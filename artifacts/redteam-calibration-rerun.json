@@ -1,0 +1,56 @@
+{
+  "backend": "facebookresearch.dinov2.vits14",
+  "n_listings_in_fixture": 10,
+  "n_images_embedded": 30,
+  "n_positive_pairs": 30,
+  "n_negative_pairs": 90,
+  "positive_min": 0.6043,
+  "positive_median": 0.8534,
+  "positive_max": 0.9588,
+  "negative_min": 0.7302,
+  "negative_median": 0.8773,
+  "negative_max": 0.9717,
+  "operating_threshold_code": 0.86,
+  "tpr_at_threshold": 0.4667,
+  "fpr_at_threshold": 0.5889,
+  "sweep": {
+    "0.5": [
+      1.0,
+      1.0
+    ],
+    "0.6": [
+      1.0,
+      1.0
+    ],
+    "0.7": [
+      0.867,
+      1.0
+    ],
+    "0.8": [
+      0.567,
+      0.9111
+    ],
+    "0.86": [
+      0.467,
+      0.5889
+    ],
+    "0.9": [
+      0.333,
+      0.3
+    ]
+  },
+  "failed": [],
+  "stored_receipt_cannot_be_reproduced_from_current_fixtures": {
+    "stored_listings_implied": 59,
+    "stored_pos": 59,
+    "stored_neg": 1711,
+    "stored_pos_median": 0.8101,
+    "stored_neg_median": 0.1606,
+    "stored_neg_max": 0.9393,
+    "stored_tpr": 0.322,
+    "stored_fpr": 0.0094,
+    "stored_dinov2_top1": "24/28",
+    "current_calibrator_schema": "different; writes threshold/tpr/fpr/n_listings not gallery top-1",
+    "gallery_runner_in_tree": false
+  }
+}
