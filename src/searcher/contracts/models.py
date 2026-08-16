@@ -22,6 +22,7 @@ from searcher.contracts.enums import (
     QueryType,
     Retention,
     SourceAdmission,
+    SourceHealthState,
     SourceOutcome,
     TerminalVerdict,
     ViewHypothesis,
@@ -30,6 +31,7 @@ from searcher.contracts.primitives import (
     ClassifiedFact,
     ItemMatchJudgment,
     ListingUtilityJudgment,
+    NormalizedField,
     PartMatch,
     PublicExplanation,
     ScoreInterval,
@@ -335,11 +337,13 @@ class ListingCandidate(SearcherModel):
     seller_metadata: dict[str, object] = Field(default_factory=dict)
     images: list[ListingImage] = Field(default_factory=list)
     structured_data: dict[str, object] = Field(default_factory=dict)
+    field_records: dict[str, NormalizedField] = Field(default_factory=dict)
     first_seen_at: UtcDateTime
     last_checked_at: UtcDateTime
     source_evidence: list[str] = Field(default_factory=list)
     cluster_id: str | None = None
     explanation: PublicExplanation = Field(default_factory=PublicExplanation)
+    language: str | None = None
 
     @model_validator(mode="after")
     def seller_fields_are_reported(self) -> ListingCandidate:
@@ -511,6 +515,8 @@ class LiveStatus(SearcherModel):
     checked_at: UtcDateTime
     destination_verified: bool = False
     http_status: int | None = None
+    outcome: SourceOutcome | None = None
+    note: str | None = None
 
 
 class SourceHealth(SearcherModel):
@@ -519,9 +525,15 @@ class SourceHealth(SearcherModel):
     consecutive_failures: int = 0
     circuit_open: bool = False
     last_checked_at: UtcDateTime
+    state: SourceHealthState = SourceHealthState.HEALTHY
+    breaker_open_until: UtcDateTime | None = None
+    last_block_class: str | None = None
+    last_success_at: UtcDateTime | None = None
 
 
 class SourceManifest(SearcherModel):
+    """Wave 1 §29.7 fields plus the §14.2 adapter manifest (schema 1.1)."""
+
     source_id: str
     adapter: str
     domain: str
@@ -533,6 +545,35 @@ class SourceManifest(SearcherModel):
     publication_boundary: str = "link-only"
     refresh_policy: str = "on-demand"
     rights_review_status: str = "fixture"
+    name: str = ""
+    version: str = "1.0.0"
+    source_class: str = "general_web"
+    capabilities: list[str] = Field(default_factory=list)
+    public_access: bool = True
+    authentication: str = "none"
+    robots_policy: str = ""
+    terms_review_status: SourceAdmission | None = None
+    rate_policy: RatePolicy = Field(default_factory=RatePolicy)
+    fetch_modes: list[FetchMode] = Field(default_factory=lambda: [FetchMode.HTTP])
+    fields: list[str] = Field(default_factory=list)
+    retention_policy: dict[str, str] = Field(default_factory=dict)
+    health_check: str = "get_home"
+    known_limitations: list[str] = Field(default_factory=list)
+    languages: list[str] = Field(default_factory=lambda: ["en"])
+    enabled: bool = True
+    disallowed_path_prefixes: list[str] = Field(default_factory=list)
+    open_question: str | None = None
+    robots_url: str | None = None
+    sitemap_urls: list[str] = Field(default_factory=list)
+    listing_path_prefixes: list[str] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def fill_defaults(self) -> SourceManifest:
+        if not self.name:
+            self.name = self.source_id
+        if self.terms_review_status is None:
+            self.terms_review_status = self.admission_status
+        return self
 
 
 class DiscoveryPage(SearcherModel):
@@ -554,6 +595,15 @@ class FetchResult(SearcherModel):
     content_digest: str | None = None
     bytes: int = 0
     http_status: int | None = None
+    canonical_url: str = ""
+    mode: FetchMode = FetchMode.HTTP
+    content_type: str | None = None
+    error_class: str | None = None
+    from_cache: bool = False
+    retry_after_seconds: float | None = None
+    redirected_from: str | None = None
+    classification_note: str | None = None
+    final_url: str | None = None
 
 
 class RawListing(SearcherModel):

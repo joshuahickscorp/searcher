@@ -19,6 +19,30 @@ class SourceRunReceipt(ReceiptBase):
     outcome: str = ""
     pages: int = 0
     matches: int = 0
+    blocked_reason: str | None = None
+    work_done: int = 0
+    work_skipped: int = 0
+
+
+class FetchRuntimeReceipt(ReceiptBase):
+    receipt_type: str = "FetchRuntimeReceipt"
+    url: str = ""
+    mode: str = ""
+    outcome: str = ""
+    http_status: int | None = None
+    bytes: int = 0
+    cache_hit: bool = False
+    duration_ms: int = 0
+    source_id: str = ""
+
+
+class SourceAdmissionReceipt(ReceiptBase):
+    receipt_type: str = "SourceAdmissionReceipt"
+    source_id: str = ""
+    url: str = ""
+    decision: str = ""
+    basis: str = ""
+    robots_allowed: bool | None = None
 
 
 class BucketDecisionReceipt(ReceiptBase):
@@ -48,6 +72,8 @@ def typed_from_payload(payload: dict[str, Any]) -> ReceiptBase:
     mapping: dict[str, type[ReceiptBase]] = {
         "ReferenceIngestionReceipt": ReferenceIngestionReceipt,
         "SourceRunReceipt": SourceRunReceipt,
+        "FetchRuntimeReceipt": FetchRuntimeReceipt,
+        "SourceAdmissionReceipt": SourceAdmissionReceipt,
         "BucketDecisionReceipt": BucketDecisionReceipt,
         "SearchExhaustionReceipt": SearchExhaustionReceipt,
         "CampaignTerminalReceipt": CampaignTerminalReceipt,

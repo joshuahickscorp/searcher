@@ -163,8 +163,11 @@ class QueryStatus(StrEnum):
 
 
 class FetchMode(StrEnum):
+    """§15.3 ladder. CACHE/HTTP/BROWSER keep Wave 1 values; LIGHT_RENDER is new."""
+
     CACHE = "cache"
     HTTP = "http"
+    LIGHT_RENDER = "light_render"
     BROWSER = "browser"
 
 
@@ -204,6 +207,68 @@ class SourceAdmission(StrEnum):
     ADMITTED = "admitted"
     BLOCKED = "blocked"
     REVIEW_REQUIRED = "review_required"
+
+
+class SourceHealthState(StrEnum):
+    """§14.6. Health changes planning, never historical results."""
+
+    HEALTHY = "HEALTHY"
+    DEGRADED = "DEGRADED"
+    BLOCKED = "BLOCKED"
+    POLICY_DISABLED = "POLICY_DISABLED"
+    PARSER_DRIFT = "PARSER_DRIFT"
+    UNAVAILABLE = "UNAVAILABLE"
+
+
+class SourceClass(StrEnum):
+    """§14.1 source classes."""
+
+    GENERAL_WEB = "general_web"
+    IMAGE_INDEX = "image_index"
+    RESALE = "resale"
+    AUCTION = "auction"
+    CONSIGNMENT = "consignment"
+    VINTAGE_ARCHIVE = "vintage_archive"
+    REGIONAL = "regional"
+    RETAILER_ARCHIVE = "retailer_archive"
+    SOLD_ARCHIVE = "sold_archive"
+    REFERENCE = "reference"
+    USER_URL = "user_url"
+    LOCAL_COLLECTION = "local_collection"
+    METASEARCH = "metasearch"
+
+
+class FrontierState(StrEnum):
+    PENDING = "pending"
+    INFLIGHT = "inflight"
+    DONE = "done"
+    BLOCKED = "blocked"
+    CANCELLED = "cancelled"
+
+
+class WorkKind(StrEnum):
+    QUERY = "query"
+    LISTING = "listing"
+    CANONICAL = "canonical"
+    GALLERY = "gallery"
+    PAGINATION = "pagination"
+    LIVE_CHECK = "live_check"
+    SITEMAP = "sitemap"
+
+
+class ExtractionMethod(StrEnum):
+    JSON_LD = "json_ld"
+    MICRODATA = "microdata"
+    OPEN_GRAPH = "open_graph"
+    DOM = "dom"
+    GALLERY = "gallery"
+    API = "api"
+    SITEMAP = "sitemap"
+    HTTP_STATUS = "http_status"
+    DECLARED = "declared"
+    DERIVED = "derived"
+    VISION_HOOK = "vision_hook"
+    UNKNOWN = "unknown"
 
 
 class DegradedLabel(StrEnum):

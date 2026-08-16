@@ -1,0 +1,10 @@
+"""SSENSE product pages. review_required: disabled by default."""
+
+from __future__ import annotations
+
+from searcher.sources.adapters.product import SSENSE, ProductPageAdapter
+
+
+class SsenseAdapter(ProductPageAdapter):
+    def __init__(self) -> None:
+        super().__init__(SSENSE)

@@ -837,3 +837,194 @@ class Repositories:
             "SELECT payload_json FROM budget_usage WHERE search_id = ?", (search_id,)
         ).fetchone()
         return _load(row["payload_json"]) if row else None
+
+    def upsert_frontier_item(self, item: dict[str, Any]) -> None:
+        now = format_utc(utc_now())
+        with self.db.transaction() as conn:
+            conn.execute(
+                """
+                INSERT INTO frontier (
+                    run_id, work_key, search_id, source_id, url, kind, depth, priority,
+                    state, attempts, cursor, last_error_class, last_outcome,
+                    payload_json, schema_version, created_at, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(run_id, work_key) DO UPDATE SET
+                    priority = excluded.priority,
+                    state = excluded.state,
+                    attempts = excluded.attempts,
+                    cursor = excluded.cursor,
+                    last_error_class = excluded.last_error_class,
+                    last_outcome = excluded.last_outcome,
+                    payload_json = excluded.payload_json,
+                    updated_at = excluded.updated_at
+                """,
+                (
+                    item["run_id"],
+                    item["work_key"],
+                    item["search_id"],
+                    item["source_id"],
+                    item["url"],
+                    item["kind"],
+                    int(item["depth"]),
+                    float(item["priority"]),
+                    item["state"],
+                    int(item.get("attempts", 0)),
+                    item.get("cursor"),
+                    item.get("last_error_class"),
+                    item.get("last_outcome"),
+                    json.dumps(item.get("payload") or {}, sort_keys=True, default=str),
+                    item.get("schema_version", SCHEMA_VERSION),
+                    item.get("created_at", now),
+                    now,
+                ),
+            )
+
+    def get_frontier_item(self, run_id: str, work_key: str) -> dict[str, Any] | None:
+        row = self.db.execute(
+            "SELECT * FROM frontier WHERE run_id = ? AND work_key = ?",
+            (run_id, work_key),
+        ).fetchone()
+        return dict(row) if row is not None else None
+
+    def list_frontier(self, run_id: str, *, state: str | None = None) -> list[dict[str, Any]]:
+        if state is None:
+            rows = self.db.execute(
+                "SELECT * FROM frontier WHERE run_id = ? ORDER BY priority DESC, created_at",
+                (run_id,),
+            ).fetchall()
+        else:
+            rows = self.db.execute(
+                "SELECT * FROM frontier WHERE run_id = ? AND state = ? "
+                "ORDER BY priority DESC, created_at",
+                (run_id, state),
+            ).fetchall()
+        return [dict(r) for r in rows]
+
+    def pop_frontier_batch(self, run_id: str, limit: int) -> list[dict[str, Any]]:
+        now = format_utc(utc_now())
+        with self.db.transaction() as conn:
+            rows = conn.execute(
+                "SELECT * FROM frontier WHERE run_id = ? AND state = 'pending' "
+                "ORDER BY priority DESC, created_at LIMIT ?",
+                (run_id, limit),
+            ).fetchall()
+            claimed: list[dict[str, Any]] = []
+            for row in rows:
+                item = dict(row)
+                conn.execute(
+                    "UPDATE frontier SET state = 'inflight', attempts = attempts + 1, "
+                    "updated_at = ? WHERE run_id = ? AND work_key = ? AND state = 'pending'",
+                    (now, run_id, item["work_key"]),
+                )
+                item["state"] = "inflight"
+                item["attempts"] = int(item["attempts"]) + 1
+                claimed.append(item)
+            return claimed
+
+    def recover_stale_inflight(self, run_id: str, older_than: str) -> int:
+        with self.db.transaction() as conn:
+            cur = conn.execute(
+                "UPDATE frontier SET state = 'pending', updated_at = ? "
+                "WHERE run_id = ? AND state = 'inflight' AND updated_at < ?",
+                (format_utc(utc_now()), run_id, older_than),
+            )
+            return int(cur.rowcount)
+
+    def upsert_response_cache(self, item: dict[str, Any]) -> None:
+        with self.db.transaction() as conn:
+            conn.execute(
+                """
+                INSERT INTO response_cache (
+                    url_canonical, etag, last_modified, content_digest, body_ref,
+                    fetched_at, policy, headers_json, schema_version
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(url_canonical) DO UPDATE SET
+                    etag = excluded.etag,
+                    last_modified = excluded.last_modified,
+                    content_digest = excluded.content_digest,
+                    body_ref = excluded.body_ref,
+                    fetched_at = excluded.fetched_at,
+                    policy = excluded.policy,
+                    headers_json = excluded.headers_json
+                """,
+                (
+                    item["url_canonical"],
+                    item.get("etag"),
+                    item.get("last_modified"),
+                    item["content_digest"],
+                    item["body_ref"],
+                    item["fetched_at"],
+                    item.get("policy"),
+                    json.dumps(item.get("headers") or {}, sort_keys=True),
+                    item.get("schema_version", SCHEMA_VERSION),
+                ),
+            )
+
+    def get_response_cache(self, url_canonical: str) -> dict[str, Any] | None:
+        row = self.db.execute(
+            "SELECT * FROM response_cache WHERE url_canonical = ?",
+            (url_canonical,),
+        ).fetchone()
+        return dict(row) if row is not None else None
+
+    def upsert_source_health_row(self, item: dict[str, Any]) -> None:
+        with self.db.transaction() as conn:
+            conn.execute(
+                """
+                INSERT INTO source_health (
+                    source_id, consecutive_failures, breaker_open_until, last_success_at,
+                    last_block_class, last_outcome, state, payload_json, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(source_id) DO UPDATE SET
+                    consecutive_failures = excluded.consecutive_failures,
+                    breaker_open_until = excluded.breaker_open_until,
+                    last_success_at = excluded.last_success_at,
+                    last_block_class = excluded.last_block_class,
+                    last_outcome = excluded.last_outcome,
+                    state = excluded.state,
+                    payload_json = excluded.payload_json,
+                    updated_at = excluded.updated_at
+                """,
+                (
+                    item["source_id"],
+                    int(item.get("consecutive_failures", 0)),
+                    item.get("breaker_open_until"),
+                    item.get("last_success_at"),
+                    item.get("last_block_class"),
+                    item.get("last_outcome"),
+                    item.get("state", "HEALTHY"),
+                    json.dumps(item.get("payload") or {}, sort_keys=True, default=str),
+                    format_utc(utc_now()),
+                ),
+            )
+
+    def get_source_health_row(self, source_id: str) -> dict[str, Any] | None:
+        row = self.db.execute(
+            "SELECT * FROM source_health WHERE source_id = ?",
+            (source_id,),
+        ).fetchone()
+        return dict(row) if row is not None else None
+
+    def upsert_robots_cache(
+        self, origin: str, body: str, status: str, crawl_delay: float | None
+    ) -> None:  # noqa: E501
+        with self.db.transaction() as conn:
+            conn.execute(
+                """
+                INSERT INTO robots_cache (origin, body, fetched_at, crawl_delay, status)
+                VALUES (?, ?, ?, ?, ?)
+                ON CONFLICT(origin) DO UPDATE SET
+                    body = excluded.body,
+                    fetched_at = excluded.fetched_at,
+                    crawl_delay = excluded.crawl_delay,
+                    status = excluded.status
+                """,
+                (origin, body, format_utc(utc_now()), crawl_delay, status),
+            )
+
+    def get_robots_cache(self, origin: str) -> dict[str, Any] | None:
+        row = self.db.execute(
+            "SELECT * FROM robots_cache WHERE origin = ?",
+            (origin,),
+        ).fetchone()
+        return dict(row) if row is not None else None
