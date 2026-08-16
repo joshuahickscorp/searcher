@@ -338,6 +338,9 @@ def project_result(
     tab_reason = "This listing met the Real gate under the available evidence."
     if bucket == BucketPublic.POSSIBLY_REAL.value:
         tab_reason = "The item may match, but important evidence is missing or conflicting."
+    if bucket == BucketPublic.REPLICA.value:
+        heading = "Why Replica"
+        tab_reason = "From replica sources. A replica listing can never be ranked Real."
     if decision is not None and decision.reason_codes:
         tab_reason = f"{tab_reason} Reason codes: {', '.join(decision.reason_codes)}."
 
@@ -423,27 +426,44 @@ def project_stored_result(
 def list_public_results(
     controller: CampaignController, search_id: str, bucket: str | None
 ) -> dict[str, Any]:
+    public = {
+        BucketPublic.REAL.value,
+        BucketPublic.POSSIBLY_REAL.value,
+        BucketPublic.REPLICA.value,
+    }
     rows = [
         row
         for row in controller.repos.list_results(search_id)
-        if str(row["public_bucket"]) in {BucketPublic.REAL.value, BucketPublic.POSSIBLY_REAL.value}
+        if str(row["public_bucket"]) in public
     ]
     real: list[dict[str, Any]] = []
     possible: list[dict[str, Any]] = []
+    replica: list[dict[str, Any]] = []
+    targets = {
+        BucketPublic.REAL.value: real,
+        BucketPublic.POSSIBLY_REAL.value: possible,
+        BucketPublic.REPLICA.value: replica,
+    }
     for row in rows:
-        target = real if row["public_bucket"] == BucketPublic.REAL.value else possible
+        target = targets[str(row["public_bucket"])]
         target.append(project_stored_result(controller, row, rank=len(target) + 1))
     counts = result_counts(controller, search_id)
-    if bucket == BucketPublic.REAL.value:
-        return {"search_id": search_id, "bucket": bucket, "results": real}
-    if bucket == BucketPublic.POSSIBLY_REAL.value:
-        return {"search_id": search_id, "bucket": bucket, "results": possible}
-    return {
+    if bucket in {
+        BucketPublic.REAL.value,
+        BucketPublic.POSSIBLY_REAL.value,
+        BucketPublic.REPLICA.value,
+    }:
+        chosen = targets[bucket]
+        return {"search_id": search_id, "bucket": bucket, "results": chosen}
+    body: dict[str, Any] = {
         "search_id": search_id,
         "real": real,
         "possibly_real": possible,
         "counts": counts,
     }
+    if replica:
+        body["replica"] = replica
+    return body
 
 
 def _as_text_map(payload: dict[str, Any]) -> dict[str, Any]:
@@ -473,6 +493,7 @@ def project_sse_data(controller: CampaignController, event: CampaignEvent) -> di
     if name in {
         PublicEventName.RESULT_REAL.value,
         PublicEventName.RESULT_POSSIBLY_REAL.value,
+        PublicEventName.RESULT_REPLICA.value,
     }:
         result_id = payload.get("result_id")
         if isinstance(result_id, str) and result_id:
@@ -504,7 +525,12 @@ def project_sse_data(controller: CampaignController, event: CampaignEvent) -> di
 def campaign_is_closed(controller: CampaignController, search_id: str) -> bool:
     if controller.repos.is_deleted(search_id):
         return True
-    campaign = controller.repos.get_campaign(search_id)
+    try:
+        campaign = controller.repos.get_campaign(search_id)
+    except (TypeError, ValueError):
+        # A concurrent writer can invalidate a sqlite3.Row mid-read.
+        # Do not treat that as terminal; the next poll retries.
+        return False
     if campaign is None:
         return True
     return is_terminal(campaign.state)

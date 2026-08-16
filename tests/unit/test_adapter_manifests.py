@@ -40,6 +40,14 @@ def test_review_required_adapters_are_disabled() -> None:
         assert manifest.open_question
 
 
+def test_pending_scope_adapters_are_disabled_review_required() -> None:
+    for name in ("depop", "grailed", "vestiaire", "taobao", "weidian", "yupoo"):
+        manifest = resolve_adapter(name).manifest()  # type: ignore[attr-defined]
+        assert manifest.admission_status is SourceAdmission.REVIEW_REQUIRED
+        assert manifest.enabled is False
+        assert manifest.open_question
+
+
 def test_searx_unavailable_without_endpoint() -> None:
     adapter = SearxAdapter(endpoint="")
     page = adapter.discover(_query(), None)

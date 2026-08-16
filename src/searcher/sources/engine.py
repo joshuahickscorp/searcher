@@ -118,14 +118,17 @@ class DiscoveryEngine:
         *,
         source_names: list[str] | None = None,
         include_disabled: bool = False,
+        families: frozenset[str] | None = None,
     ) -> SourceRunSummary:
         usage = self.controller.usage(search_id)
         cancel = RunCancel(search_id, self.controller.cancellation)
         events = SourceEvents(self.controller, search_id)
         coverage = Coverage()
-        if source_names:
+        if source_names is not None:
             self.broker.names = tuple(source_names)
-        plans = self.broker.plan(queries, usage, include_disabled=include_disabled)
+        plans = self.broker.plan(
+            queries, usage, include_disabled=include_disabled, families=families
+        )
         all_candidates: list[ListingCandidate] = []
         blocked: list[dict[str, str]] = []
         for plan in plans:

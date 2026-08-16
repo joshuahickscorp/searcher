@@ -1,0 +1,164 @@
+{
+  "search_id": "a5007d5a-281f-4784-ab5a-630e5a0b2a8f",
+  "real": [
+    {
+      "result_id": "b333ee66-1c61-45b5-9869-a9335996e614",
+      "search_id": "a5007d5a-281f-4784-ab5a-630e5a0b2a8f",
+      "candidate_id": "b6803587-ef36-445c-8969-fc53037488a9",
+      "bucket": "real",
+      "rank": 1,
+      "title": "Dior Homme General Army Trainer",
+      "source": {
+        "name": "ebay",
+        "adapter": "ebay"
+      },
+      "listing_url": "https://ebay.example/item/c6aad96e",
+      "primary_image": null,
+      "price": null,
+      "size": null,
+      "availability": "LIVE",
+      "last_checked_at": "2007-06-15T12:00:00+00:00",
+      "item_match": null,
+      "authenticity": null,
+      "listing_utility": {
+        "live": true,
+        "label": "Live",
+        "score": 1.0,
+        "last_checked_at": "2007-06-15T12:00:00+00:00"
+      },
+      "evidence_chips": [],
+      "primary_gap": null,
+      "why": {
+        "heading": "Why Real",
+        "points": [],
+        "tab_reason": "This listing met the Real gate under the available evidence. Reason codes: real-gate.",
+        "still_unverified": [
+          "No physical inspection."
+        ],
+        "supporting": [],
+        "contradictions": [],
+        "missing": [],
+        "seller_reported": [
+          {
+            "field": "Title",
+            "value": "Dior Homme General Army Trainer",
+            "origin": "REPORTED_BY_SELLER"
+          }
+        ],
+        "images_compared": [],
+        "duplicate_image_family_count": 0,
+        "live": true,
+        "checked_at": "2007-06-15T12:00:00+00:00"
+      }
+    }
+  ],
+  "possibly_real": [
+    {
+      "result_id": "fadbddea-2812-46a8-9453-8e511342b734",
+      "search_id": "a5007d5a-281f-4784-ab5a-630e5a0b2a8f",
+      "candidate_id": "037dffe9-8a2a-4eb7-8385-6cac10fbb715",
+      "bucket": "possibly_real",
+      "rank": 1,
+      "title": "Dior Homme trainer similar pair",
+      "source": {
+        "name": "the_realreal",
+        "adapter": "the_realreal"
+      },
+      "listing_url": "https://the_realreal.example/item/a53c2b45",
+      "primary_image": null,
+      "price": null,
+      "size": null,
+      "availability": "LIVE",
+      "last_checked_at": "2007-06-15T12:00:00+00:00",
+      "item_match": null,
+      "authenticity": null,
+      "listing_utility": {
+        "live": true,
+        "label": "Live",
+        "score": 1.0,
+        "last_checked_at": "2007-06-15T12:00:00+00:00"
+      },
+      "evidence_chips": [],
+      "primary_gap": null,
+      "why": {
+        "heading": "Why Possibly Real",
+        "points": [],
+        "tab_reason": "The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.",
+        "still_unverified": [
+          "No physical inspection."
+        ],
+        "supporting": [],
+        "contradictions": [],
+        "missing": [],
+        "seller_reported": [
+          {
+            "field": "Title",
+            "value": "Dior Homme trainer similar pair",
+            "origin": "REPORTED_BY_SELLER"
+          }
+        ],
+        "images_compared": [],
+        "duplicate_image_family_count": 0,
+        "live": true,
+        "checked_at": "2007-06-15T12:00:00+00:00"
+      }
+    }
+  ],
+  "counts": {
+    "real": 1,
+    "possibly_real": 1,
+    "hidden": 0
+  },
+  "replica": [
+    {
+      "result_id": "a50e3e57-3c38-43da-bee8-af2c1077377f",
+      "search_id": "a5007d5a-281f-4784-ab5a-630e5a0b2a8f",
+      "candidate_id": "343d030e-3b34-4020-bcc2-64196041a71a",
+      "bucket": "replica",
+      "rank": 1,
+      "title": "Unauthorized replica 1:1 of the trainer",
+      "source": {
+        "name": "yupoo",
+        "adapter": "yupoo"
+      },
+      "listing_url": "https://yupoo.example/item/194c75f0",
+      "primary_image": null,
+      "price": null,
+      "size": null,
+      "availability": "LIVE",
+      "last_checked_at": "2007-06-15T12:00:00+00:00",
+      "item_match": null,
+      "authenticity": null,
+      "listing_utility": {
+        "live": true,
+        "label": "Live",
+        "score": 1.0,
+        "last_checked_at": "2007-06-15T12:00:00+00:00"
+      },
+      "evidence_chips": [],
+      "primary_gap": null,
+      "why": {
+        "heading": "Why Replica",
+        "points": [],
+        "tab_reason": "From replica sources. A replica listing can never be ranked Real. Reason codes: SELF_DECLARED_REPLICA, hidden.",
+        "still_unverified": [
+          "No physical inspection."
+        ],
+        "supporting": [],
+        "contradictions": [],
+        "missing": [],
+        "seller_reported": [
+          {
+            "field": "Title",
+            "value": "Unauthorized replica 1:1 of the trainer",
+            "origin": "REPORTED_BY_SELLER"
+          }
+        ],
+        "images_compared": [],
+        "duplicate_image_family_count": 0,
+        "live": true,
+        "checked_at": "2007-06-15T12:00:00+00:00"
+      }
+    }
+  ]
+}

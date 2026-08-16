@@ -26,6 +26,14 @@ from searcher.sources.adapters.kind import KindAdapter
 from searcher.sources.adapters.komehyo import KomehyoAdapter
 from searcher.sources.adapters.marginalia import MarginaliaAdapter
 from searcher.sources.adapters.mercari_jp import MercariJpAdapter
+from searcher.sources.adapters.pending import (
+    DepopAdapter,
+    GrailedAdapter,
+    TaobaoAdapter,
+    VestiaireAdapter,
+    WeidianAdapter,
+    YupooAdapter,
+)
 from searcher.sources.adapters.poshmark import PoshmarkAdapter
 from searcher.sources.adapters.rebag import RebagAdapter
 from searcher.sources.adapters.searx import SearxAdapter
@@ -65,6 +73,12 @@ ADAPTER_REGISTRY: dict[str, Factory] = {
     "goat": GoatAdapter,
     "poshmark": PoshmarkAdapter,
     "duckduckgo": DuckDuckGoAdapter,
+    "depop": DepopAdapter,
+    "grailed": GrailedAdapter,
+    "vestiaire": VestiaireAdapter,
+    "taobao": TaobaoAdapter,
+    "weidian": WeidianAdapter,
+    "yupoo": YupooAdapter,
 }
 
 

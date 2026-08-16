@@ -8,6 +8,7 @@ from typing import Any
 
 from searcher.campaigns.controller import CampaignController
 from searcher.campaigns.models import TransitionContext
+from searcher.campaigns.publication import event_name_for_public_bucket, published_public_bucket
 from searcher.campaigns.resume import reconstruct
 from searcher.campaigns.states import is_terminal
 from searcher.contracts.enums import (
@@ -47,6 +48,8 @@ from searcher.receipts.types import (
 )
 from searcher.retrieval.cost import CostLedger
 from searcher.retrieval.text import self_declared_replica, tokenize
+from searcher.sources.broker import DEFAULT_ORDER
+from searcher.sources.families import names_for_scopes, normalize_source_scopes
 from searcher.sources.statuses import is_block
 from searcher.workers.reference.pipeline import run_reference_query_wave
 
@@ -354,6 +357,20 @@ class CampaignOrchestrator:
             return None
         return ReferenceAnalysis.model_validate_json(raw)
 
+    def _selected_scopes(self, search_id: str) -> tuple[str, ...]:
+        runtime = self.controller.repos.get_runtime(search_id)
+        return normalize_source_scopes(runtime.get("source_scopes"))
+
+    def _scoped_source_names(self, search_id: str) -> list[str]:
+        preferred = tuple(self.source_names) if self.source_names is not None else None
+        return list(
+            names_for_scopes(
+                self._selected_scopes(search_id),
+                preferred,
+                default_order=DEFAULT_ORDER,
+            )
+        )
+
     def _plan_sources(self, search_id: str) -> None:
         if self.engine is None:
             self.blocked_lanes.setdefault("discovery", "Discovery layer is not present.")
@@ -362,14 +379,11 @@ class CampaignOrchestrator:
 
         queries = self.controller.repos.list_queries(search_id)
         usage = self.controller.usage(search_id)
-        names = tuple(self.source_names) if self.source_names else None
-        broker = (
-            SourceBroker(health=self.engine.health, names=names)
-            if names
-            else SourceBroker(health=self.engine.health)
-        )
+        scopes = self._selected_scopes(search_id)
+        names = tuple(self._scoped_source_names(search_id))
+        broker = SourceBroker(health=self.engine.health, names=names)
         try:
-            plans = broker.plan(queries, usage)
+            plans = broker.plan(queries, usage, families=frozenset(scopes))
         except Exception as exc:
             self.blocked_lanes["discovery"] = f"Source planning failed: {exc}"
             return
@@ -392,7 +406,11 @@ class CampaignOrchestrator:
             self.controller.store_receipt(receipt)
         if not plans:
             self.blocked_lanes["discovery"] = "No admitted sources accepted the compiled queries."
-        self.controller.set_runtime(search_id, planned_sources=[p.source_adapter for p in plans])
+        self.controller.set_runtime(
+            search_id,
+            planned_sources=[p.source_adapter for p in plans],
+            source_scopes=list(scopes),
+        )
 
     def _discover(self, search_id: str) -> None:
         if self.engine is None:
@@ -401,7 +419,12 @@ class CampaignOrchestrator:
             return
         queries = self.controller.repos.list_queries(search_id)
         try:
-            summary = self.engine.run(search_id, queries, source_names=self.source_names)
+            summary = self.engine.run(
+                search_id,
+                queries,
+                source_names=self._scoped_source_names(search_id),
+                families=frozenset(self._selected_scopes(search_id)),
+            )
         except BudgetExceeded:
             raise
         except CancelledError:
@@ -981,20 +1004,19 @@ class CampaignOrchestrator:
         hidden = 0
         for decision in self.controller.repos.list_decisions(search_id):
             result_id = new_id()
-            public = decision.decision.public.value
+            candidate = self.controller.repos.get_candidate(search_id, decision.candidate_id)
+            public = published_public_bucket(decision, candidate)
+            payload = decision.model_dump(mode="json")
+            payload["public_bucket"] = public
             self.controller.repos.insert_result(
                 search_id,
                 result_id,
                 decision.candidate_id,
                 public,
-                decision.model_dump(mode="json"),
+                payload,
             )
-            if public == "real":
-                name = PublicEventName.RESULT_REAL.value
-            elif public == "possibly_real":
-                name = PublicEventName.RESULT_POSSIBLY_REAL.value
-            else:
-                name = PublicEventName.RESULT_REMOVED.value
+            name = event_name_for_public_bucket(public)
+            if name == PublicEventName.RESULT_REMOVED.value:
                 hidden += 1
             self.controller.emit(
                 search_id,
