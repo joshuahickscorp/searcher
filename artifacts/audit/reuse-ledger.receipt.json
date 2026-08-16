@@ -1,0 +1,28 @@
+{
+  "artifact": "artifacts/audit/reuse-ledger.json",
+  "commands": [
+    "git -C <home>/.searcher-donors/visionmcp rev-parse HEAD",
+    "git -C <home>/.searcher-donors/visionmcp status --porcelain",
+    "git -C <home>/.searcher-donors/visionmcp remote -v",
+    "git -C <home>/.searcher-donors/visionmcp worktree list",
+    "git -C <home>/Downloads/visionmcp rev-parse HEAD",
+    "git -C <home>/Downloads/visionmcp status --porcelain",
+    "git -C <home>/Downloads/visionmcp worktree list",
+    "find <home> -maxdepth 3 ... *visionmcp* *jobscraper* *searcher* *mtp*",
+    "ls -la <home>/Desktop/jobscraper",
+    "rg -c '^def test_' <home>/.searcher-donors/visionmcp/tests"
+  ],
+  "donors_inspected": [
+    "<home>/.searcher-donors/visionmcp",
+    "<home>/Downloads/visionmcp",
+    "<home>/Desktop/jobscraper"
+  ],
+  "host_policy": "read-only donors; no network; no pytest; no installs; no mutation of Downloads/visionmcp or ~/.searcher-donors/visionmcp",
+  "inspected_at": "2026-08-16T04:48:46Z",
+  "inspector": "searcher-phase-zero-audit",
+  "payload_bytes": 47478,
+  "payload_sha256": "4d278e4e650fe51ef6214d4f23d622a5ce0cb7b9f147fbc8e292481d1426ab16",
+  "schema": "searcher.audit.receipt/v1",
+  "searcher_seed_sha": "15602d7b6d02150835b74070126435adba73a90f",
+  "visionmcp_sha": "18ee3c06d27f04937d1681dea5fa2650131e4b2a"
+}

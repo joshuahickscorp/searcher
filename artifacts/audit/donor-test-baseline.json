@@ -1,0 +1,116 @@
+{
+  "inspected_at": "2026-08-16T04:48:46Z",
+  "job_scraper": {
+    "focused_counts": {
+      "test_db.py": 12,
+      "test_discover.py": 4,
+      "test_enrichment.py": 32,
+      "test_filters.py": 115,
+      "test_intern_title.py": 26,
+      "test_lifecycle.py": 15,
+      "test_liveness.py": 8,
+      "test_normalize_greenhouse.py": 3,
+      "test_toronto_bump.py": 8,
+      "test_web.py": 9
+    },
+    "path": "<home>/Desktop/jobscraper",
+    "readme_claims": "114 tests, network-free — CONTRADICTS counted 232 def test_; treat README as stale-reported",
+    "sha": null,
+    "status": "reported-not-verified-not-run",
+    "test_files_counted": 10,
+    "test_functions_counted": 232
+  },
+  "mtp": {
+    "present": false,
+    "tests": null
+  },
+  "note": "This audit did not run pytest, ruff, or CI. Counts are from rg/find on committed trees and from donor JSON/CI files.",
+  "schema": "searcher.audit.donor-test-baseline/v1",
+  "verification_status": "reported-not-verified",
+  "visionmcp": {
+    "alpha_lock_reported_suite": {
+      "source": "artifacts/alpha/ALPHA_ARTIFACT_LOCK.json",
+      "status": "reported-not-verified",
+      "suite": "1696 passed / 46 skipped",
+      "tag": "v0.8.0-alpha.2",
+      "true_alpha_implementation_sha": "41ee06ef5b4d55e331bbc9388475f85bcf9b66ee"
+    },
+    "backlog_entries_reported": 9,
+    "ci_claimed": {
+      "commands": [
+        "uv sync --frozen --extra dev --extra all",
+        "uv run python tools/scripts/public_alpha_lint.py",
+        "uv run ruff check . --select E9,F63,F7,F82",
+        "uv run python -m pytest",
+        "uv build",
+        "uv run python tools/scripts/verify-wheel.py dist"
+      ],
+      "local_ci_status": "not-available-no-network",
+      "matrix": {
+        "os": [
+          "ubuntu-latest",
+          "macos-latest",
+          "windows-latest"
+        ],
+        "python": [
+          "3.11",
+          "3.12",
+          "3.13"
+        ]
+      },
+      "source": ".github/workflows/ci.yml"
+    },
+    "count_method": "find tests -name 'test_*.py'; rg -c '^def test_'",
+    "focused_counts": {
+      "test_acquisition_os.py": 19,
+      "test_browser_perception.py": 6,
+      "test_cli.py": 2,
+      "test_evidence_graph.py": 16,
+      "test_ocular_tracking.py": 20,
+      "test_ocular_world.py": 22,
+      "test_plugin_sdk.py": 4,
+      "test_profiles_and_plugins.py": 14,
+      "test_public_demos.py": 4,
+      "test_public_resources.py": 3,
+      "test_world_memory.py": 19
+    },
+    "known_failing_or_flaky_reported": [
+      {
+        "id": "NA009",
+        "source": "NEXT_ALPHA_BACKLOG.md",
+        "summary": "census test intermittent under pytest -n 24"
+      },
+      {
+        "id": "NA001",
+        "source": "NEXT_ALPHA_BACKLOG.md",
+        "summary": "CheckpointStoreError under concurrent lanes"
+      },
+      {
+        "id": "alpha_lock_gate_a",
+        "source": "ALPHA_ARTIFACT_LOCK.json",
+        "summary": "Gate A / G002 unresolved METHOD_INVALID"
+      }
+    ],
+    "public_alpha_source_authority_reported": {
+      "candidate_baseline_physical_run": {
+        "failed": 1,
+        "passed": 1324
+      },
+      "failed": [],
+      "passed": true,
+      "product_base_sha": "2562502edc754e339a6ee1bc8889dc98be5d2345",
+      "source": "artifacts/release/public-alpha-source-authority.json",
+      "status": "reported-not-verified-and-bound-to-older-sha"
+    },
+    "sha": "18ee3c06d27f04937d1681dea5fa2650131e4b2a",
+    "test_files_counted": 132,
+    "test_functions_counted": 1623,
+    "unit_workflow_subset": [
+      "tests/test_threat_model.py",
+      "tests/test_privacy_claims.py",
+      "tests/test_security.py",
+      "tests/test_profiles_and_plugins.py",
+      "tests/test_public_resources.py"
+    ]
+  }
+}

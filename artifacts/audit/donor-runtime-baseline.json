@@ -1,0 +1,76 @@
+{
+  "inspected_at": "2026-08-16T04:48:46Z",
+  "job_scraper": {
+    "executed": false,
+    "runtime_evidence": "README claims real-world ATS fetches with zero 429s — reported-not-verified. Live jobs.db present but not queried."
+  },
+  "mtp": {
+    "present": false
+  },
+  "note": "No VisionMCP demo, doctor, MCP server, or benchmark was executed. Receipts were read as committed files.",
+  "schema": "searcher.audit.donor-runtime-baseline/v1",
+  "verification_status": "reported-not-verified",
+  "visionmcp": {
+    "capability_ledger": {
+      "mismatch": true,
+      "package_version_observed": "0.8.0a2",
+      "path": "artifacts/capability-ledger.json",
+      "product_version_in_file": "0.8.0a1"
+    },
+    "processes": {
+      "detail": "sandbox: operation not permitted",
+      "ps_attempted": true,
+      "ps_permitted": false
+    },
+    "receipts_at_this_tree": {
+      "alpha_artifact_lock": {
+        "binds_sha": "41ee06ef5b4d55e331bbc9388475f85bcf9b66ee",
+        "binds_this_sha": false,
+        "path": "artifacts/alpha/ALPHA_ARTIFACT_LOCK.json",
+        "reported": {
+          "gates_passing": "12/13",
+          "platform_scope": "macos-only",
+          "suite": "1696 passed / 46 skipped"
+        }
+      },
+      "compiler_demo": {
+        "path": "artifacts/release/demos/compiler/",
+        "status": "committed-fixture"
+      },
+      "core_soak": {
+        "pass": null,
+        "path": "artifacts/release/core-soak.json"
+      },
+      "fresh_clone": {
+        "binds_this_sha": false,
+        "commit": "1a76eec7778e5b1f7137f9c4f3c7abe536aea3b0",
+        "path": "artifacts/release/fresh-clone.json",
+        "status": "PASS"
+      },
+      "install_matrix": {
+        "path": "artifacts/release/install-matrix.json",
+        "status": "PASS"
+      },
+      "license": {
+        "path": "artifacts/release/license.json",
+        "status": "PASS"
+      },
+      "ocular_honest_baseline": {
+        "path_cited_by_ledger": "artifacts/ocular/honest-baseline/BASELINE.json",
+        "present_at_this_sha": false
+      },
+      "performance": {
+        "path": "artifacts/release/performance.json",
+        "version_in_file": "0.8.0a1"
+      },
+      "public_alpha_source_authority": {
+        "binds_sha": "2562502edc754e339a6ee1bc8889dc98be5d2345",
+        "binds_this_sha": false,
+        "core_tool_count_reported": 15,
+        "path": "artifacts/release/public-alpha-source-authority.json"
+      }
+    },
+    "sha": "18ee3c06d27f04937d1681dea5fa2650131e4b2a",
+    "tag": "v0.8.0-alpha.2"
+  }
+}

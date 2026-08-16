@@ -1,0 +1,270 @@
+{
+  "authority": {
+    "job_scraper": {
+      "basis": "Unversioned personal internship scraper. Informs REIMPLEMENT_FROM_CONTRACT. Reject stealth/proxy/impersonation.",
+      "changes_plan": true,
+      "decision": "FOUND_NOT_AUTHORITATIVE",
+      "git": false,
+      "path": "<home>/Desktop/jobscraper",
+      "sha": null
+    },
+    "mtp": {
+      "basis": "No mtp/MTP product tree in bounded locate.",
+      "decision": "ABSENT",
+      "path": null
+    },
+    "searcher": {
+      "path": "<home>/Downloads/searcher",
+      "role": "product",
+      "sha": "15602d7b6d02150835b74070126435adba73a90f"
+    },
+    "visionmcp": {
+      "basis": "Pinned clone detached at origin/main and tag v0.8.0-alpha.2; user's Downloads/visionmcp main is the same SHA and clean.",
+      "decision": "ACCEPT",
+      "package": "visionmcp-ocular",
+      "package_version": "0.8.0a2",
+      "path": "<home>/.searcher-donors/visionmcp",
+      "repository": "git@github.com:joshuahickscorp/visionmcp.git",
+      "sha": "18ee3c06d27f04937d1681dea5fa2650131e4b2a",
+      "tag": "v0.8.0-alpha.2"
+    }
+  },
+  "bible_sections": [
+    "0",
+    "4",
+    "5",
+    "6",
+    "7"
+  ],
+  "candidates": [
+    {
+      "authority": true,
+      "current_branch": "HEAD",
+      "default_branch": "origin/main",
+      "describe": "v0.8.0-alpha.2",
+      "dirty": false,
+      "head": "18ee3c06d27f04937d1681dea5fa2650131e4b2a",
+      "id": "vmcp-pin",
+      "kind": "visionmcp",
+      "origin_main": "18ee3c06d27f04937d1681dea5fa2650131e4b2a",
+      "origin_release": "ce8c056a3d5b04faaf745c2a130db7efbd7ce27e",
+      "package_name": "visionmcp-ocular",
+      "package_version": "0.8.0a2",
+      "path": "<home>/.searcher-donors/visionmcp",
+      "reason_untouchable": "shared pinned donor; read-only by contract",
+      "remotes": {
+        "origin": "git@github.com:joshuahickscorp/visionmcp.git"
+      },
+      "repo_root": "<home>/.searcher-donors/visionmcp",
+      "staged": false,
+      "tags": [
+        "v0.8.0-alpha.1",
+        "v0.8.0-alpha.2"
+      ],
+      "untouchable": true,
+      "untracked_load_bearing": [],
+      "worktrees": [
+        "<home>/.searcher-donors/visionmcp"
+      ]
+    },
+    {
+      "authority": false,
+      "current_branch": "main",
+      "dirty": false,
+      "extra_tags": [
+        "v0.8.0a2-macos-alpha",
+        "v0.8.0a2-macos-alpha-r2",
+        "world-engine-authority-v1",
+        "world-engine-baseline-ce8c056"
+      ],
+      "head": "18ee3c06d27f04937d1681dea5fa2650131e4b2a",
+      "id": "vmcp-user",
+      "kind": "visionmcp",
+      "path": "<home>/Downloads/visionmcp",
+      "reason_untouchable": "user working checkout; contract forbids mutation",
+      "same_sha_as_pin": true,
+      "untouchable": true
+    },
+    {
+      "authority": false,
+      "branch": "grok/bind-spatial-20260816-000448",
+      "dirty": true,
+      "head": "18ee3c06d27f04937d1681dea5fa2650131e4b2a",
+      "id": "vmcp-wt-bind-spatial",
+      "kind": "visionmcp-worktree",
+      "path": "<home>/.claude-grok/worktrees/bind-spatial-20260816-000448",
+      "untouchable": true
+    },
+    {
+      "authority": false,
+      "branch": "grok/bind-web-20260816-000447",
+      "dirty": true,
+      "head": "18ee3c06d27f04937d1681dea5fa2650131e4b2a",
+      "id": "vmcp-wt-bind-web",
+      "kind": "visionmcp-worktree",
+      "path": "<home>/.claude-grok/worktrees/bind-web-20260816-000447",
+      "untouchable": true
+    },
+    {
+      "authority": false,
+      "dirty": null,
+      "head": "5c3c7395558ec350f942189442c1c9f0155b4548",
+      "id": "vmcp-wt-dead-tests",
+      "kind": "visionmcp-worktree",
+      "path": "<home>/.claude-grok/worktrees/dead-tests-20260814-213842"
+    },
+    {
+      "authority": false,
+      "head": "5c3c7395558ec350f942189442c1c9f0155b4548",
+      "id": "vmcp-wt-dead-weight",
+      "kind": "visionmcp-worktree",
+      "path": "<home>/.claude-grok/worktrees/dead-weight-20260814-213910"
+    },
+    {
+      "authority": false,
+      "head": "c26640a8237d3cc5dfded39912f76366739cd6ae",
+      "id": "vmcp-wt-refactor-constraints",
+      "kind": "visionmcp-worktree",
+      "path": "<home>/.claude-grok/worktrees/refactor-constraints-20260815-140212"
+    },
+    {
+      "authority": false,
+      "head": "c26640a8237d3cc5dfded39912f76366739cd6ae",
+      "id": "vmcp-wt-refactor-plan",
+      "kind": "visionmcp-worktree",
+      "path": "<home>/.claude-grok/worktrees/refactor-plan-20260815-135153"
+    },
+    {
+      "authority": false,
+      "head": "3e812e6af365dd5308314637253a07e2ee813c8d",
+      "id": "vmcp-wt-subject-spatial",
+      "kind": "visionmcp-worktree",
+      "path": "<home>/.claude-grok/worktrees/subject-spatial-20260815-235335",
+      "untracked": [
+        "diff.patch"
+      ]
+    },
+    {
+      "authority": false,
+      "head": "df0cd6b3459e7e1487522a1ae369a24703ea8f8b",
+      "id": "vmcp-wt-subject-web",
+      "kind": "visionmcp-worktree",
+      "path": "<home>/.claude-grok/worktrees/subject-web-20260815-235333",
+      "untracked": [
+        "diff.patch"
+      ]
+    },
+    {
+      "authority": false,
+      "dirty": false,
+      "head": "2a0ca01f5cf2b60d5680ef193b984cb433aba9c0",
+      "id": "vmcp-h008",
+      "kind": "visionmcp-stray",
+      "path": "<home>/hawking-preservation/stray-visionmcp-from-grok-worktree/visionmcp-h008"
+    },
+    {
+      "authority": false,
+      "dirty": true,
+      "dirty_count": 29,
+      "head": "47255a33c09c0d5001dcbc1ec280ecc25d4961cf",
+      "id": "vmcp-h008b",
+      "kind": "visionmcp-stray",
+      "path": "<home>/hawking-preservation/stray-visionmcp-from-grok-worktree/_visionmcp_h008",
+      "untouchable": true
+    },
+    {
+      "authority": false,
+      "git": false,
+      "id": "jobscraper-desktop",
+      "kind": "jobscraper",
+      "license_claimed": "MIT",
+      "license_file": false,
+      "package_name": "jobscraper",
+      "package_version": "0.1.0",
+      "path": "<home>/Desktop/jobscraper",
+      "personal_data": [
+        "cv/",
+        "data/jobs.db",
+        "data/profiles/"
+      ],
+      "untouchable": true
+    },
+    {
+      "authority": false,
+      "exists": false,
+      "id": "jobscraper-downloads",
+      "kind": "jobscraper",
+      "path": "<home>/Downloads/jobscraper"
+    },
+    {
+      "about": "CV style notes and Hawking AI-tool scrub; not scrape engine",
+      "authority": false,
+      "id": "jobscraper-memory",
+      "kind": "claude-memory",
+      "path": "<home>/.claude/projects/-Users-<user>-Downloads-jobscraper/memory"
+    },
+    {
+      "authority": false,
+      "exists": false,
+      "id": "mtp",
+      "kind": "mtp"
+    },
+    {
+      "head": "15602d7b6d02150835b74070126435adba73a90f",
+      "id": "searcher-canonical",
+      "kind": "searcher",
+      "path": "<home>/Downloads/searcher",
+      "remotes": {},
+      "role": "product"
+    },
+    {
+      "branch": "grok/searcher-donor-audit-20260816-003933",
+      "head": "15602d7b6d02150835b74070126435adba73a90f",
+      "id": "searcher-audit-worktree",
+      "kind": "searcher",
+      "path": "<home>/.claude-grok/worktrees/searcher-donor-audit-20260816-003933",
+      "role": "this-audit"
+    }
+  ],
+  "fallback_integration_path": {
+    "adoption": "WRAP_WITH_ADAPTER",
+    "commands": [
+      "visionmcp doctor --core --json",
+      "visionmcp capabilities --json",
+      "visionmcp receipt verify <path> --json",
+      "visionmcp artifact verify --project <p> --json"
+    ],
+    "entry_point": "visionmcp.cli.public:main",
+    "id": "cli_subprocess"
+  },
+  "inspected_at": "2026-08-16T04:48:46Z",
+  "inspector": "searcher-phase-zero-audit",
+  "missing_capability_policy": "Return structured unavailable/blocked; continue campaign; never fabricate evidence.",
+  "network_used": false,
+  "primary_integration_path": {
+    "adoption": "WRAP_WITH_ADAPTER",
+    "entry": "src/searcher/integrations/visionmcp/ (later task)",
+    "extras_for_browser": [
+      "web"
+    ],
+    "extras_for_health_check": [],
+    "extras_for_observe": [
+      "imaging"
+    ],
+    "id": "in_process_core_adapter",
+    "imports": [
+      "visionmcp.capabilities:capabilities_report",
+      "visionmcp.capabilities:core_doctor_report",
+      "visionmcp.projects.store:ProjectStore",
+      "visionmcp.artifacts.store:ArtifactStore",
+      "visionmcp.core.imaging:imaging_available",
+      "visionmcp.perception.media:ImageFileAdapter",
+      "visionmcp.evidence.references:inspect_image"
+    ],
+    "lazy": true,
+    "package": "visionmcp-ocular==0.8.0a2",
+    "pin": "git+https://github.com/joshuahickscorp/visionmcp@18ee3c06d27f04937d1681dea5fa2650131e4b2a"
+  },
+  "schema": "searcher.audit.source-authority/v1",
+  "tests_run": false
+}
