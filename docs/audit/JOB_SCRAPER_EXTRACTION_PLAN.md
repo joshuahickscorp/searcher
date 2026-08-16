@@ -1,7 +1,7 @@
 # Job Scraper extraction plan
 
-**Donor located** at `<home>/Desktop/jobscraper` on 2026-08-16 and
-frozen to `<home>/.searcher-donors/jobscraper-frozen-20260816/`
+**Donor located** at `<jobscraper-live-checkout>` on 2026-08-16 and
+frozen to `$SEARCHER_JOBSCRAPER_FROZEN_DIR/`
 (manifest digest `3a2c41c8306e422ad42ede9da145891a72ec8e691bf32e8a407ead899facced2`).
 This file is the implementable follow-on to
 `docs/audit/JOB_SCRAPER_CAPABILITY_HARVEST.md`. A later discovery/acquisition
@@ -265,7 +265,7 @@ with the dashboard.
 
 ```text
 # Ported idea from Job Scraper frozen snapshot
-# path: <home>/.searcher-donors/jobscraper-frozen-20260816/
+# path: $SEARCHER_JOBSCRAPER_FROZEN_DIR/
 # manifest digest: 3a2c41c8306e422ad42ede9da145891a72ec8e691bf32e8a407ead899facced2
 # freeze: 2026-08-16
 # donor symbol: scraper.<module>:<symbol>

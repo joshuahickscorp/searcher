@@ -1,23 +1,23 @@
 {
   "artifact": "artifacts/audit/reuse-ledger.json",
   "commands": [
-    "git -C <home>/.searcher-donors/visionmcp rev-parse HEAD",
-    "git -C <home>/.searcher-donors/visionmcp status --porcelain",
-    "git -C <home>/.searcher-donors/visionmcp remote -v",
-    "git -C <home>/.searcher-donors/visionmcp worktree list",
-    "git -C <home>/Downloads/visionmcp rev-parse HEAD",
-    "git -C <home>/Downloads/visionmcp status --porcelain",
-    "git -C <home>/Downloads/visionmcp worktree list",
+    "git -C $SEARCHER_DONOR_DIR rev-parse HEAD",
+    "git -C $SEARCHER_DONOR_DIR status --porcelain",
+    "git -C $SEARCHER_DONOR_DIR remote -v",
+    "git -C $SEARCHER_DONOR_DIR worktree list",
+    "git -C <user-visionmcp-checkout> rev-parse HEAD",
+    "git -C <user-visionmcp-checkout> status --porcelain",
+    "git -C <user-visionmcp-checkout> worktree list",
     "find <home> -maxdepth 3 ... *visionmcp* *jobscraper* *searcher* *mtp*",
-    "ls -la <home>/Desktop/jobscraper",
-    "rg -c '^def test_' <home>/.searcher-donors/visionmcp/tests"
+    "ls -la <jobscraper-live-checkout>",
+    "rg -c '^def test_' $SEARCHER_DONOR_DIR/tests"
   ],
   "donors_inspected": [
-    "<home>/.searcher-donors/visionmcp",
-    "<home>/Downloads/visionmcp",
-    "<home>/Desktop/jobscraper"
+    "$SEARCHER_DONOR_DIR",
+    "<user-visionmcp-checkout>",
+    "<jobscraper-live-checkout>"
   ],
-  "host_policy": "read-only donors; no network; no pytest; no installs; no mutation of Downloads/visionmcp or ~/.searcher-donors/visionmcp",
+  "host_policy": "read-only donors; no network; no pytest; no installs; no mutation of <user-visionmcp-checkout> or $SEARCHER_DONOR_DIR",
   "inspected_at": "2026-08-16T04:48:46Z",
   "inspector": "searcher-phase-zero-audit",
   "payload_bytes": 47478,

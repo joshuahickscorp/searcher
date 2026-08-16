@@ -2,7 +2,7 @@
 
 **Correction notice.** A concurrent audit task was told Job Scraper did not
 exist. That is false. The donor was located at
-`<home>/Desktop/jobscraper` on 2026-08-16 and frozen the same day.
+`<jobscraper-live-checkout>` on 2026-08-16 and frozen the same day.
 This file is the Job Scraper harvest. It is the correction.
 
 This document inspects the **frozen snapshot only**. The live checkout is
@@ -23,9 +23,9 @@ Evidence classes used below:
 
 | Field | Value |
 |---|---|
-| Live checkout (off limits except listing/hash compare) | `<home>/Desktop/jobscraper` |
-| Frozen snapshot (read-only) | `<home>/.searcher-donors/jobscraper-frozen-20260816/` |
-| Manifest | `<home>/.searcher-donors/jobscraper-frozen-20260816.manifest.sha256` |
+| Live checkout (off limits except listing/hash compare) | `<jobscraper-live-checkout>` |
+| Frozen snapshot (read-only) | `$SEARCHER_JOBSCRAPER_FROZEN_DIR/` |
+| Manifest | `$SEARCHER_JOBSCRAPER_FROZEN_DIR.manifest.sha256` |
 | Manifest digest (`shasum -a 256` of the manifest file) | `3a2c41c8306e422ad42ede9da145891a72ec8e691bf32e8a407ead899facced2` |
 | File count | 45 |
 | Git SHA | none — donor is not a git repository |
@@ -35,10 +35,10 @@ Evidence classes used below:
 ### 0.1 Manifest verification (observed)
 
 ```text
-$ shasum -a 256 <home>/.searcher-donors/jobscraper-frozen-20260816.manifest.sha256
-3a2c41c8306e422ad42ede9da145891a72ec8e691bf32e8a407ead899facced2  <home>/.searcher-donors/jobscraper-frozen-20260816.manifest.sha256
+$ shasum -a 256 $SEARCHER_JOBSCRAPER_FROZEN_DIR.manifest.sha256
+3a2c41c8306e422ad42ede9da145891a72ec8e691bf32e8a407ead899facced2  $SEARCHER_JOBSCRAPER_FROZEN_DIR.manifest.sha256
 
-$ cd <home>/.searcher-donors/jobscraper-frozen-20260816 && shasum -a 256 -c ...manifest.sha256
+$ cd $SEARCHER_JOBSCRAPER_FROZEN_DIR && shasum -a 256 -c ...manifest.sha256
 ```
 
 All 45 paths reported `OK`. Re-run after pytest produced the same 45 `OK` lines.
@@ -75,7 +75,7 @@ are stale or false relative to the code. See §6 answers.
 ## 1. Module map
 
 Every path is under
-`<home>/.searcher-donors/jobscraper-frozen-20260816/`.
+`$SEARCHER_JOBSCRAPER_FROZEN_DIR/`.
 
 ### 1.1 `scraper/__init__.py`
 
@@ -532,7 +532,7 @@ Do not port rejected symbols "for reference". Do not vendor those files.
 ## 4. Test baseline (observed)
 
 Throwaway env: `/tmp/jobscraper-baseline-20260816/.venv` (CPython 3.11.15).
-Nothing was installed into `<home>/Desktop/jobscraper/.venv`.
+Nothing was installed into `<jobscraper-live-checkout>/.venv`.
 
 ```text
 $ uv venv --python 3.11 /tmp/jobscraper-baseline-20260816/.venv
@@ -543,7 +543,7 @@ $ uv pip install --python .../python \
     "pytest>=8.0,<9.0" "pytest-asyncio>=0.23,<1.0" "respx>=0.21,<1.0"
 # Resolved 33 packages; installed 33. No install failure.
 
-$ cd <home>/.searcher-donors/jobscraper-frozen-20260816
+$ cd $SEARCHER_JOBSCRAPER_FROZEN_DIR
 $ /tmp/jobscraper-baseline-20260816/.venv/bin/python -m pytest -q
 ........................................................................ [ 26%]
 ........................................................................ [ 52%]

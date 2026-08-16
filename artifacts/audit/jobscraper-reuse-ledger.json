@@ -1,9 +1,9 @@
 {
   "schema": "searcher-reuse-ledger/jobscraper/v1",
-  "correction": "A concurrent audit task was told Job Scraper did not exist. Donor located at <home>/Desktop/jobscraper on 2026-08-16 and frozen.",
+  "correction": "A concurrent audit task was told Job Scraper did not exist. Donor located at <jobscraper-live-checkout> on 2026-08-16 and frozen.",
   "donor": "jobscraper",
-  "located_at": "<home>/Desktop/jobscraper",
-  "frozen_path": "<home>/.searcher-donors/jobscraper-frozen-20260816/",
+  "located_at": "<jobscraper-live-checkout>",
+  "frozen_path": "$SEARCHER_JOBSCRAPER_FROZEN_DIR/",
   "repository": "n/a \u2014 not a git repository; pinned by content digest",
   "manifest_digest": "3a2c41c8306e422ad42ede9da145891a72ec8e691bf32e8a407ead899facced2",
   "freeze_date": "2026-08-16",

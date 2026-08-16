@@ -13,7 +13,7 @@
       "test_toronto_bump.py": 8,
       "test_web.py": 9
     },
-    "path": "<home>/Desktop/jobscraper",
+    "path": "<jobscraper-live-checkout>",
     "readme_claims": "114 tests, network-free — CONTRADICTS counted 232 def test_; treat README as stale-reported",
     "sha": null,
     "status": "reported-not-verified-not-run",

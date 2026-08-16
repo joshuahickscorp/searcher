@@ -1,12 +1,12 @@
 {
   "donor": "jobscraper",
-  "snapshot": "<home>/.searcher-donors/jobscraper-frozen-20260816/",
+  "snapshot": "$SEARCHER_JOBSCRAPER_FROZEN_DIR/",
   "manifest_digest": "3a2c41c8306e422ad42ede9da145891a72ec8e691bf32e8a407ead899facced2",
   "environment": {
     "venv": "/tmp/jobscraper-baseline-20260816/.venv",
     "python": "CPython 3.11.15",
     "uv": "0.11.7",
-    "not_used": "<home>/Desktop/jobscraper/.venv"
+    "not_used": "<jobscraper-live-checkout>/.venv"
   },
   "install": {
     "command": "uv pip install --python /tmp/jobscraper-baseline-20260816/.venv/bin/python \"httpx[http2]>=0.27,<0.29\" \"curl_cffi>=0.7,<0.9\" \"pyrate-limiter>=3.6,<4.0\" \"tenacity>=8.3,<10.0\" \"pydantic>=2.7,<3.0\" \"PyYAML>=6.0,<7.0\" \"structlog>=24.1,<26.0\" \"playwright>=1.45,<2.0\" \"tf-playwright-stealth>=1.1,<2.0\" \"pytest>=8.0,<9.0\" \"pytest-asyncio>=0.23,<1.0\" \"respx>=0.21,<1.0\"",
@@ -29,8 +29,8 @@
     "install_failures": []
   },
   "pytest": {
-    "command": "cd <home>/.searcher-donors/jobscraper-frozen-20260816 && /tmp/jobscraper-baseline-20260816/.venv/bin/python -m pytest -q",
-    "cwd": "<home>/.searcher-donors/jobscraper-frozen-20260816/",
+    "command": "cd $SEARCHER_JOBSCRAPER_FROZEN_DIR && /tmp/jobscraper-baseline-20260816/.venv/bin/python -m pytest -q",
+    "cwd": "$SEARCHER_JOBSCRAPER_FROZEN_DIR/",
     "exit_code": 0,
     "passed": 274,
     "failed": 0,
@@ -38,7 +38,7 @@
     "warnings": 1,
     "warning_text": "PytestCacheWarning: could not create cache path .../jobscraper-frozen-20260816/.pytest_cache (snapshot is read-only)",
     "duration_s": 4.01,
-    "output": "........................................................................ [ 26%]\n........................................................................ [ 52%]\n........................................................................ [ 78%]\n..........................................................               [100%]\n=============================== warnings summary ===============================\n../../../../tmp/jobscraper-baseline-20260816/.venv/lib/python3.11/site-packages/_pytest/cacheprovider.py:475\n  /tmp/jobscraper-baseline-20260816/.venv/lib/python3.11/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path <home>/.searcher-donors/jobscraper-frozen-20260816/.pytest_cache/v/cache/nodeids: [Errno 1] Operation not permitted: '<home>/.searcher-donors/jobscraper-frozen-20260816/pytest-cache-files-jxs5wyqi'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n274 passed, 1 warning in 4.01s\n",
+    "output": "........................................................................ [ 26%]\n........................................................................ [ 52%]\n........................................................................ [ 78%]\n..........................................................               [100%]\n=============================== warnings summary ===============================\n../../../../tmp/jobscraper-baseline-20260816/.venv/lib/python3.11/site-packages/_pytest/cacheprovider.py:475\n  /tmp/jobscraper-baseline-20260816/.venv/lib/python3.11/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path $SEARCHER_JOBSCRAPER_FROZEN_DIR/.pytest_cache/v/cache/nodeids: [Errno 1] Operation not permitted: '$SEARCHER_JOBSCRAPER_FROZEN_DIR/pytest-cache-files-jxs5wyqi'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n274 passed, 1 warning in 4.01s\n",
     "per_file": {
       "tests/test_filters.py": 114,
       "tests/test_intern_title.py": 69,

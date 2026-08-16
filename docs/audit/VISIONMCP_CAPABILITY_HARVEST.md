@@ -5,7 +5,7 @@ Donor: VisionMCP
 Repository: `git@github.com:joshuahickscorp/visionmcp.git`  
 Branch at pin: detached at tag `v0.8.0-alpha.2` (= `origin/main`)  
 **SHA: `18ee3c06d27f04937d1681dea5fa2650131e4b2a`**  
-Tree: `<home>/.searcher-donors/visionmcp` (read-only)  
+Tree: `$SEARCHER_DONOR_DIR` (read-only)  
 Package: `visionmcp-ocular` `0.8.0a2`, import `visionmcp`,
 `requires-python >=3.11`, Apache-2.0
 
@@ -545,7 +545,7 @@ still says `0.8.0a1`; `receipts.public` imports kernels.
 ## 6. How to re-check a citation
 
 ```bash
-rg -n "def capabilities_report" ~/.searcher-donors/visionmcp/src/visionmcp/capabilities.py
-git -C ~/.searcher-donors/visionmcp rev-parse HEAD
+rg -n "def capabilities_report" $SEARCHER_DONOR_DIR/src/visionmcp/capabilities.py
+git -C $SEARCHER_DONOR_DIR rev-parse HEAD
 # expect 18ee3c06d27f04937d1681dea5fa2650131e4b2a
 ```

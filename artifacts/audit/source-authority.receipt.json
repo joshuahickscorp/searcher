@@ -1,27 +1,29 @@
 {
   "artifact": "artifacts/audit/source-authority.json",
   "commands": [
-    "git -C <home>/.searcher-donors/visionmcp rev-parse HEAD",
-    "git -C <home>/.searcher-donors/visionmcp status --porcelain",
-    "git -C <home>/.searcher-donors/visionmcp remote -v",
-    "git -C <home>/.searcher-donors/visionmcp worktree list",
-    "git -C <home>/Downloads/visionmcp rev-parse HEAD",
-    "git -C <home>/Downloads/visionmcp status --porcelain",
-    "git -C <home>/Downloads/visionmcp worktree list",
+    "git -C $SEARCHER_DONOR_DIR rev-parse HEAD",
+    "git -C $SEARCHER_DONOR_DIR status --porcelain",
+    "git -C $SEARCHER_DONOR_DIR remote -v",
+    "git -C $SEARCHER_DONOR_DIR worktree list",
+    "git -C <user-visionmcp-checkout> rev-parse HEAD",
+    "git -C <user-visionmcp-checkout> status --porcelain",
+    "git -C <user-visionmcp-checkout> worktree list",
     "find <home> -maxdepth 3 ... *visionmcp* *jobscraper* *searcher* *mtp*",
-    "ls -la <home>/Desktop/jobscraper",
-    "rg -c '^def test_' <home>/.searcher-donors/visionmcp/tests"
+    "ls -la <jobscraper-live-checkout>",
+    "rg -c '^def test_' $SEARCHER_DONOR_DIR/tests"
   ],
   "donors_inspected": [
-    "<home>/.searcher-donors/visionmcp",
-    "<home>/Downloads/visionmcp",
-    "<home>/Desktop/jobscraper"
+    "$SEARCHER_DONOR_DIR",
+    "<user-visionmcp-checkout>",
+    "<jobscraper-live-checkout>"
   ],
-  "host_policy": "read-only donors; no network; no pytest; no installs; no mutation of Downloads/visionmcp or ~/.searcher-donors/visionmcp",
+  "host_policy": "read-only donors; no network; no pytest; no installs; no mutation of <user-visionmcp-checkout> or $SEARCHER_DONOR_DIR",
   "inspected_at": "2026-08-16T04:48:46Z",
   "inspector": "searcher-phase-zero-audit",
-  "payload_bytes": 8868,
-  "payload_sha256": "ea7f8b097b48d0ba839e4b59a894214f71b2b6cee68251978fb6482e4ed12e6c",
+  "payload_bytes": 8296,
+  "payload_sha256": "58ee55dfef6a50c6b0d207183b14fd628db71f5f5f1df5f09d497d697604576a",
+  "payload_sha256_before_path_scrub": "ea7f8b097b48d0ba839e4b59a894214f71b2b6cee68251978fb6482e4ed12e6c",
+  "path_form": "portable-placeholders",
   "schema": "searcher.audit.receipt/v1",
   "searcher_seed_sha": "15602d7b6d02150835b74070126435adba73a90f",
   "visionmcp_sha": "18ee3c06d27f04937d1681dea5fa2650131e4b2a"
