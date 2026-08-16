@@ -1,0 +1,22 @@
+# Local SearxNG for Searcher's zero-credential default.
+# Enable JSON in settings so GET /search?q=&format=json works.
+#   docker compose -f scripts/docker-compose.searx.yml up -d
+#   export SEARCHER_SEARX_URL=http://127.0.0.1:8888
+services:
+  searxng:
+    image: docker.io/searxng/searxng:latest
+    container_name: searcher-searxng
+    ports:
+      - "8888:8080"
+    environment:
+      - SEARXNG_BASE_URL=http://localhost:8888/
+    tmpfs:
+      - /etc/searxng:mode=1750,uid=977,gid=977,size=1m
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
+      - DAC_OVERRIDE
+    restart: unless-stopped

@@ -11,6 +11,7 @@ from searcher.contracts.enums import (
     Availability,
     DegradedLabel,
     EvidencePolarity,
+    ExtractionMethod,
     FactClass,
     FactOrigin,
     JudgmentKind,
@@ -29,6 +30,31 @@ class SearcherModel(BaseModel):
 class ArtifactRef(SearcherModel):
     digest: str
     media_type: str | None = None
+
+
+class NormalizedField(SearcherModel):
+    """§16.5: every normalized field keeps the original representation."""
+
+    value: str | int | float | bool | None = None
+    original: str | None = None
+    extraction_method: ExtractionMethod = ExtractionMethod.UNKNOWN
+    source_region: str | None = None
+    confidence: float = 0.0
+    contradiction_state: str = "none"
+    fact_class: FactClass = FactClass.EXTRACTED
+    origin: FactOrigin = FactOrigin.EXTRACTOR
+    conversion_notes: str | None = None
+
+    @model_validator(mode="after")
+    def seller_cannot_be_observed(self) -> NormalizedField:
+        if self.origin == FactOrigin.SELLER and self.fact_class == FactClass.OBSERVED:
+            raise ValueError("seller-reported value cannot be constructed as OBSERVED")
+        if self.fact_class == FactClass.REPORTED_BY_SELLER and self.origin not in {
+            FactOrigin.SELLER,
+            FactOrigin.SOURCE,
+        }:
+            raise ValueError("REPORTED_BY_SELLER requires a seller or source origin")
+        return self
 
 
 class ClassifiedFact(SearcherModel):

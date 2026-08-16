@@ -185,3 +185,60 @@ class PrivacyError(SearcherError):
 class CancelledError(SearcherError):
     def __init__(self, message: str, *, search_id: str | None = None) -> None:
         super().__init__(message, error_class=ErrorClass.CANCELLED, search_id=search_id)
+
+
+class PolicyBlocked(SearcherError):
+    def __init__(
+        self, message: str, *, search_id: str | None = None, url: str | None = None
+    ) -> None:
+        super().__init__(
+            message,
+            error_class=ErrorClass.POLICY,
+            search_id=search_id,
+            details={"url": url or ""},
+        )
+        self.url = url
+
+
+class AccessBlocked(SearcherError):
+    def __init__(
+        self,
+        message: str,
+        *,
+        search_id: str | None = None,
+        http_status: int | None = None,
+    ) -> None:
+        super().__init__(
+            message,
+            error_class=ErrorClass.ACCESS_BLOCK,
+            search_id=search_id,
+            details={"http_status": str(http_status) if http_status is not None else ""},
+        )
+        self.http_status = http_status
+
+
+class SsrfBlocked(SearcherError):
+    def __init__(self, message: str, *, url: str | None = None) -> None:
+        super().__init__(
+            message,
+            error_class=ErrorClass.POLICY,
+            details={"url": url or ""},
+        )
+        self.url = url
+
+
+class RateLimited(SearcherError):
+    def __init__(
+        self,
+        message: str,
+        *,
+        retry_after: float | None = None,
+        search_id: str | None = None,
+    ) -> None:
+        super().__init__(
+            message,
+            error_class=ErrorClass.RATE_LIMIT,
+            search_id=search_id,
+            details={"retry_after": str(retry_after) if retry_after is not None else ""},
+        )
+        self.retry_after = retry_after

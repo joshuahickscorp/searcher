@@ -12,6 +12,7 @@ from searcher.core.capabilities import (
 )
 from searcher.core.config import Settings
 from searcher.core.errors import (
+    AccessBlocked,
     BudgetExceeded,
     CapabilityUnavailable,
     CrossCampaignAccessError,
@@ -23,9 +24,12 @@ from searcher.core.errors import (
     MalformedContentError,
     NaiveDatetimeError,
     PathEscapeError,
+    PolicyBlocked,
     PrivacyError,
+    RateLimited,
     ReceiptVerificationError,
     SearcherError,
+    SsrfBlocked,
     StaleStateVersion,
     StoragePressureError,
 )
@@ -50,6 +54,7 @@ from searcher.core.time import (
 )
 
 __all__ = [
+    "AccessBlocked",
     "Budget",
     "BudgetExceeded",
     "BudgetUsage",
@@ -71,13 +76,16 @@ __all__ = [
     "POLICY_VERSION",
     "PathEscapeError",
     "PrivacyError",
+    "PolicyBlocked",
     "PossiblyRealGate",
+    "RateLimited",
     "RealGate",
     "ReceiptVerificationError",
     "Reservation",
     "SealedBudget",
     "SearcherError",
     "Settings",
+    "SsrfBlocked",
     "StaleStateVersion",
     "StoragePressureError",
     "UtcDateTime",

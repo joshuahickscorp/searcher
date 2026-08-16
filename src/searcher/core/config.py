@@ -17,6 +17,11 @@ _DEFAULT_MAX_EDGE = 8192
 _DEFAULT_MAX_IMAGES = 10
 _DEFAULT_HYPOTHESIS_CEILING = 8
 _DEFAULT_QUERY_CEILING = 48
+_DEFAULT_MAX_RESPONSE = 5 * 1024 * 1024
+HONEST_USER_AGENT = (
+    "Searcher/0.1.0 (+https://github.com/searcher-project/searcher; "
+    "research-discovery; contact=operators@searcher.invalid)"
+)
 
 
 def _env_int(name: str, default: int) -> int:
@@ -54,6 +59,12 @@ class Settings:
     query_ceiling: int
     privacy_mode: str
     visionmcp_enabled: bool
+    searx_url: str | None
+    user_agent: str
+    max_response_bytes: int
+    max_redirects: int
+    robots_ttl_seconds: int
+    global_bandwidth_bps: int
 
     @property
     def db_path(self) -> Path:
@@ -75,6 +86,7 @@ class Settings:
         delay_ms = _env_float("SEARCHER_STEP_DELAY_MS", 0.0)
         privacy = os.environ.get("SEARCHER_PRIVACY_MODE", "local").strip().lower() or "local"
         vision_flag = os.environ.get("SEARCHER_VISIONMCP", "1").strip().lower()
+        searx = os.environ.get("SEARCHER_SEARX_URL") or None
         return cls(
             data_root=root,
             policy_version=os.environ.get("SEARCHER_POLICY_VERSION", POLICY_VERSION),
@@ -93,6 +105,12 @@ class Settings:
             query_ceiling=_env_int("SEARCHER_QUERY_CEILING", _DEFAULT_QUERY_CEILING),
             privacy_mode=privacy,
             visionmcp_enabled=vision_flag not in {"0", "false", "off", "no"},
+            searx_url=searx.rstrip("/") if searx else None,
+            user_agent=os.environ.get("SEARCHER_USER_AGENT", HONEST_USER_AGENT),
+            max_response_bytes=_env_int("SEARCHER_MAX_RESPONSE_BYTES", _DEFAULT_MAX_RESPONSE),
+            max_redirects=_env_int("SEARCHER_MAX_REDIRECTS", 5),
+            robots_ttl_seconds=_env_int("SEARCHER_ROBOTS_TTL_SECONDS", 3600),
+            global_bandwidth_bps=_env_int("SEARCHER_BANDWIDTH_BPS", 2_000_000),
         )
 
     def ensure_data_root(self) -> None:

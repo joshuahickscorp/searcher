@@ -1,0 +1,71 @@
+{
+  "frozen_path": "<home>/.searcher-donors/jobscraper-frozen-20260816/",
+  "manifest_digest": "3a2c41c8306e422ad42ede9da145891a72ec8e691bf32e8a407ead899facced2",
+  "freeze_date": "2026-08-16",
+  "rung": "PORT_MINIMAL_COMPONENT",
+  "adopted": [
+    {
+      "donor": "scraper/http_client.py:DomainLimiter",
+      "lands": "src/searcher/sources/http.py",
+      "keep": "per-host lock + base_delay + jittered sleep"
+    },
+    {
+      "donor": "scraper/http_client.py:RobotsCache / RobotsBlocked",
+      "lands": "src/searcher/sources/robots.py",
+      "keep": "urllib.robotparser cache per origin; Searcher fail-closed"
+    },
+    {
+      "donor": "scraper/http_client.py:HttpClient.get_json retry",
+      "lands": "src/searcher/sources/retry.py",
+      "keep": "4-attempt ceiling, exponential jitter, Retry-After cap 60s"
+    },
+    {
+      "donor": "scraper/db.py:is_breaker_open / record_company_failure / record_company_success",
+      "lands": "src/searcher/sources/circuit.py",
+      "keep": "threshold 3, open for hours, success resets, keyed by source_id"
+    },
+    {
+      "donor": "scraper/db.py:upsert_job PK",
+      "lands": "src/searcher/sources/work_key.py",
+      "keep": "idempotent work key"
+    },
+    {
+      "donor": "scraper/db.py:log_fetch",
+      "lands": "src/searcher/sources/fetch_log.py",
+      "keep": "append-only attempts"
+    },
+    {
+      "donor": "scraper/fetchers/__init__.py:resolve_fetcher",
+      "lands": "src/searcher/sources/adapters/__init__.py",
+      "keep": "name to callable registry"
+    },
+    {
+      "donor": "scraper/fetchers/base.py:strip_html / parse_iso_date",
+      "lands": "src/searcher/normalization/html.py",
+      "keep": "tag strip + date formats"
+    },
+    {
+      "donor": "scraper/liveness.py:classify",
+      "lands": "src/searcher/sources/live_check.py",
+      "keep": "404/410 gone; conservative unknown; marketplace sold markers"
+    }
+  ],
+  "rejected": [
+    "scraper/user_agents.py",
+    "scraper/browser.py",
+    "tf-playwright-stealth",
+    "playwright_stealth",
+    "curl_cffi",
+    "ProxyPool",
+    "JOBSCRAPER_PROXIES_FILE",
+    "--disable-blink-features=AutomationControlled",
+    "data/profiles",
+    "human_pause",
+    "weighted UA pool",
+    "filters.py",
+    "role_keywords.py",
+    "fit_score",
+    "NormalizedJob",
+    "ATS fetchers"
+  ]
+}

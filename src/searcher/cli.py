@@ -17,6 +17,7 @@ from searcher.core.config import Settings
 from searcher.core.errors import SearcherError
 from searcher.evidence.content_store import ContentStore
 from searcher.receipts.types import typed_from_payload
+from searcher.sources.live_runner import LiveDiscoveryRunner
 from searcher.storage.connection import Database
 from searcher.storage.migrations import migrate
 from searcher.workers.reference.pipeline import create_reference_campaign, run_reference_query_wave
@@ -224,6 +225,47 @@ def cmd_campaign_events(args: argparse.Namespace) -> int:
         del store
 
 
+def cmd_campaign_discover(args: argparse.Namespace) -> int:
+    settings = Settings.from_env()
+    db, store, controller = _session(settings)
+    try:
+        runner = LiveDiscoveryRunner(controller)
+        extras: list[tuple[str, str]] = []
+        if args.ja:
+            extras.append(("ja", args.ja))
+        intent = runner.create(args.query, language=args.lang, extra_queries=extras)
+        sources = None
+        if args.sources:
+            sources = [part.strip() for part in args.sources.split(",") if part.strip()]
+        summary = runner.run(intent.search_id, source_names=sources)
+        campaign = controller.get(intent.search_id)
+        payload = {
+            "search_id": intent.search_id,
+            "query": args.query,
+            "state": campaign.state.value,
+            "coverage": summary.coverage if summary else {},
+            "candidates_before": summary.candidates_before if summary else 0,
+            "candidates_after": summary.candidates_after if summary else 0,
+            "urls": [c.canonical_url for c in (summary.listings if summary else [])],
+            "blocked": summary.blocked if summary else [],
+        }
+        if args.json:
+            _print(payload, as_json=True)
+        else:
+            print(f"search_id: {intent.search_id}")
+            print(f"state: {campaign.state.value}")
+            print(f"coverage: {payload['coverage']}")
+            print(f"candidates: {payload['candidates_before']} -> {payload['candidates_after']}")
+            for url in payload["urls"][:20]:
+                print(f"  listing: {url}")
+            for block in payload["blocked"]:
+                print(f"  blocked: {block}")
+        return 0
+    finally:
+        db.close()
+        del store
+
+
 def cmd_campaign_budget(args: argparse.Namespace) -> int:
     settings = Settings.from_env()
     db, store, controller = _session(settings)
@@ -383,6 +425,13 @@ def build_parser() -> argparse.ArgumentParser:
     budget = csub.add_parser("budget", help="show sealed budget usage")
     budget.add_argument("search_id")
     budget.set_defaults(func=cmd_campaign_budget)
+
+    discover = csub.add_parser("discover", help="run a live discovery campaign")
+    discover.add_argument("--query", required=True)
+    discover.add_argument("--lang", default="en")
+    discover.add_argument("--ja", default=None, help="optional Japanese query variant")
+    discover.add_argument("--sources", default=None, help="comma-separated source ids")
+    discover.set_defaults(func=cmd_campaign_discover)
 
     receipt = sub.add_parser("receipt", help="receipt commands")
     rsub = receipt.add_subparsers(dest="command", required=True)
