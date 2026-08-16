@@ -1427,6 +1427,17 @@ class CampaignOrchestrator:
             )
         if self.blocked_lanes and not candidates:
             return CampaignState.BLOCKED, next(iter(self.blocked_lanes.values())), False
+        # COMPLETE means planned coverage was searched and exhausted.
+        # An empty campaign is not exhaustion — name what was missing.
+        queries = self.controller.repos.list_queries(search_id)
+        usable = [item for item in queries if str(item.query_text or "").strip()]
+        pages_fetched = int(coverage.get("pages_fetched") or 0)
+        if not queries or not usable:
+            return CampaignState.BLOCKED, "no usable query was compiled", False
+        if not completed and not blocked:
+            return CampaignState.BLOCKED, "no source work was planned", False
+        if pages_fetched == 0 and not candidates:
+            return CampaignState.BLOCKED, "nothing was fetched", False
         return CampaignState.COMPLETE, "coverage exhausted", False
 
     def _terminate(

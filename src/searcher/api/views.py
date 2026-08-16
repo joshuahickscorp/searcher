@@ -11,7 +11,7 @@ from searcher.campaigns.controller import CampaignController
 from searcher.campaigns.events import CampaignEvent
 from searcher.campaigns.states import is_terminal
 from searcher.contracts.enums import BucketPublic, CampaignState, PublicEventName
-from searcher.contracts.models import BucketDecision, ListingCandidate, SearchCampaign
+from searcher.contracts.models import BucketDecision, ListingCandidate, ListingImage, SearchCampaign
 from searcher.core.time import format_utc
 from searcher.workers.api_campaign import empty_coverage
 
@@ -223,6 +223,104 @@ def _format_size(marked: str | None) -> dict[str, str] | None:
     return {"marked": marked, "system": "", "display": f"Size {marked}"}
 
 
+def _compared_image_ids(
+    decision: BucketDecision | None, match_payload: dict[str, Any]
+) -> list[str]:
+    if decision is not None:
+        held = [str(item) for item in decision.explanation.compared_images if str(item).strip()]
+        if held:
+            return held
+    explanation = match_payload.get("explanation")
+    if isinstance(explanation, dict):
+        raw = explanation.get("compared_images") or []
+        if isinstance(raw, list):
+            return [str(item) for item in raw if str(item).strip()]
+    return []
+
+
+def _images_compared_entries(
+    ids: list[str], candidate: ListingCandidate | None, title: str
+) -> list[dict[str, str]]:
+    by_id: dict[str, ListingImage] = {}
+    if candidate is not None:
+        by_id = {img.listing_image_id: img for img in candidate.images}
+    entries: list[dict[str, str]] = []
+    for image_id in ids:
+        image = by_id.get(image_id)
+        url = ""
+        alt = title or image_id
+        role = "listing_image"
+        if image is not None:
+            url = safe_image_url(image.remote_url) or ""
+            role = image.role.value if image.role is not None else "listing_image"
+            if not alt:
+                alt = image.listing_image_id
+        entries.append({"role": role, "url": url, "alt": alt, "image_id": image_id})
+    return entries
+
+
+def _comparison_reason(
+    ids: list[str],
+    match_row: dict[str, Any] | None,
+    candidate: ListingCandidate | None,
+) -> str | None:
+    if ids:
+        return None
+    if match_row is None:
+        return "comparison stage did not run"
+    if candidate is not None and not candidate.images:
+        return "no listing images were available to compare"
+    return "comparison ran but recorded no compared images"
+
+
+def _compare_payload(
+    *,
+    entries: list[dict[str, str]],
+    reason: str | None,
+    match_payload: dict[str, Any],
+    support: list[str],
+    contradictions: list[str],
+    missing: list[str],
+    seller_reported: list[dict[str, str]],
+    title: str,
+) -> dict[str, Any]:
+    listing = next((row for row in entries if row.get("url")), None)
+    if listing is None and entries:
+        listing = entries[0]
+    parts: list[dict[str, str]] = []
+    for row in match_payload.get("part_correspondence") or []:
+        if not isinstance(row, dict):
+            continue
+        parts.append(
+            {
+                "part": str(row.get("part_name") or ""),
+                "note": str(row.get("explanation") or ""),
+                "status": "compared",
+                "origin": str(row.get("fact_class") or "INFERRED"),
+            }
+        )
+    payload: dict[str, Any] = {
+        "reference_crop": {
+            "url": "",
+            "alt": "User reference",
+            "part": "",
+        },
+        "candidate_crop": {
+            "url": (listing or {}).get("url") or "",
+            "alt": (listing or {}).get("alt") or title or "Candidate",
+            "part": "",
+        },
+        "parts": parts,
+        "supporting": list(support),
+        "contradictions": list(contradictions),
+        "missing_views": list(missing),
+        "seller_reported_fields": list(seller_reported),
+    }
+    if reason:
+        payload["reason"] = reason
+    return payload
+
+
 def project_result(
     controller: CampaignController,
     search_id: str,
@@ -334,6 +432,20 @@ def project_result(
                     {"field": field, "value": value, "origin": "REPORTED_BY_SELLER"}
                 )
 
+    compared_ids = _compared_image_ids(decision, match_payload)
+    compared_entries = _images_compared_entries(compared_ids, candidate, title or "")
+    compared_reason = _comparison_reason(compared_ids, match_row, candidate)
+    compare_block = _compare_payload(
+        entries=compared_entries,
+        reason=compared_reason,
+        match_payload=match_payload,
+        support=support,
+        contradictions=list(dict.fromkeys([*match_contradictions, *auth_contradictions])),
+        missing=missing,
+        seller_reported=seller_reported,
+        title=title or "",
+    )
+
     heading = "Why Real" if bucket == BucketPublic.REAL.value else "Why Possibly Real"
     tab_reason = "This listing met the Real gate under the available evidence."
     if bucket == BucketPublic.POSSIBLY_REAL.value:
@@ -360,7 +472,8 @@ def project_result(
         "contradictions": list(dict.fromkeys([*match_contradictions, *auth_contradictions])),
         "missing": missing,
         "seller_reported": seller_reported,
-        "images_compared": [],
+        "images_compared": compared_entries,
+        "images_compared_reason": compared_reason,
         "duplicate_image_family_count": families,
         "live": live,
         "checked_at": last_checked,
@@ -390,6 +503,7 @@ def project_result(
         "evidence_chips": chips,
         "primary_gap": primary_gap,
         "why": why,
+        "compare": compare_block,
     }
 
 

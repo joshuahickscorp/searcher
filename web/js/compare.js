@@ -53,6 +53,21 @@ export function createCompare({ apiBase, onClose }) {
   function render(result) {
     clear(body);
     const compare = result.compare || {};
+    const why = result.why || {};
+    const emptyReason = compare.reason
+      || why.images_compared_reason
+      || (
+        Array.isArray(why.images_compared) && why.images_compared.length
+          ? ""
+          : "comparison stage did not run"
+      );
+    if (emptyReason && !((compare.reference_crop && compare.reference_crop.url)
+      || (compare.candidate_crop && compare.candidate_crop.url)
+      || (Array.isArray(compare.parts) && compare.parts.length)
+      || (Array.isArray(why.images_compared) && why.images_compared.length))) {
+      body.appendChild(el("p", { text: emptyReason }));
+      return;
+    }
     const ref = compare.reference_crop || {};
     const cand = compare.candidate_crop || {};
 

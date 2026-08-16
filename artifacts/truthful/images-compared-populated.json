@@ -1,0 +1,13 @@
+{
+  "images_compared": [
+    {
+      "role": "product",
+      "url": "https://fixture.local/item/1/lateral.png",
+      "alt": "House Name Field Model 07",
+      "image_id": "b8a140cb-1ec4-4075-9ff6-251309c74c2c-lateral"
+    }
+  ],
+  "images_compared_reason": null,
+  "compare_reason": null,
+  "compare_candidate_url": "https://fixture.local/item/1/lateral.png"
+}

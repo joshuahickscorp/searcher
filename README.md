@@ -115,18 +115,22 @@ promoted to Real through a degraded path. See
 - Source adapters for the admitted set in
   [SOURCE_POLICY.md](SOURCE_POLICY.md). International and
   `review_required` adapters ship **disabled**.
-- Matching and authenticity that use **classical** local descriptors
-  (Pillow BRIEF-like, OpenCV ORB when present). VisionMCP at the
-  pinned SHA has no learned feature backbone, no part matcher, and no
-  logo detector.
+- Matching and authenticity that use classical local descriptors
+  (Pillow BRIEF-like, OpenCV ORB when present) plus DINOv2 ViT-S/14
+  when a local TorchScript file at `$SEARCHER_DATA_ROOT/models/embedding.pt`
+  passes a real probe. A search never downloads weights. VisionMCP at
+  the pinned SHA has no learned feature backbone, no part matcher, and
+  no logo detector.
 - An HTTP API (FastAPI, SQLite WAL, SSE) and a dependency-free static
   UI in `web/`. `scripts/run_api.sh` turns live listing discovery on.
   `GET /v1/capabilities` reports `discovery.available` and
   `routing.available` from the running process.
 
-No public benchmark has been run. Thresholds are provisional. No
-precision, recall, or latency number in this repository is a measured
-product claim.
+The public benchmark receipt is
+`artifacts/searcher-public-benchmark.receipt.json` (`uv run python -m
+benchmark --all`): recall@1 0.771, recall@5 1.0, MRR 0.867 over 35
+queries, false Real 0, on the stated splits. Do not quote a number
+that is not in that receipt.
 
 Standing authority:
 [docs/SEARCHER_FULL_IMPLEMENTATION_BIBLE.md](docs/SEARCHER_FULL_IMPLEMENTATION_BIBLE.md).

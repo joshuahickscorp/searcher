@@ -1,0 +1,12 @@
+{
+  "coverage": {
+    "sources_completed": [],
+    "sources_blocked": [],
+    "pages_fetched": 0
+  },
+  "candidates": 0,
+  "queries_compiled": 0,
+  "terminal_status": "COMPLETE",
+  "terminal_reason": "coverage exhausted",
+  "note": "old default of _choose_terminal when coverage empty and discovery imported"
+}

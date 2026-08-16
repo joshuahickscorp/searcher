@@ -1,0 +1,9 @@
+{
+  "weights": "artifacts/truthful/dummy-embedding.pt",
+  "file_exists": true,
+  "size": 8,
+  "old_rule": "find_local_weights() hit => available=True",
+  "available": true,
+  "embed_png": null,
+  "notes": "file existence was treated as available; embed_png returned None"
+}

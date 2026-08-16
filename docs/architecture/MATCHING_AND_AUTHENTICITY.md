@@ -22,9 +22,10 @@ Searcher weight file to fetch. Optional paths, if you already have a file:
 - `$SEARCHER_DATA_ROOT/models/embedding.pt`
 - `$SEARCHER_DATA_ROOT/models/clip.pt`
 
-This version notices a file there and still does not load it into a model
-(`embed_png` returns `None`). The service runs without weights and answers
-with classical descriptors. The learned-embedding lane stays blocked.
+This version loads a traced DINOv2 ViT-S/14 TorchScript module from that
+path when a real probe call succeeds. A missing, dummy, or unreadable
+file leaves `DENSE_FEATURES` unavailable and `embed_png` returns `None`.
+The service runs without weights and answers with classical descriptors.
 Nothing is promoted to Real through a missing-weight fallback. Operator
 summary: [docs/OPERATING.md](../OPERATING.md#model-weights).
 

@@ -44,14 +44,22 @@ The negative list is [LIMITATIONS.md](LIMITATIONS.md).
    Evidence: `tests/unit/test_judgments.py`,
    `tests/property/test_p12_price_authenticity.py`.
 
-6. **Matching in this tree is classical.** VisionMCP at SHA
+6. **Matching uses classical descriptors, and a learned DINOv2 ViT-S/14
+   backbone when a local weights probe succeeds.** VisionMCP at SHA
    `18ee3c06d27f04937d1681dea5fa2650131e4b2a` has no learned feature
    backbone. Searcher uses Pillow descriptors and OpenCV ORB when
-   present, plus a structured extractor.
-   Evidence: `docs/architecture/MATCHING_AND_AUTHENTICITY.md`,
+   present, plus a structured extractor. The optional backbone is
+   DINOv2 ViT-S/14, loaded from a traced TorchScript file at
+   `$SEARCHER_DATA_ROOT/models/embedding.pt`, prepared once by
+   `scripts/prepare_embedding_weights.py`. A search never downloads
+   weights. Availability is the result of a real probe call, not file
+   existence. Absent or unreadable weights report unavailable.
+   Evidence: `src/searcher/core/embedding_gateway.py`,
+   `src/searcher/retrieval/embeddings.py`,
+   `docs/architecture/EMBEDDINGS.md`,
+   `tests/unit/test_capability_honesty.py`,
    `src/searcher/matching/features.py`,
-   `tests/integration/test_matching_pipeline.py`,
-   `tests/adversarial/test_hard_negatives.py`.
+   `tests/integration/test_matching_pipeline.py`.
 
 7. **Users see two tabs, Real and Possibly Real. Hard vetoes bar
    both. There is no public Fake tab.**
@@ -93,14 +101,17 @@ The negative list is [LIMITATIONS.md](LIMITATIONS.md).
 14. **Receipts are hash-chained and verify by recomputation.**
     Evidence: `tests/unit/test_receipts.py`.
 
-15. **The served API does not invent a successful empty search when
-    discovery did not run. It stops `BLOCKED` and says so. When
-    discovery does run, an empty public result list is still an
-    allowed honest outcome (`PARTIAL` / `COMPLETE` / `BLOCKED` with
-    coverage), not a finding that the item does not exist.**
-    Evidence: `src/searcher/workers/api_campaign.py`,
-    `tests/integration/test_api.py::test_campaign_runs_to_honest_blocked`,
-    `tests/integration/test_api.py::test_capabilities_reflect_real_probe`.
+15. **The served API does not invent a successful empty search.** A
+    campaign that planned no source work, compiled no usable query, or
+    fetched nothing stops `BLOCKED` and names what was missing.
+    `COMPLETE` means planned coverage was searched and exhausted. An
+    empty public result list after real coverage is still an allowed
+    honest outcome (`PARTIAL` / `COMPLETE` / `BLOCKED` with coverage),
+    not a finding that the item does not exist.
+    Evidence: `src/searcher/campaigns/orchestrator.py`,
+    `src/searcher/workers/api_campaign.py`,
+    `tests/integration/test_terminal_requires_work.py`,
+    `tests/integration/test_api.py::test_campaign_runs_to_honest_blocked`.
 
 16. **The Job Scraper §6.10 evasion surface is not present in
     Searcher.**
@@ -113,14 +124,25 @@ The negative list is [LIMITATIONS.md](LIMITATIONS.md).
     Evidence: [README.md](README.md), `web/config.js` (`API_BASE = ""`),
     `scripts/run_api.sh`, `scripts/serve_shared.sh`.
 
+18. **A declared public benchmark exists.** `uv run python -m benchmark
+    --all` writes `artifacts/searcher-public-benchmark.receipt.json`.
+    The current receipt records recall@1 0.771, recall@5 1.0, MRR 0.867
+    over 35 queries, and false Real 0. That is a measured
+    retrieval/routing result on the stated splits, not an
+    authenticity-accuracy claim.
+    Evidence: `artifacts/searcher-public-benchmark.receipt.json`,
+    `docs/SEARCHER_BENCHMARK_METHOD.md`.
+
 ## Not entitled
 
 Everything in Bible §2.2, restated in [LIMITATIONS.md](LIMITATIONS.md),
 plus:
 
 - that a finished live search will produce a Real or Possibly Real result;
-- any precision, recall, leakage, cost, or latency number;
-- that the engine has a learned visual backbone;
+- any precision, recall, leakage, cost, or latency number beyond the
+  figures recorded in `artifacts/searcher-public-benchmark.receipt.json`;
+- that the learned backbone is available when the weights file is
+  absent or the probe call fails;
 - that the footwear calibration table is a field reliability curve;
 - that a blocked source contained no result;
 - that a marketplace authentication badge makes a listing authentic;
@@ -130,16 +152,15 @@ plus:
 - that international adapters are approved for use (they ship disabled);
 - that there is a hosted API, telemetry pipeline, or training corpus.
 
-§2.1 items Searcher is **not yet** entitled to say as a running
-product, even though some supporting packages exist:
+§2.1 items the served API **does** run when live discovery is on
+(`scripts/run_api.sh` default): retrieve across the admitted source
+classes that accepted the query, compare surviving candidates, explain
+the published bucket, and show the last live-check time. A live
+campaign commonly finishes `PARTIAL` with real source coverage.
+`COMPLETE` is only used after planned coverage was searched.
 
-- retrieve candidates across admitted source classes *from the served API*;
-- compare candidates at global and part level *from the served API*;
-- explain why a candidate appears in Real or Possibly Real *from the served API*;
-- show live links and the time they were checked *from the served API*;
-- export a replayable search receipt *for a completed live discovery*.
+Still not entitled as a product-wide claim:
 
-Those become entitled only after the corresponding process actually
-runs them and the benchmark in the Bible supports the numbers. Until
-then, say the packages exist and cite their tests — do not say the
-product does it.
+- export a replayable search receipt *for every completed live discovery*;
+- that every admitted adapter produced coverage (several remain
+  `review_required` / disabled).

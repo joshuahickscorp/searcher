@@ -55,7 +55,10 @@ function whySection(result) {
   const images = Array.isArray(why.images_compared) ? why.images_compared : [];
   body.appendChild(el("h4", { text: "Which images were compared?" }));
   if (!images.length) {
-    body.appendChild(el("p", { text: missingOr(null) }));
+    const emptyReason = why.images_compared_reason
+      || (result.compare && result.compare.reason)
+      || "comparison stage did not run";
+    body.appendChild(el("p", { text: emptyReason }));
   } else {
     body.appendChild(el("ul", {}, images.map((img) => (
       el("li", { text: `${img.role || "image"}: ${img.alt || "untitled"}` })
