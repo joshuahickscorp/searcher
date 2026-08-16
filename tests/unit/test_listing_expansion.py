@@ -62,7 +62,7 @@ def test_shopify_products_json_expands_to_one_candidate_per_product() -> None:
     assert first.images
     assert first.images[0].remote_url.endswith("8001001141404_1.jpg")
     assert receipt.members_found == len(expected)
-    assert receipt.taken == len(expected)
+    assert len(receipt.taken) == len(expected)
     assert receipt.dropped == 0
     assert receipt.as_payload()["members_found"] == len(expected)
 

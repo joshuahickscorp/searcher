@@ -297,4 +297,4 @@ def install_bounded_discovery(
         BoundedDiscoveryEngine._default_source_deadline = source_deadline_seconds
     if request_timeout_seconds is not None:
         BoundedDiscoveryEngine._default_request_timeout = request_timeout_seconds
-    engine_mod.DiscoveryEngine = BoundedDiscoveryEngine  # type: ignore[misc]
+    engine_mod.DiscoveryEngine = BoundedDiscoveryEngine  # type: ignore[assignment,misc]

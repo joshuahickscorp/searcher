@@ -281,7 +281,7 @@ def _dummy_embedding_weights(path: Path) -> bool:
     except ImportError:
         return False
 
-    class _Stub(torch.nn.Module):  # type: ignore[misc]
+    class _Stub(torch.nn.Module):
         def forward(self, tensor: Any) -> Any:
             flat = tensor.reshape(tensor.shape[0], -1)
             width = int(flat.shape[1])
@@ -291,7 +291,8 @@ def _dummy_embedding_weights(path: Path) -> bool:
     model = _Stub()
     model.eval()
     with torch.inference_mode():
-        traced = torch.jit.trace(model, torch.zeros(1, 3, 224, 224))
+        jit_trace: Any = torch.jit.trace  # torch.jit is untyped for mypy
+    traced = jit_trace(model, torch.zeros(1, 3, 224, 224))
     path.parent.mkdir(parents=True, exist_ok=True)
     traced.save(str(path))
     return True

@@ -501,13 +501,13 @@ class DiscoveryEngine:
             return
         if document is not DocumentClass.PRODUCT:
             return
-        parsed = adapter.parse(doc)  # type: ignore[attr-defined]
+        parsed = adapter.parse(doc)
         for raw in parsed:
             raw_url = str(raw.payload.get("canonical_url") or raw.url)
             if looks_like_index_url(raw_url):
                 continue
             candidate = attach_image_absence(
-                adapter.normalize(raw),  # type: ignore[attr-defined]
+                adapter.normalize(raw),
                 raw,
             )
             if looks_like_index_url(candidate.canonical_url):
@@ -576,7 +576,7 @@ class DiscoveryEngine:
             return
         language = None
         try:
-            languages = adapter.manifest().languages  # type: ignore[attr-defined]
+            languages = adapter.manifest().languages
             if languages:
                 language = languages[0]
         except Exception:
