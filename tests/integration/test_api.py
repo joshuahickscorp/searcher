@@ -204,10 +204,29 @@ def test_campaign_runs_to_honest_blocked(api_app: tuple[Any, Any]) -> None:
     assert bad.status_code == 400
 
 
+def read_sse_until_complete(
+    client: Any,
+    search_id: str,
+    *,
+    timeout: float = 45.0,
+) -> list[dict[str, Any]]:
+    """Replay the event log until search.complete is present. Do not sleep-wait."""
+    deadline = time.time() + timeout
+    last: list[dict[str, Any]] = []
+    while time.time() < deadline:
+        remaining = max(0.5, deadline - time.time())
+        last = read_sse(client, search_id, timeout=min(5.0, remaining))
+        if any(item["event"] == "search.complete" for item in last):
+            return last
+        time.sleep(0.05)
+    names = [item["event"] for item in last]
+    raise AssertionError(f"search.complete was not observed before timeout: {names}")
+
+
 def test_sse_public_names_and_reconnect(api_app: tuple[Any, Any]) -> None:
     client, _app = api_app
     search_id = _create(client).json()["search_id"]
-    events = read_sse(client, search_id)
+    events = read_sse_until_complete(client, search_id)
     names = [item["event"] for item in events]
     assert names
     assert set(names) <= PUBLIC_EVENTS

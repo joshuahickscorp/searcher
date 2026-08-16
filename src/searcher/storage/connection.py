@@ -7,8 +7,80 @@ import threading
 from collections.abc import Iterator
 from contextlib import contextmanager
 from pathlib import Path
+from typing import Any
 
 from searcher.core.errors import ErrorClass, SearcherError
+
+
+class SnapshotRow:
+    """Copied statement values. Safe after the connection runs another query."""
+
+    __slots__ = ("_map", "_vals")
+
+    def __init__(self, row: sqlite3.Row) -> None:
+        keys = list(row.keys())
+        self._map = {key: row[key] for key in keys}
+        self._vals = tuple(self._map[key] for key in keys)
+
+    def __getitem__(self, key: str | int) -> Any:
+        if isinstance(key, int):
+            return self._vals[key]
+        return self._map[key]
+
+    def __contains__(self, key: object) -> bool:
+        return key in self._map
+
+    def keys(self) -> Iterator[str]:
+        return iter(self._map)
+
+    def __iter__(self) -> Iterator[Any]:
+        return iter(self._vals)
+
+    def __len__(self) -> int:
+        return len(self._vals)
+
+
+class SnapshotCursor:
+    """Rows materialized before Database.execute() releases the write lock."""
+
+    __slots__ = ("_rows", "_index", "lastrowid", "rowcount", "description")
+
+    def __init__(
+        self,
+        rows: list[SnapshotRow],
+        *,
+        lastrowid: int | None,
+        rowcount: int,
+        description: object,
+    ) -> None:
+        self._rows = rows
+        self._index = 0
+        self.lastrowid = lastrowid
+        self.rowcount = rowcount
+        self.description = description
+
+    def fetchone(self) -> Any:
+        if self._index >= len(self._rows):
+            return None
+        row = self._rows[self._index]
+        self._index += 1
+        return row
+
+    def fetchall(self) -> list[SnapshotRow]:
+        rest = self._rows[self._index :]
+        self._index = len(self._rows)
+        return rest
+
+    def fetchmany(self, size: int | None = None) -> list[SnapshotRow]:
+        if size is None or size < 0:
+            return self.fetchall()
+        end = min(self._index + size, len(self._rows))
+        chunk = self._rows[self._index : end]
+        self._index = end
+        return chunk
+
+    def __iter__(self) -> Iterator[SnapshotRow]:
+        return iter(self.fetchall())
 
 
 class Database:
@@ -55,9 +127,22 @@ class Database:
             finally:
                 self._in_write = False
 
-    def execute(self, sql: str, params: tuple[object, ...] = ()) -> sqlite3.Cursor:
+    def execute(self, sql: str, params: tuple[object, ...] = ()) -> SnapshotCursor:
+        """Run a statement and copy every row before dropping the lock.
+
+        sqlite3.Row aliases the live statement. Returning the raw cursor let a
+        second thread reset that statement, so a later fetchone() saw NULL
+        columns (intent_json=None) and the campaign went FAILED.
+        """
         with self._lock:
-            return self._conn.execute(sql, params)
+            cur = self._conn.execute(sql, params)
+            rows = [SnapshotRow(row) for row in cur.fetchall()]
+            return SnapshotCursor(
+                rows,
+                lastrowid=cur.lastrowid,
+                rowcount=cur.rowcount,
+                description=cur.description,
+            )
 
     def close(self) -> None:
         self._conn.close()
