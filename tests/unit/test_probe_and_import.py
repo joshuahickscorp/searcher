@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import subprocess
 import sys
 import time
 
@@ -9,12 +10,31 @@ from searcher.core.capabilities import CapabilityName
 from searcher.integrations.visionmcp.compatibility import PINNED_SHA, PINNED_VERSION
 from searcher.integrations.visionmcp.probe import probe_timed
 
+HEAVY = ("torch", "cv2", "playwright")
+
+# These two run in a fresh interpreter on purpose. Asserting against this
+# process's sys.modules only holds when no earlier test in the session has
+# imported a heavy module, which made the check pass alone and fail in a full
+# run — the weaker reading of a real invariant.
+_IMPORT_ONLY = "import searcher, sys; print(','.join(m for m in {heavy} if m in sys.modules))"
+_WITH_PROBE = (
+    "import sys; from searcher.integrations.visionmcp.probe import probe_timed; "
+    "probe_timed(); print(','.join(m for m in {heavy} if m in sys.modules))"
+)
+
+
+def _heavy_modules_after(snippet: str) -> str:
+    result = subprocess.run(
+        [sys.executable, "-c", snippet.format(heavy=HEAVY)],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    return result.stdout.strip()
+
 
 def test_import_searcher_does_not_import_torch() -> None:
-    # searcher is already imported by pytest collection; torch/cv2 must still be absent.
-    assert "torch" not in sys.modules
-    assert "cv2" not in sys.modules
-    assert "playwright" not in sys.modules
+    assert _heavy_modules_after(_IMPORT_ONLY) == ""
 
 
 def test_probe_is_fast_and_covers_all_names() -> None:
@@ -31,10 +51,7 @@ def test_probe_is_fast_and_covers_all_names() -> None:
 
 
 def test_probe_does_not_load_heavy_modules() -> None:
-    probe_timed()
-    assert "torch" not in sys.modules
-    assert "cv2" not in sys.modules
-    assert "playwright" not in sys.modules
+    assert _heavy_modules_after(_WITH_PROBE) == ""
 
 
 def test_probe_wall_clock_budget() -> None:

@@ -12,6 +12,7 @@ from searcher.core.policy import POLICY_VERSION
 _DEFAULT_DISK_MARGIN = 256 * 1024 * 1024
 _DEFAULT_MAX_OBJECT = 50 * 1024 * 1024
 _DEFAULT_MAX_UPLOAD = 15 * 1024 * 1024
+_DEFAULT_MAX_TOTAL_UPLOAD = 50 * 1024 * 1024
 _DEFAULT_MAX_PIXELS = 40_000_000
 _DEFAULT_MAX_EDGE = 8192
 _DEFAULT_MAX_IMAGES = 10
@@ -21,6 +22,16 @@ _DEFAULT_MAX_RESPONSE = 5 * 1024 * 1024
 HONEST_USER_AGENT = (
     "Searcher/0.1.0 (+https://github.com/searcher-project/searcher; "
     "research-discovery; contact=operators@searcher.invalid)"
+)
+_DEFAULT_API_HOST = "127.0.0.1"
+_DEFAULT_API_PORT = 8765
+_DEFAULT_CORS_ORIGINS = (
+    "http://127.0.0.1:8765",
+    "http://localhost:8765",
+    "http://127.0.0.1:8080",
+    "http://localhost:8080",
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
 )
 
 
@@ -36,6 +47,21 @@ def _env_float(name: str, default: float) -> float:
     if raw is None or raw == "":
         return default
     return float(raw)
+
+
+def _env_bool(name: str, default: bool) -> bool:
+    raw = os.environ.get(name)
+    if raw is None or raw == "":
+        return default
+    return raw.strip().lower() not in {"0", "false", "off", "no"}
+
+
+def _env_csv(name: str, default: tuple[str, ...]) -> tuple[str, ...]:
+    raw = os.environ.get(name)
+    if raw is None or raw.strip() == "":
+        return default
+    parts = tuple(item.strip() for item in raw.split(",") if item.strip() and item.strip() != "*")
+    return parts or default
 
 
 @dataclass(frozen=True, slots=True)
@@ -65,6 +91,11 @@ class Settings:
     max_redirects: int
     robots_ttl_seconds: int
     global_bandwidth_bps: int
+    max_total_upload_bytes: int
+    api_host: str
+    api_port: int
+    cors_origins: tuple[str, ...]
+    serve_web: bool
 
     @property
     def db_path(self) -> Path:
@@ -111,6 +142,14 @@ class Settings:
             max_redirects=_env_int("SEARCHER_MAX_REDIRECTS", 5),
             robots_ttl_seconds=_env_int("SEARCHER_ROBOTS_TTL_SECONDS", 3600),
             global_bandwidth_bps=_env_int("SEARCHER_BANDWIDTH_BPS", 2_000_000),
+            max_total_upload_bytes=_env_int(
+                "SEARCHER_MAX_TOTAL_UPLOAD_BYTES", _DEFAULT_MAX_TOTAL_UPLOAD
+            ),
+            api_host=os.environ.get("SEARCHER_API_HOST", _DEFAULT_API_HOST).strip()
+            or _DEFAULT_API_HOST,
+            api_port=_env_int("SEARCHER_API_PORT", _DEFAULT_API_PORT),
+            cors_origins=_env_csv("SEARCHER_CORS_ORIGINS", _DEFAULT_CORS_ORIGINS),
+            serve_web=_env_bool("SEARCHER_SERVE_WEB", False),
         )
 
     def ensure_data_root(self) -> None:

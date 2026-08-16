@@ -124,6 +124,23 @@ class ComparisonArtifactReceipt(ReceiptBase):
     receipt_type: str = "ComparisonArtifactReceipt"
     candidate_id: str = ""
     digest: str = ""
+class FeedbackReceipt(ReceiptBase):
+    receipt_type: str = "FeedbackReceipt"
+    result_id: str = ""
+    verdict: str = ""
+
+
+class DeletionReceipt(ReceiptBase):
+    receipt_type: str = "DeletionReceipt"
+    removed: list[str] = []
+    retained: list[str] = []
+
+
+class LiveCheckReceipt(ReceiptBase):
+    receipt_type: str = "LiveCheckReceipt"
+    result_ids: list[str] = []
+    refreshed: bool = False
+    reason: str = ""
 
 
 def typed_from_payload(payload: dict[str, Any]) -> ReceiptBase:
@@ -142,6 +159,9 @@ def typed_from_payload(payload: dict[str, Any]) -> ReceiptBase:
         "AuthenticityDecisionReceipt": AuthenticityDecisionReceipt,
         "CostReceipt": CostReceipt,
         "ComparisonArtifactReceipt": ComparisonArtifactReceipt,
+        "FeedbackReceipt": FeedbackReceipt,
+        "DeletionReceipt": DeletionReceipt,
+        "LiveCheckReceipt": LiveCheckReceipt,
         "ReceiptBase": ReceiptBase,
     }
     cls = mapping.get(str(payload.get("receipt_type", "ReceiptBase")), ReceiptBase)

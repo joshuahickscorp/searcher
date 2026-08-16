@@ -390,6 +390,27 @@ def cmd_store_stat(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_serve(args: argparse.Namespace) -> int:
+    import os
+
+    from searcher.api.main import run_server
+
+    if args.data_root:
+        os.environ["SEARCHER_DATA_ROOT"] = str(args.data_root)
+    if args.host:
+        os.environ["SEARCHER_API_HOST"] = str(args.host)
+    if args.port is not None:
+        os.environ["SEARCHER_API_PORT"] = str(args.port)
+    if args.cors:
+        os.environ["SEARCHER_CORS_ORIGINS"] = str(args.cors)
+    if args.static:
+        os.environ["SEARCHER_SERVE_WEB"] = "1"
+    elif args.no_static:
+        os.environ["SEARCHER_SERVE_WEB"] = "0"
+    run_server()
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="searcher", description="Searcher inspection CLI")
     parser.add_argument("--json", action="store_true", help="machine-readable output")
@@ -459,6 +480,19 @@ def build_parser() -> argparse.ArgumentParser:
     analyze.add_argument("--text", default=None)
     analyze.add_argument("--tag", action="append", default=[])
     analyze.set_defaults(func=cmd_reference_analyze)
+
+    serve = sub.add_parser("serve", help="run the local HTTP API")
+    serve.add_argument("--host", default=None)
+    serve.add_argument("--port", type=int, default=None)
+    serve.add_argument("--data-root", default=None)
+    serve.add_argument("--cors", default=None, help="comma-separated allowed origins")
+    serve.add_argument(
+        "--static",
+        action="store_true",
+        help="DEV ONLY: also serve web/ so the UI works at the API origin",
+    )
+    serve.add_argument("--no-static", action="store_true")
+    serve.set_defaults(func=cmd_serve)
 
     return parser
 

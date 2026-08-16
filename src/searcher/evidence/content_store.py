@@ -243,6 +243,57 @@ class ContentStore:
                 raise PathEscapeError(f"absolute path outside store: {user_path}") from exc
         self._safe_under(self.root, self.root / raw)
 
+    def purge_campaign_private(self, campaign_id: str) -> dict[str, int]:
+        """Remove campaign-private files. Shared CAS objects with other owners stay."""
+        if ".." in campaign_id or "/" in campaign_id or "\\" in campaign_id:
+            raise PathEscapeError(f"illegal campaign id: {campaign_id!r}")
+        removed_objects = 0
+        removed_names = 0
+        private_root = self.campaigns / campaign_id
+        digests: set[str] = set()
+        if private_root.exists():
+            safe_root = self._safe_under(self.campaigns, private_root)
+            for path in safe_root.rglob("*"):
+                if not path.is_file():
+                    continue
+                removed_names += 1
+                text = path.read_text(encoding="utf-8").strip()
+                if len(text) == _DIGEST_HEX_LEN and all(c in "0123456789abcdef" for c in text):
+                    digests.add(text)
+            shutil.rmtree(safe_root)
+
+        index = self._read_index()
+        for digest, entry in list(index.items()):
+            owners = list(entry.get("owners") or [])
+            if campaign_id not in owners:
+                continue
+            owners.remove(campaign_id)
+            if digest:
+                digests.add(str(digest))
+            if not owners and bool(entry.get("private", True)):
+                try:
+                    path = self.path_for(str(digest))
+                except PathEscapeError:
+                    continue
+                if path.is_file():
+                    path.unlink()
+                    removed_objects += 1
+                for zone in self.zones.values():
+                    link = zone / str(digest)
+                    if link.exists() or link.is_symlink():
+                        link.unlink()
+                index.pop(digest, None)
+            else:
+                entry["owners"] = owners
+                index[digest] = entry
+        self._write_index(index)
+
+        exports = self.root / "exports" / campaign_id
+        if exports.exists():
+            safe_export = self._safe_under(self.root / "exports", exports)
+            shutil.rmtree(safe_export)
+        return {"objects": removed_objects, "private_names": removed_names}
+
     def stat(self) -> StoreStat:
         object_count = 0
         byte_count = 0

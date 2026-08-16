@@ -48,6 +48,7 @@ class Repositories:
         intent: SearchIntent,
         budget: dict[str, Any],
         runtime: dict[str, Any] | None = None,
+        client_search_id: str | None = None,
     ) -> None:
         now = format_utc(utc_now())
         with self.db.transaction() as conn:
@@ -57,8 +58,9 @@ class Repositories:
                     search_id, state, state_version, intent_json, budget_json,
                     budget_used_json, coverage_json, novelty_history_json, runtime_json,
                     terminal_status, terminal_reason, search_exhaustion_receipt,
-                    fixture_name, schema_version, created_at, updated_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    fixture_name, schema_version, created_at, updated_at,
+                    client_search_id, deleted_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     campaign.search_id,
@@ -77,6 +79,8 @@ class Repositories:
                     campaign.schema_version,
                     now,
                     now,
+                    client_search_id,
+                    None,
                 ),
             )
 
@@ -837,6 +841,133 @@ class Repositories:
             "SELECT payload_json FROM budget_usage WHERE search_id = ?", (search_id,)
         ).fetchone()
         return _load(row["payload_json"]) if row else None
+
+
+    def get_campaign_meta(self, search_id: str) -> dict[str, Any] | None:
+        row = self.db.execute(
+            """
+            SELECT created_at, updated_at, deleted_at, client_search_id
+            FROM campaigns WHERE search_id = ?
+            """,
+            (search_id,),
+        ).fetchone()
+        return dict(row) if row is not None else None
+
+    def is_deleted(self, search_id: str) -> bool:
+        meta = self.get_campaign_meta(search_id)
+        if meta is None:
+            return False
+        return bool(meta.get("deleted_at"))
+
+    def find_search_id_by_client(self, client_search_id: str) -> str | None:
+        row = self.db.execute(
+            """
+            SELECT search_id FROM campaigns
+            WHERE client_search_id = ? AND deleted_at IS NULL
+            """,
+            (client_search_id,),
+        ).fetchone()
+        return str(row["search_id"]) if row is not None else None
+
+    def set_client_search_id(self, search_id: str, client_search_id: str) -> None:
+        with self.db.transaction() as conn:
+            conn.execute(
+                """
+                UPDATE campaigns SET client_search_id = ?, updated_at = ?
+                WHERE search_id = ? AND deleted_at IS NULL
+                """,
+                (client_search_id, format_utc(utc_now()), search_id),
+            )
+
+    def mark_deleted(self, search_id: str) -> None:
+        now = format_utc(utc_now())
+        with self.db.transaction() as conn:
+            conn.execute(
+                """
+                UPDATE campaigns SET deleted_at = ?, updated_at = ?
+                WHERE search_id = ? AND deleted_at IS NULL
+                """,
+                (now, now, search_id),
+            )
+
+    def redact_intent(self, search_id: str) -> None:
+        try:
+            intent = self.get_intent(search_id)
+        except KeyError:
+            return
+        redacted = intent.model_copy(update={"text": None, "tags": [], "images": []})
+        with self.db.transaction() as conn:
+            conn.execute(
+                "UPDATE campaigns SET intent_json = ?, updated_at = ? WHERE search_id = ?",
+                (_dump(redacted), format_utc(utc_now()), search_id),
+            )
+
+    def get_result_row(self, result_id: str) -> dict[str, Any] | None:
+        row = self.db.execute("SELECT * FROM results WHERE result_id = ?", (result_id,)).fetchone()
+        if row is None:
+            return None
+        item = dict(row)
+        item["payload"] = _load(row["payload_json"])
+        return item
+
+    def get_candidate(self, search_id: str, candidate_id: str) -> ListingCandidate | None:
+        row = self.db.execute(
+            """
+            SELECT payload_json FROM candidates
+            WHERE search_id = ? AND candidate_id = ?
+            """,
+            (search_id, candidate_id),
+        ).fetchone()
+        if row is None:
+            return None
+        return ListingCandidate.model_validate(_load(row["payload_json"]))
+
+    def update_open_tasks(self, search_id: str, status: TaskStatus) -> int:
+        with self.db.transaction() as conn:
+            cur = conn.execute(
+                """
+                UPDATE tasks SET status = ?
+                WHERE search_id = ? AND status IN ('pending', 'running')
+                """,
+                (status.value, search_id),
+            )
+            return int(cur.rowcount)
+
+    def list_feedback(self, search_id: str) -> list[dict[str, Any]]:
+        rows = self.db.execute(
+            "SELECT * FROM feedback WHERE search_id = ? ORDER BY rowid",
+            (search_id,),
+        ).fetchall()
+        return [dict(r) for r in rows]
+
+    def purge_campaign_private_rows(self, search_id: str) -> list[str]:
+        """Delete campaign-private rows. Receipts and the campaign row stay."""
+        removed: list[str] = []
+        statements = (
+            ("feedback", "DELETE FROM feedback WHERE search_id = ?"),
+            ("results", "DELETE FROM results WHERE search_id = ?"),
+            ("decisions", "DELETE FROM decisions WHERE search_id = ?"),
+            ("scores", "DELETE FROM scores WHERE search_id = ?"),
+            ("evidence_metadata", "DELETE FROM evidence_metadata WHERE search_id = ?"),
+            ("candidate_images", "DELETE FROM candidate_images WHERE search_id = ?"),
+            ("clusters", "DELETE FROM clusters WHERE search_id = ?"),
+            ("candidates", "DELETE FROM candidates WHERE search_id = ?"),
+            ("fetch_attempts", "DELETE FROM fetch_attempts WHERE search_id = ?"),
+            ("discovery_pages", "DELETE FROM discovery_pages WHERE search_id = ?"),
+            ("source_runs", "DELETE FROM source_runs WHERE search_id = ?"),
+            ("queries", "DELETE FROM queries WHERE search_id = ?"),
+            ("hypotheses", "DELETE FROM hypotheses WHERE search_id = ?"),
+            ("tasks", "DELETE FROM tasks WHERE search_id = ?"),
+            ("events", "DELETE FROM events WHERE search_id = ?"),
+            ("checkpoints", "DELETE FROM checkpoints WHERE search_id = ?"),
+            ("budget_usage", "DELETE FROM budget_usage WHERE search_id = ?"),
+        )
+        with self.db.transaction() as conn:
+            for name, sql in statements:
+                cur = conn.execute(sql, (search_id,))
+                if cur.rowcount:
+                    removed.append(name)
+        return removed
 
     def upsert_frontier_item(self, item: dict[str, Any]) -> None:
         now = format_utc(utc_now())

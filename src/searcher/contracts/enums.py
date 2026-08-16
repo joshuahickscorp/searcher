@@ -320,6 +320,19 @@ class TaskStatus(StrEnum):
     SKIPPED_IDEMPOTENT = "skipped_idempotent"
 
 
+class FeedbackVerdict(StrEnum):
+    """§22.5 human feedback. Recorded as evidence; never an immediate re-rank."""
+
+    CORRECT_ITEM = "correct_item"
+    WRONG_MODEL = "wrong_model"
+    LIKELY_REAL = "likely_real"
+    UNCERTAIN = "uncertain"
+    LIKELY_COUNTERFEIT = "likely_counterfeit"
+    LISTING_DEAD = "listing_dead"
+    DUPLICATE = "duplicate"
+    USEFUL_RESULT = "useful_result"
+
+
 BLOCKED_SOURCE_OUTCOMES = frozenset(
     {
         SourceOutcome.BLOCKED_BY_ACCESS,
