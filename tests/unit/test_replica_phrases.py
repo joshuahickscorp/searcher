@@ -1,0 +1,56 @@
+"""Every way a seller says "this is not the real thing" must route to replica.
+
+A missed replica is published as Real, which is the expensive error and the one
+the interface promises cannot happen. These phrases all reached Real before
+commit; each is kept as a regression case.
+"""
+
+from __future__ import annotations
+
+import pytest
+
+from searcher.retrieval.text import self_declared_replica
+
+# Observed in artifacts/redteam-invariant-attacks.json: all thirteen published
+# as Real while the interface said a replica never can.
+LEAKED = [
+    "This is fake.",
+    "スーパーコピー レプリカ",
+    "Dior Homme GAT dupe",
+    "Inspired by Dior Homme General Army Trainer",
+    "Dior Homme GAT superfake",
+    "Dior Homme GAT PK God factory",
+    "Dior Homme GAT UA batch",
+    "Dior Homme GAT 1：1",
+    "not genuine",
+    "Dior Homme GAT mirror batch",
+    "Dior Homme GAT homage",
+    "repsneaker quality",
+    "Unauthorized replica 1:1 of the original trainer",
+]
+
+# Ordinary listings. "faux fur" and "fake leather" describe a material and say
+# nothing about whether this is the item being searched for.
+GENUINE = [
+    "Dior Homme General Army Trainer",
+    "Black wool coat with faux fur collar",
+    "Vintage fake leather jacket",
+    "Authentic Prada pumps size 38 1/2",
+    "WILLY CHAVARRIA 無地 ロングスリーブカットソー",
+    "Comme des Garcons SHIRT x Supreme loop collar shirt",
+]
+
+
+@pytest.mark.parametrize("text", LEAKED)
+def test_seller_declaring_a_replica_is_detected(text: str) -> None:
+    assert self_declared_replica(text) is True
+
+
+@pytest.mark.parametrize("text", GENUINE)
+def test_ordinary_listing_is_not_called_a_replica(text: str) -> None:
+    assert self_declared_replica(text) is False
+
+
+def test_fullwidth_and_case_are_folded_before_matching() -> None:
+    assert self_declared_replica("ＲＥＰＬＩＣＡ") is True
+    assert self_declared_replica("Mirror Quality") is True
