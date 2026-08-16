@@ -26,7 +26,7 @@ was read only via non-mutating git commands. The pinned clone at
 | Historical Job Scraper path | `<historical-jobscraper-path>` | absent | — | README inside the Desktop tree still names this path. **Observed absent.** |
 | MTP | (no tree) | — | — | **ABSENT.** Searcher's campaign controller covers Bible §7. |
 | Searcher product repo | `<searcher-repo>` | `main`, no remotes, clean at seed | `15602d7b6d02150835b74070126435adba73a90f` | This product. Not a donor. |
-| This audit worktree | `<audit-worktree>/searcher-donor-audit-20260816-003933` | `grok/searcher-donor-audit-20260816-003933` | same seed SHA | Audit outputs only. |
+| This audit worktree | `<audit-worktree>/searcher-donor-audit-20260816-003933` | `lane/searcher-donor-audit-20260816-003933` | same seed SHA | Audit outputs only. |
 
 **Basis.** Authority is by reachable git identity and capability, not
 folder mtime. The pinned clone and the user's `Downloads/visionmcp`
@@ -61,7 +61,7 @@ killed; exact-name `mtp`/`MTP` scans replaced it.
 
 `$SEARCHER_DONORS_ROOT` contains only `visionmcp`.
 
-Vanished clone paths named by old Grok sessions — all **ABSENT**:
+Vanished clone paths named by old tooling sessions — all **ABSENT**:
 
 ```text
 <user-visionmcp-checkout>-visual-compiler-lab
@@ -91,18 +91,18 @@ Observed matches included:
 - `<audit-worktree>/searcher-donor-audit-20260816-003933`
 - `<audit-worktree>/searcher-wave1-20260816-003934`
 - `<jobscraper-live-checkout>` — **Job Scraper working tree**
-- `<claude-project-memory>/jobscraper` — stale Claude memory only
+- `<assistant-memory>/jobscraper` — stale assistant memory only
 - `<visionmcp-runtime-store>` — runtime project store (`projects/{binary-analyses,assurance,compiler}`), not a clone
 - `<unrelated-forge-checkout>/.visionmcp` — Forge-local state
 - `<historical-stray>/{visionmcp-h008,_visionmcp_h008}` — historical stray clones
-- Grok session directories under `<grok-sessions>/` that *name* vanished clones
-- Claude ultragoal directories under `<claude-ultragoal>/visionmcp-*`
+- Tooling session directories under `<tooling-sessions>/` that *name* vanished clones
+- Goal-ledger directories under `<goal-ledger>/visionmcp-*`
 
-`*scraper*` at maxdepth 4: only `Desktop/jobscraper` and the Claude
+`*scraper*` at maxdepth 4: only `Desktop/jobscraper` and the assistant
 project memory directory.
 
 Exact-name `mtp`/`MTP` under Downloads, Desktop, Documents, Archives,
-`.searcher-donors`, `.claude-grok`, `hawking-preservation`, hawking,
+`.searcher-donors`, `<tooling-home>`, `hawking-preservation`, hawking,
 merc, forge, substrate, census: **no product tree**. The only hit was
 an unrelated hashed JS asset
 `<unrelated-forge-checkout>/dist/assets/03-goroutines-channels-DMtpM9fY.js`.
@@ -166,21 +166,21 @@ did not run pytest or rebuild wheels.
 | Dirty | **clean** before and after this audit |
 | Remotes | same `origin` as the pin |
 | Extra tags not in the pin | `v0.8.0a2-macos-alpha` → `c26640a8…`; `v0.8.0a2-macos-alpha-r2` → `a56a9203…`; `world-engine-authority-v1` → `4ab11ae6…`; `world-engine-baseline-ce8c056` → `ce8c056a…` |
-| Local branches | many `grok/*`, `import/*`, `codex/world-engine`, `fidelity-apply`, etc. |
+| Local branches | many `lane/*`, `import/*`, `codex/world-engine`, `fidelity-apply`, etc. |
 
 Attached worktrees (observed via `git worktree list`):
 
 | Path | HEAD | Branch | Dirty? |
 | --- | --- | --- | --- |
 | `Downloads/visionmcp` | `18ee3c06` | `main` | clean |
-| `…/bind-spatial-20260816-000448` | `18ee3c06` | `grok/bind-spatial-…` | **DIRTY** (intent/subject files) |
-| `…/bind-web-20260816-000447` | `18ee3c06` | `grok/bind-web-…` | **DIRTY** (acquisition/intent) |
-| `…/dead-tests-20260814-213842` | `5c3c7395` | `grok/dead-tests-…` | not used |
-| `…/dead-weight-20260814-213910` | `5c3c7395` | `grok/dead-weight-…` | not used |
-| `…/refactor-constraints-20260815-140212` | `c26640a8` | `grok/refactor-constraints-…` | not used |
-| `…/refactor-plan-20260815-135153` | `c26640a8` | `grok/refactor-plan-…` | not used |
-| `…/subject-spatial-20260815-235335` | `3e812e6a` | `grok/subject-spatial-…` | untracked `diff.patch` |
-| `…/subject-web-20260815-235333` | `df0cd6b3` | `grok/subject-web-…` | untracked `diff.patch` |
+| `…/bind-spatial-20260816-000448` | `18ee3c06` | `lane/bind-spatial-…` | **DIRTY** (intent/subject files) |
+| `…/bind-web-20260816-000447` | `18ee3c06` | `lane/bind-web-…` | **DIRTY** (acquisition/intent) |
+| `…/dead-tests-20260814-213842` | `5c3c7395` | `lane/dead-tests-…` | not used |
+| `…/dead-weight-20260814-213910` | `5c3c7395` | `lane/dead-weight-…` | not used |
+| `…/refactor-constraints-20260815-140212` | `c26640a8` | `lane/refactor-constraints-…` | not used |
+| `…/refactor-plan-20260815-135153` | `c26640a8` | `lane/refactor-plan-…` | not used |
+| `…/subject-spatial-20260815-235335` | `3e812e6a` | `lane/subject-spatial-…` | untracked `diff.patch` |
+| `…/subject-web-20260815-235333` | `df0cd6b3` | `lane/subject-web-…` | untracked `diff.patch` |
 
 **Untouchable dirty trees:** bind-spatial, bind-web, and the hawking
 preservation clone below. They are not authority.
@@ -189,7 +189,7 @@ preservation clone below. They are not authority.
 
 | Path | HEAD | Branch | Dirty | Remote |
 | --- | --- | --- | --- | --- |
-| `…/visionmcp-h008` | `2a0ca01f5cf2b60d5680ef193b984cb433aba9c0` | `grok/h008-near4-from-sandbox` | clean | local path to a vanished `.worktrees/world-engine` |
+| `…/visionmcp-h008` | `2a0ca01f5cf2b60d5680ef193b984cb433aba9c0` | `lane/h008-near4-from-sandbox` | clean | local path to a vanished `.worktrees/world-engine` |
 | `…/_visionmcp_h008` | `47255a33c09c0d5001dcbc1ec280ecc25d4961cf` | `codex/world-engine` | **29 dirty paths** | `Downloads/visionmcp` |
 
 These are older than `18ee3c06`. The dirty clone is frozen-as-found.
@@ -217,11 +217,11 @@ These are older than `18ee3c06`. The dirty clone is frozen-as-found.
 | README self-path | still says `cd <historical-jobscraper-path>` |
 | Tests (counted, not run) | 10 `test_*.py`, 232 `def test_` |
 | Personal / load-bearing untracked-equivalent | `cv/` (CVs), `data/jobs.db` (+ wal/shm), `jobs.db`, `.venv/`, `data/profiles/` (Playwright profiles) |
-| Claude memory | `<claude-project-memory>/jobscraper/memory/` — CVs and an unrelated Hawking scrub; **not** scrape-engine docs |
+| assistant memory | `<assistant-memory>/jobscraper/memory/` — CVs and an unrelated Hawking scrub; **not** scrape-engine docs |
 
 ### 2.6 MTP
 
-No repository, directory, or Claude project named MTP/mtp. Optional
+No repository, directory, or assistant project named MTP/mtp. Optional
 donor, absent.
 
 ### 2.7 Running processes
@@ -309,7 +309,7 @@ Do not import into Searcher MVP merely because they exist at this SHA:
 | vmcp-h008 | stray clone | `<historical-stray>/…/visionmcp-h008` | `2a0ca01f` | clean | NO |
 | vmcp-h008b | stray clone | `<historical-stray>/…/_visionmcp_h008` | `47255a33` | **dirty** | NO |
 | jobscraper-desktop | Job Scraper tree | `<jobscraper-live-checkout>` | no git | n/a (live personal data) | inspect-only; not frozen |
-| jobscraper-memory | Claude memory | `<claude-project-memory>/jobscraper` | n/a | n/a | not a donor |
+| jobscraper-memory | assistant memory | `<assistant-memory>/jobscraper` | n/a | n/a | not a donor |
 | mtp | — | not found | — | — | absent |
 | searcher | product | `<searcher-repo>` + worktrees | `15602d7` | this worktree writes audit only | product |
 

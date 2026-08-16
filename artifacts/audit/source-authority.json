@@ -87,7 +87,7 @@
     },
     {
       "authority": false,
-      "branch": "grok/bind-spatial-20260816-000448",
+      "branch": "lane/bind-spatial-20260816-000448",
       "dirty": true,
       "head": "18ee3c06d27f04937d1681dea5fa2650131e4b2a",
       "id": "vmcp-wt-bind-spatial",
@@ -97,7 +97,7 @@
     },
     {
       "authority": false,
-      "branch": "grok/bind-web-20260816-000447",
+      "branch": "lane/bind-web-20260816-000447",
       "dirty": true,
       "head": "18ee3c06d27f04937d1681dea5fa2650131e4b2a",
       "id": "vmcp-wt-bind-web",
@@ -200,8 +200,8 @@
       "about": "CV style notes and Hawking AI-tool scrub; not scrape engine",
       "authority": false,
       "id": "jobscraper-memory",
-      "kind": "claude-memory",
-      "path": "<claude-project-memory>/jobscraper/memory"
+      "kind": "assistant-memory",
+      "path": "<assistant-memory>/jobscraper/memory"
     },
     {
       "authority": false,
@@ -218,7 +218,7 @@
       "role": "product"
     },
     {
-      "branch": "grok/searcher-donor-audit-20260816-003933",
+      "branch": "lane/searcher-donor-audit-20260816-003933",
       "head": "15602d7b6d02150835b74070126435adba73a90f",
       "id": "searcher-audit-worktree",
       "kind": "searcher",

@@ -12,7 +12,7 @@ Downloads, Desktop, Documents, Archives, `$SEARCHER_DONORS_ROOT`,
 `<agent-scratch>`, `<historical-stray>`, and the product trees hawking,
 merc, forge, substrate, and census returned **no product tree**.
 
-Claude projects: no `*mtp*` name. `$SEARCHER_DONORS_ROOT` contains only
+assistant projects: no `*mtp*` name. `$SEARCHER_DONORS_ROOT` contains only
 `visionmcp`. A first broad `*mtp*` find over `<home>` hung and was
 killed; it was replaced by the exact-name scan. The only filename hit
 in product trees was an unrelated hashed Forge asset
