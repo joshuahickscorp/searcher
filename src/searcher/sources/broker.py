@@ -10,6 +10,7 @@ from searcher.contracts.models import Admission, QueryVariant, SourceManifest, S
 from searcher.core.budgets import BudgetUsage
 from searcher.core.ids import new_id
 from searcher.sources.adapters import resolve_adapter
+from searcher.sources.families import family_for
 from searcher.sources.health import HealthStore, may_plan
 from searcher.sources.policy import policy_for
 
@@ -31,6 +32,13 @@ DEFAULT_ORDER = (
     "buyee",
     "vinted",
     "bunjang",
+    "ssense",
+    "depop",
+    "grailed",
+    "vestiaire",
+    "taobao",
+    "weidian",
+    "yupoo",
 )
 
 
@@ -65,6 +73,7 @@ class SourceBroker:
         usage: BudgetUsage | None = None,
         *,
         include_disabled: bool = False,
+        families: frozenset[str] | None = None,
     ) -> list[SourcePlan]:
         languages = {query.language for query in queries}
         query_ids = [query.query_id for query in queries]
@@ -73,6 +82,8 @@ class SourceBroker:
             try:
                 manifest = self.manifest_of(name)
             except Exception:
+                continue
+            if families is not None and family_for(manifest.source_id).value not in families:
                 continue
             if not include_disabled and not manifest.enabled:
                 continue

@@ -1,6 +1,9 @@
 # Searcher bucket policy
 
-Users see two tabs: Real and Possibly Real. There is no public Fake tab.
+Users see Real and Possibly Real. When replica-family sources are searched,
+or a listing declares itself a replica, a third public list **Replica** is
+published. There is no public Fake tab. A replica listing can never be ranked
+Real or Possibly Real, regardless of image-match strength.
 
 ## matching-1 (default for this wave)
 

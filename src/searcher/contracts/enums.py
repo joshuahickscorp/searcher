@@ -128,11 +128,19 @@ class BucketInternal(StrEnum):
 
 
 class BucketPublic(StrEnum):
-    """§9.14 public tab. Hidden is not shown."""
+    """§9.14 public tab. Hidden is not shown. Replica is never Real."""
 
     REAL = "real"
     POSSIBLY_REAL = "possibly_real"
+    REPLICA = "replica"
     HIDDEN = "hidden"
+
+
+class SourceFamily(StrEnum):
+    """Which family of marketplaces a source belongs to."""
+
+    LEGITIMATE = "legitimate"
+    REPLICA = "replica"
 
 
 class HypothesisStatus(StrEnum):
@@ -306,6 +314,7 @@ class PublicEventName(StrEnum):
     CANDIDATE_UPDATED = "candidate.updated"
     RESULT_REAL = "result.real"
     RESULT_POSSIBLY_REAL = "result.possibly_real"
+    RESULT_REPLICA = "result.replica"
     RESULT_REMOVED = "result.removed"
     SEARCH_WARNING = "search.warning"
     SEARCH_COMPLETE = "search.complete"

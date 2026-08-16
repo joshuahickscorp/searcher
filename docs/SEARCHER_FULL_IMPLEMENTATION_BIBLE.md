@@ -3130,6 +3130,7 @@ candidate.promoted
 candidate.updated
 result.real
 result.possibly_real
+result.replica
 result.removed
 search.warning
 search.complete

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-from searcher.contracts.enums import SourceAdmission
+from searcher.contracts.enums import SourceAdmission, SourceFamily
 from searcher.contracts.models import SourceManifest
 
 
@@ -22,6 +22,7 @@ class SourcePolicy:
     admission: SourceAdmission
     notes: str = ""
     open_question: str | None = None
+    source_family: SourceFamily = SourceFamily.LEGITIMATE
 
 
 # Derived from docs/sources/SOURCE_RESEARCH_2026-08-16.md. Do not invent.
@@ -280,6 +281,129 @@ RECORDED_POLICIES: dict[str, SourcePolicy] = {
         notes="html.duckduckgo.com Allow: /. ToS for automated commercial reuse unverified.",
         open_question="DDG ToS for automated commercial reuse were not fetched.",
     ),
+    "ssense": SourcePolicy(
+        "ssense",
+        search=False,
+        page_fetch=True,
+        render=False,
+        image_retrieval=False,
+        cache=True,
+        persistent_metadata=True,
+        thumbnail_publication=False,
+        refresh_frequency="on-demand",
+        admission=SourceAdmission.REVIEW_REQUIRED,
+        notes="Product pages only. Never ?q= or /api/. Disabled pending review.",
+        open_question="JSON-LD and sold markers unverified.",
+        source_family=SourceFamily.LEGITIMATE,
+    ),
+    "depop": SourcePolicy(
+        "depop",
+        search=False,
+        page_fetch=True,
+        render=False,
+        image_retrieval=False,
+        cache=False,
+        persistent_metadata=True,
+        thumbnail_publication=False,
+        refresh_frequency="on-demand",
+        admission=SourceAdmission.REVIEW_REQUIRED,
+        notes=(
+            "robots.txt returned a Cloudflare interstitial on 2026-08-16. "
+            "Disabled pending review."
+        ),
+        open_question="Can robots.txt and terms be fetched without a challenge?",
+        source_family=SourceFamily.LEGITIMATE,
+    ),
+    "grailed": SourcePolicy(
+        "grailed",
+        search=False,
+        page_fetch=True,
+        render=False,
+        image_retrieval=False,
+        cache=False,
+        persistent_metadata=True,
+        thumbnail_publication=False,
+        refresh_frequency="on-demand",
+        admission=SourceAdmission.REVIEW_REQUIRED,
+        notes=(
+            "robots.txt and terms returned Cloudflare blocks on 2026-08-16. "
+            "Disabled pending review."
+        ),
+        open_question="Can robots.txt and terms be fetched without a challenge?",
+        source_family=SourceFamily.LEGITIMATE,
+    ),
+    "vestiaire": SourcePolicy(
+        "vestiaire",
+        search=False,
+        page_fetch=True,
+        render=False,
+        image_retrieval=False,
+        cache=False,
+        persistent_metadata=True,
+        thumbnail_publication=False,
+        refresh_frequency="on-demand",
+        admission=SourceAdmission.REVIEW_REQUIRED,
+        notes=(
+            "robots.txt and terms returned a Cloudflare interstitial on 2026-08-16. "
+            "Disabled pending review."
+        ),
+        open_question="Can robots.txt and terms be fetched without a challenge?",
+        source_family=SourceFamily.LEGITIMATE,
+    ),
+    "taobao": SourcePolicy(
+        "taobao",
+        search=False,
+        page_fetch=False,
+        render=False,
+        image_retrieval=False,
+        cache=False,
+        persistent_metadata=True,
+        thumbnail_publication=False,
+        refresh_frequency="on-demand",
+        admission=SourceAdmission.REVIEW_REQUIRED,
+        notes=(
+            "robots allow /list/* only; item URLs typically carry query strings "
+            "and are Disallow. Disabled pending review."
+        ),
+        open_question="Is there an admitted item-page path that does not require login?",
+        source_family=SourceFamily.REPLICA,
+    ),
+    "weidian": SourcePolicy(
+        "weidian",
+        search=False,
+        page_fetch=False,
+        render=False,
+        image_retrieval=False,
+        cache=False,
+        persistent_metadata=True,
+        thumbnail_publication=False,
+        refresh_frequency="on-demand",
+        admission=SourceAdmission.REVIEW_REQUIRED,
+        notes=(
+            "robots.txt redirected to h5.weidian.com/m/abnormal/404.html "
+            "on 2026-08-16. Disabled pending review."
+        ),
+        open_question="Is there a fetchable robots.txt and an admitted public listing path?",
+        source_family=SourceFamily.REPLICA,
+    ),
+    "yupoo": SourcePolicy(
+        "yupoo",
+        search=False,
+        page_fetch=False,
+        render=False,
+        image_retrieval=False,
+        cache=False,
+        persistent_metadata=True,
+        thumbnail_publication=False,
+        refresh_frequency="on-demand",
+        admission=SourceAdmission.REVIEW_REQUIRED,
+        notes=(
+            "robots.txt and terms were not fetched in this wave. "
+            "Disabled pending review. No outbound host."
+        ),
+        open_question="What does robots.txt allow, and is album HTML an admitted listing path?",
+        source_family=SourceFamily.REPLICA,
+    ),
 }
 
 
@@ -304,6 +428,7 @@ def policy_from_manifest(manifest: SourceManifest) -> SourcePolicy:
         admission=manifest.admission_status,
         notes="; ".join(manifest.known_limitations),
         open_question=manifest.open_question,
+        source_family=manifest.source_family,
     )
 
 

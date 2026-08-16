@@ -118,9 +118,23 @@ class LiveDiscoveryRunner:
                     consult_and_surface(self.controller, search_id)
                     runtime = self.controller.repos.get_runtime(search_id)
                     if not runtime.get("index_skip_source_work"):
+                        from searcher.sources.broker import DEFAULT_ORDER
+                        from searcher.sources.families import (
+                            names_for_scopes,
+                            normalize_source_scopes,
+                        )
+
                         queries = self.controller.repos.list_queries(search_id)
+                        scopes = normalize_source_scopes(runtime.get("source_scopes"))
+                        preferred = tuple(source_names) if source_names is not None else None
+                        scoped = list(
+                            names_for_scopes(scopes, preferred, default_order=DEFAULT_ORDER)
+                        )
                         self.last_summary = engine.run(
-                            search_id, queries, source_names=source_names
+                            search_id,
+                            queries,
+                            source_names=scoped,
+                            families=frozenset(scopes),
                         )
                     remember_campaign(self.controller, search_id)
                     self.controller.persist_usage(search_id)

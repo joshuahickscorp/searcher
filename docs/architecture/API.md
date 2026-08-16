@@ -40,7 +40,9 @@ Errors are `{ "error": "<code>", "detail": "<human text>" }`. Hostile input is
 ### `POST /v1/searches`
 
 `multipart/form-data`. Field names `images` / `images[]`, `text`, `tags` /
-`tags[]`, `client_search_id`.
+`tags[]`, `client_search_id`, `source_scopes` / `source_scopes[]` (repeated
+`legitimate` and/or `replica`; unknown values ignored; absent defaults to
+`legitimate`).
 
 Returns immediately (`201`) without waiting for analysis:
 
@@ -84,6 +86,7 @@ candidate.promoted
 candidate.updated
 result.real
 result.possibly_real
+result.replica
 result.removed
 search.warning
 search.complete
@@ -96,15 +99,18 @@ The stream closes on a terminal campaign after the remaining events are sent,
 and on client disconnect.
 
 Payloads match `web/API_EXPECTATIONS.md`. `search.complete` is
-`{ "terminal_status", "reason" }`. `result.real` / `result.possibly_real` carry
-a result object when one has been stored. This process does not invent those
-events.
+`{ "terminal_status", "reason" }`. `result.real` / `result.possibly_real` /
+`result.replica` carry a result object when one has been stored. This process
+does not invent those events. A replica result is never merged into Real or
+Possibly Real.
 
 ### `GET /v1/searches/{search_id}/results`
 
-Without `bucket`: `{ search_id, real, possibly_real, counts }`.
+Without `bucket`: `{ search_id, real, possibly_real, counts }` and `replica`
+when that list is non-empty.
 
-With `?bucket=real` or `?bucket=possibly_real`: `{ search_id, bucket, results }`.
+With `?bucket=real`, `?bucket=possibly_real`, or `?bucket=replica`:
+`{ search_id, bucket, results }`.
 
 Hidden / rejected candidates are not listed. If routing has not run, both
 lists are empty and `GET /v1/searches/{id}` tells the truth about why.

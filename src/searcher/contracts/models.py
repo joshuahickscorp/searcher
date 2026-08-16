@@ -22,6 +22,7 @@ from searcher.contracts.enums import (
     QueryType,
     Retention,
     SourceAdmission,
+    SourceFamily,
     SourceHealthState,
     SourceOutcome,
     TerminalVerdict,
@@ -500,7 +501,10 @@ class BucketDecision(SearcherModel):
 
     @model_validator(mode="after")
     def veto_and_liveness_rules(self) -> BucketDecision:
-        if self.hard_vetoes and self.decision.public != BucketPublic.HIDDEN:
+        if self.hard_vetoes and self.decision.public in {
+            BucketPublic.REAL,
+            BucketPublic.POSSIBLY_REAL,
+        }:
             raise ValueError("a candidate with a hard veto cannot enter either public tab")
         if (
             self.decision.public == BucketPublic.REAL
@@ -664,6 +668,7 @@ class SourceManifest(SearcherModel):
     robots_url: str | None = None
     sitemap_urls: list[str] = Field(default_factory=list)
     listing_path_prefixes: list[str] = Field(default_factory=list)
+    source_family: SourceFamily = SourceFamily.LEGITIMATE
 
     @model_validator(mode="after")
     def fill_defaults(self) -> SourceManifest:

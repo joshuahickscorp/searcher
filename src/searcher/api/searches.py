@@ -78,6 +78,8 @@ async def create_search(request: Request) -> JSONResponse:
         client_search_id=parsed.client_search_id,
         settings=state.settings,
     )
+    if parsed.source_scopes != ("legitimate",):
+        state.controller.set_runtime(search_id, source_scopes=list(parsed.source_scopes))
     campaign = state.controller.get(search_id)
     if not is_terminal(campaign.state):
         start_campaign_thread(state, search_id)

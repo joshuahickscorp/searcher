@@ -24,8 +24,9 @@ def list_results(
     if bucket is not None and bucket not in {
         BucketPublic.REAL.value,
         BucketPublic.POSSIBLY_REAL.value,
+        BucketPublic.REPLICA.value,
     }:
-        raise ApiError(400, "bad_bucket", "bucket must be real or possibly_real.")
+        raise ApiError(400, "bad_bucket", "bucket must be real, possibly_real, or replica.")
     return list_public_results(state.controller, search_id, bucket)
 
 

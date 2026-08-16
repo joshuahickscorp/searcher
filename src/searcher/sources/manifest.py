@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from searcher.contracts.enums import FetchMode, SourceAdmission
+from searcher.contracts.enums import FetchMode, SourceAdmission, SourceFamily
 from searcher.contracts.models import RatePolicy, SourceManifest
 
 
@@ -40,6 +40,7 @@ def build_manifest(
     robots_url: str | None = None,
     sitemap_urls: list[str] | None = None,
     listing_path_prefixes: list[str] | None = None,
+    source_family: SourceFamily = SourceFamily.LEGITIMATE,
 ) -> SourceManifest:
     return SourceManifest(
         source_id=source_id,
@@ -74,6 +75,7 @@ def build_manifest(
         robots_url=robots_url,
         sitemap_urls=sitemap_urls or [],
         listing_path_prefixes=listing_path_prefixes or [],
+        source_family=source_family,
     )
 
 

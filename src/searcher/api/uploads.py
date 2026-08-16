@@ -10,9 +10,11 @@ from searcher.api.dependencies import ApiError
 from searcher.core.config import Settings
 from searcher.core.errors import InputError, MalformedContentError
 from searcher.reference.validation import refuse_path_name, validate_upload_bytes
+from searcher.sources.families import normalize_source_scopes
 
 _IMAGE_KEYS = frozenset({"images", "images[]", "image"})
 _TAG_KEYS = frozenset({"tags", "tags[]"})
+_SCOPE_KEYS = frozenset({"source_scopes", "source_scopes[]"})
 
 
 @dataclass(frozen=True, slots=True)
@@ -21,6 +23,7 @@ class ParsedCreate:
     text: str | None
     tags: list[str]
     client_search_id: str | None
+    source_scopes: tuple[str, ...]
 
 
 def _field_values(form: FormData, names: frozenset[str]) -> list[str]:
@@ -81,6 +84,7 @@ async def parse_create_form(form: FormData, settings: Settings) -> ParsedCreate:
     text_values = _field_values(form, frozenset({"text"}))
     tags = _field_values(form, _TAG_KEYS)
     client_values = _field_values(form, frozenset({"client_search_id"}))
+    raw_scopes = _field_values(form, _SCOPE_KEYS)
     text = text_values[0] if text_values else None
     client_search_id = client_values[0] if client_values else None
     return ParsedCreate(
@@ -88,6 +92,7 @@ async def parse_create_form(form: FormData, settings: Settings) -> ParsedCreate:
         text=text,
         tags=tags,
         client_search_id=client_search_id,
+        source_scopes=normalize_source_scopes(raw_scopes if raw_scopes else None),
     )
 
 
