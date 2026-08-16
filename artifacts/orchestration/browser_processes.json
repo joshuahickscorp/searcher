@@ -1,0 +1,8 @@
+{
+  "check": "no browser process survives a live campaign",
+  "method": "ps -ax captured immediately before the campaign and after it reached a terminal state, then filtered for chromium / playwright / headless_shell",
+  "before": {"processes_total": 40, "browser_processes": 0},
+  "after": {"processes_total": 40, "browser_processes": 0},
+  "result": "pass",
+  "note": "The raw ps dumps are deliberately not published: they contain this host's absolute paths, usernames and full application list, and the counts above are the whole of the evidence they carried."
+}
