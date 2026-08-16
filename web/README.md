@@ -1,10 +1,33 @@
 # Searcher web interface
 
 Static HTML, CSS, and ES modules. No build step, no dependencies.
+Published at https://joshuahickscorp.github.io/searcher/ from `web/`
+by `.github/workflows/pages.yml`. That origin does not run the API.
 
-## Local
+## Operator (the real engine)
 
-Serve the files and the development API together:
+The process that answers searches is started from the repository root:
+
+```text
+./scripts/run_api.sh
+```
+
+That serves this directory at the API origin (default
+http://127.0.0.1:8765/), so `config.js` can keep `API_BASE = ""`.
+
+Use that local copy for local work. Do not open the published HTTPS
+page with `?api=http://127.0.0.1:…`. The browser refuses an HTTPS
+page calling a private HTTP origin; the banner then says the search
+service is unavailable.
+
+Sharing, CORS, and the tunnel: [docs/OPERATING.md](../docs/OPERATING.md).
+
+`web/dev/` is a stub for UI development. It is not the operator API
+and is not part of the GitHub Pages site.
+
+## Local stub (UI development only)
+
+Serve the files and the development stub together:
 
 ```text
 python3 web/dev/stub_api.py
@@ -12,7 +35,7 @@ python3 web/dev/stub_api.py
 
 Open http://127.0.0.1:8765/
 
-Or split the two so you can stop the API without losing the page:
+Or split the two so you can stop the stub without losing the page:
 
 ```text
 python3 -m http.server 8080 --directory web
@@ -20,8 +43,6 @@ python3 web/dev/stub_api.py
 ```
 
 Open http://127.0.0.1:8080/?api=http://127.0.0.1:8765
-
-`web/dev/` is not part of the GitHub Pages site.
 
 ## Configuration
 

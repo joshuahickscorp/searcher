@@ -15,7 +15,18 @@ Order: cache → hashes/metadata → text/OCR → optional global embeddings →
 dedupe → local parts → correspondence → (optional) deliberative.
 
 Learned embeddings activate only when weights already exist locally. Nothing
-is downloaded.
+is downloaded. A fresh clone has no weight files. There is no published
+Searcher weight file to fetch. Optional paths, if you already have a file:
+
+- `SEARCHER_EMBEDDING_WEIGHTS`
+- `$SEARCHER_DATA_ROOT/models/embedding.pt`
+- `$SEARCHER_DATA_ROOT/models/clip.pt`
+
+This version notices a file there and still does not load it into a model
+(`embed_png` returns `None`). The service runs without weights and answers
+with classical descriptors. The learned-embedding lane stays blocked.
+Nothing is promoted to Real through a missing-weight fallback. Operator
+summary: [docs/OPERATING.md](../OPERATING.md#model-weights).
 
 ## Three judgments
 

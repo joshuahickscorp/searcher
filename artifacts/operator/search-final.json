@@ -1,0 +1,94 @@
+{
+  "search_id": "1d79dd19-26f8-492a-95ec-b837e7a62cba",
+  "state": "PARTIAL",
+  "state_version": 19,
+  "terminal_status": "PARTIAL",
+  "terminal_reason": "useful coverage remains incomplete; some sources blocked",
+  "created_at": "2026-08-16T19:40:46.095090+00:00",
+  "updated_at": "2026-08-16T19:42:49.931477+00:00",
+  "progress": {
+    "stage": "Ranking results",
+    "detail": null
+  },
+  "coverage": {
+    "sources_completed": [
+      {
+        "detail": "",
+        "id": "wikimedia",
+        "name": "wikimedia",
+        "status": "SEARCHED_NO_MATCH"
+      },
+      {
+        "detail": "",
+        "id": "kind",
+        "name": "kind",
+        "status": "SEARCHED_MATCHES_FOUND"
+      },
+      {
+        "detail": "",
+        "id": "the_realreal",
+        "name": "the_realreal",
+        "status": "SEARCHED_MATCHES_FOUND"
+      },
+      {
+        "detail": "",
+        "id": "byronesque",
+        "name": "byronesque",
+        "status": "SEARCHED_MATCHES_FOUND"
+      },
+      {
+        "detail": "",
+        "id": "heroine",
+        "name": "heroine",
+        "status": "SEARCHED_NO_MATCH"
+      }
+    ],
+    "sources_blocked": [
+      {
+        "detail": "",
+        "id": "komehyo",
+        "name": "komehyo",
+        "status": "SOURCE_UNAVAILABLE"
+      },
+      {
+        "detail": "",
+        "id": "ebay",
+        "name": "ebay",
+        "status": "AUTH_REQUIRED"
+      }
+    ],
+    "sources_in_progress": [],
+    "pages_fetched": 20,
+    "candidates_normalized": 10,
+    "candidates_hidden": 16
+  },
+  "counts": {
+    "real": 0,
+    "possibly_real": 0,
+    "hidden": 8
+  },
+  "hidden_policy_note": "Some candidates did not meet policy.",
+  "missing_reference_views": [
+    {
+      "view": "label",
+      "why": "Improves product-code evidence."
+    },
+    {
+      "view": "heel",
+      "why": "Heel overlay is unseen."
+    },
+    {
+      "view": "lateral",
+      "why": "Panel layout is incomplete."
+    }
+  ],
+  "deeper_refresh_available": false,
+  "intent": {
+    "text": "Dior Homme General Army Trainer 07",
+    "tags": [
+      "footwear"
+    ]
+  },
+  "events_url": "/v1/searches/1d79dd19-26f8-492a-95ec-b837e7a62cba/events",
+  "results_url": "/v1/searches/1d79dd19-26f8-492a-95ec-b837e7a62cba/results"
+}

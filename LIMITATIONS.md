@@ -69,13 +69,43 @@ GOAT, Poshmark, and DuckDuckGo HTML are `review_required` and
 
 **No hosted API.** The GitHub Pages UI is static files. The engine
 runs on the operator's machine and binds `127.0.0.1` by default. See
-[README.md](README.md).
+[README.md](README.md) and [docs/OPERATING.md](docs/OPERATING.md).
 
-**The running API process does not discover live listings.**
-`scripts/run_api.sh` completes reference analysis and query
-compilation, then terminates `BLOCKED` because discovery is not wired
-into that process. Matching, authenticity, and ranking packages exist
-and are tested; they are not called by the served API today.
+**There is no authentication.** Anyone who can reach the process can
+create, read, cancel, and delete searches. `--lan` and `--tunnel`
+are opt-in and public to whoever has the URL.
+
+**A finished search can honestly return nothing.** Empty Real and
+Possibly Real lists are allowed. Hidden candidates are not shown.
+That is not a finding that the item does not exist.
+
+**The process is only up while the operator's machine is awake and
+the script is running.** Sleep, quit, or a network drop takes it
+down. There is no hosted queue.
+
+**CORS is an allowlist.** `SEARCHER_CORS_ORIGINS` must include the
+page's origin. A miss looks to the user like “the search service is
+unavailable.” The published Pages origin is
+`https://joshuahickscorp.github.io` (no `/searcher` path).
+
+**An HTTPS page cannot call an HTTP private origin.** Pointing the
+published Pages UI at `http://127.0.0.1` or a LAN `http://` address
+is refused by the browser. Local work uses the local copy of the
+interface. Sharing over Pages requires an HTTPS API origin (the
+tunnel) and the Pages origin on the CORS allowlist.
+
+**Live listing discovery is on in `scripts/run_api.sh`.**
+`GET /v1/capabilities` reports `discovery.available` and
+`routing.available` from the running process. Some sources still
+block (`AUTH_REQUIRED` without operator keys, `SOURCE_UNAVAILABLE`).
+Setting `SEARCHER_LIVE_DISCOVERY=0` keeps the honest `BLOCKED` stop
+after the reference and query wave. Matching, authenticity, and
+ranking packages exist either way.
+
+**No model weights are bundled.** Searcher never downloads them.
+The service runs without them and does not promote anything to Real
+through a missing-weight fallback. See
+[docs/OPERATING.md](docs/OPERATING.md#model-weights).
 
 **The static UI still mentions a “current benchmark.”**
 `web/index.html` uses that phrase. No benchmark has been run. The

@@ -1,0 +1,24 @@
+Usage: scripts/serve_shared.sh [--lan | --tunnel] [--port N] [--host ADDR]
+
+  (default)  Bind 127.0.0.1. Only this Mac can reach the API.
+  --lan      Bind the local network interface and print the URL to share
+             on the same network.
+  --tunnel   Use cloudflared if it is already installed, print the public
+             URL, and refuse if cloudflared is missing. Does not install
+             anything, does not create an account, does not sign anyone up.
+
+  --port N   Listen port (default 8765, or SEARCHER_API_PORT).
+  --host A   Override bind address (ignored by --lan / --tunnel).
+  --help     This message.
+
+WARNING: This alpha has no authentication.
+--lan and --tunnel expose an unauthenticated API to whoever has the URL.
+Do not treat a tunnel URL as a private or secret-safe service.
+
+The Pages UI is opened with ?api=<this-api-origin>. CORS is set from the
+chosen mode; it is not widened permanently in the process defaults.
+
+Tell friends the API is live by sending them the printed ?api= URL.
+When you stop this process, it is not live — tell them that too.
+GET /v1/health is the machine check: unreachable means down; HTTP 200
+with status=ok means up; status=degraded means up with a blocked lane.

@@ -1,0 +1,9 @@
+  setBanner("The search service is unavailable. Searcher cannot start or update a search until the service responds.");
+  results.setStream("The search service is unavailable.");
+  announce("The search service is unavailable.");
+      if (err.code === "unavailable") markUnavailable();
+      if (err.code === "unavailable") markUnavailable();
+      if (err.code === "unavailable") markUnavailable();
+    if (err.code === "unavailable") throw err;
+      if (err.code === "unavailable") markUnavailable();
+    setBanner("The search service is unavailable. Set a working ?api= address if this page is not served by the search service.");

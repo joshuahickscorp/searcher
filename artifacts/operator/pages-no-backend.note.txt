@@ -1,0 +1,14 @@
+pages-no-backend.png is the Searcher interface in the
+API-unavailable state (banner: “The search service is unavailable.
+Set a working ?api= address if this page is not served by the
+search service.”).
+
+The published page at https://joshuahickscorp.github.io/searcher/
+serves the same web/ files (index.html HTTP 200, 10826 bytes;
+app.js contains that banner). GET …/v1/health on that origin is
+HTTP 404 — there is no API on Pages.
+
+A live headless capture of the published URL in this environment
+crashed (Chrome.app blocked; Playwright chrome-headless-shell
+SEGV). The image matches the published interface’s no-backend
+state.
