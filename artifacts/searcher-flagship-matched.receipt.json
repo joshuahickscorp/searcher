@@ -1,13 +1,11 @@
 {
   "scenario": "Bible \u00a740 first flagship acceptance",
   "input": {
-    "text": "Dior Homme General Army Trainer 07",
+    "text": "WILLY CHAVARRIA \u7121\u5730 \u30ed\u30f3\u30b0\u30b9\u30ea\u30fc\u30d6\u30ab\u30c3\u30c8\u30bd\u30fc \u30d6\u30e9\u30c3\u30af",
     "tags": [
-      "Dior Homme",
-      "Hedi Slimane",
-      "2007",
-      "black",
-      "low-top"
+      "WILLY CHAVARRIA",
+      "\u30ed\u30f3\u30b0\u30b9\u30ea\u30fc\u30d6",
+      "black"
     ],
     "images": [
       "known_1.jpg",
@@ -15,18 +13,18 @@
       "known_3.jpg"
     ]
   },
-  "search_id": "3d806d3c-5848-4f30-b4a6-1623a5971222",
-  "terminal_status": "PARTIAL",
-  "terminal_reason": "budget exhausted",
+  "search_id": "80e8a9a4-4c2b-4540-9d20-1161f9b5af8e",
+  "terminal_status": "COMPLETE",
+  "terminal_reason": "coverage exhausted",
   "counts": {
     "real": 0,
     "possibly_real": 0,
     "hidden": 8
   },
   "summary": {
-    "met": 13,
+    "met": 12,
     "not_met": 3,
-    "not_evaluable": 8,
+    "not_evaluable": 9,
     "of": 24
   },
   "behaviours": [
@@ -34,7 +32,7 @@
       "n": "1",
       "behaviour": "images normalized and hashed",
       "verdict": "met",
-      "observation": "campaign reached PARTIAL; upload accepted 3 images"
+      "observation": "campaign reached COMPLETE; upload accepted 3 images"
     },
     {
       "n": "2",
@@ -64,7 +62,7 @@
       "n": "6",
       "behaviour": "query families generated",
       "verdict": "met",
-      "observation": "progress stages observed: 143"
+      "observation": "progress stages observed: 51"
     },
     {
       "n": "7",
@@ -75,14 +73,14 @@
     {
       "n": "8",
       "behaviour": "source blocks reported honestly",
-      "verdict": "met",
-      "observation": "blocked: [('wikimedia', 'SOURCE_UNAVAILABLE'), ('byronesque', 'SOURCE_UNAVAILABLE'), ('heroine', 'BLOCKED_BY_POLICY'), ('ebay', 'AUTH_REQUIRED')]"
+      "verdict": "not evaluable",
+      "observation": "blocked: []"
     },
     {
       "n": "9",
       "behaviour": "listing candidates normalized",
       "verdict": "met",
-      "observation": "candidates_normalized=9, pages_fetched=19"
+      "observation": "candidates_normalized=9, pages_fetched=1"
     },
     {
       "n": "10",
@@ -148,7 +146,7 @@
       "n": "20",
       "behaviour": "exhaustion or saturation receipt produced",
       "verdict": "met",
-      "observation": "terminal=PARTIAL reason=budget exhausted"
+      "observation": "terminal=COMPLETE reason=coverage exhausted"
     },
     {
       "n": "21",

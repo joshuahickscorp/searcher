@@ -229,10 +229,14 @@ def main() -> int:
     parser.add_argument("--data-root", required=True)
     parser.add_argument("--budget", type=float, default=420.0)
     parser.add_argument("--out", default="artifacts/searcher-flagship-acceptance.receipt.json")
+    parser.add_argument("--text", default=TEXT, help="override the §40 text for a different item")
+    parser.add_argument("--tag", action="append", default=None, help="override the §40 tags")
     args = parser.parse_args()
 
     images = [(Path(p).name, Path(p).read_bytes()) for p in args.images]
-    search_id = post_search(args.api, images, TEXT, TAGS)
+    text = args.text
+    tags = args.tag if args.tag else TAGS
+    search_id = post_search(args.api, images, text, tags)
     print("search:", search_id, flush=True)
     state = wait_terminal(args.api, search_id, args.budget)
     events = stream_events(args.api, search_id, 30)
@@ -245,7 +249,7 @@ def main() -> int:
 
     receipt = {
         "scenario": "Bible §40 first flagship acceptance",
-        "input": {"text": TEXT, "tags": TAGS, "images": [n for n, _ in images]},
+        "input": {"text": text, "tags": tags, "images": [n for n, _ in images]},
         "search_id": search_id,
         "terminal_status": state.get("terminal_status"),
         "terminal_reason": state.get("terminal_reason"),
