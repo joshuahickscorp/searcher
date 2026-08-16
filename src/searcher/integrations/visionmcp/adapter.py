@@ -73,7 +73,7 @@ class SearcherVisionAdapter:
             assert_imaging_contract()
         except Exception:
             return None
-        from visionmcp.evidence.references import inspect_image  # type: ignore[import-untyped]
+        from visionmcp.evidence.references import inspect_image
 
         metadata, quality = inspect_image(path)
         return map_inspect_image(metadata, quality)

@@ -46,6 +46,7 @@ packages = ["src/searcher"]
 line-length = 100
 target-version = "py313"
 src = ["src", "tests"]
+extend-exclude = ["web"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM"]
@@ -71,6 +72,10 @@ check_untyped_defs = true
 mypy_path = "src"
 packages = ["searcher"]
 plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = ["cv2", "numpy", "visionmcp", "visionmcp.*"]
+ignore_missing_imports = true
 
 [tool.pydantic-mypy]
 init_forbid_extra = true

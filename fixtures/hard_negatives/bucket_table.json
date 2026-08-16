@@ -1,0 +1,257 @@
+[
+  {
+    "id": "true_match",
+    "internal": "real",
+    "public": "real",
+    "reasons": [
+      "real-gate",
+      "adjudicator=local_deterministic",
+      "output=advisory"
+    ],
+    "item_hard": [],
+    "auth_hard": []
+  },
+  {
+    "id": "adjacent_model",
+    "internal": "rejected",
+    "public": "hidden",
+    "reasons": [
+      "WRONG_PRODUCT",
+      "hidden",
+      "adjudicator=local_deterministic",
+      "output=advisory"
+    ],
+    "item_hard": [
+      "panel-count-mismatch",
+      "outsole-geometry-mismatch",
+      "heel-construction-mismatch",
+      "logo-placement-mismatch"
+    ],
+    "auth_hard": [
+      "construction-panel-count",
+      "construction-outsole",
+      "construction-heel",
+      "label-code-incompatible",
+      "logo-incompatible"
+    ]
+  },
+  {
+    "id": "different_season",
+    "internal": "possibly_real",
+    "public": "possibly_real",
+    "reasons": [
+      "possibly-real-gate",
+      "adjudicator=local_deterministic",
+      "output=advisory"
+    ],
+    "item_hard": [],
+    "auth_hard": []
+  },
+  {
+    "id": "different_colourway",
+    "internal": "rejected",
+    "public": "hidden",
+    "reasons": [
+      "HARD_COLOURWAY",
+      "INSUFFICIENT_MATCH",
+      "hidden",
+      "adjudicator=local_deterministic",
+      "output=advisory"
+    ],
+    "item_hard": [
+      "colourway-hard-mismatch"
+    ],
+    "auth_hard": [
+      "material-colourway"
+    ]
+  },
+  {
+    "id": "replica_copied_title",
+    "internal": "rejected",
+    "public": "hidden",
+    "reasons": [
+      "SELF_DECLARED_REPLICA",
+      "WRONG_PRODUCT",
+      "hidden",
+      "adjudicator=local_deterministic",
+      "output=advisory"
+    ],
+    "item_hard": [
+      "eyelet-count-mismatch",
+      "panel-count-mismatch",
+      "label-code-mismatch"
+    ],
+    "auth_hard": [
+      "construction-eyelet-count",
+      "construction-panel-count",
+      "label-code-incompatible",
+      "logo-incompatible",
+      "self-declared-replica"
+    ]
+  },
+  {
+    "id": "authentic_poor_photos",
+    "internal": "possibly_real",
+    "public": "possibly_real",
+    "reasons": [
+      "possibly-real-gate",
+      "adjudicator=local_deterministic",
+      "output=advisory"
+    ],
+    "item_hard": [],
+    "auth_hard": []
+  },
+  {
+    "id": "counterfeit_excellent_photos",
+    "internal": "rejected",
+    "public": "hidden",
+    "reasons": [
+      "STRONG_COUNTERFEIT_EVIDENCE",
+      "INSUFFICIENT_MATCH",
+      "hidden",
+      "adjudicator=local_deterministic",
+      "output=advisory"
+    ],
+    "item_hard": [
+      "label-code-mismatch"
+    ],
+    "auth_hard": [
+      "label-code-incompatible",
+      "logo-incompatible"
+    ]
+  },
+  {
+    "id": "stolen_photos",
+    "internal": "rejected",
+    "public": "hidden",
+    "reasons": [
+      "IMAGE_THEFT_OR_SCAM",
+      "hidden",
+      "adjudicator=local_deterministic",
+      "output=advisory"
+    ],
+    "item_hard": [],
+    "auth_hard": [
+      "image-theft-or-rehost"
+    ]
+  },
+  {
+    "id": "stock_mixed",
+    "internal": "real",
+    "public": "real",
+    "reasons": [
+      "real-gate",
+      "adjudicator=local_deterministic",
+      "output=advisory"
+    ],
+    "item_hard": [],
+    "auth_hard": []
+  },
+  {
+    "id": "two_items",
+    "internal": "rejected",
+    "public": "hidden",
+    "reasons": [
+      "WRONG_PRODUCT",
+      "hidden",
+      "adjudicator=local_deterministic",
+      "output=advisory"
+    ],
+    "item_hard": [
+      "panel-count-mismatch",
+      "outsole-geometry-mismatch",
+      "heel-construction-mismatch",
+      "logo-placement-mismatch"
+    ],
+    "auth_hard": [
+      "construction-panel-count",
+      "construction-outsole",
+      "construction-heel",
+      "logo-incompatible"
+    ]
+  },
+  {
+    "id": "copied_product_code",
+    "internal": "rejected",
+    "public": "hidden",
+    "reasons": [
+      "WRONG_PRODUCT",
+      "hidden",
+      "adjudicator=local_deterministic",
+      "output=advisory"
+    ],
+    "item_hard": [
+      "panel-count-mismatch",
+      "outsole-geometry-mismatch",
+      "heel-construction-mismatch",
+      "logo-placement-mismatch"
+    ],
+    "auth_hard": [
+      "construction-panel-count",
+      "construction-outsole",
+      "construction-heel",
+      "label-code-incompatible",
+      "logo-incompatible"
+    ]
+  },
+  {
+    "id": "mirrored_image",
+    "internal": "real",
+    "public": "real",
+    "reasons": [
+      "real-gate",
+      "adjudicator=local_deterministic",
+      "output=advisory"
+    ],
+    "item_hard": [],
+    "auth_hard": []
+  },
+  {
+    "id": "rehosted_sold",
+    "internal": "rejected",
+    "public": "hidden",
+    "reasons": [
+      "DEAD_LISTING",
+      "hidden",
+      "adjudicator=local_deterministic",
+      "output=advisory"
+    ],
+    "item_hard": [],
+    "auth_hard": []
+  },
+  {
+    "id": "ai_generated",
+    "internal": "rejected",
+    "public": "hidden",
+    "reasons": [
+      "WRONG_PRODUCT",
+      "hidden",
+      "adjudicator=local_deterministic",
+      "output=advisory"
+    ],
+    "item_hard": [
+      "eyelet-count-mismatch",
+      "panel-count-mismatch",
+      "heel-construction-mismatch"
+    ],
+    "auth_hard": [
+      "construction-eyelet-count",
+      "construction-panel-count",
+      "construction-outsole",
+      "construction-heel",
+      "logo-incompatible"
+    ]
+  },
+  {
+    "id": "prompt_injection",
+    "internal": "real",
+    "public": "real",
+    "reasons": [
+      "real-gate",
+      "adjudicator=local_deterministic",
+      "output=advisory"
+    ],
+    "item_hard": [],
+    "auth_hard": []
+  }
+]

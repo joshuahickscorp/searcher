@@ -72,6 +72,36 @@ class CampaignTerminalReceipt(ReceiptBase):
     state_version: int = 0
 
 
+class MatchEvidenceReceipt(ReceiptBase):
+    receipt_type: str = "MatchEvidenceReceipt"
+    candidate_id: str = ""
+    hypothesis_id: str = ""
+    item_match_lower_bound: float = 0.0
+
+
+class AuthenticityDecisionReceipt(ReceiptBase):
+    receipt_type: str = "AuthenticityDecisionReceipt"
+    candidate_id: str = ""
+    authority_ceiling: str = "uncalibrated"
+    public_label: str = "INCOMPLETE EVIDENCE"
+
+
+class CostReceipt(ReceiptBase):
+    receipt_type: str = "CostReceipt"
+    stages: list[str] = []
+    cache_hits: int = 0
+    model_calls: int = 0
+    bytes_touched: int = 0
+    dedup_savings: int = 0
+    cheap_first: bool = False
+
+
+class ComparisonArtifactReceipt(ReceiptBase):
+    receipt_type: str = "ComparisonArtifactReceipt"
+    candidate_id: str = ""
+    digest: str = ""
+
+
 def typed_from_payload(payload: dict[str, Any]) -> ReceiptBase:
     mapping: dict[str, type[ReceiptBase]] = {
         "ReferenceIngestionReceipt": ReferenceIngestionReceipt,
@@ -82,6 +112,10 @@ def typed_from_payload(payload: dict[str, Any]) -> ReceiptBase:
         "BucketDecisionReceipt": BucketDecisionReceipt,
         "SearchExhaustionReceipt": SearchExhaustionReceipt,
         "CampaignTerminalReceipt": CampaignTerminalReceipt,
+        "MatchEvidenceReceipt": MatchEvidenceReceipt,
+        "AuthenticityDecisionReceipt": AuthenticityDecisionReceipt,
+        "CostReceipt": CostReceipt,
+        "ComparisonArtifactReceipt": ComparisonArtifactReceipt,
         "ReceiptBase": ReceiptBase,
     }
     cls = mapping.get(str(payload.get("receipt_type", "ReceiptBase")), ReceiptBase)

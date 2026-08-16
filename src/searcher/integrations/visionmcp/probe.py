@@ -47,7 +47,7 @@ def _donor_core_report() -> tuple[dict[str, Any] | None, str | None]:
     if pkg is None:
         return None, "visionmcp not importable"
     try:
-        from visionmcp.capabilities import (  # type: ignore[import-untyped]
+        from visionmcp.capabilities import (
             capabilities_report,
             core_doctor_report,
         )
