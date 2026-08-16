@@ -842,7 +842,6 @@ class Repositories:
         ).fetchone()
         return _load(row["payload_json"]) if row else None
 
-
     def get_campaign_meta(self, search_id: str) -> dict[str, Any] | None:
         row = self.db.execute(
             """

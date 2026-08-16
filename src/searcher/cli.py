@@ -11,6 +11,7 @@ from typing import Any
 
 from searcher.campaigns.controller import CampaignController
 from searcher.campaigns.events import list_events
+from searcher.campaigns.orchestrator import CampaignOrchestrator
 from searcher.campaigns.resume import reconstruct
 from searcher.campaigns.runner import FixtureRunner
 from searcher.core.config import Settings
@@ -80,12 +81,19 @@ def cmd_campaign_create(args: argparse.Namespace) -> int:
         del store
 
 
+def _run_existing(controller: CampaignController, search_id: str) -> None:
+    campaign = controller.get(search_id)
+    if campaign.fixture_name:
+        FixtureRunner(controller, step_delay=controller.settings.step_delay_seconds).run(search_id)
+        return
+    CampaignOrchestrator(controller).run(search_id)
+
+
 def cmd_campaign_run(args: argparse.Namespace) -> int:
     settings = Settings.from_env()
     db, store, controller = _session(settings)
     try:
-        runner = FixtureRunner(controller, step_delay=settings.step_delay_seconds)
-        runner.run(args.search_id)
+        _run_existing(controller, args.search_id)
         campaign = controller.get(args.search_id)
         payload = {
             "search_id": args.search_id,
@@ -110,8 +118,11 @@ def cmd_campaign_resume(args: argparse.Namespace) -> int:
     db, store, controller = _session(settings)
     try:
         snapshot = reconstruct(controller.repos, args.search_id)
-        runner = FixtureRunner(controller, step_delay=settings.step_delay_seconds)
-        runner.resume(args.search_id)
+        campaign = controller.get(args.search_id)
+        if campaign.fixture_name:
+            FixtureRunner(controller, step_delay=settings.step_delay_seconds).resume(args.search_id)
+        else:
+            CampaignOrchestrator(controller).resume(args.search_id)
         campaign = controller.get(args.search_id)
         payload = {
             "search_id": args.search_id,

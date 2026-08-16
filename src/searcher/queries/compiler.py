@@ -13,18 +13,19 @@ def compile_queries(
     ceiling: int = DEFAULT_CEILING,
     demoted: set[str] | None = None,
     prior: list[QueryVariant] | None = None,
+    product_codes: list[str] | None = None,
 ) -> list[QueryVariant]:
     visual_terms: list[str] = []
-    codes: list[str] = []
+    codes: list[str] = list(product_codes or [])
     if analysis is not None:
         visual_terms = [
             rel.split()[0] for rel in analysis.visual_signature.distinctive_relations if rel.split()
         ]
-        codes = [
+        codes.extend(
             obs.text
             for obs in analysis.text_and_marks
             if obs.kind == "product_code" and not obs.injection_candidate
-        ]
+        )
     return compile_plan(
         hypotheses,
         ceiling=ceiling,

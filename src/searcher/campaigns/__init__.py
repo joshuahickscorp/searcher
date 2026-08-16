@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from searcher.campaigns.controller import CampaignController
 from searcher.campaigns.models import ResumeSnapshot, TransitionContext
+from searcher.campaigns.orchestrator import CampaignOrchestrator
 from searcher.campaigns.resume import reconstruct
 from searcher.campaigns.runner import FixtureRunner
 from searcher.campaigns.states import is_terminal
@@ -11,6 +12,7 @@ from searcher.campaigns.transitions import assert_legal
 
 __all__ = [
     "CampaignController",
+    "CampaignOrchestrator",
     "FixtureRunner",
     "ResumeSnapshot",
     "TransitionContext",
