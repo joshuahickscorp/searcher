@@ -132,6 +132,10 @@ def create_api_campaign(
 ) -> str:
     cfg = settings or controller.settings
     _reject_hostile_fields(text, tags)
+    if cfg.live_discovery:
+        from searcher.workers.bounded_discovery import install_bounded_discovery
+
+        install_bounded_discovery()
     search_id = new_id()
     intent = SearchIntent(
         search_id=search_id,
@@ -186,9 +190,7 @@ def create_api_campaign(
                         polarity=EvidencePolarity.SUPPORTING,
                         fact_class=FactClass.USER_SUPPLIED,
                         accepted=True,
-                        lineage=raw_lineage(
-                            input_digests=[ref.digest], process="reference_ingest"
-                        ),
+                        lineage=raw_lineage(input_digests=[ref.digest], process="reference_ingest"),
                         created_at=utc_now(),
                         label="reference_image",
                     )
@@ -383,6 +385,9 @@ def run_api_campaign(controller: CampaignController, search_id: str) -> None:
         if is_terminal(campaign.state) or controller.repos.is_deleted(search_id):
             return
         if _should_run_live(controller.settings):
+            from searcher.workers.bounded_discovery import install_bounded_discovery
+
+            install_bounded_discovery()
             CampaignOrchestrator(
                 controller,
                 source_names=[

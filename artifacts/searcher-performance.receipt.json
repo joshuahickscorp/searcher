@@ -15,11 +15,11 @@
         "wall_seconds": 0
       },
       "cache_hits": 0,
-      "campaign_wall_ms": 96.412,
+      "campaign_wall_ms": 49.069,
       "candidates": 5,
       "fetches": 5,
-      "first_candidate_ms": 23.621,
-      "first_routed_result_ms": 76.177,
+      "first_candidate_ms": 13.44,
+      "first_routed_result_ms": 41.615,
       "receipts": [
         {
           "cache_hits": 0,
@@ -33,7 +33,7 @@
         }
       ],
       "results": 5,
-      "search_create_ms": 46.418
+      "search_create_ms": 0.612
     },
     "duplicate_work_avoided": 1.0,
     "warm": {
@@ -49,11 +49,11 @@
         "wall_seconds": 0
       },
       "cache_hits": 5,
-      "campaign_wall_ms": 75.195,
+      "campaign_wall_ms": 29.266,
       "candidates": 5,
       "fetches": 0,
-      "first_candidate_ms": 23.374,
-      "first_routed_result_ms": 24.091,
+      "first_candidate_ms": 11.743,
+      "first_routed_result_ms": 12.282,
       "index_hits": 5,
       "index_skip_source_work": true,
       "receipts": [
@@ -74,53 +74,53 @@
   "host": "Mac-Studio",
   "http": {
     "cold": {
-      "campaign_wall_ms": 1008.653,
-      "capabilities_ms": 6.334,
+      "campaign_wall_ms": 128.294,
+      "capabilities_ms": 1.891,
       "capabilities_status": 200,
       "first_candidate_ms": null,
-      "first_progress_event_ms": 8.94,
+      "first_progress_event_ms": 1.837,
       "first_routed_result_ms": null,
-      "health_ms": 8.145,
+      "health_ms": 1.918,
       "health_status": "ok",
-      "search_create_ms": 11.633,
+      "search_create_ms": 4.372,
       "search_create_status": 201,
-      "search_id": "58eff6aa-1e9a-425b-8b08-013e990c4990",
+      "search_id": "166d1ab6-5014-4ff0-8e88-55958a2b7e27",
       "transport": "asgi-testclient",
       "transport_note": "HTTP timings are Starlette TestClient against the real app on this host. A kernel TCP bind was not used because this environment forbids loopback sockets.",
-      "ui_first_byte_ms": 21.72,
-      "ui_status": 200
+      "ui_first_byte_ms": 2.345,
+      "ui_status": 404
     },
     "warm": {
-      "campaign_wall_ms": 258.992,
-      "capabilities_ms": 11.388,
+      "campaign_wall_ms": 87.934,
+      "capabilities_ms": 1.351,
       "capabilities_status": 200,
-      "first_candidate_ms": 258.992,
-      "first_progress_event_ms": 7.866,
+      "first_candidate_ms": 87.934,
+      "first_progress_event_ms": 1.904,
       "first_routed_result_ms": null,
-      "health_ms": 3.832,
+      "health_ms": 1.378,
       "health_status": "ok",
-      "search_create_ms": 5.941,
+      "search_create_ms": 3.083,
       "search_create_status": 201,
-      "search_id": "cebf6e12-0f9f-4602-8ce3-9813f3b733f1",
+      "search_id": "db134637-42dd-42bf-94ec-520974bda609",
       "transport": "asgi-testclient",
       "transport_note": "HTTP timings are Starlette TestClient against the real app on this host. A kernel TCP bind was not used because this environment forbids loopback sockets.",
-      "ui_first_byte_ms": 12.849,
-      "ui_status": 200
+      "ui_first_byte_ms": 2.439,
+      "ui_status": 404
     }
   },
-  "measured_at": "2026-08-16T07:52:09.907637+00:00",
+  "measured_at": "2026-08-16T21:57:19.861508+00:00",
   "note": "Searcher answers a live campaign: it plans queries, fetches admitted sources, normalizes, clusters, matches, and checks liveness. A precomputed image index answers a lookup against work that already happened. Those are different operations. A cold live campaign cannot equal an index lookup. Repeat and overlapping searches can, because the warm local index avoids doing the same source work twice. This receipt records measured numbers on this host. It does not claim parity with a precomputed index.",
   "policy_version": "provisional-1",
   "profile": {
     "get_campaign": {
-      "get_campaign_200x_ms": 14.574,
-      "get_state_version_200x_ms": 0.842,
+      "get_campaign_200x_ms": 13.917,
+      "get_state_version_200x_ms": 0.489,
       "justification": "emit() used to call get_campaign, which loads the intent and six child-id lists, on every public event. A json_group_array rewrite of those lists was slower on this host (tiny rows, six correlated subqueries). emit() now reads only state_version."
     },
     "image_decode": {
       "justification": "matching and cheap signals re-open the same listing PNG. An LRU keyed by content digest avoids that decode on the repeat path.",
-      "open_rgb_24x_same_ms": 0.123,
-      "open_rgb_24x_unique_ms": 6.585
+      "open_rgb_24x_same_ms": 0.049,
+      "open_rgb_24x_unique_ms": 2.167
     }
   },
   "schema_version": "1.1.0",
