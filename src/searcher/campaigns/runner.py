@@ -246,9 +246,13 @@ class FixtureRunner:
             CampaignState.GAP_ANALYSIS: self._gaps,
             CampaignState.COMPLETE: self._complete,
         }
+        if state is CampaignState.PLANNING_SOURCES:
+            self._consult_index(search_id)
         handler = handlers.get(state)
         if handler is not None:
             handler(search_id)
+        if state is CampaignState.PUBLISHING:
+            self._remember_index(search_id)
 
     def _pack(self, search_id: str) -> dict[str, Any]:
         runtime = self.controller.repos.get_runtime(search_id)
@@ -471,7 +475,24 @@ class FixtureRunner:
         )
         self.controller.set_runtime(search_id, source_run_id=plan.source_plan_id)
 
+    def _consult_index(self, search_id: str) -> None:
+        from searcher.index.consult import consult_and_surface
+
+        consult_and_surface(self.controller, search_id)
+
+    def _remember_index(self, search_id: str) -> None:
+        from searcher.index.consult import remember_campaign
+
+        remember_campaign(self.controller, search_id)
+
     def _discover(self, search_id: str) -> None:
+        if self.controller.repos.get_runtime(search_id).get("index_skip_source_work"):
+            self.controller.emit(
+                search_id,
+                PublicEventName.SEARCH_COVERAGE.value,
+                payload={"source": "index", "pages": 0, "from_index": True},
+            )
+            return
         if self.controller.repos.list_discovery_pages(search_id):
             return
         pack = self._pack(search_id)
@@ -514,6 +535,8 @@ class FixtureRunner:
             )
 
     def _acquire(self, search_id: str) -> None:
+        if self.controller.repos.get_runtime(search_id).get("index_skip_source_work"):
+            return
         if self.controller.repos.list_fetch_attempts(search_id):
             return
         pack = self._pack(search_id)

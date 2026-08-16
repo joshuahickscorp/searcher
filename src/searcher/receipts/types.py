@@ -124,6 +124,8 @@ class ComparisonArtifactReceipt(ReceiptBase):
     receipt_type: str = "ComparisonArtifactReceipt"
     candidate_id: str = ""
     digest: str = ""
+
+
 class FeedbackReceipt(ReceiptBase):
     receipt_type: str = "FeedbackReceipt"
     result_id: str = ""

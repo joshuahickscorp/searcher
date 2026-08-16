@@ -22,6 +22,7 @@ from searcher.core.errors import StaleStateVersion
 from searcher.core.time import format_utc, utc_now
 from searcher.evidence.records import EvidenceRecord
 from searcher.storage.connection import Database
+from searcher.storage.index_tables import IndexTables
 
 
 def _dump(value: object) -> str:
@@ -40,6 +41,7 @@ def _load(raw: str) -> dict[str, Any]:
 class Repositories:
     def __init__(self, db: Database) -> None:
         self.db = db
+        self.index = IndexTables(db)
 
     def insert_campaign(
         self,
@@ -182,6 +184,15 @@ class Repositories:
                 )
             new_version = expected_version + 1
             return new_version
+
+    def get_state_version(self, search_id: str) -> int:
+        row = self.db.execute(
+            "SELECT state_version FROM campaigns WHERE search_id = ?",
+            (search_id,),
+        ).fetchone()
+        if row is None:
+            raise KeyError(search_id)
+        return int(row["state_version"])
 
     def _campaign_from_row(self, row: Any) -> SearchCampaign:
         intent = SearchIntent.model_validate(_load(row["intent_json"]))
@@ -841,7 +852,6 @@ class Repositories:
             "SELECT payload_json FROM budget_usage WHERE search_id = ?", (search_id,)
         ).fetchone()
         return _load(row["payload_json"]) if row else None
-
 
     def get_campaign_meta(self, search_id: str) -> dict[str, Any] | None:
         row = self.db.execute(

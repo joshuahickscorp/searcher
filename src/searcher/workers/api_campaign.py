@@ -182,11 +182,20 @@ def run_api_campaign(controller: CampaignController, search_id: str) -> None:
         run_reference_query_wave(controller, search_id, [], settings=controller.settings)
         if controller.repos.is_deleted(search_id):
             return
+        from searcher.index.consult import consult_and_surface
+
+        consult_and_surface(controller, search_id)
+        if controller.repos.is_deleted(search_id):
+            return
         campaign = controller.get(search_id)
         if is_terminal(campaign.state):
             return
         controller.cancellation.raise_if_cancelled(search_id)
         coverage = blocked_discovery_coverage()
+        runtime = controller.repos.get_runtime(search_id)
+        prior = runtime.get("coverage")
+        if isinstance(prior, dict) and prior.get("candidates_normalized"):
+            coverage["candidates_normalized"] = prior["candidates_normalized"]
         missing = _missing_views(controller, search_id)
         controller.set_runtime(
             search_id,

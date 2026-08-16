@@ -431,12 +431,12 @@ class CampaignController:
         output_digests: list[str] | None = None,
         error: str | None = None,
     ) -> CampaignEvent:
-        campaign = self.get(search_id)
+        version = self.repos.get_state_version(search_id)
         return self._emit(
             search_id,
             event_name,
             actor=actor,
-            state_version=campaign.state_version,
+            state_version=version,
             payload=payload or {},
             input_digests=input_digests,
             output_digests=output_digests,

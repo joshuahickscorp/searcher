@@ -210,6 +210,7 @@ class DiscoveryEngine:
         last_outcome = SourceOutcome.NOT_ATTEMPTED
         found: list[ListingCandidate] = []
         pages = 0
+        work_skipped = 0
         try:
             self.circuit.assert_closed(source_id)
         except CircuitOpen:
@@ -217,8 +218,26 @@ class DiscoveryEngine:
             events.blocked(source_id, last_outcome.value, "circuit open")
             self._finish_run(search_id, run_id, source_id, last_outcome, pages, len(found), events)
             return last_outcome.value, found
+        from searcher.index.consult import hydrate_from_index
+        from searcher.index.store import WarmIndex, versions_from_settings
+        from searcher.index.text import field_terms
+
+        index = WarmIndex(self.repos)
+        versions = versions_from_settings(self.controller.settings)
         for query in queries:
             if query.query_id not in plan.query_ids and plan.query_ids:
+                continue
+            if index.query_already_run(
+                source_id=source_id, query_text=query.query_text, versions=versions
+            ):
+                work_skipped += 1
+                for hit in index.search(field_terms(query.query_text), versions):
+                    found.append(hydrate_from_index(self.controller, search_id, hit))
+                last_outcome = (
+                    SourceOutcome.SEARCHED_MATCHES_FOUND
+                    if found
+                    else SourceOutcome.SEARCHED_NO_MATCH
+                )
                 continue
             events.query_dispatch(source_id, query.query_text)
             page = adapter.discover(query, None)  # type: ignore[attr-defined]
@@ -236,6 +255,12 @@ class DiscoveryEngine:
                     search_id, run_id, source_id, last_outcome, pages, len(found), events
                 )  # noqa: E501
                 return last_outcome.value, found
+            index.record_query(
+                source_id=source_id,
+                query_text=query.query_text,
+                versions=versions,
+                pages=len(page.urls),
+            )
             for url in page.urls:
                 frontier.enqueue(
                     search_id=search_id,
@@ -374,7 +399,16 @@ class DiscoveryEngine:
         elif last_outcome is SourceOutcome.NOT_ATTEMPTED:
             last_outcome = SourceOutcome.SEARCHED_NO_MATCH
         self.health.record(source_id, last_outcome)
-        self._finish_run(search_id, run_id, source_id, last_outcome, pages, len(found), events)
+        self._finish_run(
+            search_id,
+            run_id,
+            source_id,
+            last_outcome,
+            pages,
+            len(found),
+            events,
+            work_skipped=work_skipped,
+        )
         return last_outcome.value, found
 
     def _fetch_item(
@@ -404,6 +438,8 @@ class DiscoveryEngine:
         pages: int,
         matches: int,
         events: SourceEvents,
+        *,
+        work_skipped: int = 0,
     ) -> None:
         self.repos.upsert_source_run(
             search_id,
@@ -411,7 +447,7 @@ class DiscoveryEngine:
             source_id,
             cursor=None,
             last_outcome=outcome.value,
-            payload={"pages": pages, "matches": matches},
+            payload={"pages": pages, "matches": matches, "work_skipped": work_skipped},
         )
         receipt = SourceRunReceipt(
             search_id=search_id,
@@ -420,6 +456,7 @@ class DiscoveryEngine:
             pages=pages,
             matches=matches,
             blocked_reason=outcome.value if is_block(outcome) else None,
+            work_skipped=work_skipped,
         ).seal()
         self.controller.store_receipt(receipt)
         events.coverage(source_id, outcome.value, pages)

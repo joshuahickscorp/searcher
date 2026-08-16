@@ -25,6 +25,7 @@ HONEST_USER_AGENT = (
 )
 _DEFAULT_API_HOST = "127.0.0.1"
 _DEFAULT_API_PORT = 8765
+_DEFAULT_LIVENESS_TTL = 6 * 60 * 60
 _DEFAULT_CORS_ORIGINS = (
     "http://127.0.0.1:8765",
     "http://localhost:8765",
@@ -96,6 +97,8 @@ class Settings:
     api_port: int
     cors_origins: tuple[str, ...]
     serve_web: bool
+    liveness_ttl_seconds: int
+    index_enabled: bool
 
     @property
     def db_path(self) -> Path:
@@ -150,6 +153,8 @@ class Settings:
             api_port=_env_int("SEARCHER_API_PORT", _DEFAULT_API_PORT),
             cors_origins=_env_csv("SEARCHER_CORS_ORIGINS", _DEFAULT_CORS_ORIGINS),
             serve_web=_env_bool("SEARCHER_SERVE_WEB", False),
+            liveness_ttl_seconds=_env_int("SEARCHER_LIVENESS_TTL_SECONDS", _DEFAULT_LIVENESS_TTL),
+            index_enabled=_env_bool("SEARCHER_INDEX", True),
         )
 
     def ensure_data_root(self) -> None:
