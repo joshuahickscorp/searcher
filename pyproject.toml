@@ -17,12 +17,11 @@ dev = [
     "ruff>=0.8",
     "mypy>=1.13",
 ]
-vision = [
-    # Pinned SHA 18ee3c06d27f04937d1681dea5fa2650131e4b2a (visionmcp-ocular 0.8.0a2).
-    # GitHub checkout of that SHA has a broken submodule, so the uv source is the
-    # audited local clone. Compatibility tests still bind the SHA.
-    "visionmcp-ocular==0.8.0a2",
-]
+# The VisionMCP donor is NOT declared here. It is not published to PyPI, and a
+# `git+https` install of the audited SHA fails because that commit carries a
+# gitlink with no .gitmodules entry (see docs/architecture/DONOR_SETUP.md).
+# Install it with `scripts/setup_donor.sh`, which pins the SHA itself; the
+# compatibility tests bind the same SHA and version at runtime.
 
 [project.scripts]
 searcher = "searcher.cli:main"
@@ -42,9 +41,6 @@ dev = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/searcher"]
-
-[tool.uv.sources]
-visionmcp-ocular = { path = "<home>/.searcher-donors/visionmcp" }
 
 [tool.ruff]
 line-length = 100
