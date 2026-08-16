@@ -22,3 +22,17 @@ web/dev/__pycache__/
 web/dev/**/__pycache__/
 web/dev/artifacts/
 
+# Donor checkouts and model weights must never enter the public tree (§36.3).
+.searcher-donors/
+*.pt
+*.pth
+*.onnx
+*.safetensors
+*.ckpt
+*.gguf
+*.h5
+
+# Browser profiles
+**/playwright-profile/
+**/.browser-profile/
+

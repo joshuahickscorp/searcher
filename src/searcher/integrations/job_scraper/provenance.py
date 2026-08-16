@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
-FROZEN_PATH = Path("<home>/.searcher-donors/jobscraper-frozen-20260816/")
+# Provenance only. The snapshot is not vendored; override if you hold a copy.
+FROZEN_PATH = Path(os.environ.get("SEARCHER_JOBSCRAPER_FROZEN_DIR", "<jobscraper-frozen-dir>"))
 MANIFEST_DIGEST = "3a2c41c8306e422ad42ede9da145891a72ec8e691bf32e8a407ead899facced2"
 FREEZE_DATE = "2026-08-16"
 EXCLUSIONS = (

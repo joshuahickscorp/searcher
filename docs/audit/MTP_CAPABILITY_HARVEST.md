@@ -8,15 +8,15 @@ Inspection date (UTC): 2026-08-16T04:48:46Z
 
 Bounded searches (exact directory names `mtp` / `MTP` / `Mtp`, maxdepth
 4, `Library` / `node_modules` / `.venv` / `.git` pruned) under
-Downloads, Desktop, Documents, Archives, `.searcher-donors`,
-`.claude-grok`, `hawking-preservation`, and the product trees hawking,
+Downloads, Desktop, Documents, Archives, `$SEARCHER_DONORS_ROOT`,
+`<agent-scratch>`, `<historical-stray>`, and the product trees hawking,
 merc, forge, substrate, and census returned **no product tree**.
 
-Claude projects: no `*mtp*` name. `.searcher-donors` contains only
-`visionmcp`. A first broad `*mtp*` find over `$HOME` hung and was
+Claude projects: no `*mtp*` name. `$SEARCHER_DONORS_ROOT` contains only
+`visionmcp`. A first broad `*mtp*` find over `<home>` hung and was
 killed; it was replaced by the exact-name scan. The only filename hit
 in product trees was an unrelated hashed Forge asset
-`Downloads/forge/dist/assets/03-goroutines-channels-DMtpM9fY.js`.
+`<unrelated-forge-checkout>/dist/assets/03-goroutines-channels-DMtpM9fY.js`.
 
 Network / GitHub search was not run (contract).
 

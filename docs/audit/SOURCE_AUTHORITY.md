@@ -10,9 +10,9 @@ This document records **what was observed on this host**, what donor
 documents **report**, and what this audit **infers**. A README or ledger
 claim is not evidence that code ran.
 
-No donor checkout was mutated. `<home>/Downloads/visionmcp`
+No donor checkout was mutated. `<user-visionmcp-checkout>`
 was read only via non-mutating git commands. The pinned clone at
-`<home>/.searcher-donors/visionmcp` was read only.
+`$SEARCHER_DONOR_DIR` was read only.
 
 ---
 
@@ -20,13 +20,13 @@ was read only via non-mutating git commands. The pinned clone at
 
 | Role | Path | Git | SHA | Decision |
 | --- | --- | --- | --- | --- |
-| **Authoritative VisionMCP donor** | `<home>/.searcher-donors/visionmcp` | detached HEAD, clean, `origin` = `git@github.com:joshuahickscorp/visionmcp.git` | `18ee3c06d27f04937d1681dea5fa2650131e4b2a` (`v0.8.0-alpha.2`, equals `origin/main`) | **ACCEPT as the sole VisionMCP authority for Searcher** |
-| User working VisionMCP checkout | `<home>/Downloads/visionmcp` | `main`, **clean**, same SHA, many extra local branches and 8 attached worktrees | `18ee3c06d27f04937d1681dea5fa2650131e4b2a` | **Same commit as the pin.** Do not write. Do not treat newer worktrees as authority. |
-| Job Scraper (found) | `<home>/Desktop/jobscraper` | **not a git repository** | none | **FOUND — this changes the supervising engineer's "not located" result.** Not an authoritative frozen donor. See §3 and `JOB_SCRAPER_CAPABILITY_HARVEST.md`. |
-| Historical Job Scraper path | `<home>/Downloads/jobscraper` | absent | — | README inside the Desktop tree still names this path. **Observed absent.** |
+| **Authoritative VisionMCP donor** | `$SEARCHER_DONOR_DIR` | detached HEAD, clean, `origin` = `git@github.com:joshuahickscorp/visionmcp.git` | `18ee3c06d27f04937d1681dea5fa2650131e4b2a` (`v0.8.0-alpha.2`, equals `origin/main`) | **ACCEPT as the sole VisionMCP authority for Searcher** |
+| User working VisionMCP checkout | `<user-visionmcp-checkout>` | `main`, **clean**, same SHA, many extra local branches and 8 attached worktrees | `18ee3c06d27f04937d1681dea5fa2650131e4b2a` | **Same commit as the pin.** Do not write. Do not treat newer worktrees as authority. |
+| Job Scraper (found) | `<jobscraper-live-checkout>` | **not a git repository** | none | **FOUND — this changes the supervising engineer's "not located" result.** Not an authoritative frozen donor. See §3 and `JOB_SCRAPER_CAPABILITY_HARVEST.md`. |
+| Historical Job Scraper path | `<historical-jobscraper-path>` | absent | — | README inside the Desktop tree still names this path. **Observed absent.** |
 | MTP | (no tree) | — | — | **ABSENT.** Searcher's campaign controller covers Bible §7. |
-| Searcher product repo | `<home>/Downloads/searcher` | `main`, no remotes, clean at seed | `15602d7b6d02150835b74070126435adba73a90f` | This product. Not a donor. |
-| This audit worktree | `<home>/.claude-grok/worktrees/searcher-donor-audit-20260816-003933` | `grok/searcher-donor-audit-20260816-003933` | same seed SHA | Audit outputs only. |
+| Searcher product repo | `<searcher-repo>` | `main`, no remotes, clean at seed | `15602d7b6d02150835b74070126435adba73a90f` | This product. Not a donor. |
+| This audit worktree | `<audit-worktree>/searcher-donor-audit-20260816-003933` | `grok/searcher-donor-audit-20260816-003933` | same seed SHA | Audit outputs only. |
 
 **Basis.** Authority is by reachable git identity and capability, not
 folder mtime. The pinned clone and the user's `Downloads/visionmcp`
@@ -46,9 +46,9 @@ proxy rotation / persistent profiles.
 
 ## 1. Locate evidence
 
-Searches were bounded (`find $HOME -maxdepth 3` / `4` / `5` with
+Searches were bounded (`find <home> -maxdepth 3` / `4` / `5` with
 `Library`, `.Trash`, `node_modules`, `.venv`, `.git` pruned). An
-unbounded `find $HOME` was not run. A first `*mtp*` scan hung and was
+unbounded `find <home>` was not run. A first `*mtp*` scan hung and was
 killed; exact-name `mtp`/`MTP` scans replaced it.
 
 ### 1.1 Development roots
@@ -59,44 +59,44 @@ killed; exact-name `mtp`/`MTP` scans replaced it.
 
 `<home>/Desktop` contains `jobscraper` and `substrate`.
 
-`<home>/.searcher-donors` contains only `visionmcp`.
+`$SEARCHER_DONORS_ROOT` contains only `visionmcp`.
 
 Vanished clone paths named by old Grok sessions — all **ABSENT**:
 
 ```text
-<home>/Downloads/visionmcp-visual-compiler-lab
-<home>/Downloads/visionmcp-perf
-<home>/Downloads/visionmcp-world-engine
-<home>/Downloads/visionmcp-public-alpha
-<home>/Downloads/visionmcp-final-expansion
-<home>/Downloads/visionmcp-authority
-<home>/Downloads/visionmcp-authority-worktrees
-<home>/Downloads/jobscraper
-<home>/Downloads/mtp
-<home>/Downloads/MTP
-<home>/Desktop/mtp
-<home>/Documents/mtp
-<home>/Documents/visionmcp
-<home>/Documents/jobscraper
-<home>/Documents/searcher
+<user-visionmcp-checkout>-visual-compiler-lab
+<user-visionmcp-checkout>-perf
+<user-visionmcp-checkout>-world-engine
+<user-visionmcp-checkout>-public-alpha
+<user-visionmcp-checkout>-final-expansion
+<user-visionmcp-checkout>-authority
+<user-visionmcp-checkout>-authority-worktrees
+<historical-jobscraper-path>
+<downloads>/mtp
+<downloads>/MTP
+<desktop>/mtp
+<documents>/mtp
+<documents>/visionmcp
+<documents>/jobscraper
+<documents>/searcher
 ```
 
 ### 1.2 Name-matched directories (maxdepth 3)
 
 Observed matches included:
 
-- `<home>/.searcher-donors/visionmcp` — pinned donor
-- `<home>/Downloads/visionmcp` — user working checkout
-- `<home>/Downloads/searcher` — product
-- `<home>/.claude-grok/worktrees/searcher-donor-audit-20260816-003933`
-- `<home>/.claude-grok/worktrees/searcher-wave1-20260816-003934`
-- `<home>/Desktop/jobscraper` — **Job Scraper working tree**
-- `<home>/.claude/projects/-Users-<user>-Downloads-jobscraper` — stale Claude memory only
-- `<home>/.visionmcp` — runtime project store (`projects/{binary-analyses,assurance,compiler}`), not a clone
-- `<home>/Downloads/forge/.visionmcp` — Forge-local state
-- `<home>/hawking-preservation/stray-visionmcp-from-grok-worktree/{visionmcp-h008,_visionmcp_h008}` — historical stray clones
-- Grok session directories under `~/.grok/sessions/` that *name* vanished clones
-- Claude ultragoal directories under `~/.claude/ultragoal/visionmcp-*`
+- `$SEARCHER_DONOR_DIR` — pinned donor
+- `<user-visionmcp-checkout>` — user working checkout
+- `<searcher-repo>` — product
+- `<audit-worktree>/searcher-donor-audit-20260816-003933`
+- `<audit-worktree>/searcher-wave1-20260816-003934`
+- `<jobscraper-live-checkout>` — **Job Scraper working tree**
+- `<claude-project-memory>/jobscraper` — stale Claude memory only
+- `<visionmcp-runtime-store>` — runtime project store (`projects/{binary-analyses,assurance,compiler}`), not a clone
+- `<unrelated-forge-checkout>/.visionmcp` — Forge-local state
+- `<historical-stray>/{visionmcp-h008,_visionmcp_h008}` — historical stray clones
+- Grok session directories under `<grok-sessions>/` that *name* vanished clones
+- Claude ultragoal directories under `<claude-ultragoal>/visionmcp-*`
 
 `*scraper*` at maxdepth 4: only `Desktop/jobscraper` and the Claude
 project memory directory.
@@ -105,7 +105,7 @@ Exact-name `mtp`/`MTP` under Downloads, Desktop, Documents, Archives,
 `.searcher-donors`, `.claude-grok`, `hawking-preservation`, hawking,
 merc, forge, substrate, census: **no product tree**. The only hit was
 an unrelated hashed JS asset
-`Downloads/forge/dist/assets/03-goroutines-channels-DMtpM9fY.js`.
+`<unrelated-forge-checkout>/dist/assets/03-goroutines-channels-DMtpM9fY.js`.
 
 ### 1.3 Network / `gh` search
 
@@ -122,7 +122,7 @@ overturn "not on this host."
 
 | Field | Observed |
 | --- | --- |
-| Absolute path | `<home>/.searcher-donors/visionmcp` |
+| Absolute path | `$SEARCHER_DONOR_DIR` |
 | Repository root | same (own `.git`) |
 | Remotes | `origin` `git@github.com:joshuahickscorp/visionmcp.git` (fetch/push) |
 | Default branch | `refs/remotes/origin/HEAD` → `origin/main` |
@@ -161,7 +161,7 @@ did not run pytest or rebuild wheels.
 
 | Field | Observed |
 | --- | --- |
-| Absolute path | `<home>/Downloads/visionmcp` |
+| Absolute path | `<user-visionmcp-checkout>` |
 | HEAD | `18ee3c06d27f04937d1681dea5fa2650131e4b2a` on `main` |
 | Dirty | **clean** before and after this audit |
 | Remotes | same `origin` as the pin |
@@ -198,7 +198,7 @@ These are older than `18ee3c06`. The dirty clone is frozen-as-found.
 
 | Field | Observed |
 | --- | --- |
-| Canonical checkout | `<home>/Downloads/searcher` |
+| Canonical checkout | `<searcher-repo>` |
 | HEAD | `15602d7b6d02150835b74070126435adba73a90f` |
 | Branch | `main` |
 | Remotes | **none** |
@@ -210,14 +210,14 @@ These are older than `18ee3c06`. The dirty clone is frozen-as-found.
 
 | Field | Observed |
 | --- | --- |
-| Path | `<home>/Desktop/jobscraper` |
+| Path | `<jobscraper-live-checkout>` |
 | Git | **no `.git`** |
 | Package | `jobscraper` `0.1.0` in `pyproject.toml`; `requires-python >=3.11`; license **text** `MIT` (no `LICENSE` file) |
 | Entry point | `scraper = scraper.cli:main` |
-| README self-path | still says `cd <home>/Downloads/jobscraper` |
+| README self-path | still says `cd <historical-jobscraper-path>` |
 | Tests (counted, not run) | 10 `test_*.py`, 232 `def test_` |
 | Personal / load-bearing untracked-equivalent | `cv/` (CVs), `data/jobs.db` (+ wal/shm), `jobs.db`, `.venv/`, `data/profiles/` (Playwright profiles) |
-| Claude memory | `~/.claude/projects/-Users-<user>-Downloads-jobscraper/memory/` — CVs and an unrelated Hawking scrub; **not** scrape-engine docs |
+| Claude memory | `<claude-project-memory>/jobscraper/memory/` — CVs and an unrelated Hawking scrub; **not** scrape-engine docs |
 
 ### 2.6 MTP
 
@@ -303,15 +303,15 @@ Do not import into Searcher MVP merely because they exist at this SHA:
 
 | ID | Kind | Path | SHA / identity | Dirty | Authority |
 | --- | --- | --- | --- | --- | --- |
-| vmcp-pin | VisionMCP clone | `~/.searcher-donors/visionmcp` | `18ee3c06` detached | clean | **YES** |
-| vmcp-user | VisionMCP checkout | `~/Downloads/visionmcp` | `18ee3c06` main | clean | same commit; do not write |
-| vmcp-wt-* | VisionMCP worktrees | `~/.claude-grok/worktrees/{bind-*,dead-*,refactor-*,subject-*}` | mixed | some dirty | NO |
-| vmcp-h008 | stray clone | `~/hawking-preservation/…/visionmcp-h008` | `2a0ca01f` | clean | NO |
-| vmcp-h008b | stray clone | `~/hawking-preservation/…/_visionmcp_h008` | `47255a33` | **dirty** | NO |
-| jobscraper-desktop | Job Scraper tree | `~/Desktop/jobscraper` | no git | n/a (live personal data) | inspect-only; not frozen |
-| jobscraper-memory | Claude memory | `~/.claude/projects/-Users-<user>-Downloads-jobscraper` | n/a | n/a | not a donor |
+| vmcp-pin | VisionMCP clone | `$SEARCHER_DONOR_DIR` | `18ee3c06` detached | clean | **YES** |
+| vmcp-user | VisionMCP checkout | `<user-visionmcp-checkout>` | `18ee3c06` main | clean | same commit; do not write |
+| vmcp-wt-* | VisionMCP worktrees | `<audit-worktree>/{bind-*,dead-*,refactor-*,subject-*}` | mixed | some dirty | NO |
+| vmcp-h008 | stray clone | `<historical-stray>/…/visionmcp-h008` | `2a0ca01f` | clean | NO |
+| vmcp-h008b | stray clone | `<historical-stray>/…/_visionmcp_h008` | `47255a33` | **dirty** | NO |
+| jobscraper-desktop | Job Scraper tree | `<jobscraper-live-checkout>` | no git | n/a (live personal data) | inspect-only; not frozen |
+| jobscraper-memory | Claude memory | `<claude-project-memory>/jobscraper` | n/a | n/a | not a donor |
 | mtp | — | not found | — | — | absent |
-| searcher | product | `~/Downloads/searcher` + worktrees | `15602d7` | this worktree writes audit only | product |
+| searcher | product | `<searcher-repo>` + worktrees | `15602d7` | this worktree writes audit only | product |
 
 ---
 

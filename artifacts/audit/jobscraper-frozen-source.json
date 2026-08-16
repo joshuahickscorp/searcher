@@ -1,10 +1,10 @@
 {
   "donor": "jobscraper",
-  "located_at": "<home>/Desktop/jobscraper",
+  "located_at": "<jobscraper-live-checkout>",
   "located_on": "2026-08-16",
-  "correction": "A concurrent audit task was told Job Scraper did not exist. The donor was located at <home>/Desktop/jobscraper on 2026-08-16 and frozen.",
-  "path": "<home>/.searcher-donors/jobscraper-frozen-20260816/",
-  "manifest": "<home>/.searcher-donors/jobscraper-frozen-20260816.manifest.sha256",
+  "correction": "A concurrent audit task was told Job Scraper did not exist. The donor was located at <jobscraper-live-checkout> on 2026-08-16 and frozen.",
+  "path": "$SEARCHER_JOBSCRAPER_FROZEN_DIR/",
+  "manifest": "$SEARCHER_JOBSCRAPER_FROZEN_DIR.manifest.sha256",
   "manifest_digest": "3a2c41c8306e422ad42ede9da145891a72ec8e691bf32e8a407ead899facced2",
   "file_count": 45,
   "files": [
@@ -104,9 +104,9 @@
     "note": "Discover persists resolved ats/slug back into this file at end of run_discover."
   },
   "verification": {
-    "command_manifest_digest": "shasum -a 256 <home>/.searcher-donors/jobscraper-frozen-20260816.manifest.sha256",
-    "manifest_digest_output": "3a2c41c8306e422ad42ede9da145891a72ec8e691bf32e8a407ead899facced2  <home>/.searcher-donors/jobscraper-frozen-20260816.manifest.sha256",
-    "command_file_verify": "cd <home>/.searcher-donors/jobscraper-frozen-20260816 && shasum -a 256 -c <home>/.searcher-donors/jobscraper-frozen-20260816.manifest.sha256",
+    "command_manifest_digest": "shasum -a 256 $SEARCHER_JOBSCRAPER_FROZEN_DIR.manifest.sha256",
+    "manifest_digest_output": "3a2c41c8306e422ad42ede9da145891a72ec8e691bf32e8a407ead899facced2  $SEARCHER_JOBSCRAPER_FROZEN_DIR.manifest.sha256",
+    "command_file_verify": "cd $SEARCHER_JOBSCRAPER_FROZEN_DIR && shasum -a 256 -c $SEARCHER_JOBSCRAPER_FROZEN_DIR.manifest.sha256",
     "file_verify_result": "45/45 OK",
     "live_checkout_45_file_hash_compare": "45/45 MATCH",
     "live_listing_sha256_before": "5824f8e28da9190c2677a13e7dbbe6e3d517802e45a52b666070a0ac3600eb94",
