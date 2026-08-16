@@ -6,13 +6,17 @@ const ACCEPT_EXT = /\.(jpe?g|png|webp|gif)$/i;
 const MAX_IMAGES = 10;
 const MAX_BYTES = 20 * 1024 * 1024;
 
-// Name is prefixed into the existing text field. There is no separate API field.
+// The name joins the existing text field; there is no separate API field.
+//
+// It carries no label. A literal "Name:" prefix reached query compilation as a
+// query term and stopped brand slugs resolving: the same photographs and tags
+// returned five results as plain text and zero, terminal BLOCKED, with the
+// label in front. What the user typed goes to the server as what they typed.
 export function composeSearchText(name, known) {
   const titled = String(name || "").trim();
   const rest = String(known || "").trim();
-  if (titled && rest) return `Name: ${titled}\n\n${rest}`;
-  if (titled) return `Name: ${titled}`;
-  return rest;
+  if (titled && rest) return `${titled}\n\n${rest}`;
+  return titled || rest;
 }
 
 function looksLikeImage(file) {
