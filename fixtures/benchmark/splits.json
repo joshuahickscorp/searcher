@@ -1,0 +1,385 @@
+{
+  "calibration": {
+    "hash": "ad8f4851f79c66338c1a2430b7fee1242d77e8f940b57faa9fa83a793655c5f1",
+    "ids": [
+      "hardneg:ai_generated",
+      "hardneg:copied_product_code",
+      "hardneg:counterfeit_excellent_photos",
+      "hardneg:different_season",
+      "hardneg:mirrored_image",
+      "hardneg:prompt_injection",
+      "hardneg:rehosted_sold",
+      "hardneg:stock_mixed",
+      "kind:8001001137032",
+      "kind:8001001141343",
+      "kind:8001001141350",
+      "kind:8001001141367",
+      "kind:8001001141442"
+    ]
+  },
+  "held_out": {
+    "hash": "2d0e2ae65f6991595fb3c0b2917d20a4e358c159df9b1ca9c462de7ea1595d55",
+    "ids": [
+      "hardneg:adjacent_model",
+      "hardneg:authentic_poor_photos",
+      "hardneg:different_colourway",
+      "hardneg:replica_copied_title",
+      "hardneg:stolen_photos",
+      "hardneg:true_match",
+      "hardneg:two_items",
+      "kind:8001001141404",
+      "kind:8001001141473",
+      "kind:8001001141480",
+      "kind:8001001141503",
+      "kind:8001001141527"
+    ]
+  },
+  "hidden_evaluation": {
+    "present": false,
+    "reason": "No authorized hidden-evaluation set is held. A hidden split is not invented. Metrics that require it are reported as not computed."
+  },
+  "items": [
+    {
+      "family": "hard_negative",
+      "id": "hardneg:adjacent_model",
+      "images": [],
+      "listing_handle": null,
+      "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+      "source": "fixtures/hard_negatives + searcher.matching.synth",
+      "source_url": null,
+      "split": "held_out",
+      "title": "adjacent_model",
+      "truth_bucket": "hidden"
+    },
+    {
+      "family": "hard_negative",
+      "id": "hardneg:ai_generated",
+      "images": [],
+      "listing_handle": null,
+      "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+      "source": "fixtures/hard_negatives + searcher.matching.synth",
+      "source_url": null,
+      "split": "calibration",
+      "title": "ai_generated",
+      "truth_bucket": "hidden"
+    },
+    {
+      "family": "hard_negative",
+      "id": "hardneg:authentic_poor_photos",
+      "images": [],
+      "listing_handle": null,
+      "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+      "source": "fixtures/hard_negatives + searcher.matching.synth",
+      "source_url": null,
+      "split": "held_out",
+      "title": "authentic_poor_photos",
+      "truth_bucket": "possibly_real"
+    },
+    {
+      "family": "hard_negative",
+      "id": "hardneg:copied_product_code",
+      "images": [],
+      "listing_handle": null,
+      "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+      "source": "fixtures/hard_negatives + searcher.matching.synth",
+      "source_url": null,
+      "split": "calibration",
+      "title": "copied_product_code",
+      "truth_bucket": "hidden"
+    },
+    {
+      "family": "hard_negative",
+      "id": "hardneg:counterfeit_excellent_photos",
+      "images": [],
+      "listing_handle": null,
+      "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+      "source": "fixtures/hard_negatives + searcher.matching.synth",
+      "source_url": null,
+      "split": "calibration",
+      "title": "counterfeit_excellent_photos",
+      "truth_bucket": "hidden"
+    },
+    {
+      "family": "hard_negative",
+      "id": "hardneg:different_colourway",
+      "images": [],
+      "listing_handle": null,
+      "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+      "source": "fixtures/hard_negatives + searcher.matching.synth",
+      "source_url": null,
+      "split": "held_out",
+      "title": "different_colourway",
+      "truth_bucket": "hidden"
+    },
+    {
+      "family": "hard_negative",
+      "id": "hardneg:different_season",
+      "images": [],
+      "listing_handle": null,
+      "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+      "source": "fixtures/hard_negatives + searcher.matching.synth",
+      "source_url": null,
+      "split": "calibration",
+      "title": "different_season",
+      "truth_bucket": "possibly_real"
+    },
+    {
+      "family": "hard_negative",
+      "id": "hardneg:mirrored_image",
+      "images": [],
+      "listing_handle": null,
+      "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+      "source": "fixtures/hard_negatives + searcher.matching.synth",
+      "source_url": null,
+      "split": "calibration",
+      "title": "mirrored_image",
+      "truth_bucket": "real"
+    },
+    {
+      "family": "hard_negative",
+      "id": "hardneg:prompt_injection",
+      "images": [],
+      "listing_handle": null,
+      "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+      "source": "fixtures/hard_negatives + searcher.matching.synth",
+      "source_url": null,
+      "split": "calibration",
+      "title": "prompt_injection",
+      "truth_bucket": "real"
+    },
+    {
+      "family": "hard_negative",
+      "id": "hardneg:rehosted_sold",
+      "images": [],
+      "listing_handle": null,
+      "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+      "source": "fixtures/hard_negatives + searcher.matching.synth",
+      "source_url": null,
+      "split": "calibration",
+      "title": "rehosted_sold",
+      "truth_bucket": "hidden"
+    },
+    {
+      "family": "hard_negative",
+      "id": "hardneg:replica_copied_title",
+      "images": [],
+      "listing_handle": null,
+      "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+      "source": "fixtures/hard_negatives + searcher.matching.synth",
+      "source_url": null,
+      "split": "held_out",
+      "title": "replica_copied_title",
+      "truth_bucket": "replica"
+    },
+    {
+      "family": "hard_negative",
+      "id": "hardneg:stock_mixed",
+      "images": [],
+      "listing_handle": null,
+      "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+      "source": "fixtures/hard_negatives + searcher.matching.synth",
+      "source_url": null,
+      "split": "calibration",
+      "title": "stock_mixed",
+      "truth_bucket": "real"
+    },
+    {
+      "family": "hard_negative",
+      "id": "hardneg:stolen_photos",
+      "images": [],
+      "listing_handle": null,
+      "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+      "source": "fixtures/hard_negatives + searcher.matching.synth",
+      "source_url": null,
+      "split": "held_out",
+      "title": "stolen_photos",
+      "truth_bucket": "hidden"
+    },
+    {
+      "family": "hard_negative",
+      "id": "hardneg:true_match",
+      "images": [],
+      "listing_handle": null,
+      "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+      "source": "fixtures/hard_negatives + searcher.matching.synth",
+      "source_url": null,
+      "split": "held_out",
+      "title": "true_match",
+      "truth_bucket": "real"
+    },
+    {
+      "family": "hard_negative",
+      "id": "hardneg:two_items",
+      "images": [],
+      "listing_handle": null,
+      "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+      "source": "fixtures/hard_negatives + searcher.matching.synth",
+      "source_url": null,
+      "split": "held_out",
+      "title": "two_items",
+      "truth_bucket": "hidden"
+    },
+    {
+      "family": "kind_listing",
+      "id": "kind:8001001137032",
+      "images": [
+        "8001001137032_1.jpg",
+        "8001001137032_2.jpg",
+        "8001001137032_3.jpg"
+      ],
+      "listing_handle": "8001001137032",
+      "permission": "Cached public product photographs from shop.kind.co.jp, already held in fixtures/known_item_kind. KIND is admitted by SOURCE_POLICY for GET product/collection. Fetch date is recorded in pack.json. Images column of SOURCE_POLICY is 'no' for KIND, so this benchmark does not fetch new KIND photographs. Not an operator photograph.",
+      "source": "fixtures/known_item_kind",
+      "source_url": "https://shop.kind.co.jp/products/8001001137032",
+      "split": "calibration",
+      "title": "\u80f8\u30dd\u30b1\u30c3\u30c8\u9577\u8896T\u30b7\u30e3\u30c4",
+      "truth_bucket": null
+    },
+    {
+      "family": "kind_listing",
+      "id": "kind:8001001141343",
+      "images": [
+        "8001001141343_1.jpg",
+        "8001001141343_2.jpg",
+        "8001001141343_3.jpg"
+      ],
+      "listing_handle": "8001001141343",
+      "permission": "Cached public product photographs from shop.kind.co.jp, already held in fixtures/known_item_kind. KIND is admitted by SOURCE_POLICY for GET product/collection. Fetch date is recorded in pack.json. Images column of SOURCE_POLICY is 'no' for KIND, so this benchmark does not fetch new KIND photographs. Not an operator photograph.",
+      "source": "fixtures/known_item_kind",
+      "source_url": "https://shop.kind.co.jp/products/8001001141343",
+      "split": "calibration",
+      "title": "\u30ed\u30b4TEE",
+      "truth_bucket": null
+    },
+    {
+      "family": "kind_listing",
+      "id": "kind:8001001141350",
+      "images": [
+        "8001001141350_1.jpg",
+        "8001001141350_2.jpg",
+        "8001001141350_3.jpg"
+      ],
+      "listing_handle": "8001001141350",
+      "permission": "Cached public product photographs from shop.kind.co.jp, already held in fixtures/known_item_kind. KIND is admitted by SOURCE_POLICY for GET product/collection. Fetch date is recorded in pack.json. Images column of SOURCE_POLICY is 'no' for KIND, so this benchmark does not fetch new KIND photographs. Not an operator photograph.",
+      "source": "fixtures/known_item_kind",
+      "source_url": "https://shop.kind.co.jp/products/8001001141350",
+      "split": "calibration",
+      "title": "\u30ed\u30b4\u30ed\u30f3TEE",
+      "truth_bucket": null
+    },
+    {
+      "family": "kind_listing",
+      "id": "kind:8001001141367",
+      "images": [
+        "8001001141367_1.jpg",
+        "8001001141367_2.jpg",
+        "8001001141367_3.jpg"
+      ],
+      "listing_handle": "8001001141367",
+      "permission": "Cached public product photographs from shop.kind.co.jp, already held in fixtures/known_item_kind. KIND is admitted by SOURCE_POLICY for GET product/collection. Fetch date is recorded in pack.json. Images column of SOURCE_POLICY is 'no' for KIND, so this benchmark does not fetch new KIND photographs. Not an operator photograph.",
+      "source": "fixtures/known_item_kind",
+      "source_url": "https://shop.kind.co.jp/products/8001001141367",
+      "split": "calibration",
+      "title": "\u300cbig willy panel\u300d",
+      "truth_bucket": null
+    },
+    {
+      "family": "kind_listing",
+      "id": "kind:8001001141404",
+      "images": [
+        "8001001141404_1.jpg",
+        "8001001141404_2.jpg",
+        "8001001141404_3.jpg"
+      ],
+      "listing_handle": "8001001141404",
+      "permission": "Cached public product photographs from shop.kind.co.jp, already held in fixtures/known_item_kind. KIND is admitted by SOURCE_POLICY for GET product/collection. Fetch date is recorded in pack.json. Images column of SOURCE_POLICY is 'no' for KIND, so this benchmark does not fetch new KIND photographs. Not an operator photograph.",
+      "source": "fixtures/known_item_kind",
+      "source_url": "https://shop.kind.co.jp/products/8001001141404",
+      "split": "held_out",
+      "title": "\u7121\u5730 \u30ed\u30f3\u30b0\u30b9\u30ea\u30fc\u30d6\u30ab\u30c3\u30c8\u30bd\u30fc",
+      "truth_bucket": null
+    },
+    {
+      "family": "kind_listing",
+      "id": "kind:8001001141442",
+      "images": [
+        "8001001141442_1.jpg",
+        "8001001141442_2.jpg",
+        "8001001141442_3.jpg"
+      ],
+      "listing_handle": "8001001141442",
+      "permission": "Cached public product photographs from shop.kind.co.jp, already held in fixtures/known_item_kind. KIND is admitted by SOURCE_POLICY for GET product/collection. Fetch date is recorded in pack.json. Images column of SOURCE_POLICY is 'no' for KIND, so this benchmark does not fetch new KIND photographs. Not an operator photograph.",
+      "source": "fixtures/known_item_kind",
+      "source_url": "https://shop.kind.co.jp/products/8001001141442",
+      "split": "calibration",
+      "title": "\u30ed\u30b4\u9577\u8896\u30ab\u30c3\u30c8\u30bd\u30fc",
+      "truth_bucket": null
+    },
+    {
+      "family": "kind_listing",
+      "id": "kind:8001001141473",
+      "images": [
+        "8001001141473_1.jpg",
+        "8001001141473_2.jpg",
+        "8001001141473_3.jpg"
+      ],
+      "listing_handle": "8001001141473",
+      "permission": "Cached public product photographs from shop.kind.co.jp, already held in fixtures/known_item_kind. KIND is admitted by SOURCE_POLICY for GET product/collection. Fetch date is recorded in pack.json. Images column of SOURCE_POLICY is 'no' for KIND, so this benchmark does not fetch new KIND photographs. Not an operator photograph.",
+      "source": "fixtures/known_item_kind",
+      "source_url": "https://shop.kind.co.jp/products/8001001141473",
+      "split": "held_out",
+      "title": "\u7121\u5730\u30ab\u30c3\u30c8\u30bd\u30fc",
+      "truth_bucket": null
+    },
+    {
+      "family": "kind_listing",
+      "id": "kind:8001001141480",
+      "images": [
+        "8001001141480_1.jpg",
+        "8001001141480_2.jpg",
+        "8001001141480_3.jpg"
+      ],
+      "listing_handle": "8001001141480",
+      "permission": "Cached public product photographs from shop.kind.co.jp, already held in fixtures/known_item_kind. KIND is admitted by SOURCE_POLICY for GET product/collection. Fetch date is recorded in pack.json. Images column of SOURCE_POLICY is 'no' for KIND, so this benchmark does not fetch new KIND photographs. Not an operator photograph.",
+      "source": "fixtures/known_item_kind",
+      "source_url": "https://shop.kind.co.jp/products/8001001141480",
+      "split": "held_out",
+      "title": "\u30ed\u30b4\u9577\u8896\u30ab\u30c3\u30c8\u30bd\u30fc",
+      "truth_bucket": null
+    },
+    {
+      "family": "kind_listing",
+      "id": "kind:8001001141503",
+      "images": [
+        "8001001141503_1.jpg",
+        "8001001141503_2.jpg",
+        "8001001141503_3.jpg"
+      ],
+      "listing_handle": "8001001141503",
+      "permission": "Cached public product photographs from shop.kind.co.jp, already held in fixtures/known_item_kind. KIND is admitted by SOURCE_POLICY for GET product/collection. Fetch date is recorded in pack.json. Images column of SOURCE_POLICY is 'no' for KIND, so this benchmark does not fetch new KIND photographs. Not an operator photograph.",
+      "source": "fixtures/known_item_kind",
+      "source_url": "https://shop.kind.co.jp/products/8001001141503",
+      "split": "held_out",
+      "title": "SATAN BOMBER CREW",
+      "truth_bucket": null
+    },
+    {
+      "family": "kind_listing",
+      "id": "kind:8001001141527",
+      "images": [
+        "8001001141527_1.jpg",
+        "8001001141527_2.jpg",
+        "8001001141527_3.jpg"
+      ],
+      "listing_handle": "8001001141527",
+      "permission": "Cached public product photographs from shop.kind.co.jp, already held in fixtures/known_item_kind. KIND is admitted by SOURCE_POLICY for GET product/collection. Fetch date is recorded in pack.json. Images column of SOURCE_POLICY is 'no' for KIND, so this benchmark does not fetch new KIND photographs. Not an operator photograph.",
+      "source": "fixtures/known_item_kind",
+      "source_url": "https://shop.kind.co.jp/products/8001001141527",
+      "split": "held_out",
+      "title": "\u30ed\u30b4\u9577\u8896\u30ab\u30c3\u30c8\u30bd\u30fcW21-0004",
+      "truth_bucket": null
+    }
+  ],
+  "protocol": "searcher-public-benchmark-v1",
+  "rule": "Split by product identity (listing handle or constructed-case id). An identifier appears in exactly one of {calibration, held_out}. There is no authorized hidden-evaluation set; that split is absent. KIND: the known-item target handle is reserved for held_out; remaining handles sorted lexicographically, first five calibration, rest held_out. Hard-negative cases: the seven ids in HELD_OUT_BUCKET_IDS are held_out so the reporting split contains Real, Possibly Real, Replica, and hidden; the remaining constructed cases are calibration. Calibration is used only to inspect the score-versus-outcome curve and to show where the already-shipped 0.86 threshold sits. Thresholds are not retuned. Held-out is used only to report retrieval and bucket numbers."
+}
