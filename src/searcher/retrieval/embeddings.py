@@ -46,6 +46,7 @@ __all__ = [
     "EmbeddingBackend",
     "cosine_similarity",
     "embed_png",
+    "embed_pngs",
     "embedding_capability",
     "find_local_weights",
     "last_embed_latency_ms",
@@ -89,8 +90,8 @@ def pair_similarity(
     resolved = backend or resolve_backend()
     if resolved is None or not reference_pngs or not candidate_pngs:
         return None
-    refs = [embed_png(png, resolved) for png in reference_pngs.values()]
-    cands = [embed_png(png, resolved) for png in candidate_pngs.values()]
+    refs = embed_pngs(list(reference_pngs.values()), resolved)
+    cands = embed_pngs(list(candidate_pngs.values()), resolved)
     return max_pairwise_cosine(refs, cands)
 
 
@@ -168,30 +169,81 @@ def _to_tensor(png: bytes, torch: Any, device: Any) -> Any:
     return tensor.unsqueeze(0).to(device)
 
 
-def embed_png(png: bytes, backend: EmbeddingBackend | None = None) -> list[float] | None:
-    """Return a unit vector when a local backend can load. Never downloads."""
+def embed_pngs(
+    pngs: list[bytes], backend: EmbeddingBackend | None = None
+) -> list[list[float] | None]:
+    """Embed many images in one forward pass on the existing device."""
     global _LAST_EMBED_MS
     started = time.perf_counter()
     resolved = backend or resolve_backend()
-    if resolved is None or not png:
+    results: list[list[float] | None] = [None] * len(pngs)
+    if resolved is None or not pngs:
         _LAST_EMBED_MS = (time.perf_counter() - started) * 1000.0
-        return None
+        return results
     path = Path(resolved.weights_path)
-    digest = sha256_hex(png)
-    cache_key = (str(path), digest)
-    held = _VEC_CACHE.get(cache_key)
-    if held is not None:
-        _LAST_EMBED_MS = (time.perf_counter() - started) * 1000.0
-        return list(held)
     loaded = _get_model(path)
     if loaded is None:
         _LAST_EMBED_MS = (time.perf_counter() - started) * 1000.0
-        return None
+        return results
     model, device = loaded
     try:
         import torch
     except ImportError:
         _LAST_EMBED_MS = (time.perf_counter() - started) * 1000.0
+        return results
+    miss_idx: list[int] = []
+    miss_tensors: list[Any] = []
+    for index, png in enumerate(pngs):
+        if not png:
+            continue
+        cache_key = (str(path), sha256_hex(png))
+        held = _VEC_CACHE.get(cache_key)
+        if held is not None:
+            results[index] = list(held)
+            continue
+        try:
+            miss_tensors.append(_to_tensor(png, torch, device))
+            miss_idx.append(index)
+        except Exception:
+            results[index] = None
+    if miss_tensors:
+        try:
+            batch = torch.cat(miss_tensors, dim=0)
+            with torch.inference_mode():
+                feats = model(batch)
+                feats = torch.nn.functional.normalize(feats, p=2, dim=1)
+            cpu = feats.detach().cpu()
+            for offset, index in enumerate(miss_idx):
+                vector = cpu[offset].tolist()
+                if not isinstance(vector, list) or not vector:
+                    continue
+                out = [float(v) for v in vector]
+                if len(_VEC_CACHE) > 512:
+                    _VEC_CACHE.clear()
+                _VEC_CACHE[(str(path), sha256_hex(pngs[index]))] = out
+                results[index] = list(out)
+        except Exception:
+            for index in miss_idx:
+                if results[index] is None:
+                    results[index] = _embed_one(pngs[index], resolved)
+    _LAST_EMBED_MS = (time.perf_counter() - started) * 1000.0
+    return results
+
+
+def _embed_one(png: bytes, resolved: EmbeddingBackend) -> list[float] | None:
+    """Single-image fallback used only when a batch forward fails."""
+    path = Path(resolved.weights_path)
+    cache_key = (str(path), sha256_hex(png))
+    held = _VEC_CACHE.get(cache_key)
+    if held is not None:
+        return list(held)
+    loaded = _get_model(path)
+    if loaded is None:
+        return None
+    model, device = loaded
+    try:
+        import torch
+    except ImportError:
         return None
     try:
         tensor = _to_tensor(png, torch, device)
@@ -200,14 +252,21 @@ def embed_png(png: bytes, backend: EmbeddingBackend | None = None) -> list[float
             feats = torch.nn.functional.normalize(feats, p=2, dim=1)
             vector = feats.squeeze(0).detach().cpu().tolist()
     except Exception:
-        _LAST_EMBED_MS = (time.perf_counter() - started) * 1000.0
         return None
     if not isinstance(vector, list) or not vector:
-        _LAST_EMBED_MS = (time.perf_counter() - started) * 1000.0
         return None
     out = [float(v) for v in vector]
     if len(_VEC_CACHE) > 512:
         _VEC_CACHE.clear()
     _VEC_CACHE[cache_key] = out
-    _LAST_EMBED_MS = (time.perf_counter() - started) * 1000.0
     return list(out)
+
+
+def embed_png(png: bytes, backend: EmbeddingBackend | None = None) -> list[float] | None:
+    """Return a unit vector when a local backend can load. Never downloads."""
+    if not png:
+        global _LAST_EMBED_MS
+        started = time.perf_counter()
+        _LAST_EMBED_MS = (time.perf_counter() - started) * 1000.0
+        return None
+    return embed_pngs([png], backend)[0]

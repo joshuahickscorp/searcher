@@ -27,7 +27,7 @@ def _refresh_live(
     controller: CampaignController, search_id: str, results: list[dict[str, object]]
 ) -> tuple[bool, str]:
     try:
-        from searcher.sources.engine import DiscoveryEngine
+        from searcher.workers.bounded_discovery import BoundedDiscoveryEngine
     except Exception:
         return False, "Live re-verification could not import the discovery engine."
     candidates = []
@@ -37,7 +37,7 @@ def _refresh_live(
             candidates.append(found)
     if not candidates:
         return False, "No stored listing can be refreshed."
-    engine = DiscoveryEngine(controller, batch_size=2, max_work=len(candidates) + 2)
+    engine = BoundedDiscoveryEngine(controller, batch_size=2, max_work=len(candidates) + 2)
     try:
         engine.live_check_all(search_id, candidates)
     except Exception as exc:

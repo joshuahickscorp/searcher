@@ -38,6 +38,9 @@ def _ms(started: float) -> float:
 def _client(data_root: Path) -> TestClient:
     os.environ["SEARCHER_DATA_ROOT"] = str(data_root)
     os.environ["SEARCHER_SERVE_WEB"] = "1"
+    # Request-layer timings only. Live source work is measured separately
+    # in artifacts/searcher-latency.receipt.json.
+    os.environ["SEARCHER_LIVE_DISCOVERY"] = "0"
     settings = Settings.from_env(data_root=data_root)
     return TestClient(create_app(settings))
 

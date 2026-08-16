@@ -1,0 +1,3052 @@
+{
+  "after": {
+    "embedding": {
+      "available": false,
+      "batched": true,
+      "elapsed_ms": 0.0,
+      "images": 16,
+      "images_per_second": 0.0,
+      "note": "no local embedding weights and torch is unavailable"
+    },
+    "embedding_serial": {
+      "available": false,
+      "batched": false,
+      "elapsed_ms": 0.0,
+      "images": 16,
+      "images_per_second": 0.0,
+      "note": "no local embedding weights and torch is unavailable"
+    },
+    "fixture": {
+      "cache_hit_rate_warm": 1.0,
+      "cold": {
+        "budget": {
+          "browser_pages": 0,
+          "bytes": 3822,
+          "images": 8,
+          "model_calls": 0,
+          "pages": 1,
+          "retries": 0,
+          "sources": 1,
+          "storage": 0,
+          "wall_seconds": 0
+        },
+        "cache_hits": 0,
+        "campaign_wall_ms": 78.327,
+        "candidates": 5,
+        "fetches": 5,
+        "first_candidate_ms": 13.712,
+        "first_routed_result_ms": 42.405,
+        "receipts": [
+          {
+            "cache_hits": 0,
+            "fetches": 0,
+            "phase": "consult"
+          },
+          {
+            "cache_hits": 0,
+            "fetches": 5,
+            "phase": "remember"
+          }
+        ],
+        "results": 5,
+        "search_create_ms": 1.168
+      },
+      "duplicate_work_avoided": 1.0,
+      "warm": {
+        "budget": {
+          "browser_pages": 0,
+          "bytes": 55,
+          "images": 2,
+          "model_calls": 0,
+          "pages": 0,
+          "retries": 0,
+          "sources": 0,
+          "storage": 0,
+          "wall_seconds": 0
+        },
+        "cache_hits": 5,
+        "campaign_wall_ms": 30.468,
+        "candidates": 5,
+        "fetches": 0,
+        "first_candidate_ms": 11.796,
+        "first_routed_result_ms": 12.306,
+        "index_hits": 5,
+        "index_skip_source_work": true,
+        "receipts": [
+          {
+            "cache_hits": 5,
+            "fetches": 0,
+            "phase": "consult"
+          },
+          {
+            "cache_hits": 0,
+            "fetches": 0,
+            "phase": "remember"
+          }
+        ],
+        "results": 5
+      }
+    },
+    "host_probes": {
+      "byronesque": {
+        "elapsed_ms": 0.22,
+        "error": "PermissionError: [Errno 1] Operation not permitted",
+        "status": null,
+        "url": "https://byronesque.com/robots.txt"
+      },
+      "heroine": {
+        "elapsed_ms": 0.197,
+        "error": "PermissionError: [Errno 1] Operation not permitted",
+        "status": null,
+        "url": "https://shopheroine.com/robots.txt"
+      },
+      "kind": {
+        "elapsed_ms": 0.366,
+        "error": "PermissionError: [Errno 1] Operation not permitted",
+        "status": null,
+        "url": "https://shop.kind.co.jp/robots.txt"
+      },
+      "komehyo": {
+        "elapsed_ms": 0.225,
+        "error": "PermissionError: [Errno 1] Operation not permitted",
+        "status": null,
+        "url": "https://komehyo.jp/robots.txt"
+      },
+      "the_realreal": {
+        "elapsed_ms": 0.185,
+        "error": "PermissionError: [Errno 1] Operation not permitted",
+        "status": null,
+        "url": "https://www.therealreal.com/robots.txt"
+      },
+      "wikimedia": {
+        "elapsed_ms": 33.696,
+        "error": "PermissionError: [Errno 1] Operation not permitted",
+        "status": null,
+        "url": "https://en.wikipedia.org/robots.txt"
+      }
+    },
+    "max_wall_ms": 134588.861,
+    "median_wall_ms": 134319.95,
+    "min_wall_ms": 134038.472,
+    "runs": [
+      {
+        "candidates": 30,
+        "coverage": {
+          "candidates_hidden": 16,
+          "candidates_normalized": 30,
+          "pages_fetched": 27,
+          "sources_blocked": [
+            {
+              "detail": "",
+              "id": "wikimedia",
+              "name": "wikimedia",
+              "status": "BLOCKED_BY_POLICY"
+            },
+            {
+              "detail": "",
+              "id": "heroine",
+              "name": "heroine",
+              "status": "BLOCKED_BY_POLICY"
+            },
+            {
+              "detail": "",
+              "id": "ebay",
+              "name": "ebay",
+              "status": "AUTH_REQUIRED"
+            }
+          ],
+          "sources_completed": [
+            {
+              "detail": "",
+              "id": "kind",
+              "name": "kind",
+              "status": "SEARCHED_MATCHES_FOUND"
+            },
+            {
+              "detail": "",
+              "id": "komehyo",
+              "name": "komehyo",
+              "status": "SEARCHED_NO_MATCH"
+            },
+            {
+              "detail": "",
+              "id": "the_realreal",
+              "name": "the_realreal",
+              "status": "SEARCHED_NO_MATCH"
+            },
+            {
+              "detail": "",
+              "id": "byronesque",
+              "name": "byronesque",
+              "status": "SEARCHED_MATCHES_FOUND"
+            }
+          ],
+          "sources_in_progress": []
+        },
+        "data_root": "/var/folders/yc/1c930rns2rz1_trh4xcd9_m00000gq/T/searcher-latency-live-cz8l9sdy",
+        "fetches": {
+          "could_have_been_concurrent": 3,
+          "fetches": 17,
+          "hosts": 4,
+          "network_wait_ms": 49342.455,
+          "note": "DiscoveryEngine._run_plan fetches one URL at a time, and engine.run walks sources one at a time. Hosts are independent; same-host fetches must stay serial under the source rate policy.",
+          "per_host": {
+            "byronesque.com": 6,
+            "en.wikipedia.org": 6,
+            "ja.wikipedia.org": 2,
+            "shop.kind.co.jp": 3
+          },
+          "serial_fetches": 17
+        },
+        "hang": {
+          "elapsed_ms": 2.695,
+          "exceeded_90s": false,
+          "sources": [
+            {
+              "elapsed_ms": 20015.56,
+              "fetch_elapsed_ms": [
+                608.205,
+                5152.106,
+                6633.675,
+                3263.327,
+                3554.008,
+                0.213
+              ],
+              "fetch_max_ms": 6633.675,
+              "fetch_wall_sum_ms": 19211.534,
+              "fetches": 6,
+              "outcome": "SEARCHED_MATCHES_FOUND",
+              "pages": 9,
+              "reason": "source deadline exceeded after 20.02s",
+              "source": "byronesque",
+              "started_ms": 40194.001
+            },
+            {
+              "elapsed_ms": 1.669,
+              "fetches": 0,
+              "outcome": "AUTH_REQUIRED",
+              "pages": 0,
+              "reason": "EBAY_CLIENT_ID/SECRET not configured",
+              "source": "ebay",
+              "started_ms": 60285.968
+            },
+            {
+              "elapsed_ms": 75.744,
+              "fetches": 0,
+              "outcome": "BLOCKED_BY_POLICY",
+              "pages": 0,
+              "reason": "robots.txt fetch previously failed; fail-closed",
+              "source": "heroine",
+              "started_ms": 60210.023
+            },
+            {
+              "elapsed_ms": 20028.718,
+              "fetch_elapsed_ms": [
+                580.539,
+                12432.645,
+                0.26
+              ],
+              "fetch_max_ms": 12432.645,
+              "fetch_wall_sum_ms": 13013.444,
+              "fetches": 3,
+              "outcome": "SEARCHED_MATCHES_FOUND",
+              "pages": 10,
+              "reason": "source deadline exceeded after 20.03s",
+              "source": "kind",
+              "started_ms": 20160.613
+            },
+            {
+              "elapsed_ms": 2.228,
+              "fetches": 0,
+              "outcome": "SEARCHED_NO_MATCH",
+              "pages": 0,
+              "source": "komehyo",
+              "started_ms": 40189.641
+            },
+            {
+              "elapsed_ms": 1.967,
+              "fetches": 0,
+              "outcome": "SEARCHED_NO_MATCH",
+              "pages": 0,
+              "source": "the_realreal",
+              "started_ms": 40191.955
+            },
+            {
+              "elapsed_ms": 20007.233,
+              "fetch_elapsed_ms": [
+                26.273,
+                3941.191,
+                29.167,
+                4588.512,
+                27.189,
+                3828.63,
+                4676.322,
+                0.193
+              ],
+              "fetch_max_ms": 4676.322,
+              "fetch_wall_sum_ms": 17117.477,
+              "fetches": 8,
+              "outcome": "BLOCKED_BY_POLICY",
+              "pages": 8,
+              "reason": "source deadline exceeded after 20.01s",
+              "source": "wikimedia",
+              "started_ms": 152.872
+            }
+          ],
+          "stage": "Searching international sources"
+        },
+        "index_hits": null,
+        "index_skip_source_work": null,
+        "progress": {
+          "detail": null,
+          "stage": "Ranking results"
+        },
+        "search_id": "badcd62b-e91f-49ec-b795-d41438339d88",
+        "slowest_source": {
+          "elapsed_ms": 20028.718,
+          "fetch_elapsed_ms": [
+            580.539,
+            12432.645,
+            0.26
+          ],
+          "fetch_max_ms": 12432.645,
+          "fetch_wall_sum_ms": 13013.444,
+          "fetches": 3,
+          "outcome": "SEARCHED_MATCHES_FOUND",
+          "pages": 10,
+          "reason": "source deadline exceeded after 20.03s",
+          "source": "kind",
+          "started_ms": 20160.613
+        },
+        "sources": [
+          {
+            "elapsed_ms": 20015.56,
+            "fetch_elapsed_ms": [
+              608.205,
+              5152.106,
+              6633.675,
+              3263.327,
+              3554.008,
+              0.213
+            ],
+            "fetch_max_ms": 6633.675,
+            "fetch_wall_sum_ms": 19211.534,
+            "fetches": 6,
+            "outcome": "SEARCHED_MATCHES_FOUND",
+            "pages": 9,
+            "reason": "source deadline exceeded after 20.02s",
+            "source": "byronesque",
+            "started_ms": 40194.001
+          },
+          {
+            "elapsed_ms": 1.669,
+            "fetches": 0,
+            "outcome": "AUTH_REQUIRED",
+            "pages": 0,
+            "reason": "EBAY_CLIENT_ID/SECRET not configured",
+            "source": "ebay",
+            "started_ms": 60285.968
+          },
+          {
+            "elapsed_ms": 75.744,
+            "fetches": 0,
+            "outcome": "BLOCKED_BY_POLICY",
+            "pages": 0,
+            "reason": "robots.txt fetch previously failed; fail-closed",
+            "source": "heroine",
+            "started_ms": 60210.023
+          },
+          {
+            "elapsed_ms": 20028.718,
+            "fetch_elapsed_ms": [
+              580.539,
+              12432.645,
+              0.26
+            ],
+            "fetch_max_ms": 12432.645,
+            "fetch_wall_sum_ms": 13013.444,
+            "fetches": 3,
+            "outcome": "SEARCHED_MATCHES_FOUND",
+            "pages": 10,
+            "reason": "source deadline exceeded after 20.03s",
+            "source": "kind",
+            "started_ms": 20160.613
+          },
+          {
+            "elapsed_ms": 2.228,
+            "fetches": 0,
+            "outcome": "SEARCHED_NO_MATCH",
+            "pages": 0,
+            "source": "komehyo",
+            "started_ms": 40189.641
+          },
+          {
+            "elapsed_ms": 1.967,
+            "fetches": 0,
+            "outcome": "SEARCHED_NO_MATCH",
+            "pages": 0,
+            "source": "the_realreal",
+            "started_ms": 40191.955
+          },
+          {
+            "elapsed_ms": 20007.233,
+            "fetch_elapsed_ms": [
+              26.273,
+              3941.191,
+              29.167,
+              4588.512,
+              27.189,
+              3828.63,
+              4676.322,
+              0.193
+            ],
+            "fetch_max_ms": 4676.322,
+            "fetch_wall_sum_ms": 17117.477,
+            "fetches": 8,
+            "outcome": "BLOCKED_BY_POLICY",
+            "pages": 8,
+            "reason": "source deadline exceeded after 20.01s",
+            "source": "wikimedia",
+            "started_ms": 152.872
+          }
+        ],
+        "stages": [
+          {
+            "elapsed_ms": 7.565,
+            "stage": "Understanding the item"
+          },
+          {
+            "elapsed_ms": 0.385,
+            "stage": "Reading visible labels"
+          },
+          {
+            "elapsed_ms": 133.165,
+            "stage": "Understanding the item"
+          },
+          {
+            "elapsed_ms": 0.521,
+            "stage": "Reading visible labels"
+          },
+          {
+            "elapsed_ms": 1.759,
+            "stage": "Building possible identities"
+          },
+          {
+            "elapsed_ms": 6.782,
+            "stage": "Searching exact names"
+          },
+          {
+            "elapsed_ms": 2.695,
+            "stage": "Searching international sources"
+          },
+          {
+            "elapsed_ms": 43.975,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 160.28,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 19802.978,
+            "stage": "page_fetched"
+          },
+          {
+            "elapsed_ms": 0.508,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.398,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 746.425,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 19281.895,
+            "stage": "page_fetched"
+          },
+          {
+            "elapsed_ms": 0.31,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.219,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 2.009,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 0.086,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.143,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 1.824,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 0.079,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.139,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 1185.365,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 18830.056,
+            "stage": "page_fetched"
+          },
+          {
+            "elapsed_ms": 0.462,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.367,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 75.377,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 0.201,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.344,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 1.325,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 15.129,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 962.118,
+            "stage": "Comparing candidate images"
+          },
+          {
+            "elapsed_ms": 2216.929,
+            "stage": "Checking detail consistency"
+          },
+          {
+            "elapsed_ms": 1871.291,
+            "stage": "Checking listing authenticity evidence"
+          },
+          {
+            "elapsed_ms": 68654.398,
+            "stage": "Verifying live links"
+          },
+          {
+            "elapsed_ms": 16.621,
+            "stage": "Ranking results"
+          },
+          {
+            "elapsed_ms": 15.478,
+            "stage": "Searching alternate names"
+          },
+          {
+            "elapsed_ms": 0.433,
+            "stage": "PARTIAL"
+          }
+        ],
+        "state": "PARTIAL",
+        "terminal_reason": "useful coverage remains incomplete; some sources blocked",
+        "terminal_status": "PARTIAL",
+        "wall_ms": 134038.472
+      },
+      {
+        "candidates": 30,
+        "coverage": {
+          "candidates_hidden": 16,
+          "candidates_normalized": 30,
+          "pages_fetched": 27,
+          "sources_blocked": [
+            {
+              "detail": "",
+              "id": "wikimedia",
+              "name": "wikimedia",
+              "status": "BLOCKED_BY_POLICY"
+            },
+            {
+              "detail": "",
+              "id": "heroine",
+              "name": "heroine",
+              "status": "BLOCKED_BY_POLICY"
+            },
+            {
+              "detail": "",
+              "id": "ebay",
+              "name": "ebay",
+              "status": "AUTH_REQUIRED"
+            }
+          ],
+          "sources_completed": [
+            {
+              "detail": "",
+              "id": "kind",
+              "name": "kind",
+              "status": "SEARCHED_MATCHES_FOUND"
+            },
+            {
+              "detail": "",
+              "id": "komehyo",
+              "name": "komehyo",
+              "status": "SEARCHED_NO_MATCH"
+            },
+            {
+              "detail": "",
+              "id": "the_realreal",
+              "name": "the_realreal",
+              "status": "SEARCHED_NO_MATCH"
+            },
+            {
+              "detail": "",
+              "id": "byronesque",
+              "name": "byronesque",
+              "status": "SEARCHED_MATCHES_FOUND"
+            }
+          ],
+          "sources_in_progress": []
+        },
+        "data_root": "/var/folders/yc/1c930rns2rz1_trh4xcd9_m00000gq/T/searcher-latency-live-x9bcn6ru",
+        "fetches": {
+          "could_have_been_concurrent": 3,
+          "fetches": 17,
+          "hosts": 4,
+          "network_wait_ms": 49384.597,
+          "note": "DiscoveryEngine._run_plan fetches one URL at a time, and engine.run walks sources one at a time. Hosts are independent; same-host fetches must stay serial under the source rate policy.",
+          "per_host": {
+            "byronesque.com": 6,
+            "en.wikipedia.org": 6,
+            "ja.wikipedia.org": 2,
+            "shop.kind.co.jp": 3
+          },
+          "serial_fetches": 17
+        },
+        "hang": {
+          "elapsed_ms": 3.073,
+          "exceeded_90s": false,
+          "sources": [
+            {
+              "elapsed_ms": 20011.256,
+              "fetch_elapsed_ms": [
+                608.2,
+                5183.823,
+                3834.135,
+                4868.647,
+                3586.486,
+                0.128
+              ],
+              "fetch_max_ms": 5183.823,
+              "fetch_wall_sum_ms": 18081.419,
+              "fetches": 6,
+              "outcome": "SEARCHED_MATCHES_FOUND",
+              "pages": 9,
+              "reason": "source deadline exceeded after 20.01s",
+              "source": "byronesque",
+              "started_ms": 40186.79
+            },
+            {
+              "elapsed_ms": 0.462,
+              "fetches": 0,
+              "outcome": "AUTH_REQUIRED",
+              "pages": 0,
+              "reason": "EBAY_CLIENT_ID/SECRET not configured",
+              "source": "ebay",
+              "started_ms": 60261.156
+            },
+            {
+              "elapsed_ms": 62.753,
+              "fetches": 0,
+              "outcome": "BLOCKED_BY_POLICY",
+              "pages": 0,
+              "reason": "robots.txt fetch previously failed; fail-closed",
+              "source": "heroine",
+              "started_ms": 60198.291
+            },
+            {
+              "elapsed_ms": 20018.562,
+              "fetch_elapsed_ms": [
+                135.455,
+                12580.354,
+                0.157
+              ],
+              "fetch_max_ms": 12580.354,
+              "fetch_wall_sum_ms": 12715.966,
+              "fetches": 3,
+              "outcome": "SEARCHED_MATCHES_FOUND",
+              "pages": 10,
+              "reason": "source deadline exceeded after 20.02s",
+              "source": "kind",
+              "started_ms": 20163.723
+            },
+            {
+              "elapsed_ms": 2.152,
+              "fetches": 0,
+              "outcome": "SEARCHED_NO_MATCH",
+              "pages": 0,
+              "source": "komehyo",
+              "started_ms": 40182.568
+            },
+            {
+              "elapsed_ms": 1.904,
+              "fetches": 0,
+              "outcome": "SEARCHED_NO_MATCH",
+              "pages": 0,
+              "source": "the_realreal",
+              "started_ms": 40184.807
+            },
+            {
+              "elapsed_ms": 20014.009,
+              "fetch_elapsed_ms": [
+                26.775,
+                3617.862,
+                28.241,
+                5106.491,
+                886.117,
+                4664.11,
+                4257.311,
+                0.305
+              ],
+              "fetch_max_ms": 5106.491,
+              "fetch_wall_sum_ms": 18587.212,
+              "fetches": 8,
+              "outcome": "BLOCKED_BY_POLICY",
+              "pages": 8,
+              "reason": "source deadline exceeded after 20.01s",
+              "source": "wikimedia",
+              "started_ms": 148.981
+            }
+          ],
+          "stage": "Searching international sources"
+        },
+        "index_hits": null,
+        "index_skip_source_work": null,
+        "progress": {
+          "detail": null,
+          "stage": "Ranking results"
+        },
+        "search_id": "ffa1c2c6-1990-4cf3-949e-c2309aa55956",
+        "slowest_source": {
+          "elapsed_ms": 20018.562,
+          "fetch_elapsed_ms": [
+            135.455,
+            12580.354,
+            0.157
+          ],
+          "fetch_max_ms": 12580.354,
+          "fetch_wall_sum_ms": 12715.966,
+          "fetches": 3,
+          "outcome": "SEARCHED_MATCHES_FOUND",
+          "pages": 10,
+          "reason": "source deadline exceeded after 20.02s",
+          "source": "kind",
+          "started_ms": 20163.723
+        },
+        "sources": [
+          {
+            "elapsed_ms": 20011.256,
+            "fetch_elapsed_ms": [
+              608.2,
+              5183.823,
+              3834.135,
+              4868.647,
+              3586.486,
+              0.128
+            ],
+            "fetch_max_ms": 5183.823,
+            "fetch_wall_sum_ms": 18081.419,
+            "fetches": 6,
+            "outcome": "SEARCHED_MATCHES_FOUND",
+            "pages": 9,
+            "reason": "source deadline exceeded after 20.01s",
+            "source": "byronesque",
+            "started_ms": 40186.79
+          },
+          {
+            "elapsed_ms": 0.462,
+            "fetches": 0,
+            "outcome": "AUTH_REQUIRED",
+            "pages": 0,
+            "reason": "EBAY_CLIENT_ID/SECRET not configured",
+            "source": "ebay",
+            "started_ms": 60261.156
+          },
+          {
+            "elapsed_ms": 62.753,
+            "fetches": 0,
+            "outcome": "BLOCKED_BY_POLICY",
+            "pages": 0,
+            "reason": "robots.txt fetch previously failed; fail-closed",
+            "source": "heroine",
+            "started_ms": 60198.291
+          },
+          {
+            "elapsed_ms": 20018.562,
+            "fetch_elapsed_ms": [
+              135.455,
+              12580.354,
+              0.157
+            ],
+            "fetch_max_ms": 12580.354,
+            "fetch_wall_sum_ms": 12715.966,
+            "fetches": 3,
+            "outcome": "SEARCHED_MATCHES_FOUND",
+            "pages": 10,
+            "reason": "source deadline exceeded after 20.02s",
+            "source": "kind",
+            "started_ms": 20163.723
+          },
+          {
+            "elapsed_ms": 2.152,
+            "fetches": 0,
+            "outcome": "SEARCHED_NO_MATCH",
+            "pages": 0,
+            "source": "komehyo",
+            "started_ms": 40182.568
+          },
+          {
+            "elapsed_ms": 1.904,
+            "fetches": 0,
+            "outcome": "SEARCHED_NO_MATCH",
+            "pages": 0,
+            "source": "the_realreal",
+            "started_ms": 40184.807
+          },
+          {
+            "elapsed_ms": 20014.009,
+            "fetch_elapsed_ms": [
+              26.775,
+              3617.862,
+              28.241,
+              5106.491,
+              886.117,
+              4664.11,
+              4257.311,
+              0.305
+            ],
+            "fetch_max_ms": 5106.491,
+            "fetch_wall_sum_ms": 18587.212,
+            "fetches": 8,
+            "outcome": "BLOCKED_BY_POLICY",
+            "pages": 8,
+            "reason": "source deadline exceeded after 20.01s",
+            "source": "wikimedia",
+            "started_ms": 148.981
+          }
+        ],
+        "stages": [
+          {
+            "elapsed_ms": 7.023,
+            "stage": "Understanding the item"
+          },
+          {
+            "elapsed_ms": 0.519,
+            "stage": "Reading visible labels"
+          },
+          {
+            "elapsed_ms": 128.957,
+            "stage": "Understanding the item"
+          },
+          {
+            "elapsed_ms": 0.477,
+            "stage": "Reading visible labels"
+          },
+          {
+            "elapsed_ms": 1.737,
+            "stage": "Building possible identities"
+          },
+          {
+            "elapsed_ms": 7.195,
+            "stage": "Searching exact names"
+          },
+          {
+            "elapsed_ms": 3.073,
+            "stage": "Searching international sources"
+          },
+          {
+            "elapsed_ms": 0.23,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 100.429,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 19913.35,
+            "stage": "page_fetched"
+          },
+          {
+            "elapsed_ms": 0.733,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.493,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 313.561,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 19704.508,
+            "stage": "page_fetched"
+          },
+          {
+            "elapsed_ms": 0.283,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.164,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 1.988,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 0.087,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.138,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 1.766,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 0.079,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.119,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 1185.125,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 18826.012,
+            "stage": "page_fetched"
+          },
+          {
+            "elapsed_ms": 0.245,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.175,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 62.578,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 0.112,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.199,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 0.263,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 11.279,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 852.493,
+            "stage": "Comparing candidate images"
+          },
+          {
+            "elapsed_ms": 2099.566,
+            "stage": "Checking detail consistency"
+          },
+          {
+            "elapsed_ms": 1821.504,
+            "stage": "Checking listing authenticity evidence"
+          },
+          {
+            "elapsed_ms": 69234.861,
+            "stage": "Verifying live links"
+          },
+          {
+            "elapsed_ms": 25.697,
+            "stage": "Ranking results"
+          },
+          {
+            "elapsed_ms": 14.326,
+            "stage": "Searching alternate names"
+          },
+          {
+            "elapsed_ms": 0.353,
+            "stage": "PARTIAL"
+          }
+        ],
+        "state": "PARTIAL",
+        "terminal_reason": "useful coverage remains incomplete; some sources blocked",
+        "terminal_status": "PARTIAL",
+        "wall_ms": 134319.95
+      },
+      {
+        "candidates": 31,
+        "coverage": {
+          "candidates_hidden": 16,
+          "candidates_normalized": 31,
+          "pages_fetched": 27,
+          "sources_blocked": [
+            {
+              "detail": "",
+              "id": "wikimedia",
+              "name": "wikimedia",
+              "status": "BLOCKED_BY_POLICY"
+            },
+            {
+              "detail": "",
+              "id": "heroine",
+              "name": "heroine",
+              "status": "BLOCKED_BY_POLICY"
+            },
+            {
+              "detail": "",
+              "id": "ebay",
+              "name": "ebay",
+              "status": "AUTH_REQUIRED"
+            }
+          ],
+          "sources_completed": [
+            {
+              "detail": "",
+              "id": "kind",
+              "name": "kind",
+              "status": "SEARCHED_MATCHES_FOUND"
+            },
+            {
+              "detail": "",
+              "id": "komehyo",
+              "name": "komehyo",
+              "status": "SEARCHED_NO_MATCH"
+            },
+            {
+              "detail": "",
+              "id": "the_realreal",
+              "name": "the_realreal",
+              "status": "SEARCHED_NO_MATCH"
+            },
+            {
+              "detail": "",
+              "id": "byronesque",
+              "name": "byronesque",
+              "status": "SEARCHED_MATCHES_FOUND"
+            }
+          ],
+          "sources_in_progress": []
+        },
+        "data_root": "/var/folders/yc/1c930rns2rz1_trh4xcd9_m00000gq/T/searcher-latency-live-epqw2r8m",
+        "fetches": {
+          "could_have_been_concurrent": 3,
+          "fetches": 17,
+          "hosts": 4,
+          "network_wait_ms": 51831.096,
+          "note": "DiscoveryEngine._run_plan fetches one URL at a time, and engine.run walks sources one at a time. Hosts are independent; same-host fetches must stay serial under the source rate policy.",
+          "per_host": {
+            "byronesque.com": 6,
+            "en.wikipedia.org": 5,
+            "ja.wikipedia.org": 2,
+            "shop.kind.co.jp": 4
+          },
+          "serial_fetches": 17
+        },
+        "hang": {
+          "elapsed_ms": 2.486,
+          "exceeded_90s": false,
+          "sources": [
+            {
+              "elapsed_ms": 20010.992,
+              "fetch_elapsed_ms": [
+                602.536,
+                3527.363,
+                4601.844,
+                6363.708,
+                3603.695,
+                0.122
+              ],
+              "fetch_max_ms": 6363.708,
+              "fetch_wall_sum_ms": 18699.268,
+              "fetches": 6,
+              "outcome": "SEARCHED_MATCHES_FOUND",
+              "pages": 9,
+              "reason": "source deadline exceeded after 20.01s",
+              "source": "byronesque",
+              "started_ms": 40171.671
+            },
+            {
+              "elapsed_ms": 0.456,
+              "fetches": 0,
+              "outcome": "AUTH_REQUIRED",
+              "pages": 0,
+              "reason": "EBAY_CLIENT_ID/SECRET not configured",
+              "source": "ebay",
+              "started_ms": 60249.962
+            },
+            {
+              "elapsed_ms": 66.949,
+              "fetches": 0,
+              "outcome": "BLOCKED_BY_POLICY",
+              "pages": 0,
+              "reason": "robots.txt fetch previously failed; fail-closed",
+              "source": "heroine",
+              "started_ms": 60182.92
+            },
+            {
+              "elapsed_ms": 20019.729,
+              "fetch_elapsed_ms": [
+                264.74,
+                9041.709,
+                7037.319,
+                0.146
+              ],
+              "fetch_max_ms": 9041.709,
+              "fetch_wall_sum_ms": 16343.914,
+              "fetches": 4,
+              "outcome": "SEARCHED_MATCHES_FOUND",
+              "pages": 10,
+              "reason": "source deadline exceeded after 20.02s",
+              "source": "kind",
+              "started_ms": 20147.442
+            },
+            {
+              "elapsed_ms": 1.981,
+              "fetches": 0,
+              "outcome": "SEARCHED_NO_MATCH",
+              "pages": 0,
+              "source": "komehyo",
+              "started_ms": 40167.44
+            },
+            {
+              "elapsed_ms": 2.065,
+              "fetches": 0,
+              "outcome": "SEARCHED_NO_MATCH",
+              "pages": 0,
+              "source": "the_realreal",
+              "started_ms": 40169.494
+            },
+            {
+              "elapsed_ms": 20013.168,
+              "fetch_elapsed_ms": [
+                26.439,
+                5834.652,
+                26.255,
+                6498.205,
+                67.127,
+                4334.913,
+                0.323
+              ],
+              "fetch_max_ms": 6498.205,
+              "fetch_wall_sum_ms": 16787.914,
+              "fetches": 7,
+              "outcome": "BLOCKED_BY_POLICY",
+              "pages": 8,
+              "reason": "source deadline exceeded after 20.01s",
+              "source": "wikimedia",
+              "started_ms": 133.609
+            }
+          ],
+          "stage": "Searching international sources"
+        },
+        "index_hits": null,
+        "index_skip_source_work": null,
+        "progress": {
+          "detail": null,
+          "stage": "Ranking results"
+        },
+        "search_id": "79dc199f-f166-4b8a-ac8e-477481f06ce1",
+        "slowest_source": {
+          "elapsed_ms": 20019.729,
+          "fetch_elapsed_ms": [
+            264.74,
+            9041.709,
+            7037.319,
+            0.146
+          ],
+          "fetch_max_ms": 9041.709,
+          "fetch_wall_sum_ms": 16343.914,
+          "fetches": 4,
+          "outcome": "SEARCHED_MATCHES_FOUND",
+          "pages": 10,
+          "reason": "source deadline exceeded after 20.02s",
+          "source": "kind",
+          "started_ms": 20147.442
+        },
+        "sources": [
+          {
+            "elapsed_ms": 20010.992,
+            "fetch_elapsed_ms": [
+              602.536,
+              3527.363,
+              4601.844,
+              6363.708,
+              3603.695,
+              0.122
+            ],
+            "fetch_max_ms": 6363.708,
+            "fetch_wall_sum_ms": 18699.268,
+            "fetches": 6,
+            "outcome": "SEARCHED_MATCHES_FOUND",
+            "pages": 9,
+            "reason": "source deadline exceeded after 20.01s",
+            "source": "byronesque",
+            "started_ms": 40171.671
+          },
+          {
+            "elapsed_ms": 0.456,
+            "fetches": 0,
+            "outcome": "AUTH_REQUIRED",
+            "pages": 0,
+            "reason": "EBAY_CLIENT_ID/SECRET not configured",
+            "source": "ebay",
+            "started_ms": 60249.962
+          },
+          {
+            "elapsed_ms": 66.949,
+            "fetches": 0,
+            "outcome": "BLOCKED_BY_POLICY",
+            "pages": 0,
+            "reason": "robots.txt fetch previously failed; fail-closed",
+            "source": "heroine",
+            "started_ms": 60182.92
+          },
+          {
+            "elapsed_ms": 20019.729,
+            "fetch_elapsed_ms": [
+              264.74,
+              9041.709,
+              7037.319,
+              0.146
+            ],
+            "fetch_max_ms": 9041.709,
+            "fetch_wall_sum_ms": 16343.914,
+            "fetches": 4,
+            "outcome": "SEARCHED_MATCHES_FOUND",
+            "pages": 10,
+            "reason": "source deadline exceeded after 20.02s",
+            "source": "kind",
+            "started_ms": 20147.442
+          },
+          {
+            "elapsed_ms": 1.981,
+            "fetches": 0,
+            "outcome": "SEARCHED_NO_MATCH",
+            "pages": 0,
+            "source": "komehyo",
+            "started_ms": 40167.44
+          },
+          {
+            "elapsed_ms": 2.065,
+            "fetches": 0,
+            "outcome": "SEARCHED_NO_MATCH",
+            "pages": 0,
+            "source": "the_realreal",
+            "started_ms": 40169.494
+          },
+          {
+            "elapsed_ms": 20013.168,
+            "fetch_elapsed_ms": [
+              26.439,
+              5834.652,
+              26.255,
+              6498.205,
+              67.127,
+              4334.913,
+              0.323
+            ],
+            "fetch_max_ms": 6498.205,
+            "fetch_wall_sum_ms": 16787.914,
+            "fetches": 7,
+            "outcome": "BLOCKED_BY_POLICY",
+            "pages": 8,
+            "reason": "source deadline exceeded after 20.01s",
+            "source": "wikimedia",
+            "started_ms": 133.609
+          }
+        ],
+        "stages": [
+          {
+            "elapsed_ms": 6.543,
+            "stage": "Understanding the item"
+          },
+          {
+            "elapsed_ms": 0.422,
+            "stage": "Reading visible labels"
+          },
+          {
+            "elapsed_ms": 115.878,
+            "stage": "Understanding the item"
+          },
+          {
+            "elapsed_ms": 0.461,
+            "stage": "Reading visible labels"
+          },
+          {
+            "elapsed_ms": 1.582,
+            "stage": "Building possible identities"
+          },
+          {
+            "elapsed_ms": 6.237,
+            "stage": "Searching exact names"
+          },
+          {
+            "elapsed_ms": 2.486,
+            "stage": "Searching international sources"
+          },
+          {
+            "elapsed_ms": 0.204,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 139.815,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 19873.149,
+            "stage": "page_fetched"
+          },
+          {
+            "elapsed_ms": 0.665,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.482,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 417.164,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 19602.083,
+            "stage": "page_fetched"
+          },
+          {
+            "elapsed_ms": 0.269,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.178,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 1.803,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 0.073,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.136,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 1.929,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 0.112,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.194,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 1161.562,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 18849.236,
+            "stage": "page_fetched"
+          },
+          {
+            "elapsed_ms": 0.257,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.182,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 66.767,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 0.093,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.184,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 0.272,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 11.689,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 872.202,
+            "stage": "Comparing candidate images"
+          },
+          {
+            "elapsed_ms": 2086.908,
+            "stage": "Checking detail consistency"
+          },
+          {
+            "elapsed_ms": 1832.522,
+            "stage": "Checking listing authenticity evidence"
+          },
+          {
+            "elapsed_ms": 69503.699,
+            "stage": "Verifying live links"
+          },
+          {
+            "elapsed_ms": 17.276,
+            "stage": "Ranking results"
+          },
+          {
+            "elapsed_ms": 15.145,
+            "stage": "Searching alternate names"
+          },
+          {
+            "elapsed_ms": 0.444,
+            "stage": "PARTIAL"
+          }
+        ],
+        "state": "PARTIAL",
+        "terminal_reason": "useful coverage remains incomplete; some sources blocked",
+        "terminal_status": "PARTIAL",
+        "wall_ms": 134588.861
+      }
+    ],
+    "runs_requested": 3,
+    "use_worker_entry": true
+  },
+  "before": {
+    "embedding": {
+      "available": false,
+      "batched": false,
+      "elapsed_ms": 0.0,
+      "images": 16,
+      "images_per_second": 0.0,
+      "note": "no local embedding weights; throughput not measurable on this host"
+    },
+    "embedding_serial": {
+      "available": false,
+      "batched": false,
+      "elapsed_ms": 0.0,
+      "images": 16,
+      "images_per_second": 0.0,
+      "note": "no local embedding weights; throughput not measurable on this host"
+    },
+    "fixture": {
+      "cache_hit_rate_warm": 1.0,
+      "cold": {
+        "budget": {
+          "browser_pages": 0,
+          "bytes": 3822,
+          "images": 8,
+          "model_calls": 0,
+          "pages": 1,
+          "retries": 0,
+          "sources": 1,
+          "storage": 0,
+          "wall_seconds": 0
+        },
+        "cache_hits": 0,
+        "campaign_wall_ms": 75.087,
+        "candidates": 5,
+        "fetches": 5,
+        "first_candidate_ms": 13.913,
+        "first_routed_result_ms": 44.267,
+        "receipts": [
+          {
+            "cache_hits": 0,
+            "fetches": 0,
+            "phase": "consult"
+          },
+          {
+            "cache_hits": 0,
+            "fetches": 5,
+            "phase": "remember"
+          }
+        ],
+        "results": 5,
+        "search_create_ms": 0.954
+      },
+      "duplicate_work_avoided": 1.0,
+      "warm": {
+        "budget": {
+          "browser_pages": 0,
+          "bytes": 55,
+          "images": 2,
+          "model_calls": 0,
+          "pages": 0,
+          "retries": 0,
+          "sources": 0,
+          "storage": 0,
+          "wall_seconds": 0
+        },
+        "cache_hits": 5,
+        "campaign_wall_ms": 27.996,
+        "candidates": 5,
+        "fetches": 0,
+        "first_candidate_ms": 10.848,
+        "first_routed_result_ms": 11.35,
+        "index_hits": 5,
+        "index_skip_source_work": true,
+        "receipts": [
+          {
+            "cache_hits": 5,
+            "fetches": 0,
+            "phase": "consult"
+          },
+          {
+            "cache_hits": 0,
+            "fetches": 0,
+            "phase": "remember"
+          }
+        ],
+        "results": 5
+      }
+    },
+    "host_probes": {
+      "byronesque": {
+        "elapsed_ms": 0.198,
+        "error": "PermissionError: [Errno 1] Operation not permitted",
+        "status": null,
+        "url": "https://byronesque.com/robots.txt"
+      },
+      "heroine": {
+        "elapsed_ms": 0.43,
+        "error": "PermissionError: [Errno 1] Operation not permitted",
+        "status": null,
+        "url": "https://shopheroine.com/robots.txt"
+      },
+      "kind": {
+        "elapsed_ms": 0.364,
+        "error": "PermissionError: [Errno 1] Operation not permitted",
+        "status": null,
+        "url": "https://shop.kind.co.jp/robots.txt"
+      },
+      "komehyo": {
+        "elapsed_ms": 0.214,
+        "error": "PermissionError: [Errno 1] Operation not permitted",
+        "status": null,
+        "url": "https://komehyo.jp/robots.txt"
+      },
+      "the_realreal": {
+        "elapsed_ms": 0.183,
+        "error": "PermissionError: [Errno 1] Operation not permitted",
+        "status": null,
+        "url": "https://www.therealreal.com/robots.txt"
+      },
+      "wikimedia": {
+        "elapsed_ms": 35.649,
+        "error": "PermissionError: [Errno 1] Operation not permitted",
+        "status": null,
+        "url": "https://en.wikipedia.org/robots.txt"
+      }
+    },
+    "max_wall_ms": 232090.923,
+    "median_wall_ms": 214679.323,
+    "min_wall_ms": 204740.926,
+    "runs": [
+      {
+        "candidates": 42,
+        "coverage": {
+          "candidates_hidden": 16,
+          "candidates_normalized": 42,
+          "pages_fetched": 28,
+          "sources_blocked": [
+            {
+              "detail": "",
+              "id": "heroine",
+              "name": "heroine",
+              "status": "BLOCKED_BY_POLICY"
+            },
+            {
+              "detail": "",
+              "id": "ebay",
+              "name": "ebay",
+              "status": "AUTH_REQUIRED"
+            }
+          ],
+          "sources_completed": [
+            {
+              "detail": "",
+              "id": "wikimedia",
+              "name": "wikimedia",
+              "status": "SEARCHED_NO_MATCH"
+            },
+            {
+              "detail": "",
+              "id": "kind",
+              "name": "kind",
+              "status": "SEARCHED_MATCHES_FOUND"
+            },
+            {
+              "detail": "",
+              "id": "komehyo",
+              "name": "komehyo",
+              "status": "SEARCHED_NO_MATCH"
+            },
+            {
+              "detail": "",
+              "id": "the_realreal",
+              "name": "the_realreal",
+              "status": "SEARCHED_NO_MATCH"
+            },
+            {
+              "detail": "",
+              "id": "byronesque",
+              "name": "byronesque",
+              "status": "SEARCHED_MATCHES_FOUND"
+            }
+          ],
+          "sources_in_progress": []
+        },
+        "data_root": "/var/folders/yc/1c930rns2rz1_trh4xcd9_m00000gq/T/searcher-latency-live-qhtbt59f",
+        "fetches": {
+          "could_have_been_concurrent": 4,
+          "fetches": 28,
+          "hosts": 5,
+          "network_wait_ms": 155100.641,
+          "note": "DiscoveryEngine._run_plan fetches one URL at a time, and engine.run walks sources one at a time. Hosts are independent; same-host fetches must stay serial under the source rate policy.",
+          "per_host": {
+            "byronesque.com": 9,
+            "en.wikipedia.org": 6,
+            "fr.wikipedia.org": 1,
+            "ja.wikipedia.org": 2,
+            "shop.kind.co.jp": 10
+          },
+          "serial_fetches": 28
+        },
+        "hang": {
+          "elapsed_ms": 2.709,
+          "exceeded_90s": false,
+          "sources": [
+            {
+              "elapsed_ms": 44653.125,
+              "fetch_elapsed_ms": [
+                649.672,
+                5094.605,
+                6209.957,
+                4365.043,
+                4287.687,
+                4793.994,
+                5467.44,
+                6673.089,
+                6332.705
+              ],
+              "fetch_max_ms": 6673.089,
+              "fetch_wall_sum_ms": 43874.192,
+              "fetches": 9,
+              "outcome": "SEARCHED_MATCHES_FOUND",
+              "pages": 9,
+              "source": "byronesque",
+              "started_ms": 124486.478
+            },
+            {
+              "elapsed_ms": 0.467,
+              "fetches": 0,
+              "outcome": "AUTH_REQUIRED",
+              "pages": 0,
+              "reason": "EBAY_CLIENT_ID/SECRET not configured",
+              "source": "ebay",
+              "started_ms": 169200.268
+            },
+            {
+              "elapsed_ms": 60.497,
+              "fetches": 0,
+              "outcome": "BLOCKED_BY_POLICY",
+              "pages": 0,
+              "reason": "robots.txt fetch previously failed; fail-closed",
+              "source": "heroine",
+              "started_ms": 169139.686
+            },
+            {
+              "elapsed_ms": 94931.146,
+              "fetch_elapsed_ms": [
+                549.633,
+                9312.801,
+                7961.568,
+                11899.698,
+                12658.808,
+                9057.758,
+                9167.795,
+                10985.549,
+                10721.13,
+                12235.356
+              ],
+              "fetch_max_ms": 12658.808,
+              "fetch_wall_sum_ms": 94550.096,
+              "fetches": 10,
+              "outcome": "SEARCHED_MATCHES_FOUND",
+              "pages": 10,
+              "source": "kind",
+              "started_ms": 29551.06
+            },
+            {
+              "elapsed_ms": 2.233,
+              "fetches": 0,
+              "outcome": "SEARCHED_NO_MATCH",
+              "pages": 0,
+              "source": "komehyo",
+              "started_ms": 124482.304
+            },
+            {
+              "elapsed_ms": 1.808,
+              "fetches": 0,
+              "outcome": "SEARCHED_NO_MATCH",
+              "pages": 0,
+              "source": "the_realreal",
+              "started_ms": 124484.609
+            },
+            {
+              "elapsed_ms": 29321.808,
+              "fetch_elapsed_ms": [
+                195.702,
+                3525.08,
+                29.882,
+                1810.457,
+                231.86,
+                1379.419,
+                4810.143,
+                4667.826,
+                25.984
+              ],
+              "fetch_max_ms": 4810.143,
+              "fetch_wall_sum_ms": 16676.353,
+              "fetches": 9,
+              "outcome": "SEARCHED_NO_MATCH",
+              "pages": 9,
+              "source": "wikimedia",
+              "started_ms": 229.166
+            }
+          ],
+          "stage": "Searching international sources"
+        },
+        "index_hits": null,
+        "index_skip_source_work": null,
+        "progress": {
+          "detail": null,
+          "stage": "Verifying live links"
+        },
+        "search_id": "42d46f75-03ce-4db6-9f3a-0dc4d145ed01",
+        "slowest_source": {
+          "elapsed_ms": 94931.146,
+          "fetch_elapsed_ms": [
+            549.633,
+            9312.801,
+            7961.568,
+            11899.698,
+            12658.808,
+            9057.758,
+            9167.795,
+            10985.549,
+            10721.13,
+            12235.356
+          ],
+          "fetch_max_ms": 12658.808,
+          "fetch_wall_sum_ms": 94550.096,
+          "fetches": 10,
+          "outcome": "SEARCHED_MATCHES_FOUND",
+          "pages": 10,
+          "source": "kind",
+          "started_ms": 29551.06
+        },
+        "sources": [
+          {
+            "elapsed_ms": 44653.125,
+            "fetch_elapsed_ms": [
+              649.672,
+              5094.605,
+              6209.957,
+              4365.043,
+              4287.687,
+              4793.994,
+              5467.44,
+              6673.089,
+              6332.705
+            ],
+            "fetch_max_ms": 6673.089,
+            "fetch_wall_sum_ms": 43874.192,
+            "fetches": 9,
+            "outcome": "SEARCHED_MATCHES_FOUND",
+            "pages": 9,
+            "source": "byronesque",
+            "started_ms": 124486.478
+          },
+          {
+            "elapsed_ms": 0.467,
+            "fetches": 0,
+            "outcome": "AUTH_REQUIRED",
+            "pages": 0,
+            "reason": "EBAY_CLIENT_ID/SECRET not configured",
+            "source": "ebay",
+            "started_ms": 169200.268
+          },
+          {
+            "elapsed_ms": 60.497,
+            "fetches": 0,
+            "outcome": "BLOCKED_BY_POLICY",
+            "pages": 0,
+            "reason": "robots.txt fetch previously failed; fail-closed",
+            "source": "heroine",
+            "started_ms": 169139.686
+          },
+          {
+            "elapsed_ms": 94931.146,
+            "fetch_elapsed_ms": [
+              549.633,
+              9312.801,
+              7961.568,
+              11899.698,
+              12658.808,
+              9057.758,
+              9167.795,
+              10985.549,
+              10721.13,
+              12235.356
+            ],
+            "fetch_max_ms": 12658.808,
+            "fetch_wall_sum_ms": 94550.096,
+            "fetches": 10,
+            "outcome": "SEARCHED_MATCHES_FOUND",
+            "pages": 10,
+            "source": "kind",
+            "started_ms": 29551.06
+          },
+          {
+            "elapsed_ms": 2.233,
+            "fetches": 0,
+            "outcome": "SEARCHED_NO_MATCH",
+            "pages": 0,
+            "source": "komehyo",
+            "started_ms": 124482.304
+          },
+          {
+            "elapsed_ms": 1.808,
+            "fetches": 0,
+            "outcome": "SEARCHED_NO_MATCH",
+            "pages": 0,
+            "source": "the_realreal",
+            "started_ms": 124484.609
+          },
+          {
+            "elapsed_ms": 29321.808,
+            "fetch_elapsed_ms": [
+              195.702,
+              3525.08,
+              29.882,
+              1810.457,
+              231.86,
+              1379.419,
+              4810.143,
+              4667.826,
+              25.984
+            ],
+            "fetch_max_ms": 4810.143,
+            "fetch_wall_sum_ms": 16676.353,
+            "fetches": 9,
+            "outcome": "SEARCHED_NO_MATCH",
+            "pages": 9,
+            "source": "wikimedia",
+            "started_ms": 229.166
+          }
+        ],
+        "stages": [
+          {
+            "elapsed_ms": 9.41,
+            "stage": "Understanding the item"
+          },
+          {
+            "elapsed_ms": 0.44,
+            "stage": "Reading visible labels"
+          },
+          {
+            "elapsed_ms": 206.326,
+            "stage": "Understanding the item"
+          },
+          {
+            "elapsed_ms": 0.498,
+            "stage": "Reading visible labels"
+          },
+          {
+            "elapsed_ms": 2.462,
+            "stage": "Building possible identities"
+          },
+          {
+            "elapsed_ms": 7.321,
+            "stage": "Searching exact names"
+          },
+          {
+            "elapsed_ms": 2.709,
+            "stage": "Searching international sources"
+          },
+          {
+            "elapsed_ms": 277.677,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 279.741,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 28764.39,
+            "stage": "page_fetched"
+          },
+          {
+            "elapsed_ms": 0.086,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.2,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 715.525,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 94215.421,
+            "stage": "page_fetched"
+          },
+          {
+            "elapsed_ms": 0.098,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.217,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 2.016,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 0.072,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.146,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 1.662,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 0.061,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.135,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 1353.032,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 43299.958,
+            "stage": "page_fetched"
+          },
+          {
+            "elapsed_ms": 0.083,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.186,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 60.311,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 0.085,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.203,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 0.264,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 18.204,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 1203.706,
+            "stage": "Comparing candidate images"
+          },
+          {
+            "elapsed_ms": 2279.167,
+            "stage": "Checking detail consistency"
+          },
+          {
+            "elapsed_ms": 1912.253,
+            "stage": "Checking listing authenticity evidence"
+          },
+          {
+            "elapsed_ms": 57478.37,
+            "stage": "Verifying live links"
+          },
+          {
+            "elapsed_ms": 0.408,
+            "stage": "PARTIAL"
+          }
+        ],
+        "state": "PARTIAL",
+        "terminal_reason": "budget exhausted",
+        "terminal_status": "PARTIAL",
+        "wall_ms": 232090.923
+      },
+      {
+        "candidates": 42,
+        "coverage": {
+          "candidates_hidden": 16,
+          "candidates_normalized": 42,
+          "pages_fetched": 28,
+          "sources_blocked": [
+            {
+              "detail": "",
+              "id": "heroine",
+              "name": "heroine",
+              "status": "BLOCKED_BY_POLICY"
+            },
+            {
+              "detail": "",
+              "id": "ebay",
+              "name": "ebay",
+              "status": "AUTH_REQUIRED"
+            }
+          ],
+          "sources_completed": [
+            {
+              "detail": "",
+              "id": "wikimedia",
+              "name": "wikimedia",
+              "status": "SEARCHED_NO_MATCH"
+            },
+            {
+              "detail": "",
+              "id": "kind",
+              "name": "kind",
+              "status": "SEARCHED_MATCHES_FOUND"
+            },
+            {
+              "detail": "",
+              "id": "komehyo",
+              "name": "komehyo",
+              "status": "SEARCHED_NO_MATCH"
+            },
+            {
+              "detail": "",
+              "id": "the_realreal",
+              "name": "the_realreal",
+              "status": "SEARCHED_NO_MATCH"
+            },
+            {
+              "detail": "",
+              "id": "byronesque",
+              "name": "byronesque",
+              "status": "SEARCHED_MATCHES_FOUND"
+            }
+          ],
+          "sources_in_progress": []
+        },
+        "data_root": "/var/folders/yc/1c930rns2rz1_trh4xcd9_m00000gq/T/searcher-latency-live-vgwhs5_o",
+        "fetches": {
+          "could_have_been_concurrent": 4,
+          "fetches": 28,
+          "hosts": 5,
+          "network_wait_ms": 141527.616,
+          "note": "DiscoveryEngine._run_plan fetches one URL at a time, and engine.run walks sources one at a time. Hosts are independent; same-host fetches must stay serial under the source rate policy.",
+          "per_host": {
+            "byronesque.com": 9,
+            "en.wikipedia.org": 6,
+            "fr.wikipedia.org": 1,
+            "ja.wikipedia.org": 2,
+            "shop.kind.co.jp": 10
+          },
+          "serial_fetches": 28
+        },
+        "hang": {
+          "elapsed_ms": 2.842,
+          "exceeded_90s": false,
+          "sources": [
+            {
+              "elapsed_ms": 41665.523,
+              "fetch_elapsed_ms": [
+                621.466,
+                4787.29,
+                5362.411,
+                4885.037,
+                6078.945,
+                3988.517,
+                5539.081,
+                6354.911,
+                3391.975
+              ],
+              "fetch_max_ms": 6354.911,
+              "fetch_wall_sum_ms": 41009.633,
+              "fetches": 9,
+              "outcome": "SEARCHED_MATCHES_FOUND",
+              "pages": 9,
+              "source": "byronesque",
+              "started_ms": 112305.431
+            },
+            {
+              "elapsed_ms": 0.447,
+              "fetches": 0,
+              "outcome": "AUTH_REQUIRED",
+              "pages": 0,
+              "reason": "EBAY_CLIENT_ID/SECRET not configured",
+              "source": "ebay",
+              "started_ms": 154037.047
+            },
+            {
+              "elapsed_ms": 65.925,
+              "fetches": 0,
+              "outcome": "BLOCKED_BY_POLICY",
+              "pages": 0,
+              "reason": "robots.txt fetch previously failed; fail-closed",
+              "source": "heroine",
+              "started_ms": 153971.043
+            },
+            {
+              "elapsed_ms": 81916.275,
+              "fetch_elapsed_ms": [
+                139.023,
+                11146.533,
+                7381.367,
+                7707.813,
+                9209.311,
+                7656.974,
+                9376.855,
+                9442.533,
+                10721.249,
+                8727.565
+              ],
+              "fetch_max_ms": 11146.533,
+              "fetch_wall_sum_ms": 81509.223,
+              "fetches": 10,
+              "outcome": "SEARCHED_MATCHES_FOUND",
+              "pages": 10,
+              "source": "kind",
+              "started_ms": 30384.867
+            },
+            {
+              "elapsed_ms": 2.374,
+              "fetches": 0,
+              "outcome": "SEARCHED_NO_MATCH",
+              "pages": 0,
+              "source": "komehyo",
+              "started_ms": 112301.236
+            },
+            {
+              "elapsed_ms": 1.699,
+              "fetches": 0,
+              "outcome": "SEARCHED_NO_MATCH",
+              "pages": 0,
+              "source": "the_realreal",
+              "started_ms": 112303.676
+            },
+            {
+              "elapsed_ms": 30253.927,
+              "fetch_elapsed_ms": [
+                26.331,
+                2346.996,
+                30.417,
+                2817.564,
+                70.54,
+                2470.372,
+                5754.761,
+                5465.44,
+                26.339
+              ],
+              "fetch_max_ms": 5754.761,
+              "fetch_wall_sum_ms": 19008.76,
+              "fetches": 9,
+              "outcome": "SEARCHED_NO_MATCH",
+              "pages": 9,
+              "source": "wikimedia",
+              "started_ms": 130.858
+            }
+          ],
+          "stage": "Searching international sources"
+        },
+        "index_hits": null,
+        "index_skip_source_work": null,
+        "progress": {
+          "detail": null,
+          "stage": "Verifying live links"
+        },
+        "search_id": "940a7f83-6fcb-4f91-887d-f8d29fd0c2e2",
+        "slowest_source": {
+          "elapsed_ms": 81916.275,
+          "fetch_elapsed_ms": [
+            139.023,
+            11146.533,
+            7381.367,
+            7707.813,
+            9209.311,
+            7656.974,
+            9376.855,
+            9442.533,
+            10721.249,
+            8727.565
+          ],
+          "fetch_max_ms": 11146.533,
+          "fetch_wall_sum_ms": 81509.223,
+          "fetches": 10,
+          "outcome": "SEARCHED_MATCHES_FOUND",
+          "pages": 10,
+          "source": "kind",
+          "started_ms": 30384.867
+        },
+        "sources": [
+          {
+            "elapsed_ms": 41665.523,
+            "fetch_elapsed_ms": [
+              621.466,
+              4787.29,
+              5362.411,
+              4885.037,
+              6078.945,
+              3988.517,
+              5539.081,
+              6354.911,
+              3391.975
+            ],
+            "fetch_max_ms": 6354.911,
+            "fetch_wall_sum_ms": 41009.633,
+            "fetches": 9,
+            "outcome": "SEARCHED_MATCHES_FOUND",
+            "pages": 9,
+            "source": "byronesque",
+            "started_ms": 112305.431
+          },
+          {
+            "elapsed_ms": 0.447,
+            "fetches": 0,
+            "outcome": "AUTH_REQUIRED",
+            "pages": 0,
+            "reason": "EBAY_CLIENT_ID/SECRET not configured",
+            "source": "ebay",
+            "started_ms": 154037.047
+          },
+          {
+            "elapsed_ms": 65.925,
+            "fetches": 0,
+            "outcome": "BLOCKED_BY_POLICY",
+            "pages": 0,
+            "reason": "robots.txt fetch previously failed; fail-closed",
+            "source": "heroine",
+            "started_ms": 153971.043
+          },
+          {
+            "elapsed_ms": 81916.275,
+            "fetch_elapsed_ms": [
+              139.023,
+              11146.533,
+              7381.367,
+              7707.813,
+              9209.311,
+              7656.974,
+              9376.855,
+              9442.533,
+              10721.249,
+              8727.565
+            ],
+            "fetch_max_ms": 11146.533,
+            "fetch_wall_sum_ms": 81509.223,
+            "fetches": 10,
+            "outcome": "SEARCHED_MATCHES_FOUND",
+            "pages": 10,
+            "source": "kind",
+            "started_ms": 30384.867
+          },
+          {
+            "elapsed_ms": 2.374,
+            "fetches": 0,
+            "outcome": "SEARCHED_NO_MATCH",
+            "pages": 0,
+            "source": "komehyo",
+            "started_ms": 112301.236
+          },
+          {
+            "elapsed_ms": 1.699,
+            "fetches": 0,
+            "outcome": "SEARCHED_NO_MATCH",
+            "pages": 0,
+            "source": "the_realreal",
+            "started_ms": 112303.676
+          },
+          {
+            "elapsed_ms": 30253.927,
+            "fetch_elapsed_ms": [
+              26.331,
+              2346.996,
+              30.417,
+              2817.564,
+              70.54,
+              2470.372,
+              5754.761,
+              5465.44,
+              26.339
+            ],
+            "fetch_max_ms": 5754.761,
+            "fetch_wall_sum_ms": 19008.76,
+            "fetches": 9,
+            "outcome": "SEARCHED_NO_MATCH",
+            "pages": 9,
+            "source": "wikimedia",
+            "started_ms": 130.858
+          }
+        ],
+        "stages": [
+          {
+            "elapsed_ms": 7.294,
+            "stage": "Understanding the item"
+          },
+          {
+            "elapsed_ms": 0.417,
+            "stage": "Reading visible labels"
+          },
+          {
+            "elapsed_ms": 110.378,
+            "stage": "Understanding the item"
+          },
+          {
+            "elapsed_ms": 0.75,
+            "stage": "Reading visible labels"
+          },
+          {
+            "elapsed_ms": 1.767,
+            "stage": "Building possible identities"
+          },
+          {
+            "elapsed_ms": 7.41,
+            "stage": "Searching exact names"
+          },
+          {
+            "elapsed_ms": 2.842,
+            "stage": "Searching international sources"
+          },
+          {
+            "elapsed_ms": 0.235,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 98.699,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 30154.993,
+            "stage": "page_fetched"
+          },
+          {
+            "elapsed_ms": 0.082,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.466,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 346.902,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 81568.907,
+            "stage": "page_fetched"
+          },
+          {
+            "elapsed_ms": 0.094,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.211,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 2.163,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 0.066,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.145,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 1.554,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 0.056,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.124,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 1205.937,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 40459.462,
+            "stage": "page_fetched"
+          },
+          {
+            "elapsed_ms": 0.089,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.218,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 65.707,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 0.079,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.192,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 0.255,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 17.043,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 891.017,
+            "stage": "Comparing candidate images"
+          },
+          {
+            "elapsed_ms": 2153.836,
+            "stage": "Checking detail consistency"
+          },
+          {
+            "elapsed_ms": 1951.693,
+            "stage": "Checking listing authenticity evidence"
+          },
+          {
+            "elapsed_ms": 45691.886,
+            "stage": "Verifying live links"
+          },
+          {
+            "elapsed_ms": 0.421,
+            "stage": "PARTIAL"
+          }
+        ],
+        "state": "PARTIAL",
+        "terminal_reason": "budget exhausted",
+        "terminal_status": "PARTIAL",
+        "wall_ms": 204740.926
+      },
+      {
+        "candidates": 42,
+        "coverage": {
+          "candidates_hidden": 16,
+          "candidates_normalized": 42,
+          "pages_fetched": 28,
+          "sources_blocked": [
+            {
+              "detail": "",
+              "id": "heroine",
+              "name": "heroine",
+              "status": "BLOCKED_BY_POLICY"
+            },
+            {
+              "detail": "",
+              "id": "ebay",
+              "name": "ebay",
+              "status": "AUTH_REQUIRED"
+            }
+          ],
+          "sources_completed": [
+            {
+              "detail": "",
+              "id": "wikimedia",
+              "name": "wikimedia",
+              "status": "SEARCHED_NO_MATCH"
+            },
+            {
+              "detail": "",
+              "id": "kind",
+              "name": "kind",
+              "status": "SEARCHED_MATCHES_FOUND"
+            },
+            {
+              "detail": "",
+              "id": "komehyo",
+              "name": "komehyo",
+              "status": "SEARCHED_NO_MATCH"
+            },
+            {
+              "detail": "",
+              "id": "the_realreal",
+              "name": "the_realreal",
+              "status": "SEARCHED_NO_MATCH"
+            },
+            {
+              "detail": "",
+              "id": "byronesque",
+              "name": "byronesque",
+              "status": "SEARCHED_MATCHES_FOUND"
+            }
+          ],
+          "sources_in_progress": []
+        },
+        "data_root": "/var/folders/yc/1c930rns2rz1_trh4xcd9_m00000gq/T/searcher-latency-live-empsmpv4",
+        "fetches": {
+          "could_have_been_concurrent": 4,
+          "fetches": 28,
+          "hosts": 5,
+          "network_wait_ms": 140223.615,
+          "note": "DiscoveryEngine._run_plan fetches one URL at a time, and engine.run walks sources one at a time. Hosts are independent; same-host fetches must stay serial under the source rate policy.",
+          "per_host": {
+            "byronesque.com": 9,
+            "en.wikipedia.org": 6,
+            "fr.wikipedia.org": 1,
+            "ja.wikipedia.org": 2,
+            "shop.kind.co.jp": 10
+          },
+          "serial_fetches": 28
+        },
+        "hang": {
+          "elapsed_ms": 2.735,
+          "exceeded_90s": false,
+          "sources": [
+            {
+              "elapsed_ms": 43097.241,
+              "fetch_elapsed_ms": [
+                653.21,
+                3637.64,
+                3031.246,
+                4491.615,
+                5186.482,
+                4403.693,
+                6008.187,
+                5516.408,
+                5456.835
+              ],
+              "fetch_max_ms": 6008.187,
+              "fetch_wall_sum_ms": 38385.316,
+              "fetches": 9,
+              "outcome": "SEARCHED_MATCHES_FOUND",
+              "pages": 9,
+              "source": "byronesque",
+              "started_ms": 114289.962
+            },
+            {
+              "elapsed_ms": 0.458,
+              "fetches": 0,
+              "outcome": "AUTH_REQUIRED",
+              "pages": 0,
+              "reason": "EBAY_CLIENT_ID/SECRET not configured",
+              "source": "ebay",
+              "started_ms": 157451.922
+            },
+            {
+              "elapsed_ms": 64.551,
+              "fetches": 0,
+              "outcome": "BLOCKED_BY_POLICY",
+              "pages": 0,
+              "reason": "robots.txt fetch previously failed; fail-closed",
+              "source": "heroine",
+              "started_ms": 157387.285
+            },
+            {
+              "elapsed_ms": 87213.411,
+              "fetch_elapsed_ms": [
+                664.773,
+                10888.464,
+                7578.345,
+                11687.587,
+                7906.444,
+                9031.484,
+                12440.05,
+                9437.961,
+                8487.824,
+                8727.112
+              ],
+              "fetch_max_ms": 12440.05,
+              "fetch_wall_sum_ms": 86850.044,
+              "fetches": 10,
+              "outcome": "SEARCHED_MATCHES_FOUND",
+              "pages": 10,
+              "source": "kind",
+              "started_ms": 27072.411
+            },
+            {
+              "elapsed_ms": 2.098,
+              "fetches": 0,
+              "outcome": "SEARCHED_NO_MATCH",
+              "pages": 0,
+              "source": "komehyo",
+              "started_ms": 114285.914
+            },
+            {
+              "elapsed_ms": 1.821,
+              "fetches": 0,
+              "outcome": "SEARCHED_NO_MATCH",
+              "pages": 0,
+              "source": "the_realreal",
+              "started_ms": 114288.08
+            },
+            {
+              "elapsed_ms": 26946.021,
+              "fetch_elapsed_ms": [
+                26.638,
+                659.712,
+                27.708,
+                3158.321,
+                71.566,
+                2899.256,
+                3837.44,
+                4278.095,
+                29.519
+              ],
+              "fetch_max_ms": 4278.095,
+              "fetch_wall_sum_ms": 14988.255,
+              "fetches": 9,
+              "outcome": "SEARCHED_NO_MATCH",
+              "pages": 9,
+              "source": "wikimedia",
+              "started_ms": 126.318
+            }
+          ],
+          "stage": "Searching international sources"
+        },
+        "index_hits": null,
+        "index_skip_source_work": null,
+        "progress": {
+          "detail": null,
+          "stage": "Verifying live links"
+        },
+        "search_id": "f26b157b-b740-4d2f-b996-66a5011b3346",
+        "slowest_source": {
+          "elapsed_ms": 87213.411,
+          "fetch_elapsed_ms": [
+            664.773,
+            10888.464,
+            7578.345,
+            11687.587,
+            7906.444,
+            9031.484,
+            12440.05,
+            9437.961,
+            8487.824,
+            8727.112
+          ],
+          "fetch_max_ms": 12440.05,
+          "fetch_wall_sum_ms": 86850.044,
+          "fetches": 10,
+          "outcome": "SEARCHED_MATCHES_FOUND",
+          "pages": 10,
+          "source": "kind",
+          "started_ms": 27072.411
+        },
+        "sources": [
+          {
+            "elapsed_ms": 43097.241,
+            "fetch_elapsed_ms": [
+              653.21,
+              3637.64,
+              3031.246,
+              4491.615,
+              5186.482,
+              4403.693,
+              6008.187,
+              5516.408,
+              5456.835
+            ],
+            "fetch_max_ms": 6008.187,
+            "fetch_wall_sum_ms": 38385.316,
+            "fetches": 9,
+            "outcome": "SEARCHED_MATCHES_FOUND",
+            "pages": 9,
+            "source": "byronesque",
+            "started_ms": 114289.962
+          },
+          {
+            "elapsed_ms": 0.458,
+            "fetches": 0,
+            "outcome": "AUTH_REQUIRED",
+            "pages": 0,
+            "reason": "EBAY_CLIENT_ID/SECRET not configured",
+            "source": "ebay",
+            "started_ms": 157451.922
+          },
+          {
+            "elapsed_ms": 64.551,
+            "fetches": 0,
+            "outcome": "BLOCKED_BY_POLICY",
+            "pages": 0,
+            "reason": "robots.txt fetch previously failed; fail-closed",
+            "source": "heroine",
+            "started_ms": 157387.285
+          },
+          {
+            "elapsed_ms": 87213.411,
+            "fetch_elapsed_ms": [
+              664.773,
+              10888.464,
+              7578.345,
+              11687.587,
+              7906.444,
+              9031.484,
+              12440.05,
+              9437.961,
+              8487.824,
+              8727.112
+            ],
+            "fetch_max_ms": 12440.05,
+            "fetch_wall_sum_ms": 86850.044,
+            "fetches": 10,
+            "outcome": "SEARCHED_MATCHES_FOUND",
+            "pages": 10,
+            "source": "kind",
+            "started_ms": 27072.411
+          },
+          {
+            "elapsed_ms": 2.098,
+            "fetches": 0,
+            "outcome": "SEARCHED_NO_MATCH",
+            "pages": 0,
+            "source": "komehyo",
+            "started_ms": 114285.914
+          },
+          {
+            "elapsed_ms": 1.821,
+            "fetches": 0,
+            "outcome": "SEARCHED_NO_MATCH",
+            "pages": 0,
+            "source": "the_realreal",
+            "started_ms": 114288.08
+          },
+          {
+            "elapsed_ms": 26946.021,
+            "fetch_elapsed_ms": [
+              26.638,
+              659.712,
+              27.708,
+              3158.321,
+              71.566,
+              2899.256,
+              3837.44,
+              4278.095,
+              29.519
+            ],
+            "fetch_max_ms": 4278.095,
+            "fetch_wall_sum_ms": 14988.255,
+            "fetches": 9,
+            "outcome": "SEARCHED_NO_MATCH",
+            "pages": 9,
+            "source": "wikimedia",
+            "started_ms": 126.318
+          }
+        ],
+        "stages": [
+          {
+            "elapsed_ms": 6.56,
+            "stage": "Understanding the item"
+          },
+          {
+            "elapsed_ms": 0.413,
+            "stage": "Reading visible labels"
+          },
+          {
+            "elapsed_ms": 106.606,
+            "stage": "Understanding the item"
+          },
+          {
+            "elapsed_ms": 0.474,
+            "stage": "Reading visible labels"
+          },
+          {
+            "elapsed_ms": 2.221,
+            "stage": "Building possible identities"
+          },
+          {
+            "elapsed_ms": 7.309,
+            "stage": "Searching exact names"
+          },
+          {
+            "elapsed_ms": 2.735,
+            "stage": "Searching international sources"
+          },
+          {
+            "elapsed_ms": 0.305,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 100.524,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 26845.192,
+            "stage": "page_fetched"
+          },
+          {
+            "elapsed_ms": 0.072,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.18,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 823.192,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 86390.039,
+            "stage": "page_fetched"
+          },
+          {
+            "elapsed_ms": 0.092,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.209,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 1.889,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 0.068,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.144,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 1.677,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 0.061,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.143,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 1525.337,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 41571.761,
+            "stage": "page_fetched"
+          },
+          {
+            "elapsed_ms": 0.082,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.186,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 64.365,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 0.086,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 0.199,
+            "stage": "source_start"
+          },
+          {
+            "elapsed_ms": 0.259,
+            "stage": "query_dispatch"
+          },
+          {
+            "elapsed_ms": 17.758,
+            "stage": "source_complete"
+          },
+          {
+            "elapsed_ms": 1012.648,
+            "stage": "Comparing candidate images"
+          },
+          {
+            "elapsed_ms": 2139.631,
+            "stage": "Checking detail consistency"
+          },
+          {
+            "elapsed_ms": 1927.191,
+            "stage": "Checking listing authenticity evidence"
+          },
+          {
+            "elapsed_ms": 52131.038,
+            "stage": "Verifying live links"
+          },
+          {
+            "elapsed_ms": 0.373,
+            "stage": "PARTIAL"
+          }
+        ],
+        "state": "PARTIAL",
+        "terminal_reason": "budget exhausted",
+        "terminal_status": "PARTIAL",
+        "wall_ms": 214679.323
+      }
+    ],
+    "runs_requested": 3,
+    "use_worker_entry": false
+  },
+  "diagnosis": {
+    "fixed_in_this_lane": [
+      {
+        "file": "src/searcher/workers/bounded_discovery.py",
+        "mechanism": "BoundedDiscoveryEngine: 20s per-source deadline, 12s request timeout, 5s connect timeout, retries stop when the budget is gone, extra HostLimiter removed (HTTP already paces rpm / crawl-delay). A stall is recorded as SOURCE_UNAVAILABLE with elapsed time and the campaign continues."
+      },
+      {
+        "file": "src/searcher/retrieval/embeddings.py",
+        "mechanism": "embed_pngs batches one forward pass on the selected device."
+      }
+    ],
+    "hang_stage": "DISCOVERING / Searching international sources",
+    "measurement": {
+      "after_fetch_sum_ms_run1": 49342.455,
+      "after_kind_ms": [
+        20028.718,
+        20018.562,
+        20019.729
+      ],
+      "before_fetch_sum_ms_run1": 155100.641,
+      "before_kind_ms": [
+        94931.146,
+        81916.275,
+        87213.411
+      ],
+      "could_have_been_concurrent": 4,
+      "hosts_run1": 5,
+      "serial_fetches_after_run1": 17,
+      "serial_fetches_before_run1": 28
+    },
+    "observed_before": "kind held the stage for 82-95s with 10 serial HTTP fetches of 8-12s. byronesque added 45s. wikimedia 29s. The UI stage string does not change while engine.run walks sources.",
+    "owned_by_other_lane": [
+      {
+        "file": "src/searcher/sources/engine.py",
+        "lines": "115-174 and 283-288",
+        "mechanism": "engine.run walks SourcePlans one at a time. _run_plan pops a frontier batch then fetches each URL in a Python for-loop. No per-source wall deadline. max_work=8 plus query seeds produced 10 kind fetches on this host."
+      },
+      {
+        "file": "src/searcher/sources/fetch_modes.py",
+        "lines": "85-126 and 117-199",
+        "mechanism": "Escalator.host_limiter.wait (token bucket at rpm) then HonestHttpClient DomainLimiter at crawl-delay or 60/rpm. Two sleeps on the same host. kind rpm=12 so ~5s+5s plus the GET, matching the measured 8-12s fetches. Retries on NETWORK_FAILED/SOURCE_UNAVAILABLE up to 4 with backoff up to 30s; a true hang is ~4*20s + backoff."
+      },
+      {
+        "file": "src/searcher/sources/http.py",
+        "lines": "133-143 and 184-185",
+        "mechanism": "Default timeout=20s connect=10s. DomainLimiter.acquire sleeps the crawl-delay with no remaining-time check."
+      },
+      {
+        "file": "src/searcher/campaigns/orchestrator.py",
+        "lines": "56-65, 322-371, 441-453, 572-606",
+        "mechanism": "STAGE_LANGUAGE maps PLANNING_SOURCES and DISCOVERING to 'Searching international sources'. _discover calls engine.run with no stage deadline. _acquire downloads listing images serially (~50s after discovery on this host)."
+      }
+    ]
+  },
+  "host": "Mac-Studio",
+  "measured_at": "2026-08-16T21:43:28.948140+00:00",
+  "summary": {
+    "cache_hit_rate_warm": {
+      "after": 1.0,
+      "before": 1.0
+    },
+    "duplicate_work_avoided": {
+      "after": 1.0,
+      "before": 1.0
+    },
+    "embedding_images_per_second": {
+      "after": 0.0,
+      "before": 0.0,
+      "note": "No DINOv2 weights in this tree and the uv env has no torch. embed_pngs() batches on the existing device when weights exist. A cheap CPU stub was not a valid throughput proxy.",
+      "production_weights": "absent"
+    },
+    "host_live_campaign_median_wall_ms": {
+      "after": 134319.95,
+      "before": 214679.323,
+      "delta_ms": -80359.373,
+      "reduction_ratio": 0.3743,
+      "runs": 3
+    },
+    "kind_source_elapsed_ms": {
+      "after": [
+        20028.718,
+        20018.562,
+        20019.729
+      ],
+      "before": [
+        94931.146,
+        81916.275,
+        87213.411
+      ],
+      "note": "kind was the 90s DISCOVERING hang: 10 serial fetches at ~8-12s each"
+    },
+    "remaining_floor_ms": {
+      "approx": 134000,
+      "why": "After per-source 20s deadlines, this host still spends ~20s on reference, ~60s walking wikimedia+kind+byronesque serially at the deadline, and ~50s in orchestrator._acquire downloading listing images one at a time. Those last two live in denied files."
+    }
+  }
+}

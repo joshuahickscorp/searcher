@@ -16,6 +16,7 @@ from searcher.retrieval.broad import retrieve_broad
 from searcher.retrieval.embeddings import (
     cosine_similarity,
     embed_png,
+    embed_pngs,
     embedding_capability,
     find_local_weights,
     resolve_backend,
@@ -31,6 +32,16 @@ def test_absence_without_weights(monkeypatch: pytest.MonkeyPatch, tmp_path: Path
     assert record.name is CapabilityName.DENSE_FEATURES
     assert record.available is False
     assert embed_png(tiny_png()) is None
+
+
+def test_embed_pngs_matches_single_length_without_weights(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    monkeypatch.delenv("SEARCHER_EMBEDDING_WEIGHTS", raising=False)
+    monkeypatch.setenv("SEARCHER_DATA_ROOT", str(tmp_path))
+    pngs = [tiny_png(), tiny_png((9, 8, 7))]
+    assert embed_pngs(pngs) == [None, None]
+    assert embed_png(pngs[0]) is None
 
 
 def test_cosine_of_unit_vectors() -> None:
@@ -64,10 +75,16 @@ def test_broad_and_match_use_embedding_score(monkeypatch: pytest.MonkeyPatch) ->
         del resolved
         return list(vectors.get(png, [0.0, 0.0, 1.0]))
 
+    def fake_embed_pngs(
+        pngs: list[bytes], resolved: EmbeddingBackend | None = None
+    ) -> list[list[float] | None]:
+        return [fake_embed(png, resolved) for png in pngs]
+
     monkeypatch.setattr(emb, "resolve_backend", fake_resolve)
     monkeypatch.setattr(emb, "embed_png", fake_embed)
+    monkeypatch.setattr(emb, "embed_pngs", fake_embed_pngs)
     monkeypatch.setattr("searcher.retrieval.broad.resolve_backend", fake_resolve)
-    monkeypatch.setattr("searcher.retrieval.broad.embed_png", fake_embed)
+    monkeypatch.setattr("searcher.retrieval.broad.embed_pngs", fake_embed_pngs)
     monkeypatch.setattr("searcher.matching.pipeline.pair_similarity", lambda *a, **k: 1.0)
 
     hyp = make_hypothesis(category="garment")

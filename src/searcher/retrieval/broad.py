@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 
 from searcher.contracts.models import ItemHypothesis, ListingCandidate, VisualSignature
 from searcher.retrieval.cost import CostLedger, CostStage
-from searcher.retrieval.embeddings import cosine_similarity, embed_png, resolve_backend
+from searcher.retrieval.embeddings import cosine_similarity, embed_pngs, resolve_backend
 from searcher.retrieval.escalation import DEFAULT_BOUNDS, KEEP_THRESHOLD, EscalationBounds
 from searcher.retrieval.signals import CheapSignals, compute_cheap_signals
 
@@ -60,12 +60,27 @@ def retrieve_broad(
 
     ocr = candidate_ocr or {}
     hits: list[BroadHit] = []
+    ref_vecs: list[list[float] | None] = []
+    cand_vecs_by_id: dict[str, list[list[float] | None]] = {}
+    if backend is not None and reference_pngs:
+        ordered: list[bytes] = list(reference_pngs.values())
+        owners: list[tuple[str, int]] = [("ref", i) for i in range(len(ordered))]
+        for candidate in candidates:
+            pngs = candidate_pngs.get(candidate.candidate_id, {})
+            for png in pngs.values():
+                owners.append((candidate.candidate_id, len(ordered)))
+                ordered.append(png)
+        vectors = embed_pngs(ordered, backend)
+        ref_vecs = [vectors[i] for i in range(len(reference_pngs))]
+        for candidate_id, index in owners:
+            if candidate_id == "ref":
+                continue
+            cand_vecs_by_id.setdefault(candidate_id, []).append(vectors[index])
     for candidate in candidates:
         pngs = candidate_pngs.get(candidate.candidate_id, {})
         embedding = None
         if backend is not None and pngs and reference_pngs:
-            ref_vecs = [embed_png(png, backend) for png in reference_pngs.values()]
-            cand_vecs = [embed_png(png, backend) for png in pngs.values()]
+            cand_vecs = cand_vecs_by_id.get(candidate.candidate_id, [])
             scores = [
                 cosine_similarity(left, right)
                 for left in ref_vecs
