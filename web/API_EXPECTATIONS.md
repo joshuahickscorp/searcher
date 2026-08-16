@@ -40,9 +40,10 @@ recognized by the stub and unused by the first UI.
 | field | required | notes |
 | --- | --- | --- |
 | `images` | yes, 1–10 | one part per file |
-| `text` | no | free text |
+| `text` | no | free text. The UI may prefix an optional name as ordinary text (`Name: …`). |
 | `tags` | no | one part per tag |
 | `client_search_id` | no | idempotency key |
+| `source_scopes` | no | repeated parts: `legitimate` and/or `replica`. Unknown to current servers; they must ignore it. |
 
 The UI also accepts the Bible’s `images[]` / `tags[]` names if the server
 prefers them.
@@ -113,6 +114,7 @@ Event names are exactly those in Bible §25.4. Payloads:
 | `candidate.updated` | `{ "candidate_id" }` |
 | `result.real` | a result object (see below) |
 | `result.possibly_real` | a result object |
+| `result.replica` | a result object, if the server emits replica hits. Never merged into Real or Possibly Real. |
 | `result.removed` | `{ "result_id", "reason" }` |
 | `search.warning` | `{ "code", "message" }` |
 | `search.complete` | `{ "terminal_status", "reason" }` |
@@ -209,9 +211,12 @@ Without `bucket`:
   "search_id": "uuid",
   "real": [/* result objects */],
   "possibly_real": [/* result objects */],
+  "replica": [/* result objects; omit the key when none */],
   "counts": { "real": 0, "possibly_real": 0, "hidden": 0 }
 }
 ```
+
+The UI renders a Replica list only when the replica source scope is on and `replica` contains items. An absent `replica` key is not an error. Replica results are never merged into Real or Possibly Real.
 
 With `bucket=real` or `bucket=possibly_real`:
 

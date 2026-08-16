@@ -1,15 +1,29 @@
 :root {
-  color-scheme: light;
-  --bg: #ffffff;
-  --fg: #111111;
-  --muted: #4a4a4a;
-  --hair: #b3b3b3;
-  --wash: #f3f3f3;
-  --line: #111111;
-  --focus: #111111;
+  color-scheme: dark;
+  --bg: #0a0a0a;
+  --fg: #f2f2f2;
+  --muted: #a8a8a8;
+  --hair: #6a6a6a;
+  --wash: #161616;
+  --line: #f2f2f2;
+  --focus: #f2f2f2;
   --drawer: 28.5rem;
+  --header-h: 3.6rem;
   --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
   --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+    --bg: #ffffff;
+    --fg: #111111;
+    --muted: #4a4a4a;
+    --hair: #b3b3b3;
+    --wash: #f3f3f3;
+    --line: #111111;
+    --focus: #111111;
+  }
 }
 
 *,
@@ -61,6 +75,16 @@ a:hover {
   text-decoration-thickness: 2px;
 }
 
+::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+
+::selection {
+  background: var(--fg);
+  color: var(--bg);
+}
+
 :focus {
   outline: none;
 }
@@ -100,9 +124,10 @@ a:hover {
 .site-header {
   display: flex;
   justify-content: space-between;
-  gap: 1.5rem;
-  align-items: flex-start;
-  padding: 1.5rem 1.5rem 0;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.05rem 1.5rem;
+  min-height: var(--header-h);
 }
 
 .wordmark {
@@ -115,33 +140,88 @@ a:hover {
   padding-bottom: 0.1rem;
 }
 
-.tagline {
-  margin: 0.55rem 0 0;
-  max-width: 22rem;
-  font-size: 1.05rem;
-}
-
-.site-nav {
+.source-scopes {
+  position: relative;
   display: flex;
-  gap: 1rem;
-  font-size: 0.9rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
-.site-nav a {
+.scope-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid var(--line);
+  padding: 0.28rem 0.55rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  user-select: none;
+}
+
+.scope-toggle:has(input:checked) {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.scope-toggle input {
+  accent-color: currentColor;
+  width: 0.85rem;
+  height: 0.85rem;
+  margin: 0;
+}
+
+.scope-note {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.4rem);
+  width: min(22rem, calc(100vw - 2rem));
+  margin: 0;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid var(--line);
+  background: var(--bg);
   color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.35;
+  z-index: 6;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.source-scopes:hover .scope-note,
+.source-scopes:focus-within .scope-note {
+  opacity: 1;
 }
 
 #main {
-  padding: 2rem 1.5rem 4rem;
-  max-width: 40rem;
+  padding: 0 1.5rem 3rem;
+  max-width: 36rem;
+  margin-inline: auto;
 }
 
 body.drawer-open #main {
   max-width: calc(100vw - var(--drawer) - 2rem);
+  margin-inline: 0;
+}
+
+.first-screen {
+  min-height: calc(100dvh - var(--header-h));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.25rem 0 2.25rem;
 }
 
 .view-doc {
   max-width: 40rem;
+  padding-top: 1.5rem;
 }
 
 .view-doc h1 {
@@ -159,17 +239,18 @@ body.drawer-open #main {
 }
 
 .field {
-  margin: 0 0 1.25rem;
+  margin: 0 0 0.95rem;
 }
 
 .field-label {
   display: block;
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.4rem;
 }
 
+#item-name,
 textarea,
 .tag-box,
 .dropzone {
@@ -178,18 +259,32 @@ textarea,
   background: var(--bg);
 }
 
+#item-name {
+  display: block;
+  padding: 0.55rem 0.7rem;
+}
+
 textarea {
   display: block;
-  padding: 0.7rem 0.8rem;
+  padding: 0.55rem 0.7rem;
   resize: vertical;
-  min-height: 6rem;
+  min-height: 3.4rem;
 }
 
 .dropzone {
-  min-height: 9.5rem;
+  min-height: 8rem;
   padding: 1rem;
   position: relative;
   cursor: pointer;
+  border-style: dashed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dropzone:has(.thumbs:not(:empty)) {
+  border-style: solid;
+  justify-content: flex-start;
 }
 
 .dropzone.is-dragover,
@@ -205,6 +300,13 @@ textarea {
 .dropzone-hint {
   margin: 0;
   color: var(--muted);
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+.dropzone:has(.thumbs:not(:empty)) .dropzone-hint {
+  text-align: left;
+  font-size: 0.85rem;
 }
 
 .hint-sub {
@@ -273,7 +375,7 @@ textarea {
   flex-wrap: wrap;
   gap: 0.4rem;
   padding: 0.45rem;
-  min-height: 2.7rem;
+  min-height: 2.6rem;
 }
 
 .chips {
@@ -308,8 +410,8 @@ textarea {
 
 .actions {
   display: flex;
-  justify-content: flex-end;
-  margin-top: 1.5rem;
+  justify-content: stretch;
+  margin-top: 1.15rem;
 }
 
 #search-button,
@@ -324,6 +426,14 @@ textarea {
   letter-spacing: 0.04em;
 }
 
+#search-button {
+  width: 100%;
+  padding: 0.7rem 1.1rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 650;
+}
+
 #search-button:disabled {
   background: var(--bg);
   color: var(--muted);
@@ -331,7 +441,7 @@ textarea {
 }
 
 .recent {
-  margin-top: 2.5rem;
+  margin-top: 0.5rem;
   color: var(--muted);
   font-size: 0.92rem;
 }
@@ -344,6 +454,21 @@ textarea {
 
 .recent-list a {
   color: var(--fg);
+}
+
+.site-footer {
+  padding: 0 1.5rem 2.5rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.site-footer p {
+  margin: 0;
+  max-width: 40rem;
+}
+
+.site-footer a {
+  color: var(--muted);
 }
 
 .drawer {
@@ -495,6 +620,10 @@ textarea {
   border-bottom: 0;
   background: var(--bg);
   padding: 0.55rem 0.4rem;
+}
+
+.tabs [role="tab"][hidden] {
+  display: none;
 }
 
 .tabs [role="tab"][aria-selected="true"] {
@@ -685,10 +814,12 @@ body:not(.dev-on) .dev-num {
   max-height: calc(100dvh - 1.5rem);
   border: 1px solid var(--line);
   padding: 0;
+  background: var(--bg);
+  color: var(--fg);
 }
 
 .compare::backdrop {
-  background: rgb(0 0 0 / 0.45);
+  background: rgb(0 0 0 / 0.6);
 }
 
 .compare-bar {
@@ -769,12 +900,16 @@ body:not(.dev-on) .dev-num {
 
 @media (max-width: 720px) {
   .site-header {
-    flex-direction: column;
-    padding: 1rem 1rem 0;
+    align-items: flex-start;
+    padding: 0.85rem 1rem;
   }
 
   #main {
-    padding: 1.25rem 1rem 3rem;
+    padding: 0 1rem 2.5rem;
+  }
+
+  .site-footer {
+    padding: 0 1rem 2rem;
   }
 
   body.drawer-open #main {
@@ -792,6 +927,12 @@ body:not(.dev-on) .dev-num {
 
   .compare-pair img {
     height: 11rem;
+  }
+
+  .first-screen {
+    min-height: calc(100dvh - var(--header-h));
+    justify-content: flex-start;
+    padding-top: 0.75rem;
   }
 }
 

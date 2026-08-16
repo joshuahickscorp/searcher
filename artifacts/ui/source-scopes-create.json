@@ -1,0 +1,20 @@
+{
+  "status": 201,
+  "cors": null,
+  "body": {
+    "search_id": "f9f29dba-7622-4b46-91dd-425b2c8b803b",
+    "state": "CREATED",
+    "events_url": "/v1/searches/f9f29dba-7622-4b46-91dd-425b2c8b803b/events",
+    "results_url": "/v1/searches/f9f29dba-7622-4b46-91dd-425b2c8b803b/results"
+  },
+  "sent_fields": {
+    "text": "Name: Army Trainer\n\nscope-probe, do not treat as a real hunt",
+    "tags": [
+      "scope-probe"
+    ],
+    "source_scopes": [
+      "legitimate",
+      "replica"
+    ]
+  }
+}

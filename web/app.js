@@ -5,6 +5,7 @@ import { $, announce, show, text } from "./js/dom.js";
 import { createForm } from "./js/form.js";
 import { createResults } from "./js/results.js";
 import { currentRoute, go, goHome, onRoute } from "./js/router.js";
+import { createScopeControl } from "./js/scopes.js";
 import { forgetSearch, loadDevMode, loadTab, rememberSearch, saveDevMode, saveTab } from "./js/storage.js";
 
 const params = new URLSearchParams(location.search);
@@ -149,8 +150,12 @@ function handleEvent(name, data) {
   } else if (name === "search.coverage") {
     currentSearch.coverage = data;
     results.setSearch(currentSearch);
-  } else if (name === "result.real" || name === "result.possibly_real") {
-    const bucket = name === "result.real" ? "real" : "possibly_real";
+  } else if (name === "result.real" || name === "result.possibly_real" || name === "result.replica") {
+    const bucket = name === "result.real"
+      ? "real"
+      : name === "result.replica"
+        ? "replica"
+        : "possibly_real";
     results.upsertResult(data, bucket);
     const counts = currentSearch.counts || { real: 0, possibly_real: 0, hidden: 0 };
     const other = bucket === "real" ? "possibly_real" : "real";
@@ -210,8 +215,10 @@ const compare = createCompare({
   },
 });
 
+let scopes;
 const results = createResults({
   apiBase: () => apiBase,
+  replicaScope: () => Boolean(scopes && scopes.replicaOn()),
   onCompare: openCompare,
   async onCancel() {
     if (!currentSearchId) return;
@@ -254,17 +261,52 @@ const results = createResults({
   },
 });
 
+scopes = createScopeControl({
+  onChange() {
+    results.syncReplicaScope();
+  },
+});
+
+function buildSearchForm({ files, text, tags, clientId, includeScopes }) {
+  const fd = new FormData();
+  for (const file of files) fd.append("images", file, file.name);
+  fd.append("text", text);
+  for (const tag of tags) fd.append("tags", tag);
+  fd.append("client_search_id", clientId);
+  if (includeScopes) {
+    for (const scope of scopes.list()) fd.append("source_scopes", scope);
+  }
+  return fd;
+}
+
+async function createSearchSafe({ files, text, tags }) {
+  const clientId = clientSearchId();
+  try {
+    return await api.createSearch(buildSearchForm({
+      files,
+      text,
+      tags,
+      clientId,
+      includeScopes: true,
+    }));
+  } catch (err) {
+    if (err.code === "unavailable") throw err;
+    return api.createSearch(buildSearchForm({
+      files,
+      text,
+      tags,
+      clientId,
+      includeScopes: false,
+    }));
+  }
+}
+
 const form = createForm({
   async onSubmit({ files, text: known, tags }) {
     setBanner("");
-    const fd = new FormData();
-    for (const file of files) fd.append("images", file, file.name);
-    fd.append("text", known);
-    for (const tag of tags) fd.append("tags", tag);
-    fd.append("client_search_id", clientSearchId());
     form.setBusy(true);
     try {
-      const created = await api.createSearch(fd);
+      const created = await createSearchSafe({ files, text: known, tags });
       rememberSearch({
         id: created.search_id,
         text: known,

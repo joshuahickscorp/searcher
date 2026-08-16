@@ -13,68 +13,92 @@
 <body>
   <a class="skip-link" href="#search-form">Skip to search</a>
   <div id="live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+  <div id="api-banner" class="api-banner" hidden role="status"></div>
 
   <header class="site-header">
-    <div class="brand">
-      <a class="wordmark" href="#/" id="home-link">SEARCHER</a>
-      <p class="tagline">Find the exact item, not merely something similar.</p>
-    </div>
-    <nav class="site-nav" aria-label="About">
-      <a href="#/privacy">Privacy</a>
-      <a href="#/limitations">Limitations</a>
-    </nav>
+    <a class="wordmark" href="#/" id="home-link">SEARCHER</a>
+    <fieldset class="source-scopes" id="source-scopes" aria-describedby="scope-note">
+      <legend class="visually-hidden">Sources</legend>
+      <label class="scope-toggle" for="scope-legitimate">
+        <input type="checkbox" id="scope-legitimate" checked>
+        <span>Legitimate</span>
+      </label>
+      <label class="scope-toggle" for="scope-replica">
+        <input type="checkbox" id="scope-replica" aria-describedby="scope-note">
+        <span>Replica</span>
+      </label>
+      <p class="scope-note" id="scope-note">
+        Replica sources are searched to find replicas. A replica listing can never be ranked Real.
+      </p>
+    </fieldset>
   </header>
 
   <main id="main">
     <section id="view-home" class="view view-home">
       <form id="search-form" novalidate>
-        <div class="field">
-          <span class="field-label" id="images-label">Images</span>
-          <div
-            id="dropzone"
-            class="dropzone"
-            aria-labelledby="images-label dropzone-hint"
-          >
-            <input
-              id="file-input"
-              class="file-input"
-              type="file"
-              accept="image/jpeg,image/png,image/webp,image/gif,.jpg,.jpeg,.png,.webp,.gif"
-              multiple
+        <div class="first-screen">
+          <div class="field">
+            <span class="field-label" id="images-label">Images</span>
+            <div
+              id="dropzone"
+              class="dropzone"
+              aria-labelledby="images-label dropzone-hint"
+              aria-describedby="dropzone-desc"
             >
-            <label id="dropzone-hint" class="dropzone-hint" for="file-input">
-              Drop images here, click to choose, or paste.
-              <span class="hint-sub">1 to 10 raster images. The server is the final validator.</span>
-            </label>
-            <ul id="thumbs" class="thumbs" aria-label="Selected images"></ul>
+              <input
+                id="file-input"
+                class="file-input"
+                type="file"
+                accept="image/jpeg,image/png,image/webp,image/gif,.jpg,.jpeg,.png,.webp,.gif"
+                multiple
+              >
+              <label id="dropzone-hint" class="dropzone-hint" for="file-input">
+                Drop, click, or paste
+              </label>
+              <p id="dropzone-desc" class="visually-hidden">1 to 10 raster images. The server is the final validator.</p>
+              <ul id="thumbs" class="thumbs" aria-label="Selected images"></ul>
+            </div>
+            <p id="image-error" class="field-error" role="alert" hidden></p>
           </div>
-          <p id="image-error" class="field-error" role="alert" hidden></p>
-        </div>
 
-        <div class="field">
-          <label class="field-label" for="know">What do you know about it?</label>
-          <textarea id="know" name="text" rows="4" maxlength="4000" autocomplete="off" spellcheck="true"></textarea>
-        </div>
-
-        <div class="field">
-          <label class="field-label" for="tag-input">Tags</label>
-          <div class="tag-box" id="tag-box">
-            <ul class="chips" id="chips" aria-label="Current tags"></ul>
+          <div class="field">
+            <label class="field-label" for="item-name">Name</label>
             <input
-              id="tag-input"
+              id="item-name"
+              name="name"
               type="text"
-              maxlength="80"
+              maxlength="200"
               autocomplete="off"
-              spellcheck="false"
-              placeholder="Add a tag and press Enter"
-              aria-describedby="tag-hint"
+              spellcheck="true"
+              placeholder="If you know"
             >
           </div>
-          <p id="tag-hint" class="hint-sub">Comma or Enter creates a tag. Backspace removes the last one.</p>
-        </div>
 
-        <div class="actions">
-          <button type="submit" id="search-button" disabled>Search</button>
+          <div class="field">
+            <label class="field-label" for="know">What you know about it</label>
+            <textarea id="know" name="text" rows="2" maxlength="4000" autocomplete="off" spellcheck="true"></textarea>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="tag-input">Tags</label>
+            <div class="tag-box" id="tag-box">
+              <ul class="chips" id="chips" aria-label="Current tags"></ul>
+              <input
+                id="tag-input"
+                type="text"
+                maxlength="80"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="Add a tag"
+                aria-describedby="tag-hint"
+              >
+            </div>
+            <p id="tag-hint" class="visually-hidden">Comma or Enter creates a tag. Backspace removes the last one.</p>
+          </div>
+
+          <div class="actions">
+            <button type="submit" id="search-button" disabled>Search</button>
+          </div>
         </div>
       </form>
 
@@ -103,6 +127,8 @@
     <article id="view-limitations" class="view view-doc" hidden>
       <h1>Limitations</h1>
       <p>Searcher is not a professional authenticator. It ranks evidence under a declared benchmark and shows calibrated uncertainty. A result in Real is still an estimate.</p>
+      <p>Real means high confidence this is the same item under the available evidence and the current benchmark — not a professional authentication guarantee. Possibly Real means the item may match, but important evidence is missing or conflicting.</p>
+      <p>Replica sources are searched to find replicas. A replica listing can never be ranked Real.</p>
       <p>Searcher does not claim:</p>
       <ul>
         <li>guaranteed authenticity;</li>
@@ -124,6 +150,10 @@
       <p><a href="#/">Back to search</a></p>
     </article>
   </main>
+
+  <footer class="site-footer">
+    <p>Not a professional authenticator. <a href="#/privacy">Privacy</a> · <a href="#/limitations">Limitations</a></p>
+  </footer>
 
   <aside id="results" class="drawer" hidden aria-labelledby="results-heading">
     <div class="drawer-head">
@@ -149,7 +179,7 @@
     <p id="terminal-note" class="terminal-note" hidden></p>
 
     <p id="disclaimer" class="disclaimer">
-      Searcher ranks evidence. “Real” means high confidence under the available images and Searcher’s current benchmark; it is not a professional authentication guarantee. “Possibly Real” means the item may match, but important evidence is missing or conflicting.
+      Real is an evidence ranking, not a professional authentication guarantee.
     </p>
 
     <div class="tabs" role="tablist" aria-label="Result lists">
@@ -158,6 +188,9 @@
       </button>
       <button type="button" role="tab" id="tab-possible" aria-selected="false" aria-controls="panel-possible" tabindex="-1">
         Possibly Real <span id="count-possible">0</span>
+      </button>
+      <button type="button" role="tab" id="tab-replica" aria-selected="false" aria-controls="panel-replica" tabindex="-1" hidden>
+        Replica <span id="count-replica">0</span>
       </button>
     </div>
 
@@ -171,6 +204,9 @@
     <section id="panel-possible" class="panel" role="tabpanel" aria-labelledby="tab-possible" hidden>
       <div id="empty-possible" class="empty-state" hidden></div>
       <ul id="list-possible" class="result-list"></ul>
+    </section>
+    <section id="panel-replica" class="panel" role="tabpanel" aria-labelledby="tab-replica" hidden>
+      <ul id="list-replica" class="result-list"></ul>
     </section>
 
     <section id="coverage" class="coverage" hidden>
@@ -191,8 +227,6 @@
     </div>
     <div id="compare-body" class="compare-body"></div>
   </dialog>
-
-  <div id="api-banner" class="api-banner" hidden role="status"></div>
 
   <script type="module" src="app.js"></script>
 </body>

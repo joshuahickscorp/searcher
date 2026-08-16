@@ -27,6 +27,8 @@ Open http://127.0.0.1:8080/?api=http://127.0.0.1:8765
 
 `config.js` exports `API_BASE`. Override with `?api=`.
 `?dev=1` turns on numeric intervals when the API supplies them.
+`?scopes=legitimate,replica` carries the source-scope preference on a shared link.
+The optional name field is prefixed into `text` (`Name: …`). There is no extra API field.
 
 ## Routes
 

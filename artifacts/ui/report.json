@@ -1,0 +1,49 @@
+{
+  "first_screen": {
+    "desktop_dark_bg": "rgb(10, 10, 10)",
+    "desktop_light_bg": "rgb(255, 255, 255)",
+    "phone_dark_bg": "rgb(10, 10, 10)",
+    "above_fold": ["SEARCHER", "source scopes", "images", "name", "what you know", "tags", "search"],
+    "below_fold_desktop": {"recent_y": 810.7, "footer_y": 880.0, "viewport": 800}
+  },
+  "api_201_on_8765": {
+    "status": 201,
+    "search_id": "f9f29dba-7622-4b46-91dd-425b2c8b803b",
+    "source_scopes": ["legitimate", "replica"]
+  },
+  "browser_create_body": {
+    "images": ["<file trainer_a.png>"],
+    "text": "Name: Dior Homme Army Trainer\n\nblack leather, 2007, size 42",
+    "tags": ["dior"],
+    "source_scopes": ["legitimate", "replica"]
+  },
+  "scopes": {
+    "default": {"legitimate": true, "replica": false},
+    "after_toggle_and_reload": {"legitimate": true, "replica": true, "url": "?scopes=legitimate,replica", "localStorage": "{\"legitimate\":true,\"replica\":true}"},
+    "shared_link": {"url": "?scopes=replica", "legitimate": false, "replica": true}
+  },
+  "search_terminal": {
+    "status": "BLOCKED",
+    "reason": "Live listing discovery is not available in this process. Reference analysis finished. This is not a finding that the item does not exist.",
+    "coverage": true,
+    "replica_tab_without_payload": "hidden"
+  },
+  "replica_when_payload_present": {
+    "tab_hidden": false,
+    "count": 1,
+    "real": 0,
+    "possibly_real": 0
+  },
+  "validation": "_bad.txt is not a supported raster image. Use JPEG, PNG, WebP, or GIF. The server is the final validator.",
+  "keyboard": {
+    "name": "Tabbed name",
+    "know": "typed from keyboard",
+    "tags": ["kb-tag"]
+  },
+  "routes": {"privacy": true, "limitations": true},
+  "console_errors": [],
+  "tests": {
+    "node --check": "all changed js files OK",
+    "test_all.sh": "251 passed, 2 skipped + live_campaign 1 passed"
+  }
+}
