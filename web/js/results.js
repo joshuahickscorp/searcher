@@ -128,12 +128,26 @@ function card(result, { apiBase, onCompare }) {
   }
 
   const actions = el("div", { className: "card-actions" });
-  if (result.availability === "LIVE") {
-    const link = outboundLink(result.listing_url, "Open listing ↗");
-    if (link) actions.appendChild(link);
-    else actions.appendChild(el("span", { text: "Listing link refused (scheme is not http or https)." }));
+  // The listing always opens. Withholding the URL protected nobody - the page is
+  // public and the source published it - while telling a reader the listing was
+  // "not live" when availability is merely unknown claimed more than the
+  // evidence supports. Liveness is stated on its own line, from last_checked_at.
+  const link = outboundLink(result.listing_url, "Open listing ↗");
+  if (link) {
+    actions.appendChild(link);
   } else {
-    actions.appendChild(el("span", { text: "Listing is not live, so it is not offered as a purchase link." }));
+    actions.appendChild(el("span", { text: "No usable listing link was recorded." }));
+  }
+  if (result.availability === "SOLD" || result.availability === "REMOVED") {
+    actions.appendChild(el("span", {
+      className: "card-meta",
+      text: "This listing is no longer offered; the link opens the original page.",
+    }));
+  } else if (result.availability !== "LIVE") {
+    actions.appendChild(el("span", {
+      className: "card-meta",
+      text: "Availability could not be confirmed, so the link may be stale.",
+    }));
   }
   const compareBtn = el("button", { type: "button", text: "Compare" });
   compareBtn.addEventListener("click", () => onCompare(result, compareBtn));
