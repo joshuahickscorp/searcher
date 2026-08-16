@@ -261,7 +261,7 @@ def main() -> int:
         report["checks"]["disclaimer"] = page.locator("#disclaimer").inner_text()
 
         # Persist scopes across reload.
-        url_before_reload = page.url
+        report["checks"]["url_before_reload"] = page.url
         page.reload(wait_until="networkidle")
         report["checks"]["url_after_reload"] = page.url
         report["checks"]["scopes_after_reload"] = {
