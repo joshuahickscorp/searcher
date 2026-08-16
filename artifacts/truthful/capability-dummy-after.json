@@ -1,0 +1,9 @@
+{
+  "weights": "artifacts/truthful/dummy-embedding.pt",
+  "file_exists": true,
+  "size": 8,
+  "available": false,
+  "stability": "unavailable",
+  "notes": "unknown: local weights present at dummy-embedding.pt (local-embedding); torch is not importable so the probe could not run",
+  "find_local_weights": "artifacts/truthful/dummy-embedding.pt"
+}

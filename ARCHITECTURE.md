@@ -57,11 +57,15 @@ reference analysis
 → repeat until stop condition
 ```
 
-The **served API process today** runs reference analysis and query
-compilation, then stops with an honest `BLOCKED` because discovery is
-not wired into that process. The later stages exist as packages and
-tests. They are not invoked by `scripts/run_api.sh`. See
-[docs/architecture/API.md](docs/architecture/API.md) and
+The **served API process today** runs the campaign orchestrator when
+`SEARCHER_LIVE_DISCOVERY=1`, which is the default in
+`scripts/run_api.sh`. A live campaign reaches `PARTIAL` when real
+source coverage is incomplete. `COMPLETE` means the planned coverage
+was searched and exhausted. A campaign that planned no source work,
+compiled no usable query, or fetched nothing stops `BLOCKED` with a
+reason naming what was missing. Setting `SEARCHER_LIVE_DISCOVERY=0`
+keeps the honest `BLOCKED` stop after the reference and query wave.
+See [docs/architecture/API.md](docs/architecture/API.md) and
 [LIMITATIONS.md](LIMITATIONS.md).
 
 ## Waves in this tree

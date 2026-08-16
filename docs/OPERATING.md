@@ -212,11 +212,12 @@ downloads them.
 There is no published Searcher weight file to fetch. If you already
 have a local file you can point at it with
 `SEARCHER_EMBEDDING_WEIGHTS`, or place it at
-`data/models/embedding.pt` or `data/models/clip.pt`. This version
-notices a file there and still does not load it into a model. The
-service runs without weights and answers using classical
-descriptors. The learned-embedding lane stays blocked. Nothing is
-promoted to Real through a missing-weight fallback.
+`data/models/embedding.pt` or `data/models/clip.pt`. The backbone is
+DINOv2 ViT-S/14, prepared once by `scripts/prepare_embedding_weights.py`.
+A search never downloads. Availability is a successful probe call, not
+file existence. A dummy or unreadable file reports unavailable. The
+service runs without weights and answers using classical descriptors.
+Nothing is promoted to Real through a missing-weight fallback.
 
 The optional VisionMCP donor is a local library pin, not a weight
 download. See [architecture/DONOR_SETUP.md](architecture/DONOR_SETUP.md).

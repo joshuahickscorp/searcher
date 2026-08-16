@@ -1,0 +1,12 @@
+{
+  "coverage": {
+    "sources_completed": [],
+    "sources_blocked": [],
+    "pages_fetched": 0
+  },
+  "candidates": 0,
+  "queries_compiled": 0,
+  "terminal_status": "BLOCKED",
+  "terminal_reason": "no usable query was compiled",
+  "note": "COMPLETE requires planned coverage actually searched; empty work names the missing input"
+}

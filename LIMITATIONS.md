@@ -37,17 +37,27 @@ sellers.
 
 These are not hypothetical. They are how the code behaves now.
 
-**No learned visual backbone.** VisionMCP at pinned SHA
+**Learned backbone is optional and local.** VisionMCP at pinned SHA
 `18ee3c06d27f04937d1681dea5fa2650131e4b2a` has no learned feature
-backbone, no part matcher, and no logo detector. Matching in this
-repository is classical (Pillow BRIEF-like descriptors, OpenCV ORB
-when present, plus a structured extractor). See
-[docs/architecture/MATCHING_AND_AUTHENTICITY.md](docs/architecture/MATCHING_AND_AUTHENTICITY.md).
+backbone, no part matcher, and no logo detector. Searcher matching is
+classical (Pillow BRIEF-like descriptors, OpenCV ORB when present,
+plus a structured extractor) plus DINOv2 ViT-S/14 when a traced
+TorchScript file at `$SEARCHER_DATA_ROOT/models/embedding.pt` passes a
+real probe. Weights are prepared once by
+`scripts/prepare_embedding_weights.py`. A search never downloads them.
+A missing, dummy, or unreadable file reports unavailable — file
+existence is not availability. See
+[docs/architecture/EMBEDDINGS.md](docs/architecture/EMBEDDINGS.md).
 
-**No public benchmark has been run.** Real / Possibly Real thresholds
-in [SEARCHER_BUCKET_POLICY.md](SEARCHER_BUCKET_POLICY.md) are
-provisional. No precision, recall, leakage, or latency figure in this
-repository is a measured product result. Do not invent one.
+**The public benchmark is the receipt, not a field study.**
+`uv run python -m benchmark --all` writes
+`artifacts/searcher-public-benchmark.receipt.json`. The current
+receipt records recall@1 0.771, recall@5 1.0, MRR 0.867 over 35
+queries, and false Real 0, on the stated splits and protocol. Real /
+Possibly Real thresholds in
+[SEARCHER_BUCKET_POLICY.md](SEARCHER_BUCKET_POLICY.md) remain
+policy, not a professional authentication curve. Do not quote a
+number that is not in that receipt.
 
 **Uncalibrated intervals degrade.** If the calibration table is
 missing, the authenticity interval is labelled `uncalibrated` and the
@@ -107,10 +117,11 @@ The service runs without them and does not promote anything to Real
 through a missing-weight fallback. See
 [docs/OPERATING.md](docs/OPERATING.md#model-weights).
 
-**The static UI still mentions a “current benchmark.”**
-`web/index.html` uses that phrase. No benchmark has been run. The
-authoritative statement is this file, not the UI copy. The UI was
-not rewritten in this pass.
+**The static UI cites the published benchmark receipt.**
+`web/index.html` names
+`artifacts/searcher-public-benchmark.receipt.json` and the figures
+in it (recall@1 0.771, recall@5 1.0, MRR 0.867 over 35 queries,
+false Real 0). Those numbers are that receipt, not a field study.
 
 **Browser sandbox is partial.** Playwright, when installed, launches
 headless Chromium with a fresh context, downloads disabled, extensions
