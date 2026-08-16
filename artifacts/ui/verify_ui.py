@@ -1,3 +1,5 @@
+# ruff: noqa: E501 — this is captured evidence, not shipped code: the long lines are
+# embedded JavaScript and regexes that break if wrapped.
 """Drive the rebuilt Searcher UI and write acceptance evidence."""
 
 from __future__ import annotations

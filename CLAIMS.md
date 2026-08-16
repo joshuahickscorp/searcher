@@ -94,7 +94,10 @@ The negative list is [LIMITATIONS.md](LIMITATIONS.md).
     Evidence: `tests/unit/test_receipts.py`.
 
 15. **The served API does not invent a successful empty search when
-    discovery did not run. It stops `BLOCKED` and says so.**
+    discovery did not run. It stops `BLOCKED` and says so. When
+    discovery does run, an empty public result list is still an
+    allowed honest outcome (`PARTIAL` / `COMPLETE` / `BLOCKED` with
+    coverage), not a finding that the item does not exist.**
     Evidence: `src/searcher/workers/api_campaign.py`,
     `tests/integration/test_api.py::test_campaign_runs_to_honest_blocked`,
     `tests/integration/test_api.py::test_capabilities_reflect_real_probe`.
@@ -105,16 +108,17 @@ The negative list is [LIMITATIONS.md](LIMITATIONS.md).
     `src/searcher/integrations/job_scraper/provenance.py`.
 
 17. **There is no hosted Searcher API. The GitHub Pages UI reaches a
-    local process documented in the README.**
+    process the operator runs, documented in the README and
+    [docs/OPERATING.md](docs/OPERATING.md).**
     Evidence: [README.md](README.md), `web/config.js` (`API_BASE = ""`),
-    `scripts/run_api.sh`.
+    `scripts/run_api.sh`, `scripts/serve_shared.sh`.
 
 ## Not entitled
 
 Everything in Bible §2.2, restated in [LIMITATIONS.md](LIMITATIONS.md),
 plus:
 
-- that live marketplace search works end-to-end from `scripts/run_api.sh`;
+- that a finished live search will produce a Real or Possibly Real result;
 - any precision, recall, leakage, cost, or latency number;
 - that the engine has a learned visual backbone;
 - that the footwear calibration table is a field reliability curve;

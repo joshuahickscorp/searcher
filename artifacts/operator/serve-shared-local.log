@@ -1,0 +1,19 @@
+
+WARNING: This alpha has no authentication.
+Whoever can reach the printed URL can create searches, read results,
+and cancel or delete campaigns. --lan and --tunnel are opt-in.
+
+Mode: local (loopback only).
+API origin: http://127.0.0.1:8770
+Health:     http://127.0.0.1:8770/v1/health
+Hand this to a friend (Pages UI against this API):
+  https://joshuahickscorp.github.io/searcher/?api=http://127.0.0.1:8770
+
+It is live while this process is running. Stop the process to take it down.
+Set SEARCHER_PAGES_ORIGIN to your GitHub Pages origin so the browser
+is allowed to call this API. Example: https://you.github.io
+
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/health", "request_id": "6d23b4fa-27e8-445a-88f6-2b6ea30721b4", "status": 200, "ts": "2026-08-16T19:44:20.095889+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/health", "request_id": "538e9e77-bde3-4d58-8718-d81ce4ac7864", "status": 200, "ts": "2026-08-16T19:44:20.682293+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/health", "request_id": "bd7b9695-cf53-44f7-87bd-19383a32b57a", "status": 200, "ts": "2026-08-16T19:44:20.683480+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/health", "request_id": "03ac6c74-82dd-4431-ad19-e8443ff1edde", "status": 200, "ts": "2026-08-16T19:44:20.684362+00:00"}

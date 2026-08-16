@@ -89,27 +89,47 @@ not install anything, create an account, or sign anyone up.
 ## CORS
 
 CORS is taken from the mode, not widened in the process defaults.
+`SEARCHER_CORS_ORIGINS` is an allowlist. An origin that is not on it is
+refused, which the interface reports as “The search service is unavailable.”
 
-- Local: loopback origins used by the local UI.
+- Local: loopback origins used by the local UI (ports 8765, 8080, 8000).
 - LAN: those plus `http://<lan-ip>:<port>`.
-- Either mode: add `SEARCHER_PAGES_ORIGIN` (your GitHub Pages origin, for
-  example `https://you.github.io`) so the Pages UI is allowed to call the API.
+- Any mode: set `SEARCHER_PAGES_ORIGIN` to the Pages **origin**
+  (`https://joshuahickscorp.github.io`, no `/searcher` path) so the
+  published page is allowed to call the API.
+
+`SEARCHER_PAGES_URL` is the full page URL printed for friends
+(`https://joshuahickscorp.github.io/searcher/`). It is not a CORS
+origin. The script default is a placeholder until you set it.
 
 `*` is ignored by the settings parser. Credentials are never paired with a
 wildcard.
 
 ## What to send a friend
 
-The printed line:
+Send the printed **API origin** for loopback and LAN. That origin also
+serves `web/`, so the browser stays on one scheme and one host.
+
+The printed Pages `?api=` line is only usable when the API origin is
+HTTPS (the tunnel) **and** `SEARCHER_PAGES_ORIGIN` is on the allowlist:
 
 ```text
-https://<your-pages-host>/?api=http://<this-api-origin>
+https://joshuahickscorp.github.io/searcher/?api=https://<tunnel>
 ```
 
-When you start the server, tell them it is live. When you stop it, tell them
-it is not. Health is the machine check; a text is the human one.
+Do not point the published HTTPS page at `http://127.0.0.1` or at a
+LAN `http://` address. Browsers refuse that combination (mixed content
+and private-network access). The page then looks as if the service is
+down. Local troubleshooting uses the local copy of the interface.
+
+When you start the server, tell them it is live. When you stop it, tell
+them it is not. Health is the machine check; a text is the human one.
+
+Operator steps: [docs/OPERATING.md](../OPERATING.md).
 
 ## What this is not
 
 It is not a hosted service. It is not authenticated. A tunnel URL is not a
-secret. Stopping the process is how you take it down.
+secret. Stopping the process is how you take it down. A search can
+honestly return nothing. The process is not reachable while the machine
+is asleep.

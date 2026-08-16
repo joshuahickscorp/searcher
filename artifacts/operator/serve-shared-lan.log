@@ -1,0 +1,17 @@
+
+WARNING: This alpha has no authentication.
+Whoever can reach the printed URL can create searches, read results,
+and cancel or delete campaigns. --lan and --tunnel are opt-in.
+
+Mode: lan. Binding <lan-ip>:8771.
+Anyone on this network who has the URL can use the unauthenticated API.
+API origin: http://<lan-ip>:8771
+Health:     http://<lan-ip>:8771/v1/health
+Hand this to a friend (Pages UI against this API):
+  https://joshuahickscorp.github.io/searcher/?api=http://<lan-ip>:8771
+
+It is live while this process is running. Stop the process to take it down.
+Set SEARCHER_PAGES_ORIGIN to your GitHub Pages origin so the browser
+is allowed to call this API. Example: https://you.github.io
+
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/health", "request_id": "a33ec7db-d397-4735-bf91-c5ce208a4464", "status": 200, "ts": "2026-08-16T19:44:23.303680+00:00"}

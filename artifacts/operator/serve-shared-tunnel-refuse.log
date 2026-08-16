@@ -1,0 +1,10 @@
+
+WARNING: This alpha has no authentication.
+Whoever can reach the printed URL can create searches, read results,
+and cancel or delete campaigns. --lan and --tunnel are opt-in.
+
+cloudflared is not installed.
+This script will not install it, will not create an account,
+and will not sign anyone up.
+Install cloudflared yourself if you want --tunnel, or use --lan
+on the same network, or run without flags for loopback only.

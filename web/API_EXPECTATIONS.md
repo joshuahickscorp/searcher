@@ -11,8 +11,16 @@ only when developer numbers are enabled.
 ## Configuration
 
 - `web/config.js` exports `API_BASE`.
-- `?api=` on the page URL overrides it for local testing.
+- `?api=` on the page URL overrides it.
 - The frontend never sends credentials.
+- The published Pages origin is `https://joshuahickscorp.github.io`.
+  That origin must be on the API's `SEARCHER_CORS_ORIGINS` allowlist
+  or the browser reports a network failure. The UI then says the
+  search service is unavailable — the same banner as a down API.
+- An HTTPS page calling `http://127.0.0.1` or a LAN `http://`
+  address is refused by the browser. Local work uses the interface
+  served by the API process, not the Pages copy. See
+  [docs/OPERATING.md](../docs/OPERATING.md).
 
 ## Endpoints used
 
@@ -226,11 +234,16 @@ With `bucket=real` or `bucket=possibly_real`:
 
 ## `GET /v1/health`
 
+The running API returns more than a lone status field:
+
 ```json
-{ "status": "ok" }
+{ "status": "ok", "api": "up", "db": "ok", "blocked_lanes": [] }
 ```
 
-Any network failure or non-OK response is treated as API unavailable.
+`status` is `"ok"` or `"degraded"`. The UI treats any network
+failure, CORS refusal, or non-OK HTTP response as API unavailable.
+A visitor to the published page with no reachable API sees that
+unavailable banner.
 
 ## `GET /v1/capabilities`
 

@@ -1,3 +1,7 @@
+# Publishes the static interface in web/ to GitHub Pages.
+# Live URL: https://joshuahickscorp.github.io/searcher/
+# This origin does not run the API. Visitors without a reachable
+# ?api= origin see “The search service is unavailable.”
 name: Pages
 
 on:

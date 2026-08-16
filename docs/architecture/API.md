@@ -24,6 +24,8 @@ Environment:
 | `SEARCHER_DATA_ROOT` | `data` | SQLite + object store |
 | `SEARCHER_CORS_ORIGINS` | localhost dev origins | comma-separated allow list; `*` is ignored |
 | `SEARCHER_SERVE_WEB` | `0` (`1` in `run_api.sh`) | DEV ONLY static mount |
+| `SEARCHER_LIVE_DISCOVERY` | `1` (`1` in `run_api.sh`) | run live listing discovery from the API process |
+| `SEARCHER_EMBEDDING_WEIGHTS` | unset | optional path to a local weight file; this version does not load it |
 | `SEARCHER_MAX_IMAGES` | `10` | per-search image cap |
 | `SEARCHER_MAX_UPLOAD_BYTES` | 15 MiB | per-file cap |
 | `SEARCHER_MAX_TOTAL_UPLOAD_BYTES` | 50 MiB | combined upload cap |
@@ -151,8 +153,10 @@ records, `blocked_lanes` with reasons, donor status, and honest
 
 ### `GET /v1/health`
 
-`{ "status": "ok" }`. `SELECT 1` against SQLite. No model load, no browser,
-no donor import.
+Cheap liveness. `SELECT 1` against SQLite. No model load, no browser,
+no donor import. Body includes `status` (`ok` or `degraded`), `api`,
+`db`, `lanes`, and `blocked_lanes`. See
+[SERVING.md](SERVING.md).
 
 ## SSE reconnection
 
@@ -169,7 +173,8 @@ events may be replayed if the client omits the header; the UI upserts by
 | condition | campaign | results | capabilities |
 |---|---|---|---|
 | Donor absent / incompatible | Reference analysis still runs via Pillow; visual donor lanes stay blocked | No Real promotion through a fallback | `blocked_lanes` lists why |
-| Discovery absent (this process) | Terminal `BLOCKED` after the reference/query wave | Empty public lists | `discovery.available = false` |
+| Discovery absent or `SEARCHER_LIVE_DISCOVERY=0` | Terminal `BLOCKED` after the reference/query wave | Empty public lists | `discovery.available = false` (or disabled) |
+| Discovery present (default `run_api.sh`) | Orchestrator runs; terminal is `COMPLETE` / `PARTIAL` / `BLOCKED` from coverage | Public lists may be empty; hidden candidates are not shown | `discovery.available = true` |
 | Routing / ranking absent (this process) | Same: no invented bucket | Empty public lists unless another writer stored a decision | `routing.available = false` |
 | Refresh without sources | `202`, `search.warning` | `last_checked_at` unchanged | — |
 | Cancel | `CANCELLED` | Evidence retained | — |

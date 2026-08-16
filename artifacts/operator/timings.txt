@@ -1,0 +1,6 @@
+clone                1.42s
+uv_sync              0.59s
+capabilities         1.06s
+api_up               0.92s
+search             124.60s
+clone_to_search    310.44s
