@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 
 from searcher.contracts.models import ItemHypothesis, ListingCandidate, VisualSignature
 from searcher.retrieval.cost import CostLedger, CostStage
-from searcher.retrieval.embeddings import embed_png, resolve_backend
+from searcher.retrieval.embeddings import cosine_similarity, embed_png, resolve_backend
 from searcher.retrieval.escalation import DEFAULT_BOUNDS, KEEP_THRESHOLD, EscalationBounds
 from searcher.retrieval.signals import CheapSignals, compute_cheap_signals
 
@@ -63,9 +63,18 @@ def retrieve_broad(
     for candidate in candidates:
         pngs = candidate_pngs.get(candidate.candidate_id, {})
         embedding = None
-        if backend is not None and pngs:
-            # Gateway is real; embed_png returns None until weights actually load.
-            _ = embed_png(next(iter(pngs.values())), backend)
+        if backend is not None and pngs and reference_pngs:
+            ref_vecs = [embed_png(png, backend) for png in reference_pngs.values()]
+            cand_vecs = [embed_png(png, backend) for png in pngs.values()]
+            scores = [
+                cosine_similarity(left, right)
+                for left in ref_vecs
+                if left is not None
+                for right in cand_vecs
+                if right is not None
+            ]
+            if scores:
+                embedding = max(scores)
         signals = compute_cheap_signals(
             candidate=candidate,
             hypothesis=hypothesis,

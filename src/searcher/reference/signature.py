@@ -56,10 +56,10 @@ def build_signature(
                 )
             )
     uncertain = [
-        "learned dense embedding unavailable",
         "silhouette is a cheap background-difference, not a product-part mask",
     ]
     if not dense_features_available:
+        uncertain.append("learned dense embedding unavailable")
         uncertain.append("DENSE_FEATURES lane blocked; no promotion through this path")
     ocr_terms = [item.text for item in ocr if item.kind != "instruction"]
     logos = [item.text for item in ocr if item.kind == "brand"]

@@ -70,6 +70,7 @@ def _kind_for_url(url: str) -> WorkKind:
             "search",
             "api.php",
             "format=json",
+            "products.json",
             "/collections/",
             "/shop/",
             "/designers/",
@@ -270,7 +271,11 @@ class DiscoveryEngine:
                     source_id=source_id,
                     url=url,
                     kind=_kind_for_url(url),
-                    depth=0 if "sitemap" in url or "search" in url or "api.php" in url else 1,
+                    depth=0
+                    if any(
+                        token in url for token in ("sitemap", "search", "api.php", "products.json")
+                    )
+                    else 1,
                     priority=compute_priority(expected_match_value=query.expected_gain),
                     payload={"query": query.query_text},
                 )
@@ -482,7 +487,13 @@ class DiscoveryEngine:
             except KeyError:
                 updated.append(candidate)
                 continue
-            fresh, _status = check_candidate(candidate, manifest, escalator)
+            try:
+                fresh, _status = check_candidate(candidate, manifest, escalator)
+            except BudgetExceeded:
+                updated.append(candidate)
+                seen = {item.candidate_id for item in updated}
+                updated.extend(item for item in candidates if item.candidate_id not in seen)
+                return updated
             self.repos.upsert_candidate(search_id, fresh)
             updated.append(fresh)
         return updated

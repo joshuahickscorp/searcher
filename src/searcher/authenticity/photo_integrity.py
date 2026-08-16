@@ -12,8 +12,11 @@ def assess_photo_set(
     descriptors: list[StructuredDescriptor],
     *,
     stock_mixed: bool = False,
+    apply_footwear_rules: bool = True,
 ) -> tuple[ScoreWithEvidence, list[str], list[str]]:
-    score, contra, missing = cross_view_consistency(descriptors)
+    score, contra, missing = cross_view_consistency(
+        descriptors, apply_footwear_rules=apply_footwear_rules
+    )
     if stock_mixed:
         contra = list(contra) + ["inserted-stock-photograph"]
         score = min(score, 0.4)

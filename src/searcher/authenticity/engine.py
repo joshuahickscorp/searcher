@@ -96,7 +96,18 @@ def assess_authenticity(
         candidate=cand,
         exact_colour_required=bool(constraints and constraints.colour),
     )
-    photo, ph, pm = assess_photo_set(list(candidate.descriptors.values()), stock_mixed=stock_mixed)
+    photo, ph, pm = assess_photo_set(
+        list(candidate.descriptors.values()),
+        stock_mixed=stock_mixed,
+        apply_footwear_rules=(hypothesis.category or "").lower()
+        in {
+            "footwear",
+            "designer_footwear",
+            "sneaker",
+            "trainer",
+            "shoe",
+        },
+    )
     original, oh, _om = assess_originality(
         image_records=image_records or [],
         stolen_photo=stolen_photo,

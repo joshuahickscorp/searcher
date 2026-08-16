@@ -5,6 +5,9 @@ from __future__ import annotations
 import subprocess
 import sys
 import time
+from pathlib import Path
+
+import pytest
 
 from searcher.core.capabilities import CapabilityName
 from searcher.integrations.visionmcp.compatibility import PINNED_SHA, PINNED_VERSION
@@ -37,7 +40,14 @@ def test_import_searcher_does_not_import_torch() -> None:
     assert _heavy_modules_after(_IMPORT_ONLY) == ""
 
 
-def test_probe_is_fast_and_covers_all_names() -> None:
+def test_probe_is_fast_and_covers_all_names(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    # Dense features depend on weights being installed on the host. Point the
+    # gateway at an empty root so this asserts the donor's contribution, not
+    # whatever happens to be on this machine.
+    monkeypatch.delenv("SEARCHER_EMBEDDING_WEIGHTS", raising=False)
+    monkeypatch.setenv("SEARCHER_DATA_ROOT", str(tmp_path))
     report, elapsed = probe_timed()
     names = {record.name for record in report.capabilities}
     assert names == set(CapabilityName)

@@ -34,13 +34,14 @@ def scored(
     contradictions: list[str] | None = None,
     missing: list[str] | None = None,
     polarity: EvidencePolarity = EvidencePolarity.SUPPORTING,
+    fact_class: FactClass = FactClass.INFERRED,
 ) -> ScoreWithEvidence:
     return ScoreWithEvidence(
         interval=make_interval(mean, spread=spread),
         support=list(support or []),
         contradictions=list(contradictions or []),
         missing=list(missing or []),
-        fact_class=FactClass.INFERRED,
+        fact_class=fact_class,
         polarity=polarity,
     )
 

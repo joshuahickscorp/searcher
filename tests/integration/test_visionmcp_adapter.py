@@ -45,7 +45,14 @@ def _session(tmp_path: Path) -> tuple[Settings, Database, ContentStore, Campaign
     return settings, db, store, CampaignController(db, store, settings)
 
 
-def test_real_visionmcp_inspect_and_analyze(tmp_path: Path) -> None:
+def test_real_visionmcp_inspect_and_analyze(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    # These assertions describe what the donor contributes on its own. Local
+    # embedding weights are a separate lane and would otherwise flip
+    # learned_embedding_available on any host that has them installed.
+    monkeypatch.delenv("SEARCHER_EMBEDDING_WEIGHTS", raising=False)
+    monkeypatch.setenv("SEARCHER_DATA_ROOT", str(tmp_path))
     pkg = import_visionmcp()
     if pkg is None:
         pytest.skip("visionmcp not installed; pin the audited SHA to run this test")
@@ -87,6 +94,8 @@ def test_real_visionmcp_inspect_and_analyze(tmp_path: Path) -> None:
 
 def test_honest_degradation_without_donor(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("SEARCHER_VISIONMCP", "0")
+    monkeypatch.delenv("SEARCHER_EMBEDDING_WEIGHTS", raising=False)
+    monkeypatch.setenv("SEARCHER_DATA_ROOT", str(tmp_path))
     settings, db, store, _controller = _session(tmp_path)
     try:
         search_id = new_id()

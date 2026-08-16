@@ -41,6 +41,36 @@ RESERVED_PATTERNS = [
     for p in (r"\breserved\b", r"取引中", r"仮押さえ", r"예약", r"réservé", r"riservato")
 ]
 MIN_CONTENT_CHARS = 300
+_SCRIPT_OR_STYLE = re.compile(r"<(script|style)\b[^>]*>.*?</\1>", re.I | re.S)
+_SCHEMA_AVAIL = re.compile(
+    r"schema\.org/(InStock|OutOfStock|SoldOut|LimitedAvailability|"
+    r"OnlineOnly|PreOrder|Discontinued|InStoreOnly)",
+    re.I,
+)
+_SCHEMA_LIVE = frozenset(
+    {"instock", "limitedavailability", "onlineonly", "preorder", "instoreonly"}
+)
+_SCHEMA_SOLD = frozenset({"outofstock", "soldout"})
+_SCHEMA_REMOVED = frozenset({"discontinued"})
+
+
+def _visible_body(body: str) -> str:
+    """Drop theme JS/CSS. Shopify pages ship unused 'Sold out' i18n in <script>."""
+    return _SCRIPT_OR_STYLE.sub(" ", body)
+
+
+def _schema_availability(body: str) -> Availability | None:
+    match = _SCHEMA_AVAIL.search(body)
+    if match is None:
+        return None
+    token = match.group(1).lower()
+    if token in _SCHEMA_LIVE:
+        return Availability.LIVE
+    if token in _SCHEMA_SOLD:
+        return Availability.SOLD
+    if token in _SCHEMA_REMOVED:
+        return Availability.REMOVED
+    return None
 
 
 def classify_liveness(*, http_status: int | None, body: str, outcome: SourceOutcome) -> LiveStatus:
@@ -67,8 +97,35 @@ def classify_liveness(*, http_status: int | None, body: str, outcome: SourceOutc
             note="http gone",
         )
     if http_status == 200:
+        structured = _schema_availability(body)
+        if structured is Availability.LIVE:
+            return LiveStatus(
+                availability=Availability.LIVE,
+                checked_at=now,
+                destination_verified=True,
+                http_status=200,
+                outcome=SourceOutcome.SEARCHED_MATCHES_FOUND,
+                note="schema.org InStock",
+            )
+        if structured is Availability.SOLD:
+            return LiveStatus(
+                availability=Availability.SOLD,
+                checked_at=now,
+                http_status=200,
+                outcome=SourceOutcome.SEARCHED_MATCHES_FOUND,
+                note="schema.org OutOfStock",
+            )
+        if structured is Availability.REMOVED:
+            return LiveStatus(
+                availability=Availability.REMOVED,
+                checked_at=now,
+                http_status=200,
+                outcome=SourceOutcome.SEARCHED_NO_MATCH,
+                note="schema.org Discontinued",
+            )
+        visible = _visible_body(body)
         for pattern in SOLD_PATTERNS:
-            if pattern.search(body):
+            if pattern.search(visible):
                 return LiveStatus(
                     availability=Availability.SOLD,
                     checked_at=now,
@@ -77,7 +134,7 @@ def classify_liveness(*, http_status: int | None, body: str, outcome: SourceOutc
                     note=f"sold marker {pattern.pattern}",
                 )
         for pattern in RESERVED_PATTERNS:
-            if pattern.search(body):
+            if pattern.search(visible):
                 return LiveStatus(
                     availability=Availability.RESERVED,
                     checked_at=now,
@@ -85,7 +142,7 @@ def classify_liveness(*, http_status: int | None, body: str, outcome: SourceOutc
                     outcome=SourceOutcome.SEARCHED_MATCHES_FOUND,
                     note="reserved marker",
                 )
-        if len(body.strip()) < MIN_CONTENT_CHARS:
+        if len(visible.strip()) < MIN_CONTENT_CHARS:
             return LiveStatus(
                 availability=Availability.UNKNOWN,
                 checked_at=now,

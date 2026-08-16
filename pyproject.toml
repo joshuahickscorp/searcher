@@ -34,6 +34,10 @@ dev = [
 browser = [
     "playwright>=1.40",
 ]
+vision = [
+    "torch>=2.2",
+    "torchvision>=0.17",
+]
 
 [project.scripts]
 searcher = "searcher.cli:main"
@@ -90,7 +94,7 @@ packages = ["searcher"]
 plugins = ["pydantic.mypy"]
 
 [[tool.mypy.overrides]]
-module = ["cv2", "numpy", "visionmcp", "visionmcp.*"]
+module = ["cv2", "numpy", "torch", "torchvision", "torchvision.models", "visionmcp", "visionmcp.*"]
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]

@@ -70,6 +70,12 @@ def test_complete_requires_receipt() -> None:
     )
 
 
+def test_live_checking_may_go_partial_on_budget() -> None:
+    assert_legal(CampaignState.LIVE_CHECKING, CampaignState.PARTIAL)
+    assert_legal(CampaignState.RANKING, CampaignState.PARTIAL)
+    assert_legal(CampaignState.FINE_MATCHING, CampaignState.PARTIAL)
+
+
 def test_failed_requires_internal_defect() -> None:
     with pytest.raises(InvariantViolation, match="internal defect"):
         assert_invariants(

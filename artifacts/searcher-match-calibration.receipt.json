@@ -1,0 +1,68 @@
+{
+  "protocol": "gallery of 59 shop.kind.co.jp listings, one photograph each; query is a different photograph of a target listing, degraded seven ways; a hit means the correct listing ranks top-1 by cosine",
+  "host": "Mac-Studio",
+  "device": "mps",
+  "backbones": {
+    "torchvision.resnet50.IMAGENET1K_V2": {
+      "top1": "14/28",
+      "ms_per_image": 36.0,
+      "parameters_millions": 23.5
+    },
+    "facebookresearch.dinov2.vits14": {
+      "top1": "24/28",
+      "ms_per_image": 12.1,
+      "parameters_millions": 22.1
+    }
+  },
+  "dinov2_top1_by_degradation": {
+    "pristine": "4/4",
+    "blur": "4/4",
+    "heavy_blur": "3/4",
+    "crop": "4/4",
+    "small": "4/4",
+    "recompressed": "4/4",
+    "phone_snapshot": "1/4 (3/4 at top-5)"
+  },
+  "rejected": {
+    "multi_scale_query_expansion": "23/28 at double the latency; not adopted"
+  },
+  "pair_calibration": {
+    "n_positive_pairs": 59,
+    "n_negative_pairs": 1711,
+    "positive_median": 0.8101,
+    "positive_min": 0.4327,
+    "negative_median": 0.1606,
+    "negative_max": 0.9393,
+    "sweep_tpr_fpr": {
+      "0.5": [
+        0.949,
+        0.22
+      ],
+      "0.6": [
+        0.915,
+        0.136
+      ],
+      "0.7": [
+        0.746,
+        0.075
+      ],
+      "0.8": [
+        0.542,
+        0.026
+      ],
+      "0.9": [
+        0.237,
+        0.002
+      ]
+    },
+    "operating_threshold": 0.86,
+    "tpr_at_threshold": 0.322,
+    "fpr_at_threshold": 0.0094
+  },
+  "torchscript": {
+    "megabytes": 88.6,
+    "load_ms": 152,
+    "max_abs_drift_vs_reference": 3.84e-07
+  },
+  "note": "Held high deliberately: a false Real costs more than a miss. The shortlist, not this threshold, carries a weak query into fine matching."
+}
