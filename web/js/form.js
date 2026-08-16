@@ -81,6 +81,11 @@ export function createForm({ onSubmit }) {
         messages.push("A search can include at most 10 images. The server is the final validator.");
         break;
       }
+      const already = files.some((held) => held.file.name === file.name && held.file.size === file.size);
+      if (already) {
+        messages.push(`${file.name || "That image"} is already attached.`);
+        continue;
+      }
       files.push({ file, url: URL.createObjectURL(file) });
     }
     setError(messages[0] || "");

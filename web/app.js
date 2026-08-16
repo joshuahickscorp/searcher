@@ -118,6 +118,13 @@ function attachStream(searchId) {
       results.setStream("");
     },
     async onError() {
+      if (currentSearch && currentSearch.terminal_status) {
+        // The server closes the stream once the campaign stops. That is the end
+        // of the search, not a lost connection.
+        closeStream();
+        results.setStream("");
+        return;
+      }
       results.setStream("The live update connection dropped. Reconnecting…");
       const ok = await checkHealth();
       if (!ok && healthFails >= 2) markUnavailable();
