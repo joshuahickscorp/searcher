@@ -31,6 +31,7 @@ from searcher.contracts.enums import (
     SourceOutcome,
     TaskStatus,
     TerminalVerdict,
+    VerificationVerdict,
     ViewHypothesis,
 )
 from searcher.contracts.models import (
@@ -43,6 +44,7 @@ from searcher.contracts.models import (
     EvidenceGap,
     FetchAttempt,
     FetchResult,
+    FieldCheck,
     ItemHypothesis,
     LaneStatus,
     ListingCandidate,
@@ -64,6 +66,7 @@ from searcher.contracts.models import (
     SourcePlan,
     TargetCluster,
     Uncertainty,
+    VerificationRecord,
     ViewInventoryEntry,
     VisualSignature,
 )
@@ -110,6 +113,7 @@ __all__ = [
     "FactOrigin",
     "FeedbackVerdict",
     "FetchAttempt",
+    "FieldCheck",
     "FetchMode",
     "FetchResult",
     "FrontierState",
@@ -156,6 +160,8 @@ __all__ = [
     "TaskStatus",
     "TerminalVerdict",
     "Uncertainty",
+    "VerificationRecord",
+    "VerificationVerdict",
     "ViewHypothesis",
     "ViewInventoryEntry",
     "VisualSignature",

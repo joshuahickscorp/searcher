@@ -1,0 +1,464 @@
+{
+  "browser_extra": true,
+  "sources": [
+    {
+      "admission": {
+        "notes": "robots body taken from browser",
+        "reason": "robots appear to allow the product path, but the existing adapter lock keeps the source disabled until a dedicated review changes test_pending_scope_adapters_are_disabled_review_required",
+        "status": "review_required"
+      },
+      "browser_robots": {
+        "body_preview": "<html><head><meta name=\"color-scheme\" content=\"light dark\"></head><body><pre style=\"word-wrap: break-word; white-space: pre-wrap;\">User-agent: *\n#Prevent Bot Crawl of applied search filters\nDisallow: /search/*\n\n#Prevent Bot Crawl of magic-link pages\nDisallow: /magic-link/\nDisallow: /*/magic-link/\nDisallow: /*/signup/magic-link/\nDisallow: /*/signup/email/magic-link/\nDisallow: /*/login/magic-link/\nD",
+        "bytes": 1699,
+        "challenge": false,
+        "challenge_marker": null,
+        "elapsed_ms": 970,
+        "final_url": "https://www.depop.com/robots.txt",
+        "ok": true,
+        "status": 200
+      },
+      "challenge_appeared": false,
+      "http_robots": {
+        "body_preview": "<!doctype html>\n<html lang='en'>\n  <head>\n    <meta charset='utf-8' />\n    <title>Forbidden - Depop</title>\n    <style>\n      * {\n        box-sizing: border-box;\n      }\n\n      body {\n        margin: 0;\n        padding: 0;\n        font-size: 27px;\n        /*font-family: Helvetica, sans-serif;*/\n        font-family: Arial, sans-serif;\n      }\n\n      a {\n        color: inherit;\n        font-weight: ",
+        "bytes": 23373,
+        "challenge": false,
+        "challenge_marker": null,
+        "elapsed_ms": 41,
+        "final_url": "https://www.depop.com/robots.txt",
+        "ok": true,
+        "status": 403
+      },
+      "origin": "https://www.depop.com",
+      "product_browser": {
+        "body_preview": "<!DOCTYPE html><html id=\"__next_error__\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3\"><link rel=\"preload\" as=\"script\" fetchpriority=\"low\" nonce=\"\" href=\"https://static.depop.com/90324db/31816524594-1/_next/static/chunks/3k2hd5v312u8y.js\"><script src=\"https://static.depop.com/90324db/31816524594-1/_next/static/chun",
+        "bytes": 159633,
+        "challenge": false,
+        "challenge_marker": null,
+        "elapsed_ms": 489,
+        "final_url": "https://www.depop.com/products/example-item/",
+        "ok": true,
+        "status": 404
+      },
+      "product_http": {
+        "body_preview": "<!doctype html>\n<html lang='en'>\n  <head>\n    <meta charset='utf-8' />\n    <title>Forbidden - Depop</title>\n    <style>\n      * {\n        box-sizing: border-box;\n      }\n\n      body {\n        margin: 0;\n        padding: 0;\n        font-size: 27px;\n        /*font-family: Helvetica, sans-serif;*/\n        font-family: Arial, sans-serif;\n      }\n\n      a {\n        color: inherit;\n        font-weight: ",
+        "bytes": 24311,
+        "challenge": false,
+        "challenge_marker": null,
+        "elapsed_ms": 14,
+        "final_url": "https://www.depop.com/products/example-item/",
+        "ok": true,
+        "status": 403
+      },
+      "product_url_probed": "https://www.depop.com/products/example-item/",
+      "robots": {
+        "body_chars": 1699,
+        "product_allowed": true,
+        "rule_lines": [
+          "Disallow: /search/*",
+          "Disallow: /magic-link/",
+          "Disallow: /*/magic-link/",
+          "Disallow: /*/signup/magic-link/",
+          "Disallow: /*/signup/email/magic-link/",
+          "Disallow: /*/login/magic-link/",
+          "Disallow: /*/email-change/magic-link/",
+          "Disallow: /*/selling/*",
+          "Disallow: /*/sold/*",
+          "Disallow: /*/likes/*",
+          "Disallow: /*/other/*",
+          "Disallow: *?from=*",
+          "Disallow: *categories=*",
+          "Disallow: *subcategories=*",
+          "Disallow: *brands=*",
+          "Disallow: *sizes=*",
+          "Disallow: *priceMin=*",
+          "Disallow: *priceMax=*",
+          "Disallow: *hasFreeShipping=*",
+          "Disallow: *isDiscounted=*",
+          "Disallow: *colours=*",
+          "Disallow: *conditions=*",
+          "User-agent: Yandex",
+          "Crawl-delay: 2.0 # sets a 2-second timeout",
+          "Disallow: /search/?q=*&amp;",
+          "Disallow: *categories=*",
+          "Disallow: *subcategories=*",
+          "Disallow: *brands=*",
+          "Disallow: *sizes=*",
+          "Disallow: *priceMin=*",
+          "Disallow: *priceMax=*",
+          "Disallow: *hasFreeShipping=*",
+          "Disallow: *isDiscounted=*",
+          "Disallow: *colours=*",
+          "Disallow: *conditions=*",
+          "User-agent: GemIndexer",
+          "Disallow: /",
+          "User-agent: PetalBot",
+          "Disallow: /",
+          "Sitemap: https://www.depop.com/sitemaps/sitemap_index.xml"
+        ]
+      },
+      "robots_source": "browser",
+      "source": "depop"
+    },
+    {
+      "admission": {
+        "notes": "robots body taken from browser",
+        "reason": "anti-automation challenge on robots or product URL; not admitted",
+        "status": "review_required"
+      },
+      "browser_robots": {
+        "body_preview": "<html><head><meta name=\"color-scheme\" content=\"light dark\"></head><body><pre style=\"word-wrap: break-word; white-space: pre-wrap;\">#    _____  _____             _____  _       ______  _____\n#   / ____||  __ \\     /\\    |_   _|| |     |  ____||  __ \\\n#  | |  __ | |__) |   /  \\     | |  | |     | |__   | |  | |\n#  | | |_ ||  _  /   / /\\ \\    | |  | |     |  __|  | |  | |\n#  | |__| || | \\ \\  / ____ \\",
+        "bytes": 1384,
+        "challenge": false,
+        "challenge_marker": null,
+        "elapsed_ms": 104,
+        "final_url": "https://www.grailed.com/robots.txt",
+        "ok": true,
+        "status": 200
+      },
+      "challenge_appeared": true,
+      "http_robots": {
+        "body_preview": "#    _____  _____             _____  _       ______  _____\n#   / ____||  __ \\     /\\    |_   _|| |     |  ____||  __ \\\n#  | |  __ | |__) |   /  \\     | |  | |     | |__   | |  | |\n#  | | |_ ||  _  /   / /\\ \\    | |  | |     |  __|  | |  | |\n#  | |__| || | \\ \\  / ____ \\  _| |_ | |____ | |____ | |__| |\n#   \\_____||_|  \\_\\/_/    \\_\\|_____||______||______||_____/\n#\n#  Hello Robot,\n#\n#  Very nice to e-",
+        "bytes": 1233,
+        "challenge": false,
+        "challenge_marker": null,
+        "elapsed_ms": 137,
+        "final_url": "https://www.grailed.com/robots.txt",
+        "ok": true,
+        "status": 200
+      },
+      "origin": "https://www.grailed.com",
+      "product_browser": {
+        "body_preview": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta http-equiv=\"content-security-policy\" content=\"default-src 'none'; script-src 'nonce-XBPCD",
+        "bytes": 6159,
+        "challenge": true,
+        "challenge_marker": "cloudflare_just_a_moment",
+        "elapsed_ms": 113,
+        "final_url": "https://www.grailed.com/listings/1?__cf_chl_rt_tk=hCy8WeVll2.cbACHSQOQN8kdwvAiuI0D9vPnImaZGiw-1786914833-1.0.1.1-B6GPDF_DnwTNaD_CAUkR6Yz4kh5SPy8aQcTTwCvNxtU",
+        "ok": true,
+        "status": 403
+      },
+      "product_http": {
+        "body_preview": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta http-equiv=\"content-security-policy\" content=\"default-src &#39;none&#39;; script-src &#39",
+        "bytes": 5692,
+        "challenge": true,
+        "challenge_marker": "cloudflare_just_a_moment",
+        "elapsed_ms": 13,
+        "final_url": "https://www.grailed.com/listings/1",
+        "ok": true,
+        "status": 403
+      },
+      "product_url_probed": "https://www.grailed.com/listings/1",
+      "robots": {
+        "body_chars": 1384,
+        "product_allowed": true,
+        "rule_lines": [
+          "User-Agent: *",
+          "Disallow: /drycleanonly/*/preview",
+          "Disallow: /drycleanonly/*/edit",
+          "Disallow: /404",
+          "Disallow: /api/listings/*/related_capsules",
+          "Disallow: /api/session_id",
+          "Disallow: /connect/paypal",
+          "Disallow: /conversations",
+          "Disallow: /curators",
+          "Disallow: /internal/",
+          "Disallow: /listings/*/edit",
+          "Disallow: /listings/*/similar",
+          "Disallow: /messages",
+          "Disallow: /messages/archived",
+          "Disallow: /mygrails/*",
+          "Disallow: /my-feed",
+          "Disallow: /paypal-cancel",
+          "Disallow: /paypal-success",
+          "Disallow: /checkout/",
+          "Disallow: /checkout-success",
+          "Disallow: /random_listings/",
+          "Disallow: /search",
+          "Disallow: /sell/",
+          "Disallow: /sold",
+          "Disallow: /ssr/",
+          "Disallow: /users/*",
+          "Disallow: /*/feedback",
+          "Sitemap: https://sitemap.grailed.com/sitemap.xml.gz"
+        ]
+      },
+      "robots_source": "browser",
+      "source": "grailed"
+    },
+    {
+      "admission": {
+        "notes": "robots body taken from browser",
+        "reason": "anti-automation challenge on robots or product URL; not admitted",
+        "status": "review_required"
+      },
+      "browser_robots": {
+        "body_preview": "<html><head><meta name=\"color-scheme\" content=\"light dark\"></head><body><pre style=\"word-wrap: break-word; white-space: pre-wrap;\"># Hi there,\n#\n# Sniffing around this file, not a robot, and thinking you are bold ? Vestiaire Collective is hiring in Paris!\n# Check out available positions https://www.vestiairecollective.com/about/join-us/\n# Or please Send us an unsolicited application (same URL)\n\n# ",
+        "bytes": 7898,
+        "challenge": false,
+        "challenge_marker": null,
+        "elapsed_ms": 124,
+        "final_url": "https://www.vestiairecollective.com/robots.txt",
+        "ok": true,
+        "status": 200
+      },
+      "challenge_appeared": true,
+      "http_robots": {
+        "body_preview": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta http-equiv=\"content-security-policy\" content=\"default-src &#39;none&#39;; script-src &#39",
+        "bytes": 5746,
+        "challenge": true,
+        "challenge_marker": "cloudflare_just_a_moment",
+        "elapsed_ms": 29,
+        "final_url": "https://www.vestiairecollective.com/robots.txt",
+        "ok": true,
+        "status": 403
+      },
+      "origin": "https://www.vestiairecollective.com",
+      "product_browser": {
+        "body_preview": "<!DOCTYPE html><html lang=\"en-GB\" translate=\"no\"><head><meta charset=\"utf-8\" data-next-head=\"\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\" data-next-head=\"\"><link rel=\"preconnect\" href=\"https://images.vestiairecollective.com\" crossorigin=\"anonymous\" data-next-head=\"\"><link rel=\"preconnect\" href=\"https://assets.vestiairecollective.com\" ",
+        "bytes": 260933,
+        "challenge": false,
+        "challenge_marker": null,
+        "elapsed_ms": 552,
+        "final_url": "https://www.vestiairecollective.com/women/",
+        "ok": true,
+        "status": 200
+      },
+      "product_http": {
+        "body_preview": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta http-equiv=\"content-security-policy\" content=\"default-src &#39;none&#39;; script-src &#39",
+        "bytes": 5734,
+        "challenge": true,
+        "challenge_marker": "cloudflare_just_a_moment",
+        "elapsed_ms": 27,
+        "final_url": "https://www.vestiairecollective.com/women/",
+        "ok": true,
+        "status": 403
+      },
+      "product_url_probed": "https://www.vestiairecollective.com/women/",
+      "robots": {
+        "body_chars": 7898,
+        "product_allowed": true,
+        "rule_lines": [
+          "Sitemap: https://www.vestiairecollective.com/sitemaps/https_sitemap-en.xml",
+          "Sitemap: https://www.vestiairecollective.com/sitemaps/cms/journal-sitemap-en.xml",
+          "Sitemap: https://www.vestiairecollective.com/sitemaps/cms/campaign-sitemap-en.xml",
+          "User-agent: PetalBot",
+          "Disallow: /",
+          "User-agent: Google-Extended",
+          "Disallow: /",
+          "User-agent: CCBot",
+          "Disallow: /",
+          "User-agent: Bytespider",
+          "Disallow: /",
+          "User-agent: meta-externalagent",
+          "Disallow: /",
+          "User-agent: Applebot-Extended",
+          "Disallow: /",
+          "User-agent: GPTBot",
+          "Allow: /",
+          "Disallow: /admin/",
+          "Disallow: /api/",
+          "Disallow: /membres/",
+          "Disallow: /members/",
+          "Disallow: /my-account.shtml",
+          "Disallow: /shop-cart.shtml",
+          "Disallow: /shop-order.shtml",
+          "User-agent: ChatGPT-User",
+          "Allow: /",
+          "Disallow: /admin/",
+          "Disallow: /api/",
+          "Disallow: /membres/",
+          "Disallow: /members/",
+          "Disallow: /my-account.shtml",
+          "Disallow: /shop-cart.shtml",
+          "Disallow: /shop-order.shtml",
+          "User-agent: OAI-SearchBot",
+          "Allow: /",
+          "Disallow: /admin/",
+          "Disallow: /api/",
+          "Disallow: /membres/",
+          "Disallow: /members/",
+          "Disallow: /my-account.shtml"
+        ]
+      },
+      "robots_source": "browser",
+      "source": "vestiaire"
+    },
+    {
+      "admission": {
+        "notes": "robots body taken from browser",
+        "reason": "anti-automation challenge on robots or product URL; not admitted",
+        "status": "review_required"
+      },
+      "browser_robots": {
+        "body_preview": "<html><head><meta name=\"color-scheme\" content=\"light dark\"></head><body><pre style=\"word-wrap: break-word; white-space: pre-wrap;\">User-agent: *\nAllow: /$\nAllow: /list/*\nAllow: /list/*?*\nDisallow: /*?*\n</pre></body></html>",
+        "bytes": 222,
+        "challenge": false,
+        "challenge_marker": null,
+        "elapsed_ms": 1512,
+        "final_url": "https://www.taobao.com/robots.txt",
+        "ok": true,
+        "status": 200
+      },
+      "challenge_appeared": true,
+      "http_robots": {
+        "body_preview": "User-agent: *\nAllow: /$\nAllow: /list/*\nAllow: /list/*?*\nDisallow: /*?*\n",
+        "bytes": 71,
+        "challenge": false,
+        "challenge_marker": null,
+        "elapsed_ms": 1563,
+        "final_url": "https://www.taobao.com/robots.txt",
+        "ok": true,
+        "status": 200
+      },
+      "origin": "https://www.taobao.com",
+      "product_browser": {
+        "body_preview": "<!DOCTYPE html><html lang=\"en\" style=\"height:100%;\"><head>\n    <meta charset=\"utf-8\">\n    <meta name=\"robots\" content=\"noodp, noydir\">\n    <meta name=\"eagleeye-trace\" content=\"21081ac117869148416903253efcc3\">\n    <meta http-equiv=\"Cache-Control\" content=\"no-cache, no-store, must-revalidate\">\n    <meta http-equiv=\"Pragma\" content=\"no-cache\">\n    <meta http-equiv=\"Expires\" content=\"-1\">\n    <meta na",
+        "bytes": 116567,
+        "challenge": true,
+        "challenge_marker": "captcha",
+        "elapsed_ms": 2712,
+        "final_url": "https://login.taobao.com/havanaone/login/login.htm?bizName=taobao&redirectURL=https%3a%2f%2fitem.taobao.com:443/wow/z/app/tbpc/pc-detail-ssr-2025/home%2F_____tmd_____%2Fpage%2Flogin_jump%3Frand%3DS3WxGHAgAt756EpznwfNzJq2AFA2qBNla3j6EINUS8We9dazM_iKElp8DwVSHZUevpC41Bx7RzivXIj9RnZgdg%26_lgt_%3Df4aa624ca9fd82d58e6b4c20d5a06a11___343980___8307496d6a2af239d2302767167eb003___eaebc79cac1eb5d2f7d8b4595e00ec73344a42d5a0b8cf56539c823cd24ac06cf42c5e6b9d1da8d8130e201f9849b0997f0418a4de098dea749dafdfe0e6966472320b3927478d0faa500490975ba6d403e8e8ce287a5edcff689a7c95f43f619c6d536cfe8c62332c022d3bda061abe118969ca3aeb6e1971ce584a9d982be9ec124ba4ef32bb2b4938b3a33bab981723e4168b1e3193a2ba30fde17790e4190e9894bec1dee02be6c37439eaeaaf281cfee49449e900ac1c8f7acc2cdacde35829692f524e8aa836c9753b193cf7defd035ed85718cba868e8ba1a74ab6ecc4f577549a96e3db10daaf43b1b7c335af42c5e6b9d1da8d8130e201f9849b0997f0418a4de098dea749dafdfe0e6966472320b3927478d0faa500490975ba6d4ddb2b6c69588eb317386a772a14546df4de603b43929f1e19c0732370e8abe99d815335da42d7fb161fd014b686b43d4%26uuid%3Df4aa624ca9fd82d58e6b4c20d5a06a11",
+        "ok": true,
+        "status": 200
+      },
+      "product_http": {
+        "body_preview": "\r\n<a id=\"a-link\"></a>\r\n<script charset=\"utf-8\" src=\"https://g.alicdn.com/mtb/lib-windvane/3.0.6/windvane.js\" crossorigin></script>\r\n<script>\r\n  localStorage.x5referer = window.location.href;\r\n  var link = document.getElementById(\"a-link\");\r\n  var isMobile = navigator.userAgent.match(/.*(iPhone|iPad|Android|ios|SymbianOS|Windows Phone).*/i);\r\n  var isHarmony = navigator.userAgent.match(/ArkWeb/i);\r",
+        "bytes": 5044,
+        "challenge": false,
+        "challenge_marker": null,
+        "elapsed_ms": 711,
+        "final_url": "https://item.taobao.com/item.htm?id=1",
+        "ok": true,
+        "status": 200
+      },
+      "product_url_probed": "https://item.taobao.com/item.htm?id=1",
+      "robots": {
+        "body_chars": 222,
+        "product_allowed": true,
+        "rule_lines": [
+          "Allow: /$",
+          "Allow: /list/*",
+          "Allow: /list/*?*",
+          "Disallow: /*?*"
+        ]
+      },
+      "robots_source": "browser",
+      "source": "taobao"
+    },
+    {
+      "admission": {
+        "notes": "robots body taken from browser",
+        "reason": "robots appear to allow the product path, but the existing adapter lock keeps the source disabled until a dedicated review changes test_pending_scope_adapters_are_disabled_review_required",
+        "status": "review_required"
+      },
+      "browser_robots": {
+        "body_preview": "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no\"><meta name=\"format-detection\" content=\"telephone=no\"><meta name=\"apple-touch-fullscreen\" content=\"yes\"><meta name=\"apple-mobile-web-app-capable\" content=\"yes\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black\"><meta nam",
+        "bytes": 3487,
+        "challenge": false,
+        "challenge_marker": null,
+        "elapsed_ms": 1306,
+        "final_url": "https://h5.weidian.com/m/abnormal/404.html",
+        "ok": true,
+        "status": 200
+      },
+      "challenge_appeared": false,
+      "http_robots": {
+        "body_preview": "\r\n<!doctype html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no\"><meta name=\"format-detection\" content=\"telephone=no\"><meta name=\"apple-touch-fullscreen\" content=\"yes\"><meta name=\"apple-mobile-web-app-capable\" content=\"yes\"><meta name=\"apple-mobile-web-app-status-bar-style\" content=\"black\"><meta n",
+        "bytes": 2637,
+        "challenge": false,
+        "challenge_marker": null,
+        "elapsed_ms": 1939,
+        "final_url": "https://h5.weidian.com/m/abnormal/404.html",
+        "ok": true,
+        "status": 200
+      },
+      "origin": "https://weidian.com",
+      "product_browser": {
+        "body_preview": "<!DOCTYPE html><html lang=\"zh-CN\" data-dpr=\"1\" style=\"font-size: 86.6667px;\"><head><meta charset=\"UTF-8\"><meta name=\"data-spider\" content=\"seller\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover\"><meta content=\"telephone=no\" name=\"format-detection\"><meta name=\"apple-touch-fullscreen\" content=\"yes\"><meta name=\"app",
+        "bytes": 54189,
+        "challenge": false,
+        "challenge_marker": null,
+        "elapsed_ms": 1175,
+        "final_url": "https://weidian.com/item.html?itemID=1",
+        "ok": true,
+        "status": 200
+      },
+      "product_http": {
+        "body_preview": "\r\n<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"UTF-8\"><meta name=\"data-spider\" content=\"seller\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover\"><meta content=\"telephone=no\" name=\"format-detection\"><meta name=\"apple-touch-fullscreen\" content=\"yes\"><meta name=\"apple-mobile-web-app-capable\" content=\"yes\">",
+        "bytes": 26296,
+        "challenge": false,
+        "challenge_marker": null,
+        "elapsed_ms": 243,
+        "final_url": "https://weidian.com/item.html?itemID=1",
+        "ok": true,
+        "status": 200
+      },
+      "product_url_probed": "https://weidian.com/item.html?itemID=1",
+      "robots": {
+        "body_chars": 3391,
+        "product_allowed": true,
+        "rule_lines": []
+      },
+      "robots_source": "browser",
+      "source": "weidian"
+    },
+    {
+      "admission": {
+        "notes": "robots body taken from browser",
+        "reason": "robots appear to allow the product path, but the existing adapter lock keeps the source disabled until a dedicated review changes test_pending_scope_adapters_are_disabled_review_required",
+        "status": "review_required"
+      },
+      "browser_robots": {
+        "body_preview": "<!DOCTYPE html><html lang=\"zh-CN\" itemscope=\"itemscope\" itemtype=\"http://schema.org/WebPage\"><head><link rel=\"stylesheet\" href=\"https://s.yupoo.com/website/4.33.3/css/main.css\">\n  <meta charset=\"utf-8\">\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n  <meta name=\"msapplication-tap-highlight\" content=\"no\">\n  <meta name=\"viewport\" content=\"width=device-width,user-scalable=no,initial-scale=1",
+        "bytes": 11085,
+        "challenge": false,
+        "challenge_marker": null,
+        "elapsed_ms": 6626,
+        "final_url": "https://x.yupoo.com/404",
+        "ok": true,
+        "status": 404
+      },
+      "challenge_appeared": false,
+      "http_robots": {
+        "body_preview": "<!DOCTYPE html>\n<html lang=\"zh-CN\" itemscope=\"itemscope\" itemtype=\"http://schema.org/WebPage\">\n<head><link rel=\"stylesheet\" href=\"https://s.yupoo.com/website/4.33.3/css/main.css\">\n  <meta charset=\"utf-8\">\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n  <meta name=\"msapplication-tap-highlight\" content=\"no\">\n  <meta name=\"viewport\" content=\"width=device-width,user-scalable=no,initial-scale",
+        "bytes": 10707,
+        "challenge": false,
+        "challenge_marker": null,
+        "elapsed_ms": 6740,
+        "final_url": "https://x.yupoo.com/404",
+        "ok": true,
+        "status": 404
+      },
+      "origin": "https://www.yupoo.com",
+      "product_browser": {
+        "body_preview": "<!DOCTYPE html><html lang=\"zh-CN\" itemscope=\"itemscope\" itemtype=\"http://schema.org/WebPage\"><head><link rel=\"stylesheet\" href=\"https://s.yupoo.com/website/4.33.3/css/main.css\">\n  <meta charset=\"utf-8\">\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n  <meta name=\"msapplication-tap-highlight\" content=\"no\">\n  <meta name=\"viewport\" content=\"width=device-width,user-scalable=no,initial-scale=1",
+        "bytes": 11085,
+        "challenge": false,
+        "challenge_marker": null,
+        "elapsed_ms": 7119,
+        "final_url": "https://x.yupoo.com/404",
+        "ok": true,
+        "status": 404
+      },
+      "product_http": {
+        "body_preview": "<!DOCTYPE html>\n<html lang=\"zh-CN\" itemscope=\"itemscope\" itemtype=\"http://schema.org/WebPage\">\n<head><link rel=\"stylesheet\" href=\"https://s.yupoo.com/website/4.33.3/css/main.css\">\n  <meta charset=\"utf-8\">\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n  <meta name=\"msapplication-tap-highlight\" content=\"no\">\n  <meta name=\"viewport\" content=\"width=device-width,user-scalable=no,initial-scale",
+        "bytes": 10707,
+        "challenge": false,
+        "challenge_marker": null,
+        "elapsed_ms": 6062,
+        "final_url": "https://x.yupoo.com/404",
+        "ok": true,
+        "status": 404
+      },
+      "product_url_probed": "https://www.yupoo.com/albums/",
+      "robots": {
+        "body_chars": 10768,
+        "product_allowed": true,
+        "rule_lines": []
+      },
+      "robots_source": "browser",
+      "source": "yupoo"
+    }
+  ],
+  "user_agent": "Searcher/0.1.0 (+https://github.com/searcher-project/searcher; research-discovery; contact=operators@searcher.invalid)"
+}

@@ -308,10 +308,13 @@ RECORDED_POLICIES: dict[str, SourcePolicy] = {
         refresh_frequency="on-demand",
         admission=SourceAdmission.REVIEW_REQUIRED,
         notes=(
-            "robots.txt returned a Cloudflare interstitial on 2026-08-16. "
+            "Browser-rendered robots.txt on 2026-08-16 is a real file: "
+            "Disallow /search/*, magic-link, selling/sold/likes, and filter queries. "
+            "/products/ is allowed. Plain HTTP robots and item URLs returned 403. "
+            "Browser placeholder item returned 404 without a challenge. "
             "Disabled pending review."
         ),
-        open_question="Can robots.txt and terms be fetched without a challenge?",
+        open_question="Is automated access of /products/ permitted given the 403 on honest HTTP?",
         source_family=SourceFamily.LEGITIMATE,
     ),
     "grailed": SourcePolicy(
@@ -326,10 +329,12 @@ RECORDED_POLICIES: dict[str, SourcePolicy] = {
         refresh_frequency="on-demand",
         admission=SourceAdmission.REVIEW_REQUIRED,
         notes=(
-            "robots.txt and terms returned Cloudflare blocks on 2026-08-16. "
-            "Disabled pending review."
+            "robots.txt is fetchable over HTTP and browser (2026-08-16). "
+            "Disallow /search, /listings/*/edit, account and checkout paths. "
+            "/listings/<id> is allowed. Listing pages return a Cloudflare "
+            "Just a moment challenge. Disabled pending review."
         ),
-        open_question="Can robots.txt and terms be fetched without a challenge?",
+        open_question="Can a listing page be read without a Cloudflare challenge?",
         source_family=SourceFamily.LEGITIMATE,
     ),
     "vestiaire": SourcePolicy(
@@ -344,10 +349,11 @@ RECORDED_POLICIES: dict[str, SourcePolicy] = {
         refresh_frequency="on-demand",
         admission=SourceAdmission.REVIEW_REQUIRED,
         notes=(
-            "robots.txt and terms returned a Cloudflare interstitial on 2026-08-16. "
-            "Disabled pending review."
+            "HTTP robots.txt is a Cloudflare interstitial (2026-08-16). "
+            "Browser-rendered robots.txt is real: Disallow /admin/ /api/ /members/ "
+            "checkout. HTTP listing fetches are challenged. Disabled pending review."
         ),
-        open_question="Can robots.txt and terms be fetched without a challenge?",
+        open_question="Can robots.txt and a listing page be fetched over honest HTTP?",
         source_family=SourceFamily.LEGITIMATE,
     ),
     "taobao": SourcePolicy(
@@ -362,8 +368,9 @@ RECORDED_POLICIES: dict[str, SourcePolicy] = {
         refresh_frequency="on-demand",
         admission=SourceAdmission.REVIEW_REQUIRED,
         notes=(
-            "robots allow /list/* only; item URLs typically carry query strings "
-            "and are Disallow. Disabled pending review."
+            "robots.txt (HTTP and browser, 2026-08-16): Allow /$ and /list/*; "
+            "Disallow /*?*. Typical item URLs carry query strings and are covered "
+            "by that Disallow. Disabled pending review."
         ),
         open_question="Is there an admitted item-page path that does not require login?",
         source_family=SourceFamily.REPLICA,
@@ -380,8 +387,9 @@ RECORDED_POLICIES: dict[str, SourcePolicy] = {
         refresh_frequency="on-demand",
         admission=SourceAdmission.REVIEW_REQUIRED,
         notes=(
-            "robots.txt redirected to h5.weidian.com/m/abnormal/404.html "
-            "on 2026-08-16. Disabled pending review."
+            "robots.txt still redirected to h5.weidian.com/m/abnormal/404.html "
+            "over HTTP and browser on 2026-08-16. No usable robots file. "
+            "Disabled pending review."
         ),
         open_question="Is there a fetchable robots.txt and an admitted public listing path?",
         source_family=SourceFamily.REPLICA,
@@ -398,10 +406,12 @@ RECORDED_POLICIES: dict[str, SourcePolicy] = {
         refresh_frequency="on-demand",
         admission=SourceAdmission.REVIEW_REQUIRED,
         notes=(
-            "robots.txt and terms were not fetched in this wave. "
-            "Disabled pending review. No outbound host."
+            "www.yupoo.com/robots.txt and /albums/ redirected to x.yupoo.com/404 "
+            "over HTTP and browser on 2026-08-16. No robots file. Disabled pending review."
         ),
-        open_question="What does robots.txt allow, and is album HTML an admitted listing path?",
+        open_question=(
+            "What does a real robots.txt allow, and is album HTML an admitted listing path?"
+        ),
         source_family=SourceFamily.REPLICA,
     ),
 }

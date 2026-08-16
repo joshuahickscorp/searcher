@@ -16,6 +16,15 @@ HARD_CAP = 3
 DEFAULT_BROWSERS = 1
 
 
+def browser_extra_available() -> bool:
+    """True only when the optional playwright extra can be imported."""
+    try:
+        import playwright  # type: ignore[import-not-found, unused-ignore]  # noqa: F401
+    except ImportError:
+        return False
+    return True
+
+
 class BrowserUnavailable(SearcherError):
     def __init__(self, message: str) -> None:
         super().__init__(message, error_class=ErrorClass.BROWSER)
@@ -57,10 +66,13 @@ class BrowserPool:
         with self._lock:
             if len(self._browsers) >= self.cap:
                 return self._browsers[0]
-            browser = self._playwright.chromium.launch(
-                headless=True,
-                args=["--disable-extensions", "--disable-notifications"],
-            )
+            try:
+                browser = self._playwright.chromium.launch(
+                    headless=True,
+                    args=["--disable-extensions", "--disable-notifications"],
+                )
+            except Exception as exc:
+                raise BrowserUnavailable(f"chromium launch failed: {exc}") from exc
             self._browsers.append(browser)
             self._live += 1
             return browser

@@ -1,0 +1,30 @@
+[
+  {
+    "source": "komehyo",
+    "url": "https://komehyo.jp/robots.txt",
+    "allowed": true,
+    "basis": "recorded policy + live robots allow",
+    "delay": null
+  },
+  {
+    "source": "rebag",
+    "url": "https://www.rebag.com/robots.txt",
+    "allowed": true,
+    "basis": "recorded policy + live robots allow",
+    "delay": null
+  },
+  {
+    "source": "byronesque",
+    "url": "https://byronesque.com/robots.txt",
+    "allowed": true,
+    "basis": "recorded policy + live robots allow",
+    "delay": null
+  },
+  {
+    "source": "wikimedia",
+    "url": "https://en.wikipedia.org/robots.txt",
+    "allowed": true,
+    "basis": "recorded policy + live robots allow",
+    "delay": 5.0
+  }
+]

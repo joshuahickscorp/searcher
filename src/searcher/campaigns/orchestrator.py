@@ -897,6 +897,15 @@ class CampaignOrchestrator:
             except Exception as exc:
                 self.blocked_lanes["live_check"] = str(exc)
                 updated = candidates
+            if "live_check" not in self.blocked_lanes:
+                try:
+                    updated = self.engine.verify_all(search_id, updated)
+                except BudgetExceeded:
+                    self.blocked_lanes["verification"] = (
+                        "budget exhausted during listing verification"
+                    )
+                except Exception as exc:
+                    self.blocked_lanes["verification"] = str(exc)
         now = utc_now()
         for candidate in updated:
             live = candidate.availability is Availability.LIVE
@@ -969,6 +978,7 @@ class CampaignOrchestrator:
             from searcher.ranking.buckets import route_candidate
             from searcher.ranking.order import rank_tab
             from searcher.ranking.policy_versions import load_policy
+            from searcher.verification.runner import merge_verification
         except Exception as exc:
             self.blocked_lanes["ranking"] = str(exc)
             return
@@ -1015,6 +1025,7 @@ class CampaignOrchestrator:
                 policy=policy,
                 live_checked=live_checked,
             )
+            decision = merge_verification(decision, candidate)
             self.controller.repos.insert_decision(search_id, new_id(), decision)
             self.controller.store_receipt(
                 BucketDecisionReceipt(

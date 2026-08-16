@@ -272,6 +272,7 @@ class WorkKind(StrEnum):
 class ExtractionMethod(StrEnum):
     JSON_LD = "json_ld"
     MICRODATA = "microdata"
+    RDFA = "rdfa"
     OPEN_GRAPH = "open_graph"
     DOM = "dom"
     GALLERY = "gallery"
@@ -282,6 +283,14 @@ class ExtractionMethod(StrEnum):
     DERIVED = "derived"
     VISION_HOOK = "vision_hook"
     UNKNOWN = "unknown"
+
+
+class VerificationVerdict(StrEnum):
+    """Per-field result of the listing-page verification pass."""
+
+    AGREES = "agrees"
+    DISAGREES = "disagrees"
+    ABSENT = "absent"
 
 
 class DegradedLabel(StrEnum):

@@ -1,0 +1,6 @@
+plain_samples_ms=1.2,93.3,112.5,91.6,111.3
+render_samples_ms=348.1,45.5,46.0,46.6,46.5
+plain_median_ms=93.3
+render_median_ms=46.5
+added_median_ms=-46.7
+browser_orphans=[]
