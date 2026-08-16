@@ -1,0 +1,20 @@
+{
+  "profile": "designer_footwear",
+  "version": "fixture-v1",
+  "method": "piecewise-bin reliability on synthetic holdout",
+  "provenance": {
+    "fitted_on": "fixtures/hard_negatives",
+    "n": 24,
+    "date": "2026-08-16",
+    "not_field_calibrated": true,
+    "notes": "Identity-preserving bins from the synthetic corpus. Not a market reliability curve."
+  },
+  "bins": [
+    {"raw_lo": 0.0, "raw_hi": 0.25, "cal_mean": 0.12, "spread": 0.10},
+    {"raw_lo": 0.25, "raw_hi": 0.45, "cal_mean": 0.32, "spread": 0.12},
+    {"raw_lo": 0.45, "raw_hi": 0.62, "cal_mean": 0.52, "spread": 0.12},
+    {"raw_lo": 0.62, "raw_hi": 0.78, "cal_mean": 0.70, "spread": 0.10},
+    {"raw_lo": 0.78, "raw_hi": 0.90, "cal_mean": 0.86, "spread": 0.06},
+    {"raw_lo": 0.90, "raw_hi": 1.01, "cal_mean": 0.93, "spread": 0.05}
+  ]
+}
