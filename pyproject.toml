@@ -7,6 +7,9 @@ requires-python = ">=3.13"
 dependencies = [
     "pydantic>=2",
     "pillow>=10.4",
+    "fastapi>=0.141.1",
+    "uvicorn[standard]>=0.52.3",
+    "python-multipart>=0.0.32",
 ]
 
 [project.optional-dependencies]
@@ -37,6 +40,7 @@ dev = [
     "hypothesis>=6",
     "ruff>=0.8",
     "mypy>=1.13",
+    "httpx>=0.28.1",
 ]
 
 [tool.hatch.build.targets.wheel]
@@ -46,6 +50,7 @@ packages = ["src/searcher"]
 line-length = 100
 target-version = "py313"
 src = ["src", "tests"]
+extend-exclude = ["web"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM"]
@@ -72,6 +77,17 @@ mypy_path = "src"
 packages = ["searcher"]
 plugins = ["pydantic.mypy"]
 
+[[tool.mypy.overrides]]
+module = ["visionmcp", "visionmcp.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = [
+    "searcher.integrations.visionmcp.probe",
+    "searcher.integrations.visionmcp.adapter",
+]
+warn_unused_ignores = false
+
 [tool.pydantic-mypy]
 init_forbid_extra = true
 init_typed = true
@@ -85,4 +101,5 @@ filterwarnings = [
     "error",
     "ignore::ResourceWarning",
     "ignore::hypothesis.errors.NonInteractiveExampleWarning",
+    "ignore::starlette.exceptions.StarletteDeprecationWarning",
 ]

@@ -56,7 +56,8 @@ class Database:
                 self._in_write = False
 
     def execute(self, sql: str, params: tuple[object, ...] = ()) -> sqlite3.Cursor:
-        return self._conn.execute(sql, params)
+        with self._lock:
+            return self._conn.execute(sql, params)
 
     def close(self) -> None:
         self._conn.close()

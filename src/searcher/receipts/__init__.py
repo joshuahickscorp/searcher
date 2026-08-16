@@ -6,7 +6,10 @@ from searcher.receipts.base import ReceiptBase, verify_payload
 from searcher.receipts.types import (
     BucketDecisionReceipt,
     CampaignTerminalReceipt,
+    DeletionReceipt,
+    FeedbackReceipt,
     HypothesisUpdateReceipt,
+    LiveCheckReceipt,
     QueryPlanReceipt,
     ReferenceAnalysisReceipt,
     ReferenceIngestionReceipt,
@@ -17,7 +20,10 @@ from searcher.receipts.types import (
 __all__ = [
     "BucketDecisionReceipt",
     "CampaignTerminalReceipt",
+    "DeletionReceipt",
+    "FeedbackReceipt",
     "HypothesisUpdateReceipt",
+    "LiveCheckReceipt",
     "QueryPlanReceipt",
     "ReceiptBase",
     "ReferenceAnalysisReceipt",

@@ -72,6 +72,25 @@ class CampaignTerminalReceipt(ReceiptBase):
     state_version: int = 0
 
 
+class FeedbackReceipt(ReceiptBase):
+    receipt_type: str = "FeedbackReceipt"
+    result_id: str = ""
+    verdict: str = ""
+
+
+class DeletionReceipt(ReceiptBase):
+    receipt_type: str = "DeletionReceipt"
+    removed: list[str] = []
+    retained: list[str] = []
+
+
+class LiveCheckReceipt(ReceiptBase):
+    receipt_type: str = "LiveCheckReceipt"
+    result_ids: list[str] = []
+    refreshed: bool = False
+    reason: str = ""
+
+
 def typed_from_payload(payload: dict[str, Any]) -> ReceiptBase:
     mapping: dict[str, type[ReceiptBase]] = {
         "ReferenceIngestionReceipt": ReferenceIngestionReceipt,
@@ -82,6 +101,9 @@ def typed_from_payload(payload: dict[str, Any]) -> ReceiptBase:
         "BucketDecisionReceipt": BucketDecisionReceipt,
         "SearchExhaustionReceipt": SearchExhaustionReceipt,
         "CampaignTerminalReceipt": CampaignTerminalReceipt,
+        "FeedbackReceipt": FeedbackReceipt,
+        "DeletionReceipt": DeletionReceipt,
+        "LiveCheckReceipt": LiveCheckReceipt,
         "ReceiptBase": ReceiptBase,
     }
     cls = mapping.get(str(payload.get("receipt_type", "ReceiptBase")), ReceiptBase)

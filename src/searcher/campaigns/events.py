@@ -56,6 +56,21 @@ def is_public_event(name: str) -> bool:
     return name in PUBLIC_EVENT_NAMES
 
 
+def numbered_public_events(
+    repos: Repositories, search_id: str, *, after: int = 0
+) -> list[tuple[int, CampaignEvent]]:
+    """Campaign-local 1-based sequence over §25.4 events, for SSE Last-Event-ID."""
+    out: list[tuple[int, CampaignEvent]] = []
+    seq = 0
+    for event in list_events(repos, search_id):
+        if not is_public_event(event.event_name):
+            continue
+        seq += 1
+        if seq > after:
+            out.append((seq, event))
+    return out
+
+
 def public_payload(event: CampaignEvent) -> dict[str, Any]:
     return {
         "event": event.event_name,

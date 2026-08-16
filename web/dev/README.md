@@ -2,9 +2,13 @@
 
 Not part of the product. Not published to GitHub Pages.
 
-`stub_api.py` is a Python 3 standard-library HTTP server that implements
-enough of Bible §26.2 for the static UI to be developed and demonstrated.
+`stub_api.py` is superseded for local end-to-end use by the real API:
 
 ```text
-python3 web/dev/stub_api.py --port 8765
+scripts/run_api.sh
 ```
+
+That binds `127.0.0.1:8765` and serves `web/` so `config.js` needs no edit.
+
+The stub remains as a fixture-driven UI harness (scripted scenarios, no
+engine). Prefer the real API when checking campaign honesty.

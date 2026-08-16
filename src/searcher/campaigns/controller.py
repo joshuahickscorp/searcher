@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import sqlite3
 from typing import Any
 
 from searcher.campaigns.cancellation import CancellationController
@@ -13,7 +14,7 @@ from searcher.campaigns.models import (
     TransitionContext,
     WorkCapsule,
 )
-from searcher.campaigns.states import terminal_verdict_for
+from searcher.campaigns.states import is_terminal, terminal_verdict_for
 from searcher.campaigns.transitions import assert_invariants, assert_legal
 from searcher.contracts.enums import CampaignState, PublicEventName, TaskStatus
 from searcher.contracts.models import SearchCampaign, SearchIntent
@@ -25,6 +26,7 @@ from searcher.core.time import format_utc, utc_now
 from searcher.evidence.content_store import ContentStore
 from searcher.evidence.records import EvidenceRecord
 from searcher.receipts.base import ReceiptBase
+from searcher.receipts.types import DeletionReceipt
 from searcher.storage.connection import Database
 from searcher.storage.repositories import Repositories
 
@@ -53,6 +55,7 @@ class CampaignController:
         *,
         fixture_name: str | None = None,
         budget: Budget | None = None,
+        client_search_id: str | None = None,
     ) -> SearchCampaign:
         declared = budget or Budget(
             wall_seconds=intent.budget.wall_seconds,
@@ -75,12 +78,20 @@ class CampaignController:
             coverage={},
             fixture_name=fixture_name,
         )
-        self.repos.insert_campaign(
-            campaign,
-            intent=intent,
-            budget=sealed.to_dict(),
-            runtime={"completed_steps": [], "pending_comparisons": []},
-        )
+        try:
+            self.repos.insert_campaign(
+                campaign,
+                intent=intent,
+                budget=sealed.to_dict(),
+                runtime={"completed_steps": [], "pending_comparisons": []},
+                client_search_id=client_search_id,
+            )
+        except sqlite3.IntegrityError:
+            if client_search_id:
+                existing_id = self.repos.find_search_id_by_client(client_search_id)
+                if existing_id:
+                    return self.get(existing_id)
+            raise
         self.repos.upsert_budget_usage(intent.search_id, usage.snapshot())
         self._usages[intent.search_id] = usage
         self._emit(
@@ -142,7 +153,8 @@ class CampaignController:
         context: TransitionContext | None = None,
         actor: str = "controller",
     ) -> SearchCampaign:
-        self.cancellation.raise_if_cancelled(search_id)
+        if target is not CampaignState.CANCELLED:
+            self.cancellation.raise_if_cancelled(search_id)
         campaign = self.get(search_id)
         ctx = context or self.context_from_disk(search_id)
         assert_legal(campaign.state, target, search_id=search_id)
@@ -310,8 +322,63 @@ class CampaignController:
         }:
             return campaign
         updated = self.transition(search_id, CampaignState.CANCELLED, context=ctx, actor="cancel")
+        self.repos.update_open_tasks(search_id, TaskStatus.CANCELLED)
         self.checkpoint(search_id, "terminal", {"reason": "cancelled"})
+        self._emit(
+            search_id,
+            PublicEventName.SEARCH_COMPLETE.value,
+            actor="cancel",
+            state_version=updated.state_version,
+            payload={
+                "terminal_status": CampaignState.CANCELLED.value,
+                "reason": updated.terminal_reason or "cancelled by operator",
+            },
+        )
         return updated
+
+    def find_by_client_search_id(self, client_search_id: str) -> SearchCampaign | None:
+        search_id = self.repos.find_search_id_by_client(client_search_id)
+        if search_id is None:
+            return None
+        if self.repos.is_deleted(search_id):
+            return None
+        return self.get(search_id)
+
+    def delete(self, search_id: str) -> DeletionReceipt:
+        if self.repos.get_campaign(search_id) is None or self.repos.is_deleted(search_id):
+            raise KeyError(search_id)
+        campaign = self.get(search_id)
+        if not is_terminal(campaign.state):
+            self.cancellation.request(search_id)
+            self.repos.update_open_tasks(search_id, TaskStatus.CANCELLED)
+        disk = self.store.purge_campaign_private(search_id)
+        removed_tables = self.repos.purge_campaign_private_rows(search_id)
+        self.repos.redact_intent(search_id)
+        self.repos.mark_deleted(search_id)
+        self._usages.pop(search_id, None)
+        removed = [
+            "campaign-private object-store artifacts",
+            "user reference uploads",
+            "campaign events",
+            "candidates and results",
+            "user text and tags",
+            *removed_tables,
+        ]
+        retained = [
+            "receipts (including this DeletionReceipt)",
+            "shared content-addressed objects still owned by other campaigns",
+        ]
+        receipt = DeletionReceipt(
+            search_id=search_id,
+            removed=removed,
+            retained=retained,
+            payload={
+                "objects_removed": disk.get("objects", 0),
+                "private_names_removed": disk.get("private_names", 0),
+            },
+        ).seal()
+        self.store_receipt(receipt)
+        return receipt
 
     def mark_step(self, search_id: str, step: str) -> None:
         runtime = self.repos.get_runtime(search_id)

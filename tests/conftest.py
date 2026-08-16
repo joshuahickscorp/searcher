@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Iterator
 from pathlib import Path
+from typing import Any
 
 import pytest
 from hypothesis import HealthCheck, settings
@@ -57,6 +58,18 @@ def store(settings: Settings) -> ContentStore:
 @pytest.fixture
 def controller(db: Database, store: ContentStore, settings: Settings) -> CampaignController:
     return CampaignController(db, store, settings)
+
+
+@pytest.fixture
+def api_app(tmp_path: Path) -> Iterator[tuple[Any, Any]]:
+    from fastapi.testclient import TestClient
+
+    from searcher.api.main import create_app
+
+    settings = Settings.from_env(data_root=tmp_path / "api-data")
+    app = create_app(settings)
+    with TestClient(app) as client:
+        yield client, app
 
 
 def make_intent(search_id: str | None = None) -> SearchIntent:

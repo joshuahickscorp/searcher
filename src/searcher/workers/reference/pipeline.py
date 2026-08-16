@@ -49,9 +49,10 @@ def _progress(controller: CampaignController, search_id: str, phase: str) -> Non
     controller.emit(
         search_id,
         PublicEventName.SEARCH_PROGRESS.value,
-        payload={"phase": phase},
+        payload={"stage": phase, "detail": None, "phase": phase},
         actor="reference_worker",
     )
+    controller.set_runtime(search_id, progress={"stage": phase, "detail": None})
 
 
 def create_reference_campaign(
@@ -117,14 +118,23 @@ def run_reference_query_wave(
         if state is CampaignState.VALIDATING_INPUT:
             _progress(controller, search_id, "Understanding the item")
         elif state is CampaignState.INGESTING_REFERENCES:
-            refs = ingest_paths(controller.store, image_paths, search_id=search_id, settings=cfg)
+            runtime = controller.repos.get_runtime(search_id)
+            existing = [str(d) for d in (runtime.get("reference_digests") or [])]
+            if existing:
+                refs = [ArtifactRef(digest=d) for d in existing]
+                byte_count = int(runtime.get("reference_bytes") or 0)
+            else:
+                refs = ingest_paths(
+                    controller.store, image_paths, search_id=search_id, settings=cfg
+                )
+                byte_count = sum(p.stat().st_size for p in image_paths)
             usage = controller.usage(search_id)
-            usage.consume(images=len(refs), bytes=sum(p.stat().st_size for p in image_paths))
+            usage.consume(images=len(refs), bytes=byte_count)
             controller.persist_usage(search_id)
             receipt = ReferenceIngestionReceipt(
                 search_id=search_id,
                 reference_image_ids=[ref.digest[:16] for ref in refs],
-                byte_count=sum(p.stat().st_size for p in image_paths),
+                byte_count=byte_count,
                 input_digests=[ref.digest for ref in refs],
                 output_digests=[ref.digest for ref in refs],
             ).seal()
@@ -133,6 +143,7 @@ def run_reference_query_wave(
                 search_id,
                 has_visual_representation=True,
                 reference_digests=[ref.digest for ref in refs],
+                reference_bytes=byte_count,
                 ingestion_receipt=receipt.receipt_id,
             )
             _progress(controller, search_id, "Reading visible labels")
