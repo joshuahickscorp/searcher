@@ -1,0 +1,218 @@
+[
+  {
+    "case": "zero_images",
+    "error": "validation",
+    "honest": true,
+    "status": 422
+  },
+  {
+    "case": "eleven_images",
+    "error": "validation",
+    "honest": true,
+    "status": 422
+  },
+  {
+    "case": "25mb_image",
+    "error": "validation",
+    "honest": true,
+    "status": 422
+  },
+  {
+    "case": "not_an_image",
+    "error": "malformed_content",
+    "honest": true,
+    "status": 422
+  },
+  {
+    "case": "lying_png_header",
+    "error": "BLOCKED",
+    "honest": true,
+    "status": 201
+  },
+  {
+    "case": "zip_renamed_jpg",
+    "error": "validation",
+    "honest": true,
+    "status": 422
+  },
+  {
+    "case": "decompression_bomb",
+    "error": "malformed_content",
+    "honest": true,
+    "status": 422
+  },
+  {
+    "case": "svg",
+    "error": "validation",
+    "honest": true,
+    "status": 422
+  },
+  {
+    "case": "zero_byte",
+    "error": "malformed_content",
+    "honest": true,
+    "status": 422
+  },
+  {
+    "case": "duplicate_filenames",
+    "error": null,
+    "honest": true,
+    "status": 201
+  },
+  {
+    "case": "100kb_text",
+    "error": "validation",
+    "honest": true,
+    "status": 422
+  },
+  {
+    "case": "500_tags",
+    "error": "validation",
+    "honest": true,
+    "status": 422
+  },
+  {
+    "case": "nul_byte_text",
+    "error": "validation",
+    "honest": true,
+    "status": 422
+  },
+  {
+    "case": "control_char_tag",
+    "error": "validation",
+    "honest": true,
+    "status": 422
+  },
+  {
+    "case": "rtl_override_tag",
+    "error": "validation",
+    "honest": true,
+    "status": 422
+  },
+  {
+    "case": "10000_char_tag",
+    "error": "validation",
+    "honest": true,
+    "status": 422
+  },
+  {
+    "case": "client_search_id_not_uuid",
+    "error": null,
+    "honest": true,
+    "status": 201
+  },
+  {
+    "case": "search_id_path_traversal",
+    "error": "not_found",
+    "honest": true,
+    "status": 404
+  },
+  {
+    "case": "result_id_path_traversal",
+    "error": "not_found",
+    "honest": true,
+    "status": 404
+  },
+  {
+    "case": "filename_path_traversal",
+    "error": "validation",
+    "honest": true,
+    "status": 422
+  },
+  {
+    "case": "unknown_uuid_search",
+    "error": "search_not_found",
+    "honest": true,
+    "status": 404
+  },
+  {
+    "case": "deleted_search",
+    "error": "search_not_found",
+    "honest": true,
+    "status": 404
+  },
+  {
+    "case": "last_event_id_negative",
+    "error": null,
+    "honest": true,
+    "status": 200
+  },
+  {
+    "case": "last_event_id_huge",
+    "error": null,
+    "honest": true,
+    "status": 200
+  },
+  {
+    "case": "last_event_id_non_number",
+    "error": null,
+    "honest": true,
+    "status": 200
+  },
+  {
+    "case": "ten_concurrent_searches",
+    "error": null,
+    "honest": true,
+    "status": 201
+  },
+  {
+    "case": "sse_client_disappears",
+    "error": "BLOCKED",
+    "honest": true,
+    "status": 200
+  },
+  {
+    "case": "twenty_sse_readers",
+    "error": null,
+    "honest": true,
+    "status": 200
+  },
+  {
+    "case": "cancel_early",
+    "error": "CANCELLED",
+    "honest": true,
+    "status": 200
+  },
+  {
+    "case": "cancel_after_first_event",
+    "error": "CANCELLED",
+    "honest": true,
+    "status": 200
+  },
+  {
+    "case": "cancel_after_terminal",
+    "error": "BLOCKED",
+    "honest": true,
+    "status": 200
+  },
+  {
+    "case": "delete_during_stream",
+    "error": "search_not_found",
+    "honest": true,
+    "status": 204
+  },
+  {
+    "case": "refresh_terminal_repeatedly",
+    "error": null,
+    "honest": true,
+    "status": 202
+  },
+  {
+    "case": "per_object_cap",
+    "error": "validation",
+    "honest": true,
+    "status": 422
+  },
+  {
+    "case": "per_search_byte_budget",
+    "error": "validation",
+    "honest": true,
+    "status": 422
+  },
+  {
+    "case": "disk_margin",
+    "error": "validation",
+    "honest": true,
+    "status": 422
+  }
+]

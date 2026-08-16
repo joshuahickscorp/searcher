@@ -30,12 +30,16 @@ def parse_multipart(raw: str | None) -> dict:
     fields: dict[str, list[str]] = {}
     if not raw:
         return fields
-    names = re.findall(r'Content-Disposition: form-data; name="([^"]+)"(?:; filename="([^"]*)")?', raw)
+    names = re.findall(
+        r'Content-Disposition: form-data; name="([^"]+)"(?:; filename="([^"]*)")?',
+        raw,
+    )
     # Split on boundary-ish disposition blocks and capture following text values.
     chunks = re.split(r"\r\n--[^\r\n]+", raw)
     for chunk in chunks:
         match = re.search(
-            r'Content-Disposition: form-data; name="([^"]+)"(?:; filename="([^"]*)")?\r\n(?:Content-Type: [^\r\n]+\r\n)?\r\n(.*)$',
+            r'Content-Disposition: form-data; name="([^"]+)"'
+            r'(?:; filename="([^"]*)")?\r\n(?:Content-Type: [^\r\n]+\r\n)?\r\n(.*)$',
             chunk,
             re.S,
         )
@@ -59,8 +63,10 @@ def attach_via_drop(page, path: Path) -> None:
           const dt = new DataTransfer();
           dt.items.add(file);
           const zone = document.getElementById("dropzone");
-          zone.dispatchEvent(new DragEvent("dragover", { bubbles: true, cancelable: true, dataTransfer: dt }));
-          zone.dispatchEvent(new DragEvent("drop", { bubbles: true, cancelable: true, dataTransfer: dt }));
+          zone.dispatchEvent(new DragEvent(
+            "dragover", { bubbles: true, cancelable: true, dataTransfer: dt }));
+          zone.dispatchEvent(new DragEvent(
+            "drop", { bubbles: true, cancelable: true, dataTransfer: dt }));
         }""",
         {"payload": b64(path), "name": path.name},
     )
@@ -245,7 +251,9 @@ def main() -> int:
             """() => {
               const note = document.getElementById("terminal-note");
               const status = document.getElementById("campaign-status");
-              const text = ((note && note.textContent) || "") + " " + ((status && status.textContent) || "");
+              const noteText = (note && note.textContent) || "";
+              const statusText = (status && status.textContent) || "";
+              const text = noteText + " " + statusText;
               return /COMPLETE|PARTIAL|BLOCKED|CANCELLED|FAILED/i.test(text);
             }""",
             timeout=180000,
@@ -254,9 +262,15 @@ def main() -> int:
         report["checks"]["terminal_status"] = page.locator("#campaign-status").inner_text()
         report["checks"]["terminal_note"] = page.locator("#terminal-note").inner_text()
         report["checks"]["coverage_visible"] = page.locator("#coverage").is_visible()
-        report["checks"]["coverage_text"] = page.locator("#coverage").inner_text() if page.locator("#coverage").is_visible() else ""
+        coverage = page.locator("#coverage")
+        report["checks"]["coverage_text"] = (
+            coverage.inner_text() if coverage.is_visible() else ""
+        )
         report["checks"]["empty_real_visible"] = page.locator("#empty-real").is_visible()
-        report["checks"]["empty_real_text"] = page.locator("#empty-real").inner_text() if page.locator("#empty-real").is_visible() else ""
+        empty_real = page.locator("#empty-real")
+        report["checks"]["empty_real_text"] = (
+            empty_real.inner_text() if empty_real.is_visible() else ""
+        )
         report["checks"]["replica_tab_hidden"] = page.locator("#tab-replica").is_hidden()
         report["checks"]["disclaimer"] = page.locator("#disclaimer").inner_text()
 
@@ -297,7 +311,8 @@ def main() -> int:
         page.goto(URL, wait_until="networkidle")
         page.evaluate(
             """() => {
-              const file = new File([new Uint8Array([1,2,3,4])], "notes.txt", { type: "text/plain" });
+              const file = new File(
+                [new Uint8Array([1,2,3,4])], "notes.txt", { type: "text/plain" });
               const dt = new DataTransfer();
               dt.items.add(file);
               const ev = new Event("paste", { bubbles: true, cancelable: true });
@@ -305,7 +320,7 @@ def main() -> int:
               document.dispatchEvent(ev);
             }"""
         )
-        # paste handler filters by looksLikeImage, so a txt paste is ignored — use add via input instead
+        # paste handler filters by looksLikeImage, so a txt paste is ignored.
         bad = OUT / "_bad.txt"
         bad.write_text("not an image", encoding="utf-8")
         page.set_input_files("#file-input", str(bad))
@@ -320,7 +335,9 @@ def main() -> int:
         "fields": posted.get("fields"),
     }
     if posted.get("post_data"):
-        (OUT / "search-create-raw.txt").write_text(posted["post_data"], encoding="utf-8", errors="replace")
+        (OUT / "search-create-raw.txt").write_text(
+            posted["post_data"], encoding="utf-8", errors="replace"
+        )
     (OUT / "report.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
     (OUT / "console.log").write_text("\n".join(report["console"]) + "\n", encoding="utf-8")
     print(json.dumps({
