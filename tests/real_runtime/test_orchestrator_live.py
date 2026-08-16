@@ -15,8 +15,6 @@ import json
 from pathlib import Path
 
 import pytest
-
-pytestmark = pytest.mark.live_campaign
 from tests.support.offline_shop import tiny_png
 
 from searcher.campaigns.controller import CampaignController
@@ -24,6 +22,8 @@ from searcher.campaigns.events import list_events
 from searcher.campaigns.orchestrator import CampaignOrchestrator
 from searcher.receipts.types import typed_from_payload
 from searcher.workers.api_campaign import create_api_campaign
+
+pytestmark = pytest.mark.live_campaign
 
 
 @pytest.mark.timeout(180)
