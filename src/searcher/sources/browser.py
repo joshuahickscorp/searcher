@@ -46,7 +46,9 @@ class BrowserPool:
 
     def _ensure(self) -> Any:
         try:
-            from playwright.sync_api import sync_playwright  # type: ignore[import-not-found]
+            from playwright.sync_api import (  # type: ignore[import-not-found, unused-ignore]
+                sync_playwright,
+            )
         except ImportError as exc:
             raise BrowserUnavailable("playwright is not installed") from exc
         if self._playwright is None:

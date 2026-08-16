@@ -61,11 +61,12 @@ def controller(db: Database, store: ContentStore, settings: Settings) -> Campaig
 
 
 @pytest.fixture
-def api_app(tmp_path: Path) -> Iterator[tuple[Any, Any]]:
+def api_app(tmp_path: Path, monkeypatch: Any) -> Iterator[tuple[Any, Any]]:
     from fastapi.testclient import TestClient
 
     from searcher.api.main import create_app
 
+    monkeypatch.setenv("SEARCHER_LIVE_DISCOVERY", "0")
     settings = Settings.from_env(data_root=tmp_path / "api-data")
     app = create_app(settings)
     with TestClient(app) as client:

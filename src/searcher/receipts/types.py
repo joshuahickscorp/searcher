@@ -87,6 +87,37 @@ class SearchExhaustionReceipt(ReceiptBase):
     saturation: bool = False
     queries_exhausted: int = 0
     sources_covered: int = 0
+    hypotheses_searched: int = 0
+    query_families: list[str] = []
+    languages: list[str] = []
+    sources_admitted: list[str] = []
+    sources_completed: list[str] = []
+    sources_blocked: list[str] = []
+    pages_fetched: int = 0
+    candidates_normalized: int = 0
+    duplicates_removed: int = 0
+    candidates_finely_compared: int = 0
+    model_calls: int = 0
+    bytes: int = 0
+    cost: float = 0.0
+    retries: int = 0
+    unresolved_evidence: list[str] = []
+
+
+class CandidateNormalizationReceipt(ReceiptBase):
+    receipt_type: str = "CandidateNormalizationReceipt"
+    candidate_ids: list[str] = []
+    count: int = 0
+
+
+class DeduplicationReceipt(ReceiptBase):
+    receipt_type: str = "DeduplicationReceipt"
+    before: int = 0
+    after: int = 0
+    exact_url_dupes: int = 0
+    image_family_dupes: int = 0
+    text_dupes: int = 0
+    savings: dict[str, int] = {}
 
 
 class CampaignTerminalReceipt(ReceiptBase):
@@ -124,6 +155,8 @@ class ComparisonArtifactReceipt(ReceiptBase):
     receipt_type: str = "ComparisonArtifactReceipt"
     candidate_id: str = ""
     digest: str = ""
+
+
 class FeedbackReceipt(ReceiptBase):
     receipt_type: str = "FeedbackReceipt"
     result_id: str = ""
@@ -154,6 +187,8 @@ def typed_from_payload(payload: dict[str, Any]) -> ReceiptBase:
         "SourceAdmissionReceipt": SourceAdmissionReceipt,
         "BucketDecisionReceipt": BucketDecisionReceipt,
         "SearchExhaustionReceipt": SearchExhaustionReceipt,
+        "CandidateNormalizationReceipt": CandidateNormalizationReceipt,
+        "DeduplicationReceipt": DeduplicationReceipt,
         "CampaignTerminalReceipt": CampaignTerminalReceipt,
         "MatchEvidenceReceipt": MatchEvidenceReceipt,
         "AuthenticityDecisionReceipt": AuthenticityDecisionReceipt,

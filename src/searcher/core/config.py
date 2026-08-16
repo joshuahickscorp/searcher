@@ -96,6 +96,8 @@ class Settings:
     api_port: int
     cors_origins: tuple[str, ...]
     serve_web: bool
+    live_discovery: bool
+    saturation_real: int
 
     @property
     def db_path(self) -> Path:
@@ -150,6 +152,8 @@ class Settings:
             api_port=_env_int("SEARCHER_API_PORT", _DEFAULT_API_PORT),
             cors_origins=_env_csv("SEARCHER_CORS_ORIGINS", _DEFAULT_CORS_ORIGINS),
             serve_web=_env_bool("SEARCHER_SERVE_WEB", False),
+            live_discovery=_env_bool("SEARCHER_LIVE_DISCOVERY", True),
+            saturation_real=_env_int("SEARCHER_SATURATION_REAL", 3),
         )
 
     def ensure_data_root(self) -> None:

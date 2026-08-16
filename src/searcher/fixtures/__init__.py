@@ -1,4 +1,4 @@
-"""Offline fixture campaign runner. Scripted content lives in searcher.fixtures."""
+"""Fixture-scoped helpers. Not imported by the live campaign path."""
 
 from __future__ import annotations
 

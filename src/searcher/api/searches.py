@@ -16,10 +16,38 @@ from searcher.api.dependencies import (
 )
 from searcher.api.uploads import parse_create_form
 from searcher.api.views import create_body, project_search
+from searcher.campaigns.controller import CampaignController
 from searcher.campaigns.states import is_terminal
 from searcher.contracts.enums import PublicEventName
 from searcher.receipts.types import LiveCheckReceipt
 from searcher.workers.api_campaign import create_api_campaign
+
+
+def _refresh_live(
+    controller: CampaignController, search_id: str, results: list[dict[str, object]]
+) -> tuple[bool, str]:
+    try:
+        from searcher.sources.engine import DiscoveryEngine
+    except Exception:
+        return False, "Live re-verification could not import the discovery engine."
+    candidates = []
+    for row in results:
+        found = controller.repos.get_candidate(search_id, str(row["candidate_id"]))
+        if found is not None:
+            candidates.append(found)
+    if not candidates:
+        return False, "No stored listing can be refreshed."
+    engine = DiscoveryEngine(controller, batch_size=2, max_work=len(candidates) + 2)
+    try:
+        engine.live_check_all(search_id, candidates)
+    except Exception as exc:
+        return False, f"Live re-verification did not finish: {exc}"
+    finally:
+        engine.close()
+    return True, (
+        "Availability, price, size, and destination were re-checked where the listing allowed."
+    )
+
 
 router = APIRouter()
 
@@ -81,15 +109,17 @@ def refresh_search(search_id: str, request: Request) -> JSONResponse:
     if not results:
         reason = (
             "No stored listing can be refreshed. Live re-verification is unavailable "
-            "because the discovery layer is not present."
+            "because no published results exist."
+        )
+        refreshed = False
+    elif not state.settings.live_discovery:
+        reason = (
+            "Live re-verification of availability, price, size, and destination did not run. "
+            "Live discovery is disabled in this process."
         )
         refreshed = False
     else:
-        reason = (
-            "Live re-verification of availability, price, size, and destination did not run. "
-            "The API does not fetch listing URLs; that work belongs to the sources layer."
-        )
-        refreshed = False
+        refreshed, reason = _refresh_live(state.controller, search_id, results)
     state.controller.emit(
         search_id,
         PublicEventName.SEARCH_WARNING.value,

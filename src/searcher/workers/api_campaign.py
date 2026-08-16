@@ -1,14 +1,21 @@
-"""API campaign runner: reference wave, then an honest BLOCKED stop.
+"""API campaign runner: reference wave, then the real orchestrator.
 
-Discovery, retrieval, matching, authenticity, and ranking belong to other
-waves. This runner never invents a result or a COMPLETE verdict.
+If live discovery is disabled or a layer cannot be imported, the runner
+stops with an honest BLOCKED verdict. It never invents COMPLETE.
 """
 
 from __future__ import annotations
 
 from searcher.campaigns.controller import CampaignController
+from searcher.campaigns.orchestrator import CampaignOrchestrator, layers_present
 from searcher.campaigns.states import is_terminal
-from searcher.contracts.enums import CampaignState, PublicEventName, SourceOutcome
+from searcher.contracts.enums import (
+    CampaignState,
+    EvidencePolarity,
+    FactClass,
+    PublicEventName,
+    SourceOutcome,
+)
 from searcher.contracts.models import (
     IntentBudget,
     PrivacySettings,
@@ -21,6 +28,8 @@ from searcher.core.config import Settings
 from searcher.core.errors import CancelledError, ErrorClass, InputError, SearcherError
 from searcher.core.ids import new_id
 from searcher.core.time import utc_now
+from searcher.evidence.lineage import raw_lineage
+from searcher.evidence.records import EvidenceRecord
 from searcher.receipts.types import CampaignTerminalReceipt
 from searcher.reference.gaps import evidence_gaps
 from searcher.reference.ingest import ingest_bytes
@@ -77,13 +86,13 @@ def create_api_campaign(
         tags=list(tags),
         constraints=SearchConstraints(),
         budget=IntentBudget(
-            wall_seconds=120,
-            source_limit=0,
-            page_limit=0,
+            wall_seconds=180 if cfg.live_discovery else 120,
+            source_limit=8 if cfg.live_discovery else 0,
+            page_limit=40 if cfg.live_discovery else 0,
             browser_page_limit=0,
-            image_limit=cfg.max_images_per_search,
+            image_limit=max(cfg.max_images_per_search, 20),
             model_call_limit=0,
-            byte_limit=cfg.max_total_upload_bytes,
+            byte_limit=max(cfg.max_total_upload_bytes, 8_000_000 if cfg.live_discovery else 0),
             monetary_limit=None,
         ),
         privacy=PrivacySettings(),
@@ -112,6 +121,20 @@ def create_api_campaign(
             )
             digests.append(ref.digest)
             total += len(data)
+            controller.record_evidence(
+                EvidenceRecord(
+                    evidence_id=new_id(),
+                    search_id=search_id,
+                    content_digest=ref.digest,
+                    family_id=ref.digest,
+                    polarity=EvidencePolarity.SUPPORTING,
+                    fact_class=FactClass.USER_SUPPLIED,
+                    accepted=True,
+                    lineage=raw_lineage(input_digests=[ref.digest], process="reference_ingest"),
+                    created_at=utc_now(),
+                    label="reference_image",
+                )
+            )
     except SearcherError:
         _fail(
             controller,
@@ -172,12 +195,36 @@ def _fail(controller: CampaignController, search_id: str, reason: str) -> None:
     )
 
 
+def _should_run_live(settings: Settings) -> bool:
+    if not settings.live_discovery:
+        return False
+    present = layers_present()
+    return present["discovery"] and present["routing"]
+
+
 def run_api_campaign(controller: CampaignController, search_id: str) -> None:
-    """Run what exists, then stop with BLOCKED. Never claims search complete."""
+    """Run the orchestrator when layers are live; otherwise stop with BLOCKED."""
     try:
         controller.cancellation.raise_if_cancelled(search_id)
         campaign = controller.get(search_id)
         if is_terminal(campaign.state) or controller.repos.is_deleted(search_id):
+            return
+        if _should_run_live(controller.settings):
+            CampaignOrchestrator(
+                controller,
+                source_names=[
+                    "wikimedia",
+                    "kind",
+                    "komehyo",
+                    "the_realreal",
+                    "byronesque",
+                    "heroine",
+                    "ebay",
+                ],
+                max_rounds=2,
+                max_work=8,
+                batch_size=3,
+            ).run(search_id)
             return
         run_reference_query_wave(controller, search_id, [], settings=controller.settings)
         if controller.repos.is_deleted(search_id):

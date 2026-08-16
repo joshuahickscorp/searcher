@@ -1,0 +1,2 @@
+status=Ranking results
+terminal=useful coverage remains incomplete; some sources blocked
