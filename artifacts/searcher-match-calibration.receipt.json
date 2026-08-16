@@ -64,5 +64,14 @@
     "load_ms": 152,
     "max_abs_drift_vs_reference": 3.84e-07
   },
-  "note": "Held high deliberately: a false Real costs more than a miss. The shortlist, not this threshold, carries a weak query into fine matching."
+  "note": "Held high deliberately: a false Real costs more than a miss. The shortlist, not this threshold, carries a weak query into fine matching.",
+  "reproducibility": {
+    "status": "NOT reproducible from this repository",
+    "detail": "The headline backbone comparison (DINOv2 24/28 versus ResNet50 14/28 over a 59-listing gallery) was produced by a scratch harness that was never committed, and the gallery it used is not in the tree. Nothing in HEAD regenerates these numbers. They are kept because the decision they informed is recorded here, not because they can be checked.",
+    "what_is_reproducible_instead": {
+      "retrieval": "uv run python -m benchmark --all -> artifacts/searcher-public-benchmark.receipt.json",
+      "threshold": "uv run python -m benchmark.threshold -> artifacts/searcher-threshold.receipt.json"
+    },
+    "superseded_finding": "The pair threshold recorded here as an operating point does not hold on the splits committed to this repository: on held-out pairs 0.86 admits 70% of different-listing pairs. See artifacts/searcher-threshold.receipt.json."
+  }
 }

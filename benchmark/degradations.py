@@ -83,6 +83,15 @@ def all_degradations(data: bytes) -> dict[str, bytes]:
     return {name: apply_degradation(data, name) for name in DEGRADATION_NAMES}
 
 
+def _degrader(name: str) -> Callable[[bytes], bytes]:
+    """Bind the name now; a lambda closing over the loop variable cannot type."""
+
+    def degrade(blob: bytes) -> bytes:
+        return apply_degradation(blob, name)
+
+    return degrade
+
+
 DEGRADERS: dict[str, Callable[[bytes], bytes]] = {
-    name: (lambda blob, _name=name: apply_degradation(blob, _name)) for name in DEGRADATION_NAMES
+    name: _degrader(name) for name in DEGRADATION_NAMES
 }

@@ -20,15 +20,26 @@ from typing import Any
 from searcher import SCHEMA_VERSION
 from searcher.core.capabilities import CapabilityName, CapabilityRecord, CapabilityStability
 
-# Pair-level operating point at FPR ≤ 0.01 on the kind.co.jp calibration set:
-# 59 same-listing pairs against 1711 different-listing pairs, positives median
-# 0.810 and negatives median 0.161. This is still a pixel measurement, not an
-# item classifier - two views of one garment that share no surface can fall
-# below it. Held deliberately high because a false Real costs more than a miss;
-# the shortlist, not this threshold, is what carries a weak query into fine
-# matching. See artifacts/searcher-match-calibration.receipt.json.
+# The pair threshold is NOT a validated identity gate, and must not be read as
+# one. Measured on the splits committed to this repository
+# (artifacts/searcher-threshold.receipt.json, regenerate with
+# `uv run python -m benchmark.threshold`): on held-out pairs this value admits
+# 70% of different-listing pairs while accepting half of same-listing pairs, and
+# the best point chosen on the calibration split under a 5% false-positive
+# ceiling collapses to 10% true-positive on held-out data. Two photographs of one
+# garment taken from different angles are simply not reliably closer to each
+# other than to another garment of the same type, at this sample size.
+#
+# What does work is ranking: recall@1 0.771 and recall@5 1.0 over 35 queries
+# (artifacts/searcher-public-benchmark.receipt.json), because ranking compares a
+# candidate against its alternatives instead of against an absolute number.
+#
+# So this value is a shortlist cut, not evidence of identity, and Real requires
+# more than clearing it. Raising it does not buy precision; it only starves the
+# shortlist. A defensible gate needs a much larger authorized labelled set than
+# the 10 positive and 10 negative pairs per split held here - tracked as G056.
 OPERATING_THRESHOLD = 0.86
-TARGET_FPR = 0.01
+TARGET_FPR = 0.05
 BACKBONE_IDENTITY = "facebookresearch.dinov2.vits14"
 FEATURE_DIM = 384
 
