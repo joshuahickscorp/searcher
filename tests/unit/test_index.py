@@ -133,9 +133,9 @@ def test_cross_campaign_isolation(db: object, store: object) -> None:
     with pytest.raises(CrossCampaignAccessError):
         index.campaign_private_artifacts("campaign-a")
     private = _candidate(url="https://fixture.local/private")
-    private.seller_metadata["local_path"] = "/Users/someone/secret.png"
+    private.seller_metadata["local_path"] = "/home/someone/secret.png"
     # seller_metadata is stripped; a raw private path in title must refuse.
-    hostile = _candidate(title="see /Users/someone/secret.png")
+    hostile = _candidate(title="see /home/someone/secret.png")
     with pytest.raises(CrossCampaignAccessError):
         index.put_listing(hostile, versions)
     hits = index.search(field_terms("dior homme general army"), versions)

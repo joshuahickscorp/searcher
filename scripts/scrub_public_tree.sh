@@ -104,6 +104,12 @@ ALLOWLIST: list[tuple[str, str]] = [
         "$HOME/.searcher-donors/visionmcp",
         "same portable default, mentioned in setup_donor.sh comments",
     ),
+    # Hostile fixture, not a real path. The index must refuse a candidate that
+    # carries a filesystem path, so the fixture has to look like one.
+    (
+        "/home/someone/secret.png",
+        "tests/unit/test_index.py: synthetic private path the index must reject",
+    ),
 ]
 
 # Localhost / RFC1918 / blocked-host names are legitimate in these paths
@@ -129,6 +135,11 @@ LOCALHOST_PATH_ALLOW: list[tuple[str, str]] = [
     ("CLAIMS.md", "localhost API claim evidence"),
     ("THIRD_PARTY_NOTICES.md", "no hosted service claim"),
     ("LICENSE", "license text"),
+    ("docs/OPERATING.md", "operator manual: the whole point is telling you which local URL to open"),
+    ("docs/architecture/SERVING.md", "documents the local bind and why the published page cannot call it"),
+    ("artifacts/operator/", "captured transcript of a real clean-clone run against a local API"),
+    ("artifacts/ui/", "captured browser verification against the local API"),
+    ("artifacts/searcher-adversarial-recall.receipt.json", "records which local API the measurements came from"),
 ]
 
 SKIP_TEXT_SCAN = {

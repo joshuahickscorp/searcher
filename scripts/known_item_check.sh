@@ -18,8 +18,7 @@ if [[ ! -f "$WEIGHTS" ]]; then
   echo "preparing embedding weights at $WEIGHTS"
   mkdir -p "$(dirname "$WEIGHTS")"
   SEARCHER_DATA_ROOT="$(dirname "$(dirname "$WEIGHTS")")" \
-    uv run --extra vision python "$ROOT/scripts/prepare_embedding_weights.py" --output "$WEIGHTS" || \
-    ~/.grok-vision/bin/python "$ROOT/scripts/prepare_embedding_weights.py" --output "$WEIGHTS"
+    uv run --extra vision python "$ROOT/scripts/prepare_embedding_weights.py" --output "$WEIGHTS"
 fi
 
 if [[ ! -d "$ROOT/fixtures/known_item_kind/images" ]]; then

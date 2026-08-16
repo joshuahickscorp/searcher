@@ -102,7 +102,7 @@ Observed matches included:
 project memory directory.
 
 Exact-name `mtp`/`MTP` under Downloads, Desktop, Documents, Archives,
-`.searcher-donors`, `<tooling-home>`, `hawking-preservation`, hawking,
+`<donor-cache>`, `<tooling-home>`, `<preservation-dir>`,
 merc, forge, substrate, census: **no product tree**. The only hit was
 an unrelated hashed JS asset
 `<unrelated-forge-checkout>/dist/assets/03-goroutines-channels-DMtpM9fY.js`.

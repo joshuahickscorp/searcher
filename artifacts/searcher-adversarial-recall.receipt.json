@@ -1,0 +1,364 @@
+{
+  "api": "http://127.0.0.1:8790",
+  "listings": [
+    "https://shop.kind.co.jp/products/8003001995070",
+    "https://shop.kind.co.jp/products/8004001907551",
+    "https://shop.kind.co.jp/products/8018001762539"
+  ],
+  "degradations": [
+    "pristine",
+    "blur",
+    "heavy_blur",
+    "crop",
+    "small",
+    "recompressed",
+    "phone_snapshot"
+  ],
+  "recall_by_degradation": {
+    "pristine": {
+      "found": 0,
+      "total": 3
+    },
+    "blur": {
+      "found": 0,
+      "total": 3
+    },
+    "heavy_blur": {
+      "found": 0,
+      "total": 3
+    },
+    "crop": {
+      "found": 0,
+      "total": 3
+    },
+    "small": {
+      "found": 0,
+      "total": 3
+    },
+    "recompressed": {
+      "found": 0,
+      "total": 3
+    },
+    "phone_snapshot": {
+      "found": 0,
+      "total": 3
+    }
+  },
+  "outcomes": [
+    {
+      "listing": "https://shop.kind.co.jp/products/8003001995070",
+      "variant": "pristine",
+      "found": false,
+      "rank": null,
+      "bucket": null,
+      "counts": {
+        "real": 0,
+        "possibly_real": 0,
+        "hidden": 0
+      },
+      "terminal": "COMPLETE",
+      "reason": "coverage exhausted",
+      "wall_seconds": 2.03
+    },
+    {
+      "listing": "https://shop.kind.co.jp/products/8003001995070",
+      "variant": "blur",
+      "found": false,
+      "rank": null,
+      "bucket": null,
+      "counts": {
+        "real": 0,
+        "possibly_real": 0,
+        "hidden": 0
+      },
+      "terminal": "COMPLETE",
+      "reason": "coverage exhausted",
+      "wall_seconds": 2.02
+    },
+    {
+      "listing": "https://shop.kind.co.jp/products/8003001995070",
+      "variant": "heavy_blur",
+      "found": false,
+      "rank": null,
+      "bucket": null,
+      "counts": {
+        "real": 0,
+        "possibly_real": 0,
+        "hidden": 0
+      },
+      "terminal": "COMPLETE",
+      "reason": "coverage exhausted",
+      "wall_seconds": 2.02
+    },
+    {
+      "listing": "https://shop.kind.co.jp/products/8003001995070",
+      "variant": "crop",
+      "found": false,
+      "rank": null,
+      "bucket": null,
+      "counts": {
+        "real": 0,
+        "possibly_real": 0,
+        "hidden": 0
+      },
+      "terminal": "COMPLETE",
+      "reason": "coverage exhausted",
+      "wall_seconds": 2.02
+    },
+    {
+      "listing": "https://shop.kind.co.jp/products/8003001995070",
+      "variant": "small",
+      "found": false,
+      "rank": null,
+      "bucket": null,
+      "counts": {
+        "real": 0,
+        "possibly_real": 0,
+        "hidden": 0
+      },
+      "terminal": "COMPLETE",
+      "reason": "coverage exhausted",
+      "wall_seconds": 2.02
+    },
+    {
+      "listing": "https://shop.kind.co.jp/products/8003001995070",
+      "variant": "recompressed",
+      "found": false,
+      "rank": null,
+      "bucket": null,
+      "counts": {
+        "real": 0,
+        "possibly_real": 0,
+        "hidden": 0
+      },
+      "terminal": "COMPLETE",
+      "reason": "coverage exhausted",
+      "wall_seconds": 2.02
+    },
+    {
+      "listing": "https://shop.kind.co.jp/products/8003001995070",
+      "variant": "phone_snapshot",
+      "found": false,
+      "rank": null,
+      "bucket": null,
+      "counts": {
+        "real": 0,
+        "possibly_real": 0,
+        "hidden": 0
+      },
+      "terminal": "COMPLETE",
+      "reason": "coverage exhausted",
+      "wall_seconds": 2.02
+    },
+    {
+      "listing": "https://shop.kind.co.jp/products/8004001907551",
+      "variant": "pristine",
+      "found": false,
+      "rank": null,
+      "bucket": null,
+      "counts": {
+        "real": 0,
+        "possibly_real": 0,
+        "hidden": 0
+      },
+      "terminal": "COMPLETE",
+      "reason": "coverage exhausted",
+      "wall_seconds": 2.02
+    },
+    {
+      "listing": "https://shop.kind.co.jp/products/8004001907551",
+      "variant": "blur",
+      "found": false,
+      "rank": null,
+      "bucket": null,
+      "counts": {
+        "real": 0,
+        "possibly_real": 0,
+        "hidden": 0
+      },
+      "terminal": "COMPLETE",
+      "reason": "coverage exhausted",
+      "wall_seconds": 2.02
+    },
+    {
+      "listing": "https://shop.kind.co.jp/products/8004001907551",
+      "variant": "heavy_blur",
+      "found": false,
+      "rank": null,
+      "bucket": null,
+      "counts": {
+        "real": 0,
+        "possibly_real": 0,
+        "hidden": 0
+      },
+      "terminal": "COMPLETE",
+      "reason": "coverage exhausted",
+      "wall_seconds": 2.02
+    },
+    {
+      "listing": "https://shop.kind.co.jp/products/8004001907551",
+      "variant": "crop",
+      "found": false,
+      "rank": null,
+      "bucket": null,
+      "counts": {
+        "real": 0,
+        "possibly_real": 0,
+        "hidden": 0
+      },
+      "terminal": "COMPLETE",
+      "reason": "coverage exhausted",
+      "wall_seconds": 2.02
+    },
+    {
+      "listing": "https://shop.kind.co.jp/products/8004001907551",
+      "variant": "small",
+      "found": false,
+      "rank": null,
+      "bucket": null,
+      "counts": {
+        "real": 0,
+        "possibly_real": 0,
+        "hidden": 0
+      },
+      "terminal": "COMPLETE",
+      "reason": "coverage exhausted",
+      "wall_seconds": 2.02
+    },
+    {
+      "listing": "https://shop.kind.co.jp/products/8004001907551",
+      "variant": "recompressed",
+      "found": false,
+      "rank": null,
+      "bucket": null,
+      "counts": {
+        "real": 0,
+        "possibly_real": 0,
+        "hidden": 0
+      },
+      "terminal": "COMPLETE",
+      "reason": "coverage exhausted",
+      "wall_seconds": 2.02
+    },
+    {
+      "listing": "https://shop.kind.co.jp/products/8004001907551",
+      "variant": "phone_snapshot",
+      "found": false,
+      "rank": null,
+      "bucket": null,
+      "counts": {
+        "real": 0,
+        "possibly_real": 0,
+        "hidden": 0
+      },
+      "terminal": "COMPLETE",
+      "reason": "coverage exhausted",
+      "wall_seconds": 2.02
+    },
+    {
+      "listing": "https://shop.kind.co.jp/products/8018001762539",
+      "variant": "pristine",
+      "found": false,
+      "rank": null,
+      "bucket": null,
+      "counts": {
+        "real": 0,
+        "possibly_real": 0,
+        "hidden": 0
+      },
+      "terminal": "COMPLETE",
+      "reason": "coverage exhausted",
+      "wall_seconds": 2.02
+    },
+    {
+      "listing": "https://shop.kind.co.jp/products/8018001762539",
+      "variant": "blur",
+      "found": false,
+      "rank": null,
+      "bucket": null,
+      "counts": {
+        "real": 0,
+        "possibly_real": 0,
+        "hidden": 0
+      },
+      "terminal": "COMPLETE",
+      "reason": "coverage exhausted",
+      "wall_seconds": 2.02
+    },
+    {
+      "listing": "https://shop.kind.co.jp/products/8018001762539",
+      "variant": "heavy_blur",
+      "found": false,
+      "rank": null,
+      "bucket": null,
+      "counts": {
+        "real": 0,
+        "possibly_real": 0,
+        "hidden": 0
+      },
+      "terminal": "COMPLETE",
+      "reason": "coverage exhausted",
+      "wall_seconds": 2.02
+    },
+    {
+      "listing": "https://shop.kind.co.jp/products/8018001762539",
+      "variant": "crop",
+      "found": false,
+      "rank": null,
+      "bucket": null,
+      "counts": {
+        "real": 0,
+        "possibly_real": 0,
+        "hidden": 0
+      },
+      "terminal": "COMPLETE",
+      "reason": "coverage exhausted",
+      "wall_seconds": 2.02
+    },
+    {
+      "listing": "https://shop.kind.co.jp/products/8018001762539",
+      "variant": "small",
+      "found": false,
+      "rank": null,
+      "bucket": null,
+      "counts": {
+        "real": 0,
+        "possibly_real": 0,
+        "hidden": 0
+      },
+      "terminal": "COMPLETE",
+      "reason": "coverage exhausted",
+      "wall_seconds": 2.02
+    },
+    {
+      "listing": "https://shop.kind.co.jp/products/8018001762539",
+      "variant": "recompressed",
+      "found": false,
+      "rank": null,
+      "bucket": null,
+      "counts": {
+        "real": 0,
+        "possibly_real": 0,
+        "hidden": 0
+      },
+      "terminal": "COMPLETE",
+      "reason": "coverage exhausted",
+      "wall_seconds": 2.02
+    },
+    {
+      "listing": "https://shop.kind.co.jp/products/8018001762539",
+      "variant": "phone_snapshot",
+      "found": false,
+      "rank": null,
+      "bucket": null,
+      "counts": {
+        "real": 0,
+        "possibly_real": 0,
+        "hidden": 0
+      },
+      "terminal": "COMPLETE",
+      "reason": "coverage exhausted",
+      "wall_seconds": 2.02
+    }
+  ]
+}
