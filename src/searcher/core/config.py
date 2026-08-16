@@ -25,6 +25,7 @@ HONEST_USER_AGENT = (
 )
 _DEFAULT_API_HOST = "127.0.0.1"
 _DEFAULT_API_PORT = 8765
+_DEFAULT_LIVENESS_TTL = 6 * 60 * 60
 _DEFAULT_CORS_ORIGINS = (
     "http://127.0.0.1:8765",
     "http://localhost:8765",
@@ -98,6 +99,8 @@ class Settings:
     serve_web: bool
     live_discovery: bool
     saturation_real: int
+    liveness_ttl_seconds: int
+    index_enabled: bool
 
     @property
     def db_path(self) -> Path:
@@ -154,6 +157,8 @@ class Settings:
             serve_web=_env_bool("SEARCHER_SERVE_WEB", False),
             live_discovery=_env_bool("SEARCHER_LIVE_DISCOVERY", True),
             saturation_real=_env_int("SEARCHER_SATURATION_REAL", 3),
+            liveness_ttl_seconds=_env_int("SEARCHER_LIVENESS_TTL_SECONDS", _DEFAULT_LIVENESS_TTL),
+            index_enabled=_env_bool("SEARCHER_INDEX", True),
         )
 
     def ensure_data_root(self) -> None:

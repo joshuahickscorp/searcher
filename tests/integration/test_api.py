@@ -96,11 +96,18 @@ def test_health_is_cheap_when_warm(api_app: tuple[Any, Any]) -> None:
     client, _app = api_app
     first = client.get("/v1/health")
     assert first.status_code == 200
-    assert first.json() == {"status": "ok"}
+    body = first.json()
+    assert body["status"] == "ok"
+    assert body["api"] == "up"
+    assert body["db"] == "ok"
+    assert "lanes" in body
+    assert "blocked_lanes" in body
+    assert body["lanes"]["storage"]["ok"] is True
     started = time.perf_counter()
     second = client.get("/v1/health")
     elapsed_ms = (time.perf_counter() - started) * 1000
     assert second.status_code == 200
+    assert second.json()["status"] == "ok"
     assert elapsed_ms < 100
 
 

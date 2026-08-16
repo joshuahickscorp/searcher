@@ -113,8 +113,16 @@ class LiveDiscoveryRunner:
                     ctx = self._context(search_id, state)
                     self.controller.transition(search_id, state, context=ctx)
                 if state is CampaignState.DISCOVERING:
-                    queries = self.controller.repos.list_queries(search_id)
-                    self.last_summary = engine.run(search_id, queries, source_names=source_names)
+                    from searcher.index.consult import consult_and_surface, remember_campaign
+
+                    consult_and_surface(self.controller, search_id)
+                    runtime = self.controller.repos.get_runtime(search_id)
+                    if not runtime.get("index_skip_source_work"):
+                        queries = self.controller.repos.list_queries(search_id)
+                        self.last_summary = engine.run(
+                            search_id, queries, source_names=source_names
+                        )
+                    remember_campaign(self.controller, search_id)
                     self.controller.persist_usage(search_id)
                 if state is CampaignState.COMPLETE:
                     self._complete(search_id)

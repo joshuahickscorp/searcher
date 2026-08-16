@@ -1,4 +1,13 @@
-"""Live campaign against admitted public sources. Honest outcome is the result."""
+"""Live campaign against admitted public sources. Honest outcome is the result.
+
+Runs in its own pytest invocation. On macOS this test leaves the interpreter unable
+to spawn a child process: a subsequent `subprocess.run` returns -11 (SIGSEGV) even
+though only MainThread is alive, which is the fork-after-framework-initialisation
+crash. It breaks any later test that shells out (`test_serve_shared`,
+`test_probe_and_import`). The underlying cause is not yet identified — see G039 —
+so the interaction is quarantined rather than papered over with
+OBJC_DISABLE_INITIALIZE_FORK_SAFETY.
+"""
 
 from __future__ import annotations
 
@@ -6,6 +15,8 @@ import json
 from pathlib import Path
 
 import pytest
+
+pytestmark = pytest.mark.live_campaign
 from tests.support.offline_shop import tiny_png
 
 from searcher.campaigns.controller import CampaignController

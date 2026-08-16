@@ -12,6 +12,7 @@ dependencies = [
     "fastapi>=0.141.1",
     "uvicorn[standard]>=0.52.3",
     "python-multipart>=0.0.32",
+    "numpy>=2",
 ]
 
 [project.optional-dependencies]
@@ -108,6 +109,10 @@ warn_required_dynamic_aliases = true
 testpaths = ["tests"]
 pythonpath = ["."]
 timeout = 60
+markers = [
+    "live_campaign: runs a live campaign; must run in its own pytest invocation (see scripts/test_all.sh)",
+]
+addopts = "-m 'not live_campaign'"
 filterwarnings = [
     "error",
     "ignore::ResourceWarning",

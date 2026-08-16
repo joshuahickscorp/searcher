@@ -3,11 +3,16 @@
 from __future__ import annotations
 
 import io
+from collections import OrderedDict
 from dataclasses import dataclass
 from typing import Any
 
 from searcher.core.config import Settings
 from searcher.core.errors import MalformedContentError
+from searcher.core.ids import sha256_hex
+
+_RGB_CACHE: OrderedDict[str, Any] = OrderedDict()
+_RGB_CACHE_CAP = 48
 
 
 def _pil() -> Any:
@@ -85,7 +90,17 @@ def decode_and_normalize(data: bytes, *, settings: Settings | None = None) -> De
 
 def open_rgb(png_bytes: bytes) -> Any:
     Image, _ops, _filt, _stat = _pil()
-    return Image.open(io.BytesIO(png_bytes)).convert("RGB")
+    key = sha256_hex(png_bytes) if png_bytes else ""
+    held = _RGB_CACHE.get(key)
+    if held is not None:
+        _RGB_CACHE.move_to_end(key)
+        return held.copy()
+    image = Image.open(io.BytesIO(png_bytes)).convert("RGB")
+    _RGB_CACHE[key] = image
+    _RGB_CACHE.move_to_end(key)
+    while len(_RGB_CACHE) > _RGB_CACHE_CAP:
+        _RGB_CACHE.popitem(last=False)
+    return image.copy()
 
 
 def average_hash(png_bytes: bytes, size: int = 8) -> str:
