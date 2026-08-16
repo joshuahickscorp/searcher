@@ -17,11 +17,8 @@ node_modules/
 *.sqlite-wal
 *.sqlite-shm
 .env
-<<<<<<< ours
 uv.lock.bak
-=======
 web/dev/__pycache__/
 web/dev/**/__pycache__/
 web/dev/artifacts/
 
->>>>>>> theirs
