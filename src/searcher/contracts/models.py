@@ -97,11 +97,16 @@ class TextObservation(SearcherModel):
     confidence: float
     fact_class: FactClass = FactClass.EXTRACTED
     origin: FactOrigin = FactOrigin.EXTRACTOR
+    kind: str = "unknown"
+    injection_candidate: bool = False
 
     @model_validator(mode="after")
     def seller_not_observed(self) -> TextObservation:
         if self.origin == FactOrigin.SELLER and self.fact_class == FactClass.OBSERVED:
             raise ValueError("seller-reported value cannot be constructed as OBSERVED")
+        # GUARD: OCR / extractor output can never be recorded as OBSERVED (§3.1).
+        if self.origin == FactOrigin.EXTRACTOR and self.fact_class == FactClass.OBSERVED:
+            raise ValueError("OCR text can never become an OBSERVED fact")
         return self
 
 
@@ -110,6 +115,13 @@ class ImageQuality(SearcherModel):
     compression: float = 0.0
     occlusion: float = 0.0
     subject_area: float = 0.0
+    resolution: float = 0.0
+    perspective: float = 0.0
+    lighting: float = 0.0
+    background_interference: float = 0.0
+    text_visibility: float = 0.0
+    part_visibility: float = 0.0
+    weight: float = 0.0
     usable_for: list[str] = Field(default_factory=list)
 
 
@@ -205,6 +217,13 @@ class VisualSignatureGlobal(SearcherModel):
     colour_distribution: str | None = None
 
 
+class CrossImageLink(SearcherModel):
+    image_a: str
+    image_b: str
+    similarity: float
+    method: str
+
+
 class VisualSignature(SearcherModel):
     """§9.5"""
 
@@ -212,6 +231,12 @@ class VisualSignature(SearcherModel):
     parts: list[PartSignature] = Field(default_factory=list)
     distinctive_relations: list[str] = Field(default_factory=list)
     uncertain_features: list[str] = Field(default_factory=list)
+    texture: str | None = None
+    ocr_terms: list[str] = Field(default_factory=list)
+    logo_candidates: list[str] = Field(default_factory=list)
+    correspondence: list[CrossImageLink] = Field(default_factory=list)
+    descriptor_kind: str = "cheap_histogram"
+    learned_embedding_available: bool = False
 
 
 class ItemHypothesis(SearcherModel):
@@ -252,6 +277,11 @@ class QueryVariant(SearcherModel):
     expected_gain: float = 0.0
     cost_estimate: float = 0.0
     status: QueryStatus = QueryStatus.QUEUED
+    source_coverage: list[str] = Field(default_factory=list)
+    overlap: float = 0.0
+    family: str = ""
+    provisional: bool = False
+    translation_record: dict[str, object] | None = None
 
 
 class RatePolicy(SearcherModel):
@@ -504,6 +534,74 @@ class NextEvidenceRequest(SearcherModel):
     target: str
     reason: str
     expected_gain: float = 0.0
+
+
+class TargetCluster(SearcherModel):
+    cluster_id: str
+    image_ids: list[str] = Field(default_factory=list)
+    crop_ids: list[str] = Field(default_factory=list)
+    role: str = "primary"
+    relation: str = "same_item_multiple_views"
+    confidence: float = 0.0
+    notes: list[str] = Field(default_factory=list)
+
+
+class ViewInventoryEntry(SearcherModel):
+    crop_id: str
+    view: ViewHypothesis
+    confidence: float
+    fact_class: FactClass = FactClass.INFERRED
+
+
+class PartInventoryEntry(SearcherModel):
+    crop_id: str
+    part: str
+    confidence: float
+    fact_class: FactClass = FactClass.INFERRED
+
+
+class CategoryHypothesis(SearcherModel):
+    category: str
+    confidence: float
+    fact_class: FactClass = FactClass.INFERRED
+    evidence: list[str] = Field(default_factory=list)
+
+
+class EvidenceGap(SearcherModel):
+    gap: str
+    impact: str
+    request: str | None = None
+
+
+class LaneStatus(SearcherModel):
+    name: str
+    available: bool
+    blocked: bool = False
+    degraded: bool = False
+    reason: str = ""
+    authority_ceiling: str = "none"
+
+
+class ReferenceAnalysis(SearcherModel):
+    """§11.9 output. Later waves consume this record, not donor types."""
+
+    analysis_id: str
+    search_id: str
+    images: list[ReferenceImage] = Field(default_factory=list)
+    primary_cluster: TargetCluster
+    alternate_clusters: list[TargetCluster] = Field(default_factory=list)
+    quality_map: dict[str, ImageQuality] = Field(default_factory=dict)
+    view_inventory: list[ViewInventoryEntry] = Field(default_factory=list)
+    part_inventory: list[PartInventoryEntry] = Field(default_factory=list)
+    text_and_marks: list[TextObservation] = Field(default_factory=list)
+    visual_signature: VisualSignature = Field(default_factory=VisualSignature)
+    category_hypotheses: list[CategoryHypothesis] = Field(default_factory=list)
+    evidence_gaps: list[EvidenceGap] = Field(default_factory=list)
+    lanes: list[LaneStatus] = Field(default_factory=list)
+    promotion_blocked: bool = False
+    donor_invoked: bool = False
+    donor_version: str | None = None
+    uncertainties: list[Uncertainty] = Field(default_factory=list)
 
 
 class LiveStatus(SearcherModel):

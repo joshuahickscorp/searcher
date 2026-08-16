@@ -11,6 +11,12 @@ from searcher.core.policy import POLICY_VERSION
 
 _DEFAULT_DISK_MARGIN = 256 * 1024 * 1024
 _DEFAULT_MAX_OBJECT = 50 * 1024 * 1024
+_DEFAULT_MAX_UPLOAD = 15 * 1024 * 1024
+_DEFAULT_MAX_PIXELS = 40_000_000
+_DEFAULT_MAX_EDGE = 8192
+_DEFAULT_MAX_IMAGES = 10
+_DEFAULT_HYPOTHESIS_CEILING = 8
+_DEFAULT_QUERY_CEILING = 48
 
 
 def _env_int(name: str, default: int) -> int:
@@ -40,6 +46,14 @@ class Settings:
     step_delay_seconds: float
     fixtures_dir: Path | None
     migrations_dir: Path | None
+    max_upload_bytes: int
+    max_image_pixels: int
+    max_image_edge: int
+    max_images_per_search: int
+    hypothesis_ceiling: int
+    query_ceiling: int
+    privacy_mode: str
+    visionmcp_enabled: bool
 
     @property
     def db_path(self) -> Path:
@@ -59,6 +73,8 @@ class Settings:
         fixtures = os.environ.get("SEARCHER_FIXTURES_DIR")
         migrations = os.environ.get("SEARCHER_MIGRATIONS_DIR")
         delay_ms = _env_float("SEARCHER_STEP_DELAY_MS", 0.0)
+        privacy = os.environ.get("SEARCHER_PRIVACY_MODE", "local").strip().lower() or "local"
+        vision_flag = os.environ.get("SEARCHER_VISIONMCP", "1").strip().lower()
         return cls(
             data_root=root,
             policy_version=os.environ.get("SEARCHER_POLICY_VERSION", POLICY_VERSION),
@@ -69,6 +85,14 @@ class Settings:
             step_delay_seconds=max(0.0, delay_ms / 1000.0),
             fixtures_dir=Path(fixtures) if fixtures else None,
             migrations_dir=Path(migrations) if migrations else None,
+            max_upload_bytes=_env_int("SEARCHER_MAX_UPLOAD_BYTES", _DEFAULT_MAX_UPLOAD),
+            max_image_pixels=_env_int("SEARCHER_MAX_IMAGE_PIXELS", _DEFAULT_MAX_PIXELS),
+            max_image_edge=_env_int("SEARCHER_MAX_IMAGE_EDGE", _DEFAULT_MAX_EDGE),
+            max_images_per_search=_env_int("SEARCHER_MAX_IMAGES", _DEFAULT_MAX_IMAGES),
+            hypothesis_ceiling=_env_int("SEARCHER_HYPOTHESIS_CEILING", _DEFAULT_HYPOTHESIS_CEILING),
+            query_ceiling=_env_int("SEARCHER_QUERY_CEILING", _DEFAULT_QUERY_CEILING),
+            privacy_mode=privacy,
+            visionmcp_enabled=vision_flag not in {"0", "false", "off", "no"},
         )
 
     def ensure_data_root(self) -> None:

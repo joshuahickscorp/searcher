@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "pydantic>=2",
+    "pillow>=10.4",
 ]
 
 [project.optional-dependencies]
@@ -15,6 +16,12 @@ dev = [
     "hypothesis>=6",
     "ruff>=0.8",
     "mypy>=1.13",
+]
+vision = [
+    # Pinned SHA 18ee3c06d27f04937d1681dea5fa2650131e4b2a (visionmcp-ocular 0.8.0a2).
+    # GitHub checkout of that SHA has a broken submodule, so the uv source is the
+    # audited local clone. Compatibility tests still bind the SHA.
+    "visionmcp-ocular==0.8.0a2",
 ]
 
 [project.scripts]
@@ -35,6 +42,9 @@ dev = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/searcher"]
+
+[tool.uv.sources]
+visionmcp-ocular = { path = "<home>/.searcher-donors/visionmcp" }
 
 [tool.ruff]
 line-length = 100

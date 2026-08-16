@@ -6,18 +6,14 @@ from typing import Protocol
 
 from searcher.contracts.models import (
     FetchResult,
-    ItemHypothesis,
     ListingCandidate,
     MatchEvidence,
     NextEvidenceRequest,
+    ReferenceAnalysis,
     SourcePlan,
 )
 from searcher.contracts.primitives import ArtifactRef
 from searcher.core.capabilities import CapabilityName, CapabilityRecord
-
-
-class ReferenceAnalysis(Protocol):
-    hypotheses: list[ItemHypothesis]
 
 
 class VisionCapabilities(Protocol):

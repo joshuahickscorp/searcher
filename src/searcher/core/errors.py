@@ -146,6 +146,42 @@ class InputError(SearcherError):
         super().__init__(message, error_class=ErrorClass.INPUT, search_id=search_id)
 
 
+class MalformedContentError(SearcherError):
+    def __init__(self, message: str, *, search_id: str | None = None) -> None:
+        super().__init__(message, error_class=ErrorClass.MALFORMED_CONTENT, search_id=search_id)
+
+
+class CapabilityUnavailable(SearcherError):
+    """Typed refusal for a capability this wave does not implement or cannot run.
+
+    retrieve_candidates / compare_candidate raise this instead of returning
+    placeholder scores. A later matching wave owns those methods.
+    """
+
+    def __init__(
+        self,
+        capability: str,
+        *,
+        wave: str = "this wave",
+        search_id: str | None = None,
+        reason: str | None = None,
+    ) -> None:
+        detail = reason or f"capability {capability} is not available in {wave}"
+        super().__init__(
+            detail,
+            error_class=ErrorClass.MODEL,
+            search_id=search_id,
+            details={"capability": capability, "wave": wave},
+        )
+        self.capability = capability
+        self.wave = wave
+
+
+class PrivacyError(SearcherError):
+    def __init__(self, message: str, *, search_id: str | None = None) -> None:
+        super().__init__(message, error_class=ErrorClass.POLICY, search_id=search_id)
+
+
 class CancelledError(SearcherError):
     def __init__(self, message: str, *, search_id: str | None = None) -> None:
         super().__init__(message, error_class=ErrorClass.CANCELLED, search_id=search_id)

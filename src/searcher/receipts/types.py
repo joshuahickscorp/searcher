@@ -13,6 +13,34 @@ class ReferenceIngestionReceipt(ReceiptBase):
     byte_count: int = 0
 
 
+class ReferenceAnalysisReceipt(ReceiptBase):
+    receipt_type: str = "ReferenceAnalysisReceipt"
+    analysis_id: str = ""
+    crop_count: int = 0
+    ocr_count: int = 0
+    cluster_count: int = 0
+    donor_invoked: bool = False
+    promotion_blocked: bool = False
+    blocked_lanes: list[str] = []
+
+
+class HypothesisUpdateReceipt(ReceiptBase):
+    receipt_type: str = "HypothesisUpdateReceipt"
+    hypothesis_ids: list[str] = []
+    active_count: int = 0
+    archived_count: int = 0
+    contradiction_count: int = 0
+
+
+class QueryPlanReceipt(ReceiptBase):
+    receipt_type: str = "QueryPlanReceipt"
+    query_ids: list[str] = []
+    languages: list[str] = []
+    families: list[str] = []
+    max_round: int = 0
+    query_count: int = 0
+
+
 class SourceRunReceipt(ReceiptBase):
     receipt_type: str = "SourceRunReceipt"
     source_id: str = ""
@@ -47,6 +75,9 @@ class CampaignTerminalReceipt(ReceiptBase):
 def typed_from_payload(payload: dict[str, Any]) -> ReceiptBase:
     mapping: dict[str, type[ReceiptBase]] = {
         "ReferenceIngestionReceipt": ReferenceIngestionReceipt,
+        "ReferenceAnalysisReceipt": ReferenceAnalysisReceipt,
+        "HypothesisUpdateReceipt": HypothesisUpdateReceipt,
+        "QueryPlanReceipt": QueryPlanReceipt,
         "SourceRunReceipt": SourceRunReceipt,
         "BucketDecisionReceipt": BucketDecisionReceipt,
         "SearchExhaustionReceipt": SearchExhaustionReceipt,

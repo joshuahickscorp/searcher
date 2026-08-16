@@ -140,6 +140,7 @@ class HypothesisStatus(StrEnum):
     WEAKENED = "weakened"
     REJECTED = "rejected"
     PROMOTED = "promoted"
+    ARCHIVED = "archived"
 
 
 class QueryType(StrEnum):
@@ -185,6 +186,10 @@ class ViewHypothesis(StrEnum):
     SOLE = "sole"
     LABEL = "label"
     DETAIL = "detail"
+    TOP = "top"
+    BOX = "box"
+    WORN = "worn"
+    REAR = "rear"
     UNKNOWN = "unknown"
 
 

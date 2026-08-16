@@ -19,6 +19,7 @@ from searcher.evidence.content_store import ContentStore
 from searcher.receipts.types import typed_from_payload
 from searcher.storage.connection import Database
 from searcher.storage.migrations import migrate
+from searcher.workers.reference.pipeline import create_reference_campaign, run_reference_query_wave
 
 
 def _session(settings: Settings) -> tuple[Database, ContentStore, CampaignController]:
@@ -266,6 +267,60 @@ def cmd_receipt_verify(args: argparse.Namespace) -> int:
     return 0 if ok else 2
 
 
+def cmd_capabilities(args: argparse.Namespace) -> int:
+    import time
+
+    from searcher.integrations.visionmcp.probe import donor_status, probe_timed
+
+    started = time.perf_counter()
+    report, elapsed = probe_timed()
+    wall = time.perf_counter() - started
+    payload = {
+        "elapsed_seconds": elapsed,
+        "wall_seconds": wall,
+        "donor": donor_status(),
+        "capabilities": [r.model_dump(mode="json") for r in report.capabilities],
+    }
+    if args.json:
+        _print(payload, as_json=True)
+        return 0
+    print(f"probe_seconds: {elapsed:.4f}")
+    print(f"donor: {payload['donor']}")
+    for rec in report.capabilities:
+        flag = "yes" if rec.available else "no"
+        print(f"  {rec.name.value:24} available={flag:3}  {rec.notes}")
+    return 0
+
+
+def cmd_reference_analyze(args: argparse.Namespace) -> int:
+    settings = Settings.from_env()
+    db, store, controller = _session(settings)
+    try:
+        images = [Path(p) for p in args.image]
+        search_id = create_reference_campaign(
+            controller,
+            image_paths=images,
+            text=args.text,
+            tags=list(args.tag or []),
+            settings=settings,
+        )
+        result = run_reference_query_wave(controller, search_id, images, settings=settings)
+        if args.json:
+            _print(result, as_json=True)
+        else:
+            print(f"search_id: {result['search_id']}")
+            print(f"state: {result['state']}")
+            print(f"hypotheses: {result['hypotheses']}")
+            print(f"queries: {result['queries']}")
+            print(f"donor_invoked: {result['donor_invoked']}")
+            print(f"promotion_blocked: {result['promotion_blocked']}")
+            print(f"report: {result['report_html']}")
+        return 0
+    finally:
+        db.close()
+        del store
+
+
 def cmd_store_stat(args: argparse.Namespace) -> int:
     settings = Settings.from_env()
     settings.ensure_data_root()
@@ -344,6 +399,17 @@ def build_parser() -> argparse.ArgumentParser:
     dsub = dbp.add_subparsers(dest="command", required=True)
     migrate_cmd = dsub.add_parser("migrate", help="apply SQL migrations")
     migrate_cmd.set_defaults(func=cmd_db_migrate)
+
+    caps = sub.add_parser("capabilities", help="light capability probe")
+    caps.set_defaults(func=cmd_capabilities)
+
+    reference = sub.add_parser("reference", help="reference analysis")
+    rsub = reference.add_subparsers(dest="command", required=True)
+    analyze = rsub.add_parser("analyze", help="ingest images and compile queries")
+    analyze.add_argument("--image", action="append", required=True, dest="image")
+    analyze.add_argument("--text", default=None)
+    analyze.add_argument("--tag", action="append", default=[])
+    analyze.set_defaults(func=cmd_reference_analyze)
 
     return parser
 
