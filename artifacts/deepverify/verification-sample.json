@@ -1,0 +1,54 @@
+{
+  "source": "rebag",
+  "url": "https://www.rebag.com/shop/army-trainer",
+  "note": "Permitted source (rebag). Candidate re-checked against structured data on its own listing page. Recorded price was left in place; the change is stated.",
+  "checked_at": "2026-08-16T21:17:51.075808+00:00",
+  "extraction_method": "json_ld",
+  "fields": [
+    {
+      "field": "price",
+      "recorded": "48000",
+      "observed": "52000",
+      "verdict": "disagrees",
+      "reason": "price changed: recorded 48000, observed 52000",
+      "checked_at": "2026-08-16T21:17:51.075808+00:00"
+    },
+    {
+      "field": "availability",
+      "recorded": "LIVE",
+      "observed": "https://schema.org/InStock",
+      "verdict": "agrees",
+      "reason": "recorded value matches the listing page",
+      "checked_at": "2026-08-16T21:17:51.075808+00:00"
+    },
+    {
+      "field": "title",
+      "recorded": "Army Trainer",
+      "observed": "Army Trainer",
+      "verdict": "agrees",
+      "reason": "recorded value matches the listing page",
+      "checked_at": "2026-08-16T21:17:51.075808+00:00"
+    },
+    {
+      "field": "seller",
+      "recorded": "Dior Homme",
+      "observed": null,
+      "verdict": "absent",
+      "reason": "field not present in structured data on the listing page",
+      "checked_at": "2026-08-16T21:17:51.075808+00:00"
+    },
+    {
+      "field": "images",
+      "recorded": "https://shop.example/img.jpg",
+      "observed": "https://shop.example/img.jpg",
+      "verdict": "agrees",
+      "reason": "image set overlaps the listing page",
+      "checked_at": "2026-08-16T21:17:51.075808+00:00"
+    }
+  ],
+  "published": true,
+  "price_still_recorded": "48000",
+  "explanation_contradictions": [
+    "price: price changed: recorded 48000, observed 52000"
+  ]
+}

@@ -17,6 +17,7 @@ from searcher.sources.admission import AdmissionGate
 from searcher.sources.browser import BrowserPool, BrowserUnavailable
 from searcher.sources.cache import ResponseCache
 from searcher.sources.cancel import RunCancel
+from searcher.sources.challenge import BLOCKED_BY_CHALLENGE, challenge_note, looks_like_challenge
 from searcher.sources.fetch_log import FetchLog
 from searcher.sources.http import HonestHttpClient, HttpResponse
 from searcher.sources.rate_limit import BandwidthLimiter, HostLimiter
@@ -66,12 +67,17 @@ class Escalator:
         source_id: str,
         required_fields: list[str] | None = None,
         allow_render: bool = False,
+        force_render: bool = False,
+        skip_cache: bool = False,
         robots_body: str | None = None,
         extra_headers: dict[str, str] | None = None,
     ) -> FetchedDocument:
         if self.cancel is not None:
             self.cancel.raise_if_cancelled()
-        decision = self.admission.decide(url, manifest, robots_body=robots_body)
+        purpose = "render" if force_render else "page_fetch"
+        decision = self.admission.decide(
+            url, manifest, purpose=purpose, robots_body=robots_body
+        )
         if not decision.allowed:
             result = FetchResult(
                 attempt_id=new_id(),
@@ -79,15 +85,19 @@ class Escalator:
                 outcome=decision.outcome,
                 canonical_url=canonicalize_url(url),
                 classification_note=decision.basis,
-                mode=FetchMode.HTTP,
+                mode=FetchMode.LIGHT_RENDER if force_render else FetchMode.HTTP,
             )
             return FetchedDocument(result=result, body=b"", headers={}, final_url=url)
+        if force_render:
+            return self.render(
+                url, manifest, source_id=source_id, robots_body=robots_body, light=True
+            )
         delay = (
             decision.crawl_delay
             if decision.crawl_delay is not None
             else 60.0 / max(manifest.rate_policy.requests_per_minute, 1)
         )
-        cached = self.cache.get(url) if self.cache is not None else None
+        cached = None if skip_cache or self.cache is None else self.cache.get(url)
         if cached is not None:
             result = FetchResult(
                 attempt_id=new_id(),
@@ -150,6 +160,9 @@ class Escalator:
                 attempt += 1
                 continue
             outcome = classify_http(response.status, body=response.body)
+            challenge = looks_like_challenge(response.text)
+            if challenge:
+                outcome = SourceOutcome.BLOCKED_BY_ACCESS
             if outcome is SourceOutcome.RATE_LIMITED:
                 retry_after = parse_retry_after(response.headers.get("retry-after"))
             else:
@@ -166,6 +179,13 @@ class Escalator:
 
                     time.sleep(pause)
             result = self._from_http(url, response, outcome)
+            if challenge:
+                result = result.model_copy(
+                    update={
+                        "classification_note": challenge_note(response.text),
+                        "error_class": BLOCKED_BY_CHALLENGE,
+                    }
+                )
             self._log(source_id, url, result, started)
             last_doc = FetchedDocument(
                 result=result,
@@ -173,6 +193,8 @@ class Escalator:
                 headers=response.headers,
                 final_url=response.final_url,
             )
+            if challenge:
+                return last_doc
             if outcome is SourceOutcome.SEARCHED_MATCHES_FOUND:
                 if self.cache is not None and response.status == 200:
                     self.cache.put(
@@ -182,12 +204,13 @@ class Escalator:
                         last_modified=response.headers.get("last-modified"),
                         content_type=response.content_type,
                     )
-                if (
-                    self._needs_render(response, required_fields or list(REQUIRED_FIELDS))
-                    and allow_render
-                ):  # noqa: E501
-                    rendered = self._render(url, manifest, source_id, light=True)
-                    if rendered is not None:
+                if allow_render and self._needs_render(
+                    response, required_fields or list(REQUIRED_FIELDS)
+                ):
+                    rendered = self.render(
+                        url, manifest, source_id=source_id, robots_body=robots_body
+                    )
+                    if self._prefer_rendered(rendered):
                         return rendered
                 return last_doc
             if should_retry(outcome, attempt):
@@ -198,6 +221,20 @@ class Escalator:
                 continue
             return last_doc
 
+    def _prefer_rendered(self, rendered: FetchedDocument) -> bool:
+        """Keep the HTTP body when the renderer never actually ran."""
+        note = rendered.result.classification_note or ""
+        if note in {"browser extra unavailable", "browser budget exhausted"}:
+            return False
+        if rendered.result.error_class == "BROWSER":
+            return False
+        if (
+            rendered.result.outcome is SourceOutcome.NETWORK_FAILED
+            and not rendered.body
+        ):
+            return False
+        return rendered.result.mode in {FetchMode.LIGHT_RENDER, FetchMode.BROWSER}
+
     def _needs_render(self, response: HttpResponse, required: list[str]) -> bool:
         text = response.text.lower()
         if len(response.body) < 400 and "html" in (response.content_type or ""):
@@ -207,6 +244,126 @@ class Escalator:
         del required
         return False
 
+    def render(
+        self,
+        url: str,
+        manifest: SourceManifest,
+        *,
+        source_id: str,
+        robots_body: str | None = None,
+        light: bool = True,
+    ) -> FetchedDocument:
+        """Browser-rendered GET. Admission → robots → rate → budget → one fetch.
+
+        A challenge is terminal. There is no retry loop and no stealth.
+        """
+        if self.cancel is not None:
+            self.cancel.raise_if_cancelled()
+        started = utc_now()
+        mode = FetchMode.LIGHT_RENDER if light else FetchMode.BROWSER
+        decision = self.admission.decide(
+            url, manifest, purpose="render", robots_body=robots_body
+        )
+        if not decision.allowed:
+            result = FetchResult(
+                attempt_id=new_id(),
+                url=url,
+                outcome=decision.outcome,
+                canonical_url=canonicalize_url(url),
+                classification_note=decision.basis,
+                mode=mode,
+            )
+            self._log(source_id, url, result, started)
+            return FetchedDocument(result=result, body=b"", headers={}, final_url=url)
+        if self.browsers is None:
+            result = FetchResult(
+                attempt_id=new_id(),
+                url=url,
+                outcome=SourceOutcome.UNMEASURABLE,
+                canonical_url=canonicalize_url(url),
+                classification_note="browser extra unavailable",
+                mode=mode,
+            )
+            self._log(source_id, url, result, started)
+            return FetchedDocument(result=result, body=b"", headers={}, final_url=url)
+        if self.host_limiter is not None:
+            self.host_limiter.wait(
+                manifest.domain,
+                rpm=manifest.rate_policy.requests_per_minute,
+                burst=manifest.rate_policy.burst,
+            )
+        if self.usage is not None:
+            try:
+                self.usage.consume(browser_pages=1)
+            except BudgetExceeded:
+                result = FetchResult(
+                    attempt_id=new_id(),
+                    url=url,
+                    outcome=SourceOutcome.UNMEASURABLE,
+                    canonical_url=canonicalize_url(url),
+                    classification_note="browser budget exhausted",
+                    mode=mode,
+                    error_class="BUDGET",
+                )
+                self._log(source_id, url, result, started)
+                return FetchedDocument(result=result, body=b"", headers={}, final_url=url)
+        try:
+            with self.browsers.page(url, light=light) as lease:
+                body = lease.content.encode("utf-8")
+                text = lease.content
+                challenge = looks_like_challenge(text)
+                outcome = classify_http(lease.status, body=body, challenge=challenge)
+                note = challenge_note(text) if challenge else None
+                if self.usage is not None and body:
+                    try:
+                        self.usage.consume(bytes=len(body))
+                    except BudgetExceeded:
+                        outcome = SourceOutcome.UNMEASURABLE
+                result = FetchResult(
+                    attempt_id=new_id(),
+                    url=url,
+                    outcome=outcome,
+                    content_digest=sha256_hex(body),
+                    bytes=len(body),
+                    http_status=lease.status,
+                    canonical_url=canonicalize_url(lease.final_url or url),
+                    mode=mode,
+                    final_url=lease.final_url,
+                    classification_note=note,
+                    error_class=BLOCKED_BY_CHALLENGE if challenge else None,
+                )
+                self._log(source_id, url, result, started)
+                return FetchedDocument(
+                    result=result,
+                    body=body,
+                    headers={},
+                    final_url=lease.final_url,
+                )
+        except BrowserUnavailable as exc:
+            result = FetchResult(
+                attempt_id=new_id(),
+                url=url,
+                outcome=SourceOutcome.UNMEASURABLE,
+                canonical_url=canonicalize_url(url),
+                classification_note=str(exc),
+                mode=mode,
+                error_class="BROWSER",
+            )
+            self._log(source_id, url, result, started)
+            return FetchedDocument(result=result, body=b"", headers={}, final_url=url)
+        except Exception as exc:
+            result = FetchResult(
+                attempt_id=new_id(),
+                url=url,
+                outcome=SourceOutcome.NETWORK_FAILED,
+                canonical_url=canonicalize_url(url),
+                classification_note=str(exc),
+                mode=mode,
+                error_class=type(exc).__name__,
+            )
+            self._log(source_id, url, result, started)
+            return FetchedDocument(result=result, body=b"", headers={}, final_url=url)
+
     def _render(
         self,
         url: str,
@@ -215,41 +372,12 @@ class Escalator:
         *,
         light: bool,
     ) -> FetchedDocument | None:
-        if self.browsers is None:
-            return None
-        if (
-            FetchMode.BROWSER not in manifest.fetch_modes
-            and FetchMode.LIGHT_RENDER not in manifest.fetch_modes
-        ):  # noqa: E501
-            return None
-        decision = self.admission.decide(url, manifest, purpose="render")
-        if not decision.allowed:
-            return None
-        if self.usage is not None:
-            self.usage.consume(browser_pages=1)
-        mode = FetchMode.LIGHT_RENDER if light else FetchMode.BROWSER
-        try:
-            with self.browsers.page(url, light=light) as lease:
-                body = lease.content.encode("utf-8")
-                result = FetchResult(
-                    attempt_id=new_id(),
-                    url=url,
-                    outcome=classify_http(lease.status, body=body),
-                    content_digest=sha256_hex(body),
-                    bytes=len(body),
-                    http_status=lease.status,
-                    canonical_url=canonicalize_url(lease.final_url or url),
-                    mode=mode,
-                    final_url=lease.final_url,
-                )
-                return FetchedDocument(
-                    result=result,
-                    body=body,
-                    headers={},
-                    final_url=lease.final_url,
-                )
-        except BrowserUnavailable:
-            return None
+        rendered = self.render(url, manifest, source_id=source_id, light=light)
+        if rendered.result.mode in {FetchMode.LIGHT_RENDER, FetchMode.BROWSER}:
+            if rendered.result.outcome is SourceOutcome.UNMEASURABLE:
+                return None
+            return rendered
+        return None
 
     def _from_http(self, url: str, response: HttpResponse, outcome: SourceOutcome) -> FetchResult:
         return FetchResult(

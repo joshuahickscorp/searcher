@@ -9,6 +9,7 @@ from searcher.contracts.enums import (
 )
 from searcher.contracts.routing import as_searched_no_match, assert_outcome_honest
 from searcher.core.errors import InvariantViolation
+from searcher.sources.challenge import looks_like_challenge as body_looks_like_challenge
 
 __all__ = [
     "BLOCKED_SOURCE_OUTCOMES",
@@ -87,18 +88,7 @@ def _as_text(body: bytes | str | None) -> str:
 
 
 def _looks_like_challenge(text: str) -> bool:
-    lowered = text.lower()
-    needles = (
-        "just a moment",
-        "attention required",
-        "cf-browser-verification",
-        "captcha",
-        "access denied",
-        "sorry, you have been blocked",
-        "enable javascript and cookies",
-        "unusual traffic",
-    )
-    return any(n in lowered for n in needles)
+    return body_looks_like_challenge(text)
 
 
 def refuse_no_match_collapse(outcome: SourceOutcome) -> SourceOutcome:

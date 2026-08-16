@@ -12,6 +12,7 @@ from searcher.contracts.enums import (
     BucketInternal,
     BucketPublic,
     CampaignState,
+    ExtractionMethod,
     FactClass,
     FactOrigin,
     FetchMode,
@@ -26,6 +27,7 @@ from searcher.contracts.enums import (
     SourceHealthState,
     SourceOutcome,
     TerminalVerdict,
+    VerificationVerdict,
     ViewHypothesis,
 )
 from searcher.contracts.primitives import (
@@ -333,6 +335,30 @@ class FetchAttempt(SearcherModel):
     error_class: str | None = None
 
 
+class FieldCheck(SearcherModel):
+    """One field compared during the listing-page verification pass."""
+
+    field: str
+    recorded: str | None = None
+    observed: str | None = None
+    verdict: VerificationVerdict
+    reason: str
+    checked_at: UtcDateTime
+    extraction_method: ExtractionMethod | None = None
+
+
+class VerificationRecord(SearcherModel):
+    """What was re-checked on the candidate's own page, and whether it matched."""
+
+    candidate_id: str
+    url: str
+    checked_at: UtcDateTime
+    fields: list[FieldCheck] = Field(default_factory=list)
+    extraction_method: ExtractionMethod | None = None
+    fetch_outcome: SourceOutcome | None = None
+    classification_note: str | None = None
+
+
 class ListingImage(SearcherModel):
     """§9.10"""
 
@@ -375,6 +401,7 @@ class ListingCandidate(SearcherModel):
     cluster_id: str | None = None
     explanation: PublicExplanation = Field(default_factory=PublicExplanation)
     language: str | None = None
+    verification: VerificationRecord | None = None
 
     @model_validator(mode="after")
     def seller_fields_are_reported(self) -> ListingCandidate:

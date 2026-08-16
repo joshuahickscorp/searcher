@@ -29,6 +29,7 @@ from searcher.sources.adapters.generic_page import listing_links
 from searcher.sources.adapters.sitemap import filter_locs, parse_sitemap_locs
 from searcher.sources.admission import AdmissionGate
 from searcher.sources.broker import Coverage, SourceBroker
+from searcher.sources.browser import BrowserPool
 from searcher.sources.cache import ResponseCache
 from searcher.sources.cancel import RunCancel
 from searcher.sources.circuit import CircuitBreaker, CircuitOpen
@@ -107,10 +108,33 @@ class DiscoveryEngine:
         )
         self.cache = ResponseCache(self.repos, controller.store)
         self.circuit = CircuitBreaker(self.health)
+        self.browsers: BrowserPool | None = None
 
     def close(self) -> None:
+        if self.browsers is not None:
+            self.browsers.close()
+            self.browsers = None
         if self.owns_http:
             self.http.close()
+
+    def _make_escalator(
+        self,
+        search_id: str,
+        *,
+        cancel: RunCancel | None = None,
+        log: FetchLog | None = None,
+    ) -> Escalator:
+        if self.browsers is None:
+            self.browsers = BrowserPool(user_agent=self.controller.settings.user_agent)
+        return Escalator(
+            self.http,
+            self.admission,
+            self.cache,
+            browsers=self.browsers,
+            fetch_log=log,
+            usage=self.controller.usage(search_id),
+            cancel=cancel,
+        )
 
     def run(
         self,
@@ -201,14 +225,7 @@ class DiscoveryEngine:
         frontier = Frontier(self.repos, run_id)
         frontier.recover()
         log = FetchLog(self.repos, search_id)
-        escalator = Escalator(
-            self.http,
-            self.admission,
-            self.cache,
-            fetch_log=log,
-            usage=self.controller.usage(search_id),
-            cancel=cancel,
-        )
+        escalator = self._make_escalator(search_id, cancel=cancel, log=log)
         if hasattr(adapter, "escalator"):
             cast(Any, adapter).escalator = escalator
         last_outcome = SourceOutcome.NOT_ATTEMPTED
@@ -435,7 +452,9 @@ class DiscoveryEngine:
                 return adapter.fetch(url, FetchMode.HTTP)  # type: ignore[no-any-return]
             except RuntimeError:
                 pass
-        return escalator.fetch(url, manifest, source_id=manifest.source_id)
+        return escalator.fetch(
+            url, manifest, source_id=manifest.source_id, allow_render=True
+        )
 
     def _finish_run(
         self,
@@ -474,12 +493,7 @@ class DiscoveryEngine:
         self, search_id: str, candidates: list[ListingCandidate]
     ) -> list[ListingCandidate]:  # noqa: E501
         updated: list[ListingCandidate] = []
-        escalator = Escalator(
-            self.http,
-            self.admission,
-            self.cache,
-            usage=self.controller.usage(search_id),
-        )
+        escalator = self._make_escalator(search_id)
         for candidate in candidates:
             try:
                 adapter = resolve_adapter(candidate.source_adapter)
@@ -497,3 +511,18 @@ class DiscoveryEngine:
             self.repos.upsert_candidate(search_id, fresh)
             updated.append(fresh)
         return updated
+
+    def verify_all(
+        self, search_id: str, candidates: list[ListingCandidate]
+    ) -> list[ListingCandidate]:
+        from searcher.verification.runner import verify_candidates
+
+        escalator = self._make_escalator(search_id)
+        return verify_candidates(
+            search_id,
+            candidates,
+            escalator,
+            resolve_adapter,
+            _adapter_manifest,
+            repos=self.repos,
+        )

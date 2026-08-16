@@ -83,9 +83,15 @@ DEPOP = PendingSpec(
     domain="www.depop.com",
     source_family=SourceFamily.LEGITIMATE,
     source_class="resale",
-    notes="Cloudflare interstitial on robots/terms 2026-08-16.",
-    open_question="Can robots.txt and terms be fetched without a challenge?",
-    robots_policy="robots.txt was behind a Cloudflare interstitial on 2026-08-16",
+    notes=(
+        "Browser robots.txt is real (Disallow /search/*; /products/ allowed). "
+        "Plain HTTP robots/item is 403. 2026-08-16."
+    ),
+    open_question="Is automated access of /products/ permitted given the 403 on honest HTTP?",
+    robots_policy=(
+        "Disallow /search/* magic-link selling/sold/likes filter queries; "
+        "/products/ allowed (browser 2026-08-16)"
+    ),
 )
 
 GRAILED = PendingSpec(
@@ -93,9 +99,15 @@ GRAILED = PendingSpec(
     domain="www.grailed.com",
     source_family=SourceFamily.LEGITIMATE,
     source_class="resale",
-    notes="Cloudflare block on robots/terms 2026-08-16.",
-    open_question="Can robots.txt and terms be fetched without a challenge?",
-    robots_policy="robots.txt was Cloudflare-blocked on 2026-08-16",
+    notes=(
+        "robots.txt is fetchable. /listings/<id> is allowed. "
+        "Listing pages return a Cloudflare Just a moment challenge. 2026-08-16."
+    ),
+    open_question="Can a listing page be read without a Cloudflare challenge?",
+    robots_policy=(
+        "Disallow /search /listings/*/edit account/checkout; "
+        "listings allowed (2026-08-16)"
+    ),
 )
 
 VESTIAIRE = PendingSpec(
@@ -103,9 +115,15 @@ VESTIAIRE = PendingSpec(
     domain="www.vestiairecollective.com",
     source_family=SourceFamily.LEGITIMATE,
     source_class="consignment",
-    notes="Cloudflare interstitial on robots/terms 2026-08-16.",
-    open_question="Can robots.txt and terms be fetched without a challenge?",
-    robots_policy="robots.txt was behind a Cloudflare interstitial on 2026-08-16",
+    notes=(
+        "HTTP robots.txt is a Cloudflare interstitial. Browser robots.txt is real. "
+        "HTTP listing fetches are challenged. 2026-08-16."
+    ),
+    open_question="Can robots.txt and a listing page be fetched over honest HTTP?",
+    robots_policy=(
+        "HTTP robots challenged; browser robots Disallow /admin/ /api/ /members/ "
+        "checkout (2026-08-16)"
+    ),
 )
 
 TAOBAO = PendingSpec(
@@ -124,10 +142,13 @@ WEIDIAN = PendingSpec(
     domain="weidian.com",
     source_family=SourceFamily.REPLICA,
     source_class="regional",
-    notes="robots.txt redirected to an abnormal 404 page on 2026-08-16.",
+    notes="robots.txt still redirected to h5.weidian.com/m/abnormal/404.html on 2026-08-16.",
     open_question="Is there a fetchable robots.txt and an admitted public listing path?",
     languages=("zh", "en"),
-    robots_policy="robots.txt redirected to h5.weidian.com/m/abnormal/404.html on 2026-08-16",
+    robots_policy=(
+        "robots.txt redirected to h5.weidian.com/m/abnormal/404.html "
+        "(HTTP and browser, 2026-08-16)"
+    ),
 )
 
 YUPOO = PendingSpec(
@@ -135,9 +156,10 @@ YUPOO = PendingSpec(
     domain="yupoo.com",
     source_family=SourceFamily.REPLICA,
     source_class="regional",
-    notes="robots.txt and terms were not fetched in this wave. No outbound host.",
-    open_question="What does robots.txt allow, and is album HTML an admitted listing path?",
+    notes="www.yupoo.com/robots.txt and /albums/ redirected to x.yupoo.com/404 on 2026-08-16.",
+    open_question="What does a real robots.txt allow, and is album HTML an admitted listing path?",
     languages=("zh", "en"),
+    robots_policy="robots.txt not present; /robots.txt redirected to x.yupoo.com/404 (2026-08-16)",
 )
 
 

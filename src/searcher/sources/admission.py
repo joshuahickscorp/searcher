@@ -65,7 +65,7 @@ class AdmissionGate:
                 SourceOutcome.BLOCKED_BY_POLICY,
                 f"search is not an admitted use of {manifest.source_id}",
             )
-        if purpose == "render" and not recorded.render:
+        if purpose == "render" and not recorded.render and not recorded.page_fetch:
             return AdmissionDecision(
                 False,
                 SourceOutcome.BLOCKED_BY_POLICY,

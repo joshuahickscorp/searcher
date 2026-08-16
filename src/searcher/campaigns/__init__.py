@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
+from typing import Any
+
 from searcher.campaigns.controller import CampaignController
 from searcher.campaigns.models import ResumeSnapshot, TransitionContext
-from searcher.campaigns.orchestrator import CampaignOrchestrator
 from searcher.campaigns.resume import reconstruct
 from searcher.campaigns.runner import FixtureRunner
 from searcher.campaigns.states import is_terminal
@@ -20,3 +21,11 @@ __all__ = [
     "is_terminal",
     "reconstruct",
 ]
+
+
+def __getattr__(name: str) -> Any:
+    if name == "CampaignOrchestrator":
+        from searcher.campaigns.orchestrator import CampaignOrchestrator
+
+        return CampaignOrchestrator
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

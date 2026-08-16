@@ -174,7 +174,12 @@ def check_candidate(
     manifest: SourceManifest,
     escalator: Escalator,
 ) -> tuple[ListingCandidate, LiveStatus]:
-    doc = escalator.fetch(candidate.canonical_url, manifest, source_id=manifest.source_id)
+    doc = escalator.fetch(
+        candidate.canonical_url,
+        manifest,
+        source_id=manifest.source_id,
+        allow_render=True,
+    )
     outcome = doc.result.outcome
     if outcome is SourceOutcome.SEARCHED_MATCHES_FOUND:
         outcome = classify_http(doc.result.http_status, body=doc.body)
