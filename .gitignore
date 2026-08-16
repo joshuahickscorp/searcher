@@ -3,6 +3,11 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .ruff_cache/
+.mypy_cache/
+.hypothesis/
+*.egg-info/
+dist/
+build/
 data/
 !data/.gitkeep
 exports/
@@ -12,3 +17,4 @@ node_modules/
 *.sqlite-wal
 *.sqlite-shm
 .env
+uv.lock.bak

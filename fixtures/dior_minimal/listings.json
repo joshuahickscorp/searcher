@@ -1,0 +1,109 @@
+{
+  "listings": [
+    {
+      "listing_id": "live-strong",
+      "url": "https://fixture.local/listings/dior-gat-07-001",
+      "title": "Dior Homme General Army Trainer 07",
+      "description": "Black/olive GAT, extra lateral and heel photos.",
+      "brand": "Dior Homme",
+      "model": "General Army Trainer 07",
+      "price": "850.00",
+      "currency": "EUR",
+      "size": "42",
+      "availability": "LIVE",
+      "destination_verified": true,
+      "evidence_completeness": 0.72,
+      "item_match": {"mean": 0.94, "lower_bound": 0.91, "upper_bound": 0.97},
+      "authenticity": {"mean": 0.86, "lower_bound": 0.82, "upper_bound": 0.90},
+      "support": ["lateral panel geometry", "heel overlay notch"],
+      "missing_evidence": [],
+      "images": [
+        {"role": "product", "bytes": "FIXTURE-IMAGE-DIOR-LATERAL-v1", "family_id": "family-lateral"},
+        {"role": "product", "bytes": "FIXTURE-IMAGE-DIOR-HEEL-v1", "family_id": "family-heel"}
+      ]
+    },
+    {
+      "listing_id": "live-incomplete",
+      "url": "https://fixture.local/listings/dior-gat-07-002",
+      "title": "Dior army trainer",
+      "description": "Looks right, label not photographed.",
+      "brand": "Dior Homme",
+      "model": "Army Trainer",
+      "price": "620.00",
+      "currency": "EUR",
+      "size": "42",
+      "availability": "LIVE",
+      "destination_verified": true,
+      "evidence_completeness": 0.40,
+      "item_match": {"mean": 0.78, "lower_bound": 0.62, "upper_bound": 0.88},
+      "authenticity": {"mean": 0.55, "lower_bound": 0.35, "upper_bound": 0.70},
+      "support": ["silhouette"],
+      "missing_evidence": ["tongue label", "outsole"],
+      "images": [
+        {"role": "product", "bytes": "FIXTURE-IMAGE-DIOR-COMPRESSED-v1", "family_id": "family-compressed"}
+      ]
+    },
+    {
+      "listing_id": "sold-mirror",
+      "url": "https://fixture.local/listings/dior-gat-07-003-sold",
+      "title": "Dior Homme General Army Trainer 07 — sold",
+      "description": "Same photographs as the live listing.",
+      "brand": "Dior Homme",
+      "model": "General Army Trainer 07",
+      "price": "850.00",
+      "currency": "EUR",
+      "size": "42",
+      "availability": "SOLD",
+      "destination_verified": true,
+      "evidence_completeness": 0.72,
+      "item_match": {"mean": 0.94, "lower_bound": 0.91, "upper_bound": 0.97},
+      "authenticity": {"mean": 0.86, "lower_bound": 0.82, "upper_bound": 0.90},
+      "support": ["reused photograph family"],
+      "images": [
+        {"role": "product", "bytes": "FIXTURE-IMAGE-DIOR-LATERAL-v1", "family_id": "family-lateral"}
+      ]
+    },
+    {
+      "listing_id": "affiliate-mirror",
+      "url": "https://fixture.local/mirrors/dior-gat-07-001",
+      "title": "Buy Dior GAT 07",
+      "description": "Affiliate copy of the live listing.",
+      "brand": "Dior Homme",
+      "model": "General Army Trainer 07",
+      "price": "860.00",
+      "currency": "EUR",
+      "size": "42",
+      "availability": "LIVE",
+      "destination_verified": true,
+      "evidence_completeness": 0.50,
+      "item_match": {"mean": 0.90, "lower_bound": 0.84, "upper_bound": 0.94},
+      "authenticity": {"mean": 0.70, "lower_bound": 0.55, "upper_bound": 0.80},
+      "support": ["same photograph as live-strong"],
+      "images": [
+        {"role": "product", "bytes": "FIXTURE-IMAGE-DIOR-LATERAL-v1", "family_id": "family-lateral"}
+      ]
+    },
+    {
+      "listing_id": "hard-veto",
+      "url": "https://fixture.local/listings/wrong-model-009",
+      "title": "Dior B01 sneaker",
+      "description": "Different last, different panel count.",
+      "brand": "Dior",
+      "model": "B01",
+      "price": "900.00",
+      "currency": "EUR",
+      "size": "42",
+      "availability": "LIVE",
+      "destination_verified": true,
+      "evidence_completeness": 0.80,
+      "item_match": {"mean": 0.20, "lower_bound": 0.05, "upper_bound": 0.35},
+      "authenticity": {"mean": 0.50, "lower_bound": 0.30, "upper_bound": 0.70},
+      "hard_item_contradictions": ["panel-count-mismatch"],
+      "hard_visual_vetoes": ["wrong-last-geometry"],
+      "hard_vetoes": ["hard-visual-mismatch"],
+      "images": [
+        {"role": "product", "bytes": "FIXTURE-IMAGE-WRONG-MODEL-v1", "family_id": "family-wrong"}
+      ]
+    }
+  ]
+}

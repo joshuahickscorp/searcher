@@ -1,0 +1,82 @@
+[project]
+name = "searcher"
+version = "0.1.0"
+description = "Evidence-ranked multimodal search engine for hard-to-find physical products."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "pydantic>=2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "pytest-timeout>=2",
+    "hypothesis>=6",
+    "ruff>=0.8",
+    "mypy>=1.13",
+]
+
+[project.scripts]
+searcher = "searcher.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest>=8",
+    "pytest-timeout>=2",
+    "hypothesis>=6",
+    "ruff>=0.8",
+    "mypy>=1.13",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/searcher"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["searcher"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+warn_return_any = true
+disallow_untyped_defs = true
+disallow_any_generics = true
+disallow_incomplete_defs = true
+no_implicit_optional = true
+no_implicit_reexport = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+check_untyped_defs = true
+mypy_path = "src"
+packages = ["searcher"]
+plugins = ["pydantic.mypy"]
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+timeout = 60
+filterwarnings = [
+    "error",
+    "ignore::ResourceWarning",
+    "ignore::hypothesis.errors.NonInteractiveExampleWarning",
+]

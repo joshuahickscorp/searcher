@@ -1,0 +1,34 @@
+{
+  "created_at": "2007-06-15T12:00:00+00:00",
+  "text": "Dior Homme General Army Trainer 07",
+  "tags": ["dior", "homme", "gat", "2007", "footwear"],
+  "constraints": {
+    "category": "footwear",
+    "brand": "Dior Homme",
+    "colour": "black/olive"
+  },
+  "budget": {
+    "wall_seconds": 300,
+    "source_limit": 8,
+    "page_limit": 50,
+    "browser_page_limit": 0,
+    "image_limit": 40,
+    "model_call_limit": 0,
+    "byte_limit": 50000000,
+    "monetary_limit": null
+  },
+  "images": [
+    {
+      "reference_image_id": "ref-lateral",
+      "bytes": "FIXTURE-IMAGE-DIOR-LATERAL-v1",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "reference_image_id": "ref-heel",
+      "bytes": "FIXTURE-IMAGE-DIOR-HEEL-v1",
+      "width": 64,
+      "height": 64
+    }
+  ]
+}
