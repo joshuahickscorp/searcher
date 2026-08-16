@@ -6,6 +6,15 @@ const ACCEPT_EXT = /\.(jpe?g|png|webp|gif)$/i;
 const MAX_IMAGES = 10;
 const MAX_BYTES = 20 * 1024 * 1024;
 
+// Name is prefixed into the existing text field. There is no separate API field.
+export function composeSearchText(name, known) {
+  const titled = String(name || "").trim();
+  const rest = String(known || "").trim();
+  if (titled && rest) return `Name: ${titled}\n\n${rest}`;
+  if (titled) return `Name: ${titled}`;
+  return rest;
+}
+
 function looksLikeImage(file) {
   if (ACCEPT.has(file.type)) return true;
   if (!file.type && ACCEPT_EXT.test(file.name || "")) return true;
@@ -18,6 +27,7 @@ export function createForm({ onSubmit }) {
   const fileInput = $("file-input");
   const thumbs = $("thumbs");
   const imageError = $("image-error");
+  const itemName = $("item-name");
   const know = $("know");
   const tagInput = $("tag-input");
   const chips = $("chips");
@@ -182,7 +192,7 @@ export function createForm({ onSubmit }) {
     }
     onSubmit({
       files: files.map((row) => row.file),
-      text: know.value.trim(),
+      text: composeSearchText(itemName.value, know.value),
       tags: tags.slice(),
     });
   });
@@ -194,7 +204,11 @@ export function createForm({ onSubmit }) {
   return {
     renderRecent,
     getDraft() {
-      return { text: know.value.trim(), tags: tags.slice() };
+      return {
+        name: itemName.value.trim(),
+        text: know.value.trim(),
+        tags: tags.slice(),
+      };
     },
     setBusy(busy) {
       searchButton.disabled = busy || files.length === 0;

@@ -109,13 +109,16 @@ export function missingOr(value, fallback = "Not provided by the search service.
 }
 
 export const REAL_SUBTITLE =
-  "High confidence under the available evidence and the current benchmark — not a professional authentication guarantee.";
+  "High confidence this is the same item under the current evidence — not a professional authentication guarantee.";
 
 export const POSSIBLE_SUBTITLE =
-  "The item may match, but important evidence is missing or conflicting.";
+  "May be the same item; evidence is missing or conflicting.";
+
+export const REPLICA_SUBTITLE =
+  "From replica sources. A replica listing can never be ranked Real.";
 
 export const NO_REAL =
   "No candidate met the Real threshold yet.";
 
 export const NO_CANDIDATES =
-  "Searcher did not find a displayable candidate within this search’s current source and budget coverage.";
+  "No displayable candidate within this search’s current source and budget coverage.";

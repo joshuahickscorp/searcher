@@ -1,0 +1,27 @@
+What left the first screen, and where it lives now
+
+Removed from the first screen
+- Tagline “Find the exact item, not merely something similar.”
+  Dropped from the header. Product voice, not a legal obligation.
+- Header links Privacy and Limitations
+  One-line footer: “Not a professional authenticator. Privacy · Limitations”
+- Dropzone paragraph and “1 to 10 raster images…”
+  Hint is now “Drop, click, or paste.” The 1–10 constraint remains in a
+  visually-hidden description and in the unchanged validation messages.
+- Tag helper paragraph (“Comma or Enter…”)
+  Visually hidden; still tied to the tag field via aria-describedby.
+- Long results disclaimer defining Real / Possibly Real
+  Compressed to one line in the drawer. Full definitions added to #/limitations.
+  Tab subtitles still state what each list means.
+
+Not deleted
+- #/privacy and #/limitations routes and their original content.
+- Client-side validation messages (wording unchanged).
+- Honest empty / blocked handling: coverage, per-source outcomes, stated reason.
+- Real and Possibly Real lists (Replica is a third list, never merged).
+
+Moved onto #/limitations
+- Searcher is not a professional authenticator (already there).
+- What Real and Possibly Real mean (added).
+- Replica sources are searched to find replicas; a replica listing can never
+  be ranked Real (added).

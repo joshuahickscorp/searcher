@@ -53,7 +53,9 @@ export function saveDevMode(on) {
 }
 
 export function loadTab() {
-  return localStorage.getItem(TAB_KEY) === "possibly_real" ? "possibly_real" : "real";
+  const value = localStorage.getItem(TAB_KEY);
+  if (value === "possibly_real" || value === "replica") return value;
+  return "real";
 }
 
 export function saveTab(tab) {

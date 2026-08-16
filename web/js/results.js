@@ -4,6 +4,7 @@ import {
   NO_REAL,
   POSSIBLE_SUBTITLE,
   REAL_SUBTITLE,
+  REPLICA_SUBTITLE,
   STAGES,
   availabilityLine,
   interval,
@@ -143,14 +144,14 @@ function coverageBlock(search) {
   const wrap = el("div");
   const cov = search.coverage || {};
   const groups = [
-    ["Sources completed", cov.sources_completed],
-    ["Sources blocked", cov.sources_blocked],
+    ["Completed", cov.sources_completed],
+    ["Blocked", cov.sources_blocked],
   ];
   for (const [title, rows] of groups) {
     wrap.appendChild(el("h4", { text: title }));
     const list = Array.isArray(rows) ? rows : [];
     if (!list.length) {
-      wrap.appendChild(el("p", { text: "None reported." }));
+      wrap.appendChild(el("p", { text: "None." }));
     } else {
       wrap.appendChild(el("ul", {}, list.map((row) => {
         const bits = [row.name || row.id || "Source", row.status, row.detail].filter(Boolean);
@@ -159,9 +160,9 @@ function coverageBlock(search) {
     }
   }
   const missing = Array.isArray(search.missing_reference_views) ? search.missing_reference_views : [];
-  wrap.appendChild(el("h4", { text: "Most valuable missing reference views" }));
+  wrap.appendChild(el("h4", { text: "Missing views" }));
   if (!missing.length) {
-    wrap.appendChild(el("p", { text: "None reported." }));
+    wrap.appendChild(el("p", { text: "None." }));
   } else {
     wrap.appendChild(el("ul", {}, missing.map((row) => (
       el("li", { text: row.view ? `${row.view} — ${row.why || ""}`.trim() : String(row) })
@@ -170,8 +171,8 @@ function coverageBlock(search) {
   wrap.appendChild(el("h4", { text: "Deeper refresh" }));
   wrap.appendChild(el("p", {
     text: search.deeper_refresh_available
-      ? "A deeper refresh is available from the search service."
-      : "A deeper refresh is not available for this search.",
+      ? "Deeper refresh is available."
+      : "Deeper refresh is not available.",
   }));
   if (cov.pages_fetched != null) {
     wrap.appendChild(el("p", { text: `Pages fetched: ${cov.pages_fetched}. Candidates normalized: ${cov.candidates_normalized ?? "not provided"}.` }));
@@ -179,7 +180,7 @@ function coverageBlock(search) {
   return wrap;
 }
 
-export function createResults({ apiBase, onCompare, onCancel, onDelete, onClose, onTab }) {
+export function createResults({ apiBase, onCompare, onCancel, onDelete, onClose, onTab, replicaScope }) {
   const drawer = $("results");
   const status = $("campaign-status");
   const cancelBtn = $("cancel-search");
@@ -193,16 +194,20 @@ export function createResults({ apiBase, onCompare, onCancel, onDelete, onClose,
   const terminalNote = $("terminal-note");
   const countReal = $("count-real");
   const countPossible = $("count-possible");
+  const countReplica = $("count-replica");
   const subtitle = $("tab-subtitle");
   const hiddenNote = $("hidden-note");
   const panelReal = $("panel-real");
   const panelPossible = $("panel-possible");
+  const panelReplica = $("panel-replica");
   const listReal = $("list-real");
   const listPossible = $("list-possible");
+  const listReplica = $("list-replica");
   const emptyReal = $("empty-real");
   const emptyPossible = $("empty-possible");
   const tabReal = $("tab-real");
   const tabPossible = $("tab-possible");
+  const tabReplica = $("tab-replica");
   const coverage = $("coverage");
   const coverageBody = $("coverage-body");
 
@@ -235,7 +240,7 @@ export function createResults({ apiBase, onCompare, onCancel, onDelete, onClose,
     });
     const busy = Boolean(search && !search.terminal_status && stage);
     progress.classList.toggle("is-busy", busy);
-    text(progressNow, stage || (search && search.terminal_status ? "Search finished" : "Starting"));
+    text(progressNow, (search && search.terminal_status) ? "Search finished" : (stage || "Starting"));
     show(progress, Boolean(stage || (search && !search.terminal_status)));
   }
 
@@ -267,7 +272,7 @@ export function createResults({ apiBase, onCompare, onCancel, onDelete, onClose,
     if (realN === 0) {
       emptyReal.appendChild(el("p", { text: NO_REAL }));
       if (posN > 0) {
-        emptyReal.appendChild(el("p", { text: "Possibly Real results are available in the other tab." }));
+        emptyReal.appendChild(el("p", { text: "See Possibly Real." }));
       }
       show(emptyReal, tab === "real");
     } else {
@@ -285,13 +290,13 @@ export function createResults({ apiBase, onCompare, onCancel, onDelete, onClose,
     const reason = search.terminal_reason || "";
     let message = "";
     if (terminal === "CANCELLED") {
-      message = reason || "This search was cancelled. Evidence gathered before cancellation is kept.";
+      message = reason || "Search cancelled. Evidence gathered before cancellation is kept.";
     } else if (terminal === "BLOCKED") {
-      message = reason || "This search is blocked. Searcher could not complete the declared goal because of access, policy, or missing reference evidence. This is not the same as finding no matching item.";
+      message = reason || "Search blocked. Access, policy, or missing reference evidence stopped the goal. This is not the same as finding no matching item.";
     } else if (terminal === "FAILED") {
-      message = reason || "This search failed because of an internal error. It is not a “no results” outcome.";
+      message = reason || "Search failed from an internal error. It is not a “no results” outcome.";
     } else if (terminal === "PARTIAL") {
-      message = reason || "This search finished with incomplete coverage. Some sources were blocked or the budget ended before the search was exhausted.";
+      message = reason || "Search finished with incomplete coverage. Some sources were blocked or the budget ended first.";
     } else if (terminal === "COMPLETE") {
       message = "";
     }
@@ -326,15 +331,38 @@ export function createResults({ apiBase, onCompare, onCancel, onDelete, onClose,
     }
   }
 
+  function replicaVisible() {
+    if (typeof replicaScope === "function" && !replicaScope()) return false;
+    for (const result of results.values()) {
+      if (result.bucket === "replica") return true;
+    }
+    return false;
+  }
+
+  function visibleTabIds() {
+    const ids = ["real", "possibly_real"];
+    if (replicaVisible()) ids.push("replica");
+    return ids;
+  }
+
+  function tabButton(id) {
+    if (id === "replica") return tabReplica;
+    if (id === "possibly_real") return tabPossible;
+    return tabReal;
+  }
+
   function paintLists() {
     const real = [];
     const possible = [];
+    const replica = [];
     for (const result of results.values()) {
       if (result.bucket === "real") real.push(result);
-      else possible.push(result);
+      else if (result.bucket === "possibly_real") possible.push(result);
+      else if (result.bucket === "replica") replica.push(result);
     }
     real.sort((a, b) => (a.rank || 0) - (b.rank || 0));
     possible.sort((a, b) => (a.rank || 0) - (b.rank || 0));
+    replica.sort((a, b) => (a.rank || 0) - (b.rank || 0));
 
     function order(list, parent) {
       for (const result of list) {
@@ -348,39 +376,65 @@ export function createResults({ apiBase, onCompare, onCancel, onDelete, onClose,
     }
     order(real, listReal);
     order(possible, listPossible);
+    order(replica, listReplica);
     text(countReal, String(real.length));
     text(countPossible, String(possible.length));
+    text(countReplica, String(replica.length));
     if (search) {
       search.counts = search.counts || {};
       search.counts.real = real.length;
       search.counts.possibly_real = possible.length;
     }
+    syncReplicaScope();
     emptyCopy();
   }
 
   function setTab(next, { announceChange = false } = {}) {
-    tab = next === "possibly_real" ? "possibly_real" : "real";
-    const isReal = tab === "real";
-    tabReal.setAttribute("aria-selected", isReal ? "true" : "false");
-    tabPossible.setAttribute("aria-selected", isReal ? "false" : "true");
-    tabReal.tabIndex = isReal ? 0 : -1;
-    tabPossible.tabIndex = isReal ? -1 : 0;
-    show(panelReal, isReal);
-    show(panelPossible, !isReal);
-    text(subtitle, isReal ? REAL_SUBTITLE : POSSIBLE_SUBTITLE);
+    const allowed = visibleTabIds();
+    if (!allowed.includes(next)) next = "real";
+    tab = next;
+    const defs = [
+      ["real", tabReal, panelReal, REAL_SUBTITLE, "Real tab"],
+      ["possibly_real", tabPossible, panelPossible, POSSIBLE_SUBTITLE, "Possibly Real tab"],
+      ["replica", tabReplica, panelReplica, REPLICA_SUBTITLE, "Replica tab"],
+    ];
+    for (const [id, btn, panel, sub, spoken] of defs) {
+      const selected = tab === id;
+      const present = id !== "replica" || replicaVisible();
+      btn.setAttribute("aria-selected", selected ? "true" : "false");
+      btn.tabIndex = selected ? 0 : -1;
+      show(btn, present);
+      show(panel, selected && present);
+      if (selected) text(subtitle, sub);
+      if (selected && announceChange) announce(spoken);
+    }
     emptyCopy();
-    if (announceChange) announce(isReal ? "Real tab" : "Possibly Real tab");
     onTab(tab);
+  }
+
+  function syncReplicaScope() {
+    const on = replicaVisible();
+    show(tabReplica, on);
+    if (!on && tab === "replica") {
+      setTab("real");
+      return;
+    }
+    if (tab === "replica") show(panelReplica, on);
+    else show(panelReplica, false);
   }
 
   tabReal.addEventListener("click", () => setTab("real", { announceChange: true }));
   tabPossible.addEventListener("click", () => setTab("possibly_real", { announceChange: true }));
+  tabReplica.addEventListener("click", () => setTab("replica", { announceChange: true }));
   document.querySelector(".tabs").addEventListener("keydown", (ev) => {
     if (ev.key !== "ArrowRight" && ev.key !== "ArrowLeft") return;
     ev.preventDefault();
-    const next = tab === "real" ? "possibly_real" : "real";
+    const ids = visibleTabIds();
+    const idx = Math.max(0, ids.indexOf(tab));
+    const step = ev.key === "ArrowRight" ? 1 : -1;
+    const next = ids[(idx + step + ids.length) % ids.length];
     setTab(next, { announceChange: true });
-    (next === "real" ? tabReal : tabPossible).focus();
+    tabButton(next).focus();
   });
   cancelBtn.addEventListener("click", () => onCancel());
   deleteBtn.addEventListener("click", () => onDelete());
@@ -403,6 +457,7 @@ export function createResults({ apiBase, onCompare, onCancel, onDelete, onClose,
       cards.clear();
       clear(listReal);
       clear(listPossible);
+      clear(listReplica);
       search = null;
       lastStage = null;
       show(streamNote, false);
@@ -412,14 +467,17 @@ export function createResults({ apiBase, onCompare, onCancel, onDelete, onClose,
       show(coverage, false);
       show(cancelBtn, false);
       show(deleteBtn, false);
+      show(tabReplica, false);
+      show(panelReplica, false);
       text(status, "");
       text(countReal, "0");
       text(countPossible, "0");
+      text(countReplica, "0");
     },
     setSearch(next) {
       search = next;
       const stage = currentStage();
-      text(status, stage || (search.terminal_status ? search.terminal_status : search.state || ""));
+      text(status, search.terminal_status || stage || search.state || "");
       show(cancelBtn, !search.terminal_status);
       show(deleteBtn, Boolean(search.terminal_status));
       renderStages();
@@ -467,9 +525,10 @@ export function createResults({ apiBase, onCompare, onCancel, onDelete, onClose,
       paintLists();
     },
     loadResults(payload) {
-      if (payload.real || payload.possibly_real) {
+      if (payload.real || payload.possibly_real || payload.replica) {
         for (const row of payload.real || []) this.upsertResult(row, "real");
         for (const row of payload.possibly_real || []) this.upsertResult(row, "possibly_real");
+        for (const row of payload.replica || []) this.upsertResult(row, "replica");
       } else if (Array.isArray(payload.results)) {
         const bucket = payload.bucket;
         for (const row of payload.results) this.upsertResult(row, bucket);
@@ -482,6 +541,7 @@ export function createResults({ apiBase, onCompare, onCancel, onDelete, onClose,
     getTab() {
       return tab;
     },
+    syncReplicaScope,
     announceStage(stage) {
       if (stage && stage !== lastStage) announce(stage);
       lastStage = stage;
