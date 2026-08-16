@@ -142,6 +142,19 @@ def layers_present() -> dict[str, bool]:
     return present
 
 
+def _from_index_feed(candidate: object) -> bool:
+    """True when an authoritative source feed published this URL itself.
+
+    structured_data is a plain dict on the model, not an object; reading it with
+    getattr silently answered False for every candidate.
+    """
+    structured = getattr(candidate, "structured_data", None)
+    if not isinstance(structured, dict):
+        return False
+    raw = structured.get("raw")
+    return bool(raw.get("from_index_feed")) if isinstance(raw, dict) else False
+
+
 class CampaignOrchestrator:
     """Walk §10.1 states in §8.2 order. Every stage is optional and degradable."""
 
@@ -164,6 +177,7 @@ class CampaignOrchestrator:
         self.round = 1
         self._started = 0.0
         self._destination_verified: dict[str, bool] = {}
+        self._destination_attested: dict[str, bool] = {}
         self._kept_ids: list[str] = []
 
     def run(self, search_id: str) -> None:
@@ -914,6 +928,7 @@ class CampaignOrchestrator:
         for candidate in updated:
             live = candidate.availability is Availability.LIVE
             dest = live and candidate.availability is Availability.LIVE
+            self._destination_attested[candidate.candidate_id] = _from_index_feed(candidate)
             self._destination_verified[candidate.candidate_id] = dest
             utility = listing_utility(candidate, destination_verified=dest)
             if not any(
@@ -945,7 +960,11 @@ class CampaignOrchestrator:
                 reason="live check of discovered listings",
             ).seal()
         )
-        self.controller.set_runtime(search_id, destination_verified=self._destination_verified)
+        self.controller.set_runtime(
+            search_id,
+            destination_verified=self._destination_verified,
+            destination_attested=self._destination_attested,
+        )
         del now
 
     def _score_payloads(
@@ -993,6 +1012,9 @@ class CampaignOrchestrator:
         intent = self.controller.repos.get_intent(search_id)
         runtime = self.controller.repos.get_runtime(search_id)
         dest_map = dict(runtime.get("destination_verified") or self._destination_verified)
+        attested_map = dict(
+            runtime.get("destination_attested") or self._destination_attested
+        )
         utilities: dict[str, ListingUtility] = {}
         for candidate in candidates:
             match_row = match_rows.get(candidate.candidate_id)
@@ -1026,6 +1048,7 @@ class CampaignOrchestrator:
                 completeness_value=complete,
                 constraints=intent.constraints,
                 destination_verified=dest,
+                destination_attested=bool(attested_map.get(candidate.candidate_id, False)),
                 policy=policy,
                 live_checked=live_checked,
             )

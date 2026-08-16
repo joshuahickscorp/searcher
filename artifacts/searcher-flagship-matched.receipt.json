@@ -13,18 +13,18 @@
       "known_3.jpg"
     ]
   },
-  "search_id": "55d63712-a431-4b7e-82a9-c1862f44daab",
+  "search_id": "803c8d3c-677e-4dbb-8c23-82558f997494",
   "terminal_status": "PARTIAL",
   "terminal_reason": "budget exhausted",
   "counts": {
     "real": 0,
-    "possibly_real": 0,
-    "hidden": 8
+    "possibly_real": 5,
+    "hidden": 3
   },
   "summary": {
-    "met": 13,
-    "not_met": 3,
-    "not_evaluable": 8,
+    "met": 21,
+    "not_met": 1,
+    "not_evaluable": 2,
     "of": 24
   },
   "behaviours": [
@@ -43,7 +43,7 @@
     {
       "n": "3",
       "behaviour": "visible parts identified",
-      "verdict": "not evaluable",
+      "verdict": "met",
       "observation": "part evidence only appears on a published candidate"
     },
     {
@@ -85,32 +85,32 @@
     {
       "n": "10",
       "behaviour": "duplicates and copied-image families clustered",
-      "verdict": "not evaluable",
+      "verdict": "met",
       "observation": "cluster evidence rides on a published candidate"
     },
     {
       "n": "11",
       "behaviour": "broad retrieval preserves plausible candidates",
       "verdict": "met",
-      "observation": "counts={'real': 0, 'possibly_real': 0, 'hidden': 8}"
+      "observation": "counts={'real': 0, 'possibly_real': 5, 'hidden': 3}"
     },
     {
       "n": "12",
       "behaviour": "part-level comparison on top candidates",
-      "verdict": "not met",
-      "observation": "no published candidate carries a compare payload"
+      "verdict": "met",
+      "observation": "compare present"
     },
     {
       "n": "13",
       "behaviour": "model match and authenticity scored separately",
-      "verdict": "not evaluable",
+      "verdict": "met",
       "observation": "separate fields required on each published result"
     },
     {
       "n": "14",
       "behaviour": "live status checked",
-      "verdict": "not evaluable",
-      "observation": "nothing published"
+      "verdict": "met",
+      "observation": "last_checked_at present on published results"
     },
     {
       "n": "15",
@@ -121,25 +121,25 @@
     {
       "n": "16",
       "behaviour": "plausible but incomplete appear in Possibly Real",
-      "verdict": "not met",
-      "observation": "Possibly Real=0"
+      "verdict": "met",
+      "observation": "Possibly Real=5"
     },
     {
       "n": "17",
       "behaviour": "hard mismatches and counterfeits stay non-public",
       "verdict": "met",
-      "observation": "hidden=8; none of them appear in the public lists"
+      "observation": "hidden=3; none of them appear in the public lists"
     },
     {
       "n": "18",
       "behaviour": "every result opens the original listing",
-      "verdict": "not evaluable",
+      "verdict": "met",
       "observation": "each published result carries a url"
     },
     {
       "n": "19",
       "behaviour": "compare view shows evidence and missing views",
-      "verdict": "not evaluable",
+      "verdict": "met",
       "observation": "requires a published candidate"
     },
     {

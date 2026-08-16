@@ -71,6 +71,7 @@ def collect_hard_vetoes(
     auth_hard: list[str],
     item_lower: float,
     destination_verified: bool,
+    destination_attested: bool = False,
     stolen_photo: bool,
     duplicate_no_utility: bool,
     dead_listing_is_hard_veto: bool,
@@ -101,7 +102,17 @@ def collect_hard_vetoes(
         vetoes.append(STRONG_COUNTERFEIT)
     if stolen_photo or any("image-theft" in code for code in auth_hard):
         vetoes.append(IMAGE_THEFT_OR_SCAM)
-    if not destination_verified and candidate.availability is Availability.UNKNOWN:
+    if (
+        not destination_verified
+        and not destination_attested
+        and candidate.availability is Availability.UNKNOWN
+    ):
+        # Inaccessible means we have no reason to believe this URL resolves.
+        # A URL the shop itself published in its own product feed is not that:
+        # our own fetch being refused - a challenge, a rate limit - says
+        # something about us, not about whether the listing exists. Attested is
+        # weaker than verified and never claims the listing is live; it only
+        # stops a refused fetch from reading as a dead destination.
         vetoes.append(INACCESSIBLE)
     if dead_listing_is_hard_veto and candidate.availability not in {
         Availability.LIVE,

@@ -98,6 +98,12 @@ def browser_processes() -> int:
     return sum(1 for line in out.splitlines() if pattern.search(line) and "grep" not in line)
 
 
+def _listing_url(result: dict) -> str | None:
+    """The API projects the click-through as listing_url."""
+    value = result.get("listing_url") or result.get("url")
+    return str(value) if value else None
+
+
 def evaluate(
     state: dict,
     results: dict,
@@ -182,7 +188,7 @@ def evaluate(
                     "met" if hidden else "not evaluable",
                     f"hidden={hidden}; none of them appear in the public lists"))
     rows.append(row(18, "every result opens the original listing",
-                    "met" if published and all(r.get("url") for r in published)
+                    "met" if published and all(_listing_url(r) for r in published)
                     else ("not evaluable" if not published else "not met"),
                     "each published result carries a url"))
     rows.append(row(19, "compare view shows evidence and missing views",
