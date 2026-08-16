@@ -1,0 +1,90 @@
+{
+  "compared_at": "2026-08-16T21:25:00+00:00",
+  "head": "e1716058a93a31c6252f6f54867beb817e30b25a",
+  "receipts": {
+    "searcher-match-calibration.receipt.json": {
+      "stored": {
+        "protocol": "gallery of 59 shop.kind.co.jp listings, 24/28 DINOv2 vs 14/28 ResNet50",
+        "n_positive_pairs": 59,
+        "n_negative_pairs": 1711,
+        "positive_median": 0.8101,
+        "negative_median": 0.1606,
+        "negative_max": 0.9393,
+        "operating_threshold": 0.86,
+        "tpr_at_threshold": 0.322,
+        "fpr_at_threshold": 0.0094
+      },
+      "rerun_from_current_fixtures_and_local_weights": {
+        "command": "SEARCHER_EMBEDDING_WEIGHTS=... ~/.grok-vision/bin/python (see artifacts/redteam-calibration-rerun.json)",
+        "n_listings_in_fixture": 10,
+        "n_positive_pairs": 30,
+        "n_negative_pairs": 90,
+        "positive_median": 0.8534,
+        "negative_median": 0.8773,
+        "negative_max": 0.9717,
+        "tpr_at_0.86": 0.4667,
+        "fpr_at_0.86": 0.5889
+      },
+      "drift": "stored gallery/pair numbers cannot be reproduced. Current calibrator writes a different schema. Current fixture set has FPR 0.59 at the claimed 0.86 threshold, not 0.0094. No script in HEAD emits DINOv2 24/28 versus ResNet50 14/28."
+    },
+    "searcher-performance.receipt.json": {
+      "stored": {
+        "fixture_cold_ms": 96.412,
+        "fixture_warm_ms": 75.195,
+        "http_cold_campaign_ms": 1008.653,
+        "http_warm_campaign_ms": 258.992,
+        "http_warm_first_candidate_ms": 258.992
+      },
+      "rerun": {
+        "command": "uv run python -m searcher.bench --output artifacts/redteam-performance-rerun.json (from a git-archive copy with src/ present)",
+        "fixture_cold_ms": 52.95,
+        "fixture_warm_ms": 34.838,
+        "http_cold_campaign_ms": null,
+        "http_warm_campaign_ms": 43525.396,
+        "http_warm_first_candidate_ms": 39815.248
+      },
+      "drift": "fixture path still returns 5/5 candidates. HTTP cold wall is now null (no terminal). HTTP warm wall is 43.5s versus stored 0.26s. first_routed_result_ms remains null on both stored and rerun HTTP paths."
+    },
+    "searcher-adversarial-recall.receipt.json": {
+      "stored": {
+        "found": "0/21",
+        "terminal": "COMPLETE",
+        "reason": "coverage exhausted",
+        "wall_seconds": 2.02
+      },
+      "rerun": {
+        "command": "none — no runner, script, or test in HEAD produces this file",
+        "reproduced": false
+      },
+      "drift": "receipt is an orphan. The default _choose_terminal path still emits COMPLETE / coverage exhausted on empty coverage (orchestrator.py:1415), which matches the stored shape."
+    },
+    "artifacts/operator/RECEIPT.md": {
+      "stored": {
+        "sha": "a66414e",
+        "clone_to_search_s": 310.44,
+        "claimed_machine_path_s": 128,
+        "search_s": 124.6,
+        "public_results": "Real 0, Possibly Real 0, hidden 8",
+        "test_all": "250 passed, 3 skipped"
+      },
+      "rerun_notes": {
+        "head_now": "e171605",
+        "commits_since_receipt": "not a clean-clone of current HEAD",
+        "test_all_on_archive": "316 passed, 5 skipped, 1 deselected + 1 live_campaign passed"
+      },
+      "drift": "receipt SHA is 20+ commits behind HEAD. 128s is a subset of 310s. Flagship Dior search produced zero public results."
+    },
+    "artifacts/hardening/abuse-table.json": {
+      "stored_rows": 36,
+      "claimed_in_task_brief": 38,
+      "all_honest_in_table": true,
+      "live_discovery": false
+    },
+    "artifacts/hardening/soak.json": {
+      "stored_after_rss_kb": 90128,
+      "docs_hardening_after_rss_kb": 89008,
+      "all_blocked": true,
+      "live_discovery": false
+    }
+  }
+}

@@ -1,0 +1,343 @@
+{
+  "replica_phrases": {
+    "pattern_count": 11,
+    "rows": [
+      {
+        "title": "Unauthorized replica 1:1 of the original trainer",
+        "description": "This is a replica, not authentic.",
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica",
+        "vetoes": [
+          "SELF_DECLARED_REPLICA"
+        ]
+      },
+      {
+        "title": "Dior Homme General Army Trainer",
+        "description": "This is fake.",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Dior Homme General Army Trainer",
+        "description": "\u30b9\u30fc\u30d1\u30fc\u30b3\u30d4\u30fc \u30ec\u30d7\u30ea\u30ab",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Dior Homme GAT",
+        "description": "AAA+ batch, not branded as replica",
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica",
+        "vetoes": [
+          "SELF_DECLARED_REPLICA"
+        ]
+      },
+      {
+        "title": "Dior Homme GAT dupe",
+        "description": "",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Inspired by Dior Homme General Army Trainer",
+        "description": "",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Dior Homme GAT superfake",
+        "description": "",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Dior Homme GAT PK God factory",
+        "description": "",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Dior Homme GAT UA batch",
+        "description": "",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Dior Homme GAT 1\uff1a1",
+        "description": "",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Dior Homme GAT",
+        "description": "not genuine",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Dior Homme GAT mirror batch",
+        "description": "",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Dior Homme GAT homage",
+        "description": "",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Dior Homme GAT",
+        "description": "repsneaker quality",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Dior Homme GAT",
+        "description": "this pair is fake shoes",
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica",
+        "vetoes": [
+          "SELF_DECLARED_REPLICA"
+        ]
+      },
+      {
+        "title": "High quality reproduction of the trainer",
+        "description": "",
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica",
+        "vetoes": [
+          "SELF_DECLARED_REPLICA"
+        ]
+      },
+      {
+        "title": "Dior Homme GAT",
+        "description": "counterfeit",
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica",
+        "vetoes": [
+          "SELF_DECLARED_REPLICA"
+        ]
+      }
+    ],
+    "leaked_to_real": [],
+    "leaked_to_possibly_real": [
+      {
+        "title": "Dior Homme General Army Trainer",
+        "description": "This is fake.",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Dior Homme General Army Trainer",
+        "description": "\u30b9\u30fc\u30d1\u30fc\u30b3\u30d4\u30fc \u30ec\u30d7\u30ea\u30ab",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Dior Homme GAT dupe",
+        "description": "",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Inspired by Dior Homme General Army Trainer",
+        "description": "",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Dior Homme GAT superfake",
+        "description": "",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Dior Homme GAT PK God factory",
+        "description": "",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Dior Homme GAT UA batch",
+        "description": "",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Dior Homme GAT 1\uff1a1",
+        "description": "",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Dior Homme GAT",
+        "description": "not genuine",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Dior Homme GAT mirror batch",
+        "description": "",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Dior Homme GAT homage",
+        "description": "",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      },
+      {
+        "title": "Dior Homme GAT",
+        "description": "repsneaker quality",
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real",
+        "vetoes": []
+      }
+    ]
+  },
+  "replica_sidecars": {
+    "brand_only_detected": false,
+    "brand_only_routed": "possibly_real",
+    "brand_only_published": "possibly_real",
+    "brand_only_vetoes": [],
+    "yupoo_family": "replica",
+    "yupoo_published": "replica",
+    "yupoo_is_replica_result": true
+  },
+  "complete_zero_fetches": {
+    "empty_coverage_no_candidates": [
+      "COMPLETE",
+      "coverage exhausted"
+    ],
+    "completed_no_match_no_candidates": [
+      "COMPLETE",
+      "coverage exhausted"
+    ],
+    "bible_requires": "COMPLETE requires a search-exhaustion or success-saturation receipt; coverage exhausted with 0 pages is not saturation"
+  },
+  "capability_vs_call": {
+    "layers_present": {
+      "discovery": true,
+      "routing": true
+    },
+    "NEXT_VIEW": {
+      "available": true,
+      "notes": "Searcher-owned missing-evidence heuristic. Donor 3D next-view planner is deferred."
+    },
+    "DENSE_FEATURES": {
+      "available": false,
+      "notes": "No local embedding weights. Promotion through the learned path is blocked. Free and classical tiers remain available."
+    },
+    "dummy_weights": {
+      "find_local_weights": "/private/var/folders/yc/1c930rns2rz1_trh4xcd9_m00000gq/T/tmpnaezm_ww/embedding.pt",
+      "resolve_backend": "facebookresearch.dinov2.vits14",
+      "capability_available": true,
+      "capability_notes": "local weights at embedding.pt (facebookresearch.dinov2.vits14); torch loaded lazily at embed time; no download performed",
+      "embed_png": null
+    }
+  },
+  "result_without_reason": {
+    "images_compared_hardcoded_empty": true,
+    "views_mentions_compared_images": false,
+    "known_item_reason_null": true
+  },
+  "authenticity_bins": {
+    "table": "/private/tmp/searcher-rt-exec/fixtures/calibration/footwear_v1.json",
+    "bins": [
+      {
+        "raw": 0.45,
+        "cal_mean": 0.52,
+        "lo": 0.4,
+        "hi": 0.586,
+        "calibrated": true,
+        "ceiling": "fixture-calibrated:fixture-v1"
+      },
+      {
+        "raw": 0.5,
+        "cal_mean": 0.52,
+        "lo": 0.4,
+        "hi": 0.586,
+        "calibrated": true,
+        "ceiling": "fixture-calibrated:fixture-v1"
+      },
+      {
+        "raw": 0.55,
+        "cal_mean": 0.52,
+        "lo": 0.4,
+        "hi": 0.586,
+        "calibrated": true,
+        "ceiling": "fixture-calibrated:fixture-v1"
+      },
+      {
+        "raw": 0.61,
+        "cal_mean": 0.52,
+        "lo": 0.4,
+        "hi": 0.586,
+        "calibrated": true,
+        "ceiling": "fixture-calibrated:fixture-v1"
+      },
+      {
+        "raw": 0.62,
+        "cal_mean": 0.7,
+        "lo": 0.6,
+        "hi": 0.755,
+        "calibrated": true,
+        "ceiling": "fixture-calibrated:fixture-v1"
+      }
+    ]
+  }
+}
