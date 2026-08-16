@@ -1,0 +1,61 @@
+{
+  "backbone": "torchvision.resnet50.IMAGENET1K_V2",
+  "device": "cpu",
+  "fetch_date": "2026-08-16",
+  "fpr": 0.0333,
+  "listing_level": {
+    "fpr_at_0.94": 0.0444,
+    "n_negative_pairs": 45,
+    "n_positive_pairs": 10,
+    "negative_max": 0.954,
+    "negative_median": 0.8097,
+    "negative_min": 0.6714,
+    "positive_max": 0.9497,
+    "positive_median": 0.9302,
+    "positive_min": 0.8355,
+    "tpr_at_0.94": 0.2
+  },
+  "n_images": 30,
+  "n_listings": 10,
+  "n_negative_pairs": 90,
+  "n_positive_pairs": 30,
+  "negative_max": 0.954,
+  "negative_median": 0.7674,
+  "negative_min": 0.5827,
+  "notes": "Positives are two different photos of the same listing. Negatives are photos of different listings in the same KIND vendor collection (mostly tops). ImageNet features do not separate same-item views from other garments of the same brand; the operating point therefore fires mainly on near-duplicate frames (the live known-item case, where the user photos are the listing photos). ViT-B/16 IMAGENET1K_V1 was measured on the same pairs and was not adopted: at 0.90, TPR=0.167 FPR=0.056 versus ResNet50 at 0.94 TPR=0.067 FPR=0.033.",
+  "positive_max": 0.9497,
+  "positive_median": 0.576,
+  "positive_min": 0.2528,
+  "source": "https://shop.kind.co.jp/collections/willy-chavarria/products.json?limit=250",
+  "sweep": [
+    {"fpr": 0.778, "threshold": 0.7, "tpr": 0.467},
+    {"fpr": 0.644, "threshold": 0.74, "tpr": 0.467},
+    {"fpr": 0.544, "threshold": 0.76, "tpr": 0.467},
+    {"fpr": 0.433, "threshold": 0.78, "tpr": 0.467},
+    {"fpr": 0.356, "threshold": 0.8, "tpr": 0.433},
+    {"fpr": 0.3, "threshold": 0.82, "tpr": 0.4},
+    {"fpr": 0.267, "threshold": 0.84, "tpr": 0.367},
+    {"fpr": 0.189, "threshold": 0.86, "tpr": 0.333},
+    {"fpr": 0.167, "threshold": 0.88, "tpr": 0.333},
+    {"fpr": 0.111, "threshold": 0.9, "tpr": 0.267},
+    {"fpr": 0.067, "threshold": 0.92, "tpr": 0.267},
+    {"fpr": 0.033, "threshold": 0.94, "tpr": 0.067}
+  ],
+  "target_fpr": 0.05,
+  "target_listing": "https://shop.kind.co.jp/products/8001001141404",
+  "threshold": 0.94,
+  "tpr": 0.0667,
+  "vit_b16_imagenet1k_v1": {
+    "not_adopted": true,
+    "sweep": [
+      {"fpr": 0.967, "threshold": 0.5, "tpr": 0.833},
+      {"fpr": 0.722, "threshold": 0.6, "tpr": 0.567},
+      {"fpr": 0.456, "threshold": 0.7, "tpr": 0.467},
+      {"fpr": 0.222, "threshold": 0.8, "tpr": 0.467},
+      {"fpr": 0.111, "threshold": 0.85, "tpr": 0.367},
+      {"fpr": 0.056, "threshold": 0.9, "tpr": 0.167},
+      {"fpr": 0.0, "threshold": 0.95, "tpr": 0.0}
+    ]
+  },
+  "weights_identity": "torchvision.resnet50.IMAGENET1K_V2"
+}

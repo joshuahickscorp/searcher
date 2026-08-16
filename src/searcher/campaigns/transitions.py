@@ -85,6 +85,7 @@ _FORWARD: dict[CampaignState, frozenset[CampaignState]] = {
             CampaignState.BLOCKED,
             CampaignState.CANCELLED,
             CampaignState.FAILED,
+            CampaignState.PARTIAL,
         }
     ),
     CampaignState.NORMALIZING: frozenset(
@@ -93,6 +94,7 @@ _FORWARD: dict[CampaignState, frozenset[CampaignState]] = {
             CampaignState.BLOCKED,
             CampaignState.CANCELLED,
             CampaignState.FAILED,
+            CampaignState.PARTIAL,
         }
     ),
     CampaignState.DEDUPLICATING: frozenset(
@@ -101,6 +103,7 @@ _FORWARD: dict[CampaignState, frozenset[CampaignState]] = {
             CampaignState.BLOCKED,
             CampaignState.CANCELLED,
             CampaignState.FAILED,
+            CampaignState.PARTIAL,
         }
     ),
     CampaignState.BROAD_RETRIEVAL: frozenset(
@@ -110,6 +113,7 @@ _FORWARD: dict[CampaignState, frozenset[CampaignState]] = {
             CampaignState.BLOCKED,
             CampaignState.CANCELLED,
             CampaignState.FAILED,
+            CampaignState.PARTIAL,
         }
     ),
     CampaignState.FINE_MATCHING: frozenset(
@@ -119,6 +123,7 @@ _FORWARD: dict[CampaignState, frozenset[CampaignState]] = {
             CampaignState.BLOCKED,
             CampaignState.CANCELLED,
             CampaignState.FAILED,
+            CampaignState.PARTIAL,
         }
     ),
     CampaignState.AUTHENTICITY_REVIEW: frozenset(
@@ -127,6 +132,7 @@ _FORWARD: dict[CampaignState, frozenset[CampaignState]] = {
             CampaignState.BLOCKED,
             CampaignState.CANCELLED,
             CampaignState.FAILED,
+            CampaignState.PARTIAL,
         }
     ),
     CampaignState.LIVE_CHECKING: frozenset(
@@ -135,6 +141,7 @@ _FORWARD: dict[CampaignState, frozenset[CampaignState]] = {
             CampaignState.BLOCKED,
             CampaignState.CANCELLED,
             CampaignState.FAILED,
+            CampaignState.PARTIAL,
         }
     ),
     CampaignState.RANKING: frozenset(
@@ -143,6 +150,7 @@ _FORWARD: dict[CampaignState, frozenset[CampaignState]] = {
             CampaignState.BLOCKED,
             CampaignState.CANCELLED,
             CampaignState.FAILED,
+            CampaignState.PARTIAL,
         }
     ),
     CampaignState.PUBLISHING: frozenset(

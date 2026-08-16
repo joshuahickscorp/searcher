@@ -14,6 +14,7 @@ from searcher.core.capabilities import (
     CapabilityReport,
     CapabilityStability,
 )
+from searcher.core.embedding_gateway import embedding_capability
 from searcher.integrations.visionmcp.compatibility import (
     PINNED_SHA,
     PINNED_VERSION,
@@ -181,6 +182,9 @@ def probe_capabilities() -> CapabilityReport:
                 )
             )
             continue
+        if name is CapabilityName.DENSE_FEATURES:
+            records.append(embedding_capability())
+            continue
         if name is CapabilityName.BROWSER_CAPTURE:
             donor = mapped.get(name)
             available = bool(donor and donor.available)
@@ -205,10 +209,6 @@ def probe_capabilities() -> CapabilityReport:
             CapabilityName.OBJECT_SEGMENTATION: (
                 "ocular.segment deferred (classical GrabCut, not product parts). "
                 "Searcher cheap silhouette is DIAGNOSTIC only."
-            ),
-            CapabilityName.DENSE_FEATURES: (
-                "No learned backbone at pinned SHA. propose_dense_features is Canny/HOG. "
-                "Searcher cheap descriptors are not dense features."
             ),
             CapabilityName.LOGO_DETECTION: "No logo detector at pinned SHA.",
             CapabilityName.LOCAL_CORRESPONDENCE: (

@@ -75,7 +75,32 @@ STAGE_LANGUAGE: dict[str, str] = {
 
 REFERENCE_DONE = CampaignState.PLANNING_QUERIES.value
 
+# Fine match, authenticity, and live-check stay inside the sealed page/image
+# budget. Broad retrieval may keep many hits for recall scoring; only this
+# many go through the expensive remaining stages.
+FINE_COMPARE_CAP = 8
+
 _IMAGE_PREFIXES = (b"\x89PNG", b"\xff\xd8\xff", b"GIF87a", b"GIF89a")
+
+
+def select_kept_ids(
+    ranked_ids: list[str],
+    all_ids: list[str],
+    *,
+    cap: int = FINE_COMPARE_CAP,
+) -> list[str]:
+    """Highest-recall first, then fill from discovery order, never above cap."""
+    out: list[str] = []
+    seen: set[str] = set()
+    for cid in list(ranked_ids) + list(all_ids):
+        if not cid or cid in seen:
+            continue
+        out.append(cid)
+        seen.add(cid)
+        if len(out) >= cap:
+            break
+    return out
+
 
 _MATCH_STAGES = frozenset(
     {
@@ -166,6 +191,7 @@ class CampaignOrchestrator:
             return
         except BudgetExceeded:
             self._charge_wall(search_id)
+            self._salvage_publish(search_id)
             self._terminate(search_id, forced=CampaignState.PARTIAL, reason="budget exhausted")
         except SearcherError as exc:
             if exc.error_class is ErrorClass.CANCELLED:
@@ -492,6 +518,34 @@ class CampaignOrchestrator:
             "candidates_hidden": hidden,
         }
 
+    def _download_listing_image(
+        self,
+        image: ListingImage,
+        *,
+        search_id: str,
+        http: Any,
+        usage: Any,
+    ) -> tuple[ListingImage, bool]:
+        if image.content_digest or not image.remote_url:
+            return image, False
+        if usage.would_exceed(images=1) is not None:
+            return image, False
+        remote = image.remote_url
+        if not remote.startswith(("http://", "https://")):
+            return image, False
+        try:
+            response = http.get(remote, pace=False)
+        except Exception:
+            return image, False
+        body = getattr(response, "body", b"") or b""
+        if getattr(response, "status", 0) != 200 or not _looks_like_image(body):
+            return image, False
+        digest = self.controller.store.put_bytes(
+            body, zone="incoming", campaign_id=search_id, private=True
+        )
+        usage.consume(images=1, bytes=len(body))
+        return image.model_copy(update={"content_digest": digest}), True
+
     def _acquire(self, search_id: str) -> None:
         candidates = self.controller.repos.list_candidates(search_id)
         if not candidates or self.engine is None:
@@ -499,40 +553,33 @@ class CampaignOrchestrator:
         http = getattr(self.engine, "http", None)
         if http is None:
             return
-        usage = self.controller.usage(search_id)
-        for candidate in candidates:
-            updated_images: list[ListingImage] = []
-            changed = False
-            for image in candidate.images:
-                if image.content_digest or not image.remote_url:
-                    updated_images.append(image)
-                    continue
-                if usage.would_exceed(images=1) is not None:
-                    updated_images.append(image)
-                    continue
-                remote = image.remote_url
-                if not remote.startswith(("http://", "https://")):
-                    updated_images.append(image)
-                    continue
-                try:
-                    response = http.get(remote, pace=False)
-                except Exception:
-                    updated_images.append(image)
-                    continue
-                body = getattr(response, "body", b"") or b""
-                if getattr(response, "status", 0) != 200 or not _looks_like_image(body):
-                    updated_images.append(image)
-                    continue
-                digest = self.controller.store.put_bytes(
-                    body, zone="incoming", campaign_id=search_id, private=True
-                )
-                usage.consume(images=1, bytes=len(body))
-                updated_images.append(image.model_copy(update={"content_digest": digest}))
-                changed = True
-            if changed:
-                self.controller.repos.upsert_candidate(
-                    search_id, candidate.model_copy(update={"images": updated_images})
-                )
+        # One image per listing first so embeddings can weigh the catalog,
+        # then fill remaining slots until the image budget is gone.
+        for per_candidate in (1, None):
+            usage = self.controller.usage(search_id)
+            for candidate in self.controller.repos.list_candidates(search_id):
+                updated_images: list[ListingImage] = []
+                changed = False
+                downloaded = 0
+                for image in candidate.images:
+                    if (
+                        per_candidate is not None
+                        and downloaded >= per_candidate
+                        and not image.content_digest
+                    ):
+                        updated_images.append(image)
+                        continue
+                    fresh, did = self._download_listing_image(
+                        image, search_id=search_id, http=http, usage=usage
+                    )
+                    if did:
+                        downloaded += 1
+                        changed = True
+                    updated_images.append(fresh)
+                if changed:
+                    self.controller.repos.upsert_candidate(
+                        search_id, candidate.model_copy(update={"images": updated_images})
+                    )
         self.controller.persist_usage(search_id)
 
     def _normalize(self, search_id: str) -> None:
@@ -634,18 +681,18 @@ class CampaignOrchestrator:
             self._kept_ids = []
             return
         if "routing" in self.blocked_lanes:
-            self._kept_ids = [item.candidate_id for item in candidates]
+            self._kept_ids = select_kept_ids([], [item.candidate_id for item in candidates])
             return
         hypothesis = self._primary_hypothesis(search_id)
         if hypothesis is None:
             self.blocked_lanes["retrieval"] = "No hypothesis available for retrieval."
-            self._kept_ids = [item.candidate_id for item in candidates]
+            self._kept_ids = select_kept_ids([], [item.candidate_id for item in candidates])
             return
         try:
             from searcher.retrieval.pipeline import run_broad_retrieval
         except Exception as exc:
             self.blocked_lanes["retrieval"] = str(exc)
-            self._kept_ids = [item.candidate_id for item in candidates]
+            self._kept_ids = select_kept_ids([], [item.candidate_id for item in candidates])
             return
         ledger = CostLedger(search_id=search_id)
         pngs = {item.candidate_id: self._candidate_pngs(search_id, item) for item in candidates}
@@ -659,15 +706,8 @@ class CampaignOrchestrator:
             already_deduplicated=True,
         )
         kept = result.kept or result.hits
-        self._kept_ids = [hit.candidate.candidate_id for hit in kept]
-        held = set(self._kept_ids)
-        for candidate in candidates:
-            if candidate.candidate_id in held:
-                continue
-            self._kept_ids.append(candidate.candidate_id)
-            held.add(candidate.candidate_id)
-            if len(self._kept_ids) >= 8:
-                break
+        ranked_ids = [hit.candidate.candidate_id for hit in kept]
+        self._kept_ids = select_kept_ids(ranked_ids, [item.candidate_id for item in candidates])
         if not self._already_scored(search_id, "ITEM_MATCH", "broad"):
             for hit in kept:
                 mean = max(0.0, min(1.0, hit.signals.recall_score))
@@ -702,7 +742,7 @@ class CampaignOrchestrator:
         by_id = {item.candidate_id: item for item in listed}
         runtime = self.controller.repos.get_runtime(search_id)
         kept = list(self._kept_ids or runtime.get("kept_ids") or by_id.keys())
-        return [by_id[cid] for cid in kept if cid in by_id]
+        return [by_id[cid] for cid in kept if cid in by_id][:FINE_COMPARE_CAP]
 
     def _fine(self, search_id: str) -> None:
         candidates = self._candidates_for_match(search_id)
@@ -827,7 +867,10 @@ class CampaignOrchestrator:
             try:
                 updated = self.engine.live_check_all(search_id, candidates)
             except BudgetExceeded:
-                raise
+                self.blocked_lanes["live_check"] = "budget exhausted during live check"
+                listed = self.controller.repos.list_candidates(search_id)
+                by_id = {item.candidate_id: item for item in listed}
+                updated = [by_id.get(item.candidate_id, item) for item in candidates]
             except Exception as exc:
                 self.blocked_lanes["live_check"] = str(exc)
                 updated = candidates
@@ -1197,6 +1240,20 @@ class CampaignOrchestrator:
         current = self._cluster_count(search_id)
         self.controller.set_runtime(search_id, cluster_count=current)
         return bool(self.round > 1 and current <= previous)
+
+    def _salvage_publish(self, search_id: str) -> None:
+        """Rank and publish whatever scores exist so a budget stop is PARTIAL, not empty."""
+        if is_terminal(self.controller.get(search_id).state):
+            return
+        try:
+            if not self.controller.repos.list_decisions(search_id):
+                self._rank(search_id)
+            if self.controller.repos.list_decisions(
+                search_id
+            ) and not self.controller.repos.list_results(search_id):
+                self._publish(search_id)
+        except Exception:
+            return
 
     def _wall_exceeded(self, search_id: str) -> bool:
         if not self._started:

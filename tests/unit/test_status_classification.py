@@ -54,3 +54,38 @@ def test_liveness_sold_marker() -> None:
         outcome=SourceOutcome.SEARCHED_MATCHES_FOUND,
     )
     assert status.availability.value == "SOLD"
+
+
+def test_liveness_theme_sold_strings_do_not_override_instock() -> None:
+    body = """
+    <html><head>
+    <style>:root { --sold-out-badge-text: 0 0 0; }</style>
+    <script>window.theme = {soldOutButton: "Sold", soldoutLabel: "Sold out"};</script>
+    </head><body>
+    <script type="application/ld+json">
+    {"@type":"Product","offers":{"availability":"https://schema.org/InStock"}}
+    </script>
+    <button>カートに入れる</button>
+    </body></html>
+    """
+    status = classify_liveness(
+        http_status=200,
+        body=body,
+        outcome=SourceOutcome.SEARCHED_MATCHES_FOUND,
+    )
+    assert status.availability.value == "LIVE"
+    assert "InStock" in status.note
+
+
+def test_liveness_schema_outofstock_is_sold() -> None:
+    body = (
+        '<script type="application/ld+json">'
+        '{"@type":"Product","offers":{"availability":"https://schema.org/OutOfStock"}}'
+        "</script>"
+    )
+    status = classify_liveness(
+        http_status=200,
+        body=body,
+        outcome=SourceOutcome.SEARCHED_MATCHES_FOUND,
+    )
+    assert status.availability.value == "SOLD"

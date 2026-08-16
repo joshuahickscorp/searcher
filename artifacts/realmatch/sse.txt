@@ -1,0 +1,1274 @@
+: connected
+
+id: 1
+event: search.state
+data: {"state":"CREATED","version":0}
+
+id: 2
+event: search.state
+data: {"state":"VALIDATING_INPUT","version":1}
+
+id: 3
+event: search.progress
+data: {"stage":"Understanding the item","detail":null}
+
+id: 4
+event: search.state
+data: {"state":"INGESTING_REFERENCES","version":2}
+
+id: 5
+event: search.progress
+data: {"stage":"Reading visible labels","detail":null}
+
+id: 6
+event: search.state
+data: {"state":"CALIBRATING_REFERENCES","version":3}
+
+id: 7
+event: search.state
+data: {"state":"DECOMPOSING_REFERENCES","version":4}
+
+id: 8
+event: search.state
+data: {"state":"FORMING_HYPOTHESES","version":5}
+
+id: 9
+event: search.progress
+data: {"stage":"Building possible identities","detail":null}
+
+id: 10
+event: search.state
+data: {"state":"PLANNING_QUERIES","version":6}
+
+id: 11
+event: search.progress
+data: {"stage":"Searching exact names","detail":null}
+
+id: 12
+event: search.state
+data: {"state":"PLANNING_SOURCES","version":7}
+
+id: 13
+event: search.progress
+data: {"stage":"Searching international sources","detail":null}
+
+id: 14
+event: search.state
+data: {"state":"DISCOVERING","version":8}
+
+id: 15
+event: search.progress
+data: {"stage":"Searching international sources","detail":null}
+
+id: 16
+event: search.progress
+data: {"stage":"source_start","detail":null}
+
+id: 17
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 18
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 19
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 20
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 21
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 22
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 23
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 24
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 25
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 26
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 27
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 28
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 29
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 30
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 31
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 32
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 33
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 34
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+: heartbeat
+
+id: 35
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 36
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 37
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 38
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 39
+event: search.coverage
+data: {"sources_completed":[{"id":"wikimedia","name":"wikimedia","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":9,"candidates_normalized":0,"candidates_hidden":0}
+
+id: 40
+event: search.progress
+data: {"stage":"source_complete","detail":null}
+
+id: 41
+event: search.progress
+data: {"stage":"source_start","detail":null}
+
+id: 42
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 43
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 44
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 45
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 46
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 47
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 48
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 49
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 50
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 51
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 52
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 53
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 54
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 55
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 56
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 57
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 58
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 59
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 60
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 61
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 62
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 63
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 64
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 65
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 66
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 67
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 68
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 69
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 70
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 71
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 72
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 73
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 74
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 75
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 76
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 77
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 78
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 79
+event: candidate.discovered
+data: {"candidate_id":""}
+
+: heartbeat
+
+id: 80
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 81
+event: candidate.discovered
+data: {"candidate_id":""}
+
+: heartbeat
+
+id: 82
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 83
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 84
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 85
+event: candidate.discovered
+data: {"candidate_id":""}
+
+: heartbeat
+
+id: 86
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 87
+event: candidate.discovered
+data: {"candidate_id":""}
+
+: heartbeat
+
+id: 88
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 89
+event: candidate.discovered
+data: {"candidate_id":""}
+
+: heartbeat
+
+id: 90
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 91
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 92
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 93
+event: candidate.discovered
+data: {"candidate_id":""}
+
+: heartbeat
+
+id: 94
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 95
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 96
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 97
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 98
+event: search.coverage
+data: {"sources_completed":[{"id":"kind","name":"kind","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":10,"candidates_normalized":0,"candidates_hidden":0}
+
+id: 99
+event: search.progress
+data: {"stage":"source_complete","detail":null}
+
+id: 100
+event: search.progress
+data: {"stage":"source_start","detail":null}
+
+id: 101
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 102
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 103
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 104
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 105
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 106
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 107
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 108
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 109
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 110
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 111
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 112
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 113
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 114
+event: search.coverage
+data: {"sources_completed":[{"id":"komehyo","name":"komehyo","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":0,"candidates_normalized":0,"candidates_hidden":0}
+
+id: 115
+event: search.progress
+data: {"stage":"source_complete","detail":null}
+
+id: 116
+event: search.progress
+data: {"stage":"source_start","detail":null}
+
+id: 117
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 118
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 119
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 120
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 121
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 122
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 123
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 124
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 125
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 126
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 127
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 128
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 129
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 130
+event: search.coverage
+data: {"sources_completed":[{"id":"the_realreal","name":"the_realreal","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":0,"candidates_normalized":0,"candidates_hidden":0}
+
+id: 131
+event: search.progress
+data: {"stage":"source_complete","detail":null}
+
+id: 132
+event: search.progress
+data: {"stage":"source_start","detail":null}
+
+id: 133
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 134
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 135
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 136
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 137
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 138
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 139
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 140
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 141
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 142
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 143
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 144
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 145
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 146
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 147
+event: candidate.discovered
+data: {"candidate_id":""}
+
+: heartbeat
+
+id: 148
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 149
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 150
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 151
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 152
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 153
+event: candidate.discovered
+data: {"candidate_id":""}
+
+: heartbeat
+
+id: 154
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 155
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 156
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 157
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 158
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 159
+event: candidate.discovered
+data: {"candidate_id":""}
+
+: heartbeat
+
+id: 160
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 161
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 162
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 163
+event: candidate.discovered
+data: {"candidate_id":""}
+
+id: 164
+event: search.coverage
+data: {"sources_completed":[{"id":"byronesque","name":"byronesque","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":9,"candidates_normalized":0,"candidates_hidden":0}
+
+id: 165
+event: search.progress
+data: {"stage":"source_complete","detail":null}
+
+id: 166
+event: search.progress
+data: {"stage":"source_start","detail":null}
+
+id: 167
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 168
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 169
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 170
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 171
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 172
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 173
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 174
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 175
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 176
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 177
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 178
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 179
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 180
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 181
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 182
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 183
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 184
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 185
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 186
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 187
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 188
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 189
+event: search.coverage
+data: {"sources_completed":[{"id":"heroine","name":"heroine","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":0,"candidates_normalized":0,"candidates_hidden":0}
+
+id: 190
+event: search.progress
+data: {"stage":"source_complete","detail":null}
+
+id: 191
+event: search.progress
+data: {"stage":"source_start","detail":null}
+
+id: 192
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
+
+id: 193
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 194
+event: search.coverage
+data: {"sources_completed":[{"id":"ebay","name":"ebay","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":0,"candidates_normalized":0,"candidates_hidden":0}
+
+id: 195
+event: search.progress
+data: {"stage":"source_complete","detail":null}
+
+id: 196
+event: search.coverage
+data: {"sources_completed":[{"detail":"","id":"wikimedia","name":"wikimedia","status":"SEARCHED_NO_MATCH"},{"detail":"","id":"kind","name":"kind","status":"SEARCHED_MATCHES_FOUND"},{"detail":"","id":"komehyo","name":"komehyo","status":"SEARCHED_NO_MATCH"},{"detail":"","id":"the_realreal","name":"the_realreal","status":"SEARCHED_NO_MATCH"},{"detail":"","id":"byronesque","name":"byronesque","status":"SEARCHED_MATCHES_FOUND"}],"sources_blocked":[{"detail":"","id":"heroine","name":"heroine","status":"BLOCKED_BY_POLICY"},{"detail":"","id":"ebay","name":"ebay","status":"AUTH_REQUIRED"}],"sources_in_progress":[],"pages_fetched":28,"candidates_normalized":34,"candidates_hidden":0}
+
+id: 197
+event: candidate.discovered
+data: {"candidate_id":"39aa0e63-9949-4bac-8154-8c69c3a45188"}
+
+id: 198
+event: candidate.discovered
+data: {"candidate_id":"a2848393-d902-4a12-b645-85318a6fe8aa"}
+
+id: 199
+event: candidate.discovered
+data: {"candidate_id":"65cb48aa-1cff-4eaf-877f-014e692fc266"}
+
+id: 200
+event: candidate.discovered
+data: {"candidate_id":"0005eeee-2950-4d72-b815-c19f949c1333"}
+
+id: 201
+event: candidate.discovered
+data: {"candidate_id":"7d3ae770-c4d7-49d3-95ce-0860e4b6db16"}
+
+id: 202
+event: candidate.discovered
+data: {"candidate_id":"b619ab0f-3def-48ce-9f64-d2e2d798d989"}
+
+id: 203
+event: candidate.discovered
+data: {"candidate_id":"604b0355-06e3-426d-a141-8ea2c55bf160"}
+
+id: 204
+event: candidate.discovered
+data: {"candidate_id":"80b7cb23-275b-424a-903f-50ec0436b300"}
+
+id: 205
+event: candidate.discovered
+data: {"candidate_id":"32011e40-d30f-447f-9f3a-ba175b794e68"}
+
+id: 206
+event: candidate.discovered
+data: {"candidate_id":"fd98ea89-924a-4ddb-826a-05ec34ee3fff"}
+
+id: 207
+event: candidate.discovered
+data: {"candidate_id":"4250b115-277d-4591-9ac3-71d7cf50aa3f"}
+
+id: 208
+event: candidate.discovered
+data: {"candidate_id":"20c22afa-8346-4836-8c85-d07db5e68ce2"}
+
+id: 209
+event: candidate.discovered
+data: {"candidate_id":"66b70314-111d-4ac7-926c-d38d7099e718"}
+
+id: 210
+event: candidate.discovered
+data: {"candidate_id":"d23e7ece-e5b8-4a24-bffb-353adf694174"}
+
+id: 211
+event: candidate.discovered
+data: {"candidate_id":"826238b4-e29c-4b7b-9fce-8c1b25ed3459"}
+
+id: 212
+event: candidate.discovered
+data: {"candidate_id":"d37017d2-64b9-414c-9c41-84928d8330ae"}
+
+id: 213
+event: candidate.discovered
+data: {"candidate_id":"e8666af9-4323-4370-8a9e-94ea8dcd7e6b"}
+
+id: 214
+event: candidate.discovered
+data: {"candidate_id":"aa387608-529f-47dc-823e-4fd35fc4b081"}
+
+id: 215
+event: candidate.discovered
+data: {"candidate_id":"1c971050-43ca-4af6-b935-f736a02275ad"}
+
+id: 216
+event: candidate.discovered
+data: {"candidate_id":"6cf787c9-30dd-4748-af7a-dde8a18bc432"}
+
+id: 217
+event: candidate.discovered
+data: {"candidate_id":"5cd3839d-d02f-43d1-ad5b-c67e85f7f1fd"}
+
+id: 218
+event: candidate.discovered
+data: {"candidate_id":"76d5a2ab-80af-4ecc-bfe8-34ee0f97d892"}
+
+id: 219
+event: candidate.discovered
+data: {"candidate_id":"3dcf565a-184d-4923-a203-245dc5cb3f4c"}
+
+id: 220
+event: candidate.discovered
+data: {"candidate_id":"4ab00d82-5235-459a-81ec-841fbfe0fb51"}
+
+id: 221
+event: candidate.discovered
+data: {"candidate_id":"bf3deea1-5383-4782-b2b3-b64a669ce14f"}
+
+id: 222
+event: candidate.discovered
+data: {"candidate_id":"dff03620-4fa2-40ef-bdf1-b77274387381"}
+
+id: 223
+event: candidate.discovered
+data: {"candidate_id":"3a3dad58-170c-4afe-8369-2e60aa25ccb1"}
+
+id: 224
+event: candidate.discovered
+data: {"candidate_id":"818334d0-d72d-469e-ae67-509db5bb21dd"}
+
+id: 225
+event: candidate.discovered
+data: {"candidate_id":"20fa90e2-fdfe-4031-88e0-cffbd69efd66"}
+
+id: 226
+event: candidate.discovered
+data: {"candidate_id":"115e1140-c9aa-4f11-9c7c-85732cac8062"}
+
+id: 227
+event: candidate.discovered
+data: {"candidate_id":"f3481818-4b2b-45f2-b6c0-4bb6da38ad0d"}
+
+id: 228
+event: candidate.discovered
+data: {"candidate_id":"4d974fdb-be47-46ea-a9c2-3c49ea528ec2"}
+
+id: 229
+event: candidate.discovered
+data: {"candidate_id":"c1bc2b6a-58d6-450a-941e-3f070b47844e"}
+
+id: 230
+event: candidate.discovered
+data: {"candidate_id":"c31b05aa-ff54-4e2f-b5cc-75ea5745fc8d"}
+
+id: 231
+event: search.state
+data: {"state":"ACQUIRING","version":9}
+
+id: 232
+event: search.progress
+data: {"stage":"Comparing candidate images","detail":null}
+
+id: 233
+event: search.state
+data: {"state":"NORMALIZING","version":10}
+
+id: 234
+event: search.progress
+data: {"stage":"Comparing candidate images","detail":null}
+
+id: 235
+event: candidate.normalized
+data: {"candidate_id":"39aa0e63-9949-4bac-8154-8c69c3a45188"}
+
+id: 236
+event: candidate.normalized
+data: {"candidate_id":"a2848393-d902-4a12-b645-85318a6fe8aa"}
+
+id: 237
+event: candidate.normalized
+data: {"candidate_id":"65cb48aa-1cff-4eaf-877f-014e692fc266"}
+
+id: 238
+event: candidate.normalized
+data: {"candidate_id":"0005eeee-2950-4d72-b815-c19f949c1333"}
+
+id: 239
+event: candidate.normalized
+data: {"candidate_id":"7d3ae770-c4d7-49d3-95ce-0860e4b6db16"}
+
+id: 240
+event: candidate.normalized
+data: {"candidate_id":"b619ab0f-3def-48ce-9f64-d2e2d798d989"}
+
+id: 241
+event: candidate.normalized
+data: {"candidate_id":"604b0355-06e3-426d-a141-8ea2c55bf160"}
+
+id: 242
+event: candidate.normalized
+data: {"candidate_id":"80b7cb23-275b-424a-903f-50ec0436b300"}
+
+id: 243
+event: candidate.normalized
+data: {"candidate_id":"32011e40-d30f-447f-9f3a-ba175b794e68"}
+
+id: 244
+event: candidate.normalized
+data: {"candidate_id":"fd98ea89-924a-4ddb-826a-05ec34ee3fff"}
+
+id: 245
+event: candidate.normalized
+data: {"candidate_id":"4250b115-277d-4591-9ac3-71d7cf50aa3f"}
+
+id: 246
+event: candidate.normalized
+data: {"candidate_id":"20c22afa-8346-4836-8c85-d07db5e68ce2"}
+
+id: 247
+event: candidate.normalized
+data: {"candidate_id":"66b70314-111d-4ac7-926c-d38d7099e718"}
+
+id: 248
+event: candidate.normalized
+data: {"candidate_id":"d23e7ece-e5b8-4a24-bffb-353adf694174"}
+
+id: 249
+event: candidate.normalized
+data: {"candidate_id":"826238b4-e29c-4b7b-9fce-8c1b25ed3459"}
+
+id: 250
+event: candidate.normalized
+data: {"candidate_id":"d37017d2-64b9-414c-9c41-84928d8330ae"}
+
+id: 251
+event: candidate.normalized
+data: {"candidate_id":"e8666af9-4323-4370-8a9e-94ea8dcd7e6b"}
+
+id: 252
+event: candidate.normalized
+data: {"candidate_id":"aa387608-529f-47dc-823e-4fd35fc4b081"}
+
+id: 253
+event: candidate.normalized
+data: {"candidate_id":"1c971050-43ca-4af6-b935-f736a02275ad"}
+
+id: 254
+event: candidate.normalized
+data: {"candidate_id":"6cf787c9-30dd-4748-af7a-dde8a18bc432"}
+
+id: 255
+event: candidate.normalized
+data: {"candidate_id":"5cd3839d-d02f-43d1-ad5b-c67e85f7f1fd"}
+
+id: 256
+event: candidate.normalized
+data: {"candidate_id":"76d5a2ab-80af-4ecc-bfe8-34ee0f97d892"}
+
+id: 257
+event: candidate.normalized
+data: {"candidate_id":"3dcf565a-184d-4923-a203-245dc5cb3f4c"}
+
+id: 258
+event: candidate.normalized
+data: {"candidate_id":"4ab00d82-5235-459a-81ec-841fbfe0fb51"}
+
+id: 259
+event: candidate.normalized
+data: {"candidate_id":"bf3deea1-5383-4782-b2b3-b64a669ce14f"}
+
+id: 260
+event: candidate.normalized
+data: {"candidate_id":"dff03620-4fa2-40ef-bdf1-b77274387381"}
+
+id: 261
+event: candidate.normalized
+data: {"candidate_id":"3a3dad58-170c-4afe-8369-2e60aa25ccb1"}
+
+id: 262
+event: candidate.normalized
+data: {"candidate_id":"818334d0-d72d-469e-ae67-509db5bb21dd"}
+
+id: 263
+event: candidate.normalized
+data: {"candidate_id":"20fa90e2-fdfe-4031-88e0-cffbd69efd66"}
+
+id: 264
+event: candidate.normalized
+data: {"candidate_id":"115e1140-c9aa-4f11-9c7c-85732cac8062"}
+
+id: 265
+event: candidate.normalized
+data: {"candidate_id":"f3481818-4b2b-45f2-b6c0-4bb6da38ad0d"}
+
+id: 266
+event: candidate.normalized
+data: {"candidate_id":"4d974fdb-be47-46ea-a9c2-3c49ea528ec2"}
+
+id: 267
+event: candidate.normalized
+data: {"candidate_id":"c1bc2b6a-58d6-450a-941e-3f070b47844e"}
+
+id: 268
+event: candidate.normalized
+data: {"candidate_id":"5f5661d7-5a41-4c3c-bc8d-ac92aa941f3d"}
+
+id: 269
+event: candidate.normalized
+data: {"candidate_id":"fb3fd04b-c731-43ba-a99c-2c0c6fb6862e"}
+
+id: 270
+event: candidate.normalized
+data: {"candidate_id":"14dc7284-23bb-4f65-9d81-ed2926216a1e"}
+
+id: 271
+event: candidate.normalized
+data: {"candidate_id":"df7baee2-f1fa-4e08-bf4e-690066c1125a"}
+
+id: 272
+event: candidate.normalized
+data: {"candidate_id":"c3c3498d-7d0a-4ce1-a080-63cbff43f433"}
+
+id: 273
+event: candidate.normalized
+data: {"candidate_id":"cf722d78-caa2-4abc-80a9-b82aac6b085b"}
+
+id: 274
+event: candidate.normalized
+data: {"candidate_id":"c31b05aa-ff54-4e2f-b5cc-75ea5745fc8d"}
+
+id: 275
+event: candidate.normalized
+data: {"candidate_id":"063b9150-7cda-454f-9e6f-f24351805434"}
+
+id: 276
+event: candidate.normalized
+data: {"candidate_id":"ed88b0b4-b993-4704-80cc-e5d861f75464"}
+
+id: 277
+event: search.state
+data: {"state":"DEDUPLICATING","version":11}
+
+id: 278
+event: search.progress
+data: {"stage":"Comparing candidate images","detail":null}
+
+id: 279
+event: search.state
+data: {"state":"BROAD_RETRIEVAL","version":12}
+
+id: 280
+event: search.progress
+data: {"stage":"Comparing candidate images","detail":null}
+
+id: 281
+event: search.state
+data: {"state":"FINE_MATCHING","version":13}
+
+id: 282
+event: search.progress
+data: {"stage":"Checking detail consistency","detail":null}
+
+id: 283
+event: candidate.promoted
+data: {"candidate_id":"39aa0e63-9949-4bac-8154-8c69c3a45188"}
+
+id: 284
+event: candidate.promoted
+data: {"candidate_id":"a2848393-d902-4a12-b645-85318a6fe8aa"}
+
+id: 285
+event: candidate.promoted
+data: {"candidate_id":"b619ab0f-3def-48ce-9f64-d2e2d798d989"}
+
+id: 286
+event: candidate.promoted
+data: {"candidate_id":"66b70314-111d-4ac7-926c-d38d7099e718"}
+
+id: 287
+event: candidate.promoted
+data: {"candidate_id":"d23e7ece-e5b8-4a24-bffb-353adf694174"}
+
+id: 288
+event: candidate.promoted
+data: {"candidate_id":"826238b4-e29c-4b7b-9fce-8c1b25ed3459"}
+
+id: 289
+event: candidate.promoted
+data: {"candidate_id":"d37017d2-64b9-414c-9c41-84928d8330ae"}
+
+id: 290
+event: candidate.promoted
+data: {"candidate_id":"0005eeee-2950-4d72-b815-c19f949c1333"}
+
+id: 291
+event: search.state
+data: {"state":"AUTHENTICITY_REVIEW","version":14}
+
+id: 292
+event: search.progress
+data: {"stage":"Checking listing authenticity evidence","detail":null}
+
+: heartbeat
+
+id: 293
+event: search.state
+data: {"state":"LIVE_CHECKING","version":15}
+
+id: 294
+event: search.progress
+data: {"stage":"Verifying live links","detail":null}
+
+: heartbeat
+
+id: 295
+event: candidate.updated
+data: {"candidate_id":"39aa0e63-9949-4bac-8154-8c69c3a45188"}
+
+id: 296
+event: candidate.updated
+data: {"candidate_id":"a2848393-d902-4a12-b645-85318a6fe8aa"}
+
+id: 297
+event: candidate.updated
+data: {"candidate_id":"b619ab0f-3def-48ce-9f64-d2e2d798d989"}
+
+id: 298
+event: candidate.updated
+data: {"candidate_id":"66b70314-111d-4ac7-926c-d38d7099e718"}
+
+id: 299
+event: candidate.updated
+data: {"candidate_id":"d23e7ece-e5b8-4a24-bffb-353adf694174"}
+
+id: 300
+event: candidate.updated
+data: {"candidate_id":"826238b4-e29c-4b7b-9fce-8c1b25ed3459"}
+
+id: 301
+event: candidate.updated
+data: {"candidate_id":"d37017d2-64b9-414c-9c41-84928d8330ae"}
+
+id: 302
+event: candidate.updated
+data: {"candidate_id":"0005eeee-2950-4d72-b815-c19f949c1333"}
+
+id: 303
+event: result.possibly_real
+data: {"result_id":"ee25cb12-8d6a-4dc8-b75f-8afb558438c7","search_id":"8348d1b9-e192-47b2-8c9e-2c1443a934fd","candidate_id":"39aa0e63-9949-4bac-8154-8c69c3a45188","bucket":"possibly_real","rank":1,"title":"無地 ロングスリーブカットソー","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001141404","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141404_1.jpg?v=1786853462","alt":"無地 ロングスリーブカットソー"},"price":{"original":"8360","currency":"JPY","display":"¥8,360"},"size":null,"availability":"LIVE","last_checked_at":"2026-08-16T20:01:21.221746+00:00","item_match":{"label":"Incomplete evidence","mean":0.568113,"lower_bound":0.497213,"upper_bound":0.608113},"authenticity":{"label":"Incomplete evidence","mean":0.52,"lower_bound":0.4,"upper_bound":0.586},"listing_utility":{"live":true,"label":"Live","score":0.8350000000000001,"last_checked_at":"2026-08-16T20:01:21.221746+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"unknown"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:embedding:cosine","ev:embedding:OBSERVED-pixels"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:embedding:cosine","ev:embedding:OBSERVED-pixels"],"contradictions":[],"missing":["unknown","label-view","logo-not-resolved","cross-view-second-image","provenance"],"seller_reported":[{"field":"Title","value":"無地 ロングスリーブカットソー","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141404","origin":"REPORTED_BY_SELLER"}],"images_compared":[],"duplicate_image_family_count":4,"live":true,"checked_at":"2026-08-16T20:01:21.221746+00:00"}}
+
+id: 304
+event: result.possibly_real
+data: {"result_id":"98554171-59c3-439f-9973-4773b2873386","search_id":"8348d1b9-e192-47b2-8c9e-2c1443a934fd","candidate_id":"a2848393-d902-4a12-b645-85318a6fe8aa","bucket":"possibly_real","rank":1,"title":"ロゴ長袖カットソー","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001141442","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141442_1.jpg?v=1786853460","alt":"ロゴ長袖カットソー"},"price":{"original":"7260","currency":"JPY","display":"¥7,260"},"size":null,"availability":"LIVE","last_checked_at":"2026-08-16T20:01:21.225280+00:00","item_match":{"label":"Incomplete evidence","mean":0.595504,"lower_bound":0.519204,"upper_bound":0.635504},"authenticity":{"label":"Incomplete evidence","mean":0.52,"lower_bound":0.4,"upper_bound":0.586},"listing_utility":{"live":true,"label":"Live","score":0.8350000000000001,"last_checked_at":"2026-08-16T20:01:21.225280+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"unknown"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations"],"contradictions":[],"missing":["unknown","label-view","logo-not-resolved","cross-view-second-image","provenance"],"seller_reported":[{"field":"Title","value":"ロゴ長袖カットソー","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141442","origin":"REPORTED_BY_SELLER"}],"images_compared":[],"duplicate_image_family_count":4,"live":true,"checked_at":"2026-08-16T20:01:21.225280+00:00"}}
+
+id: 305
+event: result.removed
+data: {"result_id":"8b940dba-d37d-4ffd-ae89-cddc37f5ef4a","reason":"hidden"}
+
+id: 306
+event: result.removed
+data: {"result_id":"0e4f9c97-1bcb-4112-96da-ae7bc56dbcc0","reason":"hidden"}
+
+id: 307
+event: result.removed
+data: {"result_id":"7c37a959-8c78-4a7a-aae0-a91201cdb446","reason":"hidden"}
+
+id: 308
+event: result.possibly_real
+data: {"result_id":"9623c70f-b68d-4d3b-800b-5ce09a792673","search_id":"8348d1b9-e192-47b2-8c9e-2c1443a934fd","candidate_id":"826238b4-e29c-4b7b-9fce-8c1b25ed3459","bucket":"possibly_real","rank":1,"title":"「ワイドパンツ」","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001141336","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141336_1.jpg?v=1786707064","alt":"「ワイドパンツ」"},"price":{"original":"7260","currency":"JPY","display":"¥7,260"},"size":null,"availability":"LIVE","last_checked_at":"2026-08-16T20:01:41.777425+00:00","item_match":{"label":"Incomplete evidence","mean":0.584036,"lower_bound":0.507736,"upper_bound":0.624036},"authenticity":{"label":"Incomplete evidence","mean":0.52,"lower_bound":0.4,"upper_bound":0.586},"listing_utility":{"live":true,"label":"Live","score":0.8350000000000001,"last_checked_at":"2026-08-16T20:01:41.777425+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"unknown"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations"],"contradictions":[],"missing":["unknown","label-view","logo-not-resolved","cross-view-second-image","provenance"],"seller_reported":[{"field":"Title","value":"「ワイドパンツ」","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141336","origin":"REPORTED_BY_SELLER"}],"images_compared":[],"duplicate_image_family_count":5,"live":true,"checked_at":"2026-08-16T20:01:41.777425+00:00"}}
+
+id: 309
+event: result.removed
+data: {"result_id":"6889aa33-197a-4814-94b7-d8a4d65a2990","reason":"hidden"}
+
+id: 310
+event: result.removed
+data: {"result_id":"5175e698-b9e9-4cbd-90c7-d80f542c20ad","reason":"hidden"}
+
+id: 311
+event: search.state
+data: {"state":"PARTIAL","version":16}
+
+id: 312
+event: search.complete
+data: {"terminal_status":"PARTIAL","reason":"budget exhausted"}
+

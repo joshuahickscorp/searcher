@@ -228,6 +228,7 @@ def run_reference_query_wave(
                 analysis,
                 ceiling=cfg.query_ceiling,
                 demoted=demoted,
+                user_terms=[intent.text or "", *list(intent.tags)],
             )
             for query in queries:
                 controller.repos.upsert_query(search_id, query)

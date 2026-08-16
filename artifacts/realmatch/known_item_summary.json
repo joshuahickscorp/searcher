@@ -1,0 +1,125 @@
+{
+  "search_id": "8348d1b9-e192-47b2-8c9e-2c1443a934fd",
+  "terminal_status": "PARTIAL",
+  "terminal_reason": "budget exhausted",
+  "counts": {
+    "real": 0,
+    "possibly_real": 3,
+    "hidden": 5
+  },
+  "coverage": {
+    "sources_completed": [
+      {
+        "detail": "",
+        "id": "wikimedia",
+        "name": "wikimedia",
+        "status": "SEARCHED_NO_MATCH"
+      },
+      {
+        "detail": "",
+        "id": "kind",
+        "name": "kind",
+        "status": "SEARCHED_MATCHES_FOUND"
+      },
+      {
+        "detail": "",
+        "id": "komehyo",
+        "name": "komehyo",
+        "status": "SEARCHED_NO_MATCH"
+      },
+      {
+        "detail": "",
+        "id": "the_realreal",
+        "name": "the_realreal",
+        "status": "SEARCHED_NO_MATCH"
+      },
+      {
+        "detail": "",
+        "id": "byronesque",
+        "name": "byronesque",
+        "status": "SEARCHED_MATCHES_FOUND"
+      }
+    ],
+    "sources_blocked": [
+      {
+        "detail": "",
+        "id": "heroine",
+        "name": "heroine",
+        "status": "BLOCKED_BY_POLICY"
+      },
+      {
+        "detail": "",
+        "id": "ebay",
+        "name": "ebay",
+        "status": "AUTH_REQUIRED"
+      }
+    ],
+    "sources_in_progress": [],
+    "pages_fetched": 28,
+    "candidates_normalized": 42,
+    "candidates_hidden": 10
+  },
+  "target_in_real_rank": null,
+  "target_in_possibly_real_rank": 1,
+  "target_url_real": null,
+  "target_url_possible": "https://shop.kind.co.jp/products/8001001141404",
+  "why": {
+    "heading": "Why Possibly Real",
+    "points": [
+      "ev:text:identity",
+      "ev:global:visual",
+      "ev:parts:ontology",
+      "ev:geometry:relations",
+      "ev:embedding:cosine",
+      "ev:embedding:OBSERVED-pixels"
+    ],
+    "tab_reason": "The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.",
+    "still_unverified": [
+      "No physical inspection."
+    ],
+    "supporting": [
+      "ev:text:identity",
+      "ev:global:visual",
+      "ev:parts:ontology",
+      "ev:geometry:relations",
+      "ev:embedding:cosine",
+      "ev:embedding:OBSERVED-pixels"
+    ],
+    "contradictions": [],
+    "missing": [
+      "unknown",
+      "label-view",
+      "logo-not-resolved",
+      "cross-view-second-image",
+      "provenance"
+    ],
+    "seller_reported": [
+      {
+        "field": "Title",
+        "value": "無地 ロングスリーブカットソー",
+        "origin": "REPORTED_BY_SELLER"
+      },
+      {
+        "field": "Brand",
+        "value": "WILLY CHAVARRIA",
+        "origin": "REPORTED_BY_SELLER"
+      },
+      {
+        "field": "Model",
+        "value": "8001001141404",
+        "origin": "REPORTED_BY_SELLER"
+      }
+    ],
+    "images_compared": [],
+    "duplicate_image_family_count": 4,
+    "live": true,
+    "checked_at": "2026-08-16T20:01:21.221746+00:00"
+  },
+  "item_match": {
+    "label": "Incomplete evidence",
+    "mean": 0.568113,
+    "lower_bound": 0.497213,
+    "upper_bound": 0.608113
+  },
+  "reason": null
+}

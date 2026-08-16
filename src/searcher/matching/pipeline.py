@@ -28,6 +28,7 @@ from searcher.matching.structure import extract_structure
 from searcher.matching.types import EnrichedCandidate, StructuredDescriptor
 from searcher.matching.views import classify_subjects, refine_views
 from searcher.retrieval.cost import CostLedger, CostStage
+from searcher.retrieval.embeddings import OPERATING_THRESHOLD, pair_similarity
 from searcher.retrieval.signals import compute_cheap_signals
 from searcher.retrieval.text import text_identity, tokenize
 
@@ -105,6 +106,28 @@ def _text_score(
     return scored(mean, spread=0.06, support=[cite("text", "identity")])
 
 
+def _blend_embedding(glob: ScoreWithEvidence, similarity: float | None) -> ScoreWithEvidence:
+    if similarity is None:
+        return glob
+    if similarity >= OPERATING_THRESHOLD:
+        mean = 0.35 * glob.interval.mean + 0.65 * similarity
+        return scored(
+            mean,
+            spread=0.05,
+            support=list(glob.support)
+            + [cite("embedding", "cosine"), cite("embedding", "OBSERVED-pixels")],
+            fact_class=FactClass.OBSERVED,
+        )
+    mean = 0.90 * glob.interval.mean + 0.10 * similarity
+    return scored(
+        mean,
+        spread=0.08,
+        support=list(glob.support) + [cite("embedding", "below-threshold")],
+        missing=list(glob.missing),
+        polarity=glob.polarity,
+    )
+
+
 def match_candidate(
     *,
     hypothesis: ItemHypothesis,
@@ -115,8 +138,9 @@ def match_candidate(
     ledger: CostLedger | None = None,
 ) -> MatchEvidence:
     ontology = ontology_for(hypothesis.category)
-    del ontology
+    footwear = ontology.category == "footwear"
     exact_colour = bool(constraints and constraints.colour)
+    embedding_sim = pair_similarity(reference_pngs, candidate.pngs)
     ref_desc = _primary_descriptor(reference_descriptors)
     cand_desc = _primary_descriptor(candidate.descriptors)
     ref_png = next(iter(reference_pngs.values())) if reference_pngs else None
@@ -124,7 +148,10 @@ def match_candidate(
 
     text = _text_score(hypothesis, candidate.candidate, candidate.ocr_terms)
     if ref_desc and cand_desc and ref_png and cand_png:
-        glob = global_visual(ref_desc, cand_desc, reference_png=ref_png, candidate_png=cand_png)
+        glob = _blend_embedding(
+            global_visual(ref_desc, cand_desc, reference_png=ref_png, candidate_png=cand_png),
+            embedding_sim,
+        )
         geom_raw = compare_geometry(ref_desc, cand_desc)
         used_mirror = False
         flipped_desc = _flipped_descriptor(cand_png, cand_desc.image_id)
@@ -167,6 +194,7 @@ def match_candidate(
             exact_colour_required=exact_colour,
             colour_hard="colourway-mismatch" in colour_contra,
             label_hash_mismatch=label_mismatch,
+            apply_footwear_rules=footwear,
         )
         part_records = []
         outsole_delta = 1 if "outsole" in " ".join(hard) else 0
@@ -199,8 +227,12 @@ def match_candidate(
             reference_pngs=reference_pngs,
             candidate_pngs=candidate.pngs,
             candidate_ocr=candidate.ocr_terms,
+            embedding_similarity=embedding_sim,
         )
-        glob = scored(cheap.perceptual, spread=0.12, missing=["structure"])
+        glob = _blend_embedding(
+            scored(cheap.perceptual, spread=0.12, missing=["structure"]),
+            embedding_sim,
+        )
         geometry = scored(0.45, spread=0.2, missing=["geometry"])
         material = scored(cheap.colour, spread=0.14)
         part_records = []
@@ -210,7 +242,9 @@ def match_candidate(
         label_mismatch = False
 
     gallery = list(candidate.descriptors.values())
-    cross_score, cross_hard, cross_missing = cross_view_consistency(gallery)
+    cross_score, cross_hard, cross_missing = cross_view_consistency(
+        gallery, apply_footwear_rules=footwear
+    )
     cross = scored(
         cross_score,
         spread=0.1,
@@ -222,8 +256,9 @@ def match_candidate(
 
     missing_views: list[str] = []
     present = {v.view.value for v in candidate.views}
-    for expected in ("lateral", "heel", "sole", "label"):
-        if expected not in present:
+    expected_views = ontology.authenticity_critical_views or ontology.expected_views
+    for expected in expected_views:
+        if expected not in present and expected != "unknown":
             missing_views.append(expected)
 
     interval = combine_item_match(
@@ -247,6 +282,9 @@ def match_candidate(
         cite("parts", "ontology"),
         cite("geometry", "relations"),
     ]
+    if embedding_sim is not None and embedding_sim >= OPERATING_THRESHOLD:
+        support.append(cite("embedding", "cosine"))
+        support.append(cite("embedding", "OBSERVED-pixels"))
     explanation = build_match_explanation(
         support=support,
         contradictions=hard + soft,
