@@ -260,3 +260,35 @@ def test_verify_candidate_records_agrees_and_absent() -> None:
     assert by_field["seller"].verdict is VerificationVerdict.ABSENT
     assert updated.price_original == Decimal("48000")
     assert updated.verification.checked_at is not None
+
+
+def test_a_blocked_fetch_is_unchecked_not_absent() -> None:
+    """A refused fetch says nothing about the listing.
+
+    Observed live: kind.co.jp answered the verification fetch with a challenge,
+    and every field was recorded ABSENT. Those absences then counted as missing
+    evidence against the candidate, so the true listing was marked down for a
+    page we were never allowed to read.
+    """
+    checks = compare_fields(
+        _candidate(),
+        None,
+        checked_at=_TS,
+        extraction_method=None,
+        fetch_note="blocked by challenge (access_denied)",
+        page_read=False,
+    )
+    assert all(item.verdict is VerificationVerdict.UNCHECKED for item in checks)
+    assert all("blocked by challenge" in item.reason for item in checks)
+
+
+def test_page_read_but_empty_is_still_absent() -> None:
+    """Read the page and it said nothing: that is a real absence."""
+    checks = compare_fields(
+        _candidate(),
+        None,
+        checked_at=_TS,
+        extraction_method=None,
+        fetch_note="field not present in structured data on the listing page",
+    )
+    assert all(item.verdict is VerificationVerdict.ABSENT for item in checks)

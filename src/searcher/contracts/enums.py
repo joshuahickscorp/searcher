@@ -299,6 +299,10 @@ class VerificationVerdict(StrEnum):
     AGREES = "agrees"
     DISAGREES = "disagrees"
     ABSENT = "absent"
+    # The listing page could not be read at all - blocked, refused, out of
+    # budget. That is a fact about our fetch, not about the candidate, so it
+    # must never be scored as evidence the listing failed to supply.
+    UNCHECKED = "unchecked"
 
 
 class DegradedLabel(StrEnum):

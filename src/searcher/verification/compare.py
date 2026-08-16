@@ -157,7 +157,14 @@ def compare_fields(
     checked_at: UtcDateTime,
     extraction_method: ExtractionMethod | None,
     fetch_note: str | None = None,
+    page_read: bool = True,
 ) -> list[FieldCheck]:
+    """Compare recorded values against the listing page.
+
+    `page_read` is the difference between "the listing does not say" and "we
+    never got to look". Only the caller knows which happened, and conflating
+    them marks a candidate down for a fetch that was refused.
+    """
     recorded = recorded_values(candidate)
     observed = observed_values(payload)
     checks: list[FieldCheck] = []
@@ -166,7 +173,10 @@ def compare_fields(
         obs_raw = observed[field]
         rec_n = _NORMALIZERS[field](rec_raw)
         obs_n = _NORMALIZERS[field](obs_raw)
-        if obs_n is None:
+        if not page_read:
+            reason = fetch_note or "listing page was not read"
+            verdict = VerificationVerdict.UNCHECKED
+        elif obs_n is None:
             reason = fetch_note or "field not present in structured data on the listing page"
             verdict = VerificationVerdict.ABSENT
         elif rec_n is None:

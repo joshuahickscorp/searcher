@@ -124,6 +124,11 @@ def _evidence_for(
         VerificationVerdict.ABSENT: EvidencePolarity.MISSING,
     }
     for item in record.fields:
+        if item.verdict is VerificationVerdict.UNCHECKED:
+            # No evidence row at all: we learned nothing about this candidate,
+            # and a candidate must not be marked down for a fetch we could not
+            # complete.
+            continue
         digest = sha256_hex(
             f"{candidate.candidate_id}:{item.field}:{item.verdict}:{item.reason}".encode()
         )
@@ -187,6 +192,7 @@ def verify_candidate(
                 checked_at=now,
                 extraction_method=None,
                 fetch_note="budget exhausted before verification fetch",
+                page_read=False,
             ),
             fetch_outcome=SourceOutcome.UNMEASURABLE,
             classification_note="budget exhausted",
@@ -205,6 +211,7 @@ def verify_candidate(
                 checked_at=now,
                 extraction_method=None,
                 fetch_note=str(exc),
+                page_read=False,
             ),
             fetch_outcome=SourceOutcome.NETWORK_FAILED,
             classification_note=str(exc),
@@ -225,6 +232,7 @@ def verify_candidate(
             checked_at=now,
             extraction_method=_method_of(payload),
             fetch_note=note,
+            page_read=usable,
         ),
         extraction_method=_method_of(payload),
         fetch_outcome=doc.result.outcome,

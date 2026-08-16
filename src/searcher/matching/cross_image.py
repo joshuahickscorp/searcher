@@ -38,8 +38,50 @@ def cross_view_consistency(
             if max(panels) - min(panels) >= 2:
                 contradictions.append("gallery-panel-incompatible")
                 score = min(score, 0.25)
-    smoothness = [item.smoothness for item in descriptors]
-    if smoothness and max(smoothness) - min(smoothness) > 0.45:
+    if _stock_photo_gap(descriptors):
         contradictions.append("stock-photo-smoothness-gap")
         score = min(score, 0.4)
     return score, contradictions, []
+
+
+def _view_class(item: StructuredDescriptor) -> str:
+    """A coarse grouping of what the photograph is showing.
+
+    Only rough classes are needed: the point is to avoid comparing a full-item
+    shot against a close detail crop, which differ in smoothness for reasons
+    that say nothing about whether a photograph was taken by the seller.
+    """
+    if item.subject_area >= 0.99:
+        # No subject was segmented at all. On a real resale listing this is the
+        # size chart, the condition table or a shop banner - not a photograph of
+        # the item, and nothing about its smoothness says who took it.
+        return "graphic"
+    if item.label_hash is not None:
+        return "label"
+    if item.eyelet_count >= 2 and item.panel_count >= 2:
+        return "lateral"
+    if item.subject_area >= 0.55:
+        return "full"
+    return "detail"
+
+
+def _stock_photo_gap(descriptors: list[StructuredDescriptor], *, spread: float = 0.45) -> bool:
+    """True when one view class mixes a very smooth image with a rough one.
+
+    A listing that pairs a manufacturer's stock photograph with a real snapshot
+    of the same view is worth doubting. A listing that shows a garment laid flat
+    and then crops in on a seam is not: those differ in smoothness by design.
+    The comment above this block has always said the comparison belongs within a
+    view class; before this it ran across every image in the gallery, which
+    suppressed ordinary resale listings that photograph an item several ways.
+
+    ponytail: `spread` is inherited, not calibrated. It needs the labelled
+    stock-versus-snapshot pairs tracked in G056 before it can be defended.
+    """
+    groups: dict[str, list[float]] = {}
+    for item in descriptors:
+        view = _view_class(item)
+        if view == "graphic":
+            continue
+        groups.setdefault(view, []).append(item.smoothness)
+    return any(len(v) >= 2 and max(v) - min(v) > spread for v in groups.values())

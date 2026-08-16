@@ -13,18 +13,18 @@
       "known_3.jpg"
     ]
   },
-  "search_id": "80e8a9a4-4c2b-4540-9d20-1161f9b5af8e",
-  "terminal_status": "COMPLETE",
-  "terminal_reason": "coverage exhausted",
+  "search_id": "55d63712-a431-4b7e-82a9-c1862f44daab",
+  "terminal_status": "PARTIAL",
+  "terminal_reason": "budget exhausted",
   "counts": {
     "real": 0,
     "possibly_real": 0,
     "hidden": 8
   },
   "summary": {
-    "met": 12,
+    "met": 13,
     "not_met": 3,
-    "not_evaluable": 9,
+    "not_evaluable": 8,
     "of": 24
   },
   "behaviours": [
@@ -32,7 +32,7 @@
       "n": "1",
       "behaviour": "images normalized and hashed",
       "verdict": "met",
-      "observation": "campaign reached COMPLETE; upload accepted 3 images"
+      "observation": "campaign reached PARTIAL; upload accepted 3 images"
     },
     {
       "n": "2",
@@ -62,7 +62,7 @@
       "n": "6",
       "behaviour": "query families generated",
       "verdict": "met",
-      "observation": "progress stages observed: 51"
+      "observation": "progress stages observed: 105"
     },
     {
       "n": "7",
@@ -73,14 +73,14 @@
     {
       "n": "8",
       "behaviour": "source blocks reported honestly",
-      "verdict": "not evaluable",
-      "observation": "blocked: []"
+      "verdict": "met",
+      "observation": "blocked: [('wikimedia', 'BLOCKED_BY_POLICY'), ('byronesque', 'SOURCE_UNAVAILABLE'), ('heroine', 'BLOCKED_BY_POLICY'), ('ebay', 'AUTH_REQUIRED')]"
     },
     {
       "n": "9",
       "behaviour": "listing candidates normalized",
       "verdict": "met",
-      "observation": "candidates_normalized=9, pages_fetched=1"
+      "observation": "candidates_normalized=9, pages_fetched=17"
     },
     {
       "n": "10",
@@ -146,7 +146,7 @@
       "n": "20",
       "behaviour": "exhaustion or saturation receipt produced",
       "verdict": "met",
-      "observation": "terminal=COMPLETE reason=coverage exhausted"
+      "observation": "terminal=PARTIAL reason=budget exhausted"
     },
     {
       "n": "21",
