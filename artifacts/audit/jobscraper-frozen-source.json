@@ -1,0 +1,116 @@
+{
+  "donor": "jobscraper",
+  "located_at": "<home>/Desktop/jobscraper",
+  "located_on": "2026-08-16",
+  "correction": "A concurrent audit task was told Job Scraper did not exist. The donor was located at <home>/Desktop/jobscraper on 2026-08-16 and frozen.",
+  "path": "<home>/.searcher-donors/jobscraper-frozen-20260816/",
+  "manifest": "<home>/.searcher-donors/jobscraper-frozen-20260816.manifest.sha256",
+  "manifest_digest": "3a2c41c8306e422ad42ede9da145891a72ec8e691bf32e8a407ead899facced2",
+  "file_count": 45,
+  "files": [
+    ".gitignore",
+    "README.md",
+    "RUNBOOK.md",
+    "companies.yaml",
+    "pyproject.toml",
+    "scraper/__init__.py",
+    "scraper/browser.py",
+    "scraper/cli.py",
+    "scraper/config.py",
+    "scraper/db.py",
+    "scraper/discover.py",
+    "scraper/enrichment.py",
+    "scraper/export.py",
+    "scraper/fetchers/__init__.py",
+    "scraper/fetchers/ashby.py",
+    "scraper/fetchers/base.py",
+    "scraper/fetchers/custom/__init__.py",
+    "scraper/fetchers/custom/shopify.py",
+    "scraper/fetchers/custom/stripe.py",
+    "scraper/fetchers/greenhouse.py",
+    "scraper/fetchers/lever.py",
+    "scraper/fetchers/smartrecruiters.py",
+    "scraper/fetchers/workable.py",
+    "scraper/fetchers/workday.py",
+    "scraper/filters.py",
+    "scraper/http_client.py",
+    "scraper/liveness.py",
+    "scraper/models.py",
+    "scraper/role_keywords.py",
+    "scraper/runner.py",
+    "scraper/stats.py",
+    "scraper/user_agents.py",
+    "scraper/web.py",
+    "tests/__init__.py",
+    "tests/fixtures/greenhouse_sample.json",
+    "tests/test_db.py",
+    "tests/test_discover.py",
+    "tests/test_enrichment.py",
+    "tests/test_filters.py",
+    "tests/test_intern_title.py",
+    "tests/test_lifecycle.py",
+    "tests/test_liveness.py",
+    "tests/test_normalize_greenhouse.py",
+    "tests/test_toronto_bump.py",
+    "tests/test_web.py"
+  ],
+  "freeze_date": "2026-08-16",
+  "git_sha": null,
+  "repository": "n/a \u2014 not a git repository; pinned by content digest",
+  "package": {
+    "name": "jobscraper",
+    "version": "0.1.0",
+    "requires_python": ">=3.11"
+  },
+  "license": "MIT declared in pyproject.toml (license = { text = \"MIT\" }); no LICENSE file in snapshot",
+  "read_only": true,
+  "exclusions": [
+    {
+      "path": "data/",
+      "why": "User private job database, logs, Playwright profiles. Deliberately excluded from freeze. Not read."
+    },
+    {
+      "path": "cv/",
+      "why": "User private CV material. Deliberately excluded. Not read."
+    },
+    {
+      "path": "jobs.db",
+      "why": "User private SQLite job CRM at live checkout root. Excluded. Not read."
+    },
+    {
+      "path": ".venv/",
+      "why": "User local virtualenv. Off limits; harvest used /tmp/jobscraper-baseline-20260816/.venv"
+    },
+    {
+      "path": ".pytest_cache/",
+      "why": "Local test cache, not source."
+    },
+    {
+      "path": "jobscraper.egg-info/",
+      "why": "Local install artifact."
+    },
+    {
+      "path": ".DS_Store",
+      "why": "macOS metadata."
+    },
+    {
+      "path": ".claude/",
+      "why": "Editor/agent metadata, not donor source."
+    }
+  ],
+  "companies_yaml": {
+    "present_in_snapshot": true,
+    "role": "Operator-maintained ATS company registry loaded by scraper.config.load_companies. Contents not read, quoted, or summarized.",
+    "note": "Discover persists resolved ats/slug back into this file at end of run_discover."
+  },
+  "verification": {
+    "command_manifest_digest": "shasum -a 256 <home>/.searcher-donors/jobscraper-frozen-20260816.manifest.sha256",
+    "manifest_digest_output": "3a2c41c8306e422ad42ede9da145891a72ec8e691bf32e8a407ead899facced2  <home>/.searcher-donors/jobscraper-frozen-20260816.manifest.sha256",
+    "command_file_verify": "cd <home>/.searcher-donors/jobscraper-frozen-20260816 && shasum -a 256 -c <home>/.searcher-donors/jobscraper-frozen-20260816.manifest.sha256",
+    "file_verify_result": "45/45 OK",
+    "live_checkout_45_file_hash_compare": "45/45 MATCH",
+    "live_listing_sha256_before": "5824f8e28da9190c2677a13e7dbbe6e3d517802e45a52b666070a0ac3600eb94",
+    "live_listing_sha256_after": "5824f8e28da9190c2677a13e7dbbe6e3d517802e45a52b666070a0ac3600eb94",
+    "snapshot_touch_probe": "touch README.md -> Operation not permitted"
+  }
+}

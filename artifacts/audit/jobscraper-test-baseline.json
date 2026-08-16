@@ -1,0 +1,134 @@
+{
+  "donor": "jobscraper",
+  "snapshot": "<home>/.searcher-donors/jobscraper-frozen-20260816/",
+  "manifest_digest": "3a2c41c8306e422ad42ede9da145891a72ec8e691bf32e8a407ead899facced2",
+  "environment": {
+    "venv": "/tmp/jobscraper-baseline-20260816/.venv",
+    "python": "CPython 3.11.15",
+    "uv": "0.11.7",
+    "not_used": "<home>/Desktop/jobscraper/.venv"
+  },
+  "install": {
+    "command": "uv pip install --python /tmp/jobscraper-baseline-20260816/.venv/bin/python \"httpx[http2]>=0.27,<0.29\" \"curl_cffi>=0.7,<0.9\" \"pyrate-limiter>=3.6,<4.0\" \"tenacity>=8.3,<10.0\" \"pydantic>=2.7,<3.0\" \"PyYAML>=6.0,<7.0\" \"structlog>=24.1,<26.0\" \"playwright>=1.45,<2.0\" \"tf-playwright-stealth>=1.1,<2.0\" \"pytest>=8.0,<9.0\" \"pytest-asyncio>=0.23,<1.0\" \"respx>=0.21,<1.0\"",
+    "result": "Resolved 33 packages; installed 33; exit 0",
+    "pinned_versions": {
+      "httpx": "0.28.1",
+      "curl_cffi": "0.7.4",
+      "pyrate-limiter": "3.9.0",
+      "tenacity": "9.1.4",
+      "pydantic": "2.13.4",
+      "PyYAML": "6.0.3",
+      "structlog": "25.5.0",
+      "playwright": "1.62.0",
+      "tf-playwright-stealth": "1.2.0",
+      "pytest": "8.4.2",
+      "pytest-asyncio": "0.26.0",
+      "respx": "0.23.1"
+    },
+    "playwright_chromium_installed": false,
+    "install_failures": []
+  },
+  "pytest": {
+    "command": "cd <home>/.searcher-donors/jobscraper-frozen-20260816 && /tmp/jobscraper-baseline-20260816/.venv/bin/python -m pytest -q",
+    "cwd": "<home>/.searcher-donors/jobscraper-frozen-20260816/",
+    "exit_code": 0,
+    "passed": 274,
+    "failed": 0,
+    "skipped": 0,
+    "warnings": 1,
+    "warning_text": "PytestCacheWarning: could not create cache path .../jobscraper-frozen-20260816/.pytest_cache (snapshot is read-only)",
+    "duration_s": 4.01,
+    "output": "........................................................................ [ 26%]\n........................................................................ [ 52%]\n........................................................................ [ 78%]\n..........................................................               [100%]\n=============================== warnings summary ===============================\n../../../../tmp/jobscraper-baseline-20260816/.venv/lib/python3.11/site-packages/_pytest/cacheprovider.py:475\n  /tmp/jobscraper-baseline-20260816/.venv/lib/python3.11/site-packages/_pytest/cacheprovider.py:475: PytestCacheWarning: could not create cache path <home>/.searcher-donors/jobscraper-frozen-20260816/.pytest_cache/v/cache/nodeids: [Errno 1] Operation not permitted: '<home>/.searcher-donors/jobscraper-frozen-20260816/pytest-cache-files-jxs5wyqi'\n    config.cache.set(\"cache/nodeids\", sorted(self.cached_nodeids))\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n274 passed, 1 warning in 4.01s\n",
+    "per_file": {
+      "tests/test_filters.py": 114,
+      "tests/test_intern_title.py": 69,
+      "tests/test_enrichment.py": 32,
+      "tests/test_lifecycle.py": 15,
+      "tests/test_db.py": 12,
+      "tests/test_web.py": 9,
+      "tests/test_toronto_bump.py": 8,
+      "tests/test_liveness.py": 8,
+      "tests/test_discover.py": 4,
+      "tests/test_normalize_greenhouse.py": 3
+    },
+    "readme_claim": "114 tests, network-free \u2014 stale; 114 is test_filters.py only"
+  },
+  "could_not_run": [
+    {
+      "what": "Playwright Chromium / stealth browser fetchers",
+      "why": "playwright install chromium not run; stripe.py/shopify.py/browser.py have no tests; \u00a76.10 REJECT anyway"
+    },
+    {
+      "what": "Live ATS requests (Greenhouse/Lever/Ashby/Workable/SmartRecruiters/Workday)",
+      "why": "Contract forbids live third-party contact. discover.probe_one and HttpClient.get_json untested on the wire."
+    },
+    {
+      "what": "respx-based HTTP client tests",
+      "why": "respx is declared in [project.optional-dependencies] dev but no test imports it"
+    },
+    {
+      "what": "SIGKILL mid-WAL",
+      "why": "Interrupt reproduction used an in-transaction RuntimeError, not a killed process"
+    }
+  ],
+  "fixture_runtime": {
+    "command": "/tmp/jobscraper-baseline-20260816/.venv/bin/python /tmp/jobscraper-baseline-20260816/reproduce_fixture.py",
+    "fixture": "tests/fixtures/greenhouse_sample.json",
+    "observed": {
+      "normalized": 4,
+      "passing": [
+        {
+          "id": "7000001",
+          "title": "Software Engineer Intern, Summer 2027",
+          "country": "CA",
+          "cycle": "summer-2027",
+          "year": "sophomore",
+          "role": "engineering",
+          "fit": 67
+        },
+        {
+          "id": "7000003",
+          "title": "Finance Intern, FP&A",
+          "country": "US",
+          "cycle": "current",
+          "year": "any",
+          "role": "finance",
+          "fit": 44
+        }
+      ],
+      "drops": [
+        {
+          "id": "7000002",
+          "title": "Senior Backend Engineer",
+          "stage": "title",
+          "reason": "no-intern-keyword"
+        },
+        {
+          "id": "7000004",
+          "title": "Product Manager Intern",
+          "stage": "title",
+          "reason": "title-drop:'Manager'"
+        }
+      ],
+      "stats": {
+        "raw": 4,
+        "title_pass": 2,
+        "edu_pass": 2,
+        "role_pass": 2,
+        "location_pass": 2
+      }
+    }
+  },
+  "interrupt_resume": {
+    "command": "/tmp/jobscraper-baseline-20260816/.venv/bin/python /tmp/jobscraper-baseline-20260816/interrupt_resume.py",
+    "db": "/tmp/jobscraper-baseline-20260816/interrupt.db",
+    "verdict": "Job rows are durable and idempotent. An interrupted company transaction rolls back. An interrupted run does not resume remaining work \u2014 the next update refetches every company. No URL frontier, no work cursor.",
+    "observations": [
+      "Acme complete persist: 2 filter-passing rows (7000001, 7000003)",
+      "Brex mid-transaction RuntimeError after 1 upsert: Brex rows=0, Acme intact, company_state.Brex is None",
+      "Resume re-run Acme+Brex: Acme still 2 rows, first_seen preserved, last_seen refreshed, no duplicates; Brex inserts 2",
+      "last_success_at written but runner.run_fetch never reads it",
+      "fetch_log/http_cache are outside the jobs transaction"
+    ]
+  }
+}
