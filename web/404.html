@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SEARCHER</title>
+  <script>
+    (function () {
+      var known = { search: 1, privacy: 1, limitations: 1 };
+      var parts = location.pathname.split("/");
+      var cut = -1;
+      var i;
+      for (i = 0; i < parts.length; i++) {
+        if (known[parts[i]]) {
+          cut = i;
+          break;
+        }
+      }
+      var baseParts = cut === -1 ? parts.slice(0, -1) : parts.slice(0, cut);
+      var restParts = cut === -1 ? [] : parts.slice(cut);
+      var base = baseParts.join("/") || "";
+      if (base && base.charAt(0) !== "/") base = "/" + base;
+      if (base === "/") base = "";
+      var rest = restParts.filter(Boolean).join("/");
+      var hash = rest ? "#/" + rest : "#/";
+      var next = location.origin + base + "/" + hash;
+      location.replace(next);
+    })();
+  </script>
+</head>
+<body>
+  <p>Taking you to SEARCHER… <a href="./">Continue</a></p>
+</body>
+</html>

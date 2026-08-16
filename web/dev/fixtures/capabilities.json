@@ -1,0 +1,38 @@
+{
+  "api_version": "v1",
+  "vision": {
+    "available": true,
+    "mode": "fixture"
+  },
+  "discovery": {
+    "available": true,
+    "mode": "fixture"
+  },
+  "max_images": 10,
+  "min_images": 1,
+  "max_image_bytes": 20971520,
+  "accepted_media_types": [
+    "image/jpeg",
+    "image/png",
+    "image/webp",
+    "image/gif"
+  ],
+  "buckets": [
+    "real",
+    "possibly_real"
+  ],
+  "events": [
+    "search.state",
+    "search.progress",
+    "search.coverage",
+    "candidate.discovered",
+    "candidate.normalized",
+    "candidate.promoted",
+    "candidate.updated",
+    "result.real",
+    "result.possibly_real",
+    "result.removed",
+    "search.warning",
+    "search.complete"
+  ]
+}

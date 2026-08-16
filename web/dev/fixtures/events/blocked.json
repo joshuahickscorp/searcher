@@ -1,0 +1,67 @@
+[
+  {
+    "delay_ms": 200,
+    "event": "search.state",
+    "data": {
+      "state": "CREATED",
+      "version": 1
+    }
+  },
+  {
+    "delay_ms": 300,
+    "event": "search.progress",
+    "data": {
+      "stage": "Understanding the item",
+      "detail": null
+    }
+  },
+  {
+    "delay_ms": 300,
+    "event": "search.progress",
+    "data": {
+      "stage": "Searching international sources",
+      "detail": null
+    }
+  },
+  {
+    "delay_ms": 300,
+    "event": "search.coverage",
+    "data": {
+      "sources_completed": [],
+      "sources_blocked": [
+        {
+          "id": "discovery",
+          "name": "Discovery lane",
+          "status": "BLOCKED_BY_ACCESS",
+          "detail": "No admitted public source could be reached."
+        },
+        {
+          "id": "vision",
+          "name": "Visual comparison",
+          "status": "UNMEASURABLE",
+          "detail": "Visual comparison was not runnable."
+        }
+      ],
+      "sources_in_progress": [],
+      "pages_fetched": 0,
+      "candidates_normalized": 0,
+      "candidates_hidden": 0
+    }
+  },
+  {
+    "delay_ms": 200,
+    "event": "search.state",
+    "data": {
+      "state": "BLOCKED",
+      "version": 4
+    }
+  },
+  {
+    "delay_ms": 100,
+    "event": "search.complete",
+    "data": {
+      "terminal_status": "BLOCKED",
+      "reason": "The campaign could not reach its declared goal because admitted sources were blocked."
+    }
+  }
+]

@@ -1,0 +1,180 @@
+{
+  "result_id": "res-possible-1",
+  "search_id": "fixture-normal",
+  "candidate_id": "cand-pos-1",
+  "bucket": "possibly_real",
+  "rank": 1,
+  "title": "Dior Homme trainer, black",
+  "source": {
+    "name": "Community marketplace",
+    "adapter": "public_html"
+  },
+  "listing_url": "https://example.com/listings/trainer-black-unk",
+  "primary_image": {
+    "url": "/dev/fixtures/images/cand-b.png",
+    "alt": "Compressed listing photograph of a dark trainer"
+  },
+  "price": {
+    "original": "420",
+    "currency": "USD",
+    "display": "$420"
+  },
+  "size": {
+    "marked": "8.5",
+    "system": "US",
+    "display": "Size 8.5"
+  },
+  "availability": "LIVE",
+  "last_checked_at": "2026-08-16T00:39:20Z",
+  "item_match": {
+    "label": "Moderate",
+    "mean": 0.78,
+    "lower_bound": 0.68,
+    "upper_bound": 0.86
+  },
+  "authenticity": {
+    "label": "Incomplete evidence",
+    "mean": 0.54,
+    "lower_bound": 0.31,
+    "upper_bound": 0.72
+  },
+  "listing_utility": {
+    "live": true,
+    "label": "Live",
+    "score": 0.7,
+    "last_checked_at": "2026-08-16T00:39:20Z"
+  },
+  "evidence_chips": [
+    {
+      "kind": "support",
+      "text": "overall shape"
+    },
+    {
+      "kind": "support",
+      "text": "panel structure"
+    },
+    {
+      "kind": "missing",
+      "text": "label and sole missing"
+    }
+  ],
+  "primary_gap": {
+    "kind": "missing",
+    "text": "label and sole are missing"
+  },
+  "why": {
+    "heading": "Why Possible",
+    "points": [
+      "Overall shape and panel structure match.",
+      "Label and sole are missing.",
+      "Seller photographs are low resolution."
+    ],
+    "still_unverified": [
+      "No physical inspection."
+    ],
+    "supporting": [
+      "Global silhouette is compatible with the GAT last.",
+      "Panel count and placement are plausible."
+    ],
+    "contradictions": [],
+    "missing": [
+      "Label",
+      "Sole",
+      "High-resolution construction views"
+    ],
+    "seller_reported": [
+      {
+        "field": "Size",
+        "value": "8.5 US",
+        "origin": "REPORTED_BY_SELLER"
+      },
+      {
+        "field": "Brand",
+        "value": "Dior Homme",
+        "origin": "REPORTED_BY_SELLER"
+      }
+    ],
+    "images_compared": [
+      {
+        "url": "/dev/fixtures/images/ref-lateral.png",
+        "alt": "User reference, lateral",
+        "role": "user_reference"
+      },
+      {
+        "url": "/dev/fixtures/images/cand-b.png",
+        "alt": "Compressed listing photograph",
+        "role": "listing"
+      }
+    ],
+    "duplicate_image_family_count": 0,
+    "live": true,
+    "checked_at": "2026-08-16T00:39:20Z",
+    "tab_reason": "Item match is plausible, but authenticity-critical views are missing and the photographs are compressed."
+  },
+  "compare": {
+    "reference_crop": {
+      "url": "/dev/fixtures/images/crop-ref.png",
+      "alt": "User reference crop of the lateral panel",
+      "part": "lateral panel"
+    },
+    "candidate_crop": {
+      "url": "/dev/fixtures/images/crop-cand-b.png",
+      "alt": "Candidate crop from a compressed listing photo",
+      "part": "lateral panel"
+    },
+    "parts": [
+      {
+        "part": "Silhouette",
+        "status": "plausible",
+        "note": "Compatible, but compression hides edge geometry.",
+        "origin": "INFERRED"
+      },
+      {
+        "part": "Panel structure",
+        "status": "plausible",
+        "note": "Count and placement are compatible.",
+        "origin": "OBSERVED"
+      },
+      {
+        "part": "Label",
+        "status": "missing",
+        "note": "Not photographed.",
+        "origin": "UNRESOLVED"
+      },
+      {
+        "part": "Sole",
+        "status": "missing",
+        "note": "Not photographed.",
+        "origin": "UNRESOLVED"
+      },
+      {
+        "part": "Brand",
+        "status": "reported",
+        "note": "Dior Homme",
+        "origin": "REPORTED_BY_SELLER"
+      }
+    ],
+    "supporting": [
+      "Overall shape",
+      "Panel structure"
+    ],
+    "contradictions": [],
+    "missing_views": [
+      "label",
+      "sole",
+      "heel close-up"
+    ],
+    "seller_reported_fields": [
+      {
+        "field": "Size",
+        "value": "8.5 US",
+        "origin": "REPORTED_BY_SELLER"
+      },
+      {
+        "field": "Brand",
+        "value": "Dior Homme",
+        "origin": "REPORTED_BY_SELLER"
+      }
+    ]
+  }
+}

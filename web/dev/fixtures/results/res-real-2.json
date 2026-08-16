@@ -1,0 +1,173 @@
+{
+  "result_id": "res-real-2",
+  "search_id": "fixture-normal",
+  "candidate_id": "cand-real-2",
+  "bucket": "real",
+  "rank": 2,
+  "title": "Dior Homme GAT 2007",
+  "source": {
+    "name": "European resale listing",
+    "adapter": "public_html"
+  },
+  "listing_url": "https://example.com/listings/gat-2007-eu",
+  "primary_image": {
+    "url": "/dev/fixtures/images/cand-c.png",
+    "alt": "Listing photograph of a low trainer, three-quarter view"
+  },
+  "price": {
+    "original": "890",
+    "currency": "EUR",
+    "display": "€890"
+  },
+  "size": {
+    "marked": "42",
+    "system": "EU",
+    "display": "Size 42"
+  },
+  "availability": "LIVE",
+  "last_checked_at": "2026-08-16T00:39:20Z",
+  "item_match": {
+    "label": "High",
+    "mean": 0.92,
+    "lower_bound": 0.9,
+    "upper_bound": 0.95
+  },
+  "authenticity": {
+    "label": "High",
+    "mean": 0.83,
+    "lower_bound": 0.8,
+    "upper_bound": 0.88
+  },
+  "listing_utility": {
+    "live": true,
+    "label": "Live",
+    "score": 0.84,
+    "last_checked_at": "2026-08-16T00:39:20Z"
+  },
+  "evidence_chips": [
+    {
+      "kind": "support",
+      "text": "silhouette"
+    },
+    {
+      "kind": "support",
+      "text": "heel overlay"
+    },
+    {
+      "kind": "missing",
+      "text": "sole not shown"
+    }
+  ],
+  "primary_gap": {
+    "kind": "missing",
+    "text": "sole not shown"
+  },
+  "why": {
+    "heading": "Why Real",
+    "points": [
+      "Overall geometry and heel overlay agree with the reference.",
+      "Two independent detail groups agree.",
+      "No hard authenticity contradiction.",
+      "Listing is live."
+    ],
+    "still_unverified": [
+      "No physical inspection."
+    ],
+    "supporting": [
+      "Silhouette matches the 2007 GAT last.",
+      "Heel overlay shape is consistent."
+    ],
+    "contradictions": [],
+    "missing": [
+      "Outsole / sole view is absent.",
+      "Insole stamp is not photographed."
+    ],
+    "seller_reported": [
+      {
+        "field": "Size",
+        "value": "42",
+        "origin": "REPORTED_BY_SELLER"
+      },
+      {
+        "field": "Year",
+        "value": "2007",
+        "origin": "REPORTED_BY_SELLER"
+      }
+    ],
+    "images_compared": [
+      {
+        "url": "/dev/fixtures/images/ref-lateral.png",
+        "alt": "User reference, lateral",
+        "role": "user_reference"
+      },
+      {
+        "url": "/dev/fixtures/images/cand-c.png",
+        "alt": "Listing three-quarter photograph",
+        "role": "listing"
+      }
+    ],
+    "duplicate_image_family_count": 0,
+    "live": true,
+    "checked_at": "2026-08-16T00:39:20Z",
+    "tab_reason": "Item match and authenticity evidence clear the current Real gate. Sole photography is missing but is not a hard veto under the current benchmark."
+  },
+  "compare": {
+    "reference_crop": {
+      "url": "/dev/fixtures/images/crop-ref.png",
+      "alt": "User reference crop of the lateral panel",
+      "part": "lateral panel"
+    },
+    "candidate_crop": {
+      "url": "/dev/fixtures/images/crop-cand-c.png",
+      "alt": "Candidate crop of the heel",
+      "part": "heel"
+    },
+    "parts": [
+      {
+        "part": "Silhouette",
+        "status": "consistent",
+        "note": "Last shape and collar height agree.",
+        "origin": "OBSERVED"
+      },
+      {
+        "part": "Heel overlay",
+        "status": "consistent",
+        "note": "Notch and wrap agree.",
+        "origin": "OBSERVED"
+      },
+      {
+        "part": "Sole",
+        "status": "missing",
+        "note": "No sole photograph.",
+        "origin": "UNRESOLVED"
+      },
+      {
+        "part": "Size",
+        "status": "reported",
+        "note": "42",
+        "origin": "REPORTED_BY_SELLER"
+      }
+    ],
+    "supporting": [
+      "Silhouette",
+      "Heel overlay"
+    ],
+    "contradictions": [],
+    "missing_views": [
+      "sole",
+      "insole stamp"
+    ],
+    "seller_reported_fields": [
+      {
+        "field": "Size",
+        "value": "42",
+        "origin": "REPORTED_BY_SELLER"
+      },
+      {
+        "field": "Year",
+        "value": "2007",
+        "origin": "REPORTED_BY_SELLER"
+      }
+    ]
+  }
+}

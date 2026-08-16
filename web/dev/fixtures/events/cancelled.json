@@ -1,0 +1,55 @@
+[
+  {
+    "delay_ms": 200,
+    "event": "search.state",
+    "data": {
+      "state": "CREATED",
+      "version": 1
+    }
+  },
+  {
+    "delay_ms": 300,
+    "event": "search.progress",
+    "data": {
+      "stage": "Understanding the item",
+      "detail": null
+    }
+  },
+  {
+    "delay_ms": 300,
+    "event": "search.progress",
+    "data": {
+      "stage": "Reading visible labels",
+      "detail": null
+    }
+  },
+  {
+    "delay_ms": 300,
+    "event": "search.progress",
+    "data": {
+      "stage": "Building possible identities",
+      "detail": null
+    }
+  },
+  {
+    "delay_ms": 300,
+    "event": "search.progress",
+    "data": {
+      "stage": "Searching exact names",
+      "detail": null
+    }
+  },
+  {
+    "delay_ms": 200,
+    "event": "result.possibly_real",
+    "data": "res-possible-1"
+  },
+  {
+    "delay_ms": 400,
+    "event": "search.complete",
+    "data": {
+      "terminal_status": "CANCELLED",
+      "reason": "The search was cancelled before the campaign finished."
+    }
+  }
+]

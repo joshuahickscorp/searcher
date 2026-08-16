@@ -1,0 +1,162 @@
+{
+  "result_id": "res-possible-2",
+  "search_id": "fixture-normal",
+  "candidate_id": "cand-pos-2",
+  "bucket": "possibly_real",
+  "rank": 2,
+  "title": "General Army Trainer-style pair",
+  "source": {
+    "name": "Classified listing",
+    "adapter": "public_html"
+  },
+  "listing_url": "https://example.com/listings/gat-style-sold",
+  "primary_image": {
+    "url": "/dev/fixtures/images/cand-d.png",
+    "alt": "Listing photograph of a trainer, medial view"
+  },
+  "price": {
+    "original": "65000",
+    "currency": "JPY",
+    "display": "¥65,000"
+  },
+  "size": {
+    "marked": "41",
+    "system": "EU",
+    "display": "Size 41"
+  },
+  "availability": "SOLD",
+  "last_checked_at": "2026-08-16T00:39:20Z",
+  "item_match": {
+    "label": "Moderate",
+    "mean": 0.74,
+    "lower_bound": 0.62,
+    "upper_bound": 0.84
+  },
+  "authenticity": {
+    "label": "Moderate",
+    "mean": 0.66,
+    "lower_bound": 0.5,
+    "upper_bound": 0.78
+  },
+  "listing_utility": {
+    "live": false,
+    "label": "Sold",
+    "score": 0.22,
+    "last_checked_at": "2026-08-16T00:39:20Z"
+  },
+  "evidence_chips": [
+    {
+      "kind": "support",
+      "text": "medial stitching"
+    },
+    {
+      "kind": "contradiction",
+      "text": "size does not match the request"
+    },
+    {
+      "kind": "missing",
+      "text": "no live purchase path"
+    }
+  ],
+  "primary_gap": {
+    "kind": "contradiction",
+    "text": "marked size is 41; the request is 42"
+  },
+  "why": {
+    "heading": "Why Possible",
+    "points": [
+      "Medial stitching and collar shape are compatible.",
+      "Marked size conflicts with the requested size.",
+      "The listing is sold and is kept only as identity evidence."
+    ],
+    "still_unverified": [
+      "No physical inspection."
+    ],
+    "supporting": [
+      "Medial stitch path is compatible."
+    ],
+    "contradictions": [
+      "Seller-marked size is 41; the search asked for 42."
+    ],
+    "missing": [
+      "Current live equivalent from this seller."
+    ],
+    "seller_reported": [
+      {
+        "field": "Size",
+        "value": "41",
+        "origin": "REPORTED_BY_SELLER"
+      },
+      {
+        "field": "Availability",
+        "value": "Sold",
+        "origin": "EXTRACTED"
+      }
+    ],
+    "images_compared": [
+      {
+        "url": "/dev/fixtures/images/ref-lateral.png",
+        "alt": "User reference, lateral",
+        "role": "user_reference"
+      },
+      {
+        "url": "/dev/fixtures/images/cand-d.png",
+        "alt": "Listing medial photograph",
+        "role": "listing"
+      }
+    ],
+    "duplicate_image_family_count": 0,
+    "live": false,
+    "checked_at": "2026-08-16T00:39:20Z",
+    "tab_reason": "The pair may be the same model, but size conflicts and the listing is no longer live, so it cannot enter Real."
+  },
+  "compare": {
+    "reference_crop": {
+      "url": "/dev/fixtures/images/crop-ref.png",
+      "alt": "User reference crop of the lateral panel",
+      "part": "lateral panel"
+    },
+    "candidate_crop": {
+      "url": "/dev/fixtures/images/crop-cand-c.png",
+      "alt": "Candidate medial crop",
+      "part": "medial"
+    },
+    "parts": [
+      {
+        "part": "Medial stitching",
+        "status": "consistent",
+        "note": "Stitch path is compatible.",
+        "origin": "OBSERVED"
+      },
+      {
+        "part": "Size",
+        "status": "contradiction",
+        "note": "41 reported; 42 requested.",
+        "origin": "REPORTED_BY_SELLER"
+      },
+      {
+        "part": "Availability",
+        "status": "reported",
+        "note": "Sold",
+        "origin": "EXTRACTED"
+      }
+    ],
+    "supporting": [
+      "Medial stitching"
+    ],
+    "contradictions": [
+      "Marked size 41 versus requested 42"
+    ],
+    "missing_views": [
+      "lateral",
+      "label"
+    ],
+    "seller_reported_fields": [
+      {
+        "field": "Size",
+        "value": "41",
+        "origin": "REPORTED_BY_SELLER"
+      }
+    ]
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "result_id": "res-real-1",
+  "search_id": "fixture-normal",
+  "candidate_id": "cand-real-1",
+  "bucket": "real",
+  "rank": 1,
+  "title": "Dior Homme General Army Trainer",
+  "source": {
+    "name": "Public auction listing",
+    "adapter": "public_html"
+  },
+  "listing_url": "https://example.com/listings/gat-2007-42",
+  "primary_image": {
+    "url": "/dev/fixtures/images/cand-a.png",
+    "alt": "Listing photograph of a low trainer, lateral view"
+  },
+  "price": {
+    "original": "128000",
+    "currency": "JPY",
+    "display": "¥128,000"
+  },
+  "size": {
+    "marked": "42",
+    "system": "EU",
+    "display": "Size 42"
+  },
+  "availability": "LIVE",
+  "last_checked_at": "2026-08-16T00:39:20Z",
+  "item_match": {
+    "label": "High",
+    "mean": 0.94,
+    "lower_bound": 0.91,
+    "upper_bound": 0.97
+  },
+  "authenticity": {
+    "label": "High",
+    "mean": 0.86,
+    "lower_bound": 0.81,
+    "upper_bound": 0.91
+  },
+  "listing_utility": {
+    "live": true,
+    "label": "Live",
+    "score": 0.88,
+    "last_checked_at": "2026-08-16T00:39:20Z"
+  },
+  "evidence_chips": [
+    {
+      "kind": "support",
+      "text": "panel geometry"
+    },
+    {
+      "kind": "support",
+      "text": "heel construction"
+    },
+    {
+      "kind": "support",
+      "text": "outsole proportion"
+    }
+  ],
+  "primary_gap": {
+    "kind": "missing",
+    "text": "tongue label not shown"
+  },
+  "why": {
+    "heading": "Why Real",
+    "points": [
+      "Exact model geometry is strongly consistent.",
+      "Three independent detail groups agree.",
+      "No hard authenticity contradiction.",
+      "Listing is live."
+    ],
+    "still_unverified": [
+      "No physical inspection."
+    ],
+    "supporting": [
+      "Lateral panel intersection matches the reference crop.",
+      "Heel overlay notch is present at the expected depth.",
+      "Outsole block proportion agrees with the reference pair."
+    ],
+    "contradictions": [],
+    "missing": [
+      "Tongue label is not photographed.",
+      "Inside size label is not photographed."
+    ],
+    "seller_reported": [
+      {
+        "field": "Size",
+        "value": "42",
+        "origin": "REPORTED_BY_SELLER"
+      },
+      {
+        "field": "Colourway",
+        "value": "black / white",
+        "origin": "REPORTED_BY_SELLER"
+      }
+    ],
+    "images_compared": [
+      {
+        "url": "/dev/fixtures/images/ref-lateral.png",
+        "alt": "User reference, lateral",
+        "role": "user_reference"
+      },
+      {
+        "url": "/dev/fixtures/images/cand-a.png",
+        "alt": "Listing lateral photograph",
+        "role": "listing"
+      },
+      {
+        "url": "/dev/fixtures/images/crop-ref.png",
+        "alt": "Reference lateral crop",
+        "role": "reference_crop"
+      },
+      {
+        "url": "/dev/fixtures/images/crop-cand-a.png",
+        "alt": "Candidate lateral crop",
+        "role": "candidate_crop"
+      }
+    ],
+    "duplicate_image_family_count": 0,
+    "live": true,
+    "checked_at": "2026-08-16T00:39:20Z",
+    "tab_reason": "Item match and authenticity evidence both clear the current Real gate, the listing is live, and no hard veto applies."
+  },
+  "compare": {
+    "reference_crop": {
+      "url": "/dev/fixtures/images/crop-ref.png",
+      "alt": "User reference crop of the lateral panel",
+      "part": "lateral panel"
+    },
+    "candidate_crop": {
+      "url": "/dev/fixtures/images/crop-cand-a.png",
+      "alt": "Candidate crop of the lateral panel",
+      "part": "lateral panel"
+    },
+    "parts": [
+      {
+        "part": "Lateral panel",
+        "status": "consistent",
+        "note": "Panel seam meets the eye-stay below the fourth eyelet.",
+        "origin": "OBSERVED"
+      },
+      {
+        "part": "Heel overlay",
+        "status": "consistent",
+        "note": "Shallow central notch is present.",
+        "origin": "OBSERVED"
+      },
+      {
+        "part": "Outsole",
+        "status": "consistent",
+        "note": "Block proportion and heel-to-forefoot ratio agree.",
+        "origin": "OBSERVED"
+      },
+      {
+        "part": "Tongue label",
+        "status": "missing",
+        "note": "No usable tongue photograph.",
+        "origin": "UNRESOLVED"
+      },
+      {
+        "part": "Size",
+        "status": "reported",
+        "note": "42",
+        "origin": "REPORTED_BY_SELLER"
+      }
+    ],
+    "supporting": [
+      "Panel geometry",
+      "Heel construction",
+      "Outsole proportion"
+    ],
+    "contradictions": [],
+    "missing_views": [
+      "tongue label",
+      "inside size label",
+      "sole"
+    ],
+    "seller_reported_fields": [
+      {
+        "field": "Size",
+        "value": "42",
+        "origin": "REPORTED_BY_SELLER"
+      },
+      {
+        "field": "Condition",
+        "value": "Used",
+        "origin": "REPORTED_BY_SELLER"
+      },
+      {
+        "field": "Colourway",
+        "value": "black / white",
+        "origin": "REPORTED_BY_SELLER"
+      }
+    ]
+  }
+}

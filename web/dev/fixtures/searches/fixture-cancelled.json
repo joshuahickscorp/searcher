@@ -1,0 +1,52 @@
+{
+  "search_id": "fixture-cancelled",
+  "state": "CANCELLED",
+  "state_version": 8,
+  "terminal_status": "CANCELLED",
+  "terminal_reason": "The search was cancelled before the campaign finished.",
+  "created_at": "2026-08-16T00:40:00Z",
+  "updated_at": "2026-08-16T00:40:00Z",
+  "progress": {
+    "stage": "Searching exact names",
+    "detail": null
+  },
+  "coverage": {
+    "sources_completed": [],
+    "sources_blocked": [],
+    "sources_in_progress": [],
+    "pages_fetched": 4,
+    "candidates_normalized": 1,
+    "candidates_hidden": 0
+  },
+  "counts": {
+    "real": 0,
+    "possibly_real": 1,
+    "hidden": 0
+  },
+  "hidden_policy_note": null,
+  "missing_reference_views": [
+    {
+      "view": "sole",
+      "why": "Would resolve outsole-mould uncertainty on leading candidates."
+    },
+    {
+      "view": "inside size label",
+      "why": "Would confirm marked size independently of the seller field."
+    }
+  ],
+  "deeper_refresh_available": false,
+  "intent": {
+    "text": "cancel scenario",
+    "tags": [
+      "cancel"
+    ]
+  },
+  "result_ids": {
+    "real": [],
+    "possibly_real": [
+      "res-possible-1"
+    ]
+  },
+  "events_url": "/v1/searches/fixture-cancelled/events",
+  "results_url": "/v1/searches/fixture-cancelled/results"
+}

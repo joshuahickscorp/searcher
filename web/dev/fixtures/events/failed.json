@@ -1,0 +1,34 @@
+[
+  {
+    "delay_ms": 200,
+    "event": "search.state",
+    "data": {
+      "state": "CREATED",
+      "version": 1
+    }
+  },
+  {
+    "delay_ms": 300,
+    "event": "search.progress",
+    "data": {
+      "stage": "Understanding the item",
+      "detail": null
+    }
+  },
+  {
+    "delay_ms": 400,
+    "event": "search.state",
+    "data": {
+      "state": "FAILED",
+      "version": 2
+    }
+  },
+  {
+    "delay_ms": 100,
+    "event": "search.complete",
+    "data": {
+      "terminal_status": "FAILED",
+      "reason": "An internal error stopped the campaign. This is not a no-results outcome."
+    }
+  }
+]

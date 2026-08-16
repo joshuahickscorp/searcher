@@ -1,0 +1,67 @@
+{
+  "search_id": "fixture-partial",
+  "state": "PARTIAL",
+  "state_version": 8,
+  "terminal_status": "PARTIAL",
+  "terminal_reason": "Useful results exist, but a major source was blocked and authenticity evidence remains incomplete.",
+  "created_at": "2026-08-16T00:40:00Z",
+  "updated_at": "2026-08-16T00:40:00Z",
+  "progress": {
+    "stage": "Ranking results",
+    "detail": null
+  },
+  "coverage": {
+    "sources_completed": [
+      {
+        "id": "public_auction_jp",
+        "name": "Public auction listing",
+        "status": "SEARCHED_MATCHES_FOUND"
+      }
+    ],
+    "sources_blocked": [
+      {
+        "id": "walled_market",
+        "name": "Sign-in marketplace",
+        "status": "AUTH_REQUIRED",
+        "detail": "A sign-in wall blocked public search."
+      }
+    ],
+    "sources_in_progress": [],
+    "pages_fetched": 9,
+    "candidates_normalized": 3,
+    "candidates_hidden": 0
+  },
+  "counts": {
+    "real": 1,
+    "possibly_real": 1,
+    "hidden": 0
+  },
+  "hidden_policy_note": null,
+  "missing_reference_views": [
+    {
+      "view": "sole",
+      "why": "Would resolve outsole-mould uncertainty on leading candidates."
+    },
+    {
+      "view": "inside size label",
+      "why": "Would confirm marked size independently of the seller field."
+    }
+  ],
+  "deeper_refresh_available": true,
+  "intent": {
+    "text": "partial scenario",
+    "tags": [
+      "partial"
+    ]
+  },
+  "result_ids": {
+    "real": [
+      "res-real-1"
+    ],
+    "possibly_real": [
+      "res-possible-1"
+    ]
+  },
+  "events_url": "/v1/searches/fixture-partial/events",
+  "results_url": "/v1/searches/fixture-partial/results"
+}

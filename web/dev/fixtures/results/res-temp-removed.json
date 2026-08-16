@@ -1,0 +1,92 @@
+{
+  "result_id": "res-temp-removed",
+  "search_id": "fixture-normal",
+  "candidate_id": "cand-temp",
+  "bucket": "possibly_real",
+  "rank": 99,
+  "title": "Temporary candidate later hidden",
+  "source": {
+    "name": "Temporary page",
+    "adapter": "public_html"
+  },
+  "listing_url": "https://example.com/listings/temp",
+  "primary_image": {
+    "url": "/dev/fixtures/images/cand-e.png",
+    "alt": "Temporary listing photograph"
+  },
+  "price": {
+    "original": "10",
+    "currency": "USD",
+    "display": "$10"
+  },
+  "size": {
+    "marked": "42",
+    "system": "EU",
+    "display": "Size 42"
+  },
+  "availability": "REMOVED",
+  "last_checked_at": "2026-08-16T00:39:20Z",
+  "item_match": {
+    "label": "Incomplete evidence",
+    "mean": 0.2,
+    "lower_bound": 0.0,
+    "upper_bound": 0.4
+  },
+  "authenticity": {
+    "label": "Incomplete evidence",
+    "mean": 0.1,
+    "lower_bound": 0.0,
+    "upper_bound": 0.3
+  },
+  "listing_utility": {
+    "live": false,
+    "label": "Removed",
+    "score": 0.0,
+    "last_checked_at": "2026-08-16T00:39:20Z"
+  },
+  "evidence_chips": [
+    {
+      "kind": "missing",
+      "text": "page no longer available"
+    }
+  ],
+  "primary_gap": {
+    "kind": "contradiction",
+    "text": "destination is gone"
+  },
+  "why": {
+    "heading": "Why Possible",
+    "points": [
+      "Temporarily listed then removed."
+    ],
+    "still_unverified": [
+      "No physical inspection."
+    ],
+    "supporting": [],
+    "contradictions": [],
+    "missing": [],
+    "seller_reported": [],
+    "images_compared": [],
+    "duplicate_image_family_count": 0,
+    "live": false,
+    "checked_at": "2026-08-16T00:39:20Z",
+    "tab_reason": "Will be hidden."
+  },
+  "compare": {
+    "reference_crop": {
+      "url": "/dev/fixtures/images/crop-ref.png",
+      "alt": "User reference crop of the lateral panel",
+      "part": "lateral panel"
+    },
+    "candidate_crop": {
+      "url": "/dev/fixtures/images/crop-cand-a.png",
+      "alt": "Candidate crop of the lateral panel",
+      "part": "lateral panel"
+    },
+    "parts": [],
+    "supporting": [],
+    "contradictions": [],
+    "missing_views": [],
+    "seller_reported_fields": []
+  }
+}

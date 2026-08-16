@@ -1,0 +1,74 @@
+{
+  "homeHasWordmark": true,
+  "realTitle": "Dior Homme General Army Trainer",
+  "scores": [
+    "Item match: High mean 0.94, 0.91–0.97",
+    "Authenticity evidence: High mean 0.86, 0.81–0.91",
+    "Listing utility: Live",
+    "Item match: High mean 0.92, 0.9–0.95",
+    "Authenticity evidence: High mean 0.83, 0.8–0.88",
+    "Listing utility: Live"
+  ],
+  "compareHasSeller": true,
+  "compareHasParts": true,
+  "linkAttrs": {
+    "href": "https://example.com/listings/gat-2007-42",
+    "target": "_blank",
+    "rel": "noopener noreferrer nofollow"
+  },
+  "liveSearchId": "#/search/0b113ba7-c834-42d2-9618-ea52d0e66058",
+  "drawerWidth": 375,
+  "animation": "none",
+  "xssDom": {
+    "titles": [
+      "<img src=x onerror=alert(1)>",
+      "<img src=x onerror=alert(1)>"
+    ],
+    "html": [
+      "&lt;img src=x onerror=alert(1)&gt;",
+      "&lt;img src=x onerror=alert(1)&gt;"
+    ],
+    "strayImgs": 0,
+    "handlers": [],
+    "refusedHasSchemeNote": true
+  },
+  "dialogs": [],
+  "hashBefore": "#/search/1cb585f4-d583-4b64-be43-2533fda0d051",
+  "hashAfter": "#/search/1cb585f4-d583-4b64-be43-2533fda0d051",
+  "unavailableText": "The search service is unavailable. Set a working ?api= address if this page is not served by the search service.",
+  "colors": [
+    "rgb(17, 17, 17)",
+    "rgb(255, 255, 255)",
+    "rgba(0, 0, 0, 0)",
+    "rgb(74, 74, 74)",
+    "rgb(179, 179, 179)",
+    "rgb(0, 0, 0)"
+  ],
+  "consoleLines": [
+    {
+      "type": "error",
+      "text": "The Content Security Policy directive 'frame-ancestors' is ignored when delivered via a <meta> element."
+    },
+    {
+      "type": "error",
+      "text": "The Content Security Policy directive 'frame-ancestors' is ignored when delivered via a <meta> element."
+    },
+    {
+      "type": "error",
+      "text": "The Content Security Policy directive 'frame-ancestors' is ignored when delivered via a <meta> element."
+    },
+    {
+      "type": "error",
+      "text": "The Content Security Policy directive 'frame-ancestors' is ignored when delivered via a <meta> element."
+    },
+    {
+      "type": "error",
+      "text": "The Content Security Policy directive 'frame-ancestors' is ignored when delivered via a <meta> element."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_UNSAFE_PORT"
+    }
+  ],
+  "failures": []
+}

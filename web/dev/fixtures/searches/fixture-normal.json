@@ -1,0 +1,87 @@
+{
+  "search_id": "fixture-normal",
+  "state": "COMPLETE",
+  "state_version": 8,
+  "terminal_status": "COMPLETE",
+  "terminal_reason": "Success saturation: Real results exist and additional work had low expected gain.",
+  "created_at": "2026-08-16T00:40:00Z",
+  "updated_at": "2026-08-16T00:40:00Z",
+  "progress": {
+    "stage": "Ranking results",
+    "detail": null
+  },
+  "coverage": {
+    "sources_completed": [
+      {
+        "id": "public_auction_jp",
+        "name": "Public auction listing",
+        "status": "SEARCHED_MATCHES_FOUND"
+      },
+      {
+        "id": "eu_resale",
+        "name": "European resale listing",
+        "status": "SEARCHED_MATCHES_FOUND"
+      },
+      {
+        "id": "community",
+        "name": "Community marketplace",
+        "status": "SEARCHED_MATCHES_FOUND"
+      },
+      {
+        "id": "classifieds",
+        "name": "Classified listing",
+        "status": "SEARCHED_MATCHES_FOUND"
+      }
+    ],
+    "sources_blocked": [
+      {
+        "id": "walled_market",
+        "name": "Sign-in marketplace",
+        "status": "AUTH_REQUIRED",
+        "detail": "A sign-in wall blocked public search."
+      }
+    ],
+    "sources_in_progress": [],
+    "pages_fetched": 48,
+    "candidates_normalized": 19,
+    "candidates_hidden": 3
+  },
+  "counts": {
+    "real": 2,
+    "possibly_real": 2,
+    "hidden": 3
+  },
+  "hidden_policy_note": "Some candidates did not meet policy.",
+  "missing_reference_views": [
+    {
+      "view": "sole",
+      "why": "Would resolve outsole-mould uncertainty on leading candidates."
+    },
+    {
+      "view": "inside size label",
+      "why": "Would confirm marked size independently of the seller field."
+    }
+  ],
+  "deeper_refresh_available": true,
+  "intent": {
+    "text": "Dior Homme General Army Trainer around 2007, black and white",
+    "tags": [
+      "Dior Homme",
+      "2007",
+      "Hedi Slimane",
+      "size 42"
+    ]
+  },
+  "result_ids": {
+    "real": [
+      "res-real-1",
+      "res-real-2"
+    ],
+    "possibly_real": [
+      "res-possible-1",
+      "res-possible-2"
+    ]
+  },
+  "events_url": "/v1/searches/fixture-normal/events",
+  "results_url": "/v1/searches/fixture-normal/results"
+}

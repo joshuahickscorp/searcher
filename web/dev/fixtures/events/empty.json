@@ -1,0 +1,236 @@
+[
+  {
+    "delay_ms": 200,
+    "event": "search.state",
+    "data": {
+      "state": "CREATED",
+      "version": 1
+    }
+  },
+  {
+    "delay_ms": 250,
+    "event": "search.state",
+    "data": {
+      "state": "INGESTING_REFERENCES",
+      "version": 2
+    }
+  },
+  {
+    "delay_ms": 80,
+    "event": "search.progress",
+    "data": {
+      "stage": "Understanding the item",
+      "detail": null
+    }
+  },
+  {
+    "delay_ms": 250,
+    "event": "search.state",
+    "data": {
+      "state": "DECOMPOSING_REFERENCES",
+      "version": 3
+    }
+  },
+  {
+    "delay_ms": 80,
+    "event": "search.progress",
+    "data": {
+      "stage": "Reading visible labels",
+      "detail": null
+    }
+  },
+  {
+    "delay_ms": 250,
+    "event": "search.state",
+    "data": {
+      "state": "FORMING_HYPOTHESES",
+      "version": 4
+    }
+  },
+  {
+    "delay_ms": 80,
+    "event": "search.progress",
+    "data": {
+      "stage": "Building possible identities",
+      "detail": null
+    }
+  },
+  {
+    "delay_ms": 250,
+    "event": "search.state",
+    "data": {
+      "state": "DISCOVERING",
+      "version": 5
+    }
+  },
+  {
+    "delay_ms": 80,
+    "event": "search.progress",
+    "data": {
+      "stage": "Searching exact names",
+      "detail": null
+    }
+  },
+  {
+    "delay_ms": 250,
+    "event": "search.state",
+    "data": {
+      "state": "DISCOVERING",
+      "version": 6
+    }
+  },
+  {
+    "delay_ms": 80,
+    "event": "search.progress",
+    "data": {
+      "stage": "Searching alternate names",
+      "detail": null
+    }
+  },
+  {
+    "delay_ms": 250,
+    "event": "search.state",
+    "data": {
+      "state": "DISCOVERING",
+      "version": 7
+    }
+  },
+  {
+    "delay_ms": 80,
+    "event": "search.progress",
+    "data": {
+      "stage": "Searching international sources",
+      "detail": null
+    }
+  },
+  {
+    "delay_ms": 250,
+    "event": "search.state",
+    "data": {
+      "state": "BROAD_RETRIEVAL",
+      "version": 8
+    }
+  },
+  {
+    "delay_ms": 80,
+    "event": "search.progress",
+    "data": {
+      "stage": "Comparing candidate images",
+      "detail": null
+    }
+  },
+  {
+    "delay_ms": 250,
+    "event": "search.state",
+    "data": {
+      "state": "FINE_MATCHING",
+      "version": 9
+    }
+  },
+  {
+    "delay_ms": 80,
+    "event": "search.progress",
+    "data": {
+      "stage": "Checking detail consistency",
+      "detail": null
+    }
+  },
+  {
+    "delay_ms": 250,
+    "event": "search.state",
+    "data": {
+      "state": "AUTHENTICITY_REVIEW",
+      "version": 10
+    }
+  },
+  {
+    "delay_ms": 80,
+    "event": "search.progress",
+    "data": {
+      "stage": "Checking listing authenticity evidence",
+      "detail": null
+    }
+  },
+  {
+    "delay_ms": 250,
+    "event": "search.state",
+    "data": {
+      "state": "LIVE_CHECKING",
+      "version": 11
+    }
+  },
+  {
+    "delay_ms": 80,
+    "event": "search.progress",
+    "data": {
+      "stage": "Verifying live links",
+      "detail": null
+    }
+  },
+  {
+    "delay_ms": 250,
+    "event": "search.state",
+    "data": {
+      "state": "RANKING",
+      "version": 12
+    }
+  },
+  {
+    "delay_ms": 80,
+    "event": "search.progress",
+    "data": {
+      "stage": "Ranking results",
+      "detail": null
+    }
+  },
+  {
+    "delay_ms": 200,
+    "event": "search.coverage",
+    "data": {
+      "sources_completed": [
+        {
+          "id": "public_auction_jp",
+          "name": "Public auction listing",
+          "status": "SEARCHED_NO_MATCH"
+        },
+        {
+          "id": "eu_resale",
+          "name": "European resale listing",
+          "status": "SEARCHED_NO_MATCH"
+        }
+      ],
+      "sources_blocked": [
+        {
+          "id": "walled_market",
+          "name": "Sign-in marketplace",
+          "status": "AUTH_REQUIRED",
+          "detail": "A sign-in wall blocked public search."
+        },
+        {
+          "id": "rate_limited_board",
+          "name": "Regional board",
+          "status": "RATE_LIMITED",
+          "detail": "The source returned a rate-limit response."
+        },
+        {
+          "id": "policy_block",
+          "name": "Restricted catalogue",
+          "status": "BLOCKED_BY_POLICY",
+          "detail": "The source is not admitted for this campaign."
+        }
+      ],
+      "sources_in_progress": [],
+      "pages_fetched": 12,
+      "candidates_normalized": 0,
+      "candidates_hidden": 0
+    }
+  },
+  {
+    "delay_ms": 200,
+    "event": "search.complete",
+    "data": {
+      "terminal_status": "COMPLETE",
+      "reason": "No displayable candidate passed the threshold within the searched sources and budget."
+    }
+  }
+]
