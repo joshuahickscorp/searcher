@@ -15,7 +15,7 @@
         "fpr_at_threshold": 0.0094
       },
       "rerun_from_current_fixtures_and_local_weights": {
-        "command": "SEARCHER_EMBEDDING_WEIGHTS=... ~/.grok-vision/bin/python (see artifacts/redteam-calibration-rerun.json)",
+        "command": "SEARCHER_EMBEDDING_WEIGHTS=... <vision-env>/bin/python (see artifacts/redteam-calibration-rerun.json)",
         "n_listings_in_fixture": 10,
         "n_positive_pairs": 30,
         "n_negative_pairs": 90,
