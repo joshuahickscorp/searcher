@@ -6,7 +6,13 @@ import json
 from typing import Any
 from urllib.parse import urljoin
 
-from searcher.contracts.enums import ExtractionMethod, FetchMode, SourceAdmission, SourceOutcome
+from searcher.contracts.enums import (
+    DocumentClass,
+    ExtractionMethod,
+    FetchMode,
+    SourceAdmission,
+    SourceOutcome,
+)
 from searcher.contracts.models import (
     ListingCandidate,
     LiveStatus,
@@ -20,6 +26,8 @@ from searcher.core.time import utc_now
 from searcher.normalization.html import strip_html
 from searcher.normalization.listing import normalize_raw
 from searcher.sources.adapters.protocol import DiscoveryPageResult
+from searcher.sources.classify import classify_acquired_document
+from searcher.sources.expand import IMAGES_MISSING_KEY, attach_image_absence
 from searcher.sources.fetch_modes import FetchedDocument
 from searcher.sources.live_check import classify_liveness
 from searcher.sources.manifest import build_manifest
@@ -37,16 +45,13 @@ def _parser(html: str) -> Any:
 
 
 def classify_page_type(html: str, url: str) -> str:
-    lowered = html[:4000].lower()
-    path = url.lower()
-    if '"@type"' in html and "Product" in html:
-        return "product"
-    if any(part in path for part in ("/product", "/products/", "/itm/", "/listing/", "/items/")):
-        return "product"
-    if any(part in path for part in ("/collections/", "/shop/", "/category")):
+    document = classify_acquired_document(url=url, body=html.encode("utf-8", errors="replace"))
+    if document is DocumentClass.INDEX:
+        if "search" in url.lower():
+            return "search"
         return "collection"
-    if "search" in path or "search results" in lowered:
-        return "search"
+    if document is DocumentClass.PRODUCT:
+        return "product"
     return "unknown"
 
 
@@ -316,13 +321,25 @@ class GenericPageAdapter:
     def parse(self, fetch: FetchedDocument) -> list[RawListing]:
         if fetch.result.outcome is not SourceOutcome.SEARCHED_MATCHES_FOUND:
             return []
+        url = fetch.final_url or fetch.result.url
+        prefixes = list(self._manifest.listing_path_prefixes)
+        document = classify_acquired_document(
+            url=url,
+            body=fetch.body,
+            content_type=fetch.result.content_type,
+            listing_prefixes=prefixes,
+        )
+        if document is not DocumentClass.PRODUCT:
+            return []
         html = fetch.body.decode("utf-8", errors="replace")
-        payload = extract_listing(html, fetch.final_url or fetch.result.url)
+        payload = extract_listing(html, url)
         payload["images"] = [{"url": img} for img in payload.get("images") or []]
+        if not payload["images"]:
+            payload[IMAGES_MISSING_KEY] = "page_extracted_no_images"
         return [
             RawListing(
                 source_adapter=self._manifest.adapter,
-                url=fetch.final_url or fetch.result.url,
+                url=url,
                 payload=payload,
                 content_digest=fetch.result.content_digest or sha256_hex(fetch.body),
                 fetched_at=utc_now(),
@@ -330,7 +347,7 @@ class GenericPageAdapter:
         ]
 
     def normalize(self, raw: RawListing) -> ListingCandidate:
-        return normalize_raw(raw)
+        return attach_image_absence(normalize_raw(raw), raw)
 
     def live_check(self, candidate: ListingCandidate) -> LiveStatus:
         return classify_liveness(

@@ -463,7 +463,11 @@ class CampaignOrchestrator:
         self.controller.set_runtime(
             search_id,
             coverage=coverage,
-            last_discovery={"before": summary.candidates_before, "after": summary.candidates_after},
+            last_discovery={
+                "before": summary.candidates_before,
+                "after": summary.candidates_after,
+                "index_expansions": list(summary.expansions),
+            },
         )
         self.controller.emit(
             search_id, PublicEventName.SEARCH_COVERAGE.value, payload=coverage, actor="orchestrator"

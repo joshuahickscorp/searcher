@@ -7,6 +7,7 @@ from typing import Any, Protocol, cast
 
 from searcher.campaigns.controller import CampaignController
 from searcher.contracts.enums import (
+    DocumentClass,
     FetchMode,
     FrontierState,
     SourceOutcome,
@@ -23,20 +24,35 @@ from searcher.core.errors import BudgetExceeded, CancelledError
 from searcher.core.ids import new_id
 from searcher.core.time import utc_now
 from searcher.deduplication.clusters import cluster_candidates
+from searcher.receipts.base import ReceiptBase
 from searcher.receipts.types import SourceAdmissionReceipt, SourceRunReceipt
 from searcher.sources.adapters import resolve_adapter
-from searcher.sources.adapters.generic_page import listing_links
-from searcher.sources.adapters.sitemap import filter_locs, parse_sitemap_locs
 from searcher.sources.admission import AdmissionGate
 from searcher.sources.broker import Coverage, SourceBroker
 from searcher.sources.browser import BrowserPool
 from searcher.sources.cache import ResponseCache
 from searcher.sources.cancel import RunCancel
 from searcher.sources.circuit import CircuitBreaker, CircuitOpen
+from searcher.sources.classify import (
+    classify_acquired_document,
+    host_of,
+    looks_like_index_url,
+)
 from searcher.sources.events import SourceEvents
+from searcher.sources.expand import (
+    INDEX_EXPANSION_RECEIPT,
+    ExpansionResult,
+    attach_image_absence,
+    candidate_from_member,
+    expand_index,
+    expansion_caps_from_env,
+    member_from_frontier_payload,
+    member_frontier_payload,
+    raw_listing_from_member,
+)
 from searcher.sources.fetch_log import FetchLog
 from searcher.sources.fetch_modes import Escalator, FetchedDocument
-from searcher.sources.frontier import Frontier, compute_priority
+from searcher.sources.frontier import MAX_DEPTH, Frontier, FrontierItem, compute_priority
 from searcher.sources.health import HealthStore
 from searcher.sources.http import HonestHttpClient
 from searcher.sources.live_check import check_candidate
@@ -52,6 +68,7 @@ class SourceRunSummary:
     candidates_after: int
     listings: list[ListingCandidate] = field(default_factory=list)
     blocked: list[dict[str, str]] = field(default_factory=list)
+    expansions: list[dict[str, object]] = field(default_factory=list)
 
 
 class _HasManifest(Protocol):
@@ -89,12 +106,19 @@ class DiscoveryEngine:
         http: HonestHttpClient | None = None,
         batch_size: int = 4,
         max_work: int = 40,
+        per_index_cap: int | None = None,
+        per_campaign_cap: int | None = None,
     ) -> None:
         self.controller = controller
         self.http = http or HonestHttpClient()
         self.owns_http = http is None
         self.batch_size = batch_size
         self.max_work = max_work
+        caps = expansion_caps_from_env()
+        self.per_index_cap = caps.per_index if per_index_cap is None else per_index_cap
+        self.per_campaign_cap = caps.per_campaign if per_campaign_cap is None else per_campaign_cap
+        self._campaign_expanded = 0
+        self._expansions: list[dict[str, object]] = []
         self.repos = controller.repos
         self.health = HealthStore(self.repos)
         self.broker = SourceBroker(health=self.health)
@@ -149,6 +173,8 @@ class DiscoveryEngine:
         cancel = RunCancel(search_id, self.controller.cancellation)
         events = SourceEvents(self.controller, search_id)
         coverage = Coverage()
+        self._campaign_expanded = 0
+        self._expansions = []
         if source_names is not None:
             self.broker.names = tuple(source_names)
         plans = self.broker.plan(
@@ -195,6 +221,7 @@ class DiscoveryEngine:
             candidates_after=len(deduped.representatives),
             listings=deduped.representatives,
             blocked=blocked,
+            expansions=list(self._expansions),
         )
 
     def _run_plan(
@@ -324,85 +351,18 @@ class DiscoveryEngine:
                         )
                         events.blocked(source_id, decision.outcome.value, decision.basis)
                         continue
-                    doc = self._fetch_item(adapter, escalator, item.url, manifest)
-                    pages += 1
-                    last_outcome = doc.result.outcome
-                    events.page_fetched(source_id, item.url, last_outcome.value)
-                    self.repos.insert_discovery_page(
-                        DiscoveryPage(
-                            page_id=new_id(),
-                            search_id=search_id,
-                            source_id=source_id,
-                            url=item.url,
-                            content_digest=doc.result.content_digest,
-                            cursor=item.cursor,
-                            outcome=last_outcome,
-                            fetched_at=utc_now(),
-                        )
+                    pages_delta, last_outcome = self._handle_item(
+                        item=item,
+                        adapter=adapter,
+                        escalator=escalator,
+                        manifest=manifest,
+                        frontier=frontier,
+                        search_id=search_id,
+                        source_id=source_id,
+                        events=events,
+                        found=found,
                     )
-                    if last_outcome is SourceOutcome.SEARCHED_MATCHES_FOUND:
-                        parsed = adapter.parse(doc)  # type: ignore[attr-defined]
-                        for raw in parsed:
-                            candidate = adapter.normalize(raw)  # type: ignore[attr-defined]
-                            found.append(candidate)
-                            self.repos.upsert_candidate(search_id, candidate)
-                            events.candidates_found(source_id, 1)
-                            expandable = {WorkKind.QUERY, WorkKind.SITEMAP, WorkKind.PAGINATION}
-                            if item.depth < 3 and item.kind in expandable:
-                                child_url = candidate.canonical_url
-                                if child_url and child_url != item.url:
-                                    frontier.enqueue(
-                                        search_id=search_id,
-                                        source_id=source_id,
-                                        url=child_url,
-                                        kind=WorkKind.LISTING,
-                                        depth=item.depth + 1,
-                                        payload={"from": item.work_key},
-                                    )
-                        html = doc.body.decode("utf-8", errors="replace")
-                        if item.kind is WorkKind.SITEMAP:
-                            locs = filter_locs(
-                                parse_sitemap_locs(doc.body, limit=80),
-                                str((item.payload or {}).get("query") or ""),
-                                list(manifest.listing_path_prefixes),
-                            )
-                            for loc in locs[:20]:
-                                frontier.enqueue(
-                                    search_id=search_id,
-                                    source_id=source_id,
-                                    url=loc,
-                                    kind=WorkKind.LISTING,
-                                    depth=item.depth + 1,
-                                )
-                        elif item.kind is WorkKind.QUERY and manifest.listing_path_prefixes:
-                            prefixes = list(manifest.listing_path_prefixes)
-                            for loc in listing_links(html, item.url, prefixes)[:8]:
-                                frontier.enqueue(
-                                    search_id=search_id,
-                                    source_id=source_id,
-                                    url=loc,
-                                    kind=WorkKind.LISTING,
-                                    depth=item.depth + 1,
-                                )
-                        frontier.complete(item, outcome=last_outcome.value)
-                    elif is_block(last_outcome):
-                        frontier.complete(
-                            item,
-                            outcome=last_outcome.value,
-                            state=FrontierState.BLOCKED,
-                            error_class=last_outcome.value,
-                        )
-                        events.blocked(
-                            source_id,
-                            last_outcome.value,
-                            doc.result.classification_note or "",
-                        )
-                    else:
-                        frontier.complete(
-                            item,
-                            outcome=last_outcome.value,
-                            error_class=last_outcome.value,
-                        )
+                    pages += pages_delta
                 except BudgetExceeded:
                     frontier.complete(
                         item,
@@ -436,6 +396,232 @@ class DiscoveryEngine:
         )
         return last_outcome.value, found
 
+    def _handle_item(
+        self,
+        *,
+        item: FrontierItem,
+        adapter: Any,
+        escalator: Escalator,
+        manifest: SourceManifest,
+        frontier: Frontier,
+        search_id: str,
+        source_id: str,
+        events: SourceEvents,
+        found: list[ListingCandidate],
+    ) -> tuple[int, SourceOutcome]:
+        if item.payload.get("from_index_feed") and item.payload.get("canonical_url"):
+            self._materialize_feed_member(
+                item=item,
+                adapter=adapter,
+                frontier=frontier,
+                search_id=search_id,
+                source_id=source_id,
+                events=events,
+                found=found,
+            )
+            return 0, SourceOutcome.SEARCHED_MATCHES_FOUND
+        doc = self._fetch_item(adapter, escalator, item.url, manifest)
+        events.page_fetched(source_id, item.url, doc.result.outcome.value)
+        self.repos.insert_discovery_page(
+            DiscoveryPage(
+                page_id=new_id(),
+                search_id=search_id,
+                source_id=source_id,
+                url=item.url,
+                content_digest=doc.result.content_digest,
+                cursor=item.cursor,
+                outcome=doc.result.outcome,
+                fetched_at=utc_now(),
+            )
+        )
+        last_outcome = doc.result.outcome
+        if last_outcome is SourceOutcome.SEARCHED_MATCHES_FOUND:
+            self._ingest_document(
+                item=item,
+                doc=doc,
+                adapter=adapter,
+                manifest=manifest,
+                frontier=frontier,
+                search_id=search_id,
+                source_id=source_id,
+                events=events,
+                found=found,
+            )
+            frontier.complete(item, outcome=last_outcome.value)
+        elif is_block(last_outcome):
+            frontier.complete(
+                item,
+                outcome=last_outcome.value,
+                state=FrontierState.BLOCKED,
+                error_class=last_outcome.value,
+            )
+            events.blocked(
+                source_id,
+                last_outcome.value,
+                doc.result.classification_note or "",
+            )
+        else:
+            frontier.complete(
+                item,
+                outcome=last_outcome.value,
+                error_class=last_outcome.value,
+            )
+        return 1, last_outcome
+
+    def _ingest_document(
+        self,
+        *,
+        item: FrontierItem,
+        doc: FetchedDocument,
+        adapter: Any,
+        manifest: SourceManifest,
+        frontier: Frontier,
+        search_id: str,
+        source_id: str,
+        events: SourceEvents,
+        found: list[ListingCandidate],
+    ) -> None:
+        url = doc.final_url or doc.result.url or item.url
+        prefixes = list(manifest.listing_path_prefixes)
+        document = classify_acquired_document(
+            url=url,
+            body=doc.body,
+            content_type=doc.result.content_type,
+            listing_prefixes=prefixes,
+        )
+        if document is DocumentClass.INDEX or looks_like_index_url(url):
+            self._expand_into_frontier(
+                item=item,
+                body=doc.body,
+                manifest=manifest,
+                frontier=frontier,
+                search_id=search_id,
+                source_id=source_id,
+            )
+            return
+        if document is not DocumentClass.PRODUCT:
+            return
+        parsed = adapter.parse(doc)  # type: ignore[attr-defined]
+        for raw in parsed:
+            raw_url = str(raw.payload.get("canonical_url") or raw.url)
+            if looks_like_index_url(raw_url):
+                continue
+            candidate = attach_image_absence(
+                adapter.normalize(raw),  # type: ignore[attr-defined]
+                raw,
+            )
+            if looks_like_index_url(candidate.canonical_url):
+                continue
+            found.append(candidate)
+            self.repos.upsert_candidate(search_id, candidate)
+            events.candidates_found(source_id, 1)
+
+    def _expand_into_frontier(
+        self,
+        *,
+        item: FrontierItem,
+        body: bytes,
+        manifest: SourceManifest,
+        frontier: Frontier,
+        search_id: str,
+        source_id: str,
+    ) -> None:
+        allowed_hosts = set()
+        for raw in (manifest.domain, host_of(item.url)):
+            if not raw:
+                continue
+            allowed_hosts.add(raw.lower())
+            if ":" in raw and raw.rsplit(":", 1)[-1].isdigit():
+                allowed_hosts.add(raw.rsplit(":", 1)[0].lower())
+        seen = self._seen_target_urls(search_id, frontier)
+        result = expand_index(
+            url=item.url,
+            body=body,
+            listing_prefixes=list(manifest.listing_path_prefixes),
+            allowed_hosts=sorted(allowed_hosts),
+            seen_urls=seen,
+            per_index_cap=self.per_index_cap,
+            per_campaign_cap=self.per_campaign_cap,
+            campaign_taken=self._campaign_expanded,
+            child_depth=item.depth + 1,
+            max_depth=MAX_DEPTH,
+        )
+        self._campaign_expanded = result.campaign_taken_after
+        self._record_expansion(search_id, source_id, result)
+        for member in result.taken:
+            payload = member_frontier_payload(member, index_url=item.url, work_key=item.work_key)
+            frontier.enqueue(
+                search_id=search_id,
+                source_id=source_id,
+                url=member.url,
+                kind=WorkKind.LISTING,
+                depth=item.depth + 1,
+                payload=payload,
+            )
+
+    def _materialize_feed_member(
+        self,
+        *,
+        item: FrontierItem,
+        adapter: Any,
+        frontier: Frontier,
+        search_id: str,
+        source_id: str,
+        events: SourceEvents,
+        found: list[ListingCandidate],
+    ) -> None:
+        member = member_from_frontier_payload(item.payload, item.url)
+        if looks_like_index_url(member.url):
+            frontier.complete(item, outcome=SourceOutcome.SEARCHED_NO_MATCH.value)
+            return
+        language = None
+        try:
+            languages = adapter.manifest().languages  # type: ignore[attr-defined]
+            if languages:
+                language = languages[0]
+        except Exception:
+            language = None
+        if hasattr(adapter, "normalize"):
+            raw = raw_listing_from_member(member, source_adapter=source_id, language=language)
+            candidate = attach_image_absence(adapter.normalize(raw), raw)
+        else:
+            candidate = candidate_from_member(member, source_adapter=source_id, language=language)
+        if looks_like_index_url(candidate.canonical_url):
+            frontier.complete(item, outcome=SourceOutcome.SEARCHED_NO_MATCH.value)
+            return
+        found.append(candidate)
+        self.repos.upsert_candidate(search_id, candidate)
+        events.candidates_found(source_id, 1)
+        frontier.complete(item, outcome=SourceOutcome.SEARCHED_MATCHES_FOUND.value)
+
+    def _seen_target_urls(self, search_id: str, frontier: Frontier) -> set[str]:
+        from searcher.normalization.url import canonicalize_url
+
+        seen: set[str] = set()
+        for candidate in self.repos.list_candidates(search_id):
+            if candidate.canonical_url:
+                seen.add(canonicalize_url(candidate.canonical_url))
+        for existing in frontier.list_all():
+            if existing.url:
+                seen.add(canonicalize_url(existing.url))
+        return seen
+
+    def _record_expansion(self, search_id: str, source_id: str, result: ExpansionResult) -> None:
+        payload = result.as_payload()
+        payload["source_id"] = source_id
+        self._expansions.append(payload)
+        receipt = ReceiptBase(
+            receipt_type=INDEX_EXPANSION_RECEIPT,
+            search_id=search_id,
+            payload=payload,
+        ).seal()
+        self.controller.store_receipt(receipt)
+        runtime = self.repos.get_runtime(search_id)
+        recorded = list(runtime.get("index_expansions") or [])
+        recorded.append(payload)
+        runtime["index_expansions"] = recorded
+        self.repos.update_runtime(search_id, runtime)
+
     def _fetch_item(
         self,
         adapter: Any,
@@ -452,9 +638,7 @@ class DiscoveryEngine:
                 return adapter.fetch(url, FetchMode.HTTP)  # type: ignore[no-any-return]
             except RuntimeError:
                 pass
-        return escalator.fetch(
-            url, manifest, source_id=manifest.source_id, allow_render=True
-        )
+        return escalator.fetch(url, manifest, source_id=manifest.source_id, allow_render=True)
 
     def _finish_run(
         self,
@@ -474,7 +658,12 @@ class DiscoveryEngine:
             source_id,
             cursor=None,
             last_outcome=outcome.value,
-            payload={"pages": pages, "matches": matches, "work_skipped": work_skipped},
+            payload={
+                "pages": pages,
+                "matches": matches,
+                "work_skipped": work_skipped,
+                "expansions": list(self._expansions),
+            },
         )
         receipt = SourceRunReceipt(
             search_id=search_id,
@@ -484,6 +673,7 @@ class DiscoveryEngine:
             matches=matches,
             blocked_reason=outcome.value if is_block(outcome) else None,
             work_skipped=work_skipped,
+            payload={"expansions": list(self._expansions)},
         ).seal()
         self.controller.store_receipt(receipt)
         events.coverage(source_id, outcome.value, pages)

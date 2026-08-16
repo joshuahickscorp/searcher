@@ -9,6 +9,7 @@ from searcher.contracts.enums import (
     AdoptionDecision,
     Availability,
     CampaignState,
+    DocumentClass,
     FactClass,
     FactOrigin,
     SourceOutcome,
@@ -63,8 +64,12 @@ def test_enums_cover_bible_values() -> None:
     assert CampaignState.CREATED.value == "CREATED"
     assert TerminalVerdict.COMPLETE.value == "COMPLETE"
     assert AdoptionDecision.REIMPLEMENT_FROM_CONTRACT.value == "REIMPLEMENT_FROM_CONTRACT"
+    assert DocumentClass.PRODUCT.value == "product"
+    assert DocumentClass.INDEX.value == "index"
+    assert DocumentClass.OTHER.value == "other"
     assert len(CampaignState) == 25
     assert len(SourceOutcome) == 11
+    assert len(DocumentClass) == 3
 
 
 def test_utc_parse_rejects_naive() -> None:

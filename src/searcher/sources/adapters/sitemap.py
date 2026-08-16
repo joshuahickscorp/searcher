@@ -14,7 +14,6 @@ from searcher.contracts.models import (
     SourceHealth,
     SourceManifest,
 )
-from searcher.core.ids import sha256_hex
 from searcher.core.time import utc_now
 from searcher.normalization.listing import normalize_raw
 from searcher.sources.adapters.protocol import DiscoveryPageResult
@@ -108,21 +107,10 @@ class SitemapAdapter:
         return self.escalator.fetch(url, self._manifest, source_id=self._manifest.source_id)
 
     def parse(self, fetch: FetchedDocument) -> list[RawListing]:
-        if fetch.result.outcome is not SourceOutcome.SEARCHED_MATCHES_FOUND:
-            return []
-        locs = parse_sitemap_locs(fetch.body)
-        listings: list[RawListing] = []
-        for loc in locs:
-            listings.append(
-                RawListing(
-                    source_adapter="sitemap",
-                    url=loc,
-                    payload={"canonical_url": loc, "extraction_method": "sitemap", "title": loc},
-                    content_digest=sha256_hex(loc.encode()),
-                    fetched_at=utc_now(),
-                )
-            )
-        return listings
+        del fetch
+        # A sitemap is an index. Members re-enter the frontier; the index
+        # itself is never a candidate.
+        return []
 
     def normalize(self, raw: RawListing) -> ListingCandidate:
         return normalize_raw(raw)

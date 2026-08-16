@@ -2,13 +2,16 @@
 
 from __future__ import annotations
 
-import json
 import re
 from dataclasses import dataclass
-from typing import Any
 from urllib.parse import quote_plus, urlparse
 
-from searcher.contracts.enums import ExtractionMethod, FetchMode, SourceAdmission, SourceOutcome
+from searcher.contracts.enums import (
+    DocumentClass,
+    FetchMode,
+    SourceAdmission,
+    SourceOutcome,
+)
 from searcher.contracts.models import (
     QueryVariant,
     RatePolicy,
@@ -16,10 +19,10 @@ from searcher.contracts.models import (
     SourceManifest,
 )
 from searcher.core.ids import sha256_hex
-from searcher.core.time import utc_now
-from searcher.normalization.html import strip_html
 from searcher.sources.adapters.generic_page import GenericPageAdapter, listing_links
 from searcher.sources.adapters.protocol import DiscoveryPageResult
+from searcher.sources.classify import classify_acquired_document
+from searcher.sources.expand import raw_listing_from_member, shopify_members_from_body
 from searcher.sources.fetch_modes import FetchedDocument
 from searcher.sources.manifest import build_manifest
 from searcher.sources.robots import path_matches_prefix
@@ -107,69 +110,23 @@ def query_slugs(text: str) -> list[str]:
 
 
 def parse_shopify_catalog(body: bytes, url: str, spec: SourceSpec) -> list[RawListing]:
-    try:
-        payload = json.loads(body.decode("utf-8", errors="replace"))
-    except json.JSONDecodeError:
-        return []
-    products: list[dict[str, Any]] = []
-    if isinstance(payload, dict):
-        if isinstance(payload.get("products"), list):
-            products = [item for item in payload["products"] if isinstance(item, dict)]
-        elif isinstance(payload.get("product"), dict):
-            products = [payload["product"]]
-    origin = f"https://{spec.domain}"
+    parsed = urlparse(url)
+    origin = (
+        f"{parsed.scheme}://{parsed.netloc}"
+        if parsed.scheme and parsed.netloc
+        else f"https://{spec.domain}"
+    )
+    language = spec.languages[0] if spec.languages else None
     listings: list[RawListing] = []
-    # Keep the catalog bounded. Vendor collections can be hundreds of SKUs;
-    # the source budget is not a reason to ingest all of them.
-    for product in products[:24]:
-        handle = str(product.get("handle") or product.get("id") or "").strip()
-        if not handle:
-            continue
-        product_url = f"{origin}/products/{handle}"
-        images: list[dict[str, str]] = []
-        for image in product.get("images") or []:
-            if not isinstance(image, dict):
-                continue
-            src = image.get("src") or image.get("url")
-            if src:
-                images.append({"url": str(src)})
-        variants = product.get("variants") or []
-        variant = variants[0] if variants and isinstance(variants[0], dict) else {}
-        price = variant.get("price") if isinstance(variant, dict) else None
-        available = None
-        if isinstance(variant, dict) and "available" in variant:
-            available = "InStock" if variant.get("available") else "SoldOut"
-        elif product.get("published_at"):
-            available = "InStock"
-        title = product.get("title")
-        description = strip_html(str(product.get("body_html") or "")) or None
+    for member in shopify_members_from_body(body, url, origin=origin):
         listings.append(
-            RawListing(
+            raw_listing_from_member(
+                member,
                 source_adapter=spec.adapter,
-                url=product_url,
-                payload={
-                    "title": title,
-                    "description": description,
-                    "brand": product.get("vendor"),
-                    "model": product.get("handle"),
-                    "price_original": str(price) if price is not None else None,
-                    "currency": "JPY" if spec.languages and spec.languages[0] == "ja" else None,
-                    "availability": available,
-                    "images": images,
-                    "listing_id": handle,
-                    "canonical_url": product_url,
-                    "page_type": "product",
-                    "extraction_method": ExtractionMethod.API.value,
-                    "language": spec.languages[0] if spec.languages else None,
-                    "source_region": spec.languages[0] if spec.languages else None,
-                },
-                content_digest=sha256_hex(
-                    json.dumps(product, sort_keys=True, default=str).encode()
-                ),
-                fetched_at=utc_now(),
+                content_digest=sha256_hex(member.url.encode("utf-8")),
+                language=language,
             )
         )
-    del url
     return listings
 
 
@@ -256,20 +213,24 @@ class ProductPageAdapter(GenericPageAdapter):
 
     def parse(self, fetch: FetchedDocument) -> list[RawListing]:
         url = fetch.final_url or fetch.result.url
-        path = urlparse(url).path
-        body = fetch.body
-        if path.endswith("/products.json") or body.lstrip().startswith(b'{"products"'):
-            listings = parse_shopify_catalog(body, url, self.spec)
-            if listings:
-                return listings
-        if path.endswith(".json") and body.lstrip().startswith(b'{"product"'):
-            listings = parse_shopify_catalog(body, url, self.spec)
+        document = classify_acquired_document(
+            url=url,
+            body=fetch.body,
+            content_type=fetch.result.content_type,
+            listing_prefixes=list(self.spec.listing_prefixes),
+        )
+        if document is DocumentClass.INDEX:
+            return []
+        if document is DocumentClass.PRODUCT:
+            listings = parse_shopify_catalog(fetch.body, url, self.spec)
             if listings:
                 return listings
         listings = super().parse(fetch)
-        for listing in listings:
-            listing.payload["language"] = self.spec.languages[0]
-            listing.payload["source_region"] = self.spec.languages[0]
+        language = self.spec.languages[0] if self.spec.languages else None
+        if language:
+            for listing in listings:
+                listing.payload["language"] = language
+                listing.payload["source_region"] = language
         return listings
 
     def listing_urls_from(self, html: str, url: str) -> list[str]:

@@ -1,0 +1,73 @@
+{
+  "products": [
+    {
+      "id": 8001001141404,
+      "title": "無地 ロングスリーブカットソー",
+      "handle": "8001001141404",
+      "body_html": "<p>WILLY CHAVARRIA long sleeve.</p>",
+      "vendor": "WILLY CHAVARRIA",
+      "published_at": "2026-01-01T00:00:00Z",
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141404_1.jpg"
+        },
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141404_2.jpg"
+        }
+      ],
+      "variants": [
+        {
+          "price": "18700",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": 8001001141442,
+      "title": "ロゴ長袖カットソー",
+      "handle": "8001001141442",
+      "vendor": "WILLY CHAVARRIA",
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141442_1.jpg"
+        }
+      ],
+      "variants": [
+        {
+          "price": "22000",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": 8001001141350,
+      "title": "ロゴロンTEE",
+      "handle": "8001001141350",
+      "vendor": "WILLY CHAVARRIA",
+      "images": [
+        {
+          "src": "https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141350_1.jpg"
+        }
+      ],
+      "variants": [
+        {
+          "price": "19800",
+          "available": false
+        }
+      ]
+    },
+    {
+      "id": 8001001149999,
+      "title": "No photograph listed",
+      "handle": "8001001149999",
+      "vendor": "WILLY CHAVARRIA",
+      "images": [],
+      "variants": [
+        {
+          "price": "1000",
+          "available": true
+        }
+      ]
+    }
+  ]
+}

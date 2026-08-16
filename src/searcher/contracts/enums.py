@@ -269,6 +269,14 @@ class WorkKind(StrEnum):
     SITEMAP = "sitemap"
 
 
+class DocumentClass(StrEnum):
+    """What an acquired document is, before it may become a candidate."""
+
+    PRODUCT = "product"
+    INDEX = "index"
+    OTHER = "other"
+
+
 class ExtractionMethod(StrEnum):
     JSON_LD = "json_ld"
     MICRODATA = "microdata"
