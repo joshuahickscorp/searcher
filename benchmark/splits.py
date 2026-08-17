@@ -22,6 +22,8 @@ KNOWN_ITEM_TARGET = "8001001141404"
 # Constructed labels from the synthetic hard-negative recipe. These are not
 # marketplace authenticity labels and are not a professional judgment.
 _BASE_BUCKET_TRUTH: dict[str, str] = {
+    "calibration_true_match": "real",
+    "calibration_adjacent_model": "hidden",
     "true_match": "real",
     "adjacent_model": "hidden",
     "different_season": "possibly_real",

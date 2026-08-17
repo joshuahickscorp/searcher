@@ -38,16 +38,6 @@ def test_the_guard_passes_on_disjoint_pixels() -> None:
     assert_no_pixel_leakage({"a": [b"one"], "b": [b"two"]}, ["a"], ["b"])
 
 
-@pytest.mark.xfail(
-    reason=(
-        "The split is degenerate, not clean. Grouping by render provenance moved every "
-        "hard-negative case to held_out, leaving calibration with none, so the guard "
-        "refuses the comparison instead of reporting a hollow zero. The real repair is a "
-        "boundary that keeps hard negatives on both sides while sharing no pixels, which "
-        "may need additional distinct renders rather than reassigning existing cases."
-    ),
-    strict=True,
-)
 def test_committed_corpus_has_no_pixel_leakage() -> None:
     splits = assign_splits()
     cal = {c for c in BUCKET_TRUTH if hardneg_item_id(c) in set(splits.calibration_ids)}
@@ -70,14 +60,16 @@ def test_the_guard_refuses_a_degenerate_comparison() -> None:
         assert_no_pixel_leakage({"a": [b"one"]}, ["a"], [])
 
 
-def test_the_committed_corpus_split_is_degenerate() -> None:
-    """Recorded, not hidden: calibration currently holds no hard negatives."""
+def test_both_splits_carry_hard_negatives() -> None:
+    """Without this, the leakage check above is vacuous rather than true.
+
+    The split once reached zero shared digests by moving every constructed case
+    to held_out, leaving calibration empty. The guard passed and proved nothing.
+    Calibration now has hard negatives rendered from a distinct shoe, so the
+    comparison has both sides and the zero above is a measurement.
+    """
     splits = assign_splits()
     cal = {c for c in BUCKET_TRUTH if hardneg_item_id(c) in set(splits.calibration_ids)}
     held = {c for c in BUCKET_TRUTH if hardneg_item_id(c) in set(splits.held_out_ids)}
+    assert cal, "calibration must carry hard negatives or the leakage check is empty"
     assert held, "held_out must carry hard negatives"
-    assert not cal, (
-        "calibration has gained hard negatives - if this now fails, the split was "
-        "genuinely repaired and test_committed_corpus_has_no_pixel_leakage becomes "
-        "a real check rather than a vacuous one"
-    )

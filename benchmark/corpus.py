@@ -133,6 +133,34 @@ class BucketCase:
 
 
 def _spec_table() -> list[dict[str, Any]]:
+    # Calibration needs hard negatives of its own that share no pixels with the
+    # held-out set. Grouping cases by render provenance correctly stopped the two
+    # sides aliasing, but it did so by moving every constructed case to held_out
+    # and leaving calibration with none - so the leakage guard compared an empty
+    # set and reported a hollow zero. A distinct shoe gives calibration real
+    # negatives whose renders cannot collide, rather than borrowing held-out's.
+    cal_ref = replace(
+        REFERENCE_SHOE,
+        name="calibration_reference",
+        body=(96, 104, 120),
+        sole=(44, 40, 36),
+        heel=(70, 64, 58),
+        logo=(120, 200, 224),
+        background=(188, 192, 196),
+        label_code="C4L001",
+    )
+    cal_adjacent = replace(
+        cal_ref,
+        name="calibration_adjacent",
+        eyelets=8,
+        panels=5,
+        heel_cut="block",
+        logo_kind="triangle",
+        tread="waffle",
+        label_code="C4L777",
+    )
+    cal_ref_views = views_for(cal_ref)
+    cal_adjacent_views = views_for(cal_adjacent)
     ref_views = views_for(REFERENCE_SHOE)
     adjacent = views_for(ADJACENT_SHOE)
     colour = views_for(COLOURWAY_SHOE)
@@ -147,6 +175,16 @@ def _spec_table() -> list[dict[str, Any]]:
     stock[0] = ("lateral", screenshot_frame(ref_views[0][1]), ImageRole.PRODUCT)
     two_items = [ref_views[0], adjacent[0], ref_views[2], ref_views[3]]
     base = [
+        {
+            "id": "calibration_true_match",
+            "images": cal_ref_views,
+            "title": "Calibration House Field Model 07",
+        },
+        {
+            "id": "calibration_adjacent_model",
+            "images": cal_adjacent_views,
+            "title": "Calibration House Field Model 07",
+        },
         {
             "id": "true_match",
             "images": ref_views,

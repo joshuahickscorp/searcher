@@ -1,7 +1,9 @@
 {
   "calibration": {
-    "hash": "43595b2c6eb2c711afbec7b9e44ef3ed973febf266e6bac4d03314a43994072d",
+    "hash": "bde4d224bfa74a0ee5dff62b78b2a181ff72dbb6d22ec41f2bfcd82a17618cf1",
     "ids": [
+      "hardneg:calibration_adjacent_model",
+      "hardneg:calibration_true_match",
       "kind:8001001137032",
       "kind:8001001141343",
       "kind:8001001141350",
@@ -105,6 +107,30 @@
       "split": "held_out",
       "title": "authentic_poor_photos",
       "truth_bucket": "possibly_real"
+    },
+    {
+      "family": "hard_negative",
+      "id": "hardneg:calibration_adjacent_model",
+      "images": [],
+      "listing_handle": null,
+      "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+      "source": "fixtures/hard_negatives + searcher.matching.synth",
+      "source_url": null,
+      "split": "calibration",
+      "title": "calibration_adjacent_model",
+      "truth_bucket": "hidden"
+    },
+    {
+      "family": "hard_negative",
+      "id": "hardneg:calibration_true_match",
+      "images": [],
+      "listing_handle": null,
+      "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+      "source": "fixtures/hard_negatives + searcher.matching.synth",
+      "source_url": null,
+      "split": "calibration",
+      "title": "calibration_true_match",
+      "truth_bucket": "real"
     },
     {
       "family": "hard_negative",

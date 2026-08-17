@@ -478,7 +478,7 @@
       }
     ],
     "split": "held_out",
-    "wall_seconds": 10.485611
+    "wall_seconds": 9.130755
   },
   "calibration": {
     "curve": {
@@ -612,8 +612,10 @@
   "command": "uv run python -m benchmark.run --all",
   "dataset_authority": {
     "calibration": {
-      "hash": "43595b2c6eb2c711afbec7b9e44ef3ed973febf266e6bac4d03314a43994072d",
+      "hash": "bde4d224bfa74a0ee5dff62b78b2a181ff72dbb6d22ec41f2bfcd82a17618cf1",
       "ids": [
+        "hardneg:calibration_adjacent_model",
+        "hardneg:calibration_true_match",
         "kind:8001001137032",
         "kind:8001001141343",
         "kind:8001001141350",
@@ -672,9 +674,9 @@
     "A claim that Searcher is better than Google Images or any other engine."
   ],
   "evidence_board": "artifacts/benchmark/evidence-board.html",
-  "git_sha": "d3be52be27a17effa8e1fd1d34a48245a39e94b4",
+  "git_sha": "9fb4d9849e2b954e0846074dc73cc03c9b0e5242",
   "host": "Mac-Studio",
-  "measured_at": "2026-08-17T21:56:47.840618+00:00",
+  "measured_at": "2026-08-17T23:17:54.318039+00:00",
   "no_authenticity_claim": true,
   "not_computed": [
     {
@@ -695,24 +697,24 @@
       "cache_hits": 0,
       "fetches": 0,
       "images_processed": 179,
-      "wall_seconds": 10.485611
+      "wall_seconds": 9.130755
     },
     "cache_hit_rate": 1.0,
     "campaigns": 6,
     "fetches_per_campaign": 0,
     "fetches_total": 0,
-    "images_per_second": 29.100881,
+    "images_per_second": 33.750534,
     "images_processed": 354,
     "note": "fetches_per_campaign is 0 because every byte came from fixtures/ already permitted to be held. A live campaign's fetch cost is a different protocol; see artifacts/searcher-performance.receipt.json and artifacts/searcher-adversarial-recall.receipt.json.",
     "protocol": "Offline fixture campaigns. Retrieval is one closed-set ranking pass. Bucket evaluation is one judge_candidates campaign on the held-out constructed cases. No live source is contacted.",
     "retrieval": {
       "fetches": 0,
-      "images_per_second": 104.230637,
+      "images_per_second": 128.868988,
       "images_scored": 175,
-      "wall_seconds": 1.678969
+      "wall_seconds": 1.357968
     },
-    "wall_seconds_per_campaign": 2.02743,
-    "wall_seconds_total": 12.16458
+    "wall_seconds_per_campaign": 1.748121,
+    "wall_seconds_total": 10.488723
   },
   "policy_version": "provisional-1",
   "prior_receipts": {
@@ -2262,7 +2264,7 @@
       "units": "cosine"
     },
     "split": "held_out",
-    "wall_seconds": 1.678969
+    "wall_seconds": 1.357968
   },
   "schema_version": "1.1.0",
   "scorer": {
@@ -2274,8 +2276,10 @@
   "shipped_threshold": 0.86,
   "splits": {
     "calibration": {
-      "hash": "43595b2c6eb2c711afbec7b9e44ef3ed973febf266e6bac4d03314a43994072d",
+      "hash": "bde4d224bfa74a0ee5dff62b78b2a181ff72dbb6d22ec41f2bfcd82a17618cf1",
       "ids": [
+        "hardneg:calibration_adjacent_model",
+        "hardneg:calibration_true_match",
         "kind:8001001137032",
         "kind:8001001141343",
         "kind:8001001141350",
@@ -2379,6 +2383,30 @@
         "split": "held_out",
         "title": "authentic_poor_photos",
         "truth_bucket": "possibly_real"
+      },
+      {
+        "family": "hard_negative",
+        "id": "hardneg:calibration_adjacent_model",
+        "images": [],
+        "listing_handle": null,
+        "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+        "source": "fixtures/hard_negatives + searcher.matching.synth",
+        "source_url": null,
+        "split": "calibration",
+        "title": "calibration_adjacent_model",
+        "truth_bucket": "hidden"
+      },
+      {
+        "family": "hard_negative",
+        "id": "hardneg:calibration_true_match",
+        "images": [],
+        "listing_handle": null,
+        "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+        "source": "fixtures/hard_negatives + searcher.matching.synth",
+        "source_url": null,
+        "split": "calibration",
+        "title": "calibration_true_match",
+        "truth_bucket": "real"
       },
       {
         "family": "hard_negative",
