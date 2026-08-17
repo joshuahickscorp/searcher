@@ -26,7 +26,7 @@ from searcher.matching.parts import build_descriptors, extract_parts
 from searcher.matching.scores import scored
 from searcher.matching.segmentation import gallery_images, isolate_subjects
 from searcher.matching.structure import extract_structure
-from searcher.matching.types import EnrichedCandidate, StructuredDescriptor
+from searcher.matching.types import CorrespondenceResult, EnrichedCandidate, StructuredDescriptor
 from searcher.matching.views import classify_subjects, refine_views
 from searcher.retrieval.cost import CostLedger, CostStage
 from searcher.retrieval.embeddings import OPERATING_THRESHOLD, pair_similarity
@@ -137,6 +137,49 @@ def _blend_embedding(glob: ScoreWithEvidence, similarity: float | None) -> Score
     )
 
 
+
+def _best_correspondence(
+    reference_pngs: dict[str, bytes],
+    candidate_pngs: dict[str, bytes],
+    *,
+    ledger: CostLedger | None = None,
+    max_pairs: int = 9,
+) -> CorrespondenceResult:
+    """The strongest surface match across the photographs, not the first pair.
+
+    A user photographs the front; the seller's first image is a flat-lay and the
+    third is the detail that overlaps it. Comparing only the first of each threw
+    that evidence away, and correspondence went uncited on a candidate whose
+    images matched at 35 inliers when the right pair was compared.
+
+    One overlapping view is enough to place two photographs on the same object,
+    so the best pair is the answer and the rest need not agree. Bounded because
+    this is the expensive stage.
+    """
+    best: CorrespondenceResult | None = None
+    pairs = 0
+    for ref_png in reference_pngs.values():
+        for cand_png in candidate_pngs.values():
+            if pairs >= max_pairs:
+                break
+            pairs += 1
+            found = correspond_pair(ref_png, cand_png, ledger=ledger)
+            if best is None or found.inlier_count > best.inlier_count:
+                best = found
+        if pairs >= max_pairs:
+            break
+    if best is None:
+        return CorrespondenceResult(
+            inlier_ratio=0.0,
+            match_count=0,
+            inlier_count=0,
+            method="none",
+            mirrored=False,
+            residual=0.0,
+            notes=["no_image_pair"],
+        )
+    return best
+
 def match_candidate(
     *,
     hypothesis: ItemHypothesis,
@@ -186,7 +229,7 @@ def match_candidate(
                 EvidencePolarity.CONTRADICTORY if colour_contra else EvidencePolarity.SUPPORTING
             ),
         )
-        corr = correspond_pair(ref_png, cand_png, ledger=ledger)
+        corr = _best_correspondence(reference_pngs, candidate.pngs, ledger=ledger)
         ref_label = next(
             (d.label_hash for d in reference_descriptors.values() if d.label_hash), None
         )
