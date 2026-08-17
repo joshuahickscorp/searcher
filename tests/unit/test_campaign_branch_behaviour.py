@@ -1123,3 +1123,48 @@ def test_candidate_pngs_skip_images_without_bytes() -> None:
         ListingImage(listing_image_id="a", candidate_id="c", remote_url="https://x"),
     ]
     assert _orch()._candidate_pngs("s", candidate) == {}
+
+
+def test_a_campaign_that_goes_terminal_mid_run_stops_immediately() -> None:
+    """The loop re-checks state between stages, and must honour it.
+
+    A campaign can be cancelled or completed by another writer while the
+    orchestrator is inside a round. If the loop only checked at entry, it would
+    keep running stages against a campaign that is already finished, spending
+    budget and writing events after the terminal record.
+    """
+    controller = _FakeController()
+    orch = CampaignOrchestrator(controller)  # type: ignore[arg-type]
+    reached: list[str] = []
+
+    def go_terminal(search_id: str) -> None:
+        reached.append("pipeline")
+        controller.repos.campaign.state = CampaignState.CANCELLED
+
+    orch._open_engine = lambda search_id: None  # type: ignore[assignment]
+    orch._ensure_reference = lambda search_id: None  # type: ignore[assignment]
+    orch._run_pipeline = go_terminal  # type: ignore[assignment]
+    orch._replan = lambda search_id: reached.append("replan") or True  # type: ignore[assignment]
+
+    orch.run("s")
+
+    assert reached == ["pipeline"], (
+        "the loop continued past a campaign that became terminal mid-round"
+    )
+    assert controller.repos.campaign.state is CampaignState.CANCELLED
+
+
+def test_a_campaign_terminal_before_the_first_stage_runs_nothing() -> None:
+    controller = _FakeController()
+    orch = CampaignOrchestrator(controller)  # type: ignore[arg-type]
+    ran: list[str] = []
+
+    orch._open_engine = lambda search_id: None  # type: ignore[assignment]
+    orch._ensure_reference = lambda search_id: controller.repos.campaign.__setattr__(  # type: ignore[assignment]
+        "state", CampaignState.BLOCKED
+    )
+    orch._run_pipeline = lambda search_id: ran.append("pipeline")  # type: ignore[assignment]
+
+    orch.run("s")
+
+    assert ran == [], "a campaign already terminal must not enter the pipeline"
