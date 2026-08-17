@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from searcher.authenticity.established import established_claims, unestablished_tokens
+from searcher.authenticity.profiles import profile_for
 from searcher.contracts.models import (
     AuthenticityEvidence,
     BucketDecision,
@@ -33,12 +35,20 @@ def answer_questions(
     decision: BucketDecision,
 ) -> dict[str, object]:
     explanation = decision.explanation
+    profile = profile_for(authenticity.reference_class)
+    missing = established_claims(list(explanation.missing_evidence), profile)
+    for token in unestablished_tokens(profile):
+        if token not in missing:
+            missing.append(token)
     return {
-        "why_same_item": list(match.explanation.support),
+        "why_same_item": established_claims(list(match.explanation.support), profile),
         "why_this_tab": list(decision.reason_codes),
-        "supporting_evidence": list(explanation.support) + list(match.hard_support),
-        "conflicting_evidence": list(explanation.contradictions),
-        "missing_evidence": list(explanation.missing_evidence),
+        "supporting_evidence": established_claims(
+            list(explanation.support) + list(match.hard_support),
+            profile,
+        ),
+        "conflicting_evidence": established_claims(list(explanation.contradictions), profile),
+        "missing_evidence": missing,
         "listing_live": (
             explanation.live_status.value
             if explanation.live_status is not None

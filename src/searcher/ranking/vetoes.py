@@ -58,6 +58,9 @@ _ITEM_HARD = re.compile(
     r"eyelet-count-mismatch|panel-count-mismatch|outsole-geometry-mismatch|"
     r"wrong-product|wrong-last|wrong-model"
 )
+_FOOTWEAR_ITEM_HARD = re.compile(
+    r"eyelet-count-mismatch|panel-count-mismatch|outsole-geometry-mismatch|wrong-last"
+)
 _AUTH_HARD = re.compile(
     r"construction-|label-code-incompatible|logo-incompatible|"
     r"self-declared-replica|image-theft|strong-counterfeit"
@@ -77,6 +80,7 @@ def collect_hard_vetoes(
     dead_listing_is_hard_veto: bool,
     plausible_floor: float,
     exact_colour_required: bool,
+    apply_footwear_item_rules: bool = True,
 ) -> list[str]:
     vetoes: list[str] = []
     if url_is_malicious(candidate.canonical_url):
@@ -86,7 +90,10 @@ def collect_hard_vetoes(
     )
     if self_declared_replica(text):
         vetoes.append(SELF_DECLARED_REPLICA)
-    if any(_ITEM_HARD.search(code) for code in item_hard):
+    item_codes = list(item_hard)
+    if not apply_footwear_item_rules:
+        item_codes = [code for code in item_codes if not _FOOTWEAR_ITEM_HARD.search(code)]
+    if any(_ITEM_HARD.search(code) for code in item_codes):
         vetoes.append(WRONG_PRODUCT)
     if exact_colour_required and any("colourway" in code for code in item_hard + auth_hard):
         vetoes.append(HARD_COLOURWAY)

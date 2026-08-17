@@ -8,7 +8,11 @@ from typing import Any
 
 from searcher.campaigns.controller import CampaignController
 from searcher.campaigns.models import TransitionContext
-from searcher.campaigns.publication import event_name_for_public_bucket, published_public_bucket
+from searcher.campaigns.publication import (
+    event_name_for_public_bucket,
+    published_public_bucket,
+    published_terminal_status,
+)
 from searcher.campaigns.resume import reconstruct
 from searcher.campaigns.states import is_terminal
 from searcher.contracts.enums import (
@@ -1460,7 +1464,15 @@ class CampaignOrchestrator:
             return CampaignState.BLOCKED, "no usable query was compiled", False
         if not completed and not blocked:
             return CampaignState.BLOCKED, "no source work was planned", False
-        if pages_fetched == 0 and not candidates:
+        if (
+            published_terminal_status(
+                proposed=CampaignState.COMPLETE.value,
+                pages_fetched=pages_fetched,
+                candidate_count=len(candidates),
+                queries_compiled=len(usable),
+            )
+            != CampaignState.COMPLETE.value
+        ):
             return CampaignState.BLOCKED, "nothing was fetched", False
         return CampaignState.COMPLETE, "coverage exhausted", False
 

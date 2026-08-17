@@ -6,6 +6,7 @@ from dataclasses import dataclass, field
 
 from searcher.authenticity.completeness import completeness
 from searcher.authenticity.engine import assess_authenticity
+from searcher.authenticity.established import established_claims, unestablished_tokens
 from searcher.authenticity.profiles import profile_for
 from searcher.contracts.enums import BucketPublic
 from searcher.contracts.models import (
@@ -94,6 +95,7 @@ def judge_candidates(
         kept = retrieval.hits[: limits.clip(len(retrieval.hits), stage="broad")]
     ref_desc = prepare_reference(reference_pngs, ledger=ledger)
     ontology = ontology_for(hypothesis.category)
+    ontology_profile = profile_for(hypothesis.category)
     dest = destination_verified or {}
     stolen_ids = stolen or set()
     stock_ids = stock_mixed or set()
@@ -174,12 +176,16 @@ def judge_candidates(
             )
         comparison = None
         if render_artifacts and ref_png and pngs:
+            compare_missing = established_claims(list(match.missing_views)[:6], ontology_profile)
+            for token in unestablished_tokens(ontology_profile):
+                if token not in compare_missing:
+                    compare_missing.append(token)
             comparison = render_comparison(
                 reference_png=ref_png,
                 candidate_png=next(iter(pngs.values())),
-                agreed=list(match.explanation.support)[:6],
-                disagreed=list(match.hard_contradictions)[:6],
-                missing=list(match.missing_views)[:6],
+                agreed=established_claims(list(match.explanation.support)[:6], ontology_profile),
+                disagreed=established_claims(list(match.hard_contradictions)[:6], ontology_profile),
+                missing=compare_missing,
                 title=f"{candidate.candidate_id} {decision.decision.public.value}",
             )
         answers = answer_questions(
