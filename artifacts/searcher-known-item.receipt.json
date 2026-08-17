@@ -5,5 +5,13 @@
   "diagnosis": "The target is never retrieved. Its listing id appears zero times anywhere in the campaign log, so it is absent from the candidate set rather than present and ranked low, and absent rather than present and hidden. Four candidates were hidden and none of them is the target.",
   "why_this_narrows_it": "The finding was carried as 'photographs of a listing do not return that listing', which reads as a matching failure. It is not one. The matcher never sees the listing. Work on item matching, thresholds or the Real gate cannot move this; the listing has to be discovered first.",
   "next": "Establish why the KIND catalogue walk does not surface this product for these queries: whether the query family never names it, whether the walk stops before reaching its page, or whether it is fetched and dropped during normalisation.",
-  "also_observed": "coverage reported pages_charged_to_page_limit: null on this path. The field was added today and reads the budget ledger; null means the ledger was absent here, which is reported as absence rather than as zero, but it means the page limit is still not checkable on this route."
+  "also_observed": "coverage reported pages_charged_to_page_limit: null on this path. The field was added today and reads the budget ledger; null means the ledger was absent here, which is reported as absence rather than as zero, but it means the page limit is still not checkable on this route.",
+  "root_cause": {
+    "target_is_live": "https://shop.kind.co.jp/products/8001001141404.json returns a published product with 5 images",
+    "title": "\u7121\u5730 \u30ed\u30f3\u30b0\u30b9\u30ea\u30fc\u30d6\u30ab\u30c3\u30c8\u30bd\u30fc - a plain long-sleeve cut-and-sew. No brand, no model, no year.",
+    "not_in_catalogue_head": "Absent from the first 2000 products of products.json (8 pages x 250, scanned in order).",
+    "why_it_is_never_retrieved": "Two independent reasons, either of which alone is sufficient. No query family can name it: the compiled queries are built from brand, model, line and year, and this listing has none of those - its title is a generic garment noun. And the catalogue walk cannot reach it: it is beyond 2000 products in feed order, far past any bounded page budget.",
+    "what_this_means": "Discovery is text-driven, and image matching only runs on candidates discovery already returned. An item whose listing carries no distinguishing text is therefore unreachable no matter how good the matcher is. This is one architectural gap rather than two defects, and it explains the known-item miss and the retrieval-quality score together.",
+    "not_a_reason_to_retire_the_check": "The scenario is the product's core promise - photograph something you own, find its listing. The check failing is correct. What it shows is that the promise needs visual retrieval over a source's catalogue, not better ranking of text-retrieved candidates."
+  }
 }
