@@ -34,6 +34,13 @@ dev = [
 browser = [
     "playwright>=1.40",
 ]
+correspondence = [
+    # opencv ships SIFT. Local correspondence is optional: absent it the
+    # capability reports unavailable and everything else is unchanged.
+    "opencv-python-headless>=4.9",
+    "numpy>=1.26",
+]
+
 vision = [
     "torch>=2.2",
     "torchvision>=0.17",

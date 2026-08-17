@@ -41,7 +41,7 @@ def _detect_opencv(png: bytes, *, max_points: int) -> list[Keypoint]:
 
     image = open_rgb(png)
     array = np.array(image.convert("L"))
-    orb = cv2.ORB_create(nfeatures=max_points)
+    orb = cv2.ORB_create(nfeatures=max_points)  # type: ignore[attr-defined]  # opencv 5 stubs omit ORB_create; it exists at runtime
     kps, desc = orb.detectAndCompute(array, None)
     if desc is None or kps is None:
         return []
