@@ -34,7 +34,9 @@ from searcher.sources.cache import ResponseCache
 from searcher.sources.cancel import RunCancel
 from searcher.sources.catalog import (
     CATALOG_FALLBACK_RECEIPT,
+    CatalogCaps,
     CatalogResult,
+    catalog_caps_from_env,
     catalog_feed_path_of,
     catalog_page_param_of,
     catalog_page_size_of,
@@ -131,6 +133,45 @@ def _kind_for_url(url: str) -> WorkKind:
     return WorkKind.LISTING
 
 
+# Catalogue walks default to 64 pages/source and 80/campaign, which is more
+# than a 40-page campaign can give. Share what remains so one source cannot
+# spend the campaign. Floor keeps a useful walk when N is large.
+CATALOG_PAGE_SHARE_FLOOR = 2
+
+
+def remaining_page_budget(usage: Any) -> int:
+    """Pages still allowed by the sealed campaign budget."""
+    try:
+        ceiling = int(usage.sealed.ceiling("pages"))
+        used = int(usage.used("pages"))
+    except (AttributeError, TypeError, ValueError, KeyError):
+        return 0
+    return max(0, ceiling - used)
+
+
+def catalog_page_share(remaining_pages: int, source_count: int) -> int:
+    """Per-source catalogue pages: max(floor, remaining // N).
+
+    On a 40-page campaign with 9 sources this is 4. A single source that
+    used the env default of 64 spent the campaign before the others ran.
+    """
+    if remaining_pages <= 0 or source_count <= 0:
+        return 0
+    return max(CATALOG_PAGE_SHARE_FLOOR, remaining_pages // source_count)
+
+
+def catalog_caps_for_campaign(remaining_pages: int, source_count: int) -> CatalogCaps:
+    """Bind env catalogue caps to a fair share of the remaining page budget."""
+    env = catalog_caps_from_env()
+    share = catalog_page_share(remaining_pages, source_count)
+    return CatalogCaps(
+        pages_per_source=min(env.pages_per_source, share),
+        pages_per_campaign=min(env.pages_per_campaign, max(0, remaining_pages)),
+        promote_per_source=env.promote_per_source,
+        promote_per_campaign=env.promote_per_campaign,
+    )
+
+
 class DiscoveryEngine:
     def __init__(
         self,
@@ -156,6 +197,7 @@ class DiscoveryEngine:
         self._campaign_catalog_pages = 0
         self._campaign_catalog_promoted = 0
         self._catalogs: list[dict[str, object]] = []
+        self._catalog_walk_caps: CatalogCaps | None = None
         self._strategy_books: dict[str, StrategyBook] = {}
         self.repos = controller.repos
         self.health = HealthStore(self.repos)
@@ -243,6 +285,7 @@ class DiscoveryEngine:
         self._campaign_catalog_pages = 0
         self._campaign_catalog_promoted = 0
         self._catalogs = []
+        self._catalog_walk_caps = None
         self._strategy_books = {}
         if source_names is not None:
             self.broker.names = tuple(source_names)
@@ -253,6 +296,10 @@ class DiscoveryEngine:
             families=families,
             coverage=coverage,
         )
+        # Bound each catalogue walk to a share of the remaining page budget
+        # before any source runs. The env default (64) is larger than the
+        # campaign page_limit (40); without this the first source spends it.
+        self._bind_catalog_walk_caps(usage, len(plans))
         all_candidates: list[ListingCandidate] = []
         blocked: list[dict[str, str]] = []
         def _record_unattempted(remaining: list[Any], why: str) -> None:
@@ -935,6 +982,12 @@ class DiscoveryEngine:
             else:
                 book.mark_tried(name, yielded=0, reason=reasons[name])
 
+    def _bind_catalog_walk_caps(self, usage: Any, source_count: int) -> None:
+        """Share remaining pages across planned sources. Called from both run()s."""
+        self._catalog_walk_caps = catalog_caps_for_campaign(
+            remaining_page_budget(usage), source_count
+        )
+
     def _run_catalog_fallback(
         self,
         *,
@@ -1004,6 +1057,7 @@ class DiscoveryEngine:
                 disallowed=disallowed,
                 page_param=catalog_page_param_of(spec),
                 page_size=catalog_page_size_of(spec),
+                caps=self._catalog_walk_caps,
                 campaign_pages_already=self._campaign_catalog_pages,
                 campaign_promoted_already=self._campaign_catalog_promoted,
                 seen_urls=seen,

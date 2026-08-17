@@ -330,6 +330,7 @@ class BoundedDiscoveryEngine(DiscoveryEngine):
         self._campaign_catalog_pages = 0
         self._campaign_catalog_promoted = 0
         self._catalogs = []
+        self._catalog_walk_caps = None
         if source_names is not None:
             self.broker.names = tuple(source_names)
         plans = self.broker.plan(
@@ -351,6 +352,9 @@ class BoundedDiscoveryEngine(DiscoveryEngine):
                 _record_unattempted(plans[index + 1 :], "source budget exhausted")
                 break
             eligible.append(plan)
+        # The API executes this run(), not the base class. Bind the share
+        # here or the first source still walks 64 pages and starves the rest.
+        self._bind_catalog_walk_caps(usage, len(eligible))
         all_candidates: list[ListingCandidate] = []
         blocked: list[dict[str, str]] = []
         fatal: BaseException | None = None
