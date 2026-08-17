@@ -150,6 +150,9 @@ function handleEvent(name, data) {
   } else if (name === "search.coverage") {
     currentSearch.coverage = data;
     results.setSearch(currentSearch);
+  } else if (name === "candidate.discovered" || name === "candidate.normalized" || name === "candidate.promoted") {
+    const kind = name.split(".")[1];
+    results.noteCandidate(kind, data && data.candidate_id);
   } else if (name === "result.real" || name === "result.possibly_real" || name === "result.replica") {
     const bucket = name === "result.real"
       ? "real"
@@ -188,6 +191,26 @@ function handleEvent(name, data) {
 
 let lastCompared = null;
 
+async function submitFeedback(result, verdict) {
+  if (!result || !result.result_id) return;
+  results.setFeedback(result.result_id, { status: "sending", verdict });
+  if (compare.isOpen()) compare.refreshFeedback(results.getFeedback(result.result_id));
+  try {
+    await api.sendFeedback(result.result_id, { verdict });
+    const next = { status: "recorded", verdict };
+    results.setFeedback(result.result_id, next);
+    if (compare.isOpen()) compare.refreshFeedback(next);
+    announce("Feedback recorded. Rankings are unchanged.");
+  } catch (err) {
+    const message = err.message || "Feedback could not be recorded.";
+    const next = { status: "error", verdict, message };
+    results.setFeedback(result.result_id, next);
+    if (compare.isOpen()) compare.refreshFeedback(next);
+    if (err.code === "unavailable") markUnavailable();
+    else announce(message);
+  }
+}
+
 async function openCompare(result, opener) {
   compareOpener = opener || null;
   lastCompared = result.result_id;
@@ -205,6 +228,12 @@ async function openCompare(result, opener) {
 
 const compare = createCompare({
   apiBase: () => apiBase,
+  feedbackFor(resultId) {
+    return results.getFeedback(resultId);
+  },
+  onFeedback(result, verdict, button) {
+    return submitFeedback(result, verdict, button);
+  },
   onClose() {
     const route = currentRoute();
     if (route.name === "result" && currentSearchId) go(currentSearchId);
@@ -220,6 +249,7 @@ const results = createResults({
   apiBase: () => apiBase,
   replicaScope: () => Boolean(scopes && scopes.replicaOn()),
   onCompare: openCompare,
+  onFeedback: submitFeedback,
   async onCancel() {
     if (!currentSearchId) return;
     try {
@@ -255,6 +285,8 @@ const results = createResults({
   },
   onClose() {
     results.close();
+    const searchButton = $("search-button");
+    if (searchButton) searchButton.focus();
   },
   onTab(tab) {
     saveTab(tab);

@@ -38,8 +38,12 @@ GET    /v1/capabilities
 GET    /v1/health
 ```
 
-`POST /v1/searches/{id}/refresh` and `POST /v1/results/{id}/feedback` are
-recognized by the stub and unused by the first UI.
+`POST /v1/searches/{id}/refresh` is recognized and unused by this UI.
+
+`POST /v1/results/{id}/feedback` is used by the result card and the compare
+view. The controls send `{ "verdict": "correct_item" }` (“This is the one”)
+or `{ "verdict": "wrong_model" }` (“This is not it”). The UI never promotes,
+demotes, or invents a result from that response.
 
 ## `POST /v1/searches`
 

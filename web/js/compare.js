@@ -1,5 +1,6 @@
 import { $, clear, el, remoteImg } from "./dom.js";
-import { missingOr } from "./format.js";
+import { feedbackControls, paintFeedback } from "./feedback.js";
+import { missingOr, whyHeadingText, whyLeadText } from "./format.js";
 
 function listBlock(title, items) {
   const values = Array.isArray(items) && items.length
@@ -28,7 +29,7 @@ function originMark(origin) {
   });
 }
 
-export function createCompare({ apiBase, onClose }) {
+export function createCompare({ apiBase, onClose, onFeedback, feedbackFor }) {
   const dialog = $("compare");
   const body = $("compare-body");
   const closeBtn = $("compare-close");
@@ -52,6 +53,14 @@ export function createCompare({ apiBase, onClose }) {
 
   function render(result) {
     clear(body);
+    const heading = whyHeadingText(result);
+    const lead = whyLeadText(result);
+    if (heading || lead) {
+      const block = el("div", { className: "why-lead compare-lead" });
+      if (heading) block.appendChild(el("p", { className: "why-kicker", text: heading }));
+      if (lead) block.appendChild(el("p", { className: "why-sentence", text: lead }));
+      body.appendChild(block);
+    }
     const compare = result.compare || {};
     const why = result.why || {};
     const emptyReason = compare.reason
@@ -137,6 +146,10 @@ export function createCompare({ apiBase, onClose }) {
     body.appendChild(listBlock("Contradictions", compare.contradictions));
     body.appendChild(listBlock("Missing views", compare.missing_views));
     body.appendChild(seller);
+    if (typeof onFeedback === "function") {
+      const state = typeof feedbackFor === "function" ? feedbackFor(result.result_id) : null;
+      body.appendChild(feedbackControls(result, { onFeedback, state }));
+    }
   }
 
   return {
@@ -148,6 +161,9 @@ export function createCompare({ apiBase, onClose }) {
     close,
     isOpen() {
       return dialog.open;
+    },
+    refreshFeedback(state) {
+      paintFeedback(body.querySelector(".feedback"), state);
     },
   };
 }

@@ -121,4 +121,120 @@ export const NO_REAL =
   "No candidate met the Real threshold yet.";
 
 export const NO_CANDIDATES =
-  "No displayable candidate within this search’s current source and budget coverage.";
+  "Searcher did not find a displayable candidate within this search’s current source and budget coverage.";
+
+export const FEEDBACK_THIS_IS_THE_ONE = {
+  verdict: "correct_item",
+  label: "This is the one",
+};
+
+export const FEEDBACK_THIS_IS_NOT_IT = {
+  verdict: "wrong_model",
+  label: "This is not it",
+};
+
+export function firstMissingView(search) {
+  const rows = Array.isArray(search && search.missing_reference_views)
+    ? search.missing_reference_views
+    : [];
+  for (const row of rows) {
+    if (!row) continue;
+    if (typeof row === "string" && row.trim()) return { view: row.trim(), why: "" };
+    if (row.view || row.why) return row;
+  }
+  return null;
+}
+
+export function nextInputFromMissing(search) {
+  const first = firstMissingView(search);
+  if (!first) return null;
+  const view = String(first.view || "").trim();
+  const why = String(first.why || "").trim();
+  const action = view
+    ? `Add a photograph of the ${view}.`
+    : "Add the missing photograph the search named.";
+  const rest = (Array.isArray(search.missing_reference_views) ? search.missing_reference_views : [])
+    .slice(1)
+    .map((row) => {
+      if (!row) return "";
+      if (typeof row === "string") return row;
+      const name = String(row.view || "").trim();
+      const reason = String(row.why || "").trim();
+      if (name && reason) return `${name} — ${reason}`;
+      return name || reason;
+    })
+    .filter(Boolean);
+  return { view, why, action, rest };
+}
+
+export function whyLeadText(result) {
+  const why = result && result.why;
+  if (!why) return "";
+  if (why.tab_reason && String(why.tab_reason).trim()) return String(why.tab_reason).trim();
+  if (Array.isArray(why.points) && why.points.length && String(why.points[0]).trim()) {
+    return String(why.points[0]).trim();
+  }
+  return "";
+}
+
+export function whyHeadingText(result) {
+  const heading = result && result.why && result.why.heading;
+  return heading ? String(heading).trim() : "";
+}
+
+export function formatElapsed(ms) {
+  if (ms == null || !Number.isFinite(ms) || ms < 0) return "";
+  const sec = Math.floor(ms / 1000);
+  const minutes = Math.floor(sec / 60);
+  const seconds = sec % 60;
+  if (minutes <= 0) return `${seconds}s`;
+  return `${minutes}m ${String(seconds).padStart(2, "0")}s`;
+}
+
+export function stageStepLabel(stage) {
+  const idx = STAGES.indexOf(stage);
+  if (idx === -1) return "";
+  return `Stage ${idx + 1} of ${STAGES.length}`;
+}
+
+export function coverageStatsLine(coverage, activity) {
+  const cov = coverage || {};
+  const completed = Array.isArray(cov.sources_completed) ? cov.sources_completed.length : 0;
+  const blocked = Array.isArray(cov.sources_blocked) ? cov.sources_blocked.length : 0;
+  const running = Array.isArray(cov.sources_in_progress) ? cov.sources_in_progress.length : 0;
+  const pages = cov.pages_fetched;
+  const normalized = cov.candidates_normalized;
+  const seen = Math.max(
+    Number(normalized) || 0,
+    (activity && activity.normalized) || 0,
+    (activity && activity.discovered) || 0,
+  );
+  const parts = [];
+  if (completed) parts.push(`${completed} source${completed === 1 ? "" : "s"} searched`);
+  if (running) parts.push(`${running} in progress`);
+  if (blocked) parts.push(`${blocked} blocked`);
+  if (pages != null && pages > 0) parts.push(`${pages} page${pages === 1 ? "" : "s"}`);
+  if (seen > 0) parts.push(`${seen} listing${seen === 1 ? "" : "s"} seen`);
+  return parts.join(" · ");
+}
+
+export function sourcesInProgress(coverage) {
+  const rows = coverage && Array.isArray(coverage.sources_in_progress)
+    ? coverage.sources_in_progress
+    : [];
+  return rows
+    .map((row) => (row && (row.name || row.id || row.detail)) || "")
+    .map((name) => String(name).trim())
+    .filter(Boolean);
+}
+
+export function terminalStatusLabel(status) {
+  const words = {
+    COMPLETE: "Finished",
+    PARTIAL: "Finished with incomplete coverage",
+    BLOCKED: "Blocked",
+    FAILED: "Failed",
+    CANCELLED: "Cancelled",
+  };
+  return words[status] || status || "";
+}

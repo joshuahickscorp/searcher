@@ -20,7 +20,7 @@
     "event": "search.progress",
     "data": {
       "stage": "Understanding the item",
-      "detail": null
+      "detail": "Reading the uploaded photographs"
     }
   },
   {
@@ -36,7 +36,7 @@
     "event": "search.progress",
     "data": {
       "stage": "Reading visible labels",
-      "detail": null
+      "detail": "Looking for text on the photographs"
     }
   },
   {
@@ -52,7 +52,7 @@
     "event": "search.progress",
     "data": {
       "stage": "Building possible identities",
-      "detail": null
+      "detail": "Forming names from the text you entered"
     }
   },
   {
@@ -68,7 +68,7 @@
     "event": "search.progress",
     "data": {
       "stage": "Searching exact names",
-      "detail": null
+      "detail": "Querying the names taken from the photographs and text"
     }
   },
   {
@@ -84,7 +84,7 @@
     "event": "search.progress",
     "data": {
       "stage": "Searching alternate names",
-      "detail": null
+      "detail": "Trying alternate names and spellings"
     }
   },
   {
@@ -100,7 +100,7 @@
     "event": "search.progress",
     "data": {
       "stage": "Searching international sources",
-      "detail": null
+      "detail": "Fetching public listing pages"
     }
   },
   {
@@ -116,7 +116,7 @@
     "event": "search.progress",
     "data": {
       "stage": "Comparing candidate images",
-      "detail": null
+      "detail": "Comparing listing photographs to the reference"
     }
   },
   {
@@ -132,7 +132,7 @@
     "event": "search.progress",
     "data": {
       "stage": "Checking detail consistency",
-      "detail": null
+      "detail": "Checking part-by-part agreement"
     }
   },
   {
@@ -148,7 +148,7 @@
     "event": "search.progress",
     "data": {
       "stage": "Checking listing authenticity evidence",
-      "detail": null
+      "detail": "Reading authenticity evidence on each listing"
     }
   },
   {
@@ -164,7 +164,7 @@
     "event": "search.progress",
     "data": {
       "stage": "Verifying live links",
-      "detail": null
+      "detail": "Checking whether listing links still resolve"
     }
   },
   {
@@ -194,7 +194,7 @@
     "event": "search.progress",
     "data": {
       "stage": "Ranking results",
-      "detail": null
+      "detail": "Ordering the listings that passed the gates"
     }
   },
   {

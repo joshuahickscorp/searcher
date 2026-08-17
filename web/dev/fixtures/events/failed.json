@@ -12,7 +12,7 @@
     "event": "search.progress",
     "data": {
       "stage": "Understanding the item",
-      "detail": null
+      "detail": "Reading the uploaded photographs"
     }
   },
   {
