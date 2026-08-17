@@ -78,7 +78,20 @@ def test_budget_exhaustion_mid_source_still_reports_every_planned_source(
         f"sources vanished from coverage when the budget ran out: {missing}; "
         f"coverage was {summary.coverage}"
     )
-    assert summary.coverage["archive_org"] == SourceOutcome.NOT_ATTEMPTED.value
+    # The invariant is that nothing vanishes, not which flavour of "did not
+    # search this" is recorded. The sequential engine marks the sources after an
+    # exhausted one NOT_ATTEMPTED because it never reaches them; the bounded
+    # engine runs them concurrently, so each is attempted and comes back
+    # UNMEASURABLE. Asserting NOT_ATTEMPTED encoded the sequential engine's
+    # mechanics and failed whenever install_bounded_discovery() had run.
+    not_searched = {
+        SourceOutcome.NOT_ATTEMPTED.value,
+        SourceOutcome.UNMEASURABLE.value,
+    }
+    assert summary.coverage["archive_org"] in not_searched, (
+        f"archive_org reported {summary.coverage['archive_org']!r}, which claims it "
+        "was searched when the budget had already run out"
+    )
 
 
 def test_engine_loop_guards_the_run_plan_call() -> None:
