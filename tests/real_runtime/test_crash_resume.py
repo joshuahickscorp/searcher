@@ -11,6 +11,7 @@ import time
 from pathlib import Path
 
 import pytest
+from tests.support.child_process import run_child
 
 from searcher.campaigns.controller import CampaignController
 from searcher.campaigns.resume import reconstruct
@@ -79,24 +80,12 @@ def _poll(db_path: Path) -> dict[str, object]:
 @pytest.mark.timeout(120)
 def test_sigkill_resume_loses_zero_accepted_evidence(tmp_path: Path) -> None:
     env = _env(tmp_path)
-    migrate_proc = subprocess.run(
-        [*_cli(), "db", "migrate"],
-        cwd=Path.cwd(),
-        env=env,
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-    assert migrate_proc.returncode == 0
+    # run_child separates a child that died from a signal - a host problem -
+    # from a child that ran and failed, which is a statement about Searcher.
+    # Round 5 saw only "SIGSEGV (-11)" here and scored it as a product failure.
+    run_child([*_cli(), "db", "migrate"], env=env)
 
-    created = subprocess.run(
-        [*_cli(), "campaign", "create", "--fixture", "dior_minimal"],
-        cwd=Path.cwd(),
-        env=env,
-        check=True,
-        capture_output=True,
-        text=True,
-    )
+    created = run_child([*_cli(), "campaign", "create", "--fixture", "dior_minimal"], env=env)
     search_id = _parse_search_id(created.stdout)
     db_path = tmp_path / "searcher.sqlite"
 
