@@ -9,10 +9,10 @@ is "here is where to find this"; a card that goes nowhere is worse than no card.
 from __future__ import annotations
 
 import pytest
+from tests.helpers_matching import make_candidate
 
 from searcher.campaigns.publication import has_usable_listing_link, published_public_bucket
 from searcher.contracts.enums import BucketPublic
-from tests.helpers_matching import make_candidate
 
 
 def _candidate(url: str):
@@ -36,7 +36,9 @@ class _Decision:
 def test_a_candidate_without_a_usable_link_is_not_published(url: str) -> None:
     assert has_usable_listing_link(_candidate(url)) is False
     for bucket in (BucketPublic.REAL, BucketPublic.POSSIBLY_REAL):
-        assert published_public_bucket(_Decision(bucket), _candidate(url)) == BucketPublic.HIDDEN.value
+        assert published_public_bucket(_Decision(bucket), _candidate(url)) == (
+            BucketPublic.HIDDEN.value
+        )
 
 
 def test_an_ordinary_listing_still_publishes() -> None:

@@ -40,6 +40,7 @@ def enrich_candidate(
     ocr_terms: list[str] | None = None,
     ontology: CategoryOntology | None = None,
     ledger: CostLedger | None = None,
+    category: str | None = None,
 ) -> EnrichedCandidate:
     images: list[tuple[ListingImage, bytes]] = []
     for image in candidate.images:
@@ -51,7 +52,8 @@ def enrich_candidate(
         ledger.record(CostStage.LOCAL_PARTS, detail=f"isolate n={len(images)}")
     isolated = isolate_subjects(images)
     gallery = gallery_images(isolated)
-    views = classify_subjects(gallery)
+    chosen_category = category or (ontology.category if ontology else None)
+    views = classify_subjects(gallery, category=chosen_category)
     descriptors = build_descriptors(gallery)
     views = refine_views(views, descriptors)
     parts = extract_parts(

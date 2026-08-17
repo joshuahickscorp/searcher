@@ -8,9 +8,23 @@ from searcher.contracts.enums import ImageRole, ViewHypothesis
 from searcher.matching.types import IsolatedSubject, StructuredDescriptor, ViewGuess
 from searcher.reference.views import classify_view
 
+# Categories whose views are lateral / medial / heel / sole. Anything else gets
+# the shape-based reading below: a shirt photographed straight on is a front
+# view, not a heel.
+_FOOTWEAR_CATEGORIES = frozenset(
+    {"footwear", "shoe", "shoes", "sneaker", "sneakers", "boot", "boots"}
+)
+
+
+def _is_footwear(category: str | None) -> bool:
+    return bool(category) and str(category).strip().lower() in _FOOTWEAR_CATEGORIES
+
 
 def classify_listing_view(
-    subject: IsolatedSubject, *, ocr_kinds: set[str] | None = None
+    subject: IsolatedSubject,
+    *,
+    ocr_kinds: set[str] | None = None,
+    category: str | None = None,
 ) -> ViewGuess:
     kinds = ocr_kinds or set()
     role = subject.role
@@ -18,6 +32,14 @@ def classify_listing_view(
         return ViewGuess(subject.image_id, ViewHypothesis.LABEL, 0.7, "role_or_ocr")
     if role == ImageRole.SOLE.value:
         return ViewGuess(subject.image_id, ViewHypothesis.SOLE, 0.72, "role")
+    if role == ImageRole.PRODUCT.value and not _is_footwear(category):
+        # A garment laid flat or hung fills most of the frame; a close crop of a
+        # seam or a fabric does not. Calling either one a heel, as this did for
+        # every category, meant a garment's views could never match the views
+        # its own profile expects, so completeness stayed at its floor.
+        if subject.subject_area >= 0.45:
+            return ViewGuess(subject.image_id, ViewHypothesis.FRONT, 0.5, "product_role")
+        return ViewGuess(subject.image_id, ViewHypothesis.DETAIL, 0.45, "product_role")
     if role == ImageRole.PRODUCT.value:
         aspect = (subject.width or 1) / max(1, subject.height)
         if 1.05 <= aspect <= 2.4:
@@ -40,8 +62,10 @@ def classify_listing_view(
     return ViewGuess(subject.image_id, entry.view, entry.confidence, "geometry")
 
 
-def classify_subjects(subjects: list[IsolatedSubject]) -> list[ViewGuess]:
-    return [classify_listing_view(item) for item in subjects]
+def classify_subjects(
+    subjects: list[IsolatedSubject], *, category: str | None = None
+) -> list[ViewGuess]:
+    return [classify_listing_view(item, category=category) for item in subjects]
 
 
 def refine_views(
