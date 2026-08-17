@@ -16,8 +16,8 @@
       },
       "real": {
         "hidden": 0,
-        "possibly_real": 4,
-        "real": 0,
+        "possibly_real": 0,
+        "real": 4,
         "replica": 0
       },
       "replica": {
@@ -60,15 +60,15 @@
     "not_computed": [],
     "precision": {
       "hidden": 0.928571,
-      "possibly_real": 0.333333,
-      "real": null,
+      "possibly_real": 1.0,
+      "real": 1.0,
       "replica": 1.0
     },
     "protocol": "Bucket decision on the constructed hard-negative corpus. Labels come from the fixture recipe (same shoe, adjacent model, self-declared replica, dead listing, ...), not from a marketplace badge and not from a professional authenticator. Predictions are searcher.ranking.pipeline.judge_candidates followed by published_public_bucket so a self-declared replica is scored as Replica rather than Hidden. Policy version is matching-1. This is not an authenticity-accuracy claim.",
     "recall": {
       "hidden": 1.0,
       "possibly_real": 0.666667,
-      "real": 0.0,
+      "real": 1.0,
       "replica": 1.0
     },
     "rows": [
@@ -319,13 +319,13 @@
         "authenticity_lower": 0.8,
         "case_id": "mirrored_image",
         "completeness": 0.6667,
-        "correct": false,
+        "correct": true,
         "hard_vetoes": [],
         "id": "hardneg:mirrored_image",
         "item_match_lower": 0.91,
-        "predicted": "possibly_real",
+        "predicted": "real",
         "reasons": [
-          "possibly-real-gate",
+          "real-gate",
           "adjudicator=local_deterministic",
           "output=advisory"
         ],
@@ -335,13 +335,13 @@
         "authenticity_lower": 0.8,
         "case_id": "prompt_injection",
         "completeness": 0.6667,
-        "correct": false,
+        "correct": true,
         "hard_vetoes": [],
         "id": "hardneg:prompt_injection",
         "item_match_lower": 0.91,
-        "predicted": "possibly_real",
+        "predicted": "real",
         "reasons": [
-          "possibly-real-gate",
+          "real-gate",
           "adjudicator=local_deterministic",
           "output=advisory"
         ],
@@ -410,13 +410,13 @@
         "authenticity_lower": 0.8,
         "case_id": "stock_mixed",
         "completeness": 0.6667,
-        "correct": false,
+        "correct": true,
         "hard_vetoes": [],
         "id": "hardneg:stock_mixed",
         "item_match_lower": 0.91,
-        "predicted": "possibly_real",
+        "predicted": "real",
         "reasons": [
-          "possibly-real-gate",
+          "real-gate",
           "adjudicator=local_deterministic",
           "output=advisory"
         ],
@@ -445,13 +445,13 @@
         "authenticity_lower": 0.8,
         "case_id": "true_match",
         "completeness": 0.6667,
-        "correct": false,
+        "correct": true,
         "hard_vetoes": [],
         "id": "hardneg:true_match",
         "item_match_lower": 0.91,
-        "predicted": "possibly_real",
+        "predicted": "real",
         "reasons": [
-          "possibly-real-gate",
+          "real-gate",
           "adjudicator=local_deterministic",
           "output=advisory"
         ],
@@ -478,7 +478,7 @@
       }
     ],
     "split": "held_out",
-    "wall_seconds": 11.105325
+    "wall_seconds": 10.485611
   },
   "calibration": {
     "curve": {
@@ -672,9 +672,9 @@
     "A claim that Searcher is better than Google Images or any other engine."
   ],
   "evidence_board": "artifacts/benchmark/evidence-board.html",
-  "git_sha": "79c50bd451bc11274dc6505acf24a10f3019cee1",
+  "git_sha": "d3be52be27a17effa8e1fd1d34a48245a39e94b4",
   "host": "Mac-Studio",
-  "measured_at": "2026-08-17T21:32:32.978589+00:00",
+  "measured_at": "2026-08-17T21:56:47.840618+00:00",
   "no_authenticity_claim": true,
   "not_computed": [
     {
@@ -695,24 +695,24 @@
       "cache_hits": 0,
       "fetches": 0,
       "images_processed": 179,
-      "wall_seconds": 11.105325
+      "wall_seconds": 10.485611
     },
     "cache_hit_rate": 1.0,
     "campaigns": 6,
     "fetches_per_campaign": 0,
     "fetches_total": 0,
-    "images_per_second": 19.647032,
+    "images_per_second": 29.100881,
     "images_processed": 354,
     "note": "fetches_per_campaign is 0 because every byte came from fixtures/ already permitted to be held. A live campaign's fetch cost is a different protocol; see artifacts/searcher-performance.receipt.json and artifacts/searcher-adversarial-recall.receipt.json.",
     "protocol": "Offline fixture campaigns. Retrieval is one closed-set ranking pass. Bucket evaluation is one judge_candidates campaign on the held-out constructed cases. No live source is contacted.",
     "retrieval": {
       "fetches": 0,
-      "images_per_second": 25.315855,
+      "images_per_second": 104.230637,
       "images_scored": 175,
-      "wall_seconds": 6.912664
+      "wall_seconds": 1.678969
     },
-    "wall_seconds_per_campaign": 3.002998,
-    "wall_seconds_total": 18.017989
+    "wall_seconds_per_campaign": 2.02743,
+    "wall_seconds_total": 12.16458
   },
   "policy_version": "provisional-1",
   "prior_receipts": {
@@ -2262,7 +2262,7 @@
       "units": "cosine"
     },
     "split": "held_out",
-    "wall_seconds": 6.912664
+    "wall_seconds": 1.678969
   },
   "schema_version": "1.1.0",
   "scorer": {

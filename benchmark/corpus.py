@@ -127,6 +127,7 @@ class BucketCase:
     candidate: ListingCandidate
     pngs: dict[str, bytes]
     stolen: bool
+    stock_mixed: bool
     colour: str | None
     truth: str
 
@@ -193,6 +194,7 @@ def _spec_table() -> list[dict[str, Any]]:
             "id": "stock_mixed",
             "images": stock,
             "title": "House Name Field Model 07",
+            "stock_mixed": True,
         },
         {
             "id": "two_items",
@@ -279,6 +281,7 @@ def _case_from_spec(
         candidate=candidate,
         pngs=pngs,
         stolen=bool(spec.get("stolen")),
+        stock_mixed=bool(spec.get("stock_mixed")),
         colour=str(spec["colour"]) if spec.get("colour") else None,
         truth=truth_of[cid] if cid in truth_of else truth_of[str(spec["id"])],
     )

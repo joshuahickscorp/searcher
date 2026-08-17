@@ -149,6 +149,12 @@ def run_buckets(splits: SplitSet, *, split: str) -> BucketReport:
     pngs = {case.case_id: case.pngs for case in ordered}
     dest = {case.case_id: True for case in ordered}
     stolen = {case.case_id for case in ordered if case.stolen}
+    # Supplying both screenings tells the Real gate that screening ran. This is
+    # an ORACLE: the corpus is told which cases carry stolen or inserted stock
+    # photographs rather than detecting them. It measures the matcher as if
+    # screening were perfect, which is an upper bound and not production
+    # behaviour - production detects neither, so Real stays fail-closed there.
+    stock = {case.case_id for case in ordered if case.stock_mixed}
 
     started = time.perf_counter()
     report = judge_candidates(
@@ -161,6 +167,7 @@ def run_buckets(splits: SplitSet, *, split: str) -> BucketReport:
         already_deduplicated=True,
         destination_verified=dest,
         stolen=stolen,
+        stock_mixed=stock,
         render_artifacts=False,
     )
     wall = time.perf_counter() - started
