@@ -173,6 +173,27 @@ class WarmIndex:
             policy_version=versions.policy_version,
             limit=limit,
         )
+        # A descriptor could rescore text hits but never retrieve anything: the
+        # descriptor map was built from the keys text had already returned, so a
+        # listing text could not name stayed invisible however close its
+        # photographs were. Search the descriptors as well and merge, so visual
+        # evidence can put a listing into the candidate set rather than only
+        # reorder one already in it.
+        if query_descriptor:
+            known = {str(row["listing_key"]) for row in rows}
+            extra = self.tables.search_listings_by_descriptor(
+                query_descriptor,
+                kind="global",
+                limit=limit,
+            )
+            for listing_key, _score in extra:
+                if listing_key in known:
+                    continue
+                found = self.tables.get_listing(listing_key)
+                if found is not None:
+                    rows = [*rows, found]
+                    known.add(listing_key)
+
         hits: list[IndexHit] = []
         seen_urls: set[str] = set()
         descriptor_map: dict[str, list[dict[str, Any]]] = {}

@@ -131,3 +131,45 @@ def test_the_best_image_represents_a_multi_image_listing(index: IndexTables) -> 
     assert ranked[0][0] == "multi"
     assert ranked[0][1] == pytest.approx(1.0), "the matching photograph should decide"
     assert math.isfinite(ranked[0][1])
+
+
+def test_a_descriptor_retrieves_a_listing_text_never_returned(tmp_path) -> None:  # type: ignore[no-untyped-def]
+    """The wiring, not just the capability.
+
+    `IndexStore.search` accepted a query descriptor before this and used it only
+    to rescore rows the text search had already returned - the descriptor map
+    was built from those keys. A listing whose title matches no term stayed
+    invisible however close its photographs were. Visual evidence must be able
+    to put a listing into the candidate set, not only reorder one already there.
+    """
+    from searcher.index.keys import CacheVersions
+    from searcher.index.store import WarmIndex
+
+    db = Database(tmp_path / "index.db")
+    migrate(db)
+    index = IndexTables(db)
+
+    class _Repos:
+        def __init__(self, tables: IndexTables) -> None:
+            self.index = tables
+
+    store = WarmIndex(_Repos(index))  # type: ignore[arg-type]
+
+    _add(index, "plain-garment", [1.0, 0.0, 0.0])
+    index.replace_terms("plain-garment", [])
+
+    versions = CacheVersions(
+        adapter_version="1",
+        model_version="1",
+        parameters="{}",
+        schema_version="1.1.0",
+        policy_version="matching-1",
+    )
+
+    text_only = store.search(["archive", "trainer"], versions)
+    assert not text_only, "precondition: no term names this listing"
+
+    with_vision = store.search(["archive", "trainer"], versions, query_descriptor=[1.0, 0.0, 0.0])
+    assert [hit.listing_key for hit in with_vision] == ["plain-garment"], (
+        "a listing no term names must still be retrievable by its photographs"
+    )
