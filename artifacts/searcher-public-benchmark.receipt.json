@@ -38,6 +38,18 @@
     },
     "fetches": 0,
     "images_processed": 79,
+    "item_match_separation": {
+      "computed": true,
+      "excluded_from_different_item": [
+        "stolen_photos"
+      ],
+      "over_different_item_negatives": 0.690816,
+      "over_every_negative": -0.099184,
+      "strongest_different_item_negative": 0.12,
+      "strongest_negative": 0.91,
+      "weakest_positive": 0.810816,
+      "why_excluded": "stolen_photos reuses the target's own photographs, so a high item match is the correct answer and a stolen-photo veto hides it; it is not evidence that the matcher confuses two items"
+    },
     "labels": [
       "real",
       "possibly_real",
@@ -256,7 +268,7 @@
       }
     ],
     "split": "held_out",
-    "wall_seconds": 4.328664
+    "wall_seconds": 4.296781
   },
   "calibration": {
     "curve": {
@@ -450,9 +462,9 @@
     "A claim that Searcher is better than Google Images or any other engine."
   ],
   "evidence_board": "artifacts/benchmark/evidence-board.html",
-  "git_sha": "6d4b4859d099e9be8027dc9a5363c53eee06acc3",
+  "git_sha": "d2645105c934e2d44980934f1465ad39682b871a",
   "host": "Mac-Studio",
-  "measured_at": "2026-08-17T17:54:58.104355+00:00",
+  "measured_at": "2026-08-17T17:57:14.638180+00:00",
   "no_authenticity_claim": true,
   "not_computed": [
     {
@@ -473,24 +485,24 @@
       "cache_hits": 0,
       "fetches": 0,
       "images_processed": 79,
-      "wall_seconds": 4.328664
+      "wall_seconds": 4.296781
     },
     "cache_hit_rate": 1.0,
     "campaigns": 6,
     "fetches_per_campaign": 0,
     "fetches_total": 0,
-    "images_per_second": 43.434396,
+    "images_per_second": 44.908032,
     "images_processed": 254,
     "note": "fetches_per_campaign is 0 because every byte came from fixtures/ already permitted to be held. A live campaign's fetch cost is a different protocol; see artifacts/searcher-performance.receipt.json and artifacts/searcher-adversarial-recall.receipt.json.",
     "protocol": "Offline fixture campaigns. Retrieval is one closed-set ranking pass. Bucket evaluation is one judge_candidates campaign on the held-out constructed cases. No live source is contacted.",
     "retrieval": {
       "fetches": 0,
-      "images_per_second": 115.189486,
+      "images_per_second": 128.750013,
       "images_scored": 175,
-      "wall_seconds": 1.519236
+      "wall_seconds": 1.359223
     },
-    "wall_seconds_per_campaign": 0.97465,
-    "wall_seconds_total": 5.8479
+    "wall_seconds_per_campaign": 0.942667,
+    "wall_seconds_total": 5.656004
   },
   "policy_version": "provisional-1",
   "prior_receipts": {
@@ -2040,7 +2052,7 @@
       "units": "cosine"
     },
     "split": "held_out",
-    "wall_seconds": 1.519236
+    "wall_seconds": 1.359223
   },
   "schema_version": "1.1.0",
   "scorer": {

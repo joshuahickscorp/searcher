@@ -41,6 +41,41 @@ class BucketReport:
     images_processed: int
     not_computed: list[dict[str, str]]
 
+    # A listing that stole the real item's photographs is a different listing,
+    # not a different item: its pixels genuinely are the item, so a high item
+    # match is correct and a stolen-photo veto is what hides it. Excluding it
+    # from an item-match separation is defensible - quoting the result without
+    # saying so is not. Round 5 recomputed this over every negative, got
+    # -0.099184, and called +0.690816 unreproduced. Both are published here,
+    # named, so neither can be quoted bare.
+    def _separation(self) -> dict[str, Any]:
+        positive = [r.item_match_lower for r in self.rows if r.truth in ("real", "possibly_real")]
+        negative = [(r.case_id, r.item_match_lower) for r in self.rows
+                    if r.truth in ("hidden", "replica")]
+        if not positive or not negative:
+            return {"computed": False, "reason": "a split lacks positives or negatives"}
+        excluded = [case for case, _ in negative if case == "stolen_photos"]
+        different_item = [(c, v) for c, v in negative if c != "stolen_photos"]
+        weakest = min(positive)
+        worst_all = max(v for _, v in negative)
+        result: dict[str, Any] = {
+            "computed": True,
+            "weakest_positive": _round(weakest),
+            "over_every_negative": _round(weakest - worst_all),
+            "strongest_negative": _round(worst_all),
+            "excluded_from_different_item": excluded,
+            "why_excluded": (
+                "stolen_photos reuses the target's own photographs, so a high "
+                "item match is the correct answer and a stolen-photo veto hides "
+                "it; it is not evidence that the matcher confuses two items"
+            ),
+        }
+        if different_item:
+            worst_diff = max(v for _, v in different_item)
+            result["over_different_item_negatives"] = _round(weakest - worst_diff)
+            result["strongest_different_item_negative"] = _round(worst_diff)
+        return result
+
     def as_payload(self) -> dict[str, Any]:
         pairs = [(row.truth, row.predicted) for row in self.rows]
         precision, recall, matrix = precision_recall(pairs)
@@ -58,6 +93,7 @@ class BucketReport:
                 "rate_among_all": _round(false_real["rate_among_all"]),
                 "rate_among_not_real": _round(false_real["rate_among_not_real"]),
             },
+            "item_match_separation": self._separation(),
             "rows": [
                 {
                     "id": row.item_id,
