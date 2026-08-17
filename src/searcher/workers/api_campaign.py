@@ -10,6 +10,7 @@ import os
 import re
 import traceback
 from pathlib import Path
+from typing import Any
 
 from searcher.campaigns.controller import CampaignController
 from searcher.campaigns.orchestrator import layers_present
@@ -378,6 +379,34 @@ def _should_run_live(settings: Settings) -> bool:
     return present["discovery"] and present["routing"]
 
 
+
+def uncredentialed_source_names() -> list[str]:
+    """Admitted, enabled sources that need no operator credential.
+
+    Derived from the registry so that admitting a shop is enough to have it
+    searched. A source that cannot answer without a key is left out here rather
+    than planned and then reported AUTH_REQUIRED on every campaign.
+    """
+    from searcher.sources.adapters import ADAPTER_REGISTRY
+    from searcher.sources.broker import DEFAULT_ORDER
+    from searcher.sources.platform import requires_operator_credential
+
+    names: list[str] = []
+    for name in DEFAULT_ORDER:
+        adapter: Any = ADAPTER_REGISTRY.get(name)
+        if adapter is None:
+            continue
+        try:
+            manifest = adapter().manifest()
+        except Exception:
+            continue
+        if not getattr(manifest, "enabled", False):
+            continue
+        if requires_operator_credential(manifest):
+            continue
+        names.append(name)
+    return names
+
 def run_api_campaign(controller: CampaignController, search_id: str) -> None:
     """Run the orchestrator when layers are live; otherwise stop with BLOCKED."""
     try:
@@ -391,15 +420,13 @@ def run_api_campaign(controller: CampaignController, search_id: str) -> None:
             install_bounded_discovery()
             FastOrchestrator(
                 controller,
-                source_names=[
-                    "wikimedia",
-                    "kind",
-                    "komehyo",
-                    "the_realreal",
-                    "byronesque",
-                    "heroine",
-                    "ebay",
-                ],
+                # Ask every admitted, enabled, credential-free source rather
+                # than a list written by hand. The hard-coded seven omitted
+                # rebag, whose feed answers and whose robots permits it, so that
+                # shop never appeared in any campaign's coverage - not as
+                # searched and not as blocked. It also named ebay, which cannot
+                # answer without an operator key.
+                source_names=uncredentialed_source_names(),
                 max_rounds=2,
                 max_work=8,
                 batch_size=3,
