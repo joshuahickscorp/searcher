@@ -68,6 +68,17 @@ from searcher.sources.http import HonestHttpClient
 from searcher.sources.live_check import check_candidate
 from searcher.sources.robots import RobotsCache
 from searcher.sources.statuses import is_block
+from searcher.sources.strategies import (
+    CATALOG_FEED,
+    COLLECTION_SLUG,
+    OFFICIAL_API,
+    SITE_SEARCH,
+    SITEMAP,
+    STATUS_BLOCKED,
+    StrategyBook,
+    plan_strategies,
+    strategy_name_for_url,
+)
 
 
 @dataclass
@@ -80,6 +91,8 @@ class SourceRunSummary:
     blocked: list[dict[str, str]] = field(default_factory=list)
     expansions: list[dict[str, object]] = field(default_factory=list)
     catalog_fallbacks: list[dict[str, object]] = field(default_factory=list)
+    strategy_coverage: dict[str, list[dict[str, object]]] = field(default_factory=dict)
+    coverage_details: dict[str, str] = field(default_factory=dict)
 
 
 class _HasManifest(Protocol):
@@ -134,6 +147,7 @@ class DiscoveryEngine:
         self._campaign_catalog_pages = 0
         self._campaign_catalog_promoted = 0
         self._catalogs: list[dict[str, object]] = []
+        self._strategy_books: dict[str, StrategyBook] = {}
         self.repos = controller.repos
         self.health = HealthStore(self.repos)
         self.broker = SourceBroker(health=self.health)
@@ -220,6 +234,7 @@ class DiscoveryEngine:
         self._campaign_catalog_pages = 0
         self._campaign_catalog_promoted = 0
         self._catalogs = []
+        self._strategy_books = {}
         if source_names is not None:
             self.broker.names = tuple(source_names)
         plans = self.broker.plan(
@@ -235,7 +250,13 @@ class DiscoveryEngine:
                 coverage.record(plan.source_adapter, SourceOutcome.UNMEASURABLE)
                 break
             summary, found = self._run_plan(search_id, plan, queries, events, cancel)
-            coverage.record(plan.source_adapter, SourceOutcome(summary))
+            book = self._strategy_books.get(plan.source_adapter)
+            coverage.record(
+                plan.source_adapter,
+                SourceOutcome(summary),
+                detail=book.detail() if book is not None else "",
+                strategies=book.as_payload() if book is not None else None,
+            )
             all_candidates.extend(found)
             if is_block(SourceOutcome(summary)):
                 blocked.append({"source": plan.source_adapter, "outcome": summary})
@@ -256,6 +277,10 @@ class DiscoveryEngine:
             )
         runtime = self.controller.repos.get_runtime(search_id)
         runtime["coverage"] = coverage.per_source
+        runtime["coverage_details"] = dict(coverage.details)
+        runtime["reach_strategies"] = {
+            source_id: list(items) for source_id, items in coverage.strategies.items()
+        }
         runtime["dedupe_savings"] = deduped.savings
         self.controller.repos.update_runtime(search_id, runtime)
         self.controller.persist_usage(search_id)
@@ -268,6 +293,8 @@ class DiscoveryEngine:
             blocked=blocked,
             expansions=list(self._expansions),
             catalog_fallbacks=list(self._catalogs),
+            strategy_coverage=dict(coverage.strategies),
+            coverage_details=dict(coverage.details),
         )
 
     def _run_plan(
@@ -305,6 +332,15 @@ class DiscoveryEngine:
         found: list[ListingCandidate] = []
         pages = 0
         work_skipped = 0
+        book = StrategyBook(source_id)
+        self._strategy_books[source_id] = book
+        spec = getattr(adapter, "spec", None)
+        if spec is not None:
+            seed_text = next(
+                (str(item.query_text) for item in queries if str(item.query_text or "").strip()),
+                "",
+            )
+            book.load_plan(plan_strategies(spec, seed_text))
         try:
             self.circuit.assert_closed(source_id)
         except CircuitOpen:
@@ -345,6 +381,18 @@ class DiscoveryEngine:
                 last_outcome = outcome
                 events.blocked(source_id, outcome.value, page.note)
                 self.health.record(source_id, outcome, policy_disabled=not manifest.enabled)
+                if outcome is SourceOutcome.AUTH_REQUIRED:
+                    book.record(
+                        OFFICIAL_API,
+                        status=STATUS_BLOCKED,
+                        reason=page.note or "AUTH_REQUIRED",
+                    )
+                elif not book.attempts:
+                    book.record(
+                        source_id,
+                        status=STATUS_BLOCKED,
+                        reason=page.note or outcome.value,
+                    )
                 self._finish_run(
                     search_id, run_id, source_id, last_outcome, pages, len(found), events
                 )  # noqa: E501
@@ -425,7 +473,7 @@ class DiscoveryEngine:
                         state=FrontierState.CANCELLED,
                     )
                     raise
-        if self._should_catalog_fallback(adapter, source_id, found):
+        if self._should_run_catalog(adapter, source_id):
             extra_pages, catalog_outcome = self._run_catalog_fallback(
                 adapter=adapter,
                 escalator=escalator,
@@ -442,6 +490,7 @@ class DiscoveryEngine:
                 last_outcome = SourceOutcome.SEARCHED_MATCHES_FOUND
             elif catalog_outcome is not SourceOutcome.NOT_ATTEMPTED:
                 last_outcome = catalog_outcome
+        self._finalize_strategy_yields(source_id, book)
         if found:
             last_outcome = SourceOutcome.SEARCHED_MATCHES_FOUND
         elif last_outcome is SourceOutcome.NOT_ATTEMPTED:
@@ -686,26 +735,71 @@ class DiscoveryEngine:
         runtime["index_expansions"] = recorded
         self.repos.update_runtime(search_id, runtime)
 
-    def _should_catalog_fallback(
-        self, adapter: Any, source_id: str, found: list[ListingCandidate]
-    ) -> bool:
-        if found:
-            return False
+    def _should_run_catalog(self, adapter: Any, source_id: str) -> bool:
+        """Catalogue feed is a first-class strategy, not a last-ditch fallback.
+
+        A guessed collection handle that happens to exist can still miss the
+        item. The shop-wide feed is searched whenever the source publishes one.
+        """
         spec = getattr(adapter, "spec", None)
         if spec is None or catalog_feed_path_of(spec) is None:
             return False
+        book = self._strategy_books.get(source_id)
+        if book is not None:
+            planned = book.attempts.get(CATALOG_FEED)
+            if planned is not None and planned.status != "queued":
+                return False
+        return True
+
+    def _finalize_strategy_yields(self, source_id: str, book: StrategyBook) -> None:
+        counts = {COLLECTION_SLUG: 0, SITE_SEARCH: 0, SITEMAP: 0, CATALOG_FEED: 0}
+        reasons = {
+            COLLECTION_SLUG: "collection handle had no matching products",
+            SITE_SEARCH: "site search returned no listing URLs",
+            SITEMAP: "sitemap locs did not match the query",
+            CATALOG_FEED: "catalogue feed text matched no products",
+        }
         for payload in self._expansions:
             if payload.get("source_id") != source_id:
                 continue
-            if payload.get("catalog_fallback"):
-                continue
-            members_found = payload.get("members_found")
+            index_url = str(payload.get("index_url") or "")
+            name = strategy_name_for_url(index_url) if index_url else COLLECTION_SLUG
             taken = payload.get("taken")
-            found_n = members_found if isinstance(members_found, int) else 0
+            members = payload.get("members_found")
             taken_n = taken if isinstance(taken, int) else 0
-            if found_n > 0 or taken_n > 0:
-                return False
-        return True
+            if name in counts:
+                counts[name] += taken_n
+                if taken_n == 0:
+                    drop = payload.get("drop_reasons")
+                    if isinstance(drop, dict) and drop.get("query_not_in_loc"):
+                        reasons[name] = "sitemap locs did not contain query tokens"
+                    elif isinstance(members, int) and members == 0:
+                        reasons[name] = "strategy URL contained no listing members"
+        for payload in self._catalogs:
+            if payload.get("source_id") != source_id:
+                continue
+            promoted = payload.get("products_promoted")
+            counts[CATALOG_FEED] = int(promoted) if isinstance(promoted, int) else 0
+            if counts[CATALOG_FEED] == 0:
+                stopped = str(payload.get("stopped_reason") or "")
+                drops = payload.get("drop_reasons")
+                if stopped == "robots_disallowed":
+                    reasons[CATALOG_FEED] = "robots disallowed the catalogue feed"
+                elif stopped == "no_query":
+                    reasons[CATALOG_FEED] = "no query text to match against the feed"
+                elif isinstance(drops, dict) and drops.get("feed_text_no_match"):
+                    reasons[CATALOG_FEED] = (
+                        f"feed text matched none of {drops.get('feed_text_no_match')} products"
+                    )
+                elif stopped:
+                    reasons[CATALOG_FEED] = f"catalogue stopped: {stopped}"
+        for name, yielded in counts.items():
+            if name not in book.attempts:
+                continue
+            if yielded > 0:
+                book.mark_tried(name, yielded=yielded, reason="promoted listing URLs")
+            else:
+                book.mark_tried(name, yielded=0, reason=reasons[name])
 
     def _run_catalog_fallback(
         self,
@@ -731,7 +825,11 @@ class DiscoveryEngine:
             if raw:
                 allowed_hosts.add(raw.lower())
         seen = self._seen_target_urls(search_id, frontier)
-        query_texts = [item.query_text for item in queries if str(item.query_text or "").strip()]
+        query_texts = list(self._campaign_query_texts)
+        if not query_texts:
+            query_texts = [
+                item.query_text for item in queries if str(item.query_text or "").strip()
+            ]
 
         def fetch_page(url: str) -> bytes:
             if not catalog_url_allowed(url, disallowed):
@@ -848,6 +946,9 @@ class DiscoveryEngine:
         *,
         work_skipped: int = 0,
     ) -> None:
+        book = self._strategy_books.get(source_id)
+        strategies = book.as_payload() if book is not None else []
+        detail = book.detail() if book is not None else ""
         self.repos.upsert_source_run(
             search_id,
             run_id,
@@ -860,6 +961,8 @@ class DiscoveryEngine:
                 "work_skipped": work_skipped,
                 "expansions": list(self._expansions),
                 "catalog_fallbacks": list(self._catalogs),
+                "strategies": strategies,
+                "strategy_detail": detail,
             },
         )
         receipt = SourceRunReceipt(
@@ -873,10 +976,12 @@ class DiscoveryEngine:
             payload={
                 "expansions": list(self._expansions),
                 "catalog_fallbacks": list(self._catalogs),
+                "strategies": strategies,
+                "strategy_detail": detail,
             },
         ).seal()
         self.controller.store_receipt(receipt)
-        events.coverage(source_id, outcome.value, pages)
+        events.coverage(source_id, outcome.value, pages, strategies=strategies, detail=detail)
         events.complete(source_id, outcome.value)
 
     def live_check_all(

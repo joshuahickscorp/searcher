@@ -255,6 +255,8 @@ def cmd_campaign_discover(args: argparse.Namespace) -> int:
             "query": args.query,
             "state": campaign.state.value,
             "coverage": summary.coverage if summary else {},
+            "coverage_details": getattr(summary, "coverage_details", {}) if summary else {},
+            "strategies": getattr(summary, "strategy_coverage", {}) if summary else {},
             "candidates_before": summary.candidates_before if summary else 0,
             "candidates_after": summary.candidates_after if summary else 0,
             "urls": [c.canonical_url for c in (summary.listings if summary else [])],
@@ -266,6 +268,10 @@ def cmd_campaign_discover(args: argparse.Namespace) -> int:
             print(f"search_id: {intent.search_id}")
             print(f"state: {campaign.state.value}")
             print(f"coverage: {payload['coverage']}")
+            details = payload["coverage_details"]
+            if isinstance(details, dict):
+                for source_id, detail in details.items():
+                    print(f"  strategies {source_id}: {detail}")
             print(f"candidates: {payload['candidates_before']} -> {payload['candidates_after']}")
             for url in payload["urls"][:20]:
                 print(f"  listing: {url}")

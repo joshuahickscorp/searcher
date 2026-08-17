@@ -151,6 +151,9 @@ def catalog_page_size_of(spec: object) -> int:
 
 
 def origin_for_spec(spec: object, fallback: str = "") -> str:
+    explicit = getattr(spec, "origin", None)
+    if isinstance(explicit, str) and explicit.strip():
+        return explicit.strip().rstrip("/")
     domain = getattr(spec, "domain", None)
     if isinstance(domain, str) and domain.strip():
         return f"https://{domain.strip()}"

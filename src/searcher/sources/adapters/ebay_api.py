@@ -20,6 +20,19 @@ from searcher.normalization.listing import normalize_raw
 from searcher.sources.adapters.protocol import DiscoveryPageResult
 from searcher.sources.fetch_modes import FetchedDocument
 from searcher.sources.manifest import build_manifest
+from searcher.sources.strategies import missing_key_note
+
+EBAY_KEY_NAMES = ("EBAY_CLIENT_ID", "EBAY_CLIENT_SECRET")
+EBAY_SIGNUP_URL = "https://developer.ebay.com/api-docs/static/gs_create-the-ebay-api-keysets.html"
+
+
+def ebay_auth_note(*, client_id: str, client_secret: str) -> str:
+    return missing_key_note(
+        key_names=EBAY_KEY_NAMES,
+        present={"EBAY_CLIENT_ID": client_id, "EBAY_CLIENT_SECRET": client_secret},
+        signup_url=EBAY_SIGNUP_URL,
+        product="eBay Browse API",
+    )
 
 
 class EbayApiAdapter:
@@ -38,7 +51,10 @@ class EbayApiAdapter:
             authentication="oauth",
             robots_policy="Approved enterprise integrations must use our official API. Disallow: /sch/",  # noqa: E501
             disallowed_path_prefixes=["/sch/", "/sch/i.html"],
-            known_limitations=["dormant without EBAY_CLIENT_ID"],
+            known_limitations=[
+                "dormant without EBAY_CLIENT_ID and EBAY_CLIENT_SECRET",
+                f"create a keyset at {EBAY_SIGNUP_URL}",
+            ],
         )
 
     def _has_creds(self) -> bool:
@@ -55,17 +71,14 @@ class EbayApiAdapter:
 
     def discover(self, query: QueryVariant, cursor: str | None) -> DiscoveryPageResult:
         del query, cursor
-        if not self._has_creds():
-            return DiscoveryPageResult(
-                [],
-                [],
-                None,
-                SourceOutcome.AUTH_REQUIRED.value,
-                "EBAY_CLIENT_ID/SECRET not configured",
-            )
+        note = ebay_auth_note(client_id=self.client_id, client_secret=self.client_secret)
         return DiscoveryPageResult(
-            [], [], None, SourceOutcome.AUTH_REQUIRED.value, "oauth not implemented"
-        )  # noqa: E501
+            [],
+            [],
+            None,
+            SourceOutcome.AUTH_REQUIRED.value,
+            note,
+        )
 
     def fetch(self, url: str, mode: FetchMode) -> FetchedDocument:
         del mode
@@ -74,7 +87,9 @@ class EbayApiAdapter:
                 attempt_id=new_id(),
                 url=url,
                 outcome=SourceOutcome.AUTH_REQUIRED,
-                classification_note="eBay adapter is API-only and has no credential",
+                classification_note=ebay_auth_note(
+                    client_id=self.client_id, client_secret=self.client_secret
+                ),
             ),
             body=b"",
             headers={},
@@ -94,5 +109,5 @@ class EbayApiAdapter:
             availability=Availability.UNKNOWN,
             checked_at=utc_now(),
             outcome=SourceOutcome.AUTH_REQUIRED,
-            note="API credential required",
+            note=ebay_auth_note(client_id=self.client_id, client_secret=self.client_secret),
         )

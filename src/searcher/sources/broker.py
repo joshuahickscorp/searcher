@@ -45,9 +45,22 @@ DEFAULT_ORDER = (
 @dataclass
 class Coverage:
     per_source: dict[str, str] = field(default_factory=dict)
+    details: dict[str, str] = field(default_factory=dict)
+    strategies: dict[str, list[dict[str, object]]] = field(default_factory=dict)
 
-    def record(self, source_id: str, outcome: SourceOutcome) -> None:
+    def record(
+        self,
+        source_id: str,
+        outcome: SourceOutcome,
+        *,
+        detail: str = "",
+        strategies: list[dict[str, object]] | None = None,
+    ) -> None:
         self.per_source[source_id] = outcome.value
+        if detail:
+            self.details[source_id] = detail
+        if strategies is not None:
+            self.strategies[source_id] = list(strategies)
 
 
 class SourceBroker:
