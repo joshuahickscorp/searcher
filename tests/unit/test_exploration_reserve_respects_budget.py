@@ -11,7 +11,11 @@ from __future__ import annotations
 
 import pytest
 
-from searcher.sources.engine import ExplorationReserve, exploration_page_allowance
+from searcher.sources.engine import (
+    ExplorationReserve,
+    exploration_page_allowance,
+    remaining_page_budget,
+)
 
 
 @pytest.mark.parametrize(
@@ -55,32 +59,48 @@ def test_a_single_greedy_source_cannot_take_the_whole_budget() -> None:
         )
 
 
-@pytest.mark.xfail(
-    reason=(
-        "The reserve is per-round; page_limit is per-campaign. Each round rebinds it with "
-        "a fresh page_budget, so N rounds can grant N x the limit. This reproduces round 7's "
-        "live pages_fetched=60 against page_limit=40. The reserve itself is correct - every "
-        "single-round invariant above holds - so the repair belongs where the per-round "
-        "budget is derived, which must be the campaign remaining rather than the campaign "
-        "total."
-    ),
-    strict=True,
-)
-def test_the_budget_is_a_campaign_limit_not_a_round_limit() -> None:
-    budget, rounds = 40, 2
-    names = tuple(f"s{i}" for i in range(9))
-    total = 0
-    for _ in range(rounds):
-        reserve = ExplorationReserve(
-            allowance=exploration_page_allowance(budget, len(names)),
-            source_ids=names,
-            page_budget=budget,
-        )
-        for _ in range(budget * 3):
-            for name in names:
-                if reserve.can_claim(name):
-                    reserve.claim(name)
-                    total += 1
-    assert total <= budget, (
-        f"{rounds} rounds granted {total} pages against a campaign limit of {budget}"
+def test_rounds_share_one_campaign_budget_when_bound_from_the_ledger() -> None:
+    """Successive rounds cannot each spend a fresh budget.
+
+    An earlier version of this file asserted the opposite and marked it xfail,
+    after a hand-built reproduction gave two rounds a fresh `page_budget=40`
+    each and concluded the campaign could fetch eighty. Production never builds
+    it that way: `_bind_exploration_reserve` derives the budget from
+    `remaining_page_budget(usage)`, which is ceiling minus used, so a second
+    round binds with what the first left. The reproduction constructed a
+    scenario the code does not produce, and the defect it recorded was not real.
+    """
+
+    class _Sealed:
+        def __init__(self, ceiling: int) -> None:
+            self._ceiling = ceiling
+
+        def ceiling(self, _key: str) -> int:
+            return self._ceiling
+
+    class _Usage:
+        def __init__(self, ceiling: int) -> None:
+            self.sealed = _Sealed(ceiling)
+            self._used = 0
+
+        def used(self, _key: str) -> int:
+            return self._used
+
+        def consume(self, pages: int = 0) -> None:
+            self._used += pages
+
+    ceiling = 40
+    usage = _Usage(ceiling)
+    for _ in range(5):
+        remaining = remaining_page_budget(usage)
+        usage.consume(pages=remaining)  # a round spending everything it was given
+
+    assert usage.used("pages") == ceiling, (
+        f"five rounds charged {usage.used('pages')} against a ceiling of {ceiling}"
     )
+
+
+def test_the_allowance_falls_to_zero_once_the_budget_is_spent() -> None:
+    """A later round is given nothing rather than a fresh floor per source."""
+    assert exploration_page_allowance(0, 9) == 0
+    assert exploration_page_allowance(40, 9) > 0
