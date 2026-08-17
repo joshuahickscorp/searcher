@@ -1,0 +1,51 @@
+{
+  "question": "Does the surface look work on a domain with no per-site adapter?",
+  "method": "Fetch under the same robots gate the product uses, then call the generic extractor directly. No bespoke rule for any host below.",
+  "per_site_code_size": "each admitted site is a 10-line subclass binding a shared engine; the engine is generic_page.py (362 lines) plus product.py (569)",
+  "results": [
+    {
+      "url": "https://www.allbirds.com/products/mens-wool-runner-go",
+      "host": "www.allbirds.com",
+      "has_bespoke_adapter": false,
+      "robots_allows": true,
+      "result": "extracted",
+      "title": "Allbirds Men's Shoes | Shop Sustainable Footwear for Men",
+      "price": "",
+      "images": 9,
+      "method": "open_graph"
+    },
+    {
+      "url": "https://www.rei.com/product/895882/patagonia-better-sweater-fleece-jacket-mens",
+      "host": "www.rei.com",
+      "has_bespoke_adapter": false,
+      "robots_allows": false,
+      "result": "refused by robots \u2014 correct"
+    },
+    {
+      "url": "https://www.huckberry.com/store/flint-and-tinder/category/p/57265-waxed-trucker-jacket",
+      "host": "www.huckberry.com",
+      "has_bespoke_adapter": false,
+      "robots_allows": false,
+      "result": "refused by robots \u2014 correct"
+    },
+    {
+      "url": "https://bananarepublic.gap.com/browse/product.do?pid=500110002",
+      "host": "bananarepublic.gap.com",
+      "has_bespoke_adapter": false,
+      "robots_allows": true,
+      "result": "extracted",
+      "title": "",
+      "price": "",
+      "images": 1,
+      "method": "dom"
+    },
+    {
+      "url": "https://www.everlane.com/products/mens-organic-cotton-crew-white",
+      "host": "www.everlane.com",
+      "has_bespoke_adapter": false,
+      "robots_allows": true,
+      "result": "fetch failed: HTTPError"
+    }
+  ],
+  "reading": "The surface look is site-agnostic and needs no per-site code: two of five unknown domains extracted, one by Open Graph and one by DOM. The other three are honest limits, not defects - two are refused by robots and stay refused, and one returns HTTP 403 to a plain declared user agent, which is not answered by spoofing. Yield on a cold unknown domain is modest and title-and-images shaped; price and size are what the per-site configuration adds."
+}

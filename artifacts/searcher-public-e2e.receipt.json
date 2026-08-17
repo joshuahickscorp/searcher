@@ -1,0 +1,45 @@
+{
+  "what": "End-to-end proof through the public URL, run as a visitor would.",
+  "path": "browser origin https://joshuahickscorp.github.io -> Cloudflare quick tunnel -> loopback API. CORS preflight from the Pages origin answered 200 with access-control-allow-origin set to that origin.",
+  "queries": [
+    {
+      "query": "KIND wool overshirt, one user snapshot",
+      "terminal": "PARTIAL",
+      "counts": {
+        "real": 0,
+        "possibly_real": 0,
+        "hidden": 8
+      },
+      "reading": "Correct refusal. The one live source carries handbags, not overshirts, so nothing matched and the note said so: evidence did not establish the same item."
+    },
+    {
+      "query": "Boston Bag Triomphe Coated Canvas Small, one photograph",
+      "terminal": "PARTIAL",
+      "counts": {
+        "real": 0,
+        "possibly_real": 1,
+        "hidden": 7
+      },
+      "item_match_lower_bound": 0.802387,
+      "authenticity_lower_bound": 0.395789,
+      "listing_url": "https://shop.rebag.com/products/handbag-celine-boston-bag-triomphe-coated-canvas-small-144114525",
+      "correspondence": "ev:correspondence:orb:180-inliers",
+      "reading": "The exact item was found and published with a click-through link. ORB answered with 180 inliers, which is the fixed detector doing real work."
+    },
+    {
+      "query": "same item, five views",
+      "terminal": "PARTIAL",
+      "counts": {
+        "real": 0,
+        "possibly_real": 1,
+        "hidden": 7
+      },
+      "item_match_lower_bound": 0.79073,
+      "authenticity_lower_bound": 0.387116,
+      "reading": "Five views scored LOWER than one. This is a defect, not a ceiling: the product's own gap analysis asks the user for rear, label and detail photographs, and supplying more views moved item match the wrong way."
+    }
+  ],
+  "why_nothing_reaches_real": "Real needs item match lower bound 0.90 and authenticity lower bound 0.80. The best case measurable here - the listing's own photographs used as the query, which is the most favourable input that exists - reaches 0.79 to 0.80 on item match and 0.39 on authenticity. Authenticity is the larger gap by far. The Real gate is not close, and no amount of user photographs closes it while adding views moves the score down.",
+  "caveat": "The query images are the seller's own photographs. That is circular by construction and is an upper bound on matching, not a field measurement. It is used here only to characterise the gate, because if the gate does not open on identical pixels it will not open on a real snapshot.",
+  "unauthenticated": "The tunnel exposes an API with no authentication. Anyone holding the URL can create, read, cancel and delete searches."
+}
