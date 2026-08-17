@@ -1150,7 +1150,12 @@ class CampaignOrchestrator:
         if analysis is not None:
             from searcher.reference.gaps import evidence_gaps
 
-            for gap in evidence_gaps(analysis):
+            # Ask for the views this kind of thing actually has. A garment has
+            # no sole to photograph, and requesting one guarantees the part
+            # evidence behind it never arrives.
+            hypothesis = self._primary_hypothesis(search_id)
+            category = getattr(hypothesis, "category", None) if hypothesis else None
+            for gap in evidence_gaps(analysis, category=category):
                 if not gap.gap.startswith("missing_"):
                     continue
                 missing.append({"view": gap.gap.removeprefix("missing_"), "why": gap.impact})

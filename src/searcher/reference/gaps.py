@@ -6,7 +6,12 @@ from searcher.contracts.enums import ViewHypothesis
 from searcher.contracts.models import EvidenceGap, NextEvidenceRequest, ReferenceAnalysis
 from searcher.core.ids import new_id
 
-_PRIORITY = (
+# What to ask the owner for depends on what the thing is. Asking a long-sleeve
+# shirt for its sole and its heel was the observed behaviour, and it is not only
+# absurd to read: those views can never arrive, so the part evidence they gate
+# never arrives either, and part evidence carries 0.30 of the item match. The
+# footwear list is kept for footwear and a garment list is used for garments.
+_FOOTWEAR_PRIORITY = (
     (ViewHypothesis.SOLE, "Upload a sole / outsole view.", "Distinguishes adjacent models."),
     (ViewHypothesis.LABEL, "Upload the size / tongue label.", "Improves product-code evidence."),
     (ViewHypothesis.HEEL, "Upload a straight rear / heel view.", "Heel overlay is unseen."),
@@ -14,11 +19,22 @@ _PRIORITY = (
     (ViewHypothesis.MEDIAL, "Upload a medial view.", "The opposite side is not in the set."),
 )
 
+_GARMENT_PRIORITY = (
+    (ViewHypothesis.FRONT, "Upload the front, laid flat.", "Panel and print layout is unseen."),
+    (ViewHypothesis.REAR, "Upload the back.", "The reverse is not in the set."),
+    (ViewHypothesis.LABEL, "Upload the neck or care label.", "Improves product-code evidence."),
+    (ViewHypothesis.DETAIL, "Upload a close view of the fabric or a seam.", "Texture is unseen."),
+)
 
-def evidence_gaps(analysis: ReferenceAnalysis) -> list[EvidenceGap]:
+
+def _priority_for(category: str | None) -> tuple[tuple[ViewHypothesis, str, str], ...]:
+    return _FOOTWEAR_PRIORITY if (category or "").lower() == "footwear" else _GARMENT_PRIORITY
+
+
+def evidence_gaps(analysis: ReferenceAnalysis, *, category: str | None = None) -> list[EvidenceGap]:
     seen = {entry.view for entry in analysis.view_inventory}
     gaps: list[EvidenceGap] = []
-    for view, request, impact in _PRIORITY:
+    for view, request, impact in _priority_for(category):
         if view not in seen:
             gaps.append(EvidenceGap(gap=f"missing_{view.value}", impact=impact, request=request))
     if analysis.visual_signature.learned_embedding_available is False:
