@@ -158,6 +158,10 @@ SKIP_TEXT_SCAN = {
     "artifacts/grading-round4/tunnel-dns-cf.log",
     "artifacts/grading-round4/pages_tunnel.py",
     "docs/grading/ROUND_4.md",
+    # Round-5 grading transcript: quotes the SSRF gate's own refusal messages,
+    # which name the loopback addresses it blocked, and quotes this scanner's
+    # output. Rewriting them would falsify the evidence.
+    "docs/grading/ROUND_5.md",
     # Captured grading transcripts quote the scanner's own pattern names and the
     # local paths of the run they recorded. Rewriting them would falsify the
     # evidence; they are scrubbed of the host's real paths instead.

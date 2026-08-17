@@ -123,3 +123,37 @@ def test_logs_omit_filename_and_paths(api_app: tuple[Any, Any], caplog: Any) -> 
     assert "secret-upload.png" not in text
     assert "/tmp/private" not in text
     assert "photo.png" not in text
+
+
+def test_error_body_never_echoes_the_submitted_path(api_app: tuple[Any, Any]) -> None:
+    """The refusal must not quote what it refused.
+
+    The §32.9 "leak upload path" mutation survived the suite: making the error
+    message embed the offending name, and making the validated record keep
+    `declared_name`, left every existing assertion green. Logs were checked and
+    traversal was checked, but nothing read the body that goes back to the
+    caller. The behaviour was already correct - this is the assertion that was
+    missing, not a repair.
+    """
+    client, _app = api_app
+    for name in ("../../etc/passwd", "/tmp/private/photo.png", "..\\..\\windows\\win.ini"):
+        response = _post(client, _png(), name=name)
+        body = response.text
+        assert response.status_code == 422, f"{name} should be refused, got {response.status_code}"
+        assert name not in body, f"error body echoed the submitted path: {body[:160]}"
+        for fragment in ("etc/passwd", "/tmp/private", "win.ini", ".."):
+            assert fragment not in body, (
+                f"error body leaked {fragment!r} from {name!r}: {body[:160]}"
+            )
+
+
+def test_accepted_upload_does_not_retain_the_declared_name(api_app: tuple[Any, Any]) -> None:
+    """A stored record must not carry the caller's filename verbatim.
+
+    The other half of the same surviving mutation: `validate_upload_bytes`
+    returning a record that keeps `declared_name` was not caught by anything.
+    """
+    from searcher.reference.validation import validate_upload_bytes
+
+    validated = validate_upload_bytes(_png(), declared_name="secret-upload.png")
+    assert getattr(validated, "declared_name", None) != "secret-upload.png"

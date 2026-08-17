@@ -126,3 +126,50 @@ def test_digit_substitution_is_read_both_ways(text: str) -> None:
 @pytest.mark.parametrize("text", DIGITS_BUT_ORDINARY)
 def test_a_number_in_a_title_is_not_an_obfuscation(text: str) -> None:
     assert self_declared_replica(text) is False
+
+
+def test_round_five_replica_attacks_are_detected() -> None:
+    """Obfuscations that reached Real in the round-5 independent grade.
+
+    Each of these published as Real at commit 4fae9f7. They are three distinct
+    holes, not one: a Turkish dotless i that NFKC leaves alone because it is a
+    letter in its own right; a hedge between "not" and the word it negates; and
+    a separator inside a negating prefix. The last two were generalised to a
+    separator class after my own attack found `un_authorized` and
+    `not-authentic` still passing.
+    """
+    from searcher.retrieval.text import self_declared_replica
+
+    attacks = (
+        "replıca",
+        "not 100% authentic",
+        "un-authorized",
+        "un_authorized",
+        "un authorized",
+        "not-authentic",
+        "not fully authentic",
+        "not entirely genuine",
+        "not really legit",
+        "r3plıca",
+        "Replıca",
+    )
+    missed = [text for text in attacks if not self_declared_replica(text)]
+    assert missed == [], f"replica language reached Real undetected: {missed}"
+
+
+def test_legitimate_authenticity_language_is_not_a_replica_claim() -> None:
+    """The negations above must not swallow a seller asserting authenticity."""
+    from searcher.retrieval.text import self_declared_replica
+
+    clean = (
+        "100% authentic",
+        "authentic Nike Air Max 1",
+        "genuine leather",
+        "authorized retailer",
+        "fully authorized dealer",
+        "real leather bag",
+        "not a scratch on it",
+        "Levi 501",
+    )
+    wrong = [text for text in clean if self_declared_replica(text)]
+    assert wrong == [], f"legitimate listing text called a replica: {wrong}"

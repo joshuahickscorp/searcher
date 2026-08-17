@@ -52,9 +52,19 @@ REPLICA_PATTERNS = (
     re.compile(r"\b1\s*[:：]\s*1\b"),
     re.compile(r"\bmirror\s+(?:quality|batch)\b"),
     re.compile(r"\baaa\+?\s*(?:quality|batch)?\b"),
-    re.compile(r"\bunauthorized\b"),
+    # Sellers separate the negating prefix however they like, so the separator
+    # is a class rather than a list of spellings: un-authorized, un authorized,
+    # un_authorized.
+    re.compile(r"\bun[\s._-]?authoris?zed\b"),
+    re.compile(r"\bun[\s._-]?authentic\b"),
     re.compile(r"\bcounterfeit\b"),
-    re.compile(r"\bnot\s+(?:authentic|genuine|real|original)\b"),
+    # "not 100% authentic" and "not fully genuine" are the same claim as "not
+    # authentic". Requiring the words to be adjacent missed every hedged form.
+    re.compile(
+        r"\bnot[\s._-]+(?:(?:\d{1,3}\s*%|100|fully|entirely|completely|totally|"
+        r"quite|exactly|truly|really|strictly|guaranteed)[\s._-]+)?"
+        r"(?:authentic|genuine|real|original|legit)\b"
+    ),
     re.compile(r"\breproduction\b"),
     re.compile(r"\bstimulant\b"),
     re.compile(r"\bsuper\s?fakes?\b"),
@@ -173,6 +183,11 @@ _HOMOGLYPHS = str.maketrans({
     "а": "a", "е": "e", "о": "o", "с": "c", "р": "p", "х": "x", "у": "y",
     "і": "i", "ѕ": "s", "ԁ": "d", "ӏ": "l", "һ": "h", "ν": "v", "ο": "o",
     "α": "a", "ρ": "p", "τ": "t", "ϲ": "c", "ｅ": "e",
+    # Latin-extended look-alikes. "replıca" with a Turkish dotless i published
+    # as Real: NFKC leaves U+0131 alone because it is a letter in its own
+    # right, so nothing folded it and no pattern matched.
+    "ı": "i", "İ": "i", "ł": "l", "ø": "o", "đ": "d", "ƒ": "f", "ĸ": "k",
+    "ѐ": "e", "ё": "e", "ї": "i", "ǐ": "i", "ì": "i", "í": "i", "î": "i",
 })
 
 # Digit-for-letter substitutions, applied only to the despaced pass below so a
