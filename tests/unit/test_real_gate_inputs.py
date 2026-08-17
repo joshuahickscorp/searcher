@@ -314,6 +314,9 @@ def test_garment_authenticity_is_uncalibrated_so_real_is_out_of_reach() -> None:
         reference_descriptors=prepare_reference({"user": _png()}),
     )
     decision = route_candidate(
+        # Theft and stock-photo screening ran and found nothing. Real is
+        # fail-closed without this, because the veto cannot fire unscreened.
+        photo_screening_ran=True,
         candidate=listing,
         match=match,
         authenticity=auth,
@@ -356,6 +359,9 @@ def test_footwear_true_match_can_still_be_real() -> None:
         constraints=constraints(),
     )
     decision = route_candidate(
+        # Theft and stock-photo screening ran and found nothing. Real is
+        # fail-closed without this, because the veto cannot fire unscreened.
+        photo_screening_ran=True,
         candidate=candidate,
         match=match,
         authenticity=auth,
@@ -419,6 +425,9 @@ def test_kind_target_cites_correspondence_and_cannot_reach_real() -> None:
     assert auth.authority_ceiling.startswith("uncalibrated")
     assert auth.authenticity_distribution.lower_bound < 0.80
     decision = route_candidate(
+        # Theft and stock-photo screening ran and found nothing. Real is
+        # fail-closed without this, because the veto cannot fire unscreened.
+        photo_screening_ran=True,
         candidate=listing,
         match=match,
         authenticity=auth,

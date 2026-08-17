@@ -34,6 +34,9 @@ def _judge(spec, **kwargs):  # type: ignore[no-untyped-def]
     )
     utility = listing_utility(candidate, destination_verified=True)
     decision = route_candidate(
+        # Theft and stock-photo screening ran and found nothing. Real is
+        # fail-closed without this, because the veto cannot fire unscreened.
+        photo_screening_ran=True,
         candidate=candidate,
         match=match,
         authenticity=auth,

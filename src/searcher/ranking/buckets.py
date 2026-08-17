@@ -32,6 +32,7 @@ def route_candidate(
     destination_verified: bool = False,
     destination_attested: bool = False,
     stolen_photo: bool = False,
+    photo_screening_ran: bool = False,
     duplicate_no_utility: bool = False,
     policy: BucketPolicy | None = None,
     live_checked: bool = True,
@@ -39,7 +40,16 @@ def route_candidate(
     bundle = policy or load_policy("matching-1")
     item_lb = match.item_match_distribution.lower_bound
     auth_lb = authenticity.authenticity_distribution.lower_bound
-    if bundle.require_calibrated_for_real and authenticity.authority_ceiling.startswith(
+    if not photo_screening_ran:
+        # Theft and stock-photo screening did not run for this candidate, so
+        # nothing looked for the two shapes that most often carry a scam: the
+        # brand's own photographs on a stranger's listing, and a counterfeit
+        # dressed in lookbook imagery. IMAGE_THEFT_OR_SCAM can only fire when a
+        # caller supplies the finding, and production supplied nothing, so the
+        # veto was unreachable and those listings published as Real. A gate that
+        # depends on a check which never ran must not open.
+        auth_for_real = min(auth_lb, bundle.real.authenticity_lower_bound - 0.01)
+    elif bundle.require_calibrated_for_real and authenticity.authority_ceiling.startswith(
         "uncalibrated"
     ):
         # Uncalibrated authenticity cannot satisfy the Real gate.

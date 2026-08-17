@@ -97,6 +97,10 @@ def judge_candidates(
     ontology = ontology_for(hypothesis.category)
     ontology_profile = profile_for(hypothesis.category)
     dest = destination_verified or {}
+    # None means the screening never ran; an empty set means it ran and found
+    # nothing. Collapsing both to an empty set is what made an unreachable veto
+    # look like a clean result.
+    photo_screening_ran = stolen is not None and stock_mixed is not None
     stolen_ids = stolen or set()
     stock_ids = stock_mixed or set()
     part_cap = limits.part_matching
@@ -147,6 +151,7 @@ def judge_candidates(
             constraints=constraints,
             destination_verified=dest.get(candidate.candidate_id, False),
             stolen_photo=candidate.candidate_id in stolen_ids,
+            photo_screening_ran=photo_screening_ran,
             policy=bundle_policy,
         )
         near = abs(match.item_match_distribution.lower_bound - 0.90) < 0.08

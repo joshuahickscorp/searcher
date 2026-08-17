@@ -1,0 +1,51 @@
+"""Real must not open when theft and stock-photo screening never ran.
+
+An adversarial pass found IMAGE_THEFT_OR_SCAM unreachable in production. It
+fires only when a caller supplies `stolen_photo`, the only caller that supplies
+it is the vision worker, and that worker is referenced solely from
+tests/integration. So `stolen_ids` was always empty and a listing reusing the
+brand's official photographs on a day-old account demanding off-platform
+payment published as Real: item 0.91, authenticity 0.80, no veto.
+
+`judge_candidates` now distinguishes never-screened (None) from screened-clean
+(empty set), and the Real gate is fail-closed on the former. A gate that depends
+on a check which never ran must not open.
+"""
+
+from __future__ import annotations
+
+import inspect
+
+from searcher.ranking import pipeline as ranking_pipeline
+from searcher.ranking.buckets import route_candidate
+
+
+def test_the_gate_takes_a_screening_flag_and_defaults_to_closed() -> None:
+    sig = inspect.signature(route_candidate)
+    param = sig.parameters.get("photo_screening_ran")
+    assert param is not None, "the Real gate must know whether screening ran"
+    assert param.default is False, (
+        "the default must be fail-closed; a caller that says nothing has not screened"
+    )
+
+
+def test_judge_candidates_separates_never_screened_from_screened_clean() -> None:
+    source = inspect.getsource(ranking_pipeline.judge_candidates)
+    assert "stolen is not None" in source, (
+        "None and an empty set must not collapse; that is what made an unreachable "
+        "veto look like a clean result"
+    )
+    assert "photo_screening_ran" in source
+
+
+def test_the_gate_refuses_real_before_it_consults_calibration() -> None:
+    """Screening is checked first, so an unscreened candidate cannot pass."""
+    from searcher.ranking import buckets
+
+    source = inspect.getsource(buckets.route_candidate)
+    screening = source.index("photo_screening_ran")
+    calibrated = source.index("require_calibrated_for_real")
+    assert screening < calibrated, (
+        "the unscreened check must precede the calibration branch, or an "
+        "unscreened candidate can still take the calibrated path to Real"
+    )
