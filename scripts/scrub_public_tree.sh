@@ -162,6 +162,11 @@ SKIP_TEXT_SCAN = {
     # which name the loopback addresses it blocked, and quotes this scanner's
     # output. Rewriting them would falsify the evidence.
     "docs/grading/ROUND_5.md",
+    # Round-6 transcript, same reason: it quotes this scanner's own output and
+    # the loopback address the grader served the API on. Its one real host path
+    # was scrubbed rather than exempted - a quoted pattern is evidence, a live
+    # path is a leak, and they are not the same finding.
+    "docs/grading/ROUND_6.md",
     # Captured grading transcripts quote the scanner's own pattern names and the
     # local paths of the run they recorded. Rewriting them would falsify the
     # evidence; they are scrubbed of the host's real paths instead.

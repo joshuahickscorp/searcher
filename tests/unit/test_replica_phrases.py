@@ -173,3 +173,55 @@ def test_legitimate_authenticity_language_is_not_a_replica_claim() -> None:
     )
     wrong = [text for text in clean if self_declared_replica(text)]
     assert wrong == [], f"legitimate listing text called a replica: {wrong}"
+
+
+def test_round_six_replica_attacks_are_detected() -> None:
+    """Obfuscations that reached Real in the round-6 independent grade.
+
+    Both are the classes round 5 exposed, with different members: a Greek iota
+    where Cyrillic and Turkish look-alikes had been added by hand, and a "non-"
+    prefix where "un-" had been fixed. Extending a hand-written table one
+    script at a time loses to an attacker reading the same Unicode charts, so
+    the confusable set is now derived from Unicode names and the negating
+    prefix is a class.
+
+    `ΝOT AUTHENTIC` is the subtle one, found by attacking the repair rather
+    than by the grader: a Greek capital nu imitates Latin N while a Greek small
+    nu imitates v, so casefolding before folding turned it into
+    "vot authentic" and the claim escaped.
+    """
+    from searcher.retrieval.text import self_declared_replica
+
+    attacks = (
+        "replιca",
+        "non-authentic",
+        "non authentic",
+        "nonauthentic",
+        "non-genuine",
+        "non_original",
+        "un-authorised",
+        "non-authorised",
+        "unauthorised",
+        "ΝOT AUTHENTIC",
+        "ΗIGH QUALITY REPLICA",
+        "ΒOOTLEG",
+    )
+    missed = [text for text in attacks if not self_declared_replica(text)]
+    assert missed == [], f"replica language reached Real undetected: {missed}"
+
+
+def test_words_that_merely_begin_with_non_are_not_replica_claims() -> None:
+    """The generalised prefix must not swallow ordinary listing language."""
+    from searcher.retrieval.text import self_declared_replica
+
+    clean = (
+        "NON-SMOKING HOME",
+        "Norse Projects jacket",
+        "Novesta sneakers",
+        "authorised dealer",
+        "authorized retailer",
+        "no returns",
+        "none left in this size",
+    )
+    wrong = [text for text in clean if self_declared_replica(text)]
+    assert wrong == [], f"ordinary listing text called a replica: {wrong}"

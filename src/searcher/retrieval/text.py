@@ -55,8 +55,13 @@ REPLICA_PATTERNS = (
     # Sellers separate the negating prefix however they like, so the separator
     # is a class rather than a list of spellings: un-authorized, un authorized,
     # un_authorized.
-    re.compile(r"\bun[\s._-]?authoris?zed\b"),
-    re.compile(r"\bun[\s._-]?authentic\b"),
+    # The negating prefix is a class. "un-authorized" was fixed and
+    # "non-authentic" then published as Real, which is the same defect with a
+    # different prefix.
+    re.compile(r"\b(?:un|non)[\s._-]?authori[sz]ed\b"),
+    re.compile(r"\b(?:un|non)[\s._-]?authentic\b"),
+    re.compile(r"\b(?:un|non)[\s._-]?genuine\b"),
+    re.compile(r"\b(?:un|non)[\s._-]?original\b"),
     re.compile(r"\bcounterfeit\b"),
     # "not 100% authentic" and "not fully genuine" are the same claim as "not
     # authentic". Requiring the words to be adjacent missed every hedged form.
@@ -188,7 +193,51 @@ _HOMOGLYPHS = str.maketrans({
     # right, so nothing folded it and no pattern matched.
     "ı": "i", "İ": "i", "ł": "l", "ø": "o", "đ": "d", "ƒ": "f", "ĸ": "k",
     "ѐ": "e", "ё": "e", "ї": "i", "ǐ": "i", "ì": "i", "í": "i", "î": "i",
+    # Greek. "replιca" with a Greek iota published as Real after the Cyrillic
+    # and Latin-extended sets were added one script at a time. Adding scripts
+    # by hand is how this keeps recurring, so the confusable set below is
+    # derived from Unicode names instead of extended again by hand.
+    "ι": "i", "ε": "e", "κ": "k", "μ": "u", "σ": "o", "χ": "x", "γ": "y",
+    "η": "n", "θ": "o", "λ": "l",
 })
+
+
+def _derived_confusables() -> dict[int, str]:
+    """Letters from other scripts whose Unicode name says which Latin letter
+    they imitate.
+
+    Three separate Real leaks came from extending a hand-written homoglyph
+    table one script at a time: Cyrillic, then Turkish dotless i, then Greek
+    iota. Enumerating scripts by hand loses to an attacker who reads the same
+    Unicode charts. This walks the letters instead and keeps the ones whose
+    name marks them a look-alike of a single Latin letter.
+    """
+    import unicodedata
+
+    table: dict[int, str] = {}
+    for block_start, block_end in ((0x0370, 0x03FF), (0x0400, 0x04FF), (0x0100, 0x024F)):
+        for code in range(block_start, block_end + 1):
+            ch = chr(code)
+            if not ch.isalpha():
+                continue
+            try:
+                name = unicodedata.name(ch)
+            except ValueError:
+                continue
+            decomposed = unicodedata.normalize("NFKD", ch)
+            base = "".join(c for c in decomposed if not unicodedata.combining(c))
+            if len(base) == 1 and base.isascii() and base.isalpha():
+                table[code] = base.lower()
+                continue
+            # "GREEK SMALL LETTER IOTA" and friends: take the final word when it
+            # names a single Latin letter directly.
+            words = name.split()
+            if words and len(words[-1]) == 1 and words[-1].isascii() and words[-1].isalpha():
+                table[code] = words[-1].lower()
+    return table
+
+
+_HOMOGLYPHS = {**_derived_confusables(), **_HOMOGLYPHS}
 
 # Digit-for-letter substitutions, applied only to the despaced pass below so a
 # meaningful "1:1" is never mangled.
@@ -255,6 +304,16 @@ def _leet_variants(folded: str) -> list[str]:
     return out
 
 
+# Confusables whose Latin look-alike differs between cases. Greek capital nu
+# reads as N and Greek small nu reads as v; one table cannot hold both once the
+# text has been casefolded, so these are applied before the fold.
+_CASED_HOMOGLYPHS = str.maketrans({
+    "\u039d": "N", "\u0392": "B", "\u0397": "H", "\u03a1": "P", "\u03a4": "T",
+    "\u03a5": "Y", "\u03a7": "X", "\u039c": "M", "\u039a": "K", "\u0399": "I",
+    "\u0396": "Z", "\u0395": "E", "\u039f": "O", "\u0391": "A",
+})
+
+
 def normalize_for_replica(text: str) -> str:
     """NFKC-fold so fullwidth and compatibility forms match the same pattern.
 
@@ -263,8 +322,13 @@ def normalize_for_replica(text: str) -> str:
     characters go too: "re\u200bplica" is the same word to a reader and a
     different string to a regex.
     """
-    folded = unicodedata.normalize("NFKC", text).translate(_ZERO_WIDTH).casefold()
-    folded = folded.translate(_HOMOGLYPHS)
+    normalized = unicodedata.normalize("NFKC", text).translate(_ZERO_WIDTH)
+    # Case-sensitive confusables first. A Greek capital nu imitates Latin N
+    # while a Greek small nu imitates v, so casefolding before folding turns
+    # "ΝOT AUTHENTIC" into "vot authentic" and the claim escapes. Fold the
+    # letters whose look-alike depends on case while the case still exists.
+    normalized = normalized.translate(_CASED_HOMOGLYPHS)
+    folded = normalized.casefold().translate(_HOMOGLYPHS)
     return re.sub(r"\s+", " ", folded)
 
 
