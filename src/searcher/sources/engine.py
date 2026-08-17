@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import threading
 from dataclasses import dataclass, field
 from typing import Any, Protocol, cast
 
@@ -15,6 +16,7 @@ from searcher.contracts.enums import (
 )
 from searcher.contracts.models import (
     DiscoveryPage,
+    FetchResult,
     ListingCandidate,
     QueryVariant,
     SourceManifest,
@@ -172,6 +174,96 @@ def catalog_caps_for_campaign(remaining_pages: int, source_count: int) -> Catalo
     )
 
 
+def exploration_page_allowance(remaining_pages: int, source_count: int) -> int:
+    """Pages held for each source before any source may spend more.
+
+    Catalogue sharing already caps the feed walk. A source can still spend the
+    rest of the campaign on frontier fetches. This is the reserved floor that
+    stops that: when ``floor * N`` fits, each source is guaranteed the floor
+    and the remainder is the exploit pool. When it does not fit, the
+    allowance is ``remaining // N`` so the reserve cannot exceed the budget.
+    The floor is the existing catalogue floor, not a raised default.
+    """
+    if remaining_pages <= 0 or source_count <= 0:
+        return 0
+    floor = CATALOG_PAGE_SHARE_FLOOR
+    if floor * source_count <= remaining_pages:
+        return floor
+    return remaining_pages // source_count
+
+
+class ExplorationReserve:
+    """Hold a per-source exploration floor. Exploit spends only the unreserved rest.
+
+    Claims are the source of truth for remaining reserved pages so concurrent
+    sources cannot all observe the same ``usage`` remainder and overdraw.
+    Finishing a source releases its unused allowance into the exploit pool.
+    """
+
+    def __init__(
+        self, allowance: int, source_ids: tuple[str, ...], page_budget: int
+    ) -> None:
+        self.allowance = max(0, int(allowance))
+        self.source_ids = source_ids
+        self.page_budget = max(0, int(page_budget))
+        self.pages_by_source: dict[str, int] = {name: 0 for name in source_ids}
+        self.finished: set[str] = set()
+        self.claimed_total = 0
+        self._lock = threading.Lock()
+
+    def _remaining_after_claims(self) -> int:
+        return max(0, self.page_budget - self.claimed_total)
+
+    def _reserved_for_others(self, source_id: str) -> int:
+        reserved = 0
+        for name in self.source_ids:
+            if name == source_id or name in self.finished:
+                continue
+            used = self.pages_by_source.get(name, 0)
+            reserved += max(0, self.allowance - used)
+        return reserved
+
+    def _may_claim(self, source_id: str) -> bool:
+        remaining = self._remaining_after_claims()
+        if remaining <= 0:
+            return False
+        if self.allowance <= 0:
+            return True
+        used = self.pages_by_source.get(source_id, 0)
+        if used < self.allowance:
+            return True
+        return remaining > self._reserved_for_others(source_id)
+
+    def can_claim(self, source_id: str) -> bool:
+        with self._lock:
+            return self._may_claim(source_id)
+
+    def claim(self, source_id: str) -> bool:
+        with self._lock:
+            if not self._may_claim(source_id):
+                return False
+            self.pages_by_source[source_id] = self.pages_by_source.get(source_id, 0) + 1
+            self.claimed_total += 1
+            return True
+
+    def unclaim(self, source_id: str) -> None:
+        with self._lock:
+            used = self.pages_by_source.get(source_id, 0)
+            if used <= 0:
+                return
+            self.pages_by_source[source_id] = used - 1
+            self.claimed_total = max(0, self.claimed_total - 1)
+
+    def release_unused(self, source_id: str) -> None:
+        """Source finished. Unused exploration allowance becomes exploit pool."""
+        with self._lock:
+            self.finished.add(source_id)
+
+    def pages_taken(self) -> dict[str, int]:
+        with self._lock:
+            return dict(self.pages_by_source)
+
+
 class DiscoveryEngine:
     def __init__(
         self,
@@ -198,6 +290,7 @@ class DiscoveryEngine:
         self._campaign_catalog_promoted = 0
         self._catalogs: list[dict[str, object]] = []
         self._catalog_walk_caps: CatalogCaps | None = None
+        self._exploration_reserve: ExplorationReserve | None = None
         self._strategy_books: dict[str, StrategyBook] = {}
         self.repos = controller.repos
         self.health = HealthStore(self.repos)
@@ -286,6 +379,7 @@ class DiscoveryEngine:
         self._campaign_catalog_promoted = 0
         self._catalogs = []
         self._catalog_walk_caps = None
+        self._exploration_reserve = None
         self._strategy_books = {}
         if source_names is not None:
             self.broker.names = tuple(source_names)
@@ -299,7 +393,11 @@ class DiscoveryEngine:
         # Bound each catalogue walk to a share of the remaining page budget
         # before any source runs. The env default (64) is larger than the
         # campaign page_limit (40); without this the first source spends it.
+        planned_ids = [item.source_adapter for item in plans]
         self._bind_catalog_walk_caps(usage, len(plans))
+        # Catalogue share does not cover frontier fetches. Reserve a floor
+        # per source so the first source cannot exploit the rest away.
+        self._bind_exploration_reserve(usage, planned_ids)
         all_candidates: list[ListingCandidate] = []
         blocked: list[dict[str, str]] = []
         def _record_unattempted(remaining: list[Any], why: str) -> None:
@@ -386,6 +484,19 @@ class DiscoveryEngine:
         )
 
     def _run_plan(
+        self,
+        search_id: str,
+        plan: SourcePlan,
+        queries: list[QueryVariant],
+        events: SourceEvents,
+        cancel: RunCancel,
+    ) -> tuple[str, list[ListingCandidate]]:
+        try:
+            return self._run_source_plan(search_id, plan, queries, events, cancel)
+        finally:
+            self._release_exploration_reserve(plan.source_adapter)
+
+    def _run_source_plan(
         self,
         search_id: str,
         plan: SourcePlan,
@@ -534,6 +645,8 @@ class DiscoveryEngine:
         worked = 0
         while worked < self.max_work:
             cancel.raise_if_cancelled()
+            if not self._source_may_fetch_more(source_id, search_id):
+                break
             batch = frontier.pop(self.batch_size)
             if not batch:
                 break
@@ -988,6 +1101,44 @@ class DiscoveryEngine:
             remaining_page_budget(usage), source_count
         )
 
+    def _bind_exploration_reserve(self, usage: Any, source_ids: list[str]) -> None:
+        """Hold a per-source exploration floor before any source may exploit."""
+        remaining = remaining_page_budget(usage)
+        names = tuple(source_ids)
+        self._exploration_reserve = ExplorationReserve(
+            allowance=exploration_page_allowance(remaining, len(names)),
+            source_ids=names,
+            page_budget=remaining,
+        )
+
+    def _release_exploration_reserve(self, source_id: str) -> None:
+        reserve = self._exploration_reserve
+        if reserve is not None:
+            reserve.release_unused(source_id)
+
+    def _source_may_fetch_more(self, source_id: str, search_id: str) -> bool:
+        usage = self.controller.usage(search_id)
+        if remaining_page_budget(usage) <= 0:
+            return False
+        reserve = self._exploration_reserve
+        if reserve is None:
+            return True
+        return reserve.can_claim(source_id)
+
+    def _held_for_exploration_document(self, url: str) -> FetchedDocument:
+        return FetchedDocument(
+            result=FetchResult(
+                attempt_id=new_id(),
+                url=url,
+                outcome=SourceOutcome.NOT_ATTEMPTED,
+                classification_note="page reserved for other sources' exploration",
+                mode=FetchMode.HTTP,
+            ),
+            body=b"",
+            headers={},
+            final_url=url,
+        )
+
     def _run_catalog_fallback(
         self,
         *,
@@ -1025,6 +1176,8 @@ class DiscoveryEngine:
 
         def fetch_page(url: str) -> bytes:
             if not catalog_url_allowed(url, disallowed):
+                return b""
+            if not self._source_may_fetch_more(source_id, search_id):
                 return b""
             doc = self._fetch_item(adapter, escalator, url, manifest)
             events.page_fetched(source_id, url, doc.result.outcome.value)
@@ -1132,16 +1285,47 @@ class DiscoveryEngine:
         url: str,
         manifest: SourceManifest,
     ) -> FetchedDocument:
+        usage = getattr(escalator, "usage", None)
+        actual_remaining = remaining_page_budget(usage) if usage is not None else 0
+        reserve = self._exploration_reserve
+        source_id = manifest.source_id
+        claimed = False
+        if reserve is not None:
+            exhausted = usage is not None and actual_remaining <= 0
+            if exhausted or not reserve.claim(source_id):
+                if exhausted:
+                    raise BudgetExceeded("[BUDGET] pages", dimension="pages")
+                return self._held_for_exploration_document(url)
+            claimed = True
+        pages_before = int(usage.used("pages")) if usage is not None else 0
+        try:
+            if (
+                hasattr(adapter, "escalator")
+                and adapter.escalator is not None
+                and hasattr(adapter, "fetch")
+            ):  # noqa: E501
+                try:
+                    doc = adapter.fetch(url, FetchMode.HTTP)
+                except RuntimeError:
+                    doc = escalator.fetch(
+                        url, manifest, source_id=manifest.source_id, allow_render=True
+                    )
+            else:
+                doc = escalator.fetch(
+                    url, manifest, source_id=manifest.source_id, allow_render=True
+                )
+        except BudgetExceeded:
+            if claimed and reserve is not None:
+                reserve.unclaim(source_id)
+            raise
         if (
-            hasattr(adapter, "escalator")
-            and adapter.escalator is not None
-            and hasattr(adapter, "fetch")
-        ):  # noqa: E501
-            try:
-                return adapter.fetch(url, FetchMode.HTTP)  # type: ignore[no-any-return]
-            except RuntimeError:
-                pass
-        return escalator.fetch(url, manifest, source_id=manifest.source_id, allow_render=True)
+            claimed
+            and reserve is not None
+            and usage is not None
+            and int(usage.used("pages")) == pages_before
+        ):
+            reserve.unclaim(source_id)
+        return doc  # type: ignore[no-any-return]
 
     def _finish_run(
         self,

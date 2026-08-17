@@ -331,6 +331,7 @@ class BoundedDiscoveryEngine(DiscoveryEngine):
         self._campaign_catalog_promoted = 0
         self._catalogs = []
         self._catalog_walk_caps = None
+        self._exploration_reserve = None
         if source_names is not None:
             self.broker.names = tuple(source_names)
         plans = self.broker.plan(
@@ -355,6 +356,12 @@ class BoundedDiscoveryEngine(DiscoveryEngine):
         # The API executes this run(), not the base class. Bind the share
         # here or the first source still walks 64 pages and starves the rest.
         self._bind_catalog_walk_caps(usage, len(eligible))
+        # Same reason: a fix only on DiscoveryEngine.run does not reach the
+        # API. Frontier fetches are not catalogue-capped; reserve a floor
+        # per eligible source before any source may exploit the remainder.
+        self._bind_exploration_reserve(
+            usage, [item.source_adapter for item in eligible]
+        )
         all_candidates: list[ListingCandidate] = []
         blocked: list[dict[str, str]] = []
         fatal: BaseException | None = None

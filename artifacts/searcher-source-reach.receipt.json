@@ -1,0 +1,273 @@
+{
+  "blocked": [
+    {
+      "outcome": "BLOCKED_BY_POLICY",
+      "source": "heroine"
+    }
+  ],
+  "candidates_after": 48,
+  "candidates_before": 48,
+  "coverage": {
+    "byronesque": "SEARCHED_MATCHES_FOUND",
+    "goat": "BLOCKED_BY_POLICY",
+    "heroine": "BLOCKED_BY_POLICY",
+    "kind": "SEARCHED_MATCHES_FOUND",
+    "komehyo": "UNMEASURABLE",
+    "poshmark": "BLOCKED_BY_POLICY",
+    "rebag": "UNMEASURABLE",
+    "stockx": "BLOCKED_BY_POLICY",
+    "vinted": "BLOCKED_BY_POLICY"
+  },
+  "coverage_details": {
+    "byronesque": "collection_slug: skipped (no collection handle could be derived from the query); site_search: 0 (site search returned no listing URLs); catalog_feed: skipped (byronesque publishes no catalogue feed); sitemap: 0 (sitemap locs did not match the query)",
+    "goat": "source disabled",
+    "heroine": "collection_slug: 0 (collection handle had no matching products); site_search: 0 (site search returned no listing URLs); catalog_feed: 0 (catalogue stopped: exhausted); sitemap: 0 (sitemap locs did not match the query)",
+    "kind": "collection_slug: 24; site_search: skipped (search is not an admitted use of kind); catalog_feed: 24; sitemap: 24",
+    "komehyo": "collection_slug: skipped (no collection handle could be derived from the query); site_search: skipped (komehyo publishes no admitted site-search path); catalog_feed: skipped (komehyo publishes no catalogue feed); sitemap: 0 (sitemap locs did not match the query)",
+    "poshmark": "source disabled",
+    "rebag": "collection_slug: 0 (strategy URL contained no listing members); site_search: skipped (rebag publishes no admitted site-search path); catalog_feed: 0 (catalogue stopped: exhausted); sitemap: 0 (strategy URL contained no listing members)",
+    "stockx": "source disabled",
+    "vinted": "source disabled"
+  },
+  "query": "Dior Homme General Army Trainer",
+  "search_id": "ec80fa9e-fbda-4707-8df4-7174c9aeb1b4",
+  "state": "COMPLETE",
+  "strategies": {
+    "byronesque": [
+      {
+        "name": "collection_slug",
+        "reason": "no collection handle could be derived from the query",
+        "status": "skipped",
+        "urls": [],
+        "yielded": 0
+      },
+      {
+        "name": "site_search",
+        "reason": "site search returned no listing URLs",
+        "status": "tried",
+        "urls": [
+          "https://byronesque.com/?s=Dior+Homme+General+Army+Trainer"
+        ],
+        "yielded": 0
+      },
+      {
+        "name": "catalog_feed",
+        "reason": "byronesque publishes no catalogue feed",
+        "status": "skipped",
+        "urls": [],
+        "yielded": 0
+      },
+      {
+        "name": "sitemap",
+        "reason": "sitemap locs did not match the query",
+        "status": "tried",
+        "urls": [
+          "https://byronesque.com/sitemap_index.xml",
+          "https://byronesque.com/sitemap.xml"
+        ],
+        "yielded": 0
+      }
+    ],
+    "heroine": [
+      {
+        "name": "collection_slug",
+        "reason": "collection handle had no matching products",
+        "status": "tried",
+        "urls": [
+          "https://shop.shopheroine.com/collections/dior-homme/products.json?limit=250",
+          "https://shopheroine.com/collections/dior-homme/products.json?limit=250"
+        ],
+        "yielded": 0
+      },
+      {
+        "name": "site_search",
+        "reason": "site search returned no listing URLs",
+        "status": "tried",
+        "urls": [
+          "https://shopheroine.com/search?q=Dior+Homme+General+Army+Trainer"
+        ],
+        "yielded": 0
+      },
+      {
+        "name": "catalog_feed",
+        "reason": "catalogue stopped: exhausted",
+        "status": "tried",
+        "urls": [
+          "https://shop.shopheroine.com/collections/all/products.json?limit=250&page=1",
+          "https://shopheroine.com/collections/all/products.json?limit=250&page=1"
+        ],
+        "yielded": 0
+      },
+      {
+        "name": "sitemap",
+        "reason": "sitemap locs did not match the query",
+        "status": "tried",
+        "urls": [
+          "https://shop.shopheroine.com/sitemap.xml",
+          "https://shopheroine.com/sitemap.xml"
+        ],
+        "yielded": 0
+      }
+    ],
+    "kind": [
+      {
+        "name": "collection_slug",
+        "reason": "promoted listing URLs",
+        "status": "tried",
+        "urls": [
+          "https://shop.kind.co.jp/collections/dior-homme/products.json?limit=250"
+        ],
+        "yielded": 24
+      },
+      {
+        "name": "site_search",
+        "reason": "search is not an admitted use of kind",
+        "status": "skipped",
+        "urls": [],
+        "yielded": 0
+      },
+      {
+        "name": "catalog_feed",
+        "reason": "promoted listing URLs",
+        "status": "tried",
+        "urls": [
+          "https://shop.kind.co.jp/products.json?limit=250&page=1"
+        ],
+        "yielded": 24
+      },
+      {
+        "name": "sitemap",
+        "reason": "promoted listing URLs",
+        "status": "tried",
+        "urls": [
+          "https://shop.kind.co.jp/sitemap.xml"
+        ],
+        "yielded": 24
+      }
+    ],
+    "komehyo": [
+      {
+        "name": "collection_slug",
+        "reason": "no collection handle could be derived from the query",
+        "status": "skipped",
+        "urls": [],
+        "yielded": 0
+      },
+      {
+        "name": "site_search",
+        "reason": "komehyo publishes no admitted site-search path",
+        "status": "skipped",
+        "urls": [],
+        "yielded": 0
+      },
+      {
+        "name": "catalog_feed",
+        "reason": "komehyo publishes no catalogue feed",
+        "status": "skipped",
+        "urls": [],
+        "yielded": 0
+      },
+      {
+        "name": "sitemap",
+        "reason": "sitemap locs did not match the query",
+        "status": "tried",
+        "urls": [
+          "https://komehyo.jp/sitemap.xml",
+          "https://komehyo.jp/contents/sitemap/sitemap_index.xml",
+          "https://komehyo.jp/kaitori/sitemap.xml"
+        ],
+        "yielded": 0
+      }
+    ],
+    "rebag": [
+      {
+        "name": "collection_slug",
+        "reason": "strategy URL contained no listing members",
+        "status": "tried",
+        "urls": [
+          "https://shop.rebag.com/collections/dior-homme/products.json?limit=250",
+          "https://www.rebag.com/collections/dior-homme/products.json?limit=250"
+        ],
+        "yielded": 0
+      },
+      {
+        "name": "site_search",
+        "reason": "rebag publishes no admitted site-search path",
+        "status": "skipped",
+        "urls": [],
+        "yielded": 0
+      },
+      {
+        "name": "catalog_feed",
+        "reason": "catalogue stopped: exhausted",
+        "status": "tried",
+        "urls": [
+          "https://shop.rebag.com/products.json?limit=250&page=1",
+          "https://www.rebag.com/products.json?limit=250&page=1"
+        ],
+        "yielded": 0
+      },
+      {
+        "name": "sitemap",
+        "reason": "strategy URL contained no listing members",
+        "status": "tried",
+        "urls": [
+          "https://www.rebag.com/sitemap.xml",
+          "https://shop.rebag.com/sitemap.xml",
+          "http://www.rebag.com/sitemap.xml"
+        ],
+        "yielded": 0
+      }
+    ]
+  },
+  "urls": [
+    "https://shop.kind.co.jp/products/8001001060576",
+    "https://shop.kind.co.jp/products/8001001069197",
+    "https://shop.kind.co.jp/products/8001001074429",
+    "https://shop.kind.co.jp/products/8001001077314",
+    "https://shop.kind.co.jp/products/8001001079998",
+    "https://shop.kind.co.jp/products/8001001082233",
+    "https://shop.kind.co.jp/products/8001001082240",
+    "https://shop.kind.co.jp/products/8001001082745",
+    "https://shop.kind.co.jp/products/8001001139852",
+    "https://shop.kind.co.jp/products/8003002002807",
+    "https://shop.kind.co.jp/products/8003002002890",
+    "https://shop.kind.co.jp/products/8003002002906",
+    "https://shop.kind.co.jp/products/8003002002913",
+    "https://shop.kind.co.jp/products/8004001947212",
+    "https://shop.kind.co.jp/products/8004001947786",
+    "https://shop.kind.co.jp/products/8004001949087",
+    "https://shop.kind.co.jp/products/8004001950076",
+    "https://shop.kind.co.jp/products/8005001765707",
+    "https://shop.kind.co.jp/products/8006002308207",
+    "https://shop.kind.co.jp/products/8006002319012",
+    "https://shop.kind.co.jp/products/8009002303463",
+    "https://shop.kind.co.jp/products/8009002379987",
+    "https://shop.kind.co.jp/products/8015001071944",
+    "https://shop.kind.co.jp/products/8018001900719",
+    "https://shop.kind.co.jp/products/8018001893929",
+    "https://shop.kind.co.jp/products/8042000986535",
+    "https://shop.kind.co.jp/products/8042000986603",
+    "https://shop.kind.co.jp/products/8072000111101",
+    "https://shop.kind.co.jp/products/8042000985743",
+    "https://shop.kind.co.jp/products/8107000122441",
+    "https://shop.kind.co.jp/products/8107000122434",
+    "https://shop.kind.co.jp/products/8107000122458",
+    "https://shop.kind.co.jp/products/8107000122427",
+    "https://shop.kind.co.jp/products/8107000122410",
+    "https://shop.kind.co.jp/products/8080000803605",
+    "https://shop.kind.co.jp/products/8087000179341",
+    "https://shop.kind.co.jp/products/8045001388698",
+    "https://shop.kind.co.jp/products/8107000122397",
+    "https://shop.kind.co.jp/products/8040001321782",
+    "https://shop.kind.co.jp/products/8042000980809",
+    "https://shop.kind.co.jp/products/8042000980793",
+    "https://shop.kind.co.jp/products/8040001321393",
+    "https://shop.kind.co.jp/products/8005002024346",
+    "https://shop.kind.co.jp/products/8108000053018",
+    "https://shop.kind.co.jp/products/8107000122304",
+    "https://shop.kind.co.jp/products/8020001554199",
+    "https://shop.kind.co.jp/products/8040001319109",
+    "https://shop.kind.co.jp/products/8020001554212"
+  ]
+}
