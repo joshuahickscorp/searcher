@@ -111,6 +111,14 @@ def analyze_stored_references(
     donor_inspect: Callable[[Path], dict[str, Any] | None] | None = None,
 ) -> ReferenceAnalysis:
     cfg = settings or Settings.from_env()
+    # The view vocabulary depends on what the thing is. Derived from the user's
+    # own words here, before any crop is classified, because a garment's front
+    # must not be named a shoe's top.
+    hint_source = f"{text or ''} {' '.join(tags or [])}".lower()
+    category_hint = "footwear" if any(
+        word in hint_source
+        for word in ("shoe", "sneaker", "trainer", "boot", "pump", "loafer", "heel", "sandal")
+    ) else "garment"
     if len(images) > cfg.max_images_per_search:
         raise InputError(f"too many images (max {cfg.max_images_per_search})")
     if not images:
@@ -203,6 +211,7 @@ def analyze_stored_references(
             parent_height=decoded.height,
             ocr=ocr,
             subject_area=(w * h) / max(1, decoded.width * decoded.height),
+            category=category_hint,
         )
         crop = crop.model_copy(update={"view_hypothesis": view.view, "confidence": view.confidence})
         view_entries.append(view)

@@ -6,6 +6,10 @@ from searcher.contracts.enums import FactClass, ViewHypothesis
 from searcher.contracts.models import TextObservation, ViewInventoryEntry
 
 
+def _is_footwear(category: str | None) -> bool:
+    return (category or "").strip().lower() in {"footwear", "shoe", "shoes", "sneaker", "trainer"}
+
+
 def classify_view(
     *,
     crop_id: str,
@@ -16,7 +20,16 @@ def classify_view(
     parent_height: int,
     ocr: list[TextObservation],
     subject_area: float,
+    category: str | None = None,
 ) -> ViewInventoryEntry:
+    """Name the view this crop shows, in the vocabulary of its own category.
+
+    Every non-label branch here spoke shoe: a square subject was a TOP, a wide
+    one a SOLE, a tall one a HEEL. A garment therefore never produced the front,
+    rear or detail views its own gap list asks for, so those stayed permanently
+    missing, part evidence never established, and the 0.30 that parts carry in
+    the item match stayed empty no matter how many photographs arrived.
+    """
     aspect = width / max(1, height)
     kinds = {item.kind for item in ocr}
     texts = " ".join(item.text.lower() for item in ocr)
@@ -45,6 +58,14 @@ def classify_view(
             fact_class=FactClass.INFERRED,
         )
     if 0.85 <= aspect <= 1.15 and subject_area > 0.4:
+        if not _is_footwear(category):
+            # A garment laid flat and photographed square is its front.
+            return ViewInventoryEntry(
+                crop_id=crop_id,
+                view=ViewHypothesis.FRONT,
+                confidence=0.45,
+                fact_class=FactClass.INFERRED,
+            )
         return ViewInventoryEntry(
             crop_id=crop_id,
             view=ViewHypothesis.TOP,
@@ -52,6 +73,14 @@ def classify_view(
             fact_class=FactClass.INFERRED,
         )
     if aspect > 1.6 and subject_area > 0.35:
+        if not _is_footwear(category):
+            # A wide crop of cloth is a detail, not a sole.
+            return ViewInventoryEntry(
+                crop_id=crop_id,
+                view=ViewHypothesis.DETAIL,
+                confidence=0.4,
+                fact_class=FactClass.INFERRED,
+            )
         return ViewInventoryEntry(
             crop_id=crop_id,
             view=ViewHypothesis.SOLE,
