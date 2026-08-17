@@ -1,0 +1,20 @@
+{
+  "finding": "IMAGE_THEFT_OR_SCAM is unreachable on the production path",
+  "severity": "launch blocker",
+  "verified_by": [
+    "src/searcher/ranking/vetoes.py:110 fires the veto only when stolen_photo is true",
+    "src/searcher/ranking/pipeline.py:100 sets stolen_ids = stolen or set()",
+    "the only caller that supplies `stolen` is searcher/workers/vision/worker.py",
+    "grep of src and tests shows run_vision_worker is referenced only from tests/integration"
+  ],
+  "consequence": "In production stolen_ids is always empty, so IMAGE_THEFT_OR_SCAM can never fire. A listing that reuses the brand's official photographs on a day-old account demanding off-platform payment scores item 0.91, authenticity 0.80, no veto, and publishes as Real.",
+  "other_false_reals_found": [
+    "counterfeit using official stock photography -> Real (item 0.901125, auth 0.80)",
+    "counterfeit using a lookbook screenshot -> Real, and the screenshot RAISES authenticity to 0.88",
+    "stock_mixed=True still Real, because inserted-stock-photograph is not a hard contradiction",
+    "duplicate listing published twice as Real; DUPLICATE_NO_UTILITY is unused"
+  ],
+  "why_the_benchmark_missed_it": "The public benchmark prints false Real: 0, but that run supplies the oracle stolen flag and labels stock_mixed as truth real. It does not measure these shapes. The headline safety number is measuring around the failure it exists to catch.",
+  "user_harm": "A buyer searching for a designer item can be routed to a scam listing marked Real - the strongest claim the product makes - on the strength of the brand's own photographs.",
+  "blocks": "PUBLIC_ALPHA_READY and PRIVATE_ALPHA_READY. Not a scope limitation; a safety defect."
+}

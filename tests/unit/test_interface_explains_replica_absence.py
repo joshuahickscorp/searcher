@@ -47,3 +47,17 @@ def test_the_page_says_absence_is_not_evidence_of_absence() -> None:
 def test_the_page_still_states_a_replica_can_never_rank_real() -> None:
     text = _page()
     assert "never be ranked Real" in text
+
+
+def test_the_page_never_claims_replica_sources_are_searched() -> None:
+    """The page said both things at once.
+
+    A public-claim audit found `web/index.html` still asserting "Replica
+    sources are searched to find replicas" on the same page as the section
+    explaining that they are not. Adding an explanation without removing the
+    claim it contradicts leaves the reader with a flat falsehood above the
+    correction.
+    """
+    text = _page()
+    assert "sources are searched to find replicas" not in text
+    assert "Replica sources are not searched" in text
