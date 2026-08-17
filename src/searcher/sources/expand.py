@@ -27,6 +27,7 @@ from searcher.sources.classify import (
     origin_of,
     try_json,
 )
+from searcher.sources.platform import is_sitemap_loc, maybe_decompress
 
 DEFAULT_PER_INDEX_CAP = 24
 DEFAULT_PER_CAMPAIGN_CAP = 48
@@ -330,10 +331,19 @@ def _sitemap_loc_matches_query(url: str, tokens: Sequence[str]) -> bool:
 
 
 def _sitemap_members(body: bytes, listing_prefixes: Sequence[str]) -> list[IndexMember]:
-    text = body.decode("utf-8-sig", errors="replace")
+    text = maybe_decompress(body).decode("utf-8-sig", errors="replace")
     locs = [match.group(1).strip() for match in _SITEMAP_LOC.finditer(text)]
     members: list[IndexMember] = []
     for loc in locs:
+        if is_sitemap_loc(loc):
+            members.append(
+                IndexMember(
+                    url=loc,
+                    from_feed=False,
+                    extraction_method=ExtractionMethod.SITEMAP.value,
+                )
+            )
+            continue
         if listing_prefixes and not any(prefix in loc for prefix in listing_prefixes):
             continue
         if looks_like_index_url(loc):
@@ -345,6 +355,7 @@ def _sitemap_members(body: bytes, listing_prefixes: Sequence[str]) -> list[Index
                 extraction_method=ExtractionMethod.SITEMAP.value,
             )
         )
+    members.sort(key=lambda item: 0 if "product" in item.url.lower() else 1)
     return members
 
 
@@ -393,6 +404,7 @@ def extract_index_members(
     allowed_hosts: Sequence[str] = (),
 ) -> list[IndexMember]:
     """JSON feed, then JSON-LD, then sitemap, then HTML links."""
+    body = maybe_decompress(body)
     origin = origin_of(url)
     shopify = shopify_members_from_body(body, url, origin=origin)
     if shopify:
@@ -467,7 +479,11 @@ def expand_index(
         if not member.url:
             reasons["missing_url"] += 1
             continue
-        if sitemap_tokens and not _sitemap_loc_matches_query(member.url, sitemap_tokens):
+        if (
+            sitemap_tokens
+            and not is_sitemap_loc(member.url)
+            and not _sitemap_loc_matches_query(member.url, sitemap_tokens)
+        ):
             reasons["query_not_in_loc"] += 1
             continue
         if not _host_allowed(member.url, allowed_hosts):

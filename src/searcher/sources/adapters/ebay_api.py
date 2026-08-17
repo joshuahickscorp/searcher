@@ -20,6 +20,7 @@ from searcher.normalization.listing import normalize_raw
 from searcher.sources.adapters.protocol import DiscoveryPageResult
 from searcher.sources.fetch_modes import FetchedDocument
 from searcher.sources.manifest import build_manifest
+from searcher.sources.platform import credential_gate_note
 from searcher.sources.strategies import missing_key_note
 
 EBAY_KEY_NAMES = ("EBAY_CLIENT_ID", "EBAY_CLIENT_SECRET")
@@ -54,6 +55,7 @@ class EbayApiAdapter:
             known_limitations=[
                 "dormant without EBAY_CLIENT_ID and EBAY_CLIENT_SECRET",
                 f"create a keyset at {EBAY_SIGNUP_URL}",
+                "not part of uncredentialed reach",
             ],
         )
 
@@ -71,7 +73,11 @@ class EbayApiAdapter:
 
     def discover(self, query: QueryVariant, cursor: str | None) -> DiscoveryPageResult:
         del query, cursor
-        note = ebay_auth_note(client_id=self.client_id, client_secret=self.client_secret)
+        note = (
+            ebay_auth_note(client_id=self.client_id, client_secret=self.client_secret)
+            + ". "
+            + credential_gate_note("eBay Browse API")
+        )
         return DiscoveryPageResult(
             [],
             [],

@@ -20,6 +20,7 @@ from searcher.normalization.listing import normalize_raw
 from searcher.sources.adapters.protocol import DiscoveryPageResult
 from searcher.sources.fetch_modes import FetchedDocument
 from searcher.sources.manifest import build_manifest
+from searcher.sources.platform import credential_gate_note
 from searcher.sources.strategies import missing_key_note
 
 ETSY_KEY_NAMES = ("ETSY_API_KEY",)
@@ -54,6 +55,7 @@ class EtsyApiAdapter:
                 "dormant without ETSY_API_KEY",
                 f"register an app at {ETSY_SIGNUP_URL}",
                 "listing cache <= 6 hours",
+                "not part of uncredentialed reach",
             ],
         )
 
@@ -71,7 +73,7 @@ class EtsyApiAdapter:
             [],
             None,
             SourceOutcome.AUTH_REQUIRED.value,
-            etsy_auth_note(api_key=self.api_key),
+            etsy_auth_note(api_key=self.api_key) + ". " + credential_gate_note("Etsy Open API v3"),
         )
 
     def fetch(self, url: str, mode: FetchMode) -> FetchedDocument:

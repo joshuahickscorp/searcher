@@ -22,6 +22,24 @@ from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
 from searcher.sources.classify import origin_of, try_json
 from searcher.sources.expand import IndexMember, shopify_members_from_body
+from searcher.sources.platform import inferred_catalog_feed_path, origin_for_spec
+
+__all__ = [
+    "CATALOG_FALLBACK_RECEIPT",
+    "CatalogCaps",
+    "CatalogResult",
+    "build_catalog_page_url",
+    "catalog_caps_from_env",
+    "catalog_feed_path_of",
+    "catalog_page_param_of",
+    "catalog_page_size_of",
+    "catalog_url_allowed",
+    "feed_text_matches",
+    "haystack_from_product",
+    "match_score",
+    "origin_for_spec",
+    "page_catalog",
+]
 from searcher.sources.robots import path_matches_prefix
 
 CATALOG_FALLBACK_RECEIPT = "CatalogFallbackReceipt"
@@ -126,14 +144,14 @@ def _env_cap(name: str, default: int) -> int:
 
 
 def catalog_feed_path_of(spec: object) -> str | None:
-    """None when this source publishes no catalogue feed."""
+    """Declared path, else the predictable path for this shop's platform shape."""
     override = os.environ.get("SEARCHER_CATALOG_FEED_PATH")
     if override is not None and override.strip():
         return override.strip()
     path = getattr(spec, "catalog_feed_path", None)
     if isinstance(path, str) and path.strip():
         return path.strip()
-    return None
+    return inferred_catalog_feed_path(spec)
 
 
 def catalog_page_param_of(spec: object) -> str:
@@ -148,16 +166,6 @@ def catalog_page_size_of(spec: object) -> int:
     if isinstance(raw, int) and raw > 0:
         return raw
     return DEFAULT_PAGE_SIZE
-
-
-def origin_for_spec(spec: object, fallback: str = "") -> str:
-    explicit = getattr(spec, "origin", None)
-    if isinstance(explicit, str) and explicit.strip():
-        return explicit.strip().rstrip("/")
-    domain = getattr(spec, "domain", None)
-    if isinstance(domain, str) and domain.strip():
-        return f"https://{domain.strip()}"
-    return fallback
 
 
 def catalog_url_allowed(url: str, disallowed: Sequence[str] = ()) -> bool:

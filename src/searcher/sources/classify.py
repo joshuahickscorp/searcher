@@ -14,6 +14,7 @@ from typing import Any
 from urllib.parse import urlparse
 
 from searcher.contracts.enums import DocumentClass
+from searcher.sources.platform import maybe_decompress
 
 _PRODUCT_PATH = re.compile(
     r"/(?:products?|listing|listings|items?|itm|c/goods)/[^/]+/?(?:\.json)?$",
@@ -174,6 +175,8 @@ def classify_acquired_document(
     listing_prefixes: Sequence[str] = (),
 ) -> DocumentClass:
     """Return product, index, or other. URL shape wins over a misleading body."""
+    if body:
+        body = maybe_decompress(body)
     if looks_like_index_url(url):
         payload = try_json(body)
         shopify = _shopify_payload_class(payload)

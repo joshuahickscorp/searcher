@@ -12,6 +12,7 @@ from searcher.core.ids import new_id
 from searcher.sources.adapters import resolve_adapter
 from searcher.sources.families import family_for
 from searcher.sources.health import HealthStore, may_plan
+from searcher.sources.platform import requires_operator_credential
 from searcher.sources.policy import policy_for
 
 DEFAULT_ORDER = (
@@ -99,6 +100,8 @@ class SourceBroker:
             if families is not None and family_for(manifest.source_id).value not in families:
                 continue
             if not include_disabled and not manifest.enabled:
+                continue
+            if not include_disabled and requires_operator_credential(manifest):
                 continue
             if manifest.admission_status is SourceAdmission.BLOCKED:
                 continue

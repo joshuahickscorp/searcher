@@ -18,6 +18,11 @@ from searcher.sources.catalog import (
     catalog_url_allowed,
     origin_for_spec,
 )
+from searcher.sources.platform import (
+    inferred_collection_template,
+    inferred_sitemap_urls,
+    strategy_origins_for,
+)
 from searcher.sources.policy import policy_for
 from searcher.sources.robots import path_matches_prefix
 
@@ -166,36 +171,38 @@ def _blocked_reason(url: str, disallowed: Sequence[str]) -> str:
 def _collection_urls(spec: object, query_text: str) -> list[str]:
     from searcher.sources.adapters.product import query_slugs, slugify_query
 
-    origin = origin_for_spec(spec)
-    if not origin:
+    origins = list(strategy_origins_for(spec))
+    if not origins:
+        recorded = origin_for_spec(spec)
+        if recorded:
+            origins = [recorded]
+    if not origins:
         return []
     templates = [str(item) for item in (getattr(spec, "query_paths", ()) or ()) if item]
-    shopify_like = any(
-        str(path).startswith("/collections")
-        for path in (getattr(spec, "collection_paths", ()) or ())
-    )
-    if shopify_like and not any(is_collection_template(item) for item in templates):
-        templates.append("/collections/{slug}/products.json?limit=250")
+    inferred = inferred_collection_template(spec)
+    if inferred and not any(is_collection_template(item) for item in templates):
+        templates.append(inferred)
     slugs = query_slugs(query_text) or [slugify_query(query_text)]
     slugs = [slug for slug in slugs if slug]
     quoted = quote_plus(query_text)
     urls: list[str] = []
     seen: set[str] = set()
-    for template in templates:
-        if not is_collection_template(template) or is_site_search_template(template):
-            continue
-        if "{slug}" in template:
-            for slug in slugs:
-                url = f"{origin}{template.format(slug=slug, query=quoted)}"
+    for origin in origins:
+        for template in templates:
+            if not is_collection_template(template) or is_site_search_template(template):
+                continue
+            if "{slug}" in template:
+                for slug in slugs:
+                    url = f"{origin}{template.format(slug=slug, query=quoted)}"
+                    if url not in seen:
+                        seen.add(url)
+                        urls.append(url)
+            else:
+                slug = slugs[0] if slugs else quoted
+                url = f"{origin}{template.format(query=quoted, slug=slug)}"
                 if url not in seen:
                     seen.add(url)
                     urls.append(url)
-        else:
-            slug = slugs[0] if slugs else quoted
-            url = f"{origin}{template.format(query=quoted, slug=slug)}"
-            if url not in seen:
-                seen.add(url)
-                urls.append(url)
     return urls
 
 
@@ -223,14 +230,7 @@ def _site_search_urls(spec: object, query_text: str) -> list[str]:
 
 
 def _sitemap_urls(spec: object) -> list[str]:
-    found: list[str] = []
-    seen: set[str] = set()
-    for raw in getattr(spec, "sitemap_urls", ()) or ():
-        url = str(raw or "").strip()
-        if url and url not in seen:
-            seen.add(url)
-            found.append(url)
-    return found
+    return list(inferred_sitemap_urls(spec))
 
 
 def plan_strategies(spec: object, query_text: str) -> list[PlannedStrategy]:
@@ -319,7 +319,11 @@ def plan_strategies(spec: object, query_text: str) -> list[PlannedStrategy]:
             )
 
     feed_path = catalog_feed_path_of(spec)
-    origin = origin_for_spec(spec)
+    origins = list(strategy_origins_for(spec))
+    if not origins:
+        recorded = origin_for_spec(spec)
+        if recorded:
+            origins = [recorded]
     if not feed_path:
         planned.append(
             PlannedStrategy(
@@ -339,29 +343,37 @@ def plan_strategies(spec: object, query_text: str) -> list[PlannedStrategy]:
     else:
         from searcher.sources.catalog import build_catalog_page_url
 
-        first = build_catalog_page_url(
-            origin,
-            feed_path,
-            page=1,
-            page_param=catalog_page_param_of(spec),
-            page_size=catalog_page_size_of(spec),
-        )
-        if catalog_url_allowed(first, disallowed):
+        catalog_urls: list[str] = []
+        blocked_urls: list[str] = []
+        for origin in origins:
+            first = build_catalog_page_url(
+                origin,
+                feed_path,
+                page=1,
+                page_param=catalog_page_param_of(spec),
+                page_size=catalog_page_size_of(spec),
+            )
+            if catalog_url_allowed(first, disallowed):
+                catalog_urls.append(first)
+            else:
+                blocked_urls.append(first)
+        if catalog_urls:
             planned.append(
                 PlannedStrategy(
                     CATALOG_FEED,
                     STATUS_QUEUED,
                     "shop-wide product feed, independent of collection handles",
-                    (first,),
+                    tuple(catalog_urls),
                 )
             )
         else:
+            sample = blocked_urls[0] if blocked_urls else ""
             planned.append(
                 PlannedStrategy(
                     CATALOG_FEED,
                     STATUS_BLOCKED,
-                    _blocked_reason(first, disallowed),
-                    (first,),
+                    _blocked_reason(sample, disallowed) if sample else "url is not admitted",
+                    tuple(blocked_urls),
                 )
             )
 

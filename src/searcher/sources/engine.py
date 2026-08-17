@@ -66,6 +66,12 @@ from searcher.sources.frontier import MAX_DEPTH, Frontier, FrontierItem, compute
 from searcher.sources.health import HealthStore
 from searcher.sources.http import HonestHttpClient
 from searcher.sources.live_check import check_candidate
+from searcher.sources.platform import (
+    admitted_hosts_for,
+    commerce_origins_for,
+    robots_evidence,
+    strategy_origins_for,
+)
 from searcher.sources.robots import RobotsCache
 from searcher.sources.statuses import is_block
 from searcher.sources.strategies import (
@@ -75,9 +81,12 @@ from searcher.sources.strategies import (
     SITE_SEARCH,
     SITEMAP,
     STATUS_BLOCKED,
+    STATUS_QUEUED,
+    STATUS_SKIPPED,
     StrategyBook,
     plan_strategies,
     strategy_name_for_url,
+    strategy_url_allowed,
 )
 
 
@@ -341,6 +350,15 @@ class DiscoveryEngine:
                 "",
             )
             book.load_plan(plan_strategies(spec, seed_text))
+            self._seed_robots_sitemaps(
+                spec=spec,
+                manifest=manifest,
+                frontier=frontier,
+                search_id=search_id,
+                source_id=source_id,
+                book=book,
+                query_gain=next((item.expected_gain for item in queries), 0.0),
+            )
         try:
             self.circuit.assert_closed(source_id)
         except CircuitOpen:
@@ -417,6 +435,23 @@ class DiscoveryEngine:
                     priority=compute_priority(expected_match_value=query.expected_gain),
                     payload={"query": query.query_text},
                 )
+        if self._should_run_catalog(adapter, source_id):
+            extra_pages, catalog_outcome = self._run_catalog_fallback(
+                adapter=adapter,
+                escalator=escalator,
+                manifest=manifest,
+                queries=queries,
+                search_id=search_id,
+                source_id=source_id,
+                events=events,
+                found=found,
+                frontier=frontier,
+            )
+            pages += extra_pages
+            if found:
+                last_outcome = SourceOutcome.SEARCHED_MATCHES_FOUND
+            elif catalog_outcome is not SourceOutcome.NOT_ATTEMPTED:
+                last_outcome = catalog_outcome
         worked = 0
         while worked < self.max_work:
             cancel.raise_if_cancelled()
@@ -465,7 +500,8 @@ class DiscoveryEngine:
                         error_class="BUDGET",
                     )
                     last_outcome = SourceOutcome.UNMEASURABLE
-                    raise
+                    worked = self.max_work
+                    break
                 except CancelledError:
                     frontier.complete(
                         item,
@@ -473,23 +509,9 @@ class DiscoveryEngine:
                         state=FrontierState.CANCELLED,
                     )
                     raise
-        if self._should_run_catalog(adapter, source_id):
-            extra_pages, catalog_outcome = self._run_catalog_fallback(
-                adapter=adapter,
-                escalator=escalator,
-                manifest=manifest,
-                queries=queries,
-                search_id=search_id,
-                source_id=source_id,
-                events=events,
-                found=found,
-                frontier=frontier,
-            )
-            pages += extra_pages
-            if found:
-                last_outcome = SourceOutcome.SEARCHED_MATCHES_FOUND
-            elif catalog_outcome is not SourceOutcome.NOT_ATTEMPTED:
-                last_outcome = catalog_outcome
+            else:
+                continue
+            break
         self._finalize_strategy_yields(source_id, book)
         if found:
             last_outcome = SourceOutcome.SEARCHED_MATCHES_FOUND
@@ -609,6 +631,7 @@ class DiscoveryEngine:
                 frontier=frontier,
                 search_id=search_id,
                 source_id=source_id,
+                spec=getattr(adapter, "spec", None),
             )
             return
         if document is not DocumentClass.PRODUCT:
@@ -637,8 +660,11 @@ class DiscoveryEngine:
         frontier: Frontier,
         search_id: str,
         source_id: str,
+        spec: object | None = None,
     ) -> None:
-        allowed_hosts = set()
+        allowed_hosts: set[str] = set()
+        if spec is not None:
+            allowed_hosts.update(admitted_hosts_for(spec, manifest))
         for raw in (manifest.domain, host_of(item.url)):
             if not raw:
                 continue
@@ -735,6 +761,82 @@ class DiscoveryEngine:
         runtime["index_expansions"] = recorded
         self.repos.update_runtime(search_id, runtime)
 
+    def _seed_robots_sitemaps(
+        self,
+        *,
+        spec: object,
+        manifest: SourceManifest,
+        frontier: Frontier,
+        search_id: str,
+        source_id: str,
+        book: StrategyBook,
+        query_gain: float,
+    ) -> None:
+        """Enqueue sitemaps declared in a fetched robots.txt. Report what was fetched."""
+        disallowed = tuple(getattr(spec, "disallowed", ()) or ())
+        extra: list[str] = []
+        evidence: list[dict[str, object]] = []
+        for origin in commerce_origins_for(spec):
+            if not origin:
+                continue
+            probe = f"{origin}/"
+            try:
+                decision = self.admission.decide(probe, manifest)
+            except Exception:
+                evidence.append(
+                    robots_evidence(origin=origin, body="", status="fetch_failed")
+                )
+                continue
+            cached = self.robots.get_cached(origin)
+            status = "missing"
+            body = ""
+            if cached is not None:
+                status = cached.status
+                body = cached.body
+            elif decision.robots_fetch_status:
+                status = decision.robots_fetch_status
+            evidence.append(robots_evidence(origin=origin, body=body, status=status))
+            if cached is None or cached.status != "ok":
+                continue
+            for sitemap in cached.sitemaps:
+                if not sitemap or not strategy_url_allowed(sitemap, disallowed):
+                    continue
+                extra.append(sitemap)
+        if evidence:
+            runtime = self.repos.get_runtime(search_id)
+            recorded = list(runtime.get("robots_evidence") or [])
+            recorded.extend(evidence)
+            runtime["robots_evidence"] = recorded
+            self.repos.update_runtime(search_id, runtime)
+        if not extra:
+            return
+        existing = book.attempts.get(SITEMAP)
+        known = set(existing.urls) if existing is not None else set()
+        added = [url for url in extra if url not in known]
+        if not added:
+            return
+        if existing is None or existing.status in {STATUS_SKIPPED, STATUS_BLOCKED}:
+            book.record(
+                SITEMAP,
+                status=STATUS_QUEUED,
+                reason="robots-declared sitemap",
+                urls=added,
+            )
+        else:
+            existing.urls = list(existing.urls) + added
+            if existing.status != STATUS_QUEUED:
+                existing.status = STATUS_QUEUED
+                existing.reason = "robots-declared sitemap"
+        for url in added:
+            frontier.enqueue(
+                search_id=search_id,
+                source_id=source_id,
+                url=url,
+                kind=_kind_for_url(url),
+                depth=0,
+                priority=compute_priority(expected_match_value=query_gain),
+            )
+
     def _should_run_catalog(self, adapter: Any, source_id: str) -> bool:
         """Catalogue feed is a first-class strategy, not a last-ditch fallback.
 
@@ -819,9 +921,14 @@ class DiscoveryEngine:
         if spec is None or not feed_path:
             return 0, SourceOutcome.NOT_ATTEMPTED
         disallowed = list(getattr(spec, "disallowed", ()) or ())
-        origin = origin_for_spec(spec, fallback=f"https://{manifest.domain}")
-        allowed_hosts = set()
-        for raw in (manifest.domain, host_of(origin)):
+        origins = list(strategy_origins_for(spec))
+        recorded = origin_for_spec(spec, fallback=f"https://{manifest.domain}")
+        if recorded and recorded not in origins:
+            origins.append(recorded)
+        if not origins and recorded:
+            origins = [recorded]
+        allowed_hosts = set(admitted_hosts_for(spec, manifest))
+        for raw in (manifest.domain, *(host_of(item) for item in origins)):
             if raw:
                 allowed_hosts.add(raw.lower())
         seen = self._seen_target_urls(search_id, frontier)
@@ -852,23 +959,39 @@ class DiscoveryEngine:
                 return doc.body
             return b""
 
-        result = page_catalog(
-            origin=origin,
-            feed_path=feed_path,
-            query_texts=query_texts,
-            fetch_page=fetch_page,
-            disallowed=disallowed,
-            page_param=catalog_page_param_of(spec),
-            page_size=catalog_page_size_of(spec),
-            campaign_pages_already=self._campaign_catalog_pages,
-            campaign_promoted_already=self._campaign_catalog_promoted,
-            seen_urls=seen,
-            allowed_hosts=sorted(allowed_hosts),
-            source_id=source_id,
-        )
-        self._campaign_catalog_pages = result.campaign_pages_after
-        self._campaign_catalog_promoted = result.campaign_promoted_after
-        self._record_catalog(search_id, source_id, result)
+        pages_read = 0
+        last_result: CatalogResult | None = None
+        chosen: CatalogResult | None = None
+        picked: CatalogResult | None = None
+        for origin in origins:
+            result = page_catalog(
+                origin=origin,
+                feed_path=feed_path,
+                query_texts=query_texts,
+                fetch_page=fetch_page,
+                disallowed=disallowed,
+                page_param=catalog_page_param_of(spec),
+                page_size=catalog_page_size_of(spec),
+                campaign_pages_already=self._campaign_catalog_pages,
+                campaign_promoted_already=self._campaign_catalog_promoted,
+                seen_urls=seen,
+                allowed_hosts=sorted(allowed_hosts),
+                source_id=source_id,
+            )
+            self._campaign_catalog_pages = result.campaign_pages_after
+            self._campaign_catalog_promoted = result.campaign_promoted_after
+            self._record_catalog(search_id, source_id, result)
+            pages_read += result.pages_read
+            last_result = result
+            if result.products_promoted > 0 or result.products_seen > 0:
+                chosen = result
+                break
+            if result.stopped_reason == "robots_disallowed":
+                continue
+        picked = chosen or last_result
+        if picked is None:
+            return 0, SourceOutcome.NOT_ATTEMPTED
+        result = picked
         language = None
         try:
             languages = adapter.manifest().languages
@@ -894,10 +1017,10 @@ class DiscoveryEngine:
             self.repos.upsert_candidate(search_id, candidate)
             events.candidates_found(source_id, 1)
         if result.products_promoted > 0:
-            return result.pages_read, SourceOutcome.SEARCHED_MATCHES_FOUND
-        if result.stopped_reason == "robots_disallowed":
-            return result.pages_read, SourceOutcome.BLOCKED_BY_POLICY
-        return result.pages_read, SourceOutcome.SEARCHED_NO_MATCH
+            return pages_read, SourceOutcome.SEARCHED_MATCHES_FOUND
+        if result.stopped_reason == "robots_disallowed" and result.products_seen == 0:
+            return pages_read, SourceOutcome.BLOCKED_BY_POLICY
+        return pages_read, SourceOutcome.SEARCHED_NO_MATCH
 
     def _record_catalog(self, search_id: str, source_id: str, result: CatalogResult) -> None:
         payload = result.as_payload()

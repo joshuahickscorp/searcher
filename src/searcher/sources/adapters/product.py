@@ -278,9 +278,13 @@ REBAG = SourceSpec(
     admission=SourceAdmission.ADMITTED,
     allowed_use="product pages",
     source_class="consignment",
-    robots_policy="Disallow /digital_certificate/",
+    robots_policy=(
+        "www.rebag.com Disallow /digital_certificate/. "
+        "shop.rebag.com (Shopify, fetched 2026-08-16) Disallow /search; "
+        "/products.json and /sitemap.xml allowed."
+    ),
     languages=("en",),
-    disallowed=("/digital_certificate/",),
+    disallowed=("/digital_certificate/", "/search"),
     listing_prefixes=("/shop/", "/products/"),
     sitemap_urls=("https://www.rebag.com/sitemap.xml",),
 )

@@ -21,6 +21,8 @@ class AdmissionDecision:
     basis: str
     robots_allowed: bool | None = None
     crawl_delay: float | None = None
+    robots_url: str | None = None
+    robots_fetch_status: str | None = None
 
 
 class AdmissionGate:
@@ -92,10 +94,19 @@ class AdmissionGate:
                 SourceOutcome.BLOCKED_BY_POLICY,
                 f"recorded disallowed path prefix for {manifest.source_id}",
             )
+        robots_url = f"{origin_of(url)}/robots.txt" if url else None
         if skip_live_robots:
-            return AdmissionDecision(True, SourceOutcome.NOT_ATTEMPTED, "live robots skipped", True)
+            return AdmissionDecision(
+                True,
+                SourceOutcome.NOT_ATTEMPTED,
+                "live robots skipped",
+                True,
+                robots_url=robots_url,
+                robots_fetch_status="skipped",
+            )
         snapshot_body = robots_body
         origin = origin_of(url)
+        robots_url = f"{origin}/robots.txt" if origin else robots_url
         if snapshot_body is None:
             cached = self.robots.get_cached(origin)
             if cached is not None:
@@ -105,6 +116,8 @@ class AdmissionGate:
                         SourceOutcome.BLOCKED_BY_POLICY,
                         "robots.txt fetch previously failed; fail-closed",
                         False,
+                        robots_url=robots_url,
+                        robots_fetch_status="fetch_failed",
                     )
                 snapshot_body = cached.body
                 crawl = cached.crawl_delay
@@ -116,10 +129,18 @@ class AdmissionGate:
                         "robots.txt disallows this path",
                         False,
                         crawl,
+                        robots_url,
+                        "cached",
                     )
                 return AdmissionDecision(
-                    True, SourceOutcome.NOT_ATTEMPTED, "robots allow", True, crawl
-                )  # noqa: E501
+                    True,
+                    SourceOutcome.NOT_ATTEMPTED,
+                    "robots allow",
+                    True,
+                    crawl,
+                    robots_url,
+                    "cached",
+                )
             snapshot_body, fetch_status = self._fetch_robots(origin)
             if fetch_status != "ok":
                 self.robots.remember_failure(origin)
@@ -128,10 +149,13 @@ class AdmissionGate:
                     SourceOutcome.BLOCKED_BY_POLICY,
                     "robots.txt fetch failed; treated as disallowed",
                     False,
+                    robots_url=robots_url,
+                    robots_fetch_status=fetch_status,
                 )
         snapshot = self.robots.parse_body(origin, snapshot_body, status="ok")
         self.robots.store(snapshot)
         allowed = self.robots.allows(url, snapshot_body)
+        fetch_status = "ok" if robots_body is None else "supplied"
         if not allowed:
             return AdmissionDecision(
                 False,
@@ -139,6 +163,8 @@ class AdmissionGate:
                 "robots.txt disallows this path",
                 False,
                 snapshot.crawl_delay,
+                robots_url,
+                fetch_status,
             )
         return AdmissionDecision(
             True,
@@ -146,6 +172,8 @@ class AdmissionGate:
             "recorded policy + live robots allow",
             True,
             snapshot.crawl_delay,
+            robots_url,
+            fetch_status,
         )
 
     def _fetch_robots(self, origin: str) -> tuple[str, str]:

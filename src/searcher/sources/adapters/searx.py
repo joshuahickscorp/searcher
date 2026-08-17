@@ -39,7 +39,10 @@ class SearxAdapter:
             capabilities=["text_search"],
             languages=["en", "ja", "ko", "zh", "fr", "it", "ru"],
             robots_policy="n/a (self-hosted)",
-            known_limitations=["public instances must not be the production path"],
+            known_limitations=[
+                "public instances must not be the production path",
+                "optional web-wide path; unset SEARCHER_SEARX_URL leaves shop reach intact",
+            ],
         )
 
     def manifest(self) -> SourceManifest:
