@@ -38,7 +38,14 @@ _TS = parse_utc("2007-06-15T12:00:00+00:00")
 _REPLICA_STEMS = ("replica", "counterfeit", "superfake", "repfam")
 _HOMOGLYPHS = str.maketrans({"a": "а", "e": "е", "o": "о", "c": "с", "p": "р"})
 _SAFE_LEET = str.maketrans({"e": "3", "o": "0", "a": "4", "s": "5"})
-_OBFUSCATIONS = ("homoglyph", "zwsp", "digit", "spacing")
+# The digit 1 stands for either l or i, so "r3pl1ca" and "rep1ica" are both
+# readings of the same word. _SAFE_LEET leaves 1 out, which is why this
+# generator could never produce the one obfuscation that actually got through:
+# r3pl1ca published as Possibly Real. Detection now reads the ambiguous digit
+# both ways, and the generator has to be able to write it or the property is
+# only tested against the cases that already worked.
+_AMBIGUOUS_LEET = str.maketrans({"e": "3", "o": "0", "a": "4", "s": "5", "i": "1", "l": "1"})
+_OBFUSCATIONS = ("homoglyph", "zwsp", "digit", "spacing", "ambiguous_digit")
 
 
 class _Decision:
@@ -73,6 +80,8 @@ def _obfuscate(stem: str, kind: str) -> str:
         text = text.translate(_HOMOGLYPHS)
     elif kind == "digit":
         text = text.translate(_SAFE_LEET)
+    elif kind == "ambiguous_digit":
+        text = text.translate(_AMBIGUOUS_LEET)
     elif kind == "zwsp":
         text = "\u200b".join(text)
     elif kind == "spacing":
@@ -97,6 +106,10 @@ def adversarial_replica_text(draw: st.DrawFn) -> str:
             text = text.translate(_HOMOGLYPHS)
         elif step == "digit":
             text = "".join(ch if ch in {"\u200b", " "} else ch.translate(_SAFE_LEET) for ch in text)
+        elif step == "ambiguous_digit":
+            text = "".join(
+                ch if ch in {"\u200b", " "} else ch.translate(_AMBIGUOUS_LEET) for ch in text
+            )
         elif step == "zwsp" and "\u200b" not in text and " " not in text:
             text = "\u200b".join(text)
         elif step == "spacing" and " " not in text:

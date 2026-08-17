@@ -189,26 +189,54 @@ _AMBIGUOUS = "1"
 _MAX_AMBIGUOUS = 3
 
 
-def _leet_variants(folded: str) -> list[str]:
-    """Readings of a string where digits may stand in for letters."""
+def _word_variants(word: str) -> list[str]:
+    """Readings of one word where digits may stand in for letters."""
     from itertools import product
 
-    base = folded.translate(str.maketrans(_LEET_BASE))
-    if _AMBIGUOUS not in base:
-        return [base] if base != folded else []
-    if base.count(_AMBIGUOUS) > _MAX_AMBIGUOUS:
-        return [base.replace(_AMBIGUOUS, "l"), base.replace(_AMBIGUOUS, "i")]
+    if _AMBIGUOUS not in word:
+        return [word]
+    if word.count(_AMBIGUOUS) > _MAX_AMBIGUOUS:
+        return [word.replace(_AMBIGUOUS, "l"), word.replace(_AMBIGUOUS, "i")]
     out: list[str] = []
-    slots = base.count(_AMBIGUOUS)
+    slots = word.count(_AMBIGUOUS)
     for choice in product("li", repeat=slots):
         chars, index = [], 0
-        for ch in base:
+        for ch in word:
             if ch == _AMBIGUOUS:
                 chars.append(choice[index])
                 index += 1
             else:
                 chars.append(ch)
         out.append("".join(chars))
+    return out
+
+
+def _leet_variants(folded: str) -> list[str]:
+    """Readings of a string where digits may stand in for letters.
+
+    Enumerated per word rather than across the whole text. The bound exists to
+    stop a long run of ambiguous digits becoming expensive, but counting them
+    document-wide made detection depend on how much text came with the word:
+    "rep11ca" alone carries two and is read correctly, while the same title
+    joined to its own description carries four, blew the bound, and fell back
+    to the two uniform readings - neither of which is "replica". Publication
+    joins title and description, so every replica title was doubled and the
+    effective bound was half of what it looked like. A word is what the
+    substitution is applied to, so a word is what gets enumerated.
+    """
+    base = folded.translate(str.maketrans(_LEET_BASE))
+    if _AMBIGUOUS not in base:
+        return [base] if base != folded else []
+    per_word = [_word_variants(word) for word in base.split(" ")]
+    out: list[str] = []
+    # Each word's readings, substituted back one word at a time. The whole
+    # cross-product across words is not needed: the patterns match a single
+    # replica term, so it is enough that each word can be read on its own.
+    for position, readings in enumerate(per_word):
+        for reading in readings:
+            words = [choices[0] for choices in per_word]
+            words[position] = reading
+            out.append(" ".join(words))
     return out
 
 
@@ -242,6 +270,23 @@ _DESPACED_PATTERNS = (
     re.compile(r"\breplika\b"),
 )
 
+# Letters a digit can stand for, written into the pattern instead of enumerated
+# around it. Enumerating readings is exponential in the number of ambiguous
+# digits, so it needed a bound, and the bound was a silent miss: "rep11ca"
+# joined to its own description carries four of them, blew the bound, and fell
+# back to two uniform readings - neither of which spells the word. A character
+# class has no such limit and does not care how long the text is.
+_DIGIT_FOR_LETTER = {"l": "[l1]", "i": "[i1]", "e": "[e3]", "o": "[o0]", "a": "[a4]", "s": "[s5]"}
+
+
+def _tolerant(word: str) -> re.Pattern[str]:
+    return re.compile("".join(_DIGIT_FOR_LETTER.get(ch, re.escape(ch)) for ch in word))
+
+
+_DESPACED_TOLERANT = tuple(
+    _tolerant(word) for word in ("replica", "counterfeit", "superfake", "repfam", "replika")
+)
+
 
 def self_declared_replica(text: str | None) -> bool:
     if not text:
@@ -260,4 +305,13 @@ def self_declared_replica(text: str | None) -> bool:
         if any(pattern.search(variant) for pattern in REPLICA_PATTERNS):
             return True
     squashed = _despaced(folded)
-    return any(pattern.search(squashed) for pattern in _DESPACED_PATTERNS)
+    if any(pattern.search(squashed) for pattern in _DESPACED_PATTERNS):
+        return True
+    # The obfuscations compose. Spacing a word out and substituting digits into
+    # it are each handled above, but "r e p 1 1 c a" is both at once: spacing
+    # puts every character in its own word so the per-word pass sees no word to
+    # read, and _despaced resolves the ambiguous digit to l on its way through,
+    # so "replica" was never among the readings tried. Despace without deciding
+    # what the digit means, then read it both ways.
+    bare = re.sub(r"[\s._-]+", "", folded)
+    return any(pattern.search(bare) for pattern in _DESPACED_TOLERANT)
