@@ -70,7 +70,11 @@ class MarginaliaAdapter:
         if fetch.result.outcome is not SourceOutcome.SEARCHED_MATCHES_FOUND:
             return []
         try:
-            payload = json.loads(fetch.body.decode("utf-8"))
+            # A search endpoint can answer with bytes that are not UTF-8 - a
+            # captive portal, a compressed body, a truncated response. A strict
+            # decode raises UnicodeDecodeError out of the adapter and takes the
+            # campaign down over a malformed reply from one source.
+            payload = json.loads(fetch.body.decode("utf-8", errors="replace"))
         except json.JSONDecodeError:
             return []
         results = payload.get("results") if isinstance(payload, dict) else None

@@ -167,6 +167,45 @@ def _looks_like_sitemap(body: bytes, content_type: str | None) -> bool:
     return b"<urlset" in head or b"<sitemapindex" in head
 
 
+# A page can say 404 in its title and body while the transport says 200. Sellers
+# and shop platforms do this constantly for removed listings. The URL still looks
+# like a product URL, so URL shape - which otherwise correctly wins over a
+# misleading body - classifies the error page as a product, and every adapter
+# below then manufactures a listing out of it. That puts a page which is not a
+# listing into the candidate pool as though it were one.
+_SOFT_ERROR_MARKERS = (
+    "404 not found",
+    "page not found",
+    "404 - not found",
+    "not found",
+    "410 gone",
+    "no longer available",
+    "this listing has ended",
+    "sorry, this page",
+)
+
+
+def looks_like_soft_error(body: bytes) -> bool:
+    """True when the body announces an error the status line did not."""
+    if not body:
+        return False
+    head = body[:4096].decode("utf-8", errors="replace").lower()
+    title = ""
+    start = head.find("<title")
+    if start != -1:
+        opened = head.find(">", start)
+        closed = head.find("</title", opened + 1) if opened != -1 else -1
+        if opened != -1 and closed != -1:
+            title = head[opened + 1 : closed].strip()
+    if any(marker in title for marker in _SOFT_ERROR_MARKERS):
+        return True
+    # Outside the title, require an error phrase in a short body: a long page
+    # mentioning "not found" in passing is not an error page.
+    if len(head) < 1200:
+        return any(marker in head for marker in _SOFT_ERROR_MARKERS[:6])
+    return False
+
+
 def classify_acquired_document(
     *,
     url: str,
@@ -177,6 +216,8 @@ def classify_acquired_document(
     """Return product, index, or other. URL shape wins over a misleading body."""
     if body:
         body = maybe_decompress(body)
+    if looks_like_soft_error(body):
+        return DocumentClass.OTHER
     if looks_like_index_url(url):
         payload = try_json(body)
         shopify = _shopify_payload_class(payload)
