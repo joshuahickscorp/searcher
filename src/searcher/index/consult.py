@@ -48,6 +48,32 @@ def _versions(controller: CampaignController) -> CacheVersions:
     return versions_from_settings(controller.settings)
 
 
+def _reference_descriptor(
+    controller: CampaignController, search_id: str
+) -> list[float] | None:
+    """An image descriptor from the user's own photographs.
+
+    The consult path passed `hashed_text_vector(terms)` here, a 64-dimension
+    vector derived from words, while every stored descriptor is a 384-dimension
+    image embedding. The dimension guard skipped the mismatch, so the descriptor
+    search returned nothing and the rescoring of text hits scored nothing - the
+    visual half of consulting the index never ran at all.
+
+    Words cannot address an image space. The query has to come from the
+    photographs the user supplied, which is what this builds.
+    """
+    runtime = controller.repos.get_runtime(search_id)
+    for digest in runtime.get("reference_digests") or []:
+        try:
+            data = controller.store.get(str(digest), campaign_id=search_id)
+        except Exception:
+            continue
+        vector = descriptor_from_bytes(data)
+        if vector:
+            return vector
+    return None
+
+
 def consult_and_surface(controller: CampaignController, search_id: str) -> ConsultResult:
     """Surface stored public listings that match this campaign's hypothesis."""
     settings = controller.settings
@@ -61,7 +87,12 @@ def consult_and_surface(controller: CampaignController, search_id: str) -> Consu
     terms = query_terms(intent, hypotheses)
     if not terms:
         return result
-    query_vec = hashed_text_vector(terms)
+    # An image descriptor when the photographs give one, so the descriptor
+    # search can retrieve and the rescoring can score. The text vector is kept
+    # only as a fallback for a campaign with no usable reference image; it
+    # cannot address the image space and will be skipped by the dimension
+    # guard, which is the honest outcome rather than a meaningless cosine.
+    query_vec = _reference_descriptor(controller, search_id) or hashed_text_vector(terms)
     hits = index.search(terms, versions, query_descriptor=query_vec)
     if not hits:
         _write_cost(

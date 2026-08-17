@@ -175,8 +175,8 @@ def test_a_descriptor_retrieves_a_listing_text_never_returned(tmp_path) -> None:
     )
 
 
-def test_the_production_consult_path_does_not_yet_search_by_image() -> None:
-    """Pins a gap rather than a capability, so the wiring is not misread as done.
+def test_the_consult_path_prefers_an_image_descriptor_over_a_text_vector() -> None:
+    """The consult path must address the image space with an image.
 
     `search_listings_by_descriptor` works and `WarmIndex.search` merges its
     results. But the only production caller, `consult_and_surface`, passes
@@ -184,17 +184,28 @@ def test_the_production_consult_path_does_not_yet_search_by_image() -> None:
     while stored image descriptors are 384-dimension. The dimension guard skips
     the mismatch, so the descriptor search returns nothing on that path.
 
-    That guard is what keeps this inert rather than harmful: comparing a text
-    vector against image descriptors would produce a meaningless cosine and
-    retrieve listings for no reason. Inert is the right failure, but it is not
-    working, and the retrieval half of the known-item gap is not closed until
-    the consult path passes a descriptor taken from the user's photographs.
+    `consult_and_surface` passed `hashed_text_vector(terms)`, a 64-dimension
+    vector derived from words, while every stored descriptor is a 384-dimension
+    image embedding. The dimension guard skipped the mismatch, so the descriptor
+    search returned nothing and the rescoring of text hits scored nothing: the
+    visual half of consulting the index never ran.
+
+    The guard is why that was inert rather than harmful - comparing a text
+    vector against image descriptors yields a meaningless cosine and would
+    retrieve listings for no reason. The fix is to send an image.
     """
+    import inspect
+
     from searcher.core.embedding_gateway import FEATURE_DIM
+    from searcher.index import consult
     from searcher.index.consult import hashed_text_vector
 
-    text_vector = hashed_text_vector(["archive", "trainer"])
-    assert len(text_vector) != FEATURE_DIM, (
-        "if these ever match, the text vector would be compared against image "
-        "descriptors and this test must be replaced by a real wiring check"
+    source = inspect.getsource(consult.consult_and_surface)
+    assert "_reference_descriptor(controller, search_id)" in source, (
+        "the query descriptor must come from the user's photographs"
     )
+
+    # The text vector remains only as a fallback, and it still cannot address
+    # the image space. If these dimensions ever coincide it would silently start
+    # being compared against image descriptors.
+    assert len(hashed_text_vector(["archive", "trainer"])) != FEATURE_DIM
