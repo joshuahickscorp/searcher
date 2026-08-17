@@ -1,15 +1,13 @@
 """Splits must be disjoint in pixels, not only in identifiers.
 
 `assert_no_leakage` compares identifiers, which are cheap to keep distinct and
-say nothing about content. Measured on the committed corpus, 22 image digests
-appear in both calibration and held_out - `copied_product_code` shares renders
-with `adjacent_model` and `two_items` - because the synthetic cases are built
-from shared building blocks.
+say nothing about content. Measured at commit 73ffb4a, 22 image digests
+appeared in both calibration and held_out - `copied_product_code` shares
+renders with `adjacent_model` and `two_items` - because the synthetic cases
+are built from shared building blocks.
 
-Any pixel-based scorer has therefore seen held-out images while being
-calibrated, so held-out numbers are measured partly on their own tuning data.
-This test states the property. It is expected to fail until the split boundary
-respects render provenance; that failure is the finding, not a flaw in the test.
+The split boundary now assigns connected render groups wholly to one side,
+so calibration and held-out no longer share image content.
 """
 
 from __future__ import annotations
@@ -40,14 +38,6 @@ def test_the_guard_passes_on_disjoint_pixels() -> None:
     assert_no_pixel_leakage({"a": [b"one"], "b": [b"two"]}, ["a"], ["b"])
 
 
-@pytest.mark.xfail(
-    reason=(
-        "The committed corpus shares 22 image digests between calibration and held_out. "
-        "Recorded as a known contamination rather than hidden; the repair is to make the "
-        "split boundary respect render provenance, which drops no case."
-    ),
-    strict=True,
-)
 def test_committed_corpus_has_no_pixel_leakage() -> None:
     splits = assign_splits()
     cal = {c for c in BUCKET_TRUTH if hardneg_item_id(c) in set(splits.calibration_ids)}

@@ -3,21 +3,21 @@
     "cache_hits": 0,
     "confusion": {
       "hidden": {
-        "hidden": 6,
+        "hidden": 13,
         "possibly_real": 0,
         "real": 0,
         "replica": 0
       },
       "possibly_real": {
-        "hidden": 0,
-        "possibly_real": 1,
+        "hidden": 1,
+        "possibly_real": 2,
         "real": 0,
         "replica": 0
       },
       "real": {
         "hidden": 0,
-        "possibly_real": 0,
-        "real": 1,
+        "possibly_real": 4,
+        "real": 0,
         "replica": 0
       },
       "replica": {
@@ -30,24 +30,24 @@
     "false_real": {
       "count": 0,
       "ids": [],
-      "n": 10,
-      "n_labelled_not_real": 9,
+      "n": 22,
+      "n_labelled_not_real": 18,
       "note": "A false Real is a candidate labelled something other than Real that the engine published as Real. This is the expensive error.",
       "rate_among_all": 0.0,
       "rate_among_not_real": 0.0
     },
     "fetches": 0,
-    "images_processed": 79,
+    "images_processed": 179,
     "item_match_separation": {
       "computed": true,
       "excluded_from_different_item": [
         "stolen_photos"
       ],
-      "over_different_item_negatives": 0.690816,
-      "over_every_negative": -0.099184,
-      "strongest_different_item_negative": 0.12,
+      "over_different_item_negatives": -0.79,
+      "over_every_negative": -0.79,
+      "strongest_different_item_negative": 0.91,
       "strongest_negative": 0.91,
-      "weakest_positive": 0.810816,
+      "weakest_positive": 0.12,
       "why_excluded": "stolen_photos reuses the target's own photographs, so a high item match is the correct answer and a stolen-photo veto hides it; it is not evidence that the matcher confuses two items"
     },
     "labels": [
@@ -56,19 +56,19 @@
       "replica",
       "hidden"
     ],
-    "n": 10,
+    "n": 22,
     "not_computed": [],
     "precision": {
-      "hidden": 1.0,
-      "possibly_real": 1.0,
-      "real": 1.0,
+      "hidden": 0.928571,
+      "possibly_real": 0.333333,
+      "real": null,
       "replica": 1.0
     },
     "protocol": "Bucket decision on the constructed hard-negative corpus. Labels come from the fixture recipe (same shoe, adjacent model, self-declared replica, dead listing, ...), not from a marketplace badge and not from a professional authenticator. Predictions are searcher.ranking.pipeline.judge_candidates followed by published_public_bucket so a self-declared replica is scored as Replica rather than Hidden. Policy version is matching-1. This is not an authenticity-accuracy claim.",
     "recall": {
       "hidden": 1.0,
-      "possibly_real": 1.0,
-      "real": 1.0,
+      "possibly_real": 0.666667,
+      "real": 0.0,
       "replica": 1.0
     },
     "rows": [
@@ -111,6 +111,44 @@
         "truth": "hidden"
       },
       {
+        "authenticity_lower": 0.02,
+        "case_id": "ai_generated",
+        "completeness": 0.6667,
+        "correct": true,
+        "hard_vetoes": [
+          "WRONG_PRODUCT"
+        ],
+        "id": "hardneg:ai_generated",
+        "item_match_lower": 0.12,
+        "predicted": "hidden",
+        "reasons": [
+          "WRONG_PRODUCT",
+          "hidden",
+          "adjudicator=local_deterministic",
+          "output=advisory"
+        ],
+        "truth": "hidden"
+      },
+      {
+        "authenticity_lower": 0.02,
+        "case_id": "ai_generated_multiview",
+        "completeness": 0.6667,
+        "correct": true,
+        "hard_vetoes": [
+          "WRONG_PRODUCT"
+        ],
+        "id": "hardneg:ai_generated_multiview",
+        "item_match_lower": 0.12,
+        "predicted": "hidden",
+        "reasons": [
+          "WRONG_PRODUCT",
+          "hidden",
+          "adjudicator=local_deterministic",
+          "output=advisory"
+        ],
+        "truth": "hidden"
+      },
+      {
         "authenticity_lower": 0.6,
         "case_id": "authentic_poor_photos",
         "completeness": 0.1667,
@@ -120,11 +158,87 @@
         "item_match_lower": 0.810816,
         "predicted": "possibly_real",
         "reasons": [
-          "possibly-real-gate",
+          "possibly-real-gate"
+        ],
+        "truth": "possibly_real"
+      },
+      {
+        "authenticity_lower": 0.02,
+        "case_id": "copied_product_code",
+        "completeness": 0.6667,
+        "correct": true,
+        "hard_vetoes": [
+          "WRONG_PRODUCT"
+        ],
+        "id": "hardneg:copied_product_code",
+        "item_match_lower": 0.12,
+        "predicted": "hidden",
+        "reasons": [
+          "WRONG_PRODUCT",
+          "hidden"
+        ],
+        "truth": "hidden"
+      },
+      {
+        "authenticity_lower": 0.02,
+        "case_id": "copied_product_code_multiview",
+        "completeness": 0.6667,
+        "correct": true,
+        "hard_vetoes": [
+          "WRONG_PRODUCT"
+        ],
+        "id": "hardneg:copied_product_code_multiview",
+        "item_match_lower": 0.12,
+        "predicted": "hidden",
+        "reasons": [
+          "WRONG_PRODUCT",
+          "hidden"
+        ],
+        "truth": "hidden"
+      },
+      {
+        "authenticity_lower": 0.02,
+        "case_id": "counterfeit_excellent_photos",
+        "completeness": 0.6667,
+        "correct": true,
+        "hard_vetoes": [
+          "STRONG_COUNTERFEIT_EVIDENCE",
+          "INSUFFICIENT_MATCH"
+        ],
+        "id": "hardneg:counterfeit_excellent_photos",
+        "item_match_lower": 0.12,
+        "predicted": "hidden",
+        "reasons": [
+          "STRONG_COUNTERFEIT_EVIDENCE",
+          "INSUFFICIENT_MATCH",
+          "hidden",
           "adjudicator=local_deterministic",
           "output=advisory"
         ],
-        "truth": "possibly_real"
+        "truth": "hidden"
+      },
+      {
+        "authenticity_lower": 0.02,
+        "case_id": "counterfeit_excellent_photos_multiview",
+        "completeness": 0.6667,
+        "correct": true,
+        "hard_vetoes": [
+          "HARD_COLOURWAY",
+          "STRONG_COUNTERFEIT_EVIDENCE",
+          "INSUFFICIENT_MATCH"
+        ],
+        "id": "hardneg:counterfeit_excellent_photos_multiview",
+        "item_match_lower": 0.12,
+        "predicted": "hidden",
+        "reasons": [
+          "HARD_COLOURWAY",
+          "STRONG_COUNTERFEIT_EVIDENCE",
+          "INSUFFICIENT_MATCH",
+          "hidden",
+          "adjudicator=local_deterministic",
+          "output=advisory"
+        ],
+        "truth": "hidden"
       },
       {
         "authenticity_lower": 0.02,
@@ -169,6 +283,90 @@
         "truth": "hidden"
       },
       {
+        "authenticity_lower": 0.8,
+        "case_id": "different_season",
+        "completeness": 0.6667,
+        "correct": true,
+        "hard_vetoes": [],
+        "id": "hardneg:different_season",
+        "item_match_lower": 0.874152,
+        "predicted": "possibly_real",
+        "reasons": [
+          "possibly-real-gate"
+        ],
+        "truth": "possibly_real"
+      },
+      {
+        "authenticity_lower": 0.8,
+        "case_id": "different_season_multiview",
+        "completeness": 0.6667,
+        "correct": false,
+        "hard_vetoes": [
+          "HARD_COLOURWAY",
+          "INSUFFICIENT_MATCH"
+        ],
+        "id": "hardneg:different_season_multiview",
+        "item_match_lower": 0.12,
+        "predicted": "hidden",
+        "reasons": [
+          "HARD_COLOURWAY",
+          "INSUFFICIENT_MATCH",
+          "hidden"
+        ],
+        "truth": "possibly_real"
+      },
+      {
+        "authenticity_lower": 0.8,
+        "case_id": "mirrored_image",
+        "completeness": 0.6667,
+        "correct": false,
+        "hard_vetoes": [],
+        "id": "hardneg:mirrored_image",
+        "item_match_lower": 0.91,
+        "predicted": "possibly_real",
+        "reasons": [
+          "possibly-real-gate",
+          "adjudicator=local_deterministic",
+          "output=advisory"
+        ],
+        "truth": "real"
+      },
+      {
+        "authenticity_lower": 0.8,
+        "case_id": "prompt_injection",
+        "completeness": 0.6667,
+        "correct": false,
+        "hard_vetoes": [],
+        "id": "hardneg:prompt_injection",
+        "item_match_lower": 0.91,
+        "predicted": "possibly_real",
+        "reasons": [
+          "possibly-real-gate",
+          "adjudicator=local_deterministic",
+          "output=advisory"
+        ],
+        "truth": "real"
+      },
+      {
+        "authenticity_lower": 0.8,
+        "case_id": "rehosted_sold",
+        "completeness": 0.6667,
+        "correct": true,
+        "hard_vetoes": [
+          "DEAD_LISTING"
+        ],
+        "id": "hardneg:rehosted_sold",
+        "item_match_lower": 0.91,
+        "predicted": "hidden",
+        "reasons": [
+          "DEAD_LISTING",
+          "hidden",
+          "adjudicator=local_deterministic",
+          "output=advisory"
+        ],
+        "truth": "hidden"
+      },
+      {
         "authenticity_lower": 0.02,
         "case_id": "replica_copied_title",
         "completeness": 0.6667,
@@ -183,9 +381,7 @@
         "reasons": [
           "SELF_DECLARED_REPLICA",
           "WRONG_PRODUCT",
-          "hidden",
-          "adjudicator=local_deterministic",
-          "output=advisory"
+          "hidden"
         ],
         "truth": "replica"
       },
@@ -206,11 +402,25 @@
           "SELF_DECLARED_REPLICA",
           "WRONG_PRODUCT",
           "HARD_COLOURWAY",
-          "hidden",
+          "hidden"
+        ],
+        "truth": "replica"
+      },
+      {
+        "authenticity_lower": 0.8,
+        "case_id": "stock_mixed",
+        "completeness": 0.6667,
+        "correct": false,
+        "hard_vetoes": [],
+        "id": "hardneg:stock_mixed",
+        "item_match_lower": 0.91,
+        "predicted": "possibly_real",
+        "reasons": [
+          "possibly-real-gate",
           "adjudicator=local_deterministic",
           "output=advisory"
         ],
-        "truth": "replica"
+        "truth": "real"
       },
       {
         "authenticity_lower": 0.02,
@@ -235,13 +445,13 @@
         "authenticity_lower": 0.8,
         "case_id": "true_match",
         "completeness": 0.6667,
-        "correct": true,
+        "correct": false,
         "hard_vetoes": [],
         "id": "hardneg:true_match",
         "item_match_lower": 0.91,
-        "predicted": "real",
+        "predicted": "possibly_real",
         "reasons": [
-          "real-gate",
+          "possibly-real-gate",
           "adjudicator=local_deterministic",
           "output=advisory"
         ],
@@ -268,7 +478,7 @@
       }
     ],
     "split": "held_out",
-    "wall_seconds": 4.296781
+    "wall_seconds": 11.105325
   },
   "calibration": {
     "curve": {
@@ -402,20 +612,8 @@
   "command": "uv run python -m benchmark.run --all",
   "dataset_authority": {
     "calibration": {
-      "hash": "5a80bb07ca25453a5fde96fb28da161beb7b33045397bfb909fe59e3df8f4a0f",
+      "hash": "43595b2c6eb2c711afbec7b9e44ef3ed973febf266e6bac4d03314a43994072d",
       "ids": [
-        "hardneg:ai_generated",
-        "hardneg:ai_generated_multiview",
-        "hardneg:copied_product_code",
-        "hardneg:copied_product_code_multiview",
-        "hardneg:counterfeit_excellent_photos",
-        "hardneg:counterfeit_excellent_photos_multiview",
-        "hardneg:different_season",
-        "hardneg:different_season_multiview",
-        "hardneg:mirrored_image",
-        "hardneg:prompt_injection",
-        "hardneg:rehosted_sold",
-        "hardneg:stock_mixed",
         "kind:8001001137032",
         "kind:8001001141343",
         "kind:8001001141350",
@@ -425,15 +623,27 @@
       "permission": "KIND listings: cached shop.kind.co.jp product photographs already in fixtures/known_item_kind (SOURCE_POLICY admitted KIND GET product/collection; no new image fetch). Hard-negative cases: project-generated synthetic diagrams."
     },
     "held_out": {
-      "hash": "eeb4d2a4036ddfc31dc6adf04c9d0d147d2ede8264a97233bba245e0ac9f7adf",
+      "hash": "94b305448c83f6c27f0b2db52b0360ba75797da62f25bd443e10f8775c33a7cf",
       "ids": [
         "hardneg:adjacent_model",
         "hardneg:adjacent_model_multiview",
+        "hardneg:ai_generated",
+        "hardneg:ai_generated_multiview",
         "hardneg:authentic_poor_photos",
+        "hardneg:copied_product_code",
+        "hardneg:copied_product_code_multiview",
+        "hardneg:counterfeit_excellent_photos",
+        "hardneg:counterfeit_excellent_photos_multiview",
         "hardneg:different_colourway",
         "hardneg:different_colourway_multiview",
+        "hardneg:different_season",
+        "hardneg:different_season_multiview",
+        "hardneg:mirrored_image",
+        "hardneg:prompt_injection",
+        "hardneg:rehosted_sold",
         "hardneg:replica_copied_title",
         "hardneg:replica_copied_title_multiview",
+        "hardneg:stock_mixed",
         "hardneg:stolen_photos",
         "hardneg:true_match",
         "hardneg:two_items",
@@ -462,9 +672,9 @@
     "A claim that Searcher is better than Google Images or any other engine."
   ],
   "evidence_board": "artifacts/benchmark/evidence-board.html",
-  "git_sha": "d2645105c934e2d44980934f1465ad39682b871a",
+  "git_sha": "79c50bd451bc11274dc6505acf24a10f3019cee1",
   "host": "Mac-Studio",
-  "measured_at": "2026-08-17T17:57:14.638180+00:00",
+  "measured_at": "2026-08-17T21:32:32.978589+00:00",
   "no_authenticity_claim": true,
   "not_computed": [
     {
@@ -484,25 +694,25 @@
     "bucket_campaign": {
       "cache_hits": 0,
       "fetches": 0,
-      "images_processed": 79,
-      "wall_seconds": 4.296781
+      "images_processed": 179,
+      "wall_seconds": 11.105325
     },
     "cache_hit_rate": 1.0,
     "campaigns": 6,
     "fetches_per_campaign": 0,
     "fetches_total": 0,
-    "images_per_second": 44.908032,
-    "images_processed": 254,
+    "images_per_second": 19.647032,
+    "images_processed": 354,
     "note": "fetches_per_campaign is 0 because every byte came from fixtures/ already permitted to be held. A live campaign's fetch cost is a different protocol; see artifacts/searcher-performance.receipt.json and artifacts/searcher-adversarial-recall.receipt.json.",
     "protocol": "Offline fixture campaigns. Retrieval is one closed-set ranking pass. Bucket evaluation is one judge_candidates campaign on the held-out constructed cases. No live source is contacted.",
     "retrieval": {
       "fetches": 0,
-      "images_per_second": 128.750013,
+      "images_per_second": 25.315855,
       "images_scored": 175,
-      "wall_seconds": 1.359223
+      "wall_seconds": 6.912664
     },
-    "wall_seconds_per_campaign": 0.942667,
-    "wall_seconds_total": 5.656004
+    "wall_seconds_per_campaign": 3.002998,
+    "wall_seconds_total": 18.017989
   },
   "policy_version": "provisional-1",
   "prior_receipts": {
@@ -2052,7 +2262,7 @@
       "units": "cosine"
     },
     "split": "held_out",
-    "wall_seconds": 1.359223
+    "wall_seconds": 6.912664
   },
   "schema_version": "1.1.0",
   "scorer": {
@@ -2064,20 +2274,8 @@
   "shipped_threshold": 0.86,
   "splits": {
     "calibration": {
-      "hash": "5a80bb07ca25453a5fde96fb28da161beb7b33045397bfb909fe59e3df8f4a0f",
+      "hash": "43595b2c6eb2c711afbec7b9e44ef3ed973febf266e6bac4d03314a43994072d",
       "ids": [
-        "hardneg:ai_generated",
-        "hardneg:ai_generated_multiview",
-        "hardneg:copied_product_code",
-        "hardneg:copied_product_code_multiview",
-        "hardneg:counterfeit_excellent_photos",
-        "hardneg:counterfeit_excellent_photos_multiview",
-        "hardneg:different_season",
-        "hardneg:different_season_multiview",
-        "hardneg:mirrored_image",
-        "hardneg:prompt_injection",
-        "hardneg:rehosted_sold",
-        "hardneg:stock_mixed",
         "kind:8001001137032",
         "kind:8001001141343",
         "kind:8001001141350",
@@ -2086,15 +2284,27 @@
       ]
     },
     "held_out": {
-      "hash": "eeb4d2a4036ddfc31dc6adf04c9d0d147d2ede8264a97233bba245e0ac9f7adf",
+      "hash": "94b305448c83f6c27f0b2db52b0360ba75797da62f25bd443e10f8775c33a7cf",
       "ids": [
         "hardneg:adjacent_model",
         "hardneg:adjacent_model_multiview",
+        "hardneg:ai_generated",
+        "hardneg:ai_generated_multiview",
         "hardneg:authentic_poor_photos",
+        "hardneg:copied_product_code",
+        "hardneg:copied_product_code_multiview",
+        "hardneg:counterfeit_excellent_photos",
+        "hardneg:counterfeit_excellent_photos_multiview",
         "hardneg:different_colourway",
         "hardneg:different_colourway_multiview",
+        "hardneg:different_season",
+        "hardneg:different_season_multiview",
+        "hardneg:mirrored_image",
+        "hardneg:prompt_injection",
+        "hardneg:rehosted_sold",
         "hardneg:replica_copied_title",
         "hardneg:replica_copied_title_multiview",
+        "hardneg:stock_mixed",
         "hardneg:stolen_photos",
         "hardneg:true_match",
         "hardneg:two_items",
@@ -2142,7 +2352,7 @@
         "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
         "source": "fixtures/hard_negatives + searcher.matching.synth",
         "source_url": null,
-        "split": "calibration",
+        "split": "held_out",
         "title": "ai_generated",
         "truth_bucket": "hidden"
       },
@@ -2154,7 +2364,7 @@
         "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
         "source": "fixtures/hard_negatives + searcher.matching.synth",
         "source_url": null,
-        "split": "calibration",
+        "split": "held_out",
         "title": "ai_generated_multiview",
         "truth_bucket": "hidden"
       },
@@ -2178,7 +2388,7 @@
         "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
         "source": "fixtures/hard_negatives + searcher.matching.synth",
         "source_url": null,
-        "split": "calibration",
+        "split": "held_out",
         "title": "copied_product_code",
         "truth_bucket": "hidden"
       },
@@ -2190,7 +2400,7 @@
         "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
         "source": "fixtures/hard_negatives + searcher.matching.synth",
         "source_url": null,
-        "split": "calibration",
+        "split": "held_out",
         "title": "copied_product_code_multiview",
         "truth_bucket": "hidden"
       },
@@ -2202,7 +2412,7 @@
         "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
         "source": "fixtures/hard_negatives + searcher.matching.synth",
         "source_url": null,
-        "split": "calibration",
+        "split": "held_out",
         "title": "counterfeit_excellent_photos",
         "truth_bucket": "hidden"
       },
@@ -2214,7 +2424,7 @@
         "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
         "source": "fixtures/hard_negatives + searcher.matching.synth",
         "source_url": null,
-        "split": "calibration",
+        "split": "held_out",
         "title": "counterfeit_excellent_photos_multiview",
         "truth_bucket": "hidden"
       },
@@ -2250,7 +2460,7 @@
         "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
         "source": "fixtures/hard_negatives + searcher.matching.synth",
         "source_url": null,
-        "split": "calibration",
+        "split": "held_out",
         "title": "different_season",
         "truth_bucket": "possibly_real"
       },
@@ -2262,7 +2472,7 @@
         "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
         "source": "fixtures/hard_negatives + searcher.matching.synth",
         "source_url": null,
-        "split": "calibration",
+        "split": "held_out",
         "title": "different_season_multiview",
         "truth_bucket": "possibly_real"
       },
@@ -2274,7 +2484,7 @@
         "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
         "source": "fixtures/hard_negatives + searcher.matching.synth",
         "source_url": null,
-        "split": "calibration",
+        "split": "held_out",
         "title": "mirrored_image",
         "truth_bucket": "real"
       },
@@ -2286,7 +2496,7 @@
         "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
         "source": "fixtures/hard_negatives + searcher.matching.synth",
         "source_url": null,
-        "split": "calibration",
+        "split": "held_out",
         "title": "prompt_injection",
         "truth_bucket": "real"
       },
@@ -2298,7 +2508,7 @@
         "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
         "source": "fixtures/hard_negatives + searcher.matching.synth",
         "source_url": null,
-        "split": "calibration",
+        "split": "held_out",
         "title": "rehosted_sold",
         "truth_bucket": "hidden"
       },
@@ -2334,7 +2544,7 @@
         "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
         "source": "fixtures/hard_negatives + searcher.matching.synth",
         "source_url": null,
-        "split": "calibration",
+        "split": "held_out",
         "title": "stock_mixed",
         "truth_bucket": "real"
       },
@@ -2535,7 +2745,7 @@
         "truth_bucket": null
       }
     ],
-    "rule": "Split by product identity (listing handle or constructed-case id). An identifier appears in exactly one of {calibration, held_out}. There is no authorized hidden-evaluation set; that split is absent. KIND: the known-item target handle is reserved for held_out; remaining handles sorted lexicographically, first five calibration, rest held_out. Hard-negative cases: the ids in HELD_OUT_BUCKET_IDS (the original seven plus multi-view variants of the held-out negatives) are held_out so the reporting split contains Real, Possibly Real, Replica, and hidden, and so best-of-N pairing is scored on wrong items that carry many views; the remaining constructed cases are calibration. Calibration is used only to inspect the score-versus-outcome curve and to show where the already-shipped 0.86 threshold sits. Thresholds are not retuned. Held-out is used only to report retrieval and bucket numbers."
+    "rule": "Split by product identity (listing handle or constructed-case id) and, for constructed cases, by render provenance. An identifier appears in exactly one of {calibration, held_out}. There is no authorized hidden-evaluation set; that split is absent. KIND: the known-item target handle is reserved for held_out; remaining handles sorted lexicographically, first five calibration, rest held_out. Hard-negative cases: group by the rendered images they are built from (connected components of shared image digests); assign each group wholly to one split. A group is held_out if it contains any seed reporting case (the original seven plus multi-view variants of those negatives), so the reporting split still contains Real, Possibly Real, Replica, and hidden, and so best-of-N pairing is scored on wrong items that carry many views; remaining groups are calibration. Groups are not split, trimmed, dropped, or moved to hidden. Calibration is used only to inspect the score-versus-outcome curve and to show where the already-shipped 0.86 threshold sits. Thresholds are not retuned. Held-out is used only to report retrieval and bucket numbers."
   },
   "threshold_retuned": false
 }

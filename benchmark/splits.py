@@ -48,10 +48,11 @@ BUCKET_TRUTH: dict[str, str] = {
     },
 }
 
-# Held-out bucket cases: mix of Real / Possibly Real / Replica / hidden.
+# Seed held-out cases: mix of Real / Possibly Real / Replica / hidden.
 # Replica has a single constructed parent; its multi-view variant stays with it
 # so the reporting split sees the pairing rule on a wrong item with many views.
-_BASE_HELD_OUT_BUCKET_IDS: frozenset[str] = frozenset(
+# These seeds pull their whole render group; they are not a per-case assignment.
+_SEED_HELD_OUT_BUCKET_IDS: frozenset[str] = frozenset(
     {
         "true_match",
         "adjacent_model",
@@ -62,11 +63,66 @@ _BASE_HELD_OUT_BUCKET_IDS: frozenset[str] = frozenset(
         "two_items",
     }
 )
-HELD_OUT_BUCKET_IDS: frozenset[str] = _BASE_HELD_OUT_BUCKET_IDS | frozenset(
-    multiview_case_id(case_id)
-    for case_id in _BASE_HELD_OUT_BUCKET_IDS
-    if case_id in NEGATIVE_PARENTS
-)
+
+
+def _image_digests_for(case_id: str) -> list[str]:
+    """SHA-256 of each rendered PNG the constructed case is built from."""
+    import hashlib
+
+    from .corpus import images_for
+
+    return [hashlib.sha256(png).hexdigest() for _name, png, _role in images_for(case_id)]
+
+
+def _union_find(case_ids: Iterable[str]) -> dict[str, str]:
+    """Join cases that share any rendered image digest."""
+    ids = tuple(case_ids)
+    parent = {case_id: case_id for case_id in ids}
+
+    def find(item: str) -> str:
+        while parent[item] != item:
+            parent[item] = parent[parent[item]]
+            item = parent[item]
+        return item
+
+    def union(left: str, right: str) -> None:
+        root_left, root_right = find(left), find(right)
+        if root_left != root_right:
+            parent[root_right] = root_left
+
+    by_digest: dict[str, list[str]] = {}
+    for case_id in ids:
+        for digest in _image_digests_for(case_id):
+            by_digest.setdefault(digest, []).append(case_id)
+    for members in by_digest.values():
+        head = members[0]
+        for other in members[1:]:
+            union(head, other)
+    return {case_id: find(case_id) for case_id in ids}
+
+
+def render_groups(case_ids: Iterable[str] | None = None) -> tuple[frozenset[str], ...]:
+    """Connected components of constructed cases that share a rendered image."""
+    ids = tuple(case_ids) if case_ids is not None else tuple(BUCKET_TRUTH)
+    roots = _union_find(ids)
+    grouped: dict[str, set[str]] = {}
+    for case_id, root in roots.items():
+        grouped.setdefault(root, set()).add(case_id)
+    return tuple(frozenset(group) for group in grouped.values())
+
+
+def _held_out_from_render_groups() -> frozenset[str]:
+    seeds = _SEED_HELD_OUT_BUCKET_IDS | frozenset(
+        multiview_case_id(case_id)
+        for case_id in _SEED_HELD_OUT_BUCKET_IDS
+        if case_id in NEGATIVE_PARENTS
+    )
+    held: set[str] = set()
+    for group in render_groups(BUCKET_TRUTH):
+        if group & seeds:
+            held |= group
+    return frozenset(held)
+
 
 KIND_PERMISSION = (
     "Cached public product photographs from shop.kind.co.jp, already held in "
@@ -84,16 +140,20 @@ HARDNEG_PERMISSION = (
 )
 
 SPLIT_RULE = (
-    "Split by product identity (listing handle or constructed-case id). "
+    "Split by product identity (listing handle or constructed-case id) and, "
+    "for constructed cases, by render provenance. "
     "An identifier appears in exactly one of {calibration, held_out}. "
     "There is no authorized hidden-evaluation set; that split is absent. "
     "KIND: the known-item target handle is reserved for held_out; remaining "
     "handles sorted lexicographically, first five calibration, rest held_out. "
-    "Hard-negative cases: the ids in HELD_OUT_BUCKET_IDS (the original seven "
-    "plus multi-view variants of the held-out negatives) are held_out so the "
-    "reporting split contains Real, Possibly Real, Replica, and hidden, and "
-    "so best-of-N pairing is scored on wrong items that carry many views; "
-    "the remaining constructed cases are calibration. "
+    "Hard-negative cases: group by the rendered images they are built from "
+    "(connected components of shared image digests); assign each group "
+    "wholly to one split. A group is held_out if it contains any seed "
+    "reporting case (the original seven plus multi-view variants of those "
+    "negatives), so the reporting split still contains Real, Possibly Real, "
+    "Replica, and hidden, and so best-of-N pairing is scored on wrong items "
+    "that carry many views; remaining groups are calibration. Groups are "
+    "not split, trimmed, dropped, or moved to hidden. "
     "Calibration is used only to inspect the score-versus-outcome curve and "
     "to show where the already-shipped 0.86 threshold sits. Thresholds are "
     "not retuned. Held-out is used only to report retrieval and bucket numbers."
@@ -102,6 +162,13 @@ SPLIT_RULE = (
 
 class SplitLeakageError(ValueError):
     """Raised when the same identifier is present in more than one split."""
+
+
+# Whole render groups, not individual cases. A group that contains any seed
+# reporting case is held_out; the rest stay calibration. No group is trimmed.
+# Shared view templates (sole, label, front) connect most constructed cases
+# into one component; that size is reported, not cut down.
+HELD_OUT_BUCKET_IDS: frozenset[str] = _held_out_from_render_groups()
 
 
 @dataclass(frozen=True, slots=True)

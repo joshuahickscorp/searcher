@@ -1,19 +1,7 @@
 {
   "calibration": {
-    "hash": "5a80bb07ca25453a5fde96fb28da161beb7b33045397bfb909fe59e3df8f4a0f",
+    "hash": "43595b2c6eb2c711afbec7b9e44ef3ed973febf266e6bac4d03314a43994072d",
     "ids": [
-      "hardneg:ai_generated",
-      "hardneg:ai_generated_multiview",
-      "hardneg:copied_product_code",
-      "hardneg:copied_product_code_multiview",
-      "hardneg:counterfeit_excellent_photos",
-      "hardneg:counterfeit_excellent_photos_multiview",
-      "hardneg:different_season",
-      "hardneg:different_season_multiview",
-      "hardneg:mirrored_image",
-      "hardneg:prompt_injection",
-      "hardneg:rehosted_sold",
-      "hardneg:stock_mixed",
       "kind:8001001137032",
       "kind:8001001141343",
       "kind:8001001141350",
@@ -22,15 +10,27 @@
     ]
   },
   "held_out": {
-    "hash": "eeb4d2a4036ddfc31dc6adf04c9d0d147d2ede8264a97233bba245e0ac9f7adf",
+    "hash": "94b305448c83f6c27f0b2db52b0360ba75797da62f25bd443e10f8775c33a7cf",
     "ids": [
       "hardneg:adjacent_model",
       "hardneg:adjacent_model_multiview",
+      "hardneg:ai_generated",
+      "hardneg:ai_generated_multiview",
       "hardneg:authentic_poor_photos",
+      "hardneg:copied_product_code",
+      "hardneg:copied_product_code_multiview",
+      "hardneg:counterfeit_excellent_photos",
+      "hardneg:counterfeit_excellent_photos_multiview",
       "hardneg:different_colourway",
       "hardneg:different_colourway_multiview",
+      "hardneg:different_season",
+      "hardneg:different_season_multiview",
+      "hardneg:mirrored_image",
+      "hardneg:prompt_injection",
+      "hardneg:rehosted_sold",
       "hardneg:replica_copied_title",
       "hardneg:replica_copied_title_multiview",
+      "hardneg:stock_mixed",
       "hardneg:stolen_photos",
       "hardneg:true_match",
       "hardneg:two_items",
@@ -78,7 +78,7 @@
       "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
       "source": "fixtures/hard_negatives + searcher.matching.synth",
       "source_url": null,
-      "split": "calibration",
+      "split": "held_out",
       "title": "ai_generated",
       "truth_bucket": "hidden"
     },
@@ -90,7 +90,7 @@
       "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
       "source": "fixtures/hard_negatives + searcher.matching.synth",
       "source_url": null,
-      "split": "calibration",
+      "split": "held_out",
       "title": "ai_generated_multiview",
       "truth_bucket": "hidden"
     },
@@ -114,7 +114,7 @@
       "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
       "source": "fixtures/hard_negatives + searcher.matching.synth",
       "source_url": null,
-      "split": "calibration",
+      "split": "held_out",
       "title": "copied_product_code",
       "truth_bucket": "hidden"
     },
@@ -126,7 +126,7 @@
       "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
       "source": "fixtures/hard_negatives + searcher.matching.synth",
       "source_url": null,
-      "split": "calibration",
+      "split": "held_out",
       "title": "copied_product_code_multiview",
       "truth_bucket": "hidden"
     },
@@ -138,7 +138,7 @@
       "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
       "source": "fixtures/hard_negatives + searcher.matching.synth",
       "source_url": null,
-      "split": "calibration",
+      "split": "held_out",
       "title": "counterfeit_excellent_photos",
       "truth_bucket": "hidden"
     },
@@ -150,7 +150,7 @@
       "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
       "source": "fixtures/hard_negatives + searcher.matching.synth",
       "source_url": null,
-      "split": "calibration",
+      "split": "held_out",
       "title": "counterfeit_excellent_photos_multiview",
       "truth_bucket": "hidden"
     },
@@ -186,7 +186,7 @@
       "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
       "source": "fixtures/hard_negatives + searcher.matching.synth",
       "source_url": null,
-      "split": "calibration",
+      "split": "held_out",
       "title": "different_season",
       "truth_bucket": "possibly_real"
     },
@@ -198,7 +198,7 @@
       "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
       "source": "fixtures/hard_negatives + searcher.matching.synth",
       "source_url": null,
-      "split": "calibration",
+      "split": "held_out",
       "title": "different_season_multiview",
       "truth_bucket": "possibly_real"
     },
@@ -210,7 +210,7 @@
       "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
       "source": "fixtures/hard_negatives + searcher.matching.synth",
       "source_url": null,
-      "split": "calibration",
+      "split": "held_out",
       "title": "mirrored_image",
       "truth_bucket": "real"
     },
@@ -222,7 +222,7 @@
       "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
       "source": "fixtures/hard_negatives + searcher.matching.synth",
       "source_url": null,
-      "split": "calibration",
+      "split": "held_out",
       "title": "prompt_injection",
       "truth_bucket": "real"
     },
@@ -234,7 +234,7 @@
       "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
       "source": "fixtures/hard_negatives + searcher.matching.synth",
       "source_url": null,
-      "split": "calibration",
+      "split": "held_out",
       "title": "rehosted_sold",
       "truth_bucket": "hidden"
     },
@@ -270,7 +270,7 @@
       "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
       "source": "fixtures/hard_negatives + searcher.matching.synth",
       "source_url": null,
-      "split": "calibration",
+      "split": "held_out",
       "title": "stock_mixed",
       "truth_bucket": "real"
     },
@@ -472,5 +472,5 @@
     }
   ],
   "protocol": "searcher-public-benchmark-v1",
-  "rule": "Split by product identity (listing handle or constructed-case id). An identifier appears in exactly one of {calibration, held_out}. There is no authorized hidden-evaluation set; that split is absent. KIND: the known-item target handle is reserved for held_out; remaining handles sorted lexicographically, first five calibration, rest held_out. Hard-negative cases: the ids in HELD_OUT_BUCKET_IDS (the original seven plus multi-view variants of the held-out negatives) are held_out so the reporting split contains Real, Possibly Real, Replica, and hidden, and so best-of-N pairing is scored on wrong items that carry many views; the remaining constructed cases are calibration. Calibration is used only to inspect the score-versus-outcome curve and to show where the already-shipped 0.86 threshold sits. Thresholds are not retuned. Held-out is used only to report retrieval and bucket numbers."
+  "rule": "Split by product identity (listing handle or constructed-case id) and, for constructed cases, by render provenance. An identifier appears in exactly one of {calibration, held_out}. There is no authorized hidden-evaluation set; that split is absent. KIND: the known-item target handle is reserved for held_out; remaining handles sorted lexicographically, first five calibration, rest held_out. Hard-negative cases: group by the rendered images they are built from (connected components of shared image digests); assign each group wholly to one split. A group is held_out if it contains any seed reporting case (the original seven plus multi-view variants of those negatives), so the reporting split still contains Real, Possibly Real, Replica, and hidden, and so best-of-N pairing is scored on wrong items that carry many views; remaining groups are calibration. Groups are not split, trimmed, dropped, or moved to hidden. Calibration is used only to inspect the score-versus-outcome curve and to show where the already-shipped 0.86 threshold sits. Thresholds are not retuned. Held-out is used only to report retrieval and bucket numbers."
 }
