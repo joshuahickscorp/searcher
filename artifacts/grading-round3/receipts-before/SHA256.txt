@@ -1,0 +1,7 @@
+47af0450c1d1645f5e6578862bc86a7ad68efc3e  artifacts/grading-round3/receipts-before/searcher-adversarial-recall.receipt.json
+27c70a615c1c914543d1aec3f54c1f7bf4017786  artifacts/grading-round3/receipts-before/searcher-flagship-acceptance.receipt.json
+2517e02856f71d4ea37f98763c7c66fa2df77f77  artifacts/grading-round3/receipts-before/searcher-flagship-matched.receipt.json
+72e53262c5eb9b668103e05ef7d005f305eea487  artifacts/grading-round3/receipts-before/searcher-match-calibration.receipt.json
+2a167104004e11d18d8eaf9cc50c148c1d2e702d  artifacts/grading-round3/receipts-before/searcher-performance.receipt.json
+cb4d7ceafdb0a9e61ea4d6c2ea19f5df9f1cc54a  artifacts/grading-round3/receipts-before/searcher-public-benchmark.receipt.json
+9ab9b2d811df01d331f42c66823085543a014243  artifacts/grading-round3/receipts-before/searcher-threshold.receipt.json

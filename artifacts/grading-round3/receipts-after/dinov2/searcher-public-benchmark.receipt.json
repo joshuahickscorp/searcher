@@ -1,0 +1,2362 @@
+{
+  "buckets": {
+    "cache_hits": 0,
+    "confusion": {
+      "hidden": {
+        "hidden": 4,
+        "possibly_real": 0,
+        "real": 0,
+        "replica": 0
+      },
+      "possibly_real": {
+        "hidden": 0,
+        "possibly_real": 1,
+        "real": 0,
+        "replica": 0
+      },
+      "real": {
+        "hidden": 0,
+        "possibly_real": 0,
+        "real": 1,
+        "replica": 0
+      },
+      "replica": {
+        "hidden": 0,
+        "possibly_real": 0,
+        "real": 0,
+        "replica": 1
+      }
+    },
+    "false_real": {
+      "count": 0,
+      "ids": [],
+      "n": 7,
+      "n_labelled_not_real": 6,
+      "note": "A false Real is a candidate labelled something other than Real that the engine published as Real. This is the expensive error.",
+      "rate_among_all": 0.0,
+      "rate_among_not_real": 0.0
+    },
+    "fetches": 0,
+    "images_processed": 34,
+    "labels": [
+      "real",
+      "possibly_real",
+      "replica",
+      "hidden"
+    ],
+    "n": 7,
+    "not_computed": [],
+    "precision": {
+      "hidden": 1.0,
+      "possibly_real": 1.0,
+      "real": 1.0,
+      "replica": 1.0
+    },
+    "protocol": "Bucket decision on the constructed hard-negative corpus. Labels come from the fixture recipe (same shoe, adjacent model, self-declared replica, dead listing, ...), not from a marketplace badge and not from a professional authenticator. Predictions are searcher.ranking.pipeline.judge_candidates followed by published_public_bucket so a self-declared replica is scored as Replica rather than Hidden. Policy version is matching-1. This is not an authenticity-accuracy claim.",
+    "recall": {
+      "hidden": 1.0,
+      "possibly_real": 1.0,
+      "real": 1.0,
+      "replica": 1.0
+    },
+    "rows": [
+      {
+        "authenticity_lower": 0.02,
+        "case_id": "adjacent_model",
+        "completeness": 0.6667,
+        "correct": true,
+        "hard_vetoes": [
+          "WRONG_PRODUCT"
+        ],
+        "id": "hardneg:adjacent_model",
+        "item_match_lower": 0.12,
+        "predicted": "hidden",
+        "reasons": [
+          "WRONG_PRODUCT",
+          "hidden",
+          "adjudicator=local_deterministic",
+          "output=advisory"
+        ],
+        "truth": "hidden"
+      },
+      {
+        "authenticity_lower": 0.6,
+        "case_id": "authentic_poor_photos",
+        "completeness": 0.1667,
+        "correct": true,
+        "hard_vetoes": [],
+        "id": "hardneg:authentic_poor_photos",
+        "item_match_lower": 0.807616,
+        "predicted": "possibly_real",
+        "reasons": [
+          "possibly-real-gate",
+          "adjudicator=local_deterministic",
+          "output=advisory"
+        ],
+        "truth": "possibly_real"
+      },
+      {
+        "authenticity_lower": 0.02,
+        "case_id": "different_colourway",
+        "completeness": 0.6667,
+        "correct": true,
+        "hard_vetoes": [
+          "HARD_COLOURWAY",
+          "INSUFFICIENT_MATCH"
+        ],
+        "id": "hardneg:different_colourway",
+        "item_match_lower": 0.12,
+        "predicted": "hidden",
+        "reasons": [
+          "HARD_COLOURWAY",
+          "INSUFFICIENT_MATCH",
+          "hidden",
+          "adjudicator=local_deterministic",
+          "output=advisory"
+        ],
+        "truth": "hidden"
+      },
+      {
+        "authenticity_lower": 0.02,
+        "case_id": "replica_copied_title",
+        "completeness": 0.6667,
+        "correct": true,
+        "hard_vetoes": [
+          "SELF_DECLARED_REPLICA",
+          "WRONG_PRODUCT"
+        ],
+        "id": "hardneg:replica_copied_title",
+        "item_match_lower": 0.12,
+        "predicted": "replica",
+        "reasons": [
+          "SELF_DECLARED_REPLICA",
+          "WRONG_PRODUCT",
+          "hidden",
+          "adjudicator=local_deterministic",
+          "output=advisory"
+        ],
+        "truth": "replica"
+      },
+      {
+        "authenticity_lower": 0.02,
+        "case_id": "stolen_photos",
+        "completeness": 0.6667,
+        "correct": true,
+        "hard_vetoes": [
+          "IMAGE_THEFT_OR_SCAM"
+        ],
+        "id": "hardneg:stolen_photos",
+        "item_match_lower": 0.91,
+        "predicted": "hidden",
+        "reasons": [
+          "IMAGE_THEFT_OR_SCAM",
+          "hidden",
+          "adjudicator=local_deterministic",
+          "output=advisory"
+        ],
+        "truth": "hidden"
+      },
+      {
+        "authenticity_lower": 0.8,
+        "case_id": "true_match",
+        "completeness": 0.6667,
+        "correct": true,
+        "hard_vetoes": [],
+        "id": "hardneg:true_match",
+        "item_match_lower": 0.91,
+        "predicted": "real",
+        "reasons": [
+          "real-gate",
+          "adjudicator=local_deterministic",
+          "output=advisory"
+        ],
+        "truth": "real"
+      },
+      {
+        "authenticity_lower": 0.02,
+        "case_id": "two_items",
+        "completeness": 0.5,
+        "correct": true,
+        "hard_vetoes": [
+          "WRONG_PRODUCT"
+        ],
+        "id": "hardneg:two_items",
+        "item_match_lower": 0.12,
+        "predicted": "hidden",
+        "reasons": [
+          "WRONG_PRODUCT",
+          "hidden",
+          "adjudicator=local_deterministic",
+          "output=advisory"
+        ],
+        "truth": "hidden"
+      }
+    ],
+    "split": "held_out",
+    "wall_seconds": 1.012658
+  },
+  "calibration": {
+    "curve": {
+      "bin_width": 0.1,
+      "bins": [
+        {
+          "hi": 0.1,
+          "index": 0,
+          "lo": 0.0,
+          "mean_score": null,
+          "n": 0,
+          "n_negative": 0,
+          "n_positive": 0,
+          "positive_rate": null
+        },
+        {
+          "hi": 0.2,
+          "index": 1,
+          "lo": 0.1,
+          "mean_score": null,
+          "n": 0,
+          "n_negative": 0,
+          "n_positive": 0,
+          "positive_rate": null
+        },
+        {
+          "hi": 0.3,
+          "index": 2,
+          "lo": 0.2,
+          "mean_score": null,
+          "n": 0,
+          "n_negative": 0,
+          "n_positive": 0,
+          "positive_rate": null
+        },
+        {
+          "hi": 0.4,
+          "index": 3,
+          "lo": 0.3,
+          "mean_score": null,
+          "n": 0,
+          "n_negative": 0,
+          "n_positive": 0,
+          "positive_rate": null
+        },
+        {
+          "hi": 0.5,
+          "index": 4,
+          "lo": 0.4,
+          "mean_score": null,
+          "n": 0,
+          "n_negative": 0,
+          "n_positive": 0,
+          "positive_rate": null
+        },
+        {
+          "hi": 0.6,
+          "index": 5,
+          "lo": 0.5,
+          "mean_score": null,
+          "n": 0,
+          "n_negative": 0,
+          "n_positive": 0,
+          "positive_rate": null
+        },
+        {
+          "hi": 0.7,
+          "index": 6,
+          "lo": 0.6,
+          "mean_score": null,
+          "n": 0,
+          "n_negative": 0,
+          "n_positive": 0,
+          "positive_rate": null
+        },
+        {
+          "hi": 0.8,
+          "index": 7,
+          "lo": 0.7,
+          "mean_score": 0.7775662720270005,
+          "n": 2,
+          "n_negative": 0,
+          "n_positive": 2,
+          "positive_rate": 1.0
+        },
+        {
+          "hi": 0.9,
+          "index": 8,
+          "lo": 0.8,
+          "mean_score": 0.8589582780699047,
+          "n": 10,
+          "n_negative": 7,
+          "n_positive": 3,
+          "positive_rate": 0.3
+        },
+        {
+          "hi": 1.0,
+          "index": 9,
+          "lo": 0.9,
+          "mean_score": 0.939780680379219,
+          "n": 8,
+          "n_negative": 3,
+          "n_positive": 5,
+          "positive_rate": 0.625
+        }
+      ],
+      "n_negative": 10,
+      "n_pairs": 20,
+      "n_positive": 10,
+      "shipped_threshold": 0.86,
+      "threshold_bin": 8
+    },
+    "n_pairs": 20,
+    "protocol": "Pair curve on the calibration KIND listings only. A positive pair is two different authorized photographs of the same listing. A negative pair is gallery photograph of listing A versus gallery photograph of listing B. The shipped 0.86 threshold is taken from artifacts/searcher-match-calibration.receipt.json and is not refit on this split.",
+    "scorer": {
+      "backend_identity": "facebookresearch.dinov2.vits14",
+      "identity": "facebookresearch.dinov2.vits14",
+      "notes": "DINOv2 ViT-S/14 CLS, L2-normalised cosine. Operating threshold 0.86 is the shipped pair gate, not retuned here.",
+      "shipped_threshold": 0.86,
+      "threshold_applies": true,
+      "units": "cosine"
+    },
+    "shipped_threshold": 0.86,
+    "split": "calibration",
+    "threshold_bin_note": "shipped threshold 0.86 sits in bin [0.8, 0.9] with n=10 (positive_rate=0.3)",
+    "threshold_meaningful_on_this_scale": true,
+    "threshold_retuned": false,
+    "threshold_source": "artifacts/searcher-match-calibration.receipt.json"
+  },
+  "code_version": "0.1.0",
+  "command": "uv run python -m benchmark.run --all",
+  "dataset_authority": {
+    "calibration": {
+      "hash": "ad8f4851f79c66338c1a2430b7fee1242d77e8f940b57faa9fa83a793655c5f1",
+      "ids": [
+        "hardneg:ai_generated",
+        "hardneg:copied_product_code",
+        "hardneg:counterfeit_excellent_photos",
+        "hardneg:different_season",
+        "hardneg:mirrored_image",
+        "hardneg:prompt_injection",
+        "hardneg:rehosted_sold",
+        "hardneg:stock_mixed",
+        "kind:8001001137032",
+        "kind:8001001141343",
+        "kind:8001001141350",
+        "kind:8001001141367",
+        "kind:8001001141442"
+      ],
+      "permission": "KIND listings: cached shop.kind.co.jp product photographs already in fixtures/known_item_kind (SOURCE_POLICY admitted KIND GET product/collection; no new image fetch). Hard-negative cases: project-generated synthetic diagrams."
+    },
+    "held_out": {
+      "hash": "2d0e2ae65f6991595fb3c0b2917d20a4e358c159df9b1ca9c462de7ea1595d55",
+      "ids": [
+        "hardneg:adjacent_model",
+        "hardneg:authentic_poor_photos",
+        "hardneg:different_colourway",
+        "hardneg:replica_copied_title",
+        "hardneg:stolen_photos",
+        "hardneg:true_match",
+        "hardneg:two_items",
+        "kind:8001001141404",
+        "kind:8001001141473",
+        "kind:8001001141480",
+        "kind:8001001141503",
+        "kind:8001001141527"
+      ],
+      "permission": "Same authority families as calibration, disjoint identifiers. Used only to report. Never used to choose a threshold."
+    },
+    "hidden": {
+      "permission": "none \u2014 no authorized hidden set is held",
+      "present": false
+    }
+  },
+  "does_not_cover": [
+    "Hidden evaluation: no authorized hidden split is held, so no hidden-run number exists.",
+    "Live open-set marketplace retrieval: the prior live campaign on three KIND URLs published zero results (coverage exhausted). Those listings are not in the cached fixture pack.",
+    "Authenticity accuracy or professional authentication.",
+    "Conventional-search comparison (Bible \u00a731.8): no frozen baseline service was run.",
+    "Operator photographs, and any image not already in fixtures/.",
+    "New KIND (or other marketplace) image fetches: SOURCE_POLICY does not admit a fresh KIND image scrape for this run.",
+    "Recall@20: the authorized gallery is smaller than 20.",
+    "NDCG, colourway accuracy, multilingual retrieval, unique cluster yield: the authorized set is not labelled for those.",
+    "A claim that Searcher is better than Google Images or any other engine."
+  ],
+  "evidence_board": "artifacts/benchmark/evidence-board.html",
+  "git_sha": "6435d248a716429f197e807627c126b73f30efc5",
+  "host": "Mac-Studio",
+  "measured_at": "2026-08-17T01:18:05.903859+00:00",
+  "no_authenticity_claim": true,
+  "not_computed": [
+    {
+      "id": "recall@10_vs_gallery",
+      "reason": "gallery size is 5; recall@10 equals recall@gallery when every listing is ranked"
+    },
+    {
+      "id": "hidden_evaluation",
+      "reason": "No authorized hidden-evaluation set is held."
+    },
+    {
+      "id": "recall@20",
+      "reason": "Authorized gallery size is 5, which is less than 20."
+    }
+  ],
+  "operational": {
+    "bucket_campaign": {
+      "cache_hits": 0,
+      "fetches": 0,
+      "images_processed": 34,
+      "wall_seconds": 1.012658
+    },
+    "cache_hit_rate": 1.0,
+    "campaigns": 6,
+    "fetches_per_campaign": 0,
+    "fetches_total": 0,
+    "images_per_second": 69.427861,
+    "images_processed": 209,
+    "note": "fetches_per_campaign is 0 because every byte came from fixtures/ already permitted to be held. A live campaign's fetch cost is a different protocol; see artifacts/searcher-performance.receipt.json and artifacts/searcher-adversarial-recall.receipt.json.",
+    "protocol": "Offline fixture campaigns. Retrieval is one closed-set ranking pass. Bucket evaluation is one judge_candidates campaign on the held-out constructed cases. No live source is contacted.",
+    "retrieval": {
+      "fetches": 0,
+      "images_per_second": 87.602447,
+      "images_scored": 175,
+      "wall_seconds": 1.997661
+    },
+    "wall_seconds_per_campaign": 0.50172,
+    "wall_seconds_total": 3.010319
+  },
+  "policy_version": "provisional-1",
+  "prior_receipts": {
+    "adversarial_recall": {
+      "available": true,
+      "found": 0,
+      "listings": [
+        "https://shop.kind.co.jp/products/8003001995070",
+        "https://shop.kind.co.jp/products/8004001907551",
+        "https://shop.kind.co.jp/products/8018001762539"
+      ],
+      "source": "artifacts/searcher-adversarial-recall.receipt.json",
+      "summary": "Live campaign recall 0/21 across seven degradations. Every trial terminated COMPLETE / coverage exhausted in ~2s with empty Real, Possibly Real, and Hidden counts. Treated as a discovery-coverage finding, not a ranking target.",
+      "total": 21
+    },
+    "match_calibration": {
+      "operating_threshold": 0.86,
+      "path": "artifacts/searcher-match-calibration.receipt.json",
+      "present": true
+    },
+    "performance": {
+      "path": "artifacts/searcher-performance.receipt.json",
+      "present": true
+    }
+  },
+  "protocol_id": "searcher-public-benchmark-v1",
+  "receipt_type": "public-benchmark",
+  "retrieval": {
+    "by_degradation": {
+      "blur": {
+        "missing": 0,
+        "mrr": 0.9,
+        "n": 5,
+        "recall_at_1": 0.8,
+        "recall_at_10": 1.0,
+        "recall_at_5": 1.0
+      },
+      "crop": {
+        "missing": 0,
+        "mrr": 0.75,
+        "n": 5,
+        "recall_at_1": 0.6,
+        "recall_at_10": 1.0,
+        "recall_at_5": 1.0
+      },
+      "heavy_blur": {
+        "missing": 0,
+        "mrr": 0.85,
+        "n": 5,
+        "recall_at_1": 0.8,
+        "recall_at_10": 1.0,
+        "recall_at_5": 1.0
+      },
+      "phone_snapshot": {
+        "missing": 0,
+        "mrr": 1.0,
+        "n": 5,
+        "recall_at_1": 1.0,
+        "recall_at_10": 1.0,
+        "recall_at_5": 1.0
+      },
+      "pristine": {
+        "missing": 0,
+        "mrr": 0.9,
+        "n": 5,
+        "recall_at_1": 0.8,
+        "recall_at_10": 1.0,
+        "recall_at_5": 1.0
+      },
+      "recompressed": {
+        "missing": 0,
+        "mrr": 0.9,
+        "n": 5,
+        "recall_at_1": 0.8,
+        "recall_at_10": 1.0,
+        "recall_at_5": 1.0
+      },
+      "small": {
+        "missing": 0,
+        "mrr": 0.766667,
+        "n": 5,
+        "recall_at_1": 0.6,
+        "recall_at_10": 1.0,
+        "recall_at_5": 1.0
+      }
+    },
+    "gallery_size": 5,
+    "images_scored": 175,
+    "not_computed": [
+      {
+        "id": "recall@10_vs_gallery",
+        "reason": "gallery size is 5; recall@10 equals recall@gallery when every listing is ranked"
+      }
+    ],
+    "overall": {
+      "missing": 0,
+      "mrr": 0.866667,
+      "n": 35,
+      "recall_at_1": 0.771429,
+      "recall_at_10": 1.0,
+      "recall_at_5": 1.0
+    },
+    "protocol": "Closed-set listing retrieval on authorized KIND fixture photographs. One gallery photograph per listing (local image index 1). The query is a different photograph of the same listing (index 2) under the seven degradations named in artifacts/searcher-match-calibration.receipt.json. Rank by the declared visual scorer. An item from the other split is not present in this gallery.",
+    "queries": [
+      {
+        "degradation": "pristine",
+        "query_id": "kind:8001001141404:pristine",
+        "query_image": "8001001141404_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141404_1.jpg",
+        "target_id": "kind:8001001141404",
+        "target_score": 0.9478990429339568,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.947899
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.92175
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.913126
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.883422
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.851947
+          }
+        ]
+      },
+      {
+        "degradation": "blur",
+        "query_id": "kind:8001001141404:blur",
+        "query_image": "8001001141404_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141404_1.jpg",
+        "target_id": "kind:8001001141404",
+        "target_score": 0.9307422477188434,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.930742
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.904214
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.89227
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.872858
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.851233
+          }
+        ]
+      },
+      {
+        "degradation": "heavy_blur",
+        "query_id": "kind:8001001141404:heavy_blur",
+        "query_image": "8001001141404_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141404_1.jpg",
+        "target_id": "kind:8001001141404",
+        "target_score": 0.8422250641752473,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.842225
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.801393
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.790972
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.727295
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.656915
+          }
+        ]
+      },
+      {
+        "degradation": "crop",
+        "query_id": "kind:8001001141404:crop",
+        "query_image": "8001001141404_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141404_1.jpg",
+        "target_id": "kind:8001001141404",
+        "target_score": 0.8715906353306859,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.871591
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.865632
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.810766
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.800566
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.717135
+          }
+        ]
+      },
+      {
+        "degradation": "small",
+        "query_id": "kind:8001001141404:small",
+        "query_image": "8001001141404_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141404_1.jpg",
+        "target_id": "kind:8001001141404",
+        "target_score": 0.8580305773938186,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.858031
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.814609
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.812018
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.741363
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.67947
+          }
+        ]
+      },
+      {
+        "degradation": "recompressed",
+        "query_id": "kind:8001001141404:recompressed",
+        "query_image": "8001001141404_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141404_1.jpg",
+        "target_id": "kind:8001001141404",
+        "target_score": 0.921025304247067,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.921025
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.904044
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.893144
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.863132
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.840023
+          }
+        ]
+      },
+      {
+        "degradation": "phone_snapshot",
+        "query_id": "kind:8001001141404:phone_snapshot",
+        "query_image": "8001001141404_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141404_1.jpg",
+        "target_id": "kind:8001001141404",
+        "target_score": 0.9303486594845889,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.930349
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.922699
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.908055
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.876657
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.86729
+          }
+        ]
+      },
+      {
+        "degradation": "pristine",
+        "query_id": "kind:8001001141473:pristine",
+        "query_image": "8001001141473_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141473_1.jpg",
+        "target_id": "kind:8001001141473",
+        "target_score": 0.9401573844303222,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.940157
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.8979
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.882882
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.879805
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.875577
+          }
+        ]
+      },
+      {
+        "degradation": "blur",
+        "query_id": "kind:8001001141473:blur",
+        "query_image": "8001001141473_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141473_1.jpg",
+        "target_id": "kind:8001001141473",
+        "target_score": 0.9236101200080986,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.92361
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.879458
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.873198
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.872454
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.864915
+          }
+        ]
+      },
+      {
+        "degradation": "heavy_blur",
+        "query_id": "kind:8001001141473:heavy_blur",
+        "query_image": "8001001141473_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141473_1.jpg",
+        "target_id": "kind:8001001141473",
+        "target_score": 0.8218108643364661,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.821811
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.803561
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.785695
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.759045
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.743322
+          }
+        ]
+      },
+      {
+        "degradation": "crop",
+        "query_id": "kind:8001001141473:crop",
+        "query_image": "8001001141473_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141473_1.jpg",
+        "target_id": "kind:8001001141473",
+        "target_score": 0.889340803471312,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.889341
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.815051
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.790612
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.774903
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.770675
+          }
+        ]
+      },
+      {
+        "degradation": "small",
+        "query_id": "kind:8001001141473:small",
+        "query_image": "8001001141473_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141473_1.jpg",
+        "target_id": "kind:8001001141473",
+        "target_score": 0.8218090989570365,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.821809
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.809412
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.796016
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.772228
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.742783
+          }
+        ]
+      },
+      {
+        "degradation": "recompressed",
+        "query_id": "kind:8001001141473:recompressed",
+        "query_image": "8001001141473_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141473_1.jpg",
+        "target_id": "kind:8001001141473",
+        "target_score": 0.9409812865692724,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.940981
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.89871
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.879377
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.876611
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.87415
+          }
+        ]
+      },
+      {
+        "degradation": "phone_snapshot",
+        "query_id": "kind:8001001141473:phone_snapshot",
+        "query_image": "8001001141473_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141473_1.jpg",
+        "target_id": "kind:8001001141473",
+        "target_score": 0.9413676475122982,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.941368
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.887192
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.882907
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.882596
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.873937
+          }
+        ]
+      },
+      {
+        "degradation": "pristine",
+        "query_id": "kind:8001001141480:pristine",
+        "query_image": "8001001141480_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141480_1.jpg",
+        "target_id": "kind:8001001141480",
+        "target_score": 0.8988592779943301,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.898859
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.855197
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.829919
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.790046
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.768552
+          }
+        ]
+      },
+      {
+        "degradation": "blur",
+        "query_id": "kind:8001001141480:blur",
+        "query_image": "8001001141480_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141480_1.jpg",
+        "target_id": "kind:8001001141480",
+        "target_score": 0.8758403118542316,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.87584
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.849512
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.813976
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.791242
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.757008
+          }
+        ]
+      },
+      {
+        "degradation": "heavy_blur",
+        "query_id": "kind:8001001141480:heavy_blur",
+        "query_image": "8001001141480_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141480_1.jpg",
+        "target_id": "kind:8001001141480",
+        "target_score": 0.7020234016208116,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.702023
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.690471
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.614231
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.587659
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.49022
+          }
+        ]
+      },
+      {
+        "degradation": "crop",
+        "query_id": "kind:8001001141480:crop",
+        "query_image": "8001001141480_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141480_1.jpg",
+        "target_id": "kind:8001001141480",
+        "target_score": 0.8364016559020918,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.836402
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.8102
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.785715
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.74127
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.738152
+          }
+        ]
+      },
+      {
+        "degradation": "small",
+        "query_id": "kind:8001001141480:small",
+        "query_image": "8001001141480_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141480_1.jpg",
+        "target_id": "kind:8001001141480",
+        "target_score": 0.7335231444636173,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.733523
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.717568
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.641219
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.620805
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.533187
+          }
+        ]
+      },
+      {
+        "degradation": "recompressed",
+        "query_id": "kind:8001001141480:recompressed",
+        "query_image": "8001001141480_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141480_1.jpg",
+        "target_id": "kind:8001001141480",
+        "target_score": 0.9089832206587302,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.908983
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.865048
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.839472
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.814457
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.785814
+          }
+        ]
+      },
+      {
+        "degradation": "phone_snapshot",
+        "query_id": "kind:8001001141480:phone_snapshot",
+        "query_image": "8001001141480_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141480_1.jpg",
+        "target_id": "kind:8001001141480",
+        "target_score": 0.9157585296948317,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.915759
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.885981
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.879241
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.846836
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.837764
+          }
+        ]
+      },
+      {
+        "degradation": "pristine",
+        "query_id": "kind:8001001141503:pristine",
+        "query_image": "8001001141503_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141503_1.jpg",
+        "target_id": "kind:8001001141503",
+        "target_score": 0.9402315253052808,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.940232
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.917116
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.895093
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.88515
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.872522
+          }
+        ]
+      },
+      {
+        "degradation": "blur",
+        "query_id": "kind:8001001141503:blur",
+        "query_image": "8001001141503_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141503_1.jpg",
+        "target_id": "kind:8001001141503",
+        "target_score": 0.924335723117653,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.924336
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.903626
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.888717
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.878075
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.854844
+          }
+        ]
+      },
+      {
+        "degradation": "heavy_blur",
+        "query_id": "kind:8001001141503:heavy_blur",
+        "query_image": "8001001141503_2.jpg",
+        "rank": 4,
+        "reference_image": "8001001141503_1.jpg",
+        "target_id": "kind:8001001141503",
+        "target_score": 0.753071413114571,
+        "top": [
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.792722
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.767075
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.756895
+          },
+          {
+            "correct": true,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.753071
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.716712
+          }
+        ]
+      },
+      {
+        "degradation": "crop",
+        "query_id": "kind:8001001141503:crop",
+        "query_image": "8001001141503_2.jpg",
+        "rank": 4,
+        "reference_image": "8001001141503_1.jpg",
+        "target_id": "kind:8001001141503",
+        "target_score": 0.8735866544189106,
+        "top": [
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.902566
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.877687
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.874311
+          },
+          {
+            "correct": true,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.873587
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.853786
+          }
+        ]
+      },
+      {
+        "degradation": "small",
+        "query_id": "kind:8001001141503:small",
+        "query_image": "8001001141503_2.jpg",
+        "rank": 3,
+        "reference_image": "8001001141503_1.jpg",
+        "target_id": "kind:8001001141503",
+        "target_score": 0.7873906469865096,
+        "top": [
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.805966
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.787597
+          },
+          {
+            "correct": true,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.787391
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.776928
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.744177
+          }
+        ]
+      },
+      {
+        "degradation": "recompressed",
+        "query_id": "kind:8001001141503:recompressed",
+        "query_image": "8001001141503_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141503_1.jpg",
+        "target_id": "kind:8001001141503",
+        "target_score": 0.9330920547923502,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.933092
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.915772
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.896736
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.880903
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.866799
+          }
+        ]
+      },
+      {
+        "degradation": "phone_snapshot",
+        "query_id": "kind:8001001141503:phone_snapshot",
+        "query_image": "8001001141503_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141503_1.jpg",
+        "target_id": "kind:8001001141503",
+        "target_score": 0.9313830650669912,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.931383
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.916008
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.902295
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.882848
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.863752
+          }
+        ]
+      },
+      {
+        "degradation": "pristine",
+        "query_id": "kind:8001001141527:pristine",
+        "query_image": "8001001141527_2.jpg",
+        "rank": 2,
+        "reference_image": "8001001141527_1.jpg",
+        "target_id": "kind:8001001141527",
+        "target_score": 0.9585161536690097,
+        "top": [
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.962829
+          },
+          {
+            "correct": true,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.958516
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.915237
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.850645
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.817536
+          }
+        ]
+      },
+      {
+        "degradation": "blur",
+        "query_id": "kind:8001001141527:blur",
+        "query_image": "8001001141527_2.jpg",
+        "rank": 2,
+        "reference_image": "8001001141527_1.jpg",
+        "target_id": "kind:8001001141527",
+        "target_score": 0.948093234677369,
+        "top": [
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.952073
+          },
+          {
+            "correct": true,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.948093
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.899028
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.833999
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.80195
+          }
+        ]
+      },
+      {
+        "degradation": "heavy_blur",
+        "query_id": "kind:8001001141527:heavy_blur",
+        "query_image": "8001001141527_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141527_1.jpg",
+        "target_id": "kind:8001001141527",
+        "target_score": 0.9102573708983683,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.910257
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.909384
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.846075
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.788552
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.750158
+          }
+        ]
+      },
+      {
+        "degradation": "crop",
+        "query_id": "kind:8001001141527:crop",
+        "query_image": "8001001141527_2.jpg",
+        "rank": 2,
+        "reference_image": "8001001141527_1.jpg",
+        "target_id": "kind:8001001141527",
+        "target_score": 0.8366868973485319,
+        "top": [
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.859921
+          },
+          {
+            "correct": true,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.836687
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.829336
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.736785
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.649956
+          }
+        ]
+      },
+      {
+        "degradation": "small",
+        "query_id": "kind:8001001141527:small",
+        "query_image": "8001001141527_2.jpg",
+        "rank": 2,
+        "reference_image": "8001001141527_1.jpg",
+        "target_id": "kind:8001001141527",
+        "target_score": 0.9034572875809125,
+        "top": [
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.912964
+          },
+          {
+            "correct": true,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.903457
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.854846
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.772408
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.72744
+          }
+        ]
+      },
+      {
+        "degradation": "recompressed",
+        "query_id": "kind:8001001141527:recompressed",
+        "query_image": "8001001141527_2.jpg",
+        "rank": 2,
+        "reference_image": "8001001141527_1.jpg",
+        "target_id": "kind:8001001141527",
+        "target_score": 0.9421097671031017,
+        "top": [
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.948893
+          },
+          {
+            "correct": true,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.94211
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.899027
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.825946
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.788915
+          }
+        ]
+      },
+      {
+        "degradation": "phone_snapshot",
+        "query_id": "kind:8001001141527:phone_snapshot",
+        "query_image": "8001001141527_2.jpg",
+        "rank": 1,
+        "reference_image": "8001001141527_1.jpg",
+        "target_id": "kind:8001001141527",
+        "target_score": 0.9560708636401989,
+        "top": [
+          {
+            "correct": true,
+            "image_name": "8001001141527_1.jpg",
+            "item_id": "kind:8001001141527",
+            "score": 0.956071
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141404_1.jpg",
+            "item_id": "kind:8001001141404",
+            "score": 0.955681
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141480_1.jpg",
+            "item_id": "kind:8001001141480",
+            "score": 0.91323
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141473_1.jpg",
+            "item_id": "kind:8001001141473",
+            "score": 0.857738
+          },
+          {
+            "correct": false,
+            "image_name": "8001001141503_1.jpg",
+            "item_id": "kind:8001001141503",
+            "score": 0.832739
+          }
+        ]
+      }
+    ],
+    "scorer": {
+      "backend_identity": "facebookresearch.dinov2.vits14",
+      "identity": "facebookresearch.dinov2.vits14",
+      "notes": "DINOv2 ViT-S/14 CLS, L2-normalised cosine. Operating threshold 0.86 is the shipped pair gate, not retuned here.",
+      "shipped_threshold": 0.86,
+      "threshold_applies": true,
+      "units": "cosine"
+    },
+    "split": "held_out",
+    "wall_seconds": 1.997661
+  },
+  "schema_version": "1.1.0",
+  "shipped_threshold": 0.86,
+  "splits": {
+    "calibration": {
+      "hash": "ad8f4851f79c66338c1a2430b7fee1242d77e8f940b57faa9fa83a793655c5f1",
+      "ids": [
+        "hardneg:ai_generated",
+        "hardneg:copied_product_code",
+        "hardneg:counterfeit_excellent_photos",
+        "hardneg:different_season",
+        "hardneg:mirrored_image",
+        "hardneg:prompt_injection",
+        "hardneg:rehosted_sold",
+        "hardneg:stock_mixed",
+        "kind:8001001137032",
+        "kind:8001001141343",
+        "kind:8001001141350",
+        "kind:8001001141367",
+        "kind:8001001141442"
+      ]
+    },
+    "held_out": {
+      "hash": "2d0e2ae65f6991595fb3c0b2917d20a4e358c159df9b1ca9c462de7ea1595d55",
+      "ids": [
+        "hardneg:adjacent_model",
+        "hardneg:authentic_poor_photos",
+        "hardneg:different_colourway",
+        "hardneg:replica_copied_title",
+        "hardneg:stolen_photos",
+        "hardneg:true_match",
+        "hardneg:two_items",
+        "kind:8001001141404",
+        "kind:8001001141473",
+        "kind:8001001141480",
+        "kind:8001001141503",
+        "kind:8001001141527"
+      ]
+    },
+    "hidden_evaluation": {
+      "present": false,
+      "reason": "No authorized hidden-evaluation set is held. A hidden split is not invented. Metrics that require it are reported as not computed."
+    },
+    "items": [
+      {
+        "family": "hard_negative",
+        "id": "hardneg:adjacent_model",
+        "images": [],
+        "listing_handle": null,
+        "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+        "source": "fixtures/hard_negatives + searcher.matching.synth",
+        "source_url": null,
+        "split": "held_out",
+        "title": "adjacent_model",
+        "truth_bucket": "hidden"
+      },
+      {
+        "family": "hard_negative",
+        "id": "hardneg:ai_generated",
+        "images": [],
+        "listing_handle": null,
+        "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+        "source": "fixtures/hard_negatives + searcher.matching.synth",
+        "source_url": null,
+        "split": "calibration",
+        "title": "ai_generated",
+        "truth_bucket": "hidden"
+      },
+      {
+        "family": "hard_negative",
+        "id": "hardneg:authentic_poor_photos",
+        "images": [],
+        "listing_handle": null,
+        "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+        "source": "fixtures/hard_negatives + searcher.matching.synth",
+        "source_url": null,
+        "split": "held_out",
+        "title": "authentic_poor_photos",
+        "truth_bucket": "possibly_real"
+      },
+      {
+        "family": "hard_negative",
+        "id": "hardneg:copied_product_code",
+        "images": [],
+        "listing_handle": null,
+        "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+        "source": "fixtures/hard_negatives + searcher.matching.synth",
+        "source_url": null,
+        "split": "calibration",
+        "title": "copied_product_code",
+        "truth_bucket": "hidden"
+      },
+      {
+        "family": "hard_negative",
+        "id": "hardneg:counterfeit_excellent_photos",
+        "images": [],
+        "listing_handle": null,
+        "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+        "source": "fixtures/hard_negatives + searcher.matching.synth",
+        "source_url": null,
+        "split": "calibration",
+        "title": "counterfeit_excellent_photos",
+        "truth_bucket": "hidden"
+      },
+      {
+        "family": "hard_negative",
+        "id": "hardneg:different_colourway",
+        "images": [],
+        "listing_handle": null,
+        "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+        "source": "fixtures/hard_negatives + searcher.matching.synth",
+        "source_url": null,
+        "split": "held_out",
+        "title": "different_colourway",
+        "truth_bucket": "hidden"
+      },
+      {
+        "family": "hard_negative",
+        "id": "hardneg:different_season",
+        "images": [],
+        "listing_handle": null,
+        "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+        "source": "fixtures/hard_negatives + searcher.matching.synth",
+        "source_url": null,
+        "split": "calibration",
+        "title": "different_season",
+        "truth_bucket": "possibly_real"
+      },
+      {
+        "family": "hard_negative",
+        "id": "hardneg:mirrored_image",
+        "images": [],
+        "listing_handle": null,
+        "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+        "source": "fixtures/hard_negatives + searcher.matching.synth",
+        "source_url": null,
+        "split": "calibration",
+        "title": "mirrored_image",
+        "truth_bucket": "real"
+      },
+      {
+        "family": "hard_negative",
+        "id": "hardneg:prompt_injection",
+        "images": [],
+        "listing_handle": null,
+        "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+        "source": "fixtures/hard_negatives + searcher.matching.synth",
+        "source_url": null,
+        "split": "calibration",
+        "title": "prompt_injection",
+        "truth_bucket": "real"
+      },
+      {
+        "family": "hard_negative",
+        "id": "hardneg:rehosted_sold",
+        "images": [],
+        "listing_handle": null,
+        "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+        "source": "fixtures/hard_negatives + searcher.matching.synth",
+        "source_url": null,
+        "split": "calibration",
+        "title": "rehosted_sold",
+        "truth_bucket": "hidden"
+      },
+      {
+        "family": "hard_negative",
+        "id": "hardneg:replica_copied_title",
+        "images": [],
+        "listing_handle": null,
+        "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+        "source": "fixtures/hard_negatives + searcher.matching.synth",
+        "source_url": null,
+        "split": "held_out",
+        "title": "replica_copied_title",
+        "truth_bucket": "replica"
+      },
+      {
+        "family": "hard_negative",
+        "id": "hardneg:stock_mixed",
+        "images": [],
+        "listing_handle": null,
+        "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+        "source": "fixtures/hard_negatives + searcher.matching.synth",
+        "source_url": null,
+        "split": "calibration",
+        "title": "stock_mixed",
+        "truth_bucket": "real"
+      },
+      {
+        "family": "hard_negative",
+        "id": "hardneg:stolen_photos",
+        "images": [],
+        "listing_handle": null,
+        "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+        "source": "fixtures/hard_negatives + searcher.matching.synth",
+        "source_url": null,
+        "split": "held_out",
+        "title": "stolen_photos",
+        "truth_bucket": "hidden"
+      },
+      {
+        "family": "hard_negative",
+        "id": "hardneg:true_match",
+        "images": [],
+        "listing_handle": null,
+        "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+        "source": "fixtures/hard_negatives + searcher.matching.synth",
+        "source_url": null,
+        "split": "held_out",
+        "title": "true_match",
+        "truth_bucket": "real"
+      },
+      {
+        "family": "hard_negative",
+        "id": "hardneg:two_items",
+        "images": [],
+        "listing_handle": null,
+        "permission": "Project-generated synthetic shoe diagrams from searcher.matching.synth and fixtures/hard_negatives. Not a marketplace image. Not an operator photograph. The bucket label is constructed from the fixture recipe, not a professional authenticity judgment.",
+        "source": "fixtures/hard_negatives + searcher.matching.synth",
+        "source_url": null,
+        "split": "held_out",
+        "title": "two_items",
+        "truth_bucket": "hidden"
+      },
+      {
+        "family": "kind_listing",
+        "id": "kind:8001001137032",
+        "images": [
+          "8001001137032_1.jpg",
+          "8001001137032_2.jpg",
+          "8001001137032_3.jpg"
+        ],
+        "listing_handle": "8001001137032",
+        "permission": "Cached public product photographs from shop.kind.co.jp, already held in fixtures/known_item_kind. KIND is admitted by SOURCE_POLICY for GET product/collection. Fetch date is recorded in pack.json. Images column of SOURCE_POLICY is 'no' for KIND, so this benchmark does not fetch new KIND photographs. Not an operator photograph.",
+        "source": "fixtures/known_item_kind",
+        "source_url": "https://shop.kind.co.jp/products/8001001137032",
+        "split": "calibration",
+        "title": "\u80f8\u30dd\u30b1\u30c3\u30c8\u9577\u8896T\u30b7\u30e3\u30c4",
+        "truth_bucket": null
+      },
+      {
+        "family": "kind_listing",
+        "id": "kind:8001001141343",
+        "images": [
+          "8001001141343_1.jpg",
+          "8001001141343_2.jpg",
+          "8001001141343_3.jpg"
+        ],
+        "listing_handle": "8001001141343",
+        "permission": "Cached public product photographs from shop.kind.co.jp, already held in fixtures/known_item_kind. KIND is admitted by SOURCE_POLICY for GET product/collection. Fetch date is recorded in pack.json. Images column of SOURCE_POLICY is 'no' for KIND, so this benchmark does not fetch new KIND photographs. Not an operator photograph.",
+        "source": "fixtures/known_item_kind",
+        "source_url": "https://shop.kind.co.jp/products/8001001141343",
+        "split": "calibration",
+        "title": "\u30ed\u30b4TEE",
+        "truth_bucket": null
+      },
+      {
+        "family": "kind_listing",
+        "id": "kind:8001001141350",
+        "images": [
+          "8001001141350_1.jpg",
+          "8001001141350_2.jpg",
+          "8001001141350_3.jpg"
+        ],
+        "listing_handle": "8001001141350",
+        "permission": "Cached public product photographs from shop.kind.co.jp, already held in fixtures/known_item_kind. KIND is admitted by SOURCE_POLICY for GET product/collection. Fetch date is recorded in pack.json. Images column of SOURCE_POLICY is 'no' for KIND, so this benchmark does not fetch new KIND photographs. Not an operator photograph.",
+        "source": "fixtures/known_item_kind",
+        "source_url": "https://shop.kind.co.jp/products/8001001141350",
+        "split": "calibration",
+        "title": "\u30ed\u30b4\u30ed\u30f3TEE",
+        "truth_bucket": null
+      },
+      {
+        "family": "kind_listing",
+        "id": "kind:8001001141367",
+        "images": [
+          "8001001141367_1.jpg",
+          "8001001141367_2.jpg",
+          "8001001141367_3.jpg"
+        ],
+        "listing_handle": "8001001141367",
+        "permission": "Cached public product photographs from shop.kind.co.jp, already held in fixtures/known_item_kind. KIND is admitted by SOURCE_POLICY for GET product/collection. Fetch date is recorded in pack.json. Images column of SOURCE_POLICY is 'no' for KIND, so this benchmark does not fetch new KIND photographs. Not an operator photograph.",
+        "source": "fixtures/known_item_kind",
+        "source_url": "https://shop.kind.co.jp/products/8001001141367",
+        "split": "calibration",
+        "title": "\u300cbig willy panel\u300d",
+        "truth_bucket": null
+      },
+      {
+        "family": "kind_listing",
+        "id": "kind:8001001141404",
+        "images": [
+          "8001001141404_1.jpg",
+          "8001001141404_2.jpg",
+          "8001001141404_3.jpg"
+        ],
+        "listing_handle": "8001001141404",
+        "permission": "Cached public product photographs from shop.kind.co.jp, already held in fixtures/known_item_kind. KIND is admitted by SOURCE_POLICY for GET product/collection. Fetch date is recorded in pack.json. Images column of SOURCE_POLICY is 'no' for KIND, so this benchmark does not fetch new KIND photographs. Not an operator photograph.",
+        "source": "fixtures/known_item_kind",
+        "source_url": "https://shop.kind.co.jp/products/8001001141404",
+        "split": "held_out",
+        "title": "\u7121\u5730 \u30ed\u30f3\u30b0\u30b9\u30ea\u30fc\u30d6\u30ab\u30c3\u30c8\u30bd\u30fc",
+        "truth_bucket": null
+      },
+      {
+        "family": "kind_listing",
+        "id": "kind:8001001141442",
+        "images": [
+          "8001001141442_1.jpg",
+          "8001001141442_2.jpg",
+          "8001001141442_3.jpg"
+        ],
+        "listing_handle": "8001001141442",
+        "permission": "Cached public product photographs from shop.kind.co.jp, already held in fixtures/known_item_kind. KIND is admitted by SOURCE_POLICY for GET product/collection. Fetch date is recorded in pack.json. Images column of SOURCE_POLICY is 'no' for KIND, so this benchmark does not fetch new KIND photographs. Not an operator photograph.",
+        "source": "fixtures/known_item_kind",
+        "source_url": "https://shop.kind.co.jp/products/8001001141442",
+        "split": "calibration",
+        "title": "\u30ed\u30b4\u9577\u8896\u30ab\u30c3\u30c8\u30bd\u30fc",
+        "truth_bucket": null
+      },
+      {
+        "family": "kind_listing",
+        "id": "kind:8001001141473",
+        "images": [
+          "8001001141473_1.jpg",
+          "8001001141473_2.jpg",
+          "8001001141473_3.jpg"
+        ],
+        "listing_handle": "8001001141473",
+        "permission": "Cached public product photographs from shop.kind.co.jp, already held in fixtures/known_item_kind. KIND is admitted by SOURCE_POLICY for GET product/collection. Fetch date is recorded in pack.json. Images column of SOURCE_POLICY is 'no' for KIND, so this benchmark does not fetch new KIND photographs. Not an operator photograph.",
+        "source": "fixtures/known_item_kind",
+        "source_url": "https://shop.kind.co.jp/products/8001001141473",
+        "split": "held_out",
+        "title": "\u7121\u5730\u30ab\u30c3\u30c8\u30bd\u30fc",
+        "truth_bucket": null
+      },
+      {
+        "family": "kind_listing",
+        "id": "kind:8001001141480",
+        "images": [
+          "8001001141480_1.jpg",
+          "8001001141480_2.jpg",
+          "8001001141480_3.jpg"
+        ],
+        "listing_handle": "8001001141480",
+        "permission": "Cached public product photographs from shop.kind.co.jp, already held in fixtures/known_item_kind. KIND is admitted by SOURCE_POLICY for GET product/collection. Fetch date is recorded in pack.json. Images column of SOURCE_POLICY is 'no' for KIND, so this benchmark does not fetch new KIND photographs. Not an operator photograph.",
+        "source": "fixtures/known_item_kind",
+        "source_url": "https://shop.kind.co.jp/products/8001001141480",
+        "split": "held_out",
+        "title": "\u30ed\u30b4\u9577\u8896\u30ab\u30c3\u30c8\u30bd\u30fc",
+        "truth_bucket": null
+      },
+      {
+        "family": "kind_listing",
+        "id": "kind:8001001141503",
+        "images": [
+          "8001001141503_1.jpg",
+          "8001001141503_2.jpg",
+          "8001001141503_3.jpg"
+        ],
+        "listing_handle": "8001001141503",
+        "permission": "Cached public product photographs from shop.kind.co.jp, already held in fixtures/known_item_kind. KIND is admitted by SOURCE_POLICY for GET product/collection. Fetch date is recorded in pack.json. Images column of SOURCE_POLICY is 'no' for KIND, so this benchmark does not fetch new KIND photographs. Not an operator photograph.",
+        "source": "fixtures/known_item_kind",
+        "source_url": "https://shop.kind.co.jp/products/8001001141503",
+        "split": "held_out",
+        "title": "SATAN BOMBER CREW",
+        "truth_bucket": null
+      },
+      {
+        "family": "kind_listing",
+        "id": "kind:8001001141527",
+        "images": [
+          "8001001141527_1.jpg",
+          "8001001141527_2.jpg",
+          "8001001141527_3.jpg"
+        ],
+        "listing_handle": "8001001141527",
+        "permission": "Cached public product photographs from shop.kind.co.jp, already held in fixtures/known_item_kind. KIND is admitted by SOURCE_POLICY for GET product/collection. Fetch date is recorded in pack.json. Images column of SOURCE_POLICY is 'no' for KIND, so this benchmark does not fetch new KIND photographs. Not an operator photograph.",
+        "source": "fixtures/known_item_kind",
+        "source_url": "https://shop.kind.co.jp/products/8001001141527",
+        "split": "held_out",
+        "title": "\u30ed\u30b4\u9577\u8896\u30ab\u30c3\u30c8\u30bd\u30fcW21-0004",
+        "truth_bucket": null
+      }
+    ],
+    "rule": "Split by product identity (listing handle or constructed-case id). An identifier appears in exactly one of {calibration, held_out}. There is no authorized hidden-evaluation set; that split is absent. KIND: the known-item target handle is reserved for held_out; remaining handles sorted lexicographically, first five calibration, rest held_out. Hard-negative cases: the seven ids in HELD_OUT_BUCKET_IDS are held_out so the reporting split contains Real, Possibly Real, Replica, and hidden; the remaining constructed cases are calibration. Calibration is used only to inspect the score-versus-outcome curve and to show where the already-shipped 0.86 threshold sits. Thresholds are not retuned. Held-out is used only to report retrieval and bucket numbers."
+  },
+  "threshold_retuned": false
+}

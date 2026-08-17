@@ -1,0 +1,14 @@
+{
+  "sha": "6435d248a716429f197e807627c126b73f30efc5",
+  "holds": {
+    "replica_phrases": true,
+    "publish_requires_link": true,
+    "generic_profile": true,
+    "view_classification": true,
+    "size_not_brand": true,
+    "index_ranks_before_cap": true,
+    "flagship_behaviour_21": true,
+    "docs_and_threshold": "n/a"
+  },
+  "wrote": "artifacts/grading-round3/verify_claims.json"
+}

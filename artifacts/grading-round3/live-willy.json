@@ -1,0 +1,109 @@
+{
+  "search_id": "40350d3f-0ebe-432e-81f7-ef730455c052",
+  "elapsed_s": 197.25,
+  "terminal_status": "PARTIAL",
+  "terminal_reason": "budget exhausted",
+  "candidates": 9,
+  "product_urls": 9,
+  "with_images": 9,
+  "image_count": 47,
+  "index_urls": [],
+  "counts": {
+    "real": 0,
+    "possibly_real": 2,
+    "replica": 0,
+    "hidden": 6
+  },
+  "target_url": "https://shop.kind.co.jp/products/8001001141404",
+  "target_in_possibly_real_rank": 1,
+  "possibly_real": [
+    {
+      "bucket": "possibly_real",
+      "url": "https://shop.kind.co.jp/products/8001001141404",
+      "title": "無地 ロングスリーブカットソー",
+      "images": 5
+    },
+    {
+      "bucket": "possibly_real",
+      "url": "https://shop.kind.co.jp/products/8001001141442",
+      "title": "ロゴ長袖カットソー",
+      "images": 5
+    }
+  ],
+  "real": [],
+  "projected_possible": [
+    {
+      "listing_url": "https://shop.kind.co.jp/products/8001001141404",
+      "tab_reason": "The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.",
+      "images_compared": null,
+      "bucket": "possibly_real"
+    },
+    {
+      "listing_url": "https://shop.kind.co.jp/products/8001001141442",
+      "tab_reason": "The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.",
+      "images_compared": null,
+      "bucket": "possibly_real"
+    }
+  ],
+  "coverage": {
+    "candidates_hidden": 12,
+    "candidates_normalized": 9,
+    "pages_fetched": 18,
+    "sources_blocked": [
+      {
+        "detail": "",
+        "id": "wikimedia",
+        "name": "wikimedia",
+        "status": "BLOCKED_BY_POLICY"
+      },
+      {
+        "detail": "",
+        "id": "byronesque",
+        "name": "byronesque",
+        "status": "SOURCE_UNAVAILABLE"
+      },
+      {
+        "detail": "",
+        "id": "ebay",
+        "name": "ebay",
+        "status": "AUTH_REQUIRED"
+      }
+    ],
+    "sources_completed": [
+      {
+        "detail": "",
+        "id": "kind",
+        "name": "kind",
+        "status": "SEARCHED_MATCHES_FOUND"
+      },
+      {
+        "detail": "",
+        "id": "komehyo",
+        "name": "komehyo",
+        "status": "SEARCHED_NO_MATCH"
+      },
+      {
+        "detail": "",
+        "id": "the_realreal",
+        "name": "the_realreal",
+        "status": "SEARCHED_NO_MATCH"
+      },
+      {
+        "detail": "",
+        "id": "heroine",
+        "name": "heroine",
+        "status": "SEARCHED_NO_MATCH"
+      }
+    ],
+    "sources_in_progress": []
+  },
+  "runtime_counts": {
+    "hidden": 12,
+    "possibly_real": 2,
+    "real": 0
+  },
+  "flagship_summary": {
+    "error": "[Errno 1] Operation not permitted: 'ps'"
+  },
+  "flagship": []
+}

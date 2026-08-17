@@ -1,0 +1,270 @@
+{
+  "06c8c94ae54c6df30e443add4c0c722e40bbaeda990ce5eb3aebf49bfa0e38e6": {
+    "byte_length": 36203,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "derived"
+  },
+  "088c537fd7f8a0eef87594acf9ec9faffa5ff939df23e81cad0460d85cdeba7e": {
+    "byte_length": 245346,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "12b0ee35c149523bd091388e4f72459e80bdad68f0b784837a6f93d0476f5dcb": {
+    "byte_length": 12401,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "1c950fd0115592be4794d741a6e5054f5b1efe1d4fb1057bb11803a9e312417d": {
+    "byte_length": 75167,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "220ea96eb140ccc859b1559baba4a12dac59872fe563124607b21c2830bdb9f5": {
+    "byte_length": 95889,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "2a9276d142b74c61c8be6c08e17058a67842b5805b8bba452ddb3bc457c6b769": {
+    "byte_length": 107421,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "2d956e6f76f49b99623cc15124968fff9936c8a40cbd8dfb52df68d2d3195c7a": {
+    "byte_length": 32533,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "derived"
+  },
+  "33d0b17bb35380048f478565ea920d790e03415f4b3eb9b697710225a35b6e7b": {
+    "byte_length": 91720,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "derived"
+  },
+  "34209b45c62b0861fec3021374a3daebe70b349585d014689ddc541b6b18ad99": {
+    "byte_length": 603853,
+    "extra": {},
+    "owners": [],
+    "private": true,
+    "zone": "temporary"
+  },
+  "38b92a6747fab78fb45d4fc228470e0579b06bcca8c4480898df3748612a1995": {
+    "byte_length": 72200,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "4a9a528175fa06817c76dd23518b834fce896ba1f3182881d789f6c5b1f50ed2": {
+    "byte_length": 175986,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "derived"
+  },
+  "4be506362ec64dd452bec1aac6e558e24a248c01fe1d340067ee22f29ce4590d": {
+    "byte_length": 51606,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "derived"
+  },
+  "4c873bdd725130171284df2182f69730b884900c6400c8b3cbc53c98c956bd34": {
+    "byte_length": 108532,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "5768dbbce233ebab10564b0403ed6e56b5608a93dc5c80dbd5fa8827315b23d3": {
+    "byte_length": 238988,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "5a03ad74dd1aebf00a261b1cfa735a5e9e65a87f6df0eba183ef8f227cc6aadb": {
+    "byte_length": 70918,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "5ace051a65744626a78f9a3243e58494c903284db6ea9a397d2f23ccac6648bd": {
+    "byte_length": 96482,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "derived"
+  },
+  "5ea9946c5453888572a8142f0d85c90a260844af7ed0e4d7a6d30014de37b7b7": {
+    "byte_length": 88651,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "62a14d7a037ca299f70a69e20b8892bb0f085359e8fd4a17dc29c793348aae2f": {
+    "byte_length": 383091,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "65908a4e3560cd9fa14cf065bb5280f850de4e566031f4d27fa143025e0f4727": {
+    "byte_length": 205404,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "77f3a067b04bf556f5f3a89fa7ad1bbf5018a06f4d68dca1c861b0fc8b354c3b": {
+    "byte_length": 80359,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "derived"
+  },
+  "86a0da59360f817964c207a4aee3b08a06f5d05a8d0413e734deb5076e609ba9": {
+    "byte_length": 16478,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "94a4f519cdd08089c21dc6b459c296e5d167f2c73342433007f25f9ce4cdf909": {
+    "byte_length": 79378,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "a63cf0786d262c330e92b2361671bba136df9f41d59316f58d215cff3299b6d2": {
+    "byte_length": 289821,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "b1fb40390f5d8fa7d4c37141d2119410435208d93b1b804657ef4a73c9979415": {
+    "byte_length": 178570,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "b84a29bca4095127b5f752640cc6663c97be22b66871ab2c60646cfbf628abc6": {
+    "byte_length": 32592,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "c1b89b44ba1316738e31c29a6adca534477e5ed168e198ddf874091818e28973": {
+    "byte_length": 17517,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "d985e2ab8b1e82b645ee72271b0160ca93550b73537403ceaf7bad0f5ea1c49a": {
+    "byte_length": 82054,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "dca2d8370d6db517dd709db2d22e19787d6697f973f8c33a8ee05a3358df3443": {
+    "byte_length": 85707,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "derived"
+  },
+  "e15e7d8a29cfe9b4afae8155b9f253232de351f52948e9dd07c68cdf047efec4": {
+    "byte_length": 85747,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "fdeb914f511284ae59543f531f598422e2cf33eb75ba47b0661a6ea257b8940a": {
+    "byte_length": 216369,
+    "extra": {},
+    "owners": [
+      "40350d3f-0ebe-432e-81f7-ef730455c052"
+    ],
+    "private": true,
+    "zone": "incoming"
+  }
+}
