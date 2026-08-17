@@ -55,6 +55,13 @@ def published_public_bucket(
     if is_replica_result(candidate, decision):
         return BucketPublic.REPLICA.value
     public = decision.decision.public.value
+    if public in {BucketPublic.REAL.value, BucketPublic.POSSIBLY_REAL.value} and not (
+        decision.reason_codes or decision.hard_vetoes
+    ):
+        # Every published result states why it is where it is. A row with no
+        # reason codes at all cannot, so it stays hidden rather than appearing
+        # as a claim nobody can interrogate.
+        return BucketPublic.HIDDEN.value
     if public in {BucketPublic.REAL.value, BucketPublic.POSSIBLY_REAL.value} and (
         not has_usable_listing_link(candidate)
     ):

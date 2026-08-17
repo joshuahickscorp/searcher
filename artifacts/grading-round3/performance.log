@@ -1,0 +1,155 @@
+=== START 2026-08-17T01:19:40Z ===
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/health", "request_id": "78b0c37b-ed9a-4c1f-bca7-551c067ee7dc", "status": 200, "ts": "2026-08-17T01:19:40.845905+00:00"}
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/capabilities", "request_id": "b9612ff8-e741-42e5-80a8-b43900424d78", "status": 200, "ts": "2026-08-17T01:19:40.848006+00:00"}
+{"level": "info", "method": "GET", "ms": 3, "path": "/static", "request_id": "9004fd29-42a7-44ef-b4c7-2b377dd4eb5b", "status": 200, "ts": "2026-08-17T01:19:40.851959+00:00"}
+{"level": "info", "method": "POST", "ms": 3, "path": "/v1/searches", "request_id": "97e4d0c1-31f4-46d3-9f5f-488bfb9ded84", "status": 201, "ts": "2026-08-17T01:19:40.860695+00:00"}
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/searches/761f56ff-faf9-4ea0-aab7-6eb320616f1e", "request_id": "df46c095-e013-4b44-aa5e-b3842eb138e1", "status": 200, "ts": "2026-08-17T01:19:40.862876+00:00"}
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/searches/761f56ff-faf9-4ea0-aab7-6eb320616f1e/results", "request_id": "a13915ff-4e1f-44df-9751-09b1da44632f", "status": 200, "ts": "2026-08-17T01:19:40.865524+00:00"}
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/searches/761f56ff-faf9-4ea0-aab7-6eb320616f1e", "request_id": "5dd9e5aa-8bd0-4b32-ba06-be57b541dd0d", "status": 200, "ts": "2026-08-17T01:19:40.893257+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/761f56ff-faf9-4ea0-aab7-6eb320616f1e/results", "request_id": "f39c94ff-a5dc-4989-9b12-03855509efff", "status": 200, "ts": "2026-08-17T01:19:40.894414+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/761f56ff-faf9-4ea0-aab7-6eb320616f1e", "request_id": "0802d9ba-8a02-41db-9fa3-f46602291398", "status": 200, "ts": "2026-08-17T01:19:40.920746+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/761f56ff-faf9-4ea0-aab7-6eb320616f1e/results", "request_id": "e4073b92-6e58-4ff0-8692-657981233bc8", "status": 200, "ts": "2026-08-17T01:19:40.921723+00:00"}
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/searches/761f56ff-faf9-4ea0-aab7-6eb320616f1e", "request_id": "85fe6c7f-4360-427d-8ccc-d5acb29673cb", "status": 200, "ts": "2026-08-17T01:19:40.944942+00:00"}
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/searches/761f56ff-faf9-4ea0-aab7-6eb320616f1e/results", "request_id": "d8d4f18d-16ce-4c66-b06c-a951b144e1ec", "status": 200, "ts": "2026-08-17T01:19:40.946723+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/761f56ff-faf9-4ea0-aab7-6eb320616f1e", "request_id": "df0d1157-8cb1-46f7-bdcc-2327f9ba10bb", "status": 200, "ts": "2026-08-17T01:19:40.969309+00:00"}
+{"level": "info", "method": "GET", "ms": 2, "path": "/v1/searches/761f56ff-faf9-4ea0-aab7-6eb320616f1e/results", "request_id": "99f0b1d7-a61b-47fd-a9dc-784fc71392a0", "status": 200, "ts": "2026-08-17T01:19:40.972405+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/761f56ff-faf9-4ea0-aab7-6eb320616f1e", "request_id": "9adc6139-c880-4bc5-b487-90fb665a2754", "status": 200, "ts": "2026-08-17T01:19:40.999265+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/761f56ff-faf9-4ea0-aab7-6eb320616f1e/results", "request_id": "f7220ea5-21a0-48c2-9406-d999960d87e2", "status": 200, "ts": "2026-08-17T01:19:41.000209+00:00"}
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/health", "request_id": "5db58c16-7fd6-413f-9a45-deaa9b57db11", "status": 200, "ts": "2026-08-17T01:19:41.108298+00:00"}
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/capabilities", "request_id": "da9eeb80-4845-49ec-86e4-e23c35bd6d43", "status": 200, "ts": "2026-08-17T01:19:41.109877+00:00"}
+{"level": "info", "method": "GET", "ms": 2, "path": "/static", "request_id": "63159817-2ff4-4993-a676-36f5ba43c40a", "status": 200, "ts": "2026-08-17T01:19:41.113186+00:00"}
+{"level": "info", "method": "POST", "ms": 2, "path": "/v1/searches", "request_id": "a079e3d6-7cbb-4f71-8aae-1a74f4e57a48", "status": 201, "ts": "2026-08-17T01:19:41.116822+00:00"}
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/searches/a4991cd0-c533-4173-a783-bac72e358a98", "request_id": "570db53f-1d4f-4679-905a-b245a189e840", "status": 200, "ts": "2026-08-17T01:19:41.118848+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/a4991cd0-c533-4173-a783-bac72e358a98/results", "request_id": "51c36af2-8bfd-4f05-b2d8-63c2bc12638c", "status": 200, "ts": "2026-08-17T01:19:41.120125+00:00"}
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/searches/a4991cd0-c533-4173-a783-bac72e358a98", "request_id": "7a7c8c78-cbbc-4504-96dd-29b7cc881b94", "status": 200, "ts": "2026-08-17T01:19:41.147788+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/a4991cd0-c533-4173-a783-bac72e358a98/results", "request_id": "6dde59cb-e025-40d2-9c9a-a279a11b8372", "status": 200, "ts": "2026-08-17T01:19:41.149195+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/a4991cd0-c533-4173-a783-bac72e358a98", "request_id": "68d01e37-d3bb-42da-927d-93d7bb61a28c", "status": 200, "ts": "2026-08-17T01:19:41.175514+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/a4991cd0-c533-4173-a783-bac72e358a98/results", "request_id": "7d3e8fdb-1a74-4d52-801e-28b3b68a1d66", "status": 200, "ts": "2026-08-17T01:19:41.176452+00:00"}
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/searches/a4991cd0-c533-4173-a783-bac72e358a98", "request_id": "9d763f18-58e4-4a56-839a-080c57439dce", "status": 200, "ts": "2026-08-17T01:19:41.201237+00:00"}
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/searches/a4991cd0-c533-4173-a783-bac72e358a98/results", "request_id": "54968d88-eb19-499a-a236-4a758f87c06e", "status": 200, "ts": "2026-08-17T01:19:41.202786+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/a4991cd0-c533-4173-a783-bac72e358a98", "request_id": "6cbc1f52-b639-47d7-83f0-83b5bd03873b", "status": 200, "ts": "2026-08-17T01:19:41.229208+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/a4991cd0-c533-4173-a783-bac72e358a98/results", "request_id": "e0bb963c-cedf-411f-8bfe-bea8832e6641", "status": 200, "ts": "2026-08-17T01:19:41.230395+00:00"}
+{
+  "fixture": {
+    "cache_hit_rate_warm": 1.0,
+    "cold": {
+      "budget": {
+        "browser_pages": 0,
+        "bytes": 3822,
+        "images": 8,
+        "model_calls": 0,
+        "pages": 1,
+        "retries": 0,
+        "sources": 1,
+        "storage": 0,
+        "wall_seconds": 0
+      },
+      "cache_hits": 0,
+      "campaign_wall_ms": 49.63,
+      "candidates": 5,
+      "fetches": 5,
+      "first_candidate_ms": 12.789,
+      "first_routed_result_ms": 41.476,
+      "receipts": [
+        {
+          "cache_hits": 0,
+          "fetches": 0,
+          "phase": "consult"
+        },
+        {
+          "cache_hits": 0,
+          "fetches": 5,
+          "phase": "remember"
+        }
+      ],
+      "results": 5,
+      "search_create_ms": 0.582
+    },
+    "duplicate_work_avoided": 1.0,
+    "warm": {
+      "budget": {
+        "browser_pages": 0,
+        "bytes": 55,
+        "images": 2,
+        "model_calls": 0,
+        "pages": 0,
+        "retries": 0,
+        "sources": 0,
+        "storage": 0,
+        "wall_seconds": 0
+      },
+      "cache_hits": 5,
+      "campaign_wall_ms": 31.183,
+      "candidates": 5,
+      "fetches": 0,
+      "first_candidate_ms": 12.722,
+      "first_routed_result_ms": 13.279,
+      "index_hits": 5,
+      "index_skip_source_work": true,
+      "receipts": [
+        {
+          "cache_hits": 5,
+          "fetches": 0,
+          "phase": "consult"
+        },
+        {
+          "cache_hits": 0,
+          "fetches": 0,
+          "phase": "remember"
+        }
+      ],
+      "results": 5
+    }
+  },
+  "host": "Mac-Studio",
+  "http": {
+    "cold": {
+      "campaign_wall_ms": 138.45,
+      "capabilities_ms": 2.018,
+      "capabilities_status": 200,
+      "first_candidate_ms": null,
+      "first_progress_event_ms": 2.1,
+      "first_routed_result_ms": null,
+      "health_ms": 1.883,
+      "health_status": "ok",
+      "search_create_ms": 4.206,
+      "search_create_status": 201,
+      "search_id": "761f56ff-faf9-4ea0-aab7-6eb320616f1e",
+      "transport": "asgi-testclient",
+      "transport_note": "HTTP timings are Starlette TestClient against the real app on this host. A kernel TCP bind was not used because this environment forbids loopback sockets.",
+      "ui_first_byte_ms": 4.168,
+      "ui_status": 200
+    },
+    "warm": {
+      "campaign_wall_ms": 112.225,
+      "capabilities_ms": 1.512,
+      "capabilities_status": 200,
+      "first_candidate_ms": 112.225,
+      "first_progress_event_ms": 1.853,
+      "first_routed_result_ms": null,
+      "health_ms": 1.545,
+      "health_status": "ok",
+      "search_create_ms": 3.386,
+      "search_create_status": 201,
+      "search_id": "a4991cd0-c533-4173-a783-bac72e358a98",
+      "transport": "asgi-testclient",
+      "transport_note": "HTTP timings are Starlette TestClient against the real app on this host. A kernel TCP bind was not used because this environment forbids loopback sockets.",
+      "ui_first_byte_ms": 3.629,
+      "ui_status": 200
+    }
+  },
+  "profile": {
+    "get_campaign": {
+      "get_campaign_200x_ms": 13.801,
+      "get_state_version_200x_ms": 0.531,
+      "justification": "emit() used to call get_campaign, which loads the intent and six child-id lists, on every public event. A json_group_array rewrite of those lists was slower on this host (tiny rows, six correlated subqueries). emit() now reads only state_version."
+    },
+    "image_decode": {
+      "justification": "matching and cheap signals re-open the same listing PNG. An LRU keyed by content digest avoids that decode on the repeat path.",
+      "open_rgb_24x_same_ms": 0.045,
+      "open_rgb_24x_unique_ms": 2.202
+    }
+  }
+}
+wrote artifacts/grading-round3/searcher-performance.regen.json
+=== EXIT 0 ===

@@ -1,0 +1,24 @@
+=== START 2026-08-17T01:19:49Z ===
+{
+  "search_id": "40350d3f-0ebe-432e-81f7-ef730455c052",
+  "elapsed_s": 197.25,
+  "terminal_status": "PARTIAL",
+  "terminal_reason": "budget exhausted",
+  "candidates": 9,
+  "product_urls": 9,
+  "with_images": 9,
+  "image_count": 47,
+  "index_urls": [],
+  "counts": {
+    "real": 0,
+    "possibly_real": 2,
+    "replica": 0,
+    "hidden": 6
+  },
+  "target_in_possibly_real_rank": 1,
+  "flagship_summary": {
+    "error": "[Errno 1] Operation not permitted: 'ps'"
+  }
+}
+wrote artifacts/grading-round3/live-willy.json
+=== EXIT 0 ===

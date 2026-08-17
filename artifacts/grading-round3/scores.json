@@ -1,0 +1,42 @@
+{
+  "commit": "6435d248a716429f197e807627c126b73f30efc5",
+  "graded_at": "2026-08-17",
+  "terminal_status": "NOT_READY",
+  "note": "Independent third pass. Writes the scores this document is required to carry. Does not edit SEARCHER_FINAL_SCORECARD.md.",
+  "round_2": {
+    "plan_fidelity": 78,
+    "implementation_completeness": 80,
+    "real_runtime_proof": 77,
+    "user_visible_proof": 84,
+    "retrieval_quality": 73,
+    "authenticity_safety": 88,
+    "security_and_privacy": 83,
+    "cost_efficiency": 81,
+    "test_quality": 85,
+    "documentation": 80
+  },
+  "prior_pass_on_a7a5a98": {
+    "plan_fidelity": 70,
+    "implementation_completeness": 73,
+    "real_runtime_proof": 71,
+    "user_visible_proof": 73,
+    "retrieval_quality": 64,
+    "authenticity_safety": 83,
+    "security_and_privacy": 83,
+    "cost_efficiency": 80,
+    "test_quality": 76,
+    "documentation": 77
+  },
+  "round_1": {
+    "plan_fidelity": 58,
+    "implementation_completeness": 62,
+    "real_runtime_proof": 45,
+    "user_visible_proof": 64,
+    "retrieval_quality": 38,
+    "authenticity_safety": 42,
+    "security_and_privacy": 82,
+    "cost_efficiency": 78,
+    "test_quality": 60,
+    "documentation": 55
+  }
+}

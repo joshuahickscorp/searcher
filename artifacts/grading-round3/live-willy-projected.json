@@ -1,0 +1,449 @@
+{
+  "search_id": "40350d3f-0ebe-432e-81f7-ef730455c052",
+  "real": [],
+  "possibly_real": [
+    {
+      "result_id": "7d8c2819-2225-42e7-8fbf-9cd364ea8b8f",
+      "search_id": "40350d3f-0ebe-432e-81f7-ef730455c052",
+      "candidate_id": "d70b3b91-bb95-46e9-81e6-ac6fe0a7fa6b",
+      "bucket": "possibly_real",
+      "rank": 1,
+      "title": "無地 ロングスリーブカットソー",
+      "source": {
+        "name": "kind",
+        "adapter": "kind"
+      },
+      "listing_url": "https://shop.kind.co.jp/products/8001001141404",
+      "primary_image": {
+        "url": "https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141404_1.jpg?v=1786853462",
+        "alt": "無地 ロングスリーブカットソー"
+      },
+      "price": {
+        "original": "8360",
+        "currency": "",
+        "display": "8360"
+      },
+      "size": null,
+      "availability": "UNKNOWN",
+      "last_checked_at": "2026-08-17T01:22:04.078672+00:00",
+      "item_match": {
+        "label": "Incomplete evidence",
+        "mean": 0.611354,
+        "lower_bound": 0.550354,
+        "upper_bound": 0.651354
+      },
+      "authenticity": {
+        "label": "Incomplete evidence",
+        "mean": 0.52,
+        "lower_bound": 0.4,
+        "upper_bound": 0.586
+      },
+      "listing_utility": {
+        "live": false,
+        "label": "Unknown",
+        "score": 0.28500000000000003,
+        "last_checked_at": "2026-08-17T01:22:04.078672+00:00"
+      },
+      "evidence_chips": [
+        {
+          "kind": "support",
+          "text": "ev:text:identity"
+        },
+        {
+          "kind": "support",
+          "text": "ev:global:visual"
+        },
+        {
+          "kind": "support",
+          "text": "ev:parts:ontology"
+        }
+      ],
+      "primary_gap": {
+        "kind": "missing",
+        "text": "front"
+      },
+      "why": {
+        "heading": "Why Possibly Real",
+        "points": [
+          "ev:text:identity",
+          "ev:global:visual",
+          "ev:parts:ontology",
+          "ev:geometry:relations"
+        ],
+        "tab_reason": "The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.",
+        "still_unverified": [
+          "No physical inspection."
+        ],
+        "supporting": [
+          "ev:text:identity",
+          "ev:global:visual",
+          "ev:parts:ontology",
+          "ev:geometry:relations"
+        ],
+        "contradictions": [],
+        "missing": [
+          "front",
+          "rear",
+          "detail",
+          "label",
+          "label-view",
+          "logo-not-resolved",
+          "provenance",
+          "price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+          "availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+          "title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+          "seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+          "images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"
+        ],
+        "seller_reported": [
+          {
+            "field": "Title",
+            "value": "無地 ロングスリーブカットソー",
+            "origin": "REPORTED_BY_SELLER"
+          },
+          {
+            "field": "Brand",
+            "value": "WILLY CHAVARRIA",
+            "origin": "REPORTED_BY_SELLER"
+          },
+          {
+            "field": "Model",
+            "value": "8001001141404",
+            "origin": "REPORTED_BY_SELLER"
+          }
+        ],
+        "images_compared": [
+          {
+            "role": "product",
+            "url": "https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141404_1.jpg?v=1786853462",
+            "alt": "無地 ロングスリーブカットソー",
+            "image_id": "7ab63954-43c2-4583-9a0f-ad4c9f4fdfc3"
+          },
+          {
+            "role": "product",
+            "url": "https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141404_2.jpg?v=1786853460",
+            "alt": "無地 ロングスリーブカットソー",
+            "image_id": "7666e1e1-0c45-4366-ab37-8dec37e0a63c"
+          },
+          {
+            "role": "product",
+            "url": "https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141404_3.jpg?v=1786853460",
+            "alt": "無地 ロングスリーブカットソー",
+            "image_id": "dcc1e517-e185-4f00-8e35-6ff5cc7a5ad7"
+          },
+          {
+            "role": "product",
+            "url": "https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141404_4.jpg?v=1786853461",
+            "alt": "無地 ロングスリーブカットソー",
+            "image_id": "04f874bd-2d1b-42da-b6cb-48bb5c752070"
+          },
+          {
+            "role": "product",
+            "url": "https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141404_5.jpg?v=1786853460",
+            "alt": "無地 ロングスリーブカットソー",
+            "image_id": "23fc4b92-6bc8-4712-ab10-bafbebad311d"
+          }
+        ],
+        "images_compared_reason": null,
+        "duplicate_image_family_count": 4,
+        "live": false,
+        "checked_at": "2026-08-17T01:22:04.078672+00:00"
+      },
+      "compare": {
+        "reference_crop": {
+          "url": "",
+          "alt": "User reference",
+          "part": ""
+        },
+        "candidate_crop": {
+          "url": "https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141404_1.jpg?v=1786853462",
+          "alt": "無地 ロングスリーブカットソー",
+          "part": ""
+        },
+        "parts": [
+          {
+            "part": "eyelets",
+            "note": "ref=7 cand=17",
+            "status": "compared",
+            "origin": "INFERRED"
+          },
+          {
+            "part": "lateral_panels",
+            "note": "ref=5 cand=4",
+            "status": "compared",
+            "origin": "INFERRED"
+          },
+          {
+            "part": "outsole",
+            "note": "ref=0.4133 cand=0.4139",
+            "status": "compared",
+            "origin": "INFERRED"
+          },
+          {
+            "part": "heel",
+            "note": "ref=block cand=block",
+            "status": "compared",
+            "origin": "INFERRED"
+          },
+          {
+            "part": "logo",
+            "note": "ref=None cand=None",
+            "status": "compared",
+            "origin": "INFERRED"
+          }
+        ],
+        "supporting": [
+          "ev:text:identity",
+          "ev:global:visual",
+          "ev:parts:ontology",
+          "ev:geometry:relations"
+        ],
+        "contradictions": [],
+        "missing_views": [
+          "front",
+          "rear",
+          "detail",
+          "label",
+          "label-view",
+          "logo-not-resolved",
+          "provenance",
+          "price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+          "availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+          "title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+          "seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+          "images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"
+        ],
+        "seller_reported_fields": [
+          {
+            "field": "Title",
+            "value": "無地 ロングスリーブカットソー",
+            "origin": "REPORTED_BY_SELLER"
+          },
+          {
+            "field": "Brand",
+            "value": "WILLY CHAVARRIA",
+            "origin": "REPORTED_BY_SELLER"
+          },
+          {
+            "field": "Model",
+            "value": "8001001141404",
+            "origin": "REPORTED_BY_SELLER"
+          }
+        ]
+      }
+    },
+    {
+      "result_id": "1f978a89-0f22-4c6c-8921-b6ae30dd34bb",
+      "search_id": "40350d3f-0ebe-432e-81f7-ef730455c052",
+      "candidate_id": "a2a6bb99-2f33-478f-9d97-942f21b9bc45",
+      "bucket": "possibly_real",
+      "rank": 2,
+      "title": "ロゴ長袖カットソー",
+      "source": {
+        "name": "kind",
+        "adapter": "kind"
+      },
+      "listing_url": "https://shop.kind.co.jp/products/8001001141442",
+      "primary_image": {
+        "url": "https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141442_1.jpg?v=1786853460",
+        "alt": "ロゴ長袖カットソー"
+      },
+      "price": {
+        "original": "7260",
+        "currency": "",
+        "display": "7260"
+      },
+      "size": null,
+      "availability": "UNKNOWN",
+      "last_checked_at": "2026-08-17T01:22:41.947601+00:00",
+      "item_match": {
+        "label": "Incomplete evidence",
+        "mean": 0.595227,
+        "lower_bound": 0.534227,
+        "upper_bound": 0.635227
+      },
+      "authenticity": {
+        "label": "Incomplete evidence",
+        "mean": 0.52,
+        "lower_bound": 0.4,
+        "upper_bound": 0.586
+      },
+      "listing_utility": {
+        "live": false,
+        "label": "Unknown",
+        "score": 0.28500000000000003,
+        "last_checked_at": "2026-08-17T01:22:41.947601+00:00"
+      },
+      "evidence_chips": [
+        {
+          "kind": "support",
+          "text": "ev:text:identity"
+        },
+        {
+          "kind": "support",
+          "text": "ev:global:visual"
+        },
+        {
+          "kind": "support",
+          "text": "ev:parts:ontology"
+        }
+      ],
+      "primary_gap": {
+        "kind": "missing",
+        "text": "front"
+      },
+      "why": {
+        "heading": "Why Possibly Real",
+        "points": [
+          "ev:text:identity",
+          "ev:global:visual",
+          "ev:parts:ontology",
+          "ev:geometry:relations"
+        ],
+        "tab_reason": "The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.",
+        "still_unverified": [
+          "No physical inspection."
+        ],
+        "supporting": [
+          "ev:text:identity",
+          "ev:global:visual",
+          "ev:parts:ontology",
+          "ev:geometry:relations"
+        ],
+        "contradictions": [],
+        "missing": [
+          "front",
+          "rear",
+          "detail",
+          "label",
+          "label-view",
+          "logo-not-resolved",
+          "cross-view-second-image",
+          "provenance",
+          "price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+          "availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+          "title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+          "seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+          "images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"
+        ],
+        "seller_reported": [
+          {
+            "field": "Title",
+            "value": "ロゴ長袖カットソー",
+            "origin": "REPORTED_BY_SELLER"
+          },
+          {
+            "field": "Brand",
+            "value": "WILLY CHAVARRIA",
+            "origin": "REPORTED_BY_SELLER"
+          },
+          {
+            "field": "Model",
+            "value": "8001001141442",
+            "origin": "REPORTED_BY_SELLER"
+          }
+        ],
+        "images_compared": [
+          {
+            "role": "product",
+            "url": "https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141442_1.jpg?v=1786853460",
+            "alt": "ロゴ長袖カットソー",
+            "image_id": "ac5c3726-b2e2-4da4-95c6-1b83169c88c3"
+          }
+        ],
+        "images_compared_reason": null,
+        "duplicate_image_family_count": 4,
+        "live": false,
+        "checked_at": "2026-08-17T01:22:41.947601+00:00"
+      },
+      "compare": {
+        "reference_crop": {
+          "url": "",
+          "alt": "User reference",
+          "part": ""
+        },
+        "candidate_crop": {
+          "url": "https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141442_1.jpg?v=1786853460",
+          "alt": "ロゴ長袖カットソー",
+          "part": ""
+        },
+        "parts": [
+          {
+            "part": "eyelets",
+            "note": "ref=7 cand=17",
+            "status": "compared",
+            "origin": "INFERRED"
+          },
+          {
+            "part": "lateral_panels",
+            "note": "ref=5 cand=5",
+            "status": "compared",
+            "origin": "INFERRED"
+          },
+          {
+            "part": "outsole",
+            "note": "ref=0.4133 cand=0.3847",
+            "status": "compared",
+            "origin": "INFERRED"
+          },
+          {
+            "part": "heel",
+            "note": "ref=block cand=block",
+            "status": "compared",
+            "origin": "INFERRED"
+          },
+          {
+            "part": "logo",
+            "note": "ref=None cand=None",
+            "status": "compared",
+            "origin": "INFERRED"
+          }
+        ],
+        "supporting": [
+          "ev:text:identity",
+          "ev:global:visual",
+          "ev:parts:ontology",
+          "ev:geometry:relations"
+        ],
+        "contradictions": [],
+        "missing_views": [
+          "front",
+          "rear",
+          "detail",
+          "label",
+          "label-view",
+          "logo-not-resolved",
+          "cross-view-second-image",
+          "provenance",
+          "price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+          "availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+          "title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+          "seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+          "images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"
+        ],
+        "seller_reported_fields": [
+          {
+            "field": "Title",
+            "value": "ロゴ長袖カットソー",
+            "origin": "REPORTED_BY_SELLER"
+          },
+          {
+            "field": "Brand",
+            "value": "WILLY CHAVARRIA",
+            "origin": "REPORTED_BY_SELLER"
+          },
+          {
+            "field": "Model",
+            "value": "8001001141442",
+            "origin": "REPORTED_BY_SELLER"
+          }
+        ]
+      }
+    }
+  ],
+  "counts": {
+    "real": 0,
+    "possibly_real": 2,
+    "hidden": 6
+  }
+}

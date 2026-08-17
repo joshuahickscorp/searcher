@@ -94,7 +94,7 @@ REPLICA_PATTERNS = (
     ),
     # Negated authenticity, however it is phrased.
     re.compile(r"\b(?:not|isn'?t|ain'?t|aint)\s+(?:the\s+)?(?:an?\s+)?"
-               r"(?:authentic|genuine|real|orig(?:inal)?)\b"),
+               r"(?:authentic|genuine|real|legit|orig(?:inal)?)\b"),
     re.compile(r"\bnot\s+the\s+real\s+(?:thing|deal|one|pair)\b"),
     # The same claim in other languages.
     re.compile(r"\breplika\b"),
@@ -105,7 +105,8 @@ REPLICA_PATTERNS = (
     re.compile(r"\b(?:god|pk|ua|lc|og)\s*factory\b"),
     re.compile(r"\bfrom\s+the\s+factory\b"),
     re.compile(r"\b(?:ua|pk|lc|og|gd|hk|dt|lj|bk)\s+quality\b"),
-    re.compile(r"\bbest\s+batch\b"),
+    re.compile(r"\b(?:best|god|retail|top|clean)\s+batch\b"),
+    re.compile(r"\bdups?\b"),
     re.compile(r"\brepfam\b"),
     re.compile(r"\bsame\s+as\s+retail\b"),
     # One-to-one, spelled every way sellers spell it.
@@ -165,6 +166,19 @@ def text_identity(query_terms: list[str], listing_terms: list[str]) -> float:
 
 _ZERO_WIDTH = dict.fromkeys(map(ord, "\u200b\u200c\u200d\u2060\ufeff"))
 
+# Cyrillic and Greek letters that render as Latin ones. A seller writing
+# "repliсa" with a Cyrillic es is making the same claim to a reader and a
+# different string to a matcher.
+_HOMOGLYPHS = str.maketrans({
+    "а": "a", "е": "e", "о": "o", "с": "c", "р": "p", "х": "x", "у": "y",
+    "і": "i", "ѕ": "s", "ԁ": "d", "ӏ": "l", "һ": "h", "ν": "v", "ο": "o",
+    "α": "a", "ρ": "p", "τ": "t", "ϲ": "c", "ｅ": "e",
+})
+
+# Digit-for-letter substitutions, applied only to the despaced pass below so a
+# meaningful "1:1" is never mangled.
+_LEET = str.maketrans({"1": "l", "0": "o", "3": "e", "4": "a", "5": "s", "@": "a", "$": "s"})
+
 
 def normalize_for_replica(text: str) -> str:
     """NFKC-fold so fullwidth and compatibility forms match the same pattern.
@@ -175,6 +189,7 @@ def normalize_for_replica(text: str) -> str:
     different string to a regex.
     """
     folded = unicodedata.normalize("NFKC", text).translate(_ZERO_WIDTH).casefold()
+    folded = folded.translate(_HOMOGLYPHS)
     return re.sub(r"\s+", " ", folded)
 
 
@@ -184,7 +199,7 @@ def _despaced(text: str) -> str:
     Sellers write "r e p l i c a" and "counter feit" precisely because a word
     list does not see them. Only unambiguous words are matched this way.
     """
-    return re.sub(r"[\s._-]+", "", text)
+    return re.sub(r"[\s._-]+", "", text).translate(_LEET)
 
 
 _DESPACED_PATTERNS = (

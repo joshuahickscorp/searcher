@@ -1,0 +1,18 @@
+{
+  "replica": "BLOCKED",
+  "replica_reached_real": [],
+  "replica_reached_possibly_real": [
+    "not legit",
+    "this is not legit",
+    "god batch",
+    "retail batch",
+    "rep1ica",
+    "repliсa",
+    "dup",
+    "Copy of the original receipt included"
+  ],
+  "complete": "BLOCKED",
+  "capability": "BLOCKED",
+  "publish": "LEAK",
+  "wrote": "artifacts/grading-round3/attacks.json"
+}

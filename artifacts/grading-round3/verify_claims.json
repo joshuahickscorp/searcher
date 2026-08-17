@@ -1,0 +1,247 @@
+{
+  "git_sha": "6435d248a716429f197e807627c126b73f30efc5",
+  "replica_phrases": {
+    "claim": "thirty extra replica phrasings detected; receipt copy is not a replica",
+    "leaked_13": 13,
+    "leaked_round_two": 30,
+    "missed_13": [],
+    "missed_30": [],
+    "false_positives_on_genuine": [],
+    "receipt_copy_not_replica": true,
+    "extra_beyond_regression_detected": [
+      "AAA+",
+      "aaa quality",
+      "this is a rep",
+      "unauthorised replica",
+      "not original item",
+      "rep sneakers",
+      "comes with replica box",
+      "quality replica",
+      "mirror copy",
+      "1:1",
+      "reps"
+    ],
+    "extra_beyond_regression_missed": [
+      "not legit",
+      "this is not legit",
+      "god batch",
+      "retail batch",
+      "rep1ica",
+      "repliсa",
+      "dup"
+    ],
+    "holds": true
+  },
+  "publish_requires_link": {
+    "claim": "public bucket requires usable http(s) link; null/javascript stay hidden",
+    "bad_urls": [
+      {
+        "url": "",
+        "usable": false,
+        "published": {
+          "real": "hidden",
+          "possibly_real": "hidden"
+        }
+      },
+      {
+        "url": null,
+        "usable": false,
+        "published": {
+          "real": "hidden",
+          "possibly_real": "hidden"
+        }
+      },
+      {
+        "url": "javascript:alert(1)",
+        "usable": false,
+        "published": {
+          "real": "hidden",
+          "possibly_real": "hidden"
+        }
+      },
+      {
+        "url": "data:text/html,x",
+        "usable": false,
+        "published": {
+          "real": "hidden",
+          "possibly_real": "hidden"
+        }
+      },
+      {
+        "url": "/products/1",
+        "usable": false,
+        "published": {
+          "real": "hidden",
+          "possibly_real": "hidden"
+        }
+      }
+    ],
+    "honest_https_publishes": "possibly_real",
+    "missing_candidate": "hidden",
+    "holds": true
+  },
+  "generic_profile": {
+    "claim": "generic profile no longer expects view 'unknown'; completeness not pinned at 0.4",
+    "expected_views": [
+      "front",
+      "rear",
+      "detail",
+      "label"
+    ],
+    "unknown_in_expected": false,
+    "all_expected_are_classifier_views": true,
+    "full_completeness": 1.0,
+    "empty_completeness": 0.4,
+    "empty_missing": [
+      "front",
+      "rear",
+      "detail",
+      "label"
+    ],
+    "full_missing": [],
+    "footwear_still_has_sole": true,
+    "holds": true
+  },
+  "view_classification": {
+    "claim": "garment filling the frame reads front, not heel",
+    "garment_full_frame": "front",
+    "garment_close_crop": "detail",
+    "footwear_full_frame": "heel",
+    "unknown_category": "front",
+    "holds": true
+  },
+  "size_not_brand": {
+    "claim": "size is not part of brand; shop is not asked for prada-38",
+    "brand_tokens": [
+      "PRADA"
+    ],
+    "model_tokens": [
+      "PRADA"
+    ],
+    "size_in_brand": false,
+    "brand_slugs": [
+      "prada"
+    ],
+    "legacy_prada_38_slug": [
+      "prada-38"
+    ],
+    "compiled_query_texts": [
+      "PRADA PRADA",
+      "プラダ 中古",
+      "PRADA 中古",
+      "PRADA アーカイブ",
+      "PRADA PRADA authentication",
+      "PRADA スニーカー",
+      "PRADA PRADA sneaker used",
+      "PRADA PRADA replica differences",
+      "PRADA PRADA sold",
+      "PRADA vintage",
+      "PRADA PRADA 売り切れ",
+      "Прада б/у",
+      "큐걔가 중고",
+      "PRADA occasion",
+      "PRADA usato",
+      "PRADA ヴィンテージ",
+      "PRADA PRADA vendu",
+      "PRADA 二手"
+    ],
+    "compiled_slugs": [
+      "prada",
+      "prada-occasion",
+      "prada-prada",
+      "prada-usato",
+      "prada-vintage"
+    ],
+    "prada_38_or_size_slugs": [],
+    "holds": true
+  },
+  "index_ranks_before_cap": {
+    "claim": "index expansion ranks members against user text and tags before the cap",
+    "members_found": 120,
+    "ranked_taken": 24,
+    "ranked_first_handle": "8003001995070",
+    "ranked_first_url": "https://shop.kind.co.jp/products/8003001995070",
+    "target_rank_among_taken": 1,
+    "target_in_unranked_first_24": false,
+    "unranked_first_handle": "filler-0000",
+    "intent_terms_includes_user_text": true,
+    "query_texts_used": [
+      "PRADA(プラダ) ハイヒールパンプス ブラック サイズ 38 1/2",
+      "PRADA"
+    ],
+    "holds": true
+  },
+  "flagship_behaviour_21": {
+    "claim": "acceptance harness reports behaviour 21 as not evaluable; score is 20 of 24",
+    "source_hardcodes_met": false,
+    "source_says_not_evaluable": true,
+    "stored_b21": {
+      "n": "21",
+      "behaviour": "resume after forced interruption",
+      "verdict": "not evaluable",
+      "observation": "this harness does not interrupt the campaign it scores; resume is covered by tests/real_runtime, not observed here"
+    },
+    "stored_summary": {
+      "met": 20,
+      "not_met": 1,
+      "not_evaluable": 3,
+      "of": 24
+    },
+    "holds": true
+  },
+  "docs_and_threshold": {
+    "claim": "pair threshold documented as shortlist cut; nine docs exist",
+    "nine_exist": {
+      "ARCHITECTURE.md": true,
+      "CLAIMS.md": true,
+      "LIMITATIONS.md": true,
+      "README.md": true,
+      "docs/OPERATING.md": true,
+      "docs/architecture/API.md": true,
+      "docs/architecture/EMBEDDINGS.md": true,
+      "docs/architecture/MATCHING_AND_AUTHENTICITY.md": true,
+      "web/index.html": true
+    },
+    "all_nine_exist": true,
+    "shortlist_language": {
+      "CLAIMS.md": {
+        "shortlist_cut": false,
+        "identity_gate": false,
+        "70_percent": true,
+        "0.86": true
+      },
+      "LIMITATIONS.md": {
+        "shortlist_cut": false,
+        "identity_gate": false,
+        "70_percent": true,
+        "0.86": true
+      },
+      "README.md": {
+        "shortlist_cut": false,
+        "identity_gate": false,
+        "70_percent": true,
+        "0.86": true
+      },
+      "SEARCHER_BUCKET_POLICY.md": {
+        "shortlist_cut": false,
+        "identity_gate": false,
+        "70_percent": false,
+        "0.86": false
+      },
+      "docs/architecture/EMBEDDINGS.md": {
+        "shortlist_cut": false,
+        "identity_gate": false,
+        "70_percent": false,
+        "0.86": false
+      },
+      "src/searcher/core/embedding_gateway.py": {
+        "shortlist_cut": true,
+        "identity_gate": true,
+        "70_percent": true,
+        "0.86": true
+      }
+    },
+    "gateway_comment_has_shortlist": true,
+    "gateway_comment_has_70": true
+  }
+}
