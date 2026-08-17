@@ -287,6 +287,14 @@ REBAG = SourceSpec(
     disallowed=("/digital_certificate/", "/search"),
     listing_prefixes=("/shop/", "/products/"),
     sitemap_urls=("https://www.rebag.com/sitemap.xml",),
+    # The storefront is Shopify on shop.rebag.com while the site is
+    # www.rebag.com. Without these the spec offered nothing to plan from, so the
+    # source produced no work and appeared in neither the searched nor the
+    # blocked list - it simply vanished from coverage. Verified 2026-08-16:
+    # shop.rebag.com/products.json answers 200 with products and images, and
+    # www.rebag.com/robots.txt disallows only /digital_certificate/.
+    collection_paths=("/collections/all",),
+    catalog_feed_path="/products.json",
 )
 
 KOMEHYO = SourceSpec(
