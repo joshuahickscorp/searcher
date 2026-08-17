@@ -57,19 +57,34 @@ Requires [uv](https://docs.astral.sh/uv/). Python 3.13 is selected from
 git clone https://github.com/joshuahickscorp/searcher.git
 cd searcher
 uv sync
-./scripts/run_api.sh
+./scripts/first_run.sh
 ```
 
-Open http://127.0.0.1:8765/
+That one command reports which lanes are live, states whether the
+learned visual backbone is present, starts the API and the interface,
+runs a first search, and prints what to do next.
+
+Open the URL it prints (http://127.0.0.1:8765/ when the default port
+is free).
+
+To see the lane report without starting anything:
+
+```bash
+./scripts/first_run.sh --check-only
+```
 
 If that port is already taken the process exits with `address already
 in use`. Pick another port:
 
 ```bash
-SEARCHER_API_PORT=8766 ./scripts/run_api.sh
+SEARCHER_API_PORT=8766 ./scripts/first_run.sh
 ```
 
 Then open http://127.0.0.1:8766/
+
+The server-only command (no self-check, no first search) is
+`./scripts/run_api.sh`. Same port rule: `SEARCHER_API_PORT=8766
+./scripts/run_api.sh`.
 
 Use this local copy of the interface. Do **not** open the published
 HTTPS page and point it at `http://127.0.0.1` — the browser refuses
@@ -82,9 +97,18 @@ exist.
 
 ## Sharing
 
+**WARNING: This alpha has no authentication.** Whoever can reach the
+printed URL can create searches, read results, and cancel or delete
+campaigns.
+
 `./scripts/serve_shared.sh` is how you let someone else reach the
-process. It prints a prominent warning and the warning is the truth:
-this alpha has no authentication. `--lan` and `--tunnel` are opt-in.
+process. It checks the port, CORS, and that the printed URL actually
+answers. It refuses rather than printing a URL that cannot work.
+`--lan` and `--tunnel` are opt-in.
+
+```bash
+./scripts/serve_shared.sh --help
+```
 
 The published page only works against an **HTTPS** API origin, and
 only when that origin's CORS allowlist includes
@@ -97,8 +121,12 @@ Full steps, CORS, data, weights, and how to stop:
 ## Visual donor and model weights
 
 A fresh clone has no model weight files. Searcher never downloads
-them. The service runs without them and answers with classical
-descriptors. There is no published weight file to fetch. See
+them. The service runs without them and answers with classical descriptors.
+Nothing is promoted to Real through a missing-weight fallback. `./scripts/first_run.sh --check-only` states whether the
+learned backbone is present and prints the single command that
+installs it.
+
+There is no published weight file to fetch. See
 [docs/OPERATING.md](docs/OPERATING.md#model-weights).
 
 The optional VisionMCP donor is a local library pin, not a weight
