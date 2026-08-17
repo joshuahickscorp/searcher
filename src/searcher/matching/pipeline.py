@@ -196,7 +196,7 @@ def _pair_rank(
     return (visual, 0.0, 0.0)
 
 
-def _best_view_pair(
+def _capped_view_pairs(
     reference_pngs: dict[str, bytes],
     candidate_pngs: dict[str, bytes],
     reference_descriptors: dict[str, StructuredDescriptor],
@@ -204,24 +204,16 @@ def _best_view_pair(
     *,
     footwear: bool = False,
     max_pairs: int = 9,
-) -> tuple[
-    StructuredDescriptor | None,
-    StructuredDescriptor | None,
-    bytes | None,
-    bytes | None,
+) -> list[
+    tuple[tuple[float, float, float], StructuredDescriptor, StructuredDescriptor, bytes, bytes]
 ]:
-    """The strongest visual pair for this candidate, not the first of each.
+    """The pairs `_best_view_pair` ranks, same order and 9-pair budget.
 
-    Descriptor and pixels are always taken from the same photograph. A single
-    globally chosen reference view is the wrong object to compare when the
-    seller's matching photograph is the third frame. Bounded because this is
-    the same budget as correspondence.
+    Identity may take the max. Colour and material walk this same list.
     """
-    best: (
+    considered: list[
         tuple[tuple[float, float, float], StructuredDescriptor, StructuredDescriptor, bytes, bytes]
-        | None
-    ) = None
-    pairs = 0
+    ] = []
     references = list(reference_descriptors.items())
     candidates = list(candidate_descriptors.items())
     if footwear:
@@ -246,20 +238,118 @@ def _best_view_pair(
             )
             if cand_png is None:
                 continue
-            if pairs >= max_pairs:
-                break
-            pairs += 1
+            if len(considered) >= max_pairs:
+                return considered
             visual = global_visual(
                 ref_desc, cand_desc, reference_png=ref_png, candidate_png=cand_png
             ).interval.mean
             rank = _pair_rank(ref_desc, cand_desc, visual, footwear=footwear)
-            if best is None or rank > best[0]:
-                best = (rank, ref_desc, cand_desc, ref_png, cand_png)
-        if pairs >= max_pairs:
+            considered.append((rank, ref_desc, cand_desc, ref_png, cand_png))
+        if len(considered) >= max_pairs:
             break
-    if best is None:
+    return considered
+
+
+def _best_view_pair(
+    reference_pngs: dict[str, bytes],
+    candidate_pngs: dict[str, bytes],
+    reference_descriptors: dict[str, StructuredDescriptor],
+    candidate_descriptors: dict[str, StructuredDescriptor],
+    *,
+    footwear: bool = False,
+    max_pairs: int = 9,
+) -> tuple[
+    StructuredDescriptor | None,
+    StructuredDescriptor | None,
+    bytes | None,
+    bytes | None,
+]:
+    """The strongest visual pair for this candidate, not the first of each.
+
+    Descriptor and pixels are always taken from the same photograph. A single
+    globally chosen reference view is the wrong object to compare when the
+    seller's matching photograph is the third frame. Bounded because this is
+    the same budget as correspondence.
+    """
+    considered = _capped_view_pairs(
+        reference_pngs,
+        candidate_pngs,
+        reference_descriptors,
+        candidate_descriptors,
+        footwear=footwear,
+        max_pairs=max_pairs,
+    )
+    if not considered:
         return None, None, None, None
-    return best[1], best[2], best[3], best[4]
+    _rank, ref_desc, cand_desc, ref_png, cand_png = max(considered, key=lambda item: item[0])
+    return ref_desc, cand_desc, ref_png, cand_png
+
+
+def _colour_pair_eligible(
+    ref_desc: StructuredDescriptor,
+    cand_desc: StructuredDescriptor,
+    *,
+    footwear: bool,
+) -> bool:
+    """Whether this pair is a colour reading of the item, not of a label card.
+
+    A cream label next to a lateral of the same shoe is not a colourway
+    contradiction. A true item has none to accumulate once mixed
+    label/product pairs are set aside. Footwear further requires both
+    photographs to still show eyelets: that is the same identity-bearing
+    upper `_pair_rank` prefers, so a cooler extra lateral stays eligible.
+    """
+    if bool(ref_desc.label_hash) ^ bool(cand_desc.label_hash):
+        return False
+    return not (footwear and min(ref_desc.eyelet_count, cand_desc.eyelet_count) <= 0)
+
+
+def _colour_across_pairs(
+    considered: list[
+        tuple[tuple[float, float, float], StructuredDescriptor, StructuredDescriptor, bytes, bytes]
+    ],
+    *,
+    exact_colour: bool,
+    chosen_ref: StructuredDescriptor,
+    chosen_cand: StructuredDescriptor,
+    footwear: bool,
+) -> tuple[float, list[str]]:
+    """Worst colour contradiction among considered pairs, else the chosen pair.
+
+    Identity may keep the flattering pair. A contradiction on any other
+    considered pair is not erasable by that choice.
+    """
+    chosen_score, chosen_contra, _ = colour_consistency(
+        chosen_ref, chosen_cand, exact_colour_required=exact_colour
+    )
+    worst_contra_score: float | None = None
+    found: list[str] = []
+    for _rank, ref_desc, cand_desc, _ref_png, _cand_png in considered:
+        if not _colour_pair_eligible(ref_desc, cand_desc, footwear=footwear):
+            continue
+        score, contra, _ = colour_consistency(
+            ref_desc, cand_desc, exact_colour_required=exact_colour
+        )
+        # Soft view-to-view tint is not a colourway. A genuine bag's
+        # fill-frame detail versus its front can trip colour-soft-difference
+        # and would lower a true match. colourway-mismatch cannot: it is
+        # the contradiction pairing erases by picking a cooler extra.
+        hard = [item for item in contra if item == "colourway-mismatch"]
+        if not hard:
+            continue
+        if worst_contra_score is None or score < worst_contra_score:
+            worst_contra_score = score
+        for item in hard:
+            if item not in found:
+                found.append(item)
+    if not found:
+        return chosen_score, chosen_contra
+    merged = list(found)
+    for item in chosen_contra:
+        if item not in merged:
+            merged.append(item)
+    score = chosen_score if worst_contra_score is None else min(chosen_score, worst_contra_score)
+    return score, merged
 
 
 def _best_correspondence(
@@ -319,13 +409,17 @@ def match_candidate(
     footwear = ontology.category == "footwear"
     exact_colour = bool(constraints and constraints.colour)
     embedding_sim = pair_similarity(reference_pngs, candidate.pngs)
-    ref_desc, cand_desc, ref_png, cand_png = _best_view_pair(
+    considered = _capped_view_pairs(
         reference_pngs,
         candidate.pngs,
         reference_descriptors,
         candidate.descriptors,
         footwear=footwear,
     )
+    if considered:
+        _rank, ref_desc, cand_desc, ref_png, cand_png = max(considered, key=lambda item: item[0])
+    else:
+        ref_desc, cand_desc, ref_png, cand_png = None, None, None, None
     corr = (
         _best_correspondence(reference_pngs, candidate.pngs, ledger=ledger)
         if reference_pngs and candidate.pngs
@@ -360,8 +454,12 @@ def match_candidate(
             geom_raw.score,
             support=[cite("geometry", note) for note in geom_raw.notes] or [cite("geometry", "ok")],
         )
-        colour_score, colour_contra, _ = colour_consistency(
-            ref_desc, cand_desc, exact_colour_required=exact_colour
+        colour_score, colour_contra = _colour_across_pairs(
+            considered,
+            exact_colour=exact_colour,
+            chosen_ref=ref_desc,
+            chosen_cand=cand_desc,
+            footwear=footwear,
         )
         material = scored(
             colour_score,

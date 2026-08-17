@@ -97,21 +97,26 @@ def test_wrong_item_with_many_views_stays_below_plausible_floor() -> None:
     )
 
 
-def test_colourway_multiview_crosses_plausible_floor() -> None:
-    """Named finding: extra photographs of a different colourway clear 0.45.
+def test_colourway_multiview_stays_below_plausible_floor() -> None:
+    """Extra photographs of a different colourway must not clear 0.45.
 
-    A cooler-lit lateral of the red colourway is still the wrong item. Pairing
-    prefers it over the canonical red lateral, the colour hard contradiction
-    drops, and the item-match lower bound jumps from the hard-penalty floor
-    to the true-match band. Routing may still hide the listing via the
-    authenticity colour veto; the item-match number itself does not.
+    This test was written to document the defect and asserted the opposite: a
+    cooler-lit lateral of the red colourway is still the wrong item, pairing
+    preferred it over the canonical red lateral, the colour contradiction was
+    dropped along with the pair that showed it, and the lower bound jumped from
+    the hard-penalty floor to the true-match band at 0.91.
+
+    Contradictions are now collected across every pair considered rather than
+    read off the one chosen pair, so a colour contradiction survives the choice
+    of a flattering photograph. The assertion is inverted because the thing it
+    recorded was fixed, not because the measurement changed.
     """
     floor = _plausible_floor()
     one = _item_match_lower("different_colourway", n_views=1)
     many = _item_match_lower("different_colourway_multiview", n_views=None)
     assert one < floor, f"1-view colourway should sit below {floor}, got {one}"
-    assert many >= floor, (
-        f"expected different_colourway_multiview to cross {floor}, got {many}"
+    assert many < floor, (
+        f"extra views must not lift a different colourway over {floor}, got {many}"
     )
 
 

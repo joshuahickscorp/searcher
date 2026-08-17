@@ -141,13 +141,15 @@
         "completeness": 0.6667,
         "correct": true,
         "hard_vetoes": [
-          "HARD_COLOURWAY"
+          "HARD_COLOURWAY",
+          "INSUFFICIENT_MATCH"
         ],
         "id": "hardneg:different_colourway_multiview",
-        "item_match_lower": 0.91,
+        "item_match_lower": 0.12,
         "predicted": "hidden",
         "reasons": [
           "HARD_COLOURWAY",
+          "INSUFFICIENT_MATCH",
           "hidden",
           "adjudicator=local_deterministic",
           "output=advisory"
@@ -182,7 +184,8 @@
         "correct": true,
         "hard_vetoes": [
           "SELF_DECLARED_REPLICA",
-          "WRONG_PRODUCT"
+          "WRONG_PRODUCT",
+          "HARD_COLOURWAY"
         ],
         "id": "hardneg:replica_copied_title_multiview",
         "item_match_lower": 0.12,
@@ -190,6 +193,7 @@
         "reasons": [
           "SELF_DECLARED_REPLICA",
           "WRONG_PRODUCT",
+          "HARD_COLOURWAY",
           "hidden",
           "adjudicator=local_deterministic",
           "output=advisory"
@@ -252,7 +256,7 @@
       }
     ],
     "split": "held_out",
-    "wall_seconds": 4.45268
+    "wall_seconds": 4.655265
   },
   "calibration": {
     "curve": {
@@ -446,9 +450,9 @@
     "A claim that Searcher is better than Google Images or any other engine."
   ],
   "evidence_board": "artifacts/benchmark/evidence-board.html",
-  "git_sha": "901847300263b32207fbb6f379525bbee73760f2",
+  "git_sha": "4e639bdc60c5f6f2658d74c30be9f9015bd3eb54",
   "host": "Mac-Studio",
-  "measured_at": "2026-08-17T15:21:30.431898+00:00",
+  "measured_at": "2026-08-17T15:54:53.448627+00:00",
   "no_authenticity_claim": true,
   "not_computed": [
     {
@@ -469,24 +473,24 @@
       "cache_hits": 0,
       "fetches": 0,
       "images_processed": 79,
-      "wall_seconds": 4.45268
+      "wall_seconds": 4.655265
     },
     "cache_hit_rate": 1.0,
     "campaigns": 6,
     "fetches_per_campaign": 0,
     "fetches_total": 0,
-    "images_per_second": 42.130773,
+    "images_per_second": 39.579156,
     "images_processed": 254,
     "note": "fetches_per_campaign is 0 because every byte came from fixtures/ already permitted to be held. A live campaign's fetch cost is a different protocol; see artifacts/searcher-performance.receipt.json and artifacts/searcher-adversarial-recall.receipt.json.",
     "protocol": "Offline fixture campaigns. Retrieval is one closed-set ranking pass. Bucket evaluation is one judge_candidates campaign on the held-out constructed cases. No live source is contacted.",
     "retrieval": {
       "fetches": 0,
-      "images_per_second": 111.028818,
+      "images_per_second": 99.304626,
       "images_scored": 175,
-      "wall_seconds": 1.576167
+      "wall_seconds": 1.762254
     },
-    "wall_seconds_per_campaign": 1.004808,
-    "wall_seconds_total": 6.028847
+    "wall_seconds_per_campaign": 1.069587,
+    "wall_seconds_total": 6.417519
   },
   "policy_version": "provisional-1",
   "prior_receipts": {
@@ -2036,7 +2040,7 @@
       "units": "cosine"
     },
     "split": "held_out",
-    "wall_seconds": 1.576167
+    "wall_seconds": 1.762254
   },
   "schema_version": "1.1.0",
   "shipped_threshold": 0.86,
