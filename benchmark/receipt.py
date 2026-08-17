@@ -87,6 +87,32 @@ def adversarial_finding() -> dict[str, Any]:
     }
 
 
+def _scorer_identity() -> dict[str, Any]:
+    """Name the embedding backend, or say plainly that there was none."""
+    try:
+        from searcher.retrieval.embeddings import resolve_backend
+
+        backend = resolve_backend()
+    except Exception as exc:  # pragma: no cover - defensive
+        return {"available": False, "reason": f"{type(exc).__name__}: {exc}"}
+    if backend is None:
+        return {
+            "available": False,
+            "identity": "perceptual-hash fallback",
+            "reason": (
+                "no embedding weights on this host; every number in this "
+                "receipt came from the fallback scorer, not from the pinned "
+                "backbone, and is not comparable to a run that had weights"
+            ),
+        }
+    return {
+        "available": True,
+        "identity": getattr(backend, "identity", "unknown"),
+        "revision": getattr(backend, "revision", "unknown"),
+        "authority_ceiling": getattr(backend, "authority_ceiling", "unknown"),
+    }
+
+
 def write_artifacts(
     *,
     splits: SplitSet,
@@ -137,6 +163,13 @@ def write_artifacts(
         "protocol_id": PROTOCOL_ID,
         "command": COMMAND,
         **identity,
+        # Which scorer actually answered. The round-5 grader measured recall@1
+        # 0.914286 where this receipt claimed 0.771, and the numbers looked like
+        # the same measurement disagreeing. They were not: the weights file is
+        # not in the repository, so an extracted tree silently falls back to the
+        # perceptual-hash scorer. A number that does not name the scorer behind
+        # it cannot be reproduced or contradicted by anyone else.
+        "scorer": _scorer_identity(),
         "shipped_threshold": SHIPPED_THRESHOLD,
         "dataset_authority": {
             "calibration": {

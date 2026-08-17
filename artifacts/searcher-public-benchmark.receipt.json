@@ -256,7 +256,7 @@
       }
     ],
     "split": "held_out",
-    "wall_seconds": 4.655265
+    "wall_seconds": 4.328664
   },
   "calibration": {
     "curve": {
@@ -450,9 +450,9 @@
     "A claim that Searcher is better than Google Images or any other engine."
   ],
   "evidence_board": "artifacts/benchmark/evidence-board.html",
-  "git_sha": "4e639bdc60c5f6f2658d74c30be9f9015bd3eb54",
+  "git_sha": "6d4b4859d099e9be8027dc9a5363c53eee06acc3",
   "host": "Mac-Studio",
-  "measured_at": "2026-08-17T15:54:53.448627+00:00",
+  "measured_at": "2026-08-17T17:54:58.104355+00:00",
   "no_authenticity_claim": true,
   "not_computed": [
     {
@@ -473,24 +473,24 @@
       "cache_hits": 0,
       "fetches": 0,
       "images_processed": 79,
-      "wall_seconds": 4.655265
+      "wall_seconds": 4.328664
     },
     "cache_hit_rate": 1.0,
     "campaigns": 6,
     "fetches_per_campaign": 0,
     "fetches_total": 0,
-    "images_per_second": 39.579156,
+    "images_per_second": 43.434396,
     "images_processed": 254,
     "note": "fetches_per_campaign is 0 because every byte came from fixtures/ already permitted to be held. A live campaign's fetch cost is a different protocol; see artifacts/searcher-performance.receipt.json and artifacts/searcher-adversarial-recall.receipt.json.",
     "protocol": "Offline fixture campaigns. Retrieval is one closed-set ranking pass. Bucket evaluation is one judge_candidates campaign on the held-out constructed cases. No live source is contacted.",
     "retrieval": {
       "fetches": 0,
-      "images_per_second": 99.304626,
+      "images_per_second": 115.189486,
       "images_scored": 175,
-      "wall_seconds": 1.762254
+      "wall_seconds": 1.519236
     },
-    "wall_seconds_per_campaign": 1.069587,
-    "wall_seconds_total": 6.417519
+    "wall_seconds_per_campaign": 0.97465,
+    "wall_seconds_total": 5.8479
   },
   "policy_version": "provisional-1",
   "prior_receipts": {
@@ -2040,9 +2040,15 @@
       "units": "cosine"
     },
     "split": "held_out",
-    "wall_seconds": 1.762254
+    "wall_seconds": 1.519236
   },
   "schema_version": "1.1.0",
+  "scorer": {
+    "authority_ceiling": "OBSERVED-pixels",
+    "available": true,
+    "identity": "facebookresearch.dinov2.vits14",
+    "revision": "embedding.pt"
+  },
   "shipped_threshold": 0.86,
   "splits": {
     "calibration": {
