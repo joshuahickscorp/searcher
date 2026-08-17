@@ -42,6 +42,10 @@ def test_end_to_end_judgment_and_artifacts(tmp_path: Path) -> None:
         constraints=constraints(),
         already_deduplicated=True,
         destination_verified={"true": True, "adj": True, "rare": True},
+        # Theft and stock-photo screening ran and found nothing. Real is
+        # fail-closed without both, because the veto cannot fire unscreened.
+        stolen=set(),
+        stock_mixed=set(),
     )
     assert "true" in report.retrieval_ids
     assert report.ledger.cheap_first_respected()

@@ -38,6 +38,7 @@ def run_vision_worker(
     already_deduplicated: bool = True,
     destination_verified: dict[str, bool] | None = None,
     stolen: set[str] | None = None,
+    stock_mixed: set[str] | None = None,
     policy_version: str = "matching-1",
     bounds: EscalationBounds | None = None,
 ) -> JudgmentReport:
@@ -64,6 +65,7 @@ def run_vision_worker(
         already_deduplicated=already_deduplicated,
         destination_verified=destination_verified,
         stolen=stolen,
+        stock_mixed=stock_mixed,
         policy=load_policy(policy_version),
         bounds=bounds,
     )

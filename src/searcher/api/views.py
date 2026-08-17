@@ -282,18 +282,45 @@ def create_body(search_id: str, state: str) -> dict[str, str]:
     }
 
 
-def _judgment_label(lower: float | None, *, contradictions: bool, missing: bool) -> str:
+# Authenticity labels describe the evidence, never the item. "High" against an
+# authenticity score reads as "high authenticity" - that this item is likely
+# genuine - which is a claim Searcher cannot make and does not test. It grades
+# whether the observable evidence contradicts the reference, and "no
+# contradiction found" is a much weaker statement than "authentic". Identity is
+# different: there "High" is exactly what is meant, that this is the same item.
+_AUTHENTICITY_WORDS = {
+    "high": "No contradictions found",
+    "moderate": "Partly consistent",
+    "incomplete": "Incomplete evidence",
+    "contradictory": "Contradicted by the evidence",
+}
+_IDENTITY_WORDS = {
+    "high": "High",
+    "moderate": "Moderate",
+    "incomplete": "Incomplete evidence",
+    "contradictory": "Contradictory",
+}
+
+
+def _judgment_label(
+    lower: float | None,
+    *,
+    contradictions: bool,
+    missing: bool,
+    kind: str = "item_match",
+) -> str:
+    words = _AUTHENTICITY_WORDS if kind == "authenticity" else _IDENTITY_WORDS
     if contradictions:
-        return "Contradictory"
+        return words["contradictory"]
     if lower is None:
-        return "Incomplete evidence"
+        return words["incomplete"]
     if missing and lower < 0.80:
-        return "Incomplete evidence"
+        return words["incomplete"]
     if lower >= 0.80:
-        return "High"
+        return words["high"]
     if lower >= 0.45:
-        return "Moderate"
-    return "Incomplete evidence"
+        return words["moderate"]
+    return words["incomplete"]
 
 
 def _score_block(
@@ -502,7 +529,10 @@ def project_result(
     if auth_row is not None:
         authenticity = {
             "label": _judgment_label(
-                auth_lower, contradictions=bool(auth_contradictions), missing=bool(missing)
+                auth_lower,
+                contradictions=bool(auth_contradictions),
+                missing=bool(missing),
+                kind="authenticity",
             ),
             "mean": float(auth_row["mean"]),
             "lower_bound": float(auth_row["lower_bound"]),

@@ -49,3 +49,21 @@ def test_the_gate_refuses_real_before_it_consults_calibration() -> None:
         "the unscreened check must precede the calibration branch, or an "
         "unscreened candidate can still take the calibrated path to Real"
     )
+
+
+def test_the_vision_worker_can_declare_both_screenings() -> None:
+    """Fail-closed must be reachable, or it is fail-permanent.
+
+    The gate requires both theft and stock screening before Real can open. The
+    production worker took `stolen` and had no `stock_mixed` parameter at all,
+    so no caller could ever say screening had run and Real was shut for every
+    candidate regardless of what had actually been checked. A gate nothing can
+    satisfy is not a safety property, it is a dead branch.
+    """
+    from searcher.workers.vision.worker import run_vision_worker
+
+    params = inspect.signature(run_vision_worker).parameters
+    assert "stolen" in params
+    assert "stock_mixed" in params, (
+        "a caller that screened for inserted stock photography must be able to say so"
+    )
