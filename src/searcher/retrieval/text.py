@@ -45,6 +45,19 @@ _STOP = frozenset(
 # say nothing about whether the item is the one being searched for.
 _MATERIALS = r"(?:fur|furs|leather|suede|shearling|pearl|pearls|flower|flowers|plants?)"
 
+# Separators a seller can put inside a negating phrase. The ASCII hyphen was
+# covered and the en-dash was not, so "non–authentic" published as Real after
+# "non-authentic" had been fixed. Written once and reused.
+_SEP = r"[\s._\-\u2010-\u2015\u2212]"
+# Ways of saying "is not", including contractions the hedge pattern missed.
+_NEG = r"(?:not|isn'?t|ain'?t|aint|wasn'?t|aren'?t|isnt|arent)"
+# Hedges that sit between the negation and the word it negates.
+_HEDGE = (
+    r"(?:\d{1,3}\s*%|100|fully|entirely|completely|totally|quite|exactly|"
+    r"truly|really|strictly|guaranteed)"
+)
+
+
 REPLICA_PATTERNS = (
     re.compile(r"\breplicas?\b"),
     re.compile(r"\breps?\b"),
@@ -58,17 +71,16 @@ REPLICA_PATTERNS = (
     # The negating prefix is a class. "un-authorized" was fixed and
     # "non-authentic" then published as Real, which is the same defect with a
     # different prefix.
-    re.compile(r"\b(?:un|non)[\s._-]?authori[sz]ed\b"),
-    re.compile(r"\b(?:un|non)[\s._-]?authentic\b"),
-    re.compile(r"\b(?:un|non)[\s._-]?genuine\b"),
-    re.compile(r"\b(?:un|non)[\s._-]?original\b"),
+    re.compile(rf"\b(?:un|non){_SEP}?authori[sz]ed\b"),
+    re.compile(rf"\b(?:un|non){_SEP}?authentic\b"),
+    re.compile(rf"\b(?:un|non){_SEP}?genuine\b"),
+    re.compile(rf"\b(?:un|non){_SEP}?original\b"),
     re.compile(r"\bcounterfeit\b"),
     # "not 100% authentic" and "not fully genuine" are the same claim as "not
     # authentic". Requiring the words to be adjacent missed every hedged form.
     re.compile(
-        r"\bnot[\s._-]+(?:(?:\d{1,3}\s*%|100|fully|entirely|completely|totally|"
-        r"quite|exactly|truly|really|strictly|guaranteed)[\s._-]+)?"
-        r"(?:authentic|genuine|real|original|legit)\b"
+        rf"\b{_NEG}{_SEP}+(?:{_HEDGE}{_SEP}+)?"
+        rf"(?:authentic|genuine|real|original|legit)\b"
     ),
     re.compile(r"\breproduction\b"),
     re.compile(r"\bstimulant\b"),

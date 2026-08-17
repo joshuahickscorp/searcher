@@ -225,3 +225,40 @@ def test_words_that_merely_begin_with_non_are_not_replica_claims() -> None:
     )
     wrong = [text for text in clean if self_declared_replica(text)]
     assert wrong == [], f"ordinary listing text called a replica: {wrong}"
+
+
+def test_contraction_and_unicode_dash_replica_forms_are_detected() -> None:
+    """The forms round 6 named in its remediation list.
+
+    Two more members of two classes already fixed. The hedge pattern accepted
+    only the bare word "not", so every contraction escaped it - "isn't 100%
+    authentic" reads identically to a buyer. And the separator class held the
+    ASCII hyphen but no Unicode dash, so "non-authentic" was caught while
+    "non–authentic" with an en-dash was not.
+
+    Both are now written once as classes and reused: one separator class
+    covering the Unicode dash range, one negation class covering the
+    contractions.
+    """
+    from searcher.retrieval.text import self_declared_replica
+
+    attacks = (
+        "isn't 100% authentic",
+        "isnt 100% authentic",
+        "isn't fully authentic",
+        "ain't 100% genuine",
+        "non\u2013authentic",
+        "un\u2013authorized",
+        "not\u2014authentic",
+        "wasn't entirely genuine",
+    )
+    missed = [text for text in attacks if not self_declared_replica(text)]
+    assert missed == [], f"replica language reached Real undetected: {missed}"
+
+
+def test_ordinary_contractions_are_not_replica_claims() -> None:
+    from searcher.retrieval.text import self_declared_replica
+
+    clean = ("isn't damaged", "ain't cheap", "isn't available", "not a scratch on it")
+    wrong = [text for text in clean if self_declared_replica(text)]
+    assert wrong == [], f"ordinary listing text called a replica: {wrong}"
