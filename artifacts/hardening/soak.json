@@ -1,18 +1,18 @@
 {
   "after": {
-    "db_bytes": 3952640,
+    "db_bytes": 3674112,
     "fds": 16,
-    "rss_kb": 91440
+    "rss_kb": 93136
   },
   "all_blocked": true,
   "before": {
     "db_bytes": 4096,
     "fds": 15,
-    "rss_kb": 71696
+    "rss_kb": 71712
   },
-  "db_delta_bytes": 3948544,
+  "db_delta_bytes": 3670016,
   "fd_delta": 1,
-  "rss_delta_kb": 19744,
+  "rss_delta_kb": 21424,
   "searches": 50,
   "terminal": "BLOCKED"
 }

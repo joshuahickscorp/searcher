@@ -387,6 +387,7 @@ def uncredentialed_source_names() -> list[str]:
     searched. A source that cannot answer without a key is left out here rather
     than planned and then reported AUTH_REQUIRED on every campaign.
     """
+    from searcher.contracts.enums import SourceOutcome
     from searcher.sources.adapters import ADAPTER_REGISTRY
     from searcher.sources.broker import DEFAULT_ORDER
     from searcher.sources.platform import requires_operator_credential
@@ -397,12 +398,27 @@ def uncredentialed_source_names() -> list[str]:
         if adapter is None:
             continue
         try:
-            manifest = adapter().manifest()
+            instance = adapter()
+            manifest = instance.manifest()
         except Exception:
             continue
         if not getattr(manifest, "enabled", False):
             continue
         if requires_operator_credential(manifest):
+            continue
+        # Same reason as the credential check above, one step further: ask the
+        # adapter whether it can answer at all. searx is admitted and enabled
+        # but points at localhost until SEARCHER_SEARX_URL is set, and this
+        # project's own SSRF gate refuses localhost - so it was counted as
+        # reach, planned on every campaign, and reported SOURCE_UNAVAILABLE.
+        # The health check is pure and costs microseconds for every adapter.
+        try:
+            health = instance.health_check()
+        except Exception:
+            names.append(name)
+            continue
+        outcome = getattr(health, "last_outcome", None) or getattr(health, "outcome", None)
+        if outcome is SourceOutcome.SOURCE_UNAVAILABLE:
             continue
         names.append(name)
     return names
