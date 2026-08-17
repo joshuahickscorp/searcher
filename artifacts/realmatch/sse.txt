@@ -70,27 +70,27 @@ data: {"stage":"source_start","detail":null}
 
 id: 18
 event: search.progress
-data: {"stage":"source_start","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 19
 event: search.progress
-data: {"stage":"source_start","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 20
 event: search.progress
-data: {"stage":"source_start","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 21
 event: search.progress
-data: {"stage":"source_start","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 22
 event: search.progress
-data: {"stage":"source_start","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 23
 event: search.progress
-data: {"stage":"source_start","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 24
 event: search.progress
@@ -122,1281 +122,497 @@ data: {"stage":"query_dispatch","detail":null}
 
 id: 31
 event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+data: {"stage":"page_fetched","detail":null}
 
 id: 32
 event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+data: {"stage":"page_fetched","detail":null}
 
 id: 33
 event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+data: {"stage":"page_fetched","detail":null}
 
 id: 34
 event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+data: {"stage":"page_fetched","detail":null}
 
 id: 35
 event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 36
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 37
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 38
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 39
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 40
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 41
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 42
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 43
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 44
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 45
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 46
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 47
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 48
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 49
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 50
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 51
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 52
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 53
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 54
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 55
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 56
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 57
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 58
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 59
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 60
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 61
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 62
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 63
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 64
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 65
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 66
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 67
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 68
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 69
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 70
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 71
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 72
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 73
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 74
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 75
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 76
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 77
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 78
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 79
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 80
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 81
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 82
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 83
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 84
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 85
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 86
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 87
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 88
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 89
-event: search.progress
 data: {"stage":"page_fetched","detail":null}
-
-id: 90
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 91
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 92
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 93
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 94
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 95
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 96
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 97
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 98
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 99
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 100
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 101
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 102
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 103
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 104
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 105
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 106
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 107
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 108
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 109
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 110
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 111
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 112
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 113
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 114
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 115
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 116
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 117
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 118
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 119
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 120
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 121
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 122
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 123
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 124
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 125
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 126
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 127
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 128
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 129
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 130
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 131
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 132
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 133
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 134
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 135
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 136
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 137
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 138
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 139
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 140
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 141
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 142
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 143
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 144
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 145
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 146
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 147
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 148
-event: search.warning
-data: {"code":"warning","message":""}
 
 : heartbeat
 
-id: 149
+id: 36
 event: search.progress
 data: {"stage":"page_fetched","detail":null}
 
-id: 150
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 151
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 152
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 153
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 154
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 155
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 156
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 157
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 158
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 159
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 160
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 161
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 162
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 163
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 164
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 165
+id: 37
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 166
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 167
+id: 38
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 168
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 169
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 170
+id: 39
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 171
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 172
+id: 40
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 173
+id: 41
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 174
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 175
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 176
+id: 42
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 177
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 178
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 179
+id: 43
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 180
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 181
+id: 44
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 182
-event: search.coverage
-data: {"sources_completed":[{"id":"byronesque","name":"byronesque","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":9,"candidates_normalized":0,"candidates_hidden":0}
-
-id: 183
-event: search.progress
-data: {"stage":"source_complete","detail":null}
-
-id: 184
+id: 45
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 185
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 186
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 187
+id: 46
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 188
+id: 47
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 189
+id: 48
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 190
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 191
+id: 49
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 192
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 193
+id: 50
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 194
+id: 51
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 195
+id: 52
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 196
+id: 53
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 197
+id: 54
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 198
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 199
+id: 55
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 200
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 201
+id: 56
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 202
-event: search.coverage
-data: {"sources_completed":[{"id":"marginalia","name":"marginalia","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":9,"candidates_normalized":0,"candidates_hidden":0}
-
-id: 203
-event: search.progress
-data: {"stage":"source_complete","detail":null}
-
-id: 204
+id: 57
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 205
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 206
+id: 58
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 207
+id: 59
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 208
+id: 60
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 209
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 210
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 211
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 212
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 213
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 214
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 215
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 216
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 217
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 218
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 219
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 220
+id: 61
 event: search.coverage
 data: {"sources_completed":[{"id":"kind","name":"kind","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":5,"candidates_normalized":0,"candidates_hidden":0}
 
-id: 221
+id: 62
 event: search.progress
 data: {"stage":"source_complete","detail":null}
 
-id: 222
+id: 63
 event: search.warning
 data: {"code":"warning","message":""}
 
-id: 223
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 224
+id: 64
 event: search.progress
 data: {"stage":"page_fetched","detail":null}
 
-id: 225
+id: 65
 event: search.warning
 data: {"code":"warning","message":""}
 
-id: 226
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 227
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 228
+id: 66
 event: search.progress
 data: {"stage":"page_fetched","detail":null}
 
-id: 229
+id: 67
 event: search.warning
 data: {"code":"warning","message":""}
 
-id: 230
+id: 68
 event: search.progress
 data: {"stage":"page_fetched","detail":null}
 
-id: 231
+id: 69
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 70
 event: search.progress
 data: {"stage":"page_fetched","detail":null}
 
-id: 232
+id: 71
 event: search.warning
 data: {"code":"warning","message":""}
 
-id: 233
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 234
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 235
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 236
+id: 72
 event: search.progress
 data: {"stage":"page_fetched","detail":null}
 
-id: 237
+id: 73
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 74
 event: search.progress
 data: {"stage":"page_fetched","detail":null}
 
-id: 238
+id: 75
 event: search.warning
 data: {"code":"warning","message":""}
 
-id: 239
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 240
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 241
+id: 76
 event: search.progress
 data: {"stage":"page_fetched","detail":null}
 
-id: 242
+id: 77
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 78
 event: search.progress
 data: {"stage":"page_fetched","detail":null}
 
-id: 243
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 244
+id: 79
 event: search.warning
 data: {"code":"warning","message":""}
 
-id: 245
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 246
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 247
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 248
+id: 80
 event: search.coverage
-data: {"sources_completed":[{"id":"the_realreal","name":"the_realreal","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":5,"candidates_normalized":0,"candidates_hidden":0}
+data: {"sources_completed":[{"id":"archive_org","name":"archive_org","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":9,"candidates_normalized":0,"candidates_hidden":0}
 
-id: 249
+id: 81
 event: search.progress
 data: {"stage":"source_complete","detail":null}
 
-id: 250
+id: 82
 event: search.warning
 data: {"code":"warning","message":""}
 
-id: 251
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 252
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 253
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 254
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 255
+id: 83
 event: search.coverage
-data: {"sources_completed":[{"id":"rebag","name":"rebag","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":6,"candidates_normalized":0,"candidates_hidden":0}
+data: {"sources_completed":[{"detail":"","id":"kind","name":"kind","status":"SEARCHED_MATCHES_FOUND"}],"sources_blocked":[{"detail":"","id":"archive_org","name":"archive_org","status":"SOURCE_UNAVAILABLE"}],"sources_in_progress":[],"pages_fetched":14,"candidates_normalized":24,"candidates_hidden":0,"pages_charged_to_page_limit":null}
 
-id: 256
-event: search.progress
-data: {"stage":"source_complete","detail":null}
-
-id: 257
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 258
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 259
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 260
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 261
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 262
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 263
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 264
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 265
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 266
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 267
-event: search.coverage
-data: {"sources_completed":[{"id":"heroine","name":"heroine","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":2,"candidates_normalized":0,"candidates_hidden":0}
-
-id: 268
-event: search.progress
-data: {"stage":"source_complete","detail":null}
-
-id: 269
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 270
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-id: 271
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 272
-event: search.coverage
-data: {"sources_completed":[{"id":"komehyo","name":"komehyo","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":8,"candidates_normalized":0,"candidates_hidden":0}
-
-id: 273
-event: search.progress
-data: {"stage":"source_complete","detail":null}
-
-id: 274
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 275
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 276
-event: search.coverage
-data: {"sources_completed":[{"id":"wikimedia","name":"wikimedia","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":7,"candidates_normalized":0,"candidates_hidden":0}
-
-id: 277
-event: search.progress
-data: {"stage":"source_complete","detail":null}
-
-id: 278
-event: search.warning
-data: {"code":"warning","message":""}
-
-id: 279
-event: search.coverage
-data: {"sources_completed":[{"detail":"","id":"kind","name":"kind","status":"SEARCHED_MATCHES_FOUND"}],"sources_blocked":[{"detail":"","id":"archive_org","name":"archive_org","status":"UNMEASURABLE"},{"detail":"","id":"wikimedia","name":"wikimedia","status":"BLOCKED_BY_POLICY"},{"detail":"","id":"marginalia","name":"marginalia","status":"SOURCE_UNAVAILABLE"},{"detail":"","id":"the_realreal","name":"the_realreal","status":"SOURCE_UNAVAILABLE"},{"detail":"","id":"rebag","name":"rebag","status":"SOURCE_UNAVAILABLE"},{"detail":"","id":"komehyo","name":"komehyo","status":"SOURCE_UNAVAILABLE"},{"detail":"","id":"byronesque","name":"byronesque","status":"SOURCE_UNAVAILABLE"},{"detail":"","id":"heroine","name":"heroine","status":"BLOCKED_BY_POLICY"}],"sources_in_progress":[],"pages_fetched":51,"candidates_normalized":24,"candidates_hidden":0}
-
-id: 280
+id: 84
 event: candidate.discovered
-data: {"candidate_id":"9da3b84b-9716-4b07-8258-6f6bb52324f8"}
+data: {"candidate_id":"b5f738ea-5d67-4fa9-bad1-be0edc7fc709"}
 
-id: 281
+id: 85
 event: candidate.discovered
-data: {"candidate_id":"8fd31cdc-ea42-4b45-8ba4-2144c86fa080"}
+data: {"candidate_id":"a457e6f6-c3d6-49a7-8e9a-3df8f876f942"}
 
-id: 282
+id: 86
 event: candidate.discovered
-data: {"candidate_id":"9ceecce9-17cb-4bf2-ad8e-ac401727fe2f"}
+data: {"candidate_id":"fafcea70-b84c-4aac-ae1c-f308213a7849"}
 
-id: 283
+id: 87
 event: candidate.discovered
-data: {"candidate_id":"bb43a876-63ae-4f22-853c-5e684b47dd14"}
+data: {"candidate_id":"8a612816-31ee-4eb2-a962-517bd2aec78b"}
 
-id: 284
+id: 88
 event: candidate.discovered
-data: {"candidate_id":"a6ee1976-0b97-4238-ae89-a07dd7f535e8"}
+data: {"candidate_id":"a28fe8ac-0610-413c-b4cb-f2279c8774ba"}
 
-id: 285
+id: 89
 event: candidate.discovered
-data: {"candidate_id":"7f39624f-fdd8-4382-a2e6-94b4140e5786"}
+data: {"candidate_id":"5dd458ad-c980-481c-899d-0130ebab4d54"}
 
-id: 286
+id: 90
 event: candidate.discovered
-data: {"candidate_id":"d778091b-e634-47cb-980e-b6607bc53b43"}
+data: {"candidate_id":"6a8574fd-5839-4cba-898c-bdbbf956bcb6"}
 
-id: 287
+id: 91
 event: candidate.discovered
-data: {"candidate_id":"61907e1a-8797-4e93-a692-9279d2b5747e"}
+data: {"candidate_id":"c79d261b-c95c-4758-8dba-893e0f9eebe5"}
 
-id: 288
+id: 92
 event: candidate.discovered
-data: {"candidate_id":"a1b32f8f-6952-4a37-951a-87b3bffdb291"}
+data: {"candidate_id":"950ee9d9-52a6-4064-b4d5-5decab28e42f"}
 
-id: 289
+id: 93
 event: candidate.discovered
-data: {"candidate_id":"cd5d6db7-5d10-44e2-b459-ea92c82b6a25"}
+data: {"candidate_id":"0dd4ab92-f8d5-484a-a859-2f097578324b"}
 
-id: 290
+id: 94
 event: candidate.discovered
-data: {"candidate_id":"869d0540-5a53-443f-8e88-d4f753e71a2e"}
+data: {"candidate_id":"c420012a-6365-4e54-a4f8-03e5724108ec"}
 
-id: 291
+id: 95
 event: candidate.discovered
-data: {"candidate_id":"e443fe63-8066-4620-b865-6dc0dd9665ac"}
+data: {"candidate_id":"3b8ddac3-3cb2-4751-abb1-ecc68c66a777"}
 
-id: 292
+id: 96
 event: candidate.discovered
-data: {"candidate_id":"e1fcfb01-625b-457d-b36c-85fea4044feb"}
+data: {"candidate_id":"ff3649ce-834d-4b7a-a57a-6915add39a56"}
 
-id: 293
+id: 97
 event: candidate.discovered
-data: {"candidate_id":"18e8efc2-be8e-4a30-9950-ac366b6cb212"}
+data: {"candidate_id":"db6c418c-9c73-43ce-bfef-eb1c063891dc"}
 
-id: 294
+id: 98
 event: candidate.discovered
-data: {"candidate_id":"f8207506-4f14-4afd-9593-72f981ed3007"}
+data: {"candidate_id":"2a56b337-73f2-4017-a528-0c4f0f7766e6"}
 
-id: 295
+id: 99
 event: candidate.discovered
-data: {"candidate_id":"f3976549-c1a8-4336-8b92-4a054194da52"}
+data: {"candidate_id":"61b6eace-6d36-49a6-b590-74c95f27b7e9"}
 
-id: 296
+id: 100
 event: candidate.discovered
-data: {"candidate_id":"d14ffee6-9318-4a9b-9bd1-b33204c5738a"}
+data: {"candidate_id":"c2311c1d-6ea1-4507-a2bd-3652c08ceee5"}
 
-id: 297
+id: 101
 event: candidate.discovered
-data: {"candidate_id":"903e3b2a-072c-4636-9a64-70da5c0c2741"}
+data: {"candidate_id":"b44f6df6-c4b0-499b-92b2-594e1ae6cecd"}
 
-id: 298
+id: 102
 event: candidate.discovered
-data: {"candidate_id":"7f751a6f-e9d0-433c-9e46-3bdc81a82693"}
+data: {"candidate_id":"8466b926-4d44-4ad0-8cb9-a5088cad466e"}
 
-id: 299
+id: 103
 event: candidate.discovered
-data: {"candidate_id":"b4b38850-08d8-41ca-b6bb-07c202d06b94"}
+data: {"candidate_id":"12d855be-8785-4e42-aaf8-92b4292cbe7f"}
 
-id: 300
+id: 104
 event: candidate.discovered
-data: {"candidate_id":"6a589d15-3cb3-401f-99f7-d10d3166e5d8"}
+data: {"candidate_id":"73318c5c-5bac-4191-bb9b-aee2b0a63314"}
 
-id: 301
+id: 105
 event: candidate.discovered
-data: {"candidate_id":"aa2a2c54-5d3b-4f25-b5ff-60929c2e7d62"}
+data: {"candidate_id":"70753f89-e211-41cc-b7bb-33f1abb51dd8"}
 
-id: 302
+id: 106
 event: candidate.discovered
-data: {"candidate_id":"37115307-5e6d-4c41-940f-0efba756c2e1"}
+data: {"candidate_id":"8f4a0520-7438-42b7-9151-d91e777e2693"}
 
-id: 303
+id: 107
 event: candidate.discovered
-data: {"candidate_id":"25640686-dee7-4a94-a02f-81f713082966"}
+data: {"candidate_id":"5e171c8c-bb80-4481-9664-8a44450bd56a"}
 
-id: 304
+id: 108
 event: search.state
 data: {"state":"ACQUIRING","version":9}
 
-id: 305
+id: 109
 event: search.progress
 data: {"stage":"Comparing candidate images","detail":null}
 
-id: 306
+id: 110
 event: search.state
 data: {"state":"NORMALIZING","version":10}
 
-id: 307
+id: 111
 event: search.progress
 data: {"stage":"Comparing candidate images","detail":null}
 
-id: 308
+id: 112
 event: candidate.normalized
-data: {"candidate_id":"9da3b84b-9716-4b07-8258-6f6bb52324f8"}
+data: {"candidate_id":"b5f738ea-5d67-4fa9-bad1-be0edc7fc709"}
 
-id: 309
+id: 113
 event: candidate.normalized
-data: {"candidate_id":"8fd31cdc-ea42-4b45-8ba4-2144c86fa080"}
+data: {"candidate_id":"a457e6f6-c3d6-49a7-8e9a-3df8f876f942"}
 
-id: 310
+id: 114
 event: candidate.normalized
-data: {"candidate_id":"9ceecce9-17cb-4bf2-ad8e-ac401727fe2f"}
+data: {"candidate_id":"fafcea70-b84c-4aac-ae1c-f308213a7849"}
 
-id: 311
+id: 115
 event: candidate.normalized
-data: {"candidate_id":"bb43a876-63ae-4f22-853c-5e684b47dd14"}
+data: {"candidate_id":"8a612816-31ee-4eb2-a962-517bd2aec78b"}
 
-id: 312
+id: 116
 event: candidate.normalized
-data: {"candidate_id":"a6ee1976-0b97-4238-ae89-a07dd7f535e8"}
+data: {"candidate_id":"a28fe8ac-0610-413c-b4cb-f2279c8774ba"}
 
-id: 313
+id: 117
 event: candidate.normalized
-data: {"candidate_id":"7f39624f-fdd8-4382-a2e6-94b4140e5786"}
+data: {"candidate_id":"5dd458ad-c980-481c-899d-0130ebab4d54"}
 
-id: 314
+id: 118
 event: candidate.normalized
-data: {"candidate_id":"d778091b-e634-47cb-980e-b6607bc53b43"}
+data: {"candidate_id":"6a8574fd-5839-4cba-898c-bdbbf956bcb6"}
 
-id: 315
+id: 119
 event: candidate.normalized
-data: {"candidate_id":"61907e1a-8797-4e93-a692-9279d2b5747e"}
+data: {"candidate_id":"c79d261b-c95c-4758-8dba-893e0f9eebe5"}
 
-id: 316
+id: 120
 event: candidate.normalized
-data: {"candidate_id":"a1b32f8f-6952-4a37-951a-87b3bffdb291"}
+data: {"candidate_id":"950ee9d9-52a6-4064-b4d5-5decab28e42f"}
 
-id: 317
+id: 121
 event: candidate.normalized
-data: {"candidate_id":"cd5d6db7-5d10-44e2-b459-ea92c82b6a25"}
+data: {"candidate_id":"0dd4ab92-f8d5-484a-a859-2f097578324b"}
 
-id: 318
+id: 122
 event: candidate.normalized
-data: {"candidate_id":"869d0540-5a53-443f-8e88-d4f753e71a2e"}
+data: {"candidate_id":"c420012a-6365-4e54-a4f8-03e5724108ec"}
 
-id: 319
+id: 123
 event: candidate.normalized
-data: {"candidate_id":"e443fe63-8066-4620-b865-6dc0dd9665ac"}
+data: {"candidate_id":"3b8ddac3-3cb2-4751-abb1-ecc68c66a777"}
 
-id: 320
+id: 124
 event: candidate.normalized
-data: {"candidate_id":"e1fcfb01-625b-457d-b36c-85fea4044feb"}
+data: {"candidate_id":"ff3649ce-834d-4b7a-a57a-6915add39a56"}
 
-id: 321
+id: 125
 event: candidate.normalized
-data: {"candidate_id":"18e8efc2-be8e-4a30-9950-ac366b6cb212"}
+data: {"candidate_id":"db6c418c-9c73-43ce-bfef-eb1c063891dc"}
 
-id: 322
+id: 126
 event: candidate.normalized
-data: {"candidate_id":"f8207506-4f14-4afd-9593-72f981ed3007"}
+data: {"candidate_id":"2a56b337-73f2-4017-a528-0c4f0f7766e6"}
 
-id: 323
+id: 127
 event: candidate.normalized
-data: {"candidate_id":"f3976549-c1a8-4336-8b92-4a054194da52"}
+data: {"candidate_id":"61b6eace-6d36-49a6-b590-74c95f27b7e9"}
 
-id: 324
+id: 128
 event: candidate.normalized
-data: {"candidate_id":"d14ffee6-9318-4a9b-9bd1-b33204c5738a"}
+data: {"candidate_id":"c2311c1d-6ea1-4507-a2bd-3652c08ceee5"}
 
-id: 325
+id: 129
 event: candidate.normalized
-data: {"candidate_id":"903e3b2a-072c-4636-9a64-70da5c0c2741"}
+data: {"candidate_id":"b44f6df6-c4b0-499b-92b2-594e1ae6cecd"}
 
-id: 326
+id: 130
 event: candidate.normalized
-data: {"candidate_id":"7f751a6f-e9d0-433c-9e46-3bdc81a82693"}
+data: {"candidate_id":"8466b926-4d44-4ad0-8cb9-a5088cad466e"}
 
-id: 327
+id: 131
 event: candidate.normalized
-data: {"candidate_id":"b4b38850-08d8-41ca-b6bb-07c202d06b94"}
+data: {"candidate_id":"12d855be-8785-4e42-aaf8-92b4292cbe7f"}
 
-id: 328
+id: 132
 event: candidate.normalized
-data: {"candidate_id":"6a589d15-3cb3-401f-99f7-d10d3166e5d8"}
+data: {"candidate_id":"73318c5c-5bac-4191-bb9b-aee2b0a63314"}
 
-id: 329
+id: 133
 event: candidate.normalized
-data: {"candidate_id":"aa2a2c54-5d3b-4f25-b5ff-60929c2e7d62"}
+data: {"candidate_id":"70753f89-e211-41cc-b7bb-33f1abb51dd8"}
 
-id: 330
+id: 134
 event: candidate.normalized
-data: {"candidate_id":"37115307-5e6d-4c41-940f-0efba756c2e1"}
+data: {"candidate_id":"8f4a0520-7438-42b7-9151-d91e777e2693"}
 
-id: 331
+id: 135
 event: candidate.normalized
-data: {"candidate_id":"25640686-dee7-4a94-a02f-81f713082966"}
+data: {"candidate_id":"5e171c8c-bb80-4481-9664-8a44450bd56a"}
 
-id: 332
+id: 136
 event: search.state
 data: {"state":"DEDUPLICATING","version":11}
 
-id: 333
+id: 137
 event: search.progress
 data: {"stage":"Comparing candidate images","detail":null}
 
-id: 334
+id: 138
 event: search.state
 data: {"state":"BROAD_RETRIEVAL","version":12}
 
-id: 335
+id: 139
 event: search.progress
 data: {"stage":"Comparing candidate images","detail":null}
 
-id: 336
+id: 140
 event: search.state
 data: {"state":"FINE_MATCHING","version":13}
 
-id: 337
+id: 141
 event: search.progress
 data: {"stage":"Checking detail consistency","detail":null}
 
-id: 338
+id: 142
 event: candidate.promoted
-data: {"candidate_id":"d778091b-e634-47cb-980e-b6607bc53b43"}
+data: {"candidate_id":"0dd4ab92-f8d5-484a-a859-2f097578324b"}
 
-id: 339
+id: 143
 event: candidate.promoted
-data: {"candidate_id":"9ceecce9-17cb-4bf2-ad8e-ac401727fe2f"}
+data: {"candidate_id":"c2311c1d-6ea1-4507-a2bd-3652c08ceee5"}
 
-id: 340
+id: 144
 event: candidate.promoted
-data: {"candidate_id":"18e8efc2-be8e-4a30-9950-ac366b6cb212"}
+data: {"candidate_id":"db6c418c-9c73-43ce-bfef-eb1c063891dc"}
 
-id: 341
+id: 145
 event: candidate.promoted
-data: {"candidate_id":"9da3b84b-9716-4b07-8258-6f6bb52324f8"}
+data: {"candidate_id":"fafcea70-b84c-4aac-ae1c-f308213a7849"}
 
-id: 342
+id: 146
 event: candidate.promoted
-data: {"candidate_id":"a1b32f8f-6952-4a37-951a-87b3bffdb291"}
+data: {"candidate_id":"ff3649ce-834d-4b7a-a57a-6915add39a56"}
 
-id: 343
+id: 147
 event: candidate.promoted
-data: {"candidate_id":"f3976549-c1a8-4336-8b92-4a054194da52"}
+data: {"candidate_id":"b5f738ea-5d67-4fa9-bad1-be0edc7fc709"}
 
-id: 344
+id: 148
 event: candidate.promoted
-data: {"candidate_id":"f8207506-4f14-4afd-9593-72f981ed3007"}
+data: {"candidate_id":"61b6eace-6d36-49a6-b590-74c95f27b7e9"}
 
-id: 345
+id: 149
 event: candidate.promoted
-data: {"candidate_id":"d14ffee6-9318-4a9b-9bd1-b33204c5738a"}
+data: {"candidate_id":"5dd458ad-c980-481c-899d-0130ebab4d54"}
 
-id: 346
+id: 150
 event: search.state
 data: {"state":"AUTHENTICITY_REVIEW","version":14}
 
-id: 347
+id: 151
 event: search.progress
 data: {"stage":"Checking listing authenticity evidence","detail":null}
 
 : heartbeat
 
-id: 348
+id: 152
 event: search.state
 data: {"state":"LIVE_CHECKING","version":15}
 
-id: 349
+id: 153
 event: search.progress
 data: {"stage":"Verifying live links","detail":null}
 
@@ -1412,95 +628,107 @@ data: {"stage":"Verifying live links","detail":null}
 
 : heartbeat
 
-id: 350
+id: 154
 event: candidate.updated
-data: {"candidate_id":"d778091b-e634-47cb-980e-b6607bc53b43"}
+data: {"candidate_id":"0dd4ab92-f8d5-484a-a859-2f097578324b"}
 
-id: 351
+id: 155
 event: candidate.updated
-data: {"candidate_id":"9ceecce9-17cb-4bf2-ad8e-ac401727fe2f"}
+data: {"candidate_id":"c2311c1d-6ea1-4507-a2bd-3652c08ceee5"}
 
-id: 352
+id: 156
 event: candidate.updated
-data: {"candidate_id":"18e8efc2-be8e-4a30-9950-ac366b6cb212"}
+data: {"candidate_id":"db6c418c-9c73-43ce-bfef-eb1c063891dc"}
 
-id: 353
+id: 157
 event: candidate.updated
-data: {"candidate_id":"9da3b84b-9716-4b07-8258-6f6bb52324f8"}
+data: {"candidate_id":"fafcea70-b84c-4aac-ae1c-f308213a7849"}
 
-id: 354
+id: 158
 event: candidate.updated
-data: {"candidate_id":"a1b32f8f-6952-4a37-951a-87b3bffdb291"}
+data: {"candidate_id":"ff3649ce-834d-4b7a-a57a-6915add39a56"}
 
-id: 355
+id: 159
 event: candidate.updated
-data: {"candidate_id":"f3976549-c1a8-4336-8b92-4a054194da52"}
+data: {"candidate_id":"b5f738ea-5d67-4fa9-bad1-be0edc7fc709"}
 
-id: 356
+id: 160
 event: candidate.updated
-data: {"candidate_id":"f8207506-4f14-4afd-9593-72f981ed3007"}
+data: {"candidate_id":"61b6eace-6d36-49a6-b590-74c95f27b7e9"}
 
-id: 357
+id: 161
 event: candidate.updated
-data: {"candidate_id":"d14ffee6-9318-4a9b-9bd1-b33204c5738a"}
+data: {"candidate_id":"5dd458ad-c980-481c-899d-0130ebab4d54"}
 
-id: 358
+id: 162
 event: search.state
 data: {"state":"RANKING","version":16}
 
-id: 359
+id: 163
 event: search.progress
 data: {"stage":"Ranking results","detail":null}
 
-id: 360
+id: 164
 event: search.state
 data: {"state":"PUBLISHING","version":17}
 
-id: 361
+id: 165
 event: search.progress
 data: {"stage":"Ranking results","detail":null}
 
-id: 362
+id: 166
 event: result.possibly_real
-data: {"result_id":"c599fb8d-a1cc-4bc1-af8f-e5029c7aeff3","search_id":"fc22b9ab-4541-4d06-8f98-035388477331","candidate_id":"d778091b-e634-47cb-980e-b6607bc53b43","bucket":"possibly_real","rank":1,"title":"GAME SHIRT L S UMBRO SP長袖TシャツTC261-JK511","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8006002318626","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8006002318626_1.jpg?v=1786965670","alt":"GAME SHIRT L S UMBRO SP長袖TシャツTC261-JK511"},"price":{"original":"33660","currency":"","display":"33660"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-17T16:20:20.424590+00:00","item_match":{"label":"Incomplete evidence","mean":0.575826,"lower_bound":0.505826,"upper_bound":0.615826},"authenticity":{"label":"Incomplete evidence","mean":0.469648,"lower_bound":0.249648,"upper_bound":0.590648},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-17T16:20:20.424590+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"GAME SHIRT L S UMBRO SP長袖TシャツTC261-JK511","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"UMBRO×TOGA ARCHIVES","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8006002318626","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8006002318626_1.jpg?v=1786965670","alt":"GAME SHIRT L S UMBRO SP長袖TシャツTC261-JK511","image_id":"2b98d592-cc13-4d85-ac3b-ab3daf762444"}],"images_compared_reason":null,"duplicate_image_family_count":5,"live":false,"checked_at":"2026-08-17T16:20:20.424590+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8006002318626_1.jpg?v=1786965670","alt":"GAME SHIRT L S UMBRO SP長袖TシャツTC261-JK511","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"GAME SHIRT L S UMBRO SP長袖TシャツTC261-JK511","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"UMBRO×TOGA ARCHIVES","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8006002318626","origin":"REPORTED_BY_SELLER"}]}}
+data: {"result_id":"1e7807ac-2712-4af5-9781-7be80cf7bb7b","search_id":"4af2aeb5-8045-4da0-a07e-d95ebeea561b","candidate_id":"0dd4ab92-f8d5-484a-a859-2f097578324b","bucket":"possibly_real","rank":1,"title":"GAME SHIRT L S UMBRO SP長袖TシャツTC261-JK511","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8006002318626","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8006002318626_1.jpg?v=1786965670","alt":"GAME SHIRT L S UMBRO SP長袖TシャツTC261-JK511"},"price":{"original":"33660","currency":"","display":"33660"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-17T23:22:45.030775+00:00","item_match":{"label":"Incomplete evidence","mean":0.575826,"lower_bound":0.505826,"upper_bound":0.615826},"authenticity":{"label":"Incomplete evidence","mean":0.469648,"lower_bound":0.249648,"upper_bound":0.590648},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-17T23:22:45.030775+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"GAME SHIRT L S UMBRO SP長袖TシャツTC261-JK511","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"UMBRO×TOGA ARCHIVES","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8006002318626","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8006002318626_1.jpg?v=1786965670","alt":"GAME SHIRT L S UMBRO SP長袖TシャツTC261-JK511","image_id":"cb28e595-7078-418a-855d-9a86ac95b982"}],"images_compared_reason":null,"duplicate_image_family_count":5,"live":false,"checked_at":"2026-08-17T23:22:45.030775+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8006002318626_1.jpg?v=1786965670","alt":"GAME SHIRT L S UMBRO SP長袖TシャツTC261-JK511","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"GAME SHIRT L S UMBRO SP長袖TシャツTC261-JK511","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"UMBRO×TOGA ARCHIVES","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8006002318626","origin":"REPORTED_BY_SELLER"}]}}
 
-id: 363
-event: result.possibly_real
-data: {"result_id":"66a9090c-15df-4e4a-88c8-649435a200a4","search_id":"fc22b9ab-4541-4d06-8f98-035388477331","candidate_id":"9ceecce9-17cb-4bf2-ad8e-ac401727fe2f","bucket":"possibly_real","rank":1,"title":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001076249","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001076249_1.jpg?v=1786972271","alt":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO"},"price":{"original":"50160","currency":"","display":"50160"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-17T16:20:29.182956+00:00","item_match":{"label":"Incomplete evidence","mean":0.523009,"lower_bound":0.453009,"upper_bound":0.59},"authenticity":{"label":"Incomplete evidence","mean":0.501219,"lower_bound":0.281219,"upper_bound":0.622219},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-17T16:20:29.182956+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"OUR LEGACY","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001076249","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001076249_1.jpg?v=1786972271","alt":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO","image_id":"042222bc-3f92-4c59-97c7-936bc8d412bb"}],"images_compared_reason":null,"duplicate_image_family_count":5,"live":false,"checked_at":"2026-08-17T16:20:29.182956+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001076249_1.jpg?v=1786972271","alt":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"OUR LEGACY","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001076249","origin":"REPORTED_BY_SELLER"}]}}
-
-id: 364
-event: result.possibly_real
-data: {"result_id":"1fd60c8d-148e-4eba-860f-e720f55131c6","search_id":"fc22b9ab-4541-4d06-8f98-035388477331","candidate_id":"18e8efc2-be8e-4a30-9950-ac366b6cb212","bucket":"possibly_real","rank":1,"title":"23SSウールコートUC2B9303","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001059341","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001059341_1.jpg?v=1786972271","alt":"23SSウールコートUC2B9303"},"price":{"original":"72160","currency":"","display":"72160"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-17T16:20:37.681714+00:00","item_match":{"label":"Incomplete evidence","mean":0.576389,"lower_bound":0.506389,"upper_bound":0.616389},"authenticity":{"label":"Incomplete evidence","mean":0.463853,"lower_bound":0.243853,"upper_bound":0.584853},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-17T16:20:37.681714+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"23SSウールコートUC2B9303","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"UNDERCOVER×jun takahashi","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001059341","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001059341_1.jpg?v=1786972271","alt":"23SSウールコートUC2B9303","image_id":"9205b4cc-d848-48b2-97ae-c0b63324aa64"}],"images_compared_reason":null,"duplicate_image_family_count":5,"live":false,"checked_at":"2026-08-17T16:20:37.681714+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001059341_1.jpg?v=1786972271","alt":"23SSウールコートUC2B9303","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"23SSウールコートUC2B9303","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"UNDERCOVER×jun takahashi","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001059341","origin":"REPORTED_BY_SELLER"}]}}
-
-id: 365
-event: result.possibly_real
-data: {"result_id":"2caff3b6-f561-4421-8aee-a3ef690923ad","search_id":"fc22b9ab-4541-4d06-8f98-035388477331","candidate_id":"9da3b84b-9716-4b07-8258-6f6bb52324f8","bucket":"possibly_real","rank":1,"title":"FINX CO CORDUROY L S SHIRTオーバーサイズコーデュロイシャツジャケットVS52-307","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001067568","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001067568_1.jpg?v=1786972271","alt":"FINX CO CORDUROY L S SHIRTオーバーサイズコーデュロイシャツジャケットVS52-307"},"price":{"original":"13860","currency":"","display":"13860"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-17T16:20:49.300523+00:00","item_match":{"label":"Incomplete evidence","mean":0.553222,"lower_bound":0.483222,"upper_bound":0.593222},"authenticity":{"label":"Incomplete evidence","mean":0.462035,"lower_bound":0.242035,"upper_bound":0.583035},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-17T16:20:49.300523+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"FINX CO CORDUROY L S SHIRTオーバーサイズコーデュロイシャツジャケットVS52-307","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"VEIN","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001067568","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001067568_1.jpg?v=1786972271","alt":"FINX CO CORDUROY L S SHIRTオーバーサイズコーデュロイシャツジャケットVS52-307","image_id":"a05f7d40-8b4f-4877-a333-b3a1afa4c2b8"}],"images_compared_reason":null,"duplicate_image_family_count":4,"live":false,"checked_at":"2026-08-17T16:20:49.300523+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001067568_1.jpg?v=1786972271","alt":"FINX CO CORDUROY L S SHIRTオーバーサイズコーデュロイシャツジャケットVS52-307","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"FINX CO CORDUROY L S SHIRTオーバーサイズコーデュロイシャツジャケットVS52-307","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"VEIN","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001067568","origin":"REPORTED_BY_SELLER"}]}}
-
-id: 366
+id: 167
 event: result.removed
-data: {"result_id":"87b7f7dc-2aca-4491-8ed6-46a0ed6857e8","reason":"hidden"}
+data: {"result_id":"1e55be2f-0e92-47c5-a0ed-bde151143ae0","reason":"hidden"}
 
-id: 367
-event: result.removed
-data: {"result_id":"8ce7e6e3-26f8-4a96-9dd1-f89b7dfd2e90","reason":"hidden"}
-
-id: 368
-event: result.removed
-data: {"result_id":"2e74f770-7015-4b78-b7ab-fff0afc45243","reason":"hidden"}
-
-id: 369
+id: 168
 event: result.possibly_real
-data: {"result_id":"4a93bd52-39fe-49c8-bae9-d82c601a7748","search_id":"fc22b9ab-4541-4d06-8f98-035388477331","candidate_id":"d14ffee6-9318-4a9b-9bd1-b33204c5738a","bucket":"possibly_real","rank":1,"title":"24AWbone flight jacket．MA-1ジャケットsbj.0002AW24","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001062938","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001062938_1.jpg?v=1786972270","alt":"24AWbone flight jacket．MA-1ジャケットsbj.0002AW24"},"price":{"original":"88660","currency":"","display":"88660"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-17T16:21:33.673368+00:00","item_match":{"label":"Incomplete evidence","mean":0.554219,"lower_bound":0.484219,"upper_bound":0.594219},"authenticity":{"label":"Incomplete evidence","mean":0.549551,"lower_bound":0.329551,"upper_bound":0.670551},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-17T16:21:33.673368+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"24AWbone flight jacket．MA-1ジャケットsbj.0002AW24","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"TAKAHIROMIYASHITA TheSoloIst．","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001062938","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001062938_1.jpg?v=1786972270","alt":"24AWbone flight jacket．MA-1ジャケットsbj.0002AW24","image_id":"3c59c573-c642-4a69-8e74-77f5e048770e"}],"images_compared_reason":null,"duplicate_image_family_count":5,"live":false,"checked_at":"2026-08-17T16:21:33.673368+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001062938_1.jpg?v=1786972270","alt":"24AWbone flight jacket．MA-1ジャケットsbj.0002AW24","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"24AWbone flight jacket．MA-1ジャケットsbj.0002AW24","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"TAKAHIROMIYASHITA TheSoloIst．","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001062938","origin":"REPORTED_BY_SELLER"}]}}
+data: {"result_id":"aff83c86-2470-44ee-9f06-f92d26a06e79","search_id":"4af2aeb5-8045-4da0-a07e-d95ebeea561b","candidate_id":"db6c418c-9c73-43ce-bfef-eb1c063891dc","bucket":"possibly_real","rank":1,"title":"【FINE WOOL RIPSTOP SHIRT】ウールシャツJ22DL0242","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8042000989550","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8042000989550_1.jpg?v=1786965704","alt":"【FINE WOOL RIPSTOP SHIRT】ウールシャツJ22DL0242"},"price":{"original":"50160","currency":"","display":"50160"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-17T23:23:06.990493+00:00","item_match":{"label":"Incomplete evidence","mean":0.520306,"lower_bound":0.450306,"upper_bound":0.59},"authenticity":{"label":"Incomplete evidence","mean":0.508638,"lower_bound":0.288638,"upper_bound":0.629638},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-17T23:23:06.990493+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:3-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:3-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"【FINE WOOL RIPSTOP SHIRT】ウールシャツJ22DL0242","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"JIL SANDER","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8042000989550","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8042000989550_1.jpg?v=1786965704","alt":"【FINE WOOL RIPSTOP SHIRT】ウールシャツJ22DL0242","image_id":"509cb600-919e-4559-a23b-dec73efc8b14"}],"images_compared_reason":null,"duplicate_image_family_count":6,"live":false,"checked_at":"2026-08-17T23:23:06.990493+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8042000989550_1.jpg?v=1786965704","alt":"【FINE WOOL RIPSTOP SHIRT】ウールシャツJ22DL0242","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:3-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"【FINE WOOL RIPSTOP SHIRT】ウールシャツJ22DL0242","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"JIL SANDER","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8042000989550","origin":"REPORTED_BY_SELLER"}]}}
 
-id: 370
+id: 169
+event: result.possibly_real
+data: {"result_id":"03003568-80b1-4079-8788-6d5fca937565","search_id":"4af2aeb5-8045-4da0-a07e-d95ebeea561b","candidate_id":"fafcea70-b84c-4aac-ae1c-f308213a7849","bucket":"possibly_real","rank":1,"title":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001076249","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001076249_1.jpg?v=1786972271","alt":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO"},"price":{"original":"50160","currency":"","display":"50160"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-17T23:23:18.846490+00:00","item_match":{"label":"Incomplete evidence","mean":0.523009,"lower_bound":0.453009,"upper_bound":0.59},"authenticity":{"label":"Incomplete evidence","mean":0.501219,"lower_bound":0.281219,"upper_bound":0.622219},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-17T23:23:18.846490+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"OUR LEGACY","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001076249","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001076249_1.jpg?v=1786972271","alt":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO","image_id":"14dc4fe8-b148-4252-86f5-21291674b2d2"}],"images_compared_reason":null,"duplicate_image_family_count":5,"live":false,"checked_at":"2026-08-17T23:23:18.846490+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001076249_1.jpg?v=1786972271","alt":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"OUR LEGACY","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001076249","origin":"REPORTED_BY_SELLER"}]}}
+
+id: 170
+event: result.possibly_real
+data: {"result_id":"621ea28d-e47c-400e-9594-00e3d0e0af4a","search_id":"4af2aeb5-8045-4da0-a07e-d95ebeea561b","candidate_id":"ff3649ce-834d-4b7a-a57a-6915add39a56","bucket":"possibly_real","rank":1,"title":"Shoulder Pad long Sleeve Topロングスリーブカットソー","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8032001044150","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8032001044150_1.jpg?v=1786965690","alt":"Shoulder Pad long Sleeve Topロングスリーブカットソー"},"price":{"original":"6160","currency":"","display":"6160"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-17T23:23:27.787969+00:00","item_match":{"label":"Incomplete evidence","mean":0.681222,"lower_bound":0.681222,"upper_bound":0.721222},"authenticity":{"label":"Incomplete evidence","mean":0.493487,"lower_bound":0.273487,"upper_bound":0.614487},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-17T23:23:27.787969+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:14-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:14-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"Shoulder Pad long Sleeve Topロングスリーブカットソー","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"YUUNA ICHIKAWA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8032001044150","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8032001044150_1.jpg?v=1786965690","alt":"Shoulder Pad long Sleeve Topロングスリーブカットソー","image_id":"c4cd6b6a-69bf-4402-a2c7-329ff24f96e3"}],"images_compared_reason":null,"duplicate_image_family_count":5,"live":false,"checked_at":"2026-08-17T23:23:27.787969+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8032001044150_1.jpg?v=1786965690","alt":"Shoulder Pad long Sleeve Topロングスリーブカットソー","part":""},"parts":[{"part":"collar","note":"correspondence orb:14-inliers","status":"compared","origin":"INFERRED"},{"part":"placket","note":"correspondence orb:14-inliers","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"correspondence orb:14-inliers","status":"compared","origin":"INFERRED"},{"part":"hem","note":"correspondence orb:14-inliers","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"correspondence orb:14-inliers","status":"compared","origin":"INFERRED"},{"part":"closure","note":"correspondence orb:14-inliers","status":"compared","origin":"INFERRED"},{"part":"logo","note":"correspondence orb:14-inliers","status":"compared","origin":"INFERRED"},{"part":"seams","note":"correspondence orb:14-inliers","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"correspondence orb:14-inliers","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:14-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"Shoulder Pad long Sleeve Topロングスリーブカットソー","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"YUUNA ICHIKAWA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8032001044150","origin":"REPORTED_BY_SELLER"}]}}
+
+id: 171
+event: result.possibly_real
+data: {"result_id":"c8ca0f33-e293-49b4-876d-4aa45625bbe6","search_id":"4af2aeb5-8045-4da0-a07e-d95ebeea561b","candidate_id":"b5f738ea-5d67-4fa9-bad1-be0edc7fc709","bucket":"possibly_real","rank":1,"title":"FINX CO CORDUROY L S SHIRTオーバーサイズコーデュロイシャツジャケットVS52-307","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001067568","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001067568_1.jpg?v=1786972271","alt":"FINX CO CORDUROY L S SHIRTオーバーサイズコーデュロイシャツジャケットVS52-307"},"price":{"original":"13860","currency":"","display":"13860"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-17T23:23:37.982401+00:00","item_match":{"label":"Incomplete evidence","mean":0.553222,"lower_bound":0.483222,"upper_bound":0.593222},"authenticity":{"label":"Incomplete evidence","mean":0.462035,"lower_bound":0.242035,"upper_bound":0.583035},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-17T23:23:37.982401+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"FINX CO CORDUROY L S SHIRTオーバーサイズコーデュロイシャツジャケットVS52-307","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"VEIN","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001067568","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001067568_1.jpg?v=1786972271","alt":"FINX CO CORDUROY L S SHIRTオーバーサイズコーデュロイシャツジャケットVS52-307","image_id":"06565225-3163-4616-abc6-7e982c8bbfb7"}],"images_compared_reason":null,"duplicate_image_family_count":4,"live":false,"checked_at":"2026-08-17T23:23:37.982401+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001067568_1.jpg?v=1786972271","alt":"FINX CO CORDUROY L S SHIRTオーバーサイズコーデュロイシャツジャケットVS52-307","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"FINX CO CORDUROY L S SHIRTオーバーサイズコーデュロイシャツジャケットVS52-307","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"VEIN","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001067568","origin":"REPORTED_BY_SELLER"}]}}
+
+id: 172
+event: result.possibly_real
+data: {"result_id":"00b53a92-ea59-4852-8102-5fb3461109ee","search_id":"4af2aeb5-8045-4da0-a07e-d95ebeea561b","candidate_id":"61b6eace-6d36-49a6-b590-74c95f27b7e9","bucket":"possibly_real","rank":1,"title":"TIGHT T-SHIRTS半袖Tシャツ201101-0203","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8078000579170","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8078000579170_1.jpg?v=1786961470","alt":"TIGHT T-SHIRTS半袖Tシャツ201101-0203"},"price":{"original":"6160","currency":"","display":"6160"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-17T23:23:47.424135+00:00","item_match":{"label":"Incomplete evidence","mean":0.530217,"lower_bound":0.460217,"upper_bound":0.59},"authenticity":{"label":"Incomplete evidence","mean":0.551244,"lower_bound":0.331244,"upper_bound":0.672244},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-17T23:23:47.424135+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"TIGHT T-SHIRTS半袖Tシャツ201101-0203","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"THE CLE","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8078000579170","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8078000579170_1.jpg?v=1786961470","alt":"TIGHT T-SHIRTS半袖Tシャツ201101-0203","image_id":"93545249-deb4-4de2-9a8d-aaa80a62bfd2"}],"images_compared_reason":null,"duplicate_image_family_count":7,"live":false,"checked_at":"2026-08-17T23:23:47.424135+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8078000579170_1.jpg?v=1786961470","alt":"TIGHT T-SHIRTS半袖Tシャツ201101-0203","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"TIGHT T-SHIRTS半袖Tシャツ201101-0203","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"THE CLE","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8078000579170","origin":"REPORTED_BY_SELLER"}]}}
+
+id: 173
+event: result.removed
+data: {"result_id":"cb44668e-2bb4-42dd-ba80-f5b68fb787eb","reason":"hidden"}
+
+id: 174
 event: search.state
 data: {"state":"GAP_ANALYSIS","version":18}
 
-id: 371
+id: 175
 event: search.progress
 data: {"stage":"Ranking results","detail":null}
 
-id: 372
+id: 176
 event: search.progress
 data: {"stage":"Searching alternate names","detail":null}
+
+id: 177
+event: search.state
+data: {"state":"PARTIAL","version":19}
+
+id: 178
+event: search.complete
+data: {"terminal_status":"PARTIAL","reason":"useful coverage remains incomplete; some sources blocked"}
+
+id: 179
+event: search.coverage
+data: {"sources_completed":[{"detail":"","id":"kind","name":"kind","status":"SEARCHED_MATCHES_FOUND"}],"sources_blocked":[{"detail":"","id":"archive_org","name":"archive_org","status":"SOURCE_UNAVAILABLE"},{"detail":"adapter reported SOURCE_UNAVAILABLE","id":"searx","name":"searx","status":"SOURCE_UNAVAILABLE"},{"detail":"source budget exhausted","id":"wikimedia","name":"wikimedia","status":"UNMEASURABLE"},{"detail":"source budget exhausted","id":"marginalia","name":"marginalia","status":"UNMEASURABLE"},{"detail":"source budget exhausted","id":"the_realreal","name":"the_realreal","status":"UNMEASURABLE"},{"detail":"source budget exhausted","id":"rebag","name":"rebag","status":"UNMEASURABLE"},{"detail":"source budget exhausted","id":"komehyo","name":"komehyo","status":"UNMEASURABLE"},{"detail":"source budget exhausted","id":"byronesque","name":"byronesque","status":"UNMEASURABLE"},{"detail":"source budget exhausted","id":"heroine","name":"heroine","status":"UNMEASURABLE"},{"detail":"operator credential required","id":"ebay","name":"ebay","status":"AUTH_REQUIRED"},{"detail":"operator credential required","id":"etsy","name":"etsy","status":"AUTH_REQUIRED"},{"detail":"source disabled","id":"mercari_jp","name":"mercari_jp","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"yahoo_auctions","name":"yahoo_auctions","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"buyee","name":"buyee","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"vinted","name":"vinted","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"bunjang","name":"bunjang","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"ssense","name":"ssense","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"depop","name":"depop","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"grailed","name":"grailed","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"vestiaire","name":"vestiaire","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"taobao","name":"taobao","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"weidian","name":"weidian","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"yupoo","name":"yupoo","status":"BLOCKED_BY_POLICY"}],"sources_in_progress":[],"pages_fetched":14,"candidates_normalized":24,"candidates_hidden":4,"pages_charged_to_page_limit":null}
 

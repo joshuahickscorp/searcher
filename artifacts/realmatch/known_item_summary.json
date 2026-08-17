@@ -1,11 +1,11 @@
 {
-  "search_id": "fc22b9ab-4541-4d06-8f98-035388477331",
+  "search_id": "4af2aeb5-8045-4da0-a07e-d95ebeea561b",
   "terminal_status": "PARTIAL",
   "terminal_reason": "useful coverage remains incomplete; some sources blocked",
   "counts": {
     "real": 0,
-    "possibly_real": 5,
-    "hidden": 3
+    "possibly_real": 6,
+    "hidden": 2
   },
   "coverage": {
     "sources_completed": [
@@ -21,55 +21,146 @@
         "detail": "",
         "id": "archive_org",
         "name": "archive_org",
+        "status": "SOURCE_UNAVAILABLE"
+      },
+      {
+        "detail": "adapter reported SOURCE_UNAVAILABLE",
+        "id": "searx",
+        "name": "searx",
+        "status": "SOURCE_UNAVAILABLE"
+      },
+      {
+        "detail": "source budget exhausted",
+        "id": "wikimedia",
+        "name": "wikimedia",
         "status": "UNMEASURABLE"
       },
       {
-        "detail": "",
-        "id": "wikimedia",
-        "name": "wikimedia",
+        "detail": "source budget exhausted",
+        "id": "marginalia",
+        "name": "marginalia",
+        "status": "UNMEASURABLE"
+      },
+      {
+        "detail": "source budget exhausted",
+        "id": "the_realreal",
+        "name": "the_realreal",
+        "status": "UNMEASURABLE"
+      },
+      {
+        "detail": "source budget exhausted",
+        "id": "rebag",
+        "name": "rebag",
+        "status": "UNMEASURABLE"
+      },
+      {
+        "detail": "source budget exhausted",
+        "id": "komehyo",
+        "name": "komehyo",
+        "status": "UNMEASURABLE"
+      },
+      {
+        "detail": "source budget exhausted",
+        "id": "byronesque",
+        "name": "byronesque",
+        "status": "UNMEASURABLE"
+      },
+      {
+        "detail": "source budget exhausted",
+        "id": "heroine",
+        "name": "heroine",
+        "status": "UNMEASURABLE"
+      },
+      {
+        "detail": "operator credential required",
+        "id": "ebay",
+        "name": "ebay",
+        "status": "AUTH_REQUIRED"
+      },
+      {
+        "detail": "operator credential required",
+        "id": "etsy",
+        "name": "etsy",
+        "status": "AUTH_REQUIRED"
+      },
+      {
+        "detail": "source disabled",
+        "id": "mercari_jp",
+        "name": "mercari_jp",
         "status": "BLOCKED_BY_POLICY"
       },
       {
-        "detail": "",
-        "id": "marginalia",
-        "name": "marginalia",
-        "status": "SOURCE_UNAVAILABLE"
+        "detail": "source disabled",
+        "id": "yahoo_auctions",
+        "name": "yahoo_auctions",
+        "status": "BLOCKED_BY_POLICY"
       },
       {
-        "detail": "",
-        "id": "the_realreal",
-        "name": "the_realreal",
-        "status": "SOURCE_UNAVAILABLE"
+        "detail": "source disabled",
+        "id": "buyee",
+        "name": "buyee",
+        "status": "BLOCKED_BY_POLICY"
       },
       {
-        "detail": "",
-        "id": "rebag",
-        "name": "rebag",
-        "status": "SOURCE_UNAVAILABLE"
+        "detail": "source disabled",
+        "id": "vinted",
+        "name": "vinted",
+        "status": "BLOCKED_BY_POLICY"
       },
       {
-        "detail": "",
-        "id": "komehyo",
-        "name": "komehyo",
-        "status": "SOURCE_UNAVAILABLE"
+        "detail": "source disabled",
+        "id": "bunjang",
+        "name": "bunjang",
+        "status": "BLOCKED_BY_POLICY"
       },
       {
-        "detail": "",
-        "id": "byronesque",
-        "name": "byronesque",
-        "status": "SOURCE_UNAVAILABLE"
+        "detail": "source disabled",
+        "id": "ssense",
+        "name": "ssense",
+        "status": "BLOCKED_BY_POLICY"
       },
       {
-        "detail": "",
-        "id": "heroine",
-        "name": "heroine",
+        "detail": "source disabled",
+        "id": "depop",
+        "name": "depop",
+        "status": "BLOCKED_BY_POLICY"
+      },
+      {
+        "detail": "source disabled",
+        "id": "grailed",
+        "name": "grailed",
+        "status": "BLOCKED_BY_POLICY"
+      },
+      {
+        "detail": "source disabled",
+        "id": "vestiaire",
+        "name": "vestiaire",
+        "status": "BLOCKED_BY_POLICY"
+      },
+      {
+        "detail": "source disabled",
+        "id": "taobao",
+        "name": "taobao",
+        "status": "BLOCKED_BY_POLICY"
+      },
+      {
+        "detail": "source disabled",
+        "id": "weidian",
+        "name": "weidian",
+        "status": "BLOCKED_BY_POLICY"
+      },
+      {
+        "detail": "source disabled",
+        "id": "yupoo",
+        "name": "yupoo",
         "status": "BLOCKED_BY_POLICY"
       }
     ],
     "sources_in_progress": [],
-    "pages_fetched": 51,
+    "pages_fetched": 14,
     "candidates_normalized": 24,
-    "candidates_hidden": 6
+    "candidates_hidden": 4,
+    "pages_charged_to_page_limit": null
   },
   "target_in_real_rank": null,
   "target_in_possibly_real_rank": null,

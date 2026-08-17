@@ -1,0 +1,9 @@
+{
+  "what": "Known-item check: photographs of KIND listing 8001001141404 must return that listing.",
+  "result": "SOURCE LISTING NOT IN PUBLIC TABS",
+  "command": "./scripts/known_item_check.sh",
+  "diagnosis": "The target is never retrieved. Its listing id appears zero times anywhere in the campaign log, so it is absent from the candidate set rather than present and ranked low, and absent rather than present and hidden. Four candidates were hidden and none of them is the target.",
+  "why_this_narrows_it": "The finding was carried as 'photographs of a listing do not return that listing', which reads as a matching failure. It is not one. The matcher never sees the listing. Work on item matching, thresholds or the Real gate cannot move this; the listing has to be discovered first.",
+  "next": "Establish why the KIND catalogue walk does not surface this product for these queries: whether the query family never names it, whether the walk stops before reaching its page, or whether it is fetched and dropped during normalisation.",
+  "also_observed": "coverage reported pages_charged_to_page_limit: null on this path. The field was added today and reads the budget ledger; null means the ledger was absent here, which is reported as absence rather than as zero, but it means the page limit is still not checkable on this route."
+}
