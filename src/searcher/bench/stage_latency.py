@@ -281,14 +281,18 @@ def _dummy_embedding_weights(path: Path) -> bool:
     except ImportError:
         return False
 
-    class _Stub(torch.nn.Module):
-        def forward(self, tensor: Any) -> Any:
-            flat = tensor.reshape(tensor.shape[0], -1)
-            width = int(flat.shape[1])
-            reps = (384 + width - 1) // width
-            return flat.repeat(1, reps)[:, :384]
+    # Built with type() rather than a class statement: subclassing torch.nn.Module
+    # directly makes `uv run mypy src` fail on a machine without torch installed,
+    # where the base resolves to Any. That is every fresh clone, and mypy is a
+    # documented gate command.
+    def _forward(_self: Any, tensor: Any) -> Any:
+        flat = tensor.reshape(tensor.shape[0], -1)
+        width = int(flat.shape[1])
+        reps = (384 + width - 1) // width
+        return flat.repeat(1, reps)[:, :384]
 
-    model = _Stub()
+    stub_cls: Any = type("_Stub", (torch.nn.Module,), {"forward": _forward})
+    model = stub_cls()
     model.eval()
     with torch.inference_mode():
         jit_trace: Any = torch.jit.trace  # torch.jit is untyped for mypy
