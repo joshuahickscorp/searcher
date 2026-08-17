@@ -1489,15 +1489,28 @@ class CampaignOrchestrator:
             return CampaignState.BLOCKED, "no usable query was compiled", False
         if not completed and not blocked:
             return CampaignState.BLOCKED, "no source work was planned", False
-        if (
-            published_terminal_status(
-                proposed=CampaignState.COMPLETE.value,
-                pages_fetched=pages_fetched,
-                candidate_count=len(candidates),
-                queries_compiled=len(usable),
+        # A source that timed out, hung, looped or returned unparseable content
+        # did not answer, and a campaign carrying one has not exhausted its
+        # coverage. Fault injection found COMPLETE returned after all four.
+        outcomes = {
+            str(row.get("id") or ""): str(row.get("status") or "")
+            for row in (list(coverage.get("sources_completed") or []) + blocked)
+            if row.get("id")
+        }
+        verdict = published_terminal_status(
+            proposed=CampaignState.COMPLETE.value,
+            pages_fetched=pages_fetched,
+            candidate_count=len(candidates),
+            queries_compiled=len(usable),
+            source_outcomes=outcomes or None,
+        )
+        if verdict == CampaignState.PARTIAL.value:
+            return (
+                CampaignState.PARTIAL,
+                "a planned source did not answer; coverage is incomplete",
+                False,
             )
-            != CampaignState.COMPLETE.value
-        ):
+        if verdict != CampaignState.COMPLETE.value:
             return CampaignState.BLOCKED, "nothing was fetched", False
         return CampaignState.COMPLETE, "coverage exhausted", False
 

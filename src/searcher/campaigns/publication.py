@@ -4,7 +4,13 @@ from __future__ import annotations
 
 from urllib.parse import urlparse
 
-from searcher.contracts.enums import BucketPublic, CampaignState, PublicEventName, SourceFamily
+from searcher.contracts.enums import (
+    BucketPublic,
+    CampaignState,
+    PublicEventName,
+    SourceFamily,
+    SourceOutcome,
+)
 from searcher.contracts.models import BucketDecision, ListingCandidate
 from searcher.ranking.vetoes import SELF_DECLARED_REPLICA
 from searcher.retrieval.text import self_declared_replica
@@ -71,6 +77,20 @@ def published_public_bucket(
     return public
 
 
+# Outcomes that mean a planned source did not answer. A campaign carrying any of
+# these has not exhausted the search it planned, whatever else it achieved.
+_COVERAGE_UNRESOLVED = frozenset(
+    {
+        SourceOutcome.NETWORK_FAILED.value,
+        SourceOutcome.PARSER_FAILED.value,
+        SourceOutcome.RATE_LIMITED.value,
+        SourceOutcome.SOURCE_UNAVAILABLE.value,
+        SourceOutcome.UNMEASURABLE.value,
+        SourceOutcome.NOT_ATTEMPTED.value,
+    }
+)
+
+
 def published_terminal_status(
     *,
     proposed: str,
@@ -78,6 +98,7 @@ def published_terminal_status(
     candidate_count: int,
     queries_compiled: int | None = None,
     saturation: bool = False,
+    source_outcomes: dict[str, str] | None = None,
 ) -> str:
     """COMPLETE is a coverage claim. Fetching nothing is not coverage.
 
@@ -93,6 +114,22 @@ def published_terminal_status(
         return CampaignState.BLOCKED.value
     if pages_fetched <= 0 and candidate_count <= 0:
         return CampaignState.BLOCKED.value
+    if source_outcomes is not None:
+        # COMPLETE says the planned search was carried out. A source that timed
+        # out, hung, looped on redirects, returned unparseable content, or was
+        # never reached did not answer, and a campaign carrying any of those has
+        # not exhausted its coverage. Fault injection found COMPLETE returned
+        # after a 21.5s timeout, a 20.4s hang, a 9.8s redirect loop, and an
+        # HTTP 200 whose body could not be parsed. PARTIAL is the honest word
+        # for searched-but-incomplete, and the coverage map already records
+        # which source it was.
+        unresolved = sorted(
+            name
+            for name, outcome in source_outcomes.items()
+            if outcome in _COVERAGE_UNRESOLVED
+        )
+        if unresolved:
+            return CampaignState.PARTIAL.value
     return proposed
 
 
