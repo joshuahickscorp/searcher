@@ -444,6 +444,16 @@ def assert_no_pixel_leakage(
 
     cal = set(calibration_cases)
     held = set(held_out_cases)
+    # A comparison against an empty side always finds nothing shared. The first
+    # version of this guard reported "22 digests to 0" after a split repair that
+    # had moved every hard-negative case to held_out, leaving calibration with
+    # none - so the guard proved nothing and the number read like a fix. Refuse
+    # the degenerate comparison rather than pass it.
+    if not cal or not held:
+        raise SplitLeakageError(
+            f"degenerate split: calibration has {len(cal)} case(s) and held_out has "
+            f"{len(held)}; a pixel comparison needs both sides populated"
+        )
     digests: dict[str, set[str]] = {}
     for case, images in images_by_case.items():
         side = "calibration" if case in cal else ("held_out" if case in held else None)
