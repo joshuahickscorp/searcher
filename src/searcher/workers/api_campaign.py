@@ -148,7 +148,11 @@ def create_api_campaign(
         constraints=SearchConstraints(),
         budget=IntentBudget(
             wall_seconds=180 if cfg.live_discovery else 120,
-            source_limit=8 if cfg.live_discovery else 0,
+            # Derived from the list it is meant to bound, not written twice.
+            # A hardcoded 8 against nine answerable sources meant the ninth,
+            # archive_org, was planned, counted as reach, and never attempted -
+            # and admitting a tenth would silently have starved another.
+            source_limit=len(uncredentialed_source_names()) if cfg.live_discovery else 0,
             page_limit=40 if cfg.live_discovery else 0,
             browser_page_limit=0,
             image_limit=max(cfg.max_images_per_search, 20),
