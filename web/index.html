@@ -120,7 +120,8 @@
     <article id="view-limitations" class="view view-doc" hidden>
       <h1>Limitations</h1>
       <p>Searcher is not a professional authenticator. It ranks evidence under a declared policy and shows calibrated uncertainty. A result in Real is still an estimate.</p>
-      <p>Real means high confidence this is the same item under the available evidence and the published benchmark in <code>artifacts/searcher-public-benchmark.receipt.json</code> (recall@1 0.771, recall@5 1.0, MRR 0.867 over 35 queries, false Real 0) — not a professional authentication guarantee. Possibly Real means the item may match, but important evidence is missing or conflicting.</p>
+      <p>Real means high confidence this is the <em>same item</em> as the one you photographed — an identity judgement, not an authenticity one, and never a professional authentication guarantee. Possibly Real means the item may match, but important evidence is missing or conflicting.</p>
+      <p>Retrieval is measured in <code>artifacts/searcher-public-benchmark.receipt.json</code>: recall@1 0.771, recall@5 1.0, MRR 0.867 over 35 queries. Those are identity figures. The receipt also reports <code>false Real 0</code>, and that number is <strong>not</strong> evidence about authenticity: it is measured with photograph screening absent, so it does not cover a listing that reuses the brand&rsquo;s own images. Real is currently unavailable for any candidate whose photographs were never screened.</p>
       <p>A replica listing can never be ranked Real. Replica sources are not searched; the reason is below.</p>
       <p>Searcher does not claim:</p>
       <ul>
