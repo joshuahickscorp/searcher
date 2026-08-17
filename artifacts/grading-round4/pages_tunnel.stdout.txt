@@ -1,0 +1,12 @@
+{
+  "ok": false,
+  "reason": "pages/tunnel reachable but no working published listing",
+  "pages_status": 200,
+  "tunnel_url": "https://structural-investigation-chance-managers.trycloudflare.com",
+  "cors_ok": true,
+  "create_status": 201,
+  "published_count": 0,
+  "working_links": 0,
+  "friend_url_host": "https://joshuahickscorp.github.io/searcher/",
+  "search_terminal": "PARTIAL"
+}

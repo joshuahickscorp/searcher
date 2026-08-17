@@ -177,7 +177,39 @@ _HOMOGLYPHS = str.maketrans({
 
 # Digit-for-letter substitutions, applied only to the despaced pass below so a
 # meaningful "1:1" is never mangled.
-_LEET = str.maketrans({"1": "l", "0": "o", "3": "e", "4": "a", "5": "s", "@": "a", "$": "s"})
+_LEET_BASE: dict[str, str | int | None] = {
+    "0": "o", "3": "e", "4": "a", "5": "s", "@": "a", "$": "s", "7": "t",
+}
+_LEET_L = str.maketrans({**_LEET_BASE, "1": "l"})
+_LEET_I = str.maketrans({**_LEET_BASE, "1": "i"})
+# Kept for the despaced pass, which only needs one reading.
+_LEET = _LEET_L
+
+_AMBIGUOUS = "1"
+_MAX_AMBIGUOUS = 3
+
+
+def _leet_variants(folded: str) -> list[str]:
+    """Readings of a string where digits may stand in for letters."""
+    from itertools import product
+
+    base = folded.translate(str.maketrans(_LEET_BASE))
+    if _AMBIGUOUS not in base:
+        return [base] if base != folded else []
+    if base.count(_AMBIGUOUS) > _MAX_AMBIGUOUS:
+        return [base.replace(_AMBIGUOUS, "l"), base.replace(_AMBIGUOUS, "i")]
+    out: list[str] = []
+    slots = base.count(_AMBIGUOUS)
+    for choice in product("li", repeat=slots):
+        chars, index = [], 0
+        for ch in base:
+            if ch == _AMBIGUOUS:
+                chars.append(choice[index])
+                index += 1
+            else:
+                chars.append(ch)
+        out.append("".join(chars))
+    return out
 
 
 def normalize_for_replica(text: str) -> str:
@@ -217,5 +249,15 @@ def self_declared_replica(text: str | None) -> bool:
     folded = normalize_for_replica(text)
     if any(pattern.search(folded) for pattern in REPLICA_PATTERNS):
         return True
+    # Digit-for-letter substitution, on the spaced text as well as the squashed
+    # one. Only the despaced pass mapped it before, so a single substitution was
+    # caught while "r3pl1ca" - two of them - published as Possibly Real.
+    # A digit can stand for more than one letter, and a word can mix readings:
+    # "r3pl1ca" is replica only if 1 reads as i, while "rep11ca" needs one l and
+    # one i. Enumerate the readings of the ambiguous digit, bounded so a long
+    # string of them cannot become expensive.
+    for variant in _leet_variants(folded):
+        if any(pattern.search(variant) for pattern in REPLICA_PATTERNS):
+            return True
     squashed = _despaced(folded)
     return any(pattern.search(squashed) for pattern in _DESPACED_PATTERNS)

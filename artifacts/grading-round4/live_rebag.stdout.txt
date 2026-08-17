@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "requires_credential": false,
+  "vendor": "Celine",
+  "handle": "handbag-celine-boston-bag-triomphe-coated-canvas-small-144114525",
+  "title": "Boston Bag Triomphe Coated Canvas Small",
+  "coverage": {
+    "rebag": "SEARCHED_MATCHES_FOUND"
+  },
+  "coverage_details": {
+    "rebag": "collection_slug: 24; site_search: skipped (rebag publishes no admitted site-search path); catalog_feed: 8; sitemap: 24"
+  },
+  "strategy_coverage": {
+    "rebag": [
+      {
+        "name": "collection_slug",
+        "status": "tried",
+        "reason": "promoted listing URLs",
+        "yielded": 24,
+        "urls": [
+          "https://shop.rebag.com/collections/celine/products.json?limit=250",
+          "https://www.rebag.com/collections/celine/products.json?limit=250"
+        ]
+      },
+      {
+        "name": "site_search",
+        "status": "skipped",
+        "reason": "rebag publishes no admitted site-search path",
+        "yielded": 0,
+        "urls": []
+      },
+      {
+        "name": "catalog_feed",
+        "status": "tried",
+        "reason": "promoted listing URLs",
+        "yielded": 8,
+        "urls": [
+          "https://shop.rebag.com/products.json?limit=250&page=1",
+          "https://www.rebag.com/products.json?limit=250&page=1"
+        ]
+      },
+      {
+        "name": "sitemap",
+        "status": "tried",
+        "reason": "promoted listing URLs",
+        "yielded": 24,
+        "urls": [
+          "https://www.rebag.com/sitemap.xml",
+          "https://shop.rebag.com/sitemap.xml",
+          "http://www.rebag.com/sitemap.xml"
+        ]
+      }
+    ]
+  },
+  "urls": [
+    "https://shop.rebag.com/products/accessories-celine-multifunction-strap-wallet-leather-large4481451",
+    "https://shop.rebag.com/products/handbag-celine-boston-bag-triomphe-coated-canvas-small-144114525",
+    "https://shop.rebag.com/products/handbags-celine-16-top-handle-bag-smooth-calfskin-medium4488171",
+    "https://shop.rebag.com/products/handbags-celine-ava-triomphe-bag-triomphe-coated-canvas-4482211",
+    "https://shop.rebag.com/products/handbags-celine-belt-bag-textured-leather-micro4496862",
+    "https://shop.rebag.com/products/handbags-celine-boston-bag-triomphe-coated-canvas-small4496771",
+    "https://shop.rebag.com/products/handbags-celine-frame-shoulder-bag-leather-medium4494631",
+    "https://shop.rebag.com/products/handbags-celine-luggage-bag-grainy-leather-nano4473881",
+    "https://shop.rebag.com/products/handbags-celine-classic-box-bag-smooth-leather-medium3086212",
+    "https://shop.rebag.com/products/handbags-celine-romy-shoulder-bag-leather-large3164691",
+    "https://shop.rebag.com/products/handbags-celine-classic-box-bag-lizard-small3243721",
+    "https://shop.rebag.com/products/handbags-celine-classic-box-bag-lizard-medium3294211"
+  ],
+  "catalog_urls": [
+    "https://shop.rebag.com/products.json?limit=250&page=1",
+    "https://www.rebag.com/products.json?limit=250&page=1"
+  ],
+  "wall_ms": 135237.2
+}
+CLAIM_HOLD

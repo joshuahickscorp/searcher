@@ -1,0 +1,387 @@
+{
+  "pages": "https://joshuahickscorp.github.io/searcher/",
+  "pages_origin": "https://joshuahickscorp.github.io",
+  "pages_status": 200,
+  "pages_bytes": 11758,
+  "pages_has_searcher": true,
+  "pages_has_api_param": true,
+  "local_health": {
+    "status": "ok",
+    "api": "up",
+    "db": "ok",
+    "checked_at": "2026-08-17T04:54:44.004141+00:00",
+    "lanes": {
+      "storage": {
+        "ok": true
+      },
+      "index": {
+        "ok": true,
+        "entries": 0
+      },
+      "discovery": {
+        "ok": true,
+        "reason": "sources layer present; live discovery is started by the campaign runner"
+      },
+      "vision": {
+        "ok": true,
+        "reason": "not probed on /v1/health; see GET /v1/capabilities"
+      }
+    },
+    "blocked_lanes": []
+  },
+  "tunnel_url": "https://twins-introductory-although-shipping.trycloudflare.com",
+  "tunnel_resolved_via_1.1.1.1": [
+    "104.16.230.132",
+    "104.16.231.132"
+  ],
+  "tunnel_resolve_ip": "104.16.230.132",
+  "tunnel_health_status": 200,
+  "tunnel_health": {
+    "status": "ok",
+    "api": "up",
+    "db": "ok",
+    "checked_at": "2026-08-17T04:54:59.069399+00:00",
+    "lanes": {
+      "storage": {
+        "ok": true
+      },
+      "index": {
+        "ok": true,
+        "entries": 0
+      },
+      "discovery": {
+        "ok": true,
+        "reason": "sources layer present; live discovery is started by the campaign runner"
+      },
+      "vision": {
+        "ok": true,
+        "reason": "not probed on /v1/health; see GET /v1/capabilities"
+      }
+    },
+    "blocked_lanes": []
+  },
+  "cors_origin_sent": "https://joshuahickscorp.github.io",
+  "cors_allow_origin": "https://joshuahickscorp.github.io",
+  "cors_ok": true,
+  "friend_url": "https://joshuahickscorp.github.io/searcher/?api=https://twins-introductory-although-shipping.trycloudflare.com",
+  "create_status": 201,
+  "create_cors": "https://joshuahickscorp.github.io",
+  "create": {
+    "search_id": "65551697-84c4-4817-84bd-21bbec4af598",
+    "state": "CREATED",
+    "events_url": "/v1/searches/65551697-84c4-4817-84bd-21bbec4af598/events",
+    "results_url": "/v1/searches/65551697-84c4-4817-84bd-21bbec4af598/results"
+  },
+  "search": {
+    "search_id": "65551697-84c4-4817-84bd-21bbec4af598",
+    "state": "PARTIAL",
+    "state_version": 19,
+    "terminal_status": "PARTIAL",
+    "terminal_reason": "useful coverage remains incomplete; some sources blocked",
+    "created_at": "2026-08-17T04:54:59.320805+00:00",
+    "updated_at": "2026-08-17T04:57:12.298628+00:00",
+    "progress": {
+      "stage": "Ranking results",
+      "detail": null
+    },
+    "coverage": {
+      "sources_completed": [
+        {
+          "detail": "",
+          "id": "wikimedia",
+          "name": "wikimedia",
+          "status": "SEARCHED_NO_MATCH"
+        },
+        {
+          "detail": "",
+          "id": "kind",
+          "name": "kind",
+          "status": "SEARCHED_MATCHES_FOUND"
+        }
+      ],
+      "sources_blocked": [
+        {
+          "detail": "",
+          "id": "heroine",
+          "name": "heroine",
+          "status": "BLOCKED_BY_POLICY"
+        },
+        {
+          "detail": "",
+          "id": "archive_org",
+          "name": "archive_org",
+          "status": "SOURCE_UNAVAILABLE"
+        }
+      ],
+      "sources_in_progress": [],
+      "pages_fetched": 17,
+      "candidates_normalized": 24,
+      "candidates_hidden": 14
+    },
+    "counts": {
+      "real": 0,
+      "possibly_real": 1,
+      "hidden": 7
+    },
+    "hidden_policy_note": "Some candidates did not meet policy.",
+    "missing_reference_views": [
+      {
+        "view": "rear",
+        "why": "The reverse is not in the set."
+      },
+      {
+        "view": "label",
+        "why": "Improves product-code evidence."
+      },
+      {
+        "view": "detail",
+        "why": "Texture is unseen."
+      }
+    ],
+    "deeper_refresh_available": false,
+    "intent": {
+      "text": "Willy Chavarria",
+      "tags": [
+        "garment"
+      ]
+    },
+    "events_url": "/v1/searches/65551697-84c4-4817-84bd-21bbec4af598/events",
+    "results_url": "/v1/searches/65551697-84c4-4817-84bd-21bbec4af598/results"
+  },
+  "results": {
+    "search_id": "65551697-84c4-4817-84bd-21bbec4af598",
+    "real": [],
+    "possibly_real": [
+      {
+        "result_id": "ef0fae70-5643-40ab-aa04-0e9c4853db01",
+        "search_id": "65551697-84c4-4817-84bd-21bbec4af598",
+        "candidate_id": "ce768777-b8d2-47a9-843c-c81528b75b5a",
+        "bucket": "possibly_real",
+        "rank": 1,
+        "title": "\u30ed\u30b4\u9577\u8896\u30ab\u30c3\u30c8\u30bd\u30fc",
+        "source": {
+          "name": "kind",
+          "adapter": "kind"
+        },
+        "listing_url": "https://shop.kind.co.jp/products/8001001141442",
+        "primary_image": {
+          "url": "https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141442_1.jpg?v=1786853460",
+          "alt": "\u30ed\u30b4\u9577\u8896\u30ab\u30c3\u30c8\u30bd\u30fc"
+        },
+        "price": {
+          "original": "7260",
+          "currency": "",
+          "display": "7260"
+        },
+        "size": null,
+        "availability": "UNKNOWN",
+        "last_checked_at": "2026-08-17T04:56:07.420045+00:00",
+        "item_match": {
+          "label": "Incomplete evidence",
+          "mean": 0.519239,
+          "lower_bound": 0.458239,
+          "upper_bound": 0.59
+        },
+        "authenticity": {
+          "label": "Incomplete evidence",
+          "mean": 0.473982,
+          "lower_bound": 0.253982,
+          "upper_bound": 0.594982
+        },
+        "listing_utility": {
+          "live": false,
+          "label": "Unknown",
+          "score": 0.28500000000000003,
+          "last_checked_at": "2026-08-17T04:56:07.420045+00:00"
+        },
+        "evidence_chips": [
+          {
+            "kind": "support",
+            "text": "ev:text:identity"
+          },
+          {
+            "kind": "support",
+            "text": "ev:global:visual"
+          },
+          {
+            "kind": "support",
+            "text": "ev:parts:ontology"
+          }
+        ],
+        "primary_gap": {
+          "kind": "missing",
+          "text": "front"
+        },
+        "why": {
+          "heading": "Why Possibly Real",
+          "points": [
+            "ev:text:identity",
+            "ev:global:visual",
+            "ev:parts:ontology",
+            "ev:geometry:relations"
+          ],
+          "tab_reason": "The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.",
+          "still_unverified": [
+            "No physical inspection."
+          ],
+          "supporting": [
+            "ev:text:identity",
+            "ev:global:visual",
+            "ev:parts:ontology",
+            "ev:geometry:relations"
+          ],
+          "contradictions": [],
+          "missing": [
+            "front",
+            "rear",
+            "detail",
+            "label",
+            "label-view",
+            "logo-not-resolved",
+            "cross-view-second-image",
+            "provenance",
+            "unestablished:construction",
+            "price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+            "availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+            "title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+            "seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+            "images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"
+          ],
+          "seller_reported": [
+            {
+              "field": "Title",
+              "value": "\u30ed\u30b4\u9577\u8896\u30ab\u30c3\u30c8\u30bd\u30fc",
+              "origin": "REPORTED_BY_SELLER"
+            },
+            {
+              "field": "Brand",
+              "value": "WILLY CHAVARRIA",
+              "origin": "REPORTED_BY_SELLER"
+            },
+            {
+              "field": "Model",
+              "value": "8001001141442",
+              "origin": "REPORTED_BY_SELLER"
+            }
+          ],
+          "images_compared": [
+            {
+              "role": "product",
+              "url": "https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141442_1.jpg?v=1786853460",
+              "alt": "\u30ed\u30b4\u9577\u8896\u30ab\u30c3\u30c8\u30bd\u30fc",
+              "image_id": "d52fcea4-a888-4ba5-8658-e007d6d469a0"
+            }
+          ],
+          "images_compared_reason": null,
+          "duplicate_image_family_count": 4,
+          "live": false,
+          "checked_at": "2026-08-17T04:56:07.420045+00:00"
+        },
+        "compare": {
+          "reference_crop": {
+            "url": "",
+            "alt": "User reference",
+            "part": ""
+          },
+          "candidate_crop": {
+            "url": "https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141442_1.jpg?v=1786853460",
+            "alt": "\u30ed\u30b4\u9577\u8896\u30ab\u30c3\u30c8\u30bd\u30fc",
+            "part": ""
+          },
+          "parts": [
+            {
+              "part": "eyelets",
+              "note": "ref=15 cand=17",
+              "status": "compared",
+              "origin": "INFERRED"
+            },
+            {
+              "part": "lateral_panels",
+              "note": "ref=5 cand=5",
+              "status": "compared",
+              "origin": "INFERRED"
+            },
+            {
+              "part": "outsole",
+              "note": "ref=0.3745 cand=0.3847",
+              "status": "compared",
+              "origin": "INFERRED"
+            },
+            {
+              "part": "heel",
+              "note": "ref=notched cand=block",
+              "status": "compared",
+              "origin": "INFERRED"
+            },
+            {
+              "part": "logo",
+              "note": "ref=None cand=None",
+              "status": "compared",
+              "origin": "INFERRED"
+            }
+          ],
+          "supporting": [
+            "ev:text:identity",
+            "ev:global:visual",
+            "ev:parts:ontology",
+            "ev:geometry:relations"
+          ],
+          "contradictions": [],
+          "missing_views": [
+            "front",
+            "rear",
+            "detail",
+            "label",
+            "label-view",
+            "logo-not-resolved",
+            "cross-view-second-image",
+            "provenance",
+            "unestablished:construction",
+            "price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+            "availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+            "title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+            "seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+            "images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"
+          ],
+          "seller_reported_fields": [
+            {
+              "field": "Title",
+              "value": "\u30ed\u30b4\u9577\u8896\u30ab\u30c3\u30c8\u30bd\u30fc",
+              "origin": "REPORTED_BY_SELLER"
+            },
+            {
+              "field": "Brand",
+              "value": "WILLY CHAVARRIA",
+              "origin": "REPORTED_BY_SELLER"
+            },
+            {
+              "field": "Model",
+              "value": "8001001141442",
+              "origin": "REPORTED_BY_SELLER"
+            }
+          ]
+        }
+      }
+    ],
+    "counts": {
+      "real": 0,
+      "possibly_real": 1,
+      "hidden": 7
+    }
+  },
+  "published_count": 1,
+  "link_checks": [
+    {
+      "bucket": "possibly_real",
+      "listing_url": "https://shop.kind.co.jp/products/8001001141442",
+      "has_http_link": true,
+      "has_reason": true,
+      "tab_reason": "The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.",
+      "link_status": 200,
+      "working": true
+    }
+  ],
+  "working_links": 1,
+  "ok": true,
+  "reason": "pages + tunnel returned published listings with working http(s) links"
+}

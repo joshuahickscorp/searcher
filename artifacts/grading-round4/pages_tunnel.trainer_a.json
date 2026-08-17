@@ -1,0 +1,196 @@
+{
+  "pages": "https://joshuahickscorp.github.io/searcher/",
+  "pages_origin": "https://joshuahickscorp.github.io",
+  "pages_status": 200,
+  "pages_bytes": 11758,
+  "pages_has_searcher": true,
+  "pages_has_api_param": true,
+  "local_health": {
+    "status": "ok",
+    "api": "up",
+    "db": "ok",
+    "checked_at": "2026-08-17T04:51:28.639660+00:00",
+    "lanes": {
+      "storage": {
+        "ok": true
+      },
+      "index": {
+        "ok": true,
+        "entries": 0
+      },
+      "discovery": {
+        "ok": true,
+        "reason": "sources layer present; live discovery is started by the campaign runner"
+      },
+      "vision": {
+        "ok": true,
+        "reason": "not probed on /v1/health; see GET /v1/capabilities"
+      }
+    },
+    "blocked_lanes": []
+  },
+  "tunnel_url": "https://structural-investigation-chance-managers.trycloudflare.com",
+  "tunnel_resolved_via_1.1.1.1": [
+    "104.16.231.132",
+    "104.16.230.132"
+  ],
+  "tunnel_resolve_ip": "104.16.231.132",
+  "tunnel_health_status": 200,
+  "tunnel_health": {
+    "status": "ok",
+    "api": "up",
+    "db": "ok",
+    "checked_at": "2026-08-17T04:51:36.923938+00:00",
+    "lanes": {
+      "storage": {
+        "ok": true
+      },
+      "index": {
+        "ok": true,
+        "entries": 0
+      },
+      "discovery": {
+        "ok": true,
+        "reason": "sources layer present; live discovery is started by the campaign runner"
+      },
+      "vision": {
+        "ok": true,
+        "reason": "not probed on /v1/health; see GET /v1/capabilities"
+      }
+    },
+    "blocked_lanes": []
+  },
+  "cors_origin_sent": "https://joshuahickscorp.github.io",
+  "cors_allow_origin": "https://joshuahickscorp.github.io",
+  "cors_ok": true,
+  "friend_url": "https://joshuahickscorp.github.io/searcher/?api=https://structural-investigation-chance-managers.trycloudflare.com",
+  "create_status": 201,
+  "create_cors": "https://joshuahickscorp.github.io",
+  "create": {
+    "search_id": "aabc78b7-cd5e-4900-ba44-ef60ac990861",
+    "state": "CREATED",
+    "events_url": "/v1/searches/aabc78b7-cd5e-4900-ba44-ef60ac990861/events",
+    "results_url": "/v1/searches/aabc78b7-cd5e-4900-ba44-ef60ac990861/results"
+  },
+  "search": {
+    "search_id": "aabc78b7-cd5e-4900-ba44-ef60ac990861",
+    "state": "PARTIAL",
+    "state_version": 19,
+    "terminal_status": "PARTIAL",
+    "terminal_reason": "useful coverage remains incomplete; some sources blocked",
+    "created_at": "2026-08-17T04:51:37.168632+00:00",
+    "updated_at": "2026-08-17T04:52:41.194998+00:00",
+    "progress": {
+      "stage": "Ranking results",
+      "detail": null
+    },
+    "coverage": {
+      "sources_completed": [
+        {
+          "detail": "",
+          "id": "wikimedia",
+          "name": "wikimedia",
+          "status": "NETWORK_FAILED"
+        },
+        {
+          "detail": "",
+          "id": "kind",
+          "name": "kind",
+          "status": "SEARCHED_MATCHES_FOUND"
+        }
+      ],
+      "sources_blocked": [
+        {
+          "detail": "",
+          "id": "heroine",
+          "name": "heroine",
+          "status": "UNMEASURABLE"
+        },
+        {
+          "detail": "",
+          "id": "searx",
+          "name": "searx",
+          "status": "SOURCE_UNAVAILABLE"
+        },
+        {
+          "detail": "",
+          "id": "marginalia",
+          "name": "marginalia",
+          "status": "SOURCE_UNAVAILABLE"
+        },
+        {
+          "detail": "",
+          "id": "the_realreal",
+          "name": "the_realreal",
+          "status": "BLOCKED_BY_ACCESS"
+        },
+        {
+          "detail": "",
+          "id": "rebag",
+          "name": "rebag",
+          "status": "SOURCE_UNAVAILABLE"
+        },
+        {
+          "detail": "",
+          "id": "komehyo",
+          "name": "komehyo",
+          "status": "SOURCE_UNAVAILABLE"
+        },
+        {
+          "detail": "",
+          "id": "byronesque",
+          "name": "byronesque",
+          "status": "SOURCE_UNAVAILABLE"
+        }
+      ],
+      "sources_in_progress": [],
+      "pages_fetched": 52,
+      "candidates_normalized": 24,
+      "candidates_hidden": 16
+    },
+    "counts": {
+      "real": 0,
+      "possibly_real": 0,
+      "hidden": 8
+    },
+    "hidden_policy_note": "Some candidates did not meet policy.",
+    "missing_reference_views": [
+      {
+        "view": "front",
+        "why": "Panel and print layout is unseen."
+      },
+      {
+        "view": "rear",
+        "why": "The reverse is not in the set."
+      },
+      {
+        "view": "label",
+        "why": "Improves product-code evidence."
+      }
+    ],
+    "deeper_refresh_available": false,
+    "intent": {
+      "text": "Willy Chavarria",
+      "tags": [
+        "garment"
+      ]
+    },
+    "events_url": "/v1/searches/aabc78b7-cd5e-4900-ba44-ef60ac990861/events",
+    "results_url": "/v1/searches/aabc78b7-cd5e-4900-ba44-ef60ac990861/results"
+  },
+  "results": {
+    "search_id": "aabc78b7-cd5e-4900-ba44-ef60ac990861",
+    "real": [],
+    "possibly_real": [],
+    "counts": {
+      "real": 0,
+      "possibly_real": 0,
+      "hidden": 8
+    }
+  },
+  "published_count": 0,
+  "link_checks": [],
+  "working_links": 0,
+  "ok": false,
+  "reason": "pages/tunnel reachable but no working published listing"
+}

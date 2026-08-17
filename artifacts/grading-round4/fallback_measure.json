@@ -1,0 +1,39 @@
+{
+  "methods": [
+    "brief_fallback"
+  ],
+  "same_inliers": [
+    5,
+    8,
+    6,
+    7,
+    8,
+    6,
+    10,
+    6,
+    8,
+    6
+  ],
+  "other_inliers": [
+    6,
+    6,
+    12,
+    5,
+    7,
+    6,
+    5,
+    5,
+    5,
+    5
+  ],
+  "same_median": 6.5,
+  "other_median": 5.5,
+  "same_min": 5,
+  "same_max": 10,
+  "other_min": 5,
+  "other_max": 12,
+  "tpr": 0.1,
+  "fpr": 0.1,
+  "ranges_overlap": true,
+  "cannot_separate": true
+}

@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: http: https:; connect-src 'self' http: https:; font-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <title>SEARCHER</title>
+  <meta name="description" content="Find the exact item, not merely something similar.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#search-form">Skip to search</a>
+  <div id="live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+  <div id="api-banner" class="api-banner" hidden role="status"></div>
+
+  <header class="site-header">
+    <a class="wordmark" href="#/" id="home-link">SEARCHER</a>
+    <fieldset class="source-scopes" id="source-scopes" aria-describedby="scope-note">
+      <legend class="visually-hidden">Sources</legend>
+      <label class="scope-toggle" for="scope-legitimate">
+        <input type="checkbox" id="scope-legitimate" checked>
+        <span>Legitimate</span>
+      </label>
+      <label class="scope-toggle" for="scope-replica">
+        <input type="checkbox" id="scope-replica" aria-describedby="scope-note">
+        <span>Replica</span>
+      </label>
+      <p class="scope-note" id="scope-note">
+        Replica sources are searched to find replicas. A replica listing can never be ranked Real.
+      </p>
+    </fieldset>
+  </header>
+
+  <main id="main">
+    <section id="view-home" class="view view-home">
+      <form id="search-form" novalidate>
+        <div class="first-screen">
+          <p class="lead">Find the exact item, not merely something similar.</p>
+          <div class="field">
+            <span class="field-label" id="images-label">Images</span>
+            <div
+              id="dropzone"
+              class="dropzone"
+              aria-labelledby="images-label dropzone-hint"
+              aria-describedby="dropzone-desc"
+            >
+              <input
+                id="file-input"
+                class="file-input"
+                type="file"
+                accept="image/jpeg,image/png,image/webp,image/gif,.jpg,.jpeg,.png,.webp,.gif"
+                multiple
+              >
+              <label id="dropzone-hint" class="dropzone-hint" for="file-input">
+                Drop, click, or paste
+              </label>
+              <p class="dropzone-sub">1 to 10 JPEG, PNG, WebP, or GIF photographs. The server is the final validator.</p>
+              <p id="dropzone-desc" class="visually-hidden">1 to 10 raster images. The server is the final validator.</p>
+              <ul id="thumbs" class="thumbs" aria-label="Selected images"></ul>
+            </div>
+            <p id="image-error" class="field-error" role="alert" hidden></p>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="item-name">Name</label>
+            <input
+              id="item-name"
+              name="name"
+              type="text"
+              maxlength="200"
+              autocomplete="off"
+              spellcheck="true"
+              placeholder="If you know"
+            >
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="know">What you know about it</label>
+            <textarea id="know" name="text" rows="2" maxlength="4000" autocomplete="off" spellcheck="true"></textarea>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="tag-input">Tags</label>
+            <div class="tag-box" id="tag-box">
+              <ul class="chips" id="chips" aria-label="Current tags"></ul>
+              <input
+                id="tag-input"
+                type="text"
+                maxlength="80"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="Add a tag"
+                aria-describedby="tag-hint"
+              >
+            </div>
+            <p id="tag-hint" class="visually-hidden">Comma or Enter creates a tag. Backspace removes the last one.</p>
+          </div>
+
+          <div class="actions">
+            <button type="submit" id="search-button" disabled>Search</button>
+          </div>
+        </div>
+      </form>
+
+      <details class="recent" id="recent-wrap">
+        <summary>Recent searches on this device</summary>
+        <ul id="recent-list" class="recent-list"></ul>
+      </details>
+    </section>
+
+    <article id="view-privacy" class="view view-doc" hidden>
+      <h1>Privacy</h1>
+      <p>Searcher treats a search as a private request, not as content to publish or train on.</p>
+      <ul>
+        <li>Uploads are private by default. They are sent only to the configured search service.</li>
+        <li>Images, text, and tags are not used for training by default.</li>
+        <li>This site has no hidden analytics, no accounts, and no third-party scripts.</li>
+        <li>Nothing here is uploaded to a third-party model unless the search service is explicitly configured that way.</li>
+        <li>A search can be deleted. Deletion is requested from the results panel when a search is open.</li>
+        <li>Retention is a property of the search service, not of this page. This page stores only local drafts, display preferences, and recent search identifiers in this browser.</li>
+        <li>Diagnostics should be inspectable before anything is exported. This page never embeds a secret, token, or credential.</li>
+      </ul>
+      <p>The static files of this interface contain no keys. The API address is deployment configuration, overridable with a <code>?api=</code> query parameter for local testing.</p>
+      <p><a href="#/">Back to search</a></p>
+    </article>
+
+    <article id="view-limitations" class="view view-doc" hidden>
+      <h1>Limitations</h1>
+      <p>Searcher is not a professional authenticator. It ranks evidence under a declared policy and shows calibrated uncertainty. A result in Real is still an estimate.</p>
+      <p>Real means high confidence this is the same item under the available evidence and the published benchmark in <code>artifacts/searcher-public-benchmark.receipt.json</code> (recall@1 0.771, recall@5 1.0, MRR 0.867 over 35 queries, false Real 0) — not a professional authentication guarantee. Possibly Real means the item may match, but important evidence is missing or conflicting.</p>
+      <p>Replica sources are searched to find replicas. A replica listing can never be ranked Real.</p>
+      <p>Searcher does not claim:</p>
+      <ul>
+        <li>guaranteed authenticity;</li>
+        <li>professional authentication;</li>
+        <li>counterfeit detection with universal accuracy;</li>
+        <li>exhaustive coverage of the internet;</li>
+        <li>access to every marketplace;</li>
+        <li>guaranteed purchase availability;</li>
+        <li>guaranteed seller trustworthiness;</li>
+        <li>guaranteed lowest price;</li>
+        <li>universal brand, category, or era coverage;</li>
+        <li>superiority over conventional image search without a frozen comparison;</li>
+        <li>that a blocked source contained no result;</li>
+        <li>that a result is authentic solely because a marketplace says it is authenticated;</li>
+        <li>that a result is fake solely because the model is uncertain.</li>
+      </ul>
+      <p>Searcher does not place orders, enter payment information, negotiate with sellers, or publish accusations against sellers. Listing pages open in a new tab. Checkout is never embedded.</p>
+      <p>A missing candidate is simply absent. If some candidates did not meet policy, that is all the interface will say.</p>
+      <p><a href="#/">Back to search</a></p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>Not a professional authenticator. <a href="#/privacy">Privacy</a> · <a href="#/limitations">Limitations</a></p>
+  </footer>
+
+  <aside id="results" class="drawer" hidden aria-labelledby="results-heading">
+    <div class="drawer-head">
+      <h2 id="results-heading" tabindex="-1">Results</h2>
+      <p id="campaign-intent" class="campaign-intent" hidden></p>
+      <p id="campaign-status" class="campaign-status"></p>
+      <div class="drawer-actions">
+        <button type="button" id="cancel-search" hidden>Cancel search</button>
+        <button type="button" id="delete-search" hidden>Delete this search</button>
+        <button type="button" id="close-drawer" class="close-drawer">Close results</button>
+      </div>
+    </div>
+
+    <div id="progress" class="progress" hidden>
+      <p id="progress-now" class="progress-now" aria-describedby="progress-meta progress-detail progress-stats"></p>
+      <p id="progress-meta" class="progress-meta" hidden></p>
+      <p id="progress-detail" class="progress-detail" hidden></p>
+      <p id="progress-stats" class="progress-stats" hidden></p>
+      <ul id="progress-sources" class="progress-sources" hidden></ul>
+      <details id="stage-details">
+        <summary>All stages</summary>
+        <ol id="stage-list" class="stage-list"></ol>
+      </details>
+    </div>
+
+    <p id="stream-note" class="stream-note" hidden></p>
+    <p id="warning-note" class="warning-note" hidden></p>
+    <p id="terminal-note" class="terminal-note" hidden></p>
+
+    <p id="disclaimer" class="disclaimer">
+      Real is an evidence ranking, not a professional authentication guarantee.
+    </p>
+
+    <div class="tabs" role="tablist" aria-label="Result lists">
+      <button type="button" role="tab" id="tab-real" aria-selected="true" aria-controls="panel-real" tabindex="0">
+        Real <span id="count-real">0</span>
+      </button>
+      <button type="button" role="tab" id="tab-possible" aria-selected="false" aria-controls="panel-possible" tabindex="-1">
+        Possibly Real <span id="count-possible">0</span>
+      </button>
+      <button type="button" role="tab" id="tab-replica" aria-selected="false" aria-controls="panel-replica" tabindex="-1" hidden>
+        Replica <span id="count-replica">0</span>
+      </button>
+    </div>
+
+    <p id="tab-subtitle" class="tab-subtitle"></p>
+    <p id="hidden-note" class="hidden-note" hidden></p>
+
+    <section id="panel-real" class="panel" role="tabpanel" aria-labelledby="tab-real">
+      <div id="empty-real" class="empty-state" hidden></div>
+      <ul id="list-real" class="result-list"></ul>
+    </section>
+    <section id="panel-possible" class="panel" role="tabpanel" aria-labelledby="tab-possible" hidden>
+      <div id="empty-possible" class="empty-state" hidden></div>
+      <ul id="list-possible" class="result-list"></ul>
+    </section>
+    <section id="panel-replica" class="panel" role="tabpanel" aria-labelledby="tab-replica" hidden>
+      <ul id="list-replica" class="result-list"></ul>
+    </section>
+
+    <section id="coverage" class="coverage" hidden>
+      <h3>Coverage</h3>
+      <div id="coverage-body"></div>
+    </section>
+
+    <label class="dev-toggle" for="dev-mode">
+      <input type="checkbox" id="dev-mode">
+      Developer numbers
+    </label>
+  </aside>
+
+  <dialog id="compare" class="compare" aria-labelledby="compare-title">
+    <div class="compare-bar">
+      <h2 id="compare-title">Compare</h2>
+      <button type="button" id="compare-close">Close</button>
+    </div>
+    <div id="compare-body" class="compare-body"></div>
+  </dialog>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

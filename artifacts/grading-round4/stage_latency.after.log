@@ -1,0 +1,7 @@
+after live run 1/3
+{"run": 1, "wall_ms": 107145.848, "terminal": "PARTIAL", "slowest": {"source": "komehyo", "started_ms": 126.87, "elapsed_ms": 20056.653, "outcome": "SOURCE_UNAVAILABLE", "pages": 8, "fetches": 1, "reason": "source deadline exceeded after 20.06s", "fetch_elapsed_ms": [224.554], "fetch_wall_sum_ms": 224.554, "fetch_max_ms": 224.554}}
+after live run 2/3
+{"run": 2, "wall_ms": 118841.192, "terminal": "PARTIAL", "slowest": {"source": "byronesque", "started_ms": 128.895, "elapsed_ms": 20201.856, "outcome": "SOURCE_UNAVAILABLE", "pages": 9, "fetches": 5, "reason": "source deadline exceeded after 20.20s", "fetch_elapsed_ms": [645.514, 4114.432, 4400.067, 4104.658, 6163.622], "fetch_wall_sum_ms": 19428.293, "fetch_max_ms": 6163.622}}
+after live run 3/3
+{"run": 3, "wall_ms": 87622.849, "terminal": "PARTIAL", "slowest": {"source": "komehyo", "started_ms": 144.29, "elapsed_ms": 20068.138, "outcome": "SOURCE_UNAVAILABLE", "pages": 8, "fetches": 1, "reason": "source deadline exceeded after 20.07s", "fetch_elapsed_ms": [218.005], "fetch_wall_sum_ms": 218.005, "fetch_max_ms": 218.005}}
+wrote artifacts/grading-round4/stage_latency.after.json phase=after

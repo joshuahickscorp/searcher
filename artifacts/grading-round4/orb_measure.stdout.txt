@@ -1,0 +1,46 @@
+{
+  "opencv_available": true,
+  "methods": [
+    "orb"
+  ],
+  "n": 10,
+  "threshold": 10,
+  "same_inliers": [
+    33,
+    14,
+    17,
+    69,
+    16,
+    28,
+    50,
+    37,
+    86,
+    57
+  ],
+  "other_inliers": [
+    4,
+    0,
+    0,
+    0,
+    3,
+    0,
+    0,
+    0,
+    0,
+    7
+  ],
+  "same_median": 35.0,
+  "other_median": 0.0,
+  "same_min": 14,
+  "same_max": 86,
+  "other_min": 0,
+  "other_max": 7,
+  "tp": 10,
+  "fn": 0,
+  "fp": 0,
+  "tn": 10,
+  "tpr": 1.0,
+  "fpr": 0.0,
+  "honest_limits": "These are NOT independent photographs. They are warps of the same source pixels, so they share sensor, focus, lighting geometry and the exact drape of the garment. A true-positive rate measured on them is an upper bound on what real photographs would give, and must be reported as such. They are adequate for asking whether correspondence fires on overlapping surfaces, and inadequate for claiming a recall figure."
+}
+CLAIM_HOLD: ORB TPR=1.000 FPR=0.000 at threshold 10

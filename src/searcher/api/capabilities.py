@@ -23,15 +23,47 @@ def _lane(*, enabled: bool, present: bool, missing: str, disabled: str) -> dict[
     return {"available": True, "reason": ""}
 
 
+def _with_searcher_own(lane: dict[str, Any]) -> dict[str, Any]:
+    """Report what this project can do, not only what the donor lacks.
+
+    The probe describes the pinned donor. For LOCAL_CORRESPONDENCE that note
+    read "No SIFT/SuperPoint/LoFTR" while Searcher's own ORB detector was
+    answering, so the endpoint denied a capability the product was using. A lane
+    the product implements itself is reported on its own terms.
+    """
+    if lane.get("name") != "LOCAL_CORRESPONDENCE":
+        return lane
+    from searcher.matching.features import opencv_available
+
+    if not opencv_available():
+        lane["notes"] = (
+            "opencv is absent, so correspondence falls back to a descriptor that "
+            "cannot separate two objects. Install the correspondence extra."
+        )
+        return lane
+    lane["available"] = True
+    lane["stability"] = "experimental"
+    lane["dependency"] = "opencv"
+    lane["authority_ceiling"] = "OBSERVED-pixels"
+    lane["notes"] = (
+        "Searcher's own ORB detector with ratio test and RANSAC homography. "
+        "Not the donor's; the donor has no correspondence at the pinned SHA."
+    )
+    return lane
+
+
 @router.get("/v1/capabilities")
 def get_capabilities(request: Request) -> dict[str, Any]:
     state = get_state(request)
     report = probe_capabilities()
-    lanes = [record.model_dump(mode="json") for record in report.capabilities]
+    lanes = [_with_searcher_own(record.model_dump(mode="json")) for record in report.capabilities]
+    # Derived from the same list the caller sees. Reading the raw probe here
+    # while lanes carried Searcher's own capability let one payload say a lane
+    # was both available and blocked.
     blocked = [
-        {"name": record.name.value, "reason": record.notes}
-        for record in report.capabilities
-        if not record.available
+        {"name": lane["name"], "reason": lane.get("notes")}
+        for lane in lanes
+        if not lane.get("available")
     ]
     return {
         "api_version": "v1",

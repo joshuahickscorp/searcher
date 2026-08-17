@@ -1,0 +1,38 @@
+{
+  "commit": "31e6004c76e1d845447e0993a5ce68948f311265",
+  "graded_at": "2026-08-17",
+  "terminal_status": "NOT_READY",
+  "note": "Independent fourth pass. Writes the scores this document is required to carry. Does not edit SEARCHER_FINAL_SCORECARD.md. Does not accept commit messages or the stored speed receipt as evidence.",
+  "round_4": {
+    "plan_fidelity": 82,
+    "implementation_completeness": 84,
+    "real_runtime_proof": 76,
+    "user_visible_proof": 87,
+    "retrieval_quality": 72,
+    "authenticity_safety": 89,
+    "security_and_privacy": 82,
+    "cost_efficiency": 83,
+    "test_quality": 83,
+    "documentation": 80
+  },
+  "round_3_as_cited": {
+    "plan_fidelity": 78,
+    "implementation_completeness": 80,
+    "real_runtime_proof": 77,
+    "user_visible_proof": 84,
+    "retrieval_quality": 73,
+    "authenticity_safety": 88,
+    "security_and_privacy": 83,
+    "cost_efficiency": 81,
+    "test_quality": 85,
+    "documentation": 80
+  },
+  "independent_wall_ms": {
+    "n": 3,
+    "median": 107145.848,
+    "min": 87622.849,
+    "max": 118841.192,
+    "stored_before_not_rerun": 199474.107,
+    "stored_after_not_reproduced": 95704.578
+  }
+}

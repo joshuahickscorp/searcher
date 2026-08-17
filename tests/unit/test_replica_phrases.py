@@ -103,3 +103,26 @@ def test_paperwork_copies_are_provenance_not_replicas() -> None:
     """"Copy of the original receipt" is evidence for the seller, not against."""
     assert self_declared_replica("Copy of the original receipt included") is False
     assert self_declared_replica("comes with copy of the original invoice") is False
+
+
+# Round 4 found this: a single digit substitution was caught while two were not,
+# because only one reading of "1" was tried and a word can mix readings.
+OBFUSCATED = ["r3pl1ca", "rep11ca", "r3p1ica", "5uperfake", "fak3", "c0unterfeit"]
+
+# Ordinary listings that contain digits and must not be dragged in with them.
+DIGITS_BUT_ORDINARY = [
+    "Nike Air Max 1 size 10",
+    "Levi 501 jeans W32",
+    "Model 111 watch",
+    "Room 101 print",
+]
+
+
+@pytest.mark.parametrize("text", OBFUSCATED)
+def test_digit_substitution_is_read_both_ways(text: str) -> None:
+    assert self_declared_replica(text) is True
+
+
+@pytest.mark.parametrize("text", DIGITS_BUT_ORDINARY)
+def test_a_number_in_a_title_is_not_an_obfuscation(text: str) -> None:
+    assert self_declared_replica(text) is False

@@ -1,0 +1,167 @@
+{
+  "opencv_available": true,
+  "methods": [
+    "orb"
+  ],
+  "n": 10,
+  "threshold": 10,
+  "same_inliers": [
+    33,
+    14,
+    17,
+    69,
+    16,
+    28,
+    50,
+    37,
+    86,
+    57
+  ],
+  "other_inliers": [
+    4,
+    0,
+    0,
+    0,
+    3,
+    0,
+    0,
+    0,
+    0,
+    7
+  ],
+  "same_median": 35.0,
+  "other_median": 0.0,
+  "same_min": 14,
+  "same_max": 86,
+  "other_min": 0,
+  "other_max": 7,
+  "tp": 10,
+  "fn": 0,
+  "fp": 0,
+  "tn": 10,
+  "tpr": 1.0,
+  "fpr": 0.0,
+  "honest_limits": "These are NOT independent photographs. They are warps of the same source pixels, so they share sensor, focus, lighting geometry and the exact drape of the garment. A true-positive rate measured on them is an upper bound on what real photographs would give, and must be reported as such. They are adequate for asking whether correspondence fires on overlapping surfaces, and inadequate for claiming a recall figure.",
+  "pairs": [
+    {
+      "snapshot": "8001001137032_snapshot.jpg",
+      "own_listing": "8001001137032_1.jpg",
+      "other_listing": "8001001141343_1.jpg",
+      "own_inliers": 33,
+      "other_inliers": 4,
+      "own_method": "orb",
+      "other_method": "orb",
+      "own_notes": [],
+      "other_notes": []
+    },
+    {
+      "snapshot": "8001001141343_snapshot.jpg",
+      "own_listing": "8001001141343_1.jpg",
+      "other_listing": "8001001141350_1.jpg",
+      "own_inliers": 14,
+      "other_inliers": 0,
+      "own_method": "orb",
+      "other_method": "orb",
+      "own_notes": [],
+      "other_notes": []
+    },
+    {
+      "snapshot": "8001001141350_snapshot.jpg",
+      "own_listing": "8001001141350_1.jpg",
+      "other_listing": "8001001141367_1.jpg",
+      "own_inliers": 17,
+      "other_inliers": 0,
+      "own_method": "orb",
+      "other_method": "orb",
+      "own_notes": [],
+      "other_notes": []
+    },
+    {
+      "snapshot": "8001001141367_snapshot.jpg",
+      "own_listing": "8001001141367_1.jpg",
+      "other_listing": "8001001141404_1.jpg",
+      "own_inliers": 69,
+      "other_inliers": 0,
+      "own_method": "orb",
+      "other_method": "orb",
+      "own_notes": [],
+      "other_notes": [
+        "no_descriptor_matches"
+      ]
+    },
+    {
+      "snapshot": "8001001141404_snapshot.jpg",
+      "own_listing": "8001001141404_1.jpg",
+      "other_listing": "8001001141442_1.jpg",
+      "own_inliers": 16,
+      "other_inliers": 3,
+      "own_method": "orb",
+      "other_method": "orb",
+      "own_notes": [],
+      "other_notes": []
+    },
+    {
+      "snapshot": "8001001141442_snapshot.jpg",
+      "own_listing": "8001001141442_1.jpg",
+      "other_listing": "8001001141473_1.jpg",
+      "own_inliers": 28,
+      "other_inliers": 0,
+      "own_method": "orb",
+      "other_method": "orb",
+      "own_notes": [],
+      "other_notes": [
+        "no_descriptor_matches"
+      ]
+    },
+    {
+      "snapshot": "8001001141473_snapshot.jpg",
+      "own_listing": "8001001141473_1.jpg",
+      "other_listing": "8001001141480_1.jpg",
+      "own_inliers": 50,
+      "other_inliers": 0,
+      "own_method": "orb",
+      "other_method": "orb",
+      "own_notes": [],
+      "other_notes": [
+        "no_descriptor_matches"
+      ]
+    },
+    {
+      "snapshot": "8001001141480_snapshot.jpg",
+      "own_listing": "8001001141480_1.jpg",
+      "other_listing": "8001001141503_1.jpg",
+      "own_inliers": 37,
+      "other_inliers": 0,
+      "own_method": "orb",
+      "other_method": "orb",
+      "own_notes": [],
+      "other_notes": [
+        "no_descriptor_matches"
+      ]
+    },
+    {
+      "snapshot": "8001001141503_snapshot.jpg",
+      "own_listing": "8001001141503_1.jpg",
+      "other_listing": "8001001141527_1.jpg",
+      "own_inliers": 86,
+      "other_inliers": 0,
+      "own_method": "orb",
+      "other_method": "orb",
+      "own_notes": [],
+      "other_notes": [
+        "no_descriptor_matches"
+      ]
+    },
+    {
+      "snapshot": "8001001141527_snapshot.jpg",
+      "own_listing": "8001001141527_1.jpg",
+      "other_listing": "8001001137032_1.jpg",
+      "own_inliers": 57,
+      "other_inliers": 7,
+      "own_method": "orb",
+      "other_method": "orb",
+      "own_notes": [],
+      "other_notes": []
+    }
+  ]
+}

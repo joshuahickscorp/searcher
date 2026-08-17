@@ -1,0 +1,293 @@
+{
+  "holds": {
+    "reach_self_sufficient": true,
+    "label_hash": true,
+    "footwear_paths": true,
+    "replica_real": false,
+    "public_card": true
+  },
+  "checks": {
+    "reach_self_sufficient": {
+      "claim": "reach is self-sufficient: no operator key in the live plan; plan derived from registry",
+      "holds": true,
+      "planned": [
+        "searx",
+        "wikimedia",
+        "marginalia",
+        "the_realreal",
+        "rebag",
+        "komehyo",
+        "kind",
+        "byronesque",
+        "heroine",
+        "archive_org"
+      ],
+      "default_order": [
+        "searx",
+        "wikimedia",
+        "marginalia",
+        "the_realreal",
+        "rebag",
+        "komehyo",
+        "kind",
+        "byronesque",
+        "heroine",
+        "archive_org",
+        "ebay",
+        "etsy",
+        "mercari_jp",
+        "yahoo_auctions",
+        "buyee",
+        "vinted",
+        "bunjang",
+        "ssense",
+        "depop",
+        "grailed",
+        "vestiaire",
+        "taobao",
+        "weidian",
+        "yupoo"
+      ],
+      "credentialed_in_plan": [],
+      "missing_from_registry": [],
+      "enabled_uncredentialed_not_in_plan": [],
+      "plan_is_registry_keys": true,
+      "plan_iterates_default_order_not_registry_keys": true,
+      "rebag_in_plan": true,
+      "manifests": {
+        "searx": {
+          "enabled": true,
+          "auth": "none",
+          "requires_credential": false,
+          "admission": "admitted"
+        },
+        "wikimedia": {
+          "enabled": true,
+          "auth": "none",
+          "requires_credential": false,
+          "admission": "admitted"
+        },
+        "marginalia": {
+          "enabled": true,
+          "auth": "api_key",
+          "requires_credential": false,
+          "admission": "admitted"
+        },
+        "the_realreal": {
+          "enabled": true,
+          "auth": "none",
+          "requires_credential": false,
+          "admission": "admitted"
+        },
+        "rebag": {
+          "enabled": true,
+          "auth": "none",
+          "requires_credential": false,
+          "admission": "admitted"
+        },
+        "komehyo": {
+          "enabled": true,
+          "auth": "none",
+          "requires_credential": false,
+          "admission": "admitted"
+        },
+        "kind": {
+          "enabled": true,
+          "auth": "none",
+          "requires_credential": false,
+          "admission": "admitted"
+        },
+        "byronesque": {
+          "enabled": true,
+          "auth": "none",
+          "requires_credential": false,
+          "admission": "admitted"
+        },
+        "heroine": {
+          "enabled": true,
+          "auth": "none",
+          "requires_credential": false,
+          "admission": "admitted"
+        },
+        "archive_org": {
+          "enabled": true,
+          "auth": "none",
+          "requires_credential": false,
+          "admission": "admitted"
+        }
+      },
+      "would_fail_if": "rebag missing from plan, or a credentialed adapter planned, or planned name not in registry"
+    },
+    "label_hash": {
+      "claim": "unequal label hashes are not a hard product-code contradiction",
+      "holds": true,
+      "hard": [],
+      "missing": [
+        "label-code-unresolved"
+      ],
+      "score_mean": 0.45,
+      "source_mentions_strong_counterfeit": false,
+      "would_fail_if": "hard is non-empty or STRONG_COUNTERFEIT remains in labels.py",
+      "still_raises_scan": false
+    },
+    "footwear_paths": {
+      "claim": "four paths no longer assume footwear / ask a garment for its sole",
+      "holds": true,
+      "paths": {
+        "gaps_garment_asks_sole": false,
+        "gaps_none_asks_sole": false,
+        "gaps_bag_asks_sole": false,
+        "view_garment": "front",
+        "view_unknown": "front",
+        "profile_expected": [
+          "front",
+          "rear",
+          "lateral",
+          "label",
+          "detail"
+        ],
+        "profile_expects_sole": false,
+        "compare_parts": [
+          {
+            "part": "collar",
+            "status": "compared"
+          },
+          {
+            "part": "label",
+            "status": "compared"
+          },
+          {
+            "part": "front",
+            "status": "compared"
+          },
+          {
+            "part": "construction",
+            "status": "unestablished",
+            "note": "not established for this category"
+          }
+        ],
+        "compare_mentions_footwear_part": false,
+        "ontology_none_category": "footwear",
+        "ontology_none_is_footwear": true,
+        "ontology_garment_category": "garment",
+        "pipeline_defaults_ontology_to_footwear": true
+      },
+      "remaining_footwear_defaults": {
+        "ontology_for(None)": "footwear",
+        "pipeline.py enrich default": true
+      },
+      "would_fail_if": "a garment gap list contains sole, view class is heel, profile expects sole, or compare publishes outsole/heel/eyelets"
+    },
+    "replica_real": {
+      "claim": "replica language including homoglyph and digit obfuscation cannot publish as Real; property-tested",
+      "holds": false,
+      "leaked_real": [
+        "digit_leet"
+      ],
+      "rows": {
+        "plain": {
+          "text": "This is a replica",
+          "detected": true,
+          "published": "replica"
+        },
+        "homoglyph_cyrillic_c": {
+          "text": "repli\u0441a",
+          "detected": true,
+          "published": "replica"
+        },
+        "digit_leet": {
+          "text": "r3pl1ca",
+          "detected": false,
+          "published": "real"
+        },
+        "zwsp": {
+          "text": "re\u200bplica",
+          "detected": true,
+          "published": "replica"
+        },
+        "spaced": {
+          "text": "r e p l i c a",
+          "detected": true,
+          "published": "replica"
+        },
+        "rep1ica": {
+          "text": "rep1ica",
+          "detected": true,
+          "published": "replica"
+        },
+        "not_legit": {
+          "text": "not legit",
+          "detected": true,
+          "published": "replica"
+        },
+        "god_batch": {
+          "text": "god batch",
+          "detected": true,
+          "published": "replica"
+        },
+        "dup": {
+          "text": "dup",
+          "detected": true,
+          "published": "replica"
+        }
+      },
+      "property_test_present": true,
+      "would_fail_if": "any listed replica string publishes as Real, or the generated-input property test is absent"
+    },
+    "public_card": {
+      "claim": "a public card requires an http(s) link and at least one reason code",
+      "holds": true,
+      "failed": [],
+      "rows": [
+        {
+          "name": "empty_url_empty_reason",
+          "url": "",
+          "reasons": [],
+          "published": "hidden",
+          "expected": "hidden",
+          "ok": true,
+          "usable_link": false
+        },
+        {
+          "name": "js_url",
+          "url": "javascript:alert(1)",
+          "reasons": [
+            "possibly-real-gate"
+          ],
+          "published": "hidden",
+          "expected": "hidden",
+          "ok": true,
+          "usable_link": false
+        },
+        {
+          "name": "https_empty_reason",
+          "url": "https://shop.kind.co.jp/products/1",
+          "reasons": [],
+          "published": "hidden",
+          "expected": "hidden",
+          "ok": true,
+          "usable_link": true
+        },
+        {
+          "name": "https_with_reason",
+          "url": "https://shop.kind.co.jp/products/1",
+          "reasons": [
+            "possibly-real-gate"
+          ],
+          "published": "possibly_real",
+          "expected": "possibly_real",
+          "ok": true,
+          "usable_link": true
+        },
+        {
+          "name": "https_hard_veto_only",
+          "url": "https://shop.kind.co.jp/products/1",
+          "reasons": [],
+          "published": "replica",
+          "usable_link": true
+        }
+      ],
+      "would_fail_if": "empty URL, javascript: URL, or empty reason_codes still publish Real/Possibly Real"
+    }
+  }
+}

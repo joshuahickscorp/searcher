@@ -1,0 +1,14 @@
+{
+  "holds": {
+    "reach_self_sufficient": true,
+    "label_hash": true,
+    "footwear_paths": true,
+    "replica_real": false,
+    "public_card": true
+  }
+}
+HOLD reach_self_sufficient
+HOLD label_hash
+HOLD footwear_paths
+FAIL replica_real
+HOLD public_card

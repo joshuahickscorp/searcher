@@ -1,0 +1,12 @@
+{
+  "replica": "BLOCKED",
+  "replica_reached_real": [],
+  "replica_reached_possibly_real": [
+    "Copy of the original receipt included",
+    "r3pl1ca"
+  ],
+  "complete": "BLOCKED",
+  "capability": "BLOCKED",
+  "publish": "BLOCKED",
+  "wrote": "artifacts/grading-round4/attacks.json"
+}

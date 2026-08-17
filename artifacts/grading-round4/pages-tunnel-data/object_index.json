@@ -1,0 +1,386 @@
+{
+  "028f889324bf10ce768062315eee597e73ee6985f6c3db2dd1c43013cec77af3": {
+    "byte_length": 229120,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861",
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "04dce2f688ee9d8af035024ea39701ff5435a64cb264cab99cca3266fd73b166": {
+    "byte_length": 1872,
+    "extra": {},
+    "owners": [],
+    "private": true,
+    "zone": "temporary"
+  },
+  "0e192fdc812ede77037c64517e4b54667b8342b9dd1adf6aa520bdb5161056ea": {
+    "byte_length": 211592,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861",
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "107796086df958016a0adbc0ac7f81caad6a5a39b876d7b0fc8580f69242e3c7": {
+    "byte_length": 80540,
+    "extra": {},
+    "owners": [
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "21c2efb326fa7582c002dd7c36115b1c029b7b9d016eeeab28fda9cf3381ce53": {
+    "byte_length": 757014,
+    "extra": {},
+    "owners": [],
+    "private": true,
+    "zone": "temporary"
+  },
+  "29f911560c2576bcf931d6cdc987fce7fd2e8c1f100bd71de9f29b8af76b1989": {
+    "byte_length": 740465,
+    "extra": {},
+    "owners": [],
+    "private": true,
+    "zone": "temporary"
+  },
+  "30e8fdc7572855377055d4081255e24dc63c5dcfb23daca600e64b930fbc6349": {
+    "byte_length": 117430,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "3254014b7aab75cb3ab26c104c8c01d036abcd1d131b89473a43934aab5673c8": {
+    "byte_length": 116962,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "3ff77146f3c050979872b20b903d947e85a4460fad11749fc7bb95cb5bc39425": {
+    "byte_length": 73114,
+    "extra": {},
+    "owners": [
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "derived"
+  },
+  "4722423d51a19fc0f9302eb281331962c8093820641952586396c85c404a4d79": {
+    "byte_length": 2151,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861"
+    ],
+    "private": true,
+    "zone": "derived"
+  },
+  "523cd73d9ef04554934e313330f6b0b56093c0cab5ef84f93c65d12a160f37d1": {
+    "byte_length": 116464,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861",
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "57202d9503b053fba4d20f668f2703d4acd1b7bbaafd1f009bd4c0fe11a8b1ef": {
+    "byte_length": 91849,
+    "extra": {},
+    "owners": [
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "5778542172379e925e50a319503d556a167637300acd72952ef51eea13e2978b": {
+    "byte_length": 3745,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861"
+    ],
+    "private": true,
+    "zone": "derived"
+  },
+  "5ea9946c5453888572a8142f0d85c90a260844af7ed0e4d7a6d30014de37b7b7": {
+    "byte_length": 88651,
+    "extra": {},
+    "owners": [
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "61014dda465cbb1f0102479a48ead05679a97aa863d9981b89460540e8baccb3": {
+    "byte_length": 191254,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861",
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "63d85f25c8231dc227665d1b06bb6c107b9cbda024b4a6ebc47599a79fb7f687": {
+    "byte_length": 134523,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861",
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "6d3b1892be3ab6a29f5e256cd682810895b4855db707de7c65cd73ddb0b42b57": {
+    "byte_length": 184204,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "7c2781918129bc0ef34551580a8918bd55e4caae059bde8efc60e1c137d69796": {
+    "byte_length": 67866,
+    "extra": {},
+    "owners": [
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "82ec4787dc356d5700979378837279866b89e3afdcc52c6ff79278ffdd0dc795": {
+    "byte_length": 199268,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861",
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "8a4cc70481be554210ef56e38f8651637b67c9655513fdba53adfc58b6acc0cd": {
+    "byte_length": 134643,
+    "extra": {},
+    "owners": [
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "8bf267cb6da48a59d76965efd3b5b18b6c4b1859760e1fb456bd773a44c07531": {
+    "byte_length": 161424,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861",
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "90e9db8cdb4fc39c8f78c88ef186f5bc533381efe4371efdd5dad5a5fffdb86a": {
+    "byte_length": 150920,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "9125f54cb5c8aaa76839b18a1017e8196b309a2f6399138fb298e4107b9bbb2a": {
+    "byte_length": 762174,
+    "extra": {},
+    "owners": [],
+    "private": true,
+    "zone": "temporary"
+  },
+  "94a4f519cdd08089c21dc6b459c296e5d167f2c73342433007f25f9ce4cdf909": {
+    "byte_length": 79378,
+    "extra": {},
+    "owners": [
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "96756c88130954de270c6f69ad8ee522cedc2aef324dabc318af8e45ce48f1d0": {
+    "byte_length": 13778,
+    "extra": {},
+    "owners": [
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "9a948a382ad7e5f6163bcf47da860a3c85cdb8b396df93475fa5d9dd7d12d36e": {
+    "byte_length": 726359,
+    "extra": {},
+    "owners": [],
+    "private": true,
+    "zone": "temporary"
+  },
+  "ae2295e003ed162641586a45702540bb2ac8bb2770986d80ed3b2c8f73f4f4b5": {
+    "byte_length": 136069,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "b490096da61bfb2934b8f8c11781b2164b12c9ebf17bbbc34ae4cd99efefc474": {
+    "byte_length": 2947,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861"
+    ],
+    "private": true,
+    "zone": "derived"
+  },
+  "b7848e0340cf51686659d738c0abe5cb2532bc160d85086d73feb04e74350d16": {
+    "byte_length": 149081,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "b8f1afd8208c4d59670c4ef8d035b19134e075c65e1a1e8a585f59eb964f7d09": {
+    "byte_length": 59035,
+    "extra": {},
+    "owners": [
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "bea1f8322923bf7d83eb7b3d1fbb902544218b16613f716f8a64e7870564e98c": {
+    "byte_length": 751654,
+    "extra": {},
+    "owners": [],
+    "private": true,
+    "zone": "temporary"
+  },
+  "c0087efe620a967b2e91fe2715faf8f5e1c305152605a579aeb5a314932bb1c0": {
+    "byte_length": 6663,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "c513941ce12c149e7feb2493aa13cc5d4f260c4e9a250f10bc1444ffaa72fffc": {
+    "byte_length": 149605,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "c5b8caa610027653e9d9a966e61a0888549400718cb3a1f786a987db371b9a6f": {
+    "byte_length": 837,
+    "extra": {},
+    "owners": [],
+    "private": true,
+    "zone": "temporary"
+  },
+  "caf5bca7bcd143654f51ea0ade4907f89957514f75a958d7c562e2b850486c03": {
+    "byte_length": 159029,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "ce667ed84a0cc0b1b81d1b274524adf527a4cfd48c5482de2375bc452f56d9d5": {
+    "byte_length": 155525,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861",
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "d4b97d801f926d022f343faff03472e5cf583e59ac63fb5d70b7a90e7f26be8a": {
+    "byte_length": 7104,
+    "extra": {},
+    "owners": [
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "db340e0a19fd6ae740d174f95b201a94cf04a4a1474bb8822247cc1504071952": {
+    "byte_length": 55265,
+    "extra": {},
+    "owners": [
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "eeb2ef8edeb2a9d07ce52b80f14b0abb8083841b925c865ae48a9b4e11abae40": {
+    "byte_length": 147362,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861",
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "f3818412d85605dca6fb4a7834a36c6428daa9472d8d95f34a9eada25d537c74": {
+    "byte_length": 164266,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861",
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "f66c1c8654b22feb80c0dbf6d0284d6a692cbd121ab51ef61bc66cf8fd0adf81": {
+    "byte_length": 71597,
+    "extra": {},
+    "owners": [
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "derived"
+  },
+  "f90617277531a330703e1a6e94227f69d16f00ade951e7e279c4a9fd93b4fe90": {
+    "byte_length": 183175,
+    "extra": {},
+    "owners": [
+      "aabc78b7-cd5e-4900-ba44-ef60ac990861",
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "incoming"
+  },
+  "ff8511acf6db8c8bdb0fbfa3b0201c918339393a25f2604edd1c2e7209086485": {
+    "byte_length": 29349,
+    "extra": {},
+    "owners": [
+      "65551697-84c4-4817-84bd-21bbec4af598"
+    ],
+    "private": true,
+    "zone": "derived"
+  }
+}

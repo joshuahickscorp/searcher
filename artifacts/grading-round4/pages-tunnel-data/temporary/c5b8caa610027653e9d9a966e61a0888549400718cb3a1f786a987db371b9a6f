@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://komehyo.jp/contents/sitemap/parts1.xml.gz</loc>
+    <lastmod>2026-08-17T00:31:44.380+09:00</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://komehyo.jp/contents/sitemap/parts2.xml.gz</loc>
+    <lastmod>2026-08-17T00:31:44.380+09:00</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://komehyo.jp/contents/sitemap/parts3.xml.gz</loc>
+    <lastmod>2026-08-17T00:31:44.380+09:00</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://komehyo.jp/contents/sitemap/parts4.xml.gz</loc>
+    <lastmod>2026-08-17T00:31:44.380+09:00</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://komehyo.jp/contents/sitemap/sitemap_z1.xml</loc>
+    <lastmod>2026-08-17T00:31:44.380+09:00</lastmod>
+  </sitemap>
+</sitemapindex>

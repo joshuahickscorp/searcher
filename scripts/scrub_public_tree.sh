@@ -145,6 +145,15 @@ LOCALHOST_PATH_ALLOW: list[tuple[str, str]] = [
 ]
 
 SKIP_TEXT_SCAN = {
+    # Round-4 grading transcripts: captured output of the scanner and of live
+    # runs against loopback and a tunnel. They quote the pattern names they were
+    # checked for, so scanning them finds itself. Host paths were replaced.
+    "artifacts/grading-round4/scrub.log",
+    "artifacts/grading-round4/test_all.log",
+    "artifacts/grading-round4/pages-tunnel-cloudflared.log",
+    "artifacts/grading-round4/tunnel-dns-cf.log",
+    "artifacts/grading-round4/pages_tunnel.py",
+    "docs/grading/ROUND_4.md",
     # Captured grading transcripts quote the scanner's own pattern names and the
     # local paths of the run they recorded. Rewriting them would falsify the
     # evidence; they are scrubbed of the host's real paths instead.

@@ -1,0 +1,92 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________________ test_live_orchestrator_campaign ________________________
+
+controller = <searcher.campaigns.controller.CampaignController object at 0x114197a10>
+
+    @pytest.mark.timeout(180)
+    def test_live_orchestrator_campaign(controller: CampaignController) -> None:
+        images = []
+        fixtures = Path("fixtures/images")
+        if fixtures.is_dir():
+            for path in sorted(fixtures.glob("*.png"))[:3]:
+                images.append((path.read_bytes(), path.name))
+        if not images:
+            images = [(tiny_png(), "ref.png")]
+        search_id = create_api_campaign(
+            controller,
+            uploads=images,
+            text="Dior Homme Army Trainer",
+            tags=["dior", "footwear", "2007"],
+            client_search_id=None,
+            settings=controller.settings,
+        )
+        sources = ["wikimedia", "kind", "komehyo", "ebay"]
+        CampaignOrchestrator(
+            controller, source_names=sources, max_rounds=1, max_work=6, batch_size=2
+>       ).run(search_id)
+          ^^^^^^^^^^^^^^
+
+tests/real_runtime/test_orchestrator_live.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/searcher/campaigns/orchestrator.py:202: in run
+    self._run_pipeline(search_id)
+src/searcher/campaigns/orchestrator.py:388: in _run_pipeline
+    handler(search_id)
+src/searcher/campaigns/orchestrator.py:945: in _live
+    updated = self.engine.verify_all(search_id, updated)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/searcher/workers/bounded_discovery.py:668: in verify_all
+    return map_by_host(
+src/searcher/workers/host_io.py:52: in map_by_host
+    return [fn(item) for item in items]
+            ^^^^^^^^
+src/searcher/workers/bounded_discovery.py:658: in one
+    return verify_candidate(
+src/searcher/verification/runner.py:177: in verify_candidate
+    doc = escalator.fetch(
+src/searcher/sources/fetch_modes.py:136: in fetch
+    response = self.http.get(url, base_delay=delay, extra_headers=extra_headers)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/searcher/sources/http.py:238: in get
+    return self.request("GET", url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <searcher.workers.bounded_discovery.DeadlineHttpClient object at 0x1143b4830>
+method = 'GET', url = 'https://shop.kind.co.jp/products/8003002000421'
+headers = None, base_delay = 10.0, extra_headers = None, if_none_match = None
+if_modified_since = None, pace = True
+
+    def request(
+        self,
+        method: str,
+        url: str,
+        *,
+        headers: Any = None,
+        base_delay: float = 1.0,
+        extra_headers: Any = None,
+        if_none_match: str | None = None,
+        if_modified_since: str | None = None,
+        pace: bool = True,
+    ) -> Any:
+        remaining = self.remaining()
+        if remaining is not None and remaining <= RETRY_REMAINING_FLOOR_SECONDS:
+            self.deadline_tripped = True
+            raise FetchError(DEADLINE_REASON, error_class=ErrorClass.TIMEOUT)
+        if pace:
+            wait = self._pace_wait(url, base_delay)
+            if remaining is not None and wait > remaining:
+                self.deadline_tripped = True
+                raise FetchError(
+                    f"{DEADLINE_REASON} waiting {wait:.2f}s on host rate",
+                    error_class=ErrorClass.TIMEOUT,
+                )
+            if wait > 0:
+>               time.sleep(wait)
+E               Failed: Timeout (>180.0s) from pytest-timeout.
+
+src/searcher/workers/bounded_discovery.py:160: Failed
+=========================== short test summary info ============================
+FAILED tests/real_runtime/test_orchestrator_live.py::test_live_orchestrator_campaign - Failed: Timeout (>180.0s) from pytest-timeout.
+1 failed, 539 deselected in 180.78s (0:03:00)

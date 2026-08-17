@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "reason": "pages + tunnel returned published listings with working http(s) links",
+  "pages_status": 200,
+  "tunnel_url": "https://twins-introductory-although-shipping.trycloudflare.com",
+  "cors_ok": true,
+  "create_status": 201,
+  "published_count": 1,
+  "working_links": 1,
+  "friend_url_host": "https://joshuahickscorp.github.io/searcher/",
+  "search_terminal": "PARTIAL"
+}
