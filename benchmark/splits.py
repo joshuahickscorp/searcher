@@ -357,3 +357,36 @@ def write_split_manifest(path: Any = None) -> SplitSet:
     }
     dest.write_text(json.dumps(body, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return splits
+
+def assert_no_pixel_leakage(
+    images_by_case: dict[str, list[bytes]],
+    calibration_cases: Iterable[str],
+    held_out_cases: Iterable[str],
+) -> None:
+    """Fail if calibration and held-out cases share image content.
+
+    `assert_no_leakage` compares identifiers. Identifiers are cheap to keep
+    distinct and say nothing about pixels, so a case can sit in calibration
+    carrying the same bytes as a held-out case under another name - and in this
+    corpus 22 image hashes did exactly that, because the synthetic cases are
+    built from shared renders. Any pixel-based scorer has then seen the
+    held-out images during calibration, and every held-out number measured
+    afterwards is measured partly on its own tuning data.
+    """
+    import hashlib
+
+    cal = set(calibration_cases)
+    held = set(held_out_cases)
+    digests: dict[str, set[str]] = {}
+    for case, images in images_by_case.items():
+        side = "calibration" if case in cal else ("held_out" if case in held else None)
+        if side is None:
+            continue
+        for png in images:
+            digests.setdefault(hashlib.sha256(png).hexdigest(), set()).add(side)
+    shared = sorted(d for d, sides in digests.items() if len(sides) > 1)
+    if shared:
+        raise SplitLeakageError(
+            f"{len(shared)} image digest(s) appear in both calibration and held_out; "
+            f"first: {shared[0][:16]}"
+        )

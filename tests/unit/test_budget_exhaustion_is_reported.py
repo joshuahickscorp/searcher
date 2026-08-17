@@ -38,10 +38,16 @@ def test_budget_exhaustion_mid_source_still_reports_every_planned_source(
     # searcher.sources.engine.DiscoveryEngine to BoundedDiscoveryEngine with no
     # undo, so importing the name gets whichever class ran last in the suite.
     # Both need the guard, so both are exercised by name rather than by import.
-    from searcher.sources.engine import DiscoveryEngine as EngineName
+    import searcher.sources.engine as engine_mod
     from searcher.workers.bounded_discovery import BoundedDiscoveryEngine
 
-    DiscoveryEngine = EngineName if EngineName is not BoundedDiscoveryEngine else EngineName
+    # install_bounded_discovery() rebinds engine_mod.DiscoveryEngine globally
+    # with no undo, so whichever class ran last in the suite is what an import
+    # returns. Pin the base class for this test and restore afterwards, rather
+    # than testing whichever engine a previous test happened to leave behind.
+    original = engine_mod.DiscoveryEngine
+    DiscoveryEngine = original.__mro__[-2] if original is BoundedDiscoveryEngine else original
+    monkeypatch.setattr(engine_mod, "DiscoveryEngine", DiscoveryEngine)
     planned = ["wikimedia", "kind", "archive_org"]
     seen: list[str] = []
 
