@@ -31,7 +31,6 @@
       "construction-panel-count",
       "construction-outsole",
       "construction-heel",
-      "label-code-incompatible",
       "logo-incompatible"
     ]
   },
@@ -84,7 +83,6 @@
     "auth_hard": [
       "construction-eyelet-count",
       "construction-panel-count",
-      "label-code-incompatible",
       "logo-incompatible",
       "self-declared-replica"
     ]
@@ -116,7 +114,6 @@
       "label-code-mismatch"
     ],
     "auth_hard": [
-      "label-code-incompatible",
       "logo-incompatible"
     ]
   },
@@ -190,7 +187,6 @@
       "construction-panel-count",
       "construction-outsole",
       "construction-heel",
-      "label-code-incompatible",
       "logo-incompatible"
     ]
   },
