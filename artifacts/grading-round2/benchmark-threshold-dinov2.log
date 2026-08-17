@@ -1,0 +1,6 @@
+scorer: facebookresearch.dinov2.vits14
+chosen on calibration: 0.95 (tpr 0.3, fpr 0.0, 10+/10-)
+held out at 0.95: tpr 0.1, fpr 0.1 (10+/10-)
+shipped 0.86 on held out: tpr 0.5, fpr 0.7
+verdict: chosen threshold does not hold on held-out data
+wrote artifacts/searcher-threshold.receipt.json

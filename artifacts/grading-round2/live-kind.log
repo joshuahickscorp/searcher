@@ -1,0 +1,131 @@
+{
+  "search_id": "44ed64b4-7bd0-4d8a-ba36-04fe83c8a968",
+  "terminal_state": "COMPLETE",
+  "terminal_status": "COMPLETE",
+  "terminal_reason": "discovery complete",
+  "candidates": 24,
+  "product_urls": 24,
+  "with_images": 24,
+  "index_canonical_urls": [],
+  "sample": [
+    {
+      "url": "https://shop.kind.co.jp/products/8001001141404",
+      "title": "無地 ロングスリーブカットソー",
+      "images": 5,
+      "images_missing_reason": null
+    },
+    {
+      "url": "https://shop.kind.co.jp/products/8001001141442",
+      "title": "ロゴ長袖カットソー",
+      "images": 5,
+      "images_missing_reason": null
+    },
+    {
+      "url": "https://shop.kind.co.jp/products/8001001141565",
+      "title": "NYLON PANTS",
+      "images": 6,
+      "images_missing_reason": null
+    },
+    {
+      "url": "https://shop.kind.co.jp/products/8001001141541",
+      "title": "加工スウェットリブパンツ",
+      "images": 7,
+      "images_missing_reason": null
+    },
+    {
+      "url": "https://shop.kind.co.jp/products/8001001141534",
+      "title": "スウェットリブパンツ",
+      "images": 8,
+      "images_missing_reason": null
+    },
+    {
+      "url": "https://shop.kind.co.jp/products/8001001141350",
+      "title": "ロゴロンTEE",
+      "images": 5,
+      "images_missing_reason": null
+    },
+    {
+      "url": "https://shop.kind.co.jp/products/8001001141527",
+      "title": "ロゴ長袖カットソーW21-0004",
+      "images": 5,
+      "images_missing_reason": null
+    },
+    {
+      "url": "https://shop.kind.co.jp/products/8001001137032",
+      "title": "胸ポケット長袖Tシャツ",
+      "images": 6,
+      "images_missing_reason": null
+    },
+    {
+      "url": "https://shop.kind.co.jp/products/8001001141411",
+      "title": "ストレートパンツBSC505",
+      "images": 6,
+      "images_missing_reason": null
+    },
+    {
+      "url": "https://shop.kind.co.jp/products/8001001141510",
+      "title": "ワイドパンツREC21-012",
+      "images": 6,
+      "images_missing_reason": null
+    },
+    {
+      "url": "https://shop.kind.co.jp/products/8001001141558",
+      "title": "カコウスウェットリブパンツ",
+      "images": 5,
+      "images_missing_reason": null
+    },
+    {
+      "url": "https://shop.kind.co.jp/products/8001001141367",
+      "title": "「big willy panel」",
+      "images": 6,
+      "images_missing_reason": null
+    }
+  ],
+  "expansions": [
+    {
+      "index_url": "https://shop.kind.co.jp/collections/willy-chavarria/products.json?limit=250",
+      "document_class": "index",
+      "members_found": 225,
+      "taken": 24,
+      "dropped": 201,
+      "drop_reasons": {
+        "per_index_cap": 201
+      },
+      "per_index_cap": 24,
+      "per_campaign_cap": 48,
+      "campaign_taken_before": 0,
+      "campaign_taken_after": 24,
+      "member_urls": [
+        "https://shop.kind.co.jp/products/8001001141404",
+        "https://shop.kind.co.jp/products/8001001141442",
+        "https://shop.kind.co.jp/products/8001001141565",
+        "https://shop.kind.co.jp/products/8001001141541",
+        "https://shop.kind.co.jp/products/8001001141534",
+        "https://shop.kind.co.jp/products/8001001141350",
+        "https://shop.kind.co.jp/products/8001001141527",
+        "https://shop.kind.co.jp/products/8001001137032",
+        "https://shop.kind.co.jp/products/8001001141411",
+        "https://shop.kind.co.jp/products/8001001141510",
+        "https://shop.kind.co.jp/products/8001001141558",
+        "https://shop.kind.co.jp/products/8001001141367",
+        "https://shop.kind.co.jp/products/8001001141343",
+        "https://shop.kind.co.jp/products/8001001141329",
+        "https://shop.kind.co.jp/products/8001001141336",
+        "https://shop.kind.co.jp/products/8001001141480",
+        "https://shop.kind.co.jp/products/8001001141503",
+        "https://shop.kind.co.jp/products/8001001141473",
+        "https://shop.kind.co.jp/products/8001001141428",
+        "https://shop.kind.co.jp/products/8001001141381",
+        "https://shop.kind.co.jp/products/8001001141435",
+        "https://shop.kind.co.jp/products/8045001391346",
+        "https://shop.kind.co.jp/products/8001001136899",
+        "https://shop.kind.co.jp/products/8001001136820"
+      ],
+      "source_id": "kind"
+    }
+  ],
+  "coverage": {
+    "kind": "SEARCHED_MATCHES_FOUND"
+  },
+  "pages_fetched": null
+}

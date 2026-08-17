@@ -1,0 +1,516 @@
+{
+  "git_sha": "a7a5a98949f47f350109ca648680985a334e2aee",
+  "replica": {
+    "attack": "publish a replica to Real",
+    "leaked_regression": 13,
+    "extra_phrasings": 35,
+    "reached_real": [],
+    "reached_possibly_real": [
+      "1st copy",
+      "first copy",
+      "super copy",
+      "super-copy",
+      "god factory",
+      "not the authentic piece",
+      "isn't authentic",
+      "ain't genuine",
+      "not the real thing",
+      "replika",
+      "réplique",
+      "imitazione",
+      "imitation",
+      "re​plica",
+      "r e p l i c a",
+      "1/1 pair",
+      "1-1 quality",
+      "one to one",
+      "same as retail",
+      "best batch",
+      "repfam",
+      "high quality copy",
+      "mirror",
+      "from the factory",
+      "not orig",
+      "this isn't the authentic pair",
+      "counter feit",
+      "super  copy",
+      "UA quality",
+      "PK factory"
+    ],
+    "replica_family_with_real_decision_published_as": "replica",
+    "clean_listings_flagged": [],
+    "rows": [
+      {
+        "text": "This is fake.",
+        "in_regression_list": true,
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica"
+      },
+      {
+        "text": "スーパーコピー レプリカ",
+        "in_regression_list": true,
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica"
+      },
+      {
+        "text": "Dior Homme GAT dupe",
+        "in_regression_list": true,
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica"
+      },
+      {
+        "text": "Inspired by Dior Homme General Army Trainer",
+        "in_regression_list": true,
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica"
+      },
+      {
+        "text": "Dior Homme GAT superfake",
+        "in_regression_list": true,
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica"
+      },
+      {
+        "text": "Dior Homme GAT PK God factory",
+        "in_regression_list": true,
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica"
+      },
+      {
+        "text": "Dior Homme GAT UA batch",
+        "in_regression_list": true,
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica"
+      },
+      {
+        "text": "Dior Homme GAT 1：1",
+        "in_regression_list": true,
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica"
+      },
+      {
+        "text": "not genuine",
+        "in_regression_list": true,
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica"
+      },
+      {
+        "text": "Dior Homme GAT mirror batch",
+        "in_regression_list": true,
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica"
+      },
+      {
+        "text": "Dior Homme GAT homage",
+        "in_regression_list": true,
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica"
+      },
+      {
+        "text": "repsneaker quality",
+        "in_regression_list": true,
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica"
+      },
+      {
+        "text": "Unauthorized replica 1:1 of the original trainer",
+        "in_regression_list": true,
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica"
+      },
+      {
+        "text": "1st copy",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "first copy",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "super copy",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "super-copy",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "AAA+",
+        "in_regression_list": false,
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica"
+      },
+      {
+        "text": "aaa quality",
+        "in_regression_list": false,
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica"
+      },
+      {
+        "text": "god factory",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "not the authentic piece",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "isn't authentic",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "ain't genuine",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "not the real thing",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "this is a rep",
+        "in_regression_list": false,
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica"
+      },
+      {
+        "text": "replika",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "réplique",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "imitazione",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "imitation",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "unauthorised replica",
+        "in_regression_list": false,
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica"
+      },
+      {
+        "text": "not original item",
+        "in_regression_list": false,
+        "detected": true,
+        "routed_public": "hidden",
+        "published": "replica"
+      },
+      {
+        "text": "re​plica",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "r e p l i c a",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "1/1 pair",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "1-1 quality",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "one to one",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "same as retail",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "best batch",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "repfam",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "high quality copy",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "mirror",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "from the factory",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "not orig",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "this isn't the authentic pair",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "counter feit",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "super  copy",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "UA quality",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      },
+      {
+        "text": "PK factory",
+        "in_regression_list": false,
+        "detected": false,
+        "routed_public": "possibly_real",
+        "published": "possibly_real"
+      }
+    ],
+    "outcome": "BLOCKED"
+  },
+  "complete_without_fetch": {
+    "attack": "reach COMPLETE without fetching",
+    "findings": [
+      {
+        "case": "empty campaign, no queries, no coverage",
+        "state": "BLOCKED",
+        "reason": "no usable query was compiled",
+        "saturation": false,
+        "complete": false
+      },
+      {
+        "case": "query compiled, no source work planned",
+        "state": "BLOCKED",
+        "reason": "no source work was planned",
+        "saturation": false,
+        "complete": false
+      },
+      {
+        "case": "source marked completed, pages_fetched=0, no candidates",
+        "state": "BLOCKED",
+        "reason": "nothing was fetched",
+        "saturation": false,
+        "complete": false
+      },
+      {
+        "case": "forced COMPLETE with no work",
+        "state": "COMPLETE",
+        "reason": "COMPLETE",
+        "saturation": false,
+        "complete": true,
+        "note": "forced=COMPLETE is an internal override used for saturation/tests"
+      }
+    ],
+    "unforced_complete_without_work": [],
+    "outcome": "BLOCKED"
+  },
+  "capability_lie": {
+    "attack": "make a capability lie",
+    "findings": [
+      {
+        "case": "dummy file, no probe",
+        "path_found": "/private/var/folders/yc/1c930rns2rz1_trh4xcd9_m00000gq/T/tmp_ly0mp3r/dummy.pt",
+        "available": false,
+        "notes": "unknown: local weights present at dummy.pt (local-embedding); not probed (torch stays unloaded until asked)",
+        "lied": false
+      },
+      {
+        "case": "dummy file, probe=True",
+        "available": false,
+        "notes": "unknown: local weights present at dummy.pt (local-embedding); torch is not importable so the probe could not run",
+        "lied": false
+      },
+      {
+        "case": "zero-byte file, probe=True",
+        "path_found": "None",
+        "available": false,
+        "notes": "No local embedding weights. Promotion through the learned path is blocked. Free and classical tiers remain available.",
+        "lied": false
+      },
+      {
+        "case": "missing path, probe=True",
+        "path_found": "None",
+        "available": false,
+        "notes": "No local embedding weights. Promotion through the learned path is blocked. Free and classical tiers remain available.",
+        "lied": false
+      },
+      {
+        "case": "dummy file after record_probe_result(True)",
+        "available": true,
+        "notes": "local weights at dummy.pt (local-embedding); probe call succeeded; no download performed",
+        "lied": true,
+        "note": "internal cache write, not a public API"
+      },
+      {
+        "case": "probe_capabilities() with dummy weights (GET /v1/capabilities path)",
+        "dense_available": false,
+        "dense_notes": "unknown: local weights present at dummy.pt (local-embedding); not probed (torch stays unloaded until asked)",
+        "next_view_available": true,
+        "next_view_notes": "Searcher-owned missing-evidence heuristic. Donor 3D next-view planner is deferred.",
+        "lied": false
+      }
+    ],
+    "public_lies": [],
+    "outcome": "BLOCKED"
+  },
+  "publish_without_reason_or_link": {
+    "attack": "publish a result without a reason or a link",
+    "findings": [
+      {
+        "case": "empty canonical_url + empty reason_codes",
+        "published_count": 1,
+        "listing_url": null,
+        "tab_reason": "The item may match, but important evidence is missing or conflicting.",
+        "reason_codes_in_why": false,
+        "published_without_link": true,
+        "published_without_reason_codes": true
+      },
+      {
+        "case": "javascript: URL stored as canonical_url",
+        "published_count": 1,
+        "listing_url": null,
+        "published_without_link": true,
+        "tab_reason": "The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate."
+      },
+      {
+        "case": "routed honest listing",
+        "published_count": 1,
+        "bucket": "possibly_real",
+        "listing_url": "https://kind.example/item/f0d39d44",
+        "tab_reason": "The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.",
+        "has_link": true,
+        "has_reason_codes": true
+      }
+    ],
+    "leaks": [
+      {
+        "case": "empty canonical_url + empty reason_codes",
+        "published_count": 1,
+        "listing_url": null,
+        "tab_reason": "The item may match, but important evidence is missing or conflicting.",
+        "reason_codes_in_why": false,
+        "published_without_link": true,
+        "published_without_reason_codes": true
+      },
+      {
+        "case": "javascript: URL stored as canonical_url",
+        "published_count": 1,
+        "listing_url": null,
+        "published_without_link": true,
+        "tab_reason": "The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate."
+      }
+    ],
+    "outcome": "LEAK"
+  }
+}

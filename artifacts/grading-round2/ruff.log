@@ -1,0 +1,6 @@
+Using CPython 3.13.13
+Creating virtual environment at: .venv
+   Building searcher @ file:///Users/scammermike/.claude-grok/worktrees/searcher-regrade2-20260816-194923
+      Built searcher @ file:///Users/scammermike/.claude-grok/worktrees/searcher-regrade2-20260816-194923
+Installed 44 packages in 99ms
+[1;32mAll checks passed![0m

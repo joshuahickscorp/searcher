@@ -1,0 +1,6 @@
+scorer: searcher.cheap_visual.ahash_colour
+chosen on calibration: 0.83 (tpr 0.4, fpr 0.0, 10+/10-)
+held out at 0.83: tpr 0.4, fpr 0.0 (10+/10-)
+shipped 0.86 on held out: tpr 0.3, fpr 0.0
+verdict: chosen threshold holds on held-out data
+wrote artifacts/searcher-threshold.receipt.json

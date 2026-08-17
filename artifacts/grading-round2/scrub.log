@@ -1,0 +1,54 @@
+SEARCHER public-tree scrub (Bible §36.3)
+root: /Users/scammermike/.claude-grok/worktrees/searcher-regrade2-20260816-194923
+
+WORKING TREE
+  counts:
+    $HOME: 2
+    home_path: 5
+    localhost: 1
+    username: 5
+  findings:
+    docs/audit/REDTEAM_COMPLETENESS.md:41  [$HOME] $HOME expansion in committed text  | 10 | Dishonest state | “Scrub passes and history is clean” | Task brief. | Working tree scrub PASSes. History is **not** clean: 47 `$HOME` hits, 4 home-path hits. The script does not fail on history unless `SEARCHER_SCRUB_FAIL_ON_HISTORY=1`. | `./scripts/scrub_public_tree.sh` → `PASS: working tree is clean` plus `GIT HISTORY` counts. |
+    docs/audit/REDTEAM_COMPLETENESS.md:282  [$HOME] $HOME expansion in committed text  | The scrub passes and history is clean | Tree passes. History is not clean (47 `$HOME`, 4 home paths). |
+    artifacts/grading-round2/benchmark-all.log:2  [home_path] home-directory path  receipt: /Users/scammermike/.claude-grok/worktrees/searcher-regrade2-20260816-194923/artifacts/searcher-public-benchmark.receipt.json
+    artifacts/grading-round2/benchmark-all.log:2  [username] personal username  receipt: /Users/scammermike/.claude-grok/worktrees/searcher-regrade2-20260816-194923/artifacts/searcher-public-benchmark.receipt.json
+    artifacts/grading-round2/benchmark-all.log:3  [home_path] home-directory path  evidence: /Users/scammermike/.claude-grok/worktrees/searcher-regrade2-20260816-194923/artifacts/benchmark/evidence-board.html
+    artifacts/grading-round2/benchmark-all.log:3  [username] personal username  evidence: /Users/scammermike/.claude-grok/worktrees/searcher-regrade2-20260816-194923/artifacts/benchmark/evidence-board.html
+    artifacts/grading-round2/benchmark-all.log:4  [home_path] home-directory path  splits: /Users/scammermike/.claude-grok/worktrees/searcher-regrade2-20260816-194923/fixtures/benchmark/splits.json
+    artifacts/grading-round2/benchmark-all.log:4  [username] personal username  splits: /Users/scammermike/.claude-grok/worktrees/searcher-regrade2-20260816-194923/fixtures/benchmark/splits.json
+    artifacts/grading-round2/receipts-before/searcher-adversarial-recall.receipt.json:2  [localhost] localhost/private address not on the documentation allowlist  "api": "http://127.0.0.1:8806",
+    artifacts/grading-round2/ruff.log:3  [home_path] home-directory path  Building searcher @ file:///Users/scammermike/.claude-grok/worktrees/searcher-regrade2-20260816-194923
+    artifacts/grading-round2/ruff.log:3  [username] personal username  Building searcher @ file:///Users/scammermike/.claude-grok/worktrees/searcher-regrade2-20260816-194923
+    artifacts/grading-round2/ruff.log:4  [home_path] home-directory path  Built searcher @ file:///Users/scammermike/.claude-grok/worktrees/searcher-regrade2-20260816-194923
+    artifacts/grading-round2/ruff.log:4  [username] personal username  Built searcher @ file:///Users/scammermike/.claude-grok/worktrees/searcher-regrade2-20260816-194923
+
+GIT HISTORY (not rewritten by this script)
+  counts:
+    $HOME: 51
+    home_path: 4
+  findings:
+    cdff1c2aa59cdfd194cd6aefacc5c8bff8ea6c78:artifacts/redteam-receipt-comparison.json  [$HOME] $HOME / tilde expansion in history
+    5a3915c62a43932dd4a073e1c39d8484dc4900ec:artifacts/redteam-receipt-comparison.json  [$HOME] $HOME / tilde expansion in history
+    5a3915c62a43932dd4a073e1c39d8484dc4900ec:docs/audit/REDTEAM_COMPLETENESS.md  [$HOME] $HOME / tilde expansion in history
+    7d5c9e1a961346bb8766c1acc490f3c763af829b:scripts/known_item_check.sh  [$HOME] $HOME / tilde expansion in history
+    7d5c9e1a961346bb8766c1acc490f3c763af829b:tests/unit/test_index.py  [home_path] home-directory path in history
+    5761fe9aa43a504d15a1c4fc3fb6ea1e21b19641:scripts/known_item_check.sh  [$HOME] $HOME / tilde expansion in history
+    cee67647585a8c2a37a60916f99ee3ef7e39a85a:tests/unit/test_index.py  [home_path] home-directory path in history
+    55e3142cd213b61b2f57c43b6d80ac9c83739436:artifacts/audit/reuse-ledger.receipt.json  [$HOME] $HOME / tilde expansion in history
+    55e3142cd213b61b2f57c43b6d80ac9c83739436:artifacts/audit/source-authority.receipt.json  [$HOME] $HOME / tilde expansion in history
+    55e3142cd213b61b2f57c43b6d80ac9c83739436:docs/audit/MTP_CAPABILITY_HARVEST.md  [$HOME] $HOME / tilde expansion in history
+    55e3142cd213b61b2f57c43b6d80ac9c83739436:docs/audit/SOURCE_AUTHORITY.md  [$HOME] $HOME / tilde expansion in history
+    55e3142cd213b61b2f57c43b6d80ac9c83739436:docs/audit/VISIONMCP_CAPABILITY_HARVEST.md  [$HOME] $HOME / tilde expansion in history
+    55e3142cd213b61b2f57c43b6d80ac9c83739436:scripts/scrub_public_tree.sh  [$HOME] $HOME / tilde expansion in history
+    1e99adadefa0658d9ac1103291bd1dae76880e85:docs/audit/JOB_SCRAPER_CAPABILITY_HARVEST.md  [$HOME] $HOME / tilde expansion in history
+    1e92900c4e3f913ea512bd6ae8d3208572dc7aa4:artifacts/audit/reuse-ledger.receipt.json  [$HOME] $HOME / tilde expansion in history
+    1e92900c4e3f913ea512bd6ae8d3208572dc7aa4:artifacts/audit/source-authority.receipt.json  [$HOME] $HOME / tilde expansion in history
+    1e92900c4e3f913ea512bd6ae8d3208572dc7aa4:docs/audit/JOB_SCRAPER_CAPABILITY_HARVEST.md  [$HOME] $HOME / tilde expansion in history
+    1e92900c4e3f913ea512bd6ae8d3208572dc7aa4:docs/audit/MTP_CAPABILITY_HARVEST.md  [$HOME] $HOME / tilde expansion in history
+    1e92900c4e3f913ea512bd6ae8d3208572dc7aa4:docs/audit/SOURCE_AUTHORITY.md  [$HOME] $HOME / tilde expansion in history
+    1e92900c4e3f913ea512bd6ae8d3208572dc7aa4:docs/audit/VISIONMCP_CAPABILITY_HARVEST.md  [$HOME] $HOME / tilde expansion in history
+    15602d7b6d02150835b74070126435adba73a90f:docs/SEARCHER_FULL_IMPLEMENTATION_BIBLE.md  [$HOME] $HOME / tilde expansion in history
+
+History findings are reported only. A history rewrite is the supervising engineer's call. Set SEARCHER_SCRUB_FAIL_ON_HISTORY=1 to make leftover history fail the gate after that rewrite.
+
+FAIL: 13 working-tree finding(s)

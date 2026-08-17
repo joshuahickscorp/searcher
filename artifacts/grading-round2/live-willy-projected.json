@@ -1,0 +1,104 @@
+{
+  "counts": {
+    "real": 0,
+    "possibly_real": 4,
+    "hidden": 4
+  },
+  "real": 0,
+  "possibly_real": [
+    {
+      "rank": 1,
+      "title": "無地 ロングスリーブカットソー",
+      "listing_url": "https://shop.kind.co.jp/products/8001001141404",
+      "bucket": "possibly_real",
+      "tab_reason": "The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.",
+      "images_compared": 5,
+      "images_compared_reason": null,
+      "has_compare": true,
+      "item_match_lb": 0.550354,
+      "auth_lb": 0.4,
+      "missing": [
+        "unknown",
+        "label-view",
+        "logo-not-resolved",
+        "provenance",
+        "price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+        "availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+        "title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+        "seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+        "images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"
+      ]
+    },
+    {
+      "rank": 2,
+      "title": "ロゴ長袖カットソー",
+      "listing_url": "https://shop.kind.co.jp/products/8001001141442",
+      "bucket": "possibly_real",
+      "tab_reason": "The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.",
+      "images_compared": 5,
+      "images_compared_reason": null,
+      "has_compare": true,
+      "item_match_lb": 0.530298,
+      "auth_lb": 0.4,
+      "missing": [
+        "unknown",
+        "label-view",
+        "logo-not-resolved",
+        "provenance",
+        "price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+        "availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+        "title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+        "seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+        "images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"
+      ]
+    },
+    {
+      "rank": 3,
+      "title": "ロゴ長袖カットソーW21-0004",
+      "listing_url": "https://shop.kind.co.jp/products/8001001141527",
+      "bucket": "possibly_real",
+      "tab_reason": "The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.",
+      "images_compared": 1,
+      "images_compared_reason": null,
+      "has_compare": true,
+      "item_match_lb": 0.487727,
+      "auth_lb": 0.4,
+      "missing": [
+        "unknown",
+        "label-view",
+        "logo-not-resolved",
+        "cross-view-second-image",
+        "provenance",
+        "price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+        "availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+        "title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+        "seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+        "images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"
+      ]
+    },
+    {
+      "rank": 4,
+      "title": "NYLON PANTS",
+      "listing_url": "https://shop.kind.co.jp/products/8001001141565",
+      "bucket": "possibly_real",
+      "tab_reason": "The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.",
+      "images_compared": 1,
+      "images_compared_reason": null,
+      "has_compare": true,
+      "item_match_lb": 0.53714,
+      "auth_lb": 0.4,
+      "missing": [
+        "unknown",
+        "label-view",
+        "logo-not-resolved",
+        "cross-view-second-image",
+        "provenance",
+        "price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+        "availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+        "title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+        "seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+        "images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"
+      ]
+    }
+  ]
+}

@@ -54,3 +54,52 @@ def test_ordinary_listing_is_not_called_a_replica(text: str) -> None:
 def test_fullwidth_and_case_are_folded_before_matching() -> None:
     assert self_declared_replica("ＲＥＰＬＩＣＡ") is True
     assert self_declared_replica("Mirror Quality") is True
+
+# Found by an independent adversarial pass after the first thirteen were fixed:
+# every one of these reached Possibly Real with perfect match scores. They are
+# the same claim in other words - qualified copies, factory and batch slang,
+# negated authenticity, other languages, and deliberate obfuscation with
+# zero-width characters or spaced-out letters.
+LEAKED_ROUND_TWO = [
+    '1st copy',
+    'first copy',
+    'super copy',
+    'super-copy',
+    'god factory',
+    'not the authentic piece',
+    "isn't authentic",
+    "ain't genuine",
+    'not the real thing',
+    'replika',
+    'réplique',
+    'imitazione',
+    'imitation',
+    're\u200bplica',
+    'r e p l i c a',
+    '1/1 pair',
+    '1-1 quality',
+    'one to one',
+    'same as retail',
+    'best batch',
+    'repfam',
+    'high quality copy',
+    'mirror',
+    'from the factory',
+    'not orig',
+    "this isn't the authentic pair",
+    'counter feit',
+    'super  copy',
+    'UA quality',
+    'PK factory',
+]
+
+
+@pytest.mark.parametrize("text", LEAKED_ROUND_TWO)
+def test_second_round_of_seller_phrasings_is_detected(text: str) -> None:
+    assert self_declared_replica(text) is True
+
+
+def test_paperwork_copies_are_provenance_not_replicas() -> None:
+    """"Copy of the original receipt" is evidence for the seller, not against."""
+    assert self_declared_replica("Copy of the original receipt included") is False
+    assert self_declared_replica("comes with copy of the original invoice") is False

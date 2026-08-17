@@ -1,0 +1,9 @@
+{
+  "replica": "BLOCKED",
+  "replica_reached_real": [],
+  "replica_reached_possibly_real_count": 30,
+  "complete": "BLOCKED",
+  "capability": "BLOCKED",
+  "publish": "LEAK",
+  "wrote": "artifacts/grading-round2/attacks.json"
+}

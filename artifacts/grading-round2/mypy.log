@@ -1,0 +1,2 @@
+src/searcher/bench/stage_latency.py:284: [1m[31merror:(B[m Class cannot subclass (B[m[1m"Module"(B[m (has type (B[m[1m"Any"(B[m)  (B[m[33m[misc](B[m
+[1m[31mFound 1 error in 1 file (checked 261 source files)(B[m
