@@ -19,6 +19,21 @@ from searcher.reference.vocab import category_of, is_colour, is_material
 _YEAR_FULL = re.compile(r"\b((?:19|20)\d{2})\b")
 _YEAR_SHORT = re.compile(r"\b((?:0[0-9]|1[0-9]|2[0-6]))\b")
 _TOKEN = re.compile(r"[A-Za-z0-9][A-Za-z0-9'./-]*")
+# A garment or shoe size, however the listing writes it. These describe fit, not
+# identity, and must never end up inside a brand.
+_SIZE_MARKER = re.compile(r"(?i)\b(size|sz|サイズ)\b|サイズ")
+_SIZE_VALUE = re.compile(
+    r"(?i)^(?:\d{1,3}(?:[./]\d{1,2})?|[xs]{0,2}[sml]|xx?[sl]|us\d|eu\d{2}|uk\d)$"
+)
+
+
+def _looks_like_size(token: str) -> bool:
+    return bool(_SIZE_VALUE.match(token))
+
+
+def _is_numeric(token: str) -> bool:
+    """A token carrying no letters: 38, 1/2, 126610."""
+    return bool(token) and not any(ch.isalpha() for ch in token)
 
 
 @dataclass
@@ -52,9 +67,19 @@ def parse_user_text(text: str | None, tags: list[str] | None = None) -> ParsedUs
         y = int(parsed.year)
         parsed.years_alt = [str(y - 1), str(y + 1)]
     tokens = _TOKEN.findall(raw)
+    # Everything after a size marker is fit information. "サイズ 38 1/2" made 38 a
+    # brand token, so the campaign asked a shop for its "prada-38" collection,
+    # got an empty feed, and reported the source searched with no match.
+    after_size_marker = False
+    marker_seen = bool(_SIZE_MARKER.search(raw))
     unused: list[str] = []
     for token in tokens:
         lower = token.lower()
+        if marker_seen and _looks_like_size(token):
+            after_size_marker = True
+            continue
+        if after_size_marker and _looks_like_size(token):
+            continue
         if parsed.year and (token == parsed.year or token == parsed.year[2:]):
             continue
         cat = category_of(token)
@@ -74,6 +99,13 @@ def parse_user_text(text: str | None, tags: list[str] | None = None) -> ParsedUs
     if unused:
         if len(unused) == 1:
             parsed.brand_tokens = unused[:1]
+        elif _is_numeric(unused[1]) and not _is_numeric(unused[0]):
+            # A number following a word is a size or a model reference, not the
+            # second half of a brand name: PRADA 38, Rolex 126610. A numeric
+            # first token is left alone, because brands like 1017 ALYX 9SM
+            # really do start with one.
+            parsed.brand_tokens = unused[:1]
+            parsed.model_tokens = unused[1:]
         else:
             parsed.brand_tokens = unused[:2]
             parsed.model_tokens = unused[2:]
