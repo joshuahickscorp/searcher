@@ -63,6 +63,7 @@ dev = [
     # starlette>=1.6 TestClient wants httpx2; plain httpx only raises a
     # DeprecationWarning, which our filterwarnings=error turns into a failure.
     "httpx2>=0.1",
+    "coverage>=7.15.4",
 ]
 
 [tool.hatch.build.targets.wheel]

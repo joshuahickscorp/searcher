@@ -1,0 +1,67 @@
+{
+  "floor": {
+    "statement": 90,
+    "branch": 80,
+    "source": "Bible \u00a732.1"
+  },
+  "measured_at_commit": "7a3f314",
+  "suite": "599 passed, 1 deselected",
+  "areas": [
+    {
+      "area": "matching",
+      "statement": 91.7,
+      "branch": 84.6,
+      "meets_floor": true
+    },
+    {
+      "area": "ranking",
+      "statement": 91.4,
+      "branch": 72.0,
+      "meets_floor": false
+    },
+    {
+      "area": "authenticity",
+      "statement": 93.0,
+      "branch": 78.9,
+      "meets_floor": false
+    },
+    {
+      "area": "api",
+      "statement": 86.2,
+      "branch": 70.7,
+      "meets_floor": false
+    },
+    {
+      "area": "campaigns",
+      "statement": 80.1,
+      "branch": 62.5,
+      "meets_floor": false
+    },
+    {
+      "area": "sources",
+      "statement": 81.4,
+      "branch": 64.4,
+      "meets_floor": false
+    },
+    {
+      "area": "retrieval",
+      "statement": 86.9,
+      "branch": 71.5,
+      "meets_floor": false
+    }
+  ],
+  "total": {
+    "statement": 80.5,
+    "branch": 66.1
+  },
+  "below_floor": [
+    "ranking",
+    "authenticity",
+    "api",
+    "campaigns",
+    "sources",
+    "retrieval"
+  ],
+  "reproduce": "./scripts/coverage_floor.sh",
+  "note": "The Bible states the floor but never designates which paths are critical. The seven areas above are this project's choice, recorded so the number cannot be moved by quietly renaming what counts. Only matching meets both floors."
+}
