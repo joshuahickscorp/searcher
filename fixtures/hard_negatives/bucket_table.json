@@ -111,7 +111,8 @@
       "output=advisory"
     ],
     "item_hard": [
-      "label-code-mismatch"
+      "label-code-mismatch",
+      "logo-placement-mismatch"
     ],
     "auth_hard": [
       "logo-incompatible"
@@ -158,7 +159,8 @@
       "panel-count-mismatch",
       "outsole-geometry-mismatch",
       "heel-construction-mismatch",
-      "logo-placement-mismatch"
+      "logo-placement-mismatch",
+      "eyelet-count-mismatch"
     ],
     "auth_hard": [
       "construction-panel-count",
@@ -220,12 +222,15 @@
     "internal": "rejected",
     "public": "hidden",
     "reasons": [
-      "STRONG_COUNTERFEIT_EVIDENCE",
+      "WRONG_PRODUCT",
       "hidden",
       "adjudicator=local_deterministic",
       "output=advisory"
     ],
-    "item_hard": [],
+    "item_hard": [
+      "eyelet-count-mismatch",
+      "panel-count-mismatch"
+    ],
     "auth_hard": [
       "construction-eyelet-count",
       "construction-panel-count",

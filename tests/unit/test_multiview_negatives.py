@@ -120,10 +120,25 @@ def test_colourway_multiview_stays_below_plausible_floor() -> None:
     )
 
 
-def test_ai_generated_five_views_cross_plausible_floor() -> None:
-    """Existing 5-view negative, not a new fixture: pairing already inflates it."""
+def test_ai_generated_five_views_stays_below_plausible_floor() -> None:
+    """Extra photographs of an AI-generated listing must not clear 0.45.
+
+    This test was written to document the defect and asserted the opposite: a
+    front of the generated shoe still has a couple of drawn eyelets, pairing
+    preferred it over the lateral that has none, the construction
+    contradiction was dropped along with the pair that showed it, and the
+    lower bound jumped from the hard-penalty floor to 0.786, within 0.025 of
+    authentic_poor_photos.
+
+    Contradictions are now collected across every pair considered rather than
+    read off the one chosen pair, so a construction contradiction survives
+    the choice of a flattering photograph. The assertion is inverted because
+    the thing it recorded was fixed, not because the measurement changed.
+    """
     floor = _plausible_floor()
     one = _item_match_lower("ai_generated", n_views=1)
     five = _item_match_lower("ai_generated", n_views=None)
-    assert one < floor
-    assert five >= floor
+    assert one < floor, f"1-view AI-generated should sit below {floor}, got {one}"
+    assert five < floor, (
+        f"extra views must not lift an AI-generated listing over {floor}, got {five}"
+    )

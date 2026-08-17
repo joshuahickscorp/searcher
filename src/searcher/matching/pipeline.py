@@ -25,7 +25,12 @@ from searcher.matching.parts import build_descriptors, compare_extracted_parts, 
 from searcher.matching.scores import scored
 from searcher.matching.segmentation import gallery_images, isolate_subjects
 from searcher.matching.structure import extract_structure
-from searcher.matching.types import CorrespondenceResult, EnrichedCandidate, StructuredDescriptor
+from searcher.matching.types import (
+    CorrespondenceResult,
+    EnrichedCandidate,
+    GeometryResult,
+    StructuredDescriptor,
+)
 from searcher.matching.views import classify_subjects, refine_views
 from searcher.retrieval.cost import CostLedger, CostStage
 from searcher.retrieval.embeddings import OPERATING_THRESHOLD, pair_similarity
@@ -209,7 +214,8 @@ def _capped_view_pairs(
 ]:
     """The pairs `_best_view_pair` ranks, same order and 9-pair budget.
 
-    Identity may take the max. Colour and material walk this same list.
+    Identity may take the max. Colour, material, construction and geometry
+    walk this same list.
     """
     considered: list[
         tuple[tuple[float, float, float], StructuredDescriptor, StructuredDescriptor, bytes, bytes]
@@ -352,6 +358,102 @@ def _colour_across_pairs(
     return score, merged
 
 
+def _construction_pair_eligible(
+    ref_desc: StructuredDescriptor,
+    cand_desc: StructuredDescriptor,
+    *,
+    footwear: bool,
+) -> bool:
+    """Whether this pair is a construction reading of the same view.
+
+    A cream label next to a lateral of the same shoe is not a construction
+    contradiction. A true item has none to accumulate once mixed
+    label/product pairs and cross-view pairs are set aside. Footwear uses
+    outsole ratio as the view-class signal: laterals of the same shoe sit
+    together, a lateral versus a front does not. 0.07 is the existing
+    outsole hard-mismatch threshold, so a cooler extra lateral stays
+    eligible and a missing-eyelet lateral still compares to the reference
+    lateral that shows the eyelets.
+    """
+    if bool(ref_desc.label_hash) ^ bool(cand_desc.label_hash):
+        return False
+    if not footwear:
+        return True
+    return abs(ref_desc.outsole_ratio - cand_desc.outsole_ratio) < 0.07
+
+
+def _construction_across_pairs(
+    considered: list[
+        tuple[tuple[float, float, float], StructuredDescriptor, StructuredDescriptor, bytes, bytes]
+    ],
+    *,
+    chosen_ref: StructuredDescriptor,
+    chosen_cand: StructuredDescriptor,
+    chosen_geom: GeometryResult,
+    footwear: bool,
+) -> tuple[GeometryResult, list[str]]:
+    """Worst construction contradiction among considered pairs, else the chosen pair.
+
+    Identity may keep the flattering pair. A contradiction on any other
+    considered pair is not erasable by that choice.
+    """
+    chosen_hard, _ = item_contradictions(
+        reference=chosen_ref,
+        candidate=chosen_cand,
+        geometry=chosen_geom,
+        exact_colour_required=False,
+        colour_hard=False,
+        label_hash_mismatch=False,
+        apply_footwear_rules=footwear,
+    )
+    chosen_construction = [item for item in chosen_hard if item != "colourway-hard-mismatch"]
+    worst_geom: GeometryResult | None = None
+    found: list[str] = []
+    for _rank, ref_desc, cand_desc, _ref_png, cand_png in considered:
+        if not _construction_pair_eligible(ref_desc, cand_desc, footwear=footwear):
+            continue
+        geom = compare_geometry(ref_desc, cand_desc, apply_footwear_rules=footwear)
+        # Same flip the chosen pair already tries. A mirrored true lateral
+        # looks like a heel-cut / eyelet change until it is flipped back;
+        # that is not a construction contradiction.
+        flipped = _flipped_descriptor(cand_png, cand_desc.image_id)
+        if flipped is not None:
+            geom_flip = compare_geometry(ref_desc, flipped, apply_footwear_rules=footwear)
+            if geom_flip.score > geom.score:
+                geom = geom_flip
+                cand_desc = flipped
+        hard, _soft = item_contradictions(
+            reference=ref_desc,
+            candidate=cand_desc,
+            geometry=geom,
+            exact_colour_required=False,
+            colour_hard=False,
+            label_hash_mismatch=False,
+            apply_footwear_rules=footwear,
+        )
+        # Soft view-to-view drift is not a construction change. A genuine
+        # shoe's front versus its lateral can trip eyelet-count-soft and
+        # would lower a true match. The hard count mismatches cannot: they
+        # are the contradiction pairing erases by picking a front.
+        construction = [item for item in hard if item != "colourway-hard-mismatch"]
+        if not construction:
+            continue
+        if worst_geom is None or geom.score < worst_geom.score:
+            worst_geom = geom
+        for item in construction:
+            if item not in found:
+                found.append(item)
+    if not found:
+        return chosen_geom, chosen_construction
+    merged = list(found)
+    for item in chosen_construction:
+        if item not in merged:
+            merged.append(item)
+    if worst_geom is not None and worst_geom.score < chosen_geom.score:
+        return worst_geom, merged
+    return chosen_geom, merged
+
+
 def _best_correspondence(
     reference_pngs: dict[str, bytes],
     candidate_pngs: dict[str, bytes],
@@ -450,10 +552,6 @@ def match_candidate(
                 geom_raw = geom_flip
                 cand_desc = flipped_desc
                 used_mirror = True
-        geometry = tight(
-            geom_raw.score,
-            support=[cite("geometry", note) for note in geom_raw.notes] or [cite("geometry", "ok")],
-        )
         colour_score, colour_contra = _colour_across_pairs(
             considered,
             exact_colour=exact_colour,
@@ -487,6 +585,20 @@ def match_candidate(
             colour_hard="colourway-mismatch" in colour_contra,
             label_hash_mismatch=label_mismatch,
             apply_footwear_rules=footwear,
+        )
+        geom_raw, construction_hard = _construction_across_pairs(
+            considered,
+            chosen_ref=ref_desc,
+            chosen_cand=cand_desc,
+            chosen_geom=geom_raw,
+            footwear=footwear,
+        )
+        for item in construction_hard:
+            if item not in hard:
+                hard.append(item)
+        geometry = tight(
+            geom_raw.score,
+            support=[cite("geometry", note) for note in geom_raw.notes] or [cite("geometry", "ok")],
         )
         if footwear:
             part_records = []

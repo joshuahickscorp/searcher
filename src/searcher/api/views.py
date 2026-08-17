@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from collections import Counter
+from collections.abc import Callable, Sequence
 from decimal import Decimal
 from typing import Any
 from urllib.parse import urlparse
@@ -142,6 +143,94 @@ def _hidden_reason_note(
     ]
     return "Hidden: " + "; ".join(parts) + "."
 
+
+def _capabilities_for(source_id: str) -> tuple[str, ...]:
+    """Read the source's declared capabilities. Missing source, missing."""
+    try:
+        from searcher.sources.adapters import resolve_adapter
+
+        adapter = resolve_adapter(source_id)
+    except Exception:
+        return ()
+    manifest_fn = getattr(adapter, "manifest", None)
+    if not callable(manifest_fn):
+        return ()
+    try:
+        caps = manifest_fn().capabilities
+    except Exception:
+        return ()
+    if not caps:
+        return ()
+    return tuple(str(item) for item in caps)
+
+
+def _join_source_names(names: list[str]) -> str:
+    if len(names) == 1:
+        return names[0]
+    if len(names) == 2:
+        return f"{names[0]} and {names[1]}"
+    return ", ".join(names[:-1]) + f", and {names[-1]}"
+
+
+def _as_count(value: object) -> int | None:
+    if isinstance(value, bool) or value is None:
+        return None
+    if isinstance(value, int):
+        return value
+    if isinstance(value, str) and value.lstrip("-").isdigit():
+        return int(value)
+    return None
+
+
+def _count_words(n: int, singular: str) -> str:
+    return f"{n} {singular}" if n == 1 else f"{n} {singular}s"
+
+
+def _keyhole_coverage_note(
+    coverage: dict[str, object],
+    *,
+    capabilities_for: Callable[[str], Sequence[str]] | None = None,
+) -> str | None:
+    """Name sources that were walked, not searched, so a miss is not a finding."""
+    lookup = capabilities_for or _capabilities_for
+    completed = coverage.get("sources_completed") or []
+    if not isinstance(completed, list):
+        return None
+    walked: list[str] = []
+    seen: set[str] = set()
+    for row in completed:
+        if not isinstance(row, dict):
+            continue
+        source_id = str(row.get("id") or "")
+        if not source_id or source_id in seen:
+            continue
+        caps = tuple(str(item) for item in (lookup(source_id) or ()))
+        # Unknown source (empty lookup) is not a walk we can name.
+        if not caps or "text_search" in caps:
+            continue
+        seen.add(source_id)
+        walked.append(str(row.get("name") or source_id))
+    if not walked:
+        return None
+    who = _join_source_names(walked)
+    if len(walked) == 1:
+        walked_clause = f"{who} was walked through its catalogue instead of being searched"
+    else:
+        walked_clause = (
+            f"{who} were walked through their catalogues instead of being searched"
+        )
+    pages = _as_count(coverage.get("pages_fetched"))
+    normalized = _as_count(coverage.get("candidates_normalized"))
+    if pages is not None and normalized is not None:
+        return (
+            f"{walked_clause}. Coverage was bounded to "
+            f"{_count_words(pages, 'page')} and "
+            f"{_count_words(normalized, 'candidate')}, "
+            "so absence is not evidence of absence."
+        )
+    return f"{walked_clause}, so absence is not evidence of absence."
+
+
 def project_search(controller: CampaignController, campaign: SearchCampaign) -> dict[str, Any]:
     search_id = campaign.search_id
     runtime = controller.repos.get_runtime(search_id)
@@ -156,6 +245,11 @@ def project_search(controller: CampaignController, campaign: SearchCampaign) -> 
         # already recorded per result - a campaign that hides everything should
         # say why rather than leave a bare count.
         hidden_note = _hidden_reason_note(controller, search_id, counts["hidden"])
+    # A source without text_search never queried its catalogue. Five published
+    # hits are not a finding that the item is absent.
+    walk_note = _keyhole_coverage_note(coverage)
+    if walk_note:
+        hidden_note = f"{hidden_note} {walk_note}" if hidden_note else walk_note
     missing = runtime.get("missing_reference_views") or []
     terminal = campaign.terminal_status.value if campaign.terminal_status else None
     return {
@@ -170,6 +264,7 @@ def project_search(controller: CampaignController, campaign: SearchCampaign) -> 
         "coverage": coverage,
         "counts": counts,
         "hidden_policy_note": hidden_note,
+        "keyhole_coverage_note": walk_note,
         "missing_reference_views": missing,
         "deeper_refresh_available": bool(runtime.get("deeper_refresh_available")),
         "intent": {"text": intent.text or "", "tags": list(intent.tags)},

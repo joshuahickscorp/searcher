@@ -247,7 +247,11 @@ class DiscoveryEngine:
         if source_names is not None:
             self.broker.names = tuple(source_names)
         plans = self.broker.plan(
-            queries, usage, include_disabled=include_disabled, families=families
+            queries,
+            usage,
+            include_disabled=include_disabled,
+            families=families,
+            coverage=coverage,
         )
         all_candidates: list[ListingCandidate] = []
         blocked: list[dict[str, str]] = []
