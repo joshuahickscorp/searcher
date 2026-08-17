@@ -1,5 +1,3 @@
-import { $ } from "./dom.js";
-
 const KEY = "searcher.sourceScopes";
 export const SCOPE_LEGITIMATE = "legitimate";
 export const SCOPE_REPLICA = "replica";
@@ -81,8 +79,13 @@ function resolveInitial() {
 }
 
 export function createScopeControl({ onChange } = {}) {
-  const legitimate = $("scope-legitimate");
-  const replica = $("scope-replica");
+  // The checkboxes are absent while the slider is withdrawn from the header.
+  // The control still resolves a scope and still sends source_scopes, so the
+  // server keeps receiving an explicit choice rather than a silent default,
+  // and ?scopes= continues to drive the replica lane for diagnosis.
+  // `$` throws on a missing id by design, so look these up directly.
+  const legitimate = document.getElementById("scope-legitimate");
+  const replica = document.getElementById("scope-replica");
   let state = resolveInitial();
 
   function apply(next) {
@@ -90,19 +93,23 @@ export function createScopeControl({ onChange } = {}) {
       legitimate: Boolean(next.legitimate),
       replica: Boolean(next.replica),
     };
-    legitimate.checked = state.legitimate;
-    replica.checked = state.replica;
+    if (legitimate) legitimate.checked = state.legitimate;
+    if (replica) replica.checked = state.replica;
     writeStored(state);
     writeScopesUrl(state);
     if (typeof onChange === "function") onChange(state);
   }
 
-  legitimate.addEventListener("change", () => {
-    apply({ legitimate: legitimate.checked, replica: replica.checked });
-  });
-  replica.addEventListener("change", () => {
-    apply({ legitimate: legitimate.checked, replica: replica.checked });
-  });
+  if (legitimate) {
+    legitimate.addEventListener("change", () => {
+      apply({ legitimate: legitimate.checked, replica: Boolean(replica && replica.checked) });
+    });
+  }
+  if (replica) {
+    replica.addEventListener("change", () => {
+      apply({ legitimate: Boolean(legitimate && legitimate.checked), replica: replica.checked });
+    });
+  }
 
   apply(state);
   return {

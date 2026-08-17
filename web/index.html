@@ -19,20 +19,9 @@
 
   <header class="site-header">
     <a class="wordmark" href="#/" id="home-link">SEARCHER</a>
-    <fieldset class="source-scopes" id="source-scopes" aria-describedby="scope-note">
-      <legend class="visually-hidden">Sources</legend>
-      <label class="scope-toggle" for="scope-legitimate">
-        <input type="checkbox" id="scope-legitimate" checked>
-        <span>Legitimate</span>
-      </label>
-      <label class="scope-toggle" for="scope-replica">
-        <input type="checkbox" id="scope-replica" aria-describedby="scope-note">
-        <span>Replica</span>
-      </label>
-      <p class="scope-note" id="scope-note">
-        Replica sources are searched to find replicas. A replica listing can never be ranked Real.
-      </p>
-    </fieldset>
+    <!-- The source-scope slider is withdrawn from the interface while Real is
+         the focus. The replica lane is untouched on the server and stays
+         reachable with ?scopes=legitimate,replica for diagnosis. -->
   </header>
 
   <main id="main">
