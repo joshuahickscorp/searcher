@@ -175,6 +175,10 @@ class WarmIndex:
         )
         hits: list[IndexHit] = []
         seen_urls: set[str] = set()
+        descriptor_map: dict[str, list[dict[str, Any]]] = {}
+        if query_descriptor:
+            keys = [str(row["listing_key"]) for row in rows]
+            descriptor_map = self.tables.list_descriptors_for_keys(keys)
         for row in rows:
             url = str(row["canonical_url"])
             if url in seen_urls:
@@ -183,7 +187,7 @@ class WarmIndex:
             desc_score = 0.0
             if query_descriptor:
                 best = 0.0
-                for desc in self.tables.list_descriptors(str(row["listing_key"])):
+                for desc in descriptor_map.get(str(row["listing_key"]), []):
                     vector = unpack_descriptor(desc["descriptor"])
                     best = max(best, cosine(query_descriptor, vector))
                 desc_score = best

@@ -147,6 +147,21 @@ class IndexTables:
         ).fetchall()
         return [dict(row) for row in rows]
 
+    def list_descriptors_for_keys(self, listing_keys: list[str]) -> dict[str, list[dict[str, Any]]]:
+        """One query for every listing's descriptors. Empty input is a no-op."""
+        out: dict[str, list[dict[str, Any]]] = {key: [] for key in listing_keys}
+        if not listing_keys:
+            return out
+        placeholders = ",".join("?" * len(listing_keys))
+        rows = self.db.execute(
+            f"SELECT * FROM index_descriptors WHERE listing_key IN ({placeholders})",
+            tuple(listing_keys),
+        ).fetchall()
+        for row in rows:
+            key = str(row["listing_key"])
+            out.setdefault(key, []).append(dict(row))
+        return out
+
     def search_listings(
         self,
         terms: list[str],

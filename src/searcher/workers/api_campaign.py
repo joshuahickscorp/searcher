@@ -8,12 +8,11 @@ from __future__ import annotations
 
 import os
 import re
-import threading
 import traceback
 from pathlib import Path
 
 from searcher.campaigns.controller import CampaignController
-from searcher.campaigns.orchestrator import CampaignOrchestrator, layers_present
+from searcher.campaigns.orchestrator import layers_present
 from searcher.campaigns.states import is_terminal
 from searcher.contracts.enums import (
     CampaignState,
@@ -46,6 +45,8 @@ from searcher.evidence.records import EvidenceRecord
 from searcher.receipts.types import CampaignTerminalReceipt
 from searcher.reference.gaps import evidence_gaps
 from searcher.reference.ingest import ingest_bytes
+from searcher.workers.fast_orchestrator import FastOrchestrator
+from searcher.workers.locks import STORE_LOCK
 from searcher.workers.reference.pipeline import run_reference_query_wave
 
 # Create-time field bounds. Images are capped by Settings; these stop text/tag bombs.
@@ -66,7 +67,7 @@ _BIDI_OVERRIDES = frozenset("\u202a\u202b\u202c\u202d\u202e\u2066\u2067\u2068\u2
 _ALLOWED_CONTROLS = frozenset("\t\n\r")
 # ContentStore's object index and hard-link zone have no lock. Concurrent
 # creates of the same bytes raise FileExistsError / torn JSON and return 500.
-_STORE_LOCK = threading.RLock()
+_STORE_LOCK = STORE_LOCK
 
 DISCOVERY_BLOCKED_REASON = (
     "Live listing discovery is not available in this process. "
@@ -388,7 +389,7 @@ def run_api_campaign(controller: CampaignController, search_id: str) -> None:
             from searcher.workers.bounded_discovery import install_bounded_discovery
 
             install_bounded_discovery()
-            CampaignOrchestrator(
+            FastOrchestrator(
                 controller,
                 source_names=[
                     "wikimedia",

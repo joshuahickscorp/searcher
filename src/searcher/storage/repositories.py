@@ -129,6 +129,50 @@ class Repositories:
                 ),
             )
 
+    def merge_runtime(self, search_id: str, fields: dict[str, Any]) -> dict[str, Any]:
+        """Atomically read-modify-write runtime_json. One writer, no lost updates."""
+        with self.db.transaction() as conn:
+            row = conn.execute(
+                "SELECT runtime_json FROM campaigns WHERE search_id = ?",
+                (search_id,),
+            ).fetchone()
+            if row is None:
+                raise KeyError(search_id)
+            runtime = _load(str(row["runtime_json"]))
+            runtime.update(fields)
+            conn.execute(
+                "UPDATE campaigns SET runtime_json = ?, updated_at = ? WHERE search_id = ?",
+                (
+                    json.dumps(runtime, sort_keys=True, default=str),
+                    format_utc(utc_now()),
+                    search_id,
+                ),
+            )
+            return runtime
+
+    def append_runtime_list(self, search_id: str, key: str, item: object) -> list[object]:
+        """Append one value to a runtime list under the writer lock."""
+        with self.db.transaction() as conn:
+            row = conn.execute(
+                "SELECT runtime_json FROM campaigns WHERE search_id = ?",
+                (search_id,),
+            ).fetchone()
+            if row is None:
+                raise KeyError(search_id)
+            runtime = _load(str(row["runtime_json"]))
+            held = list(runtime.get(key) or [])
+            held.append(item)
+            runtime[key] = held
+            conn.execute(
+                "UPDATE campaigns SET runtime_json = ?, updated_at = ? WHERE search_id = ?",
+                (
+                    json.dumps(runtime, sort_keys=True, default=str),
+                    format_utc(utc_now()),
+                    search_id,
+                ),
+            )
+            return held
+
     def update_campaign_blob(
         self,
         campaign: SearchCampaign,

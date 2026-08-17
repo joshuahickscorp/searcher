@@ -8,6 +8,25 @@ from searcher.ranking.pipeline import JudgmentReport, judge_candidates
 from searcher.retrieval.escalation import EscalationBounds
 
 
+def _embed_batch(
+    reference_pngs: dict[str, bytes],
+    candidate_pngs: dict[str, dict[str, bytes]],
+) -> None:
+    """One forward pass for every candidate/reference image the judge will see."""
+    try:
+        from searcher.retrieval.embeddings import embed_pngs, resolve_backend
+    except Exception:
+        return
+    backend = resolve_backend()
+    if backend is None:
+        return
+    blobs: list[bytes] = list(reference_pngs.values())
+    for group in candidate_pngs.values():
+        blobs.extend(group.values())
+    if blobs:
+        embed_pngs(blobs, backend)
+
+
 def run_vision_worker(
     *,
     search_id: str,
@@ -24,6 +43,7 @@ def run_vision_worker(
 ) -> JudgmentReport:
     from searcher.ranking.policy_versions import load_policy
 
+    _embed_batch(reference_pngs, candidate_pngs)
     key = idempotency_key(
         task_type="vision_match",
         search_id=search_id,
