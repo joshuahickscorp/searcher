@@ -1,0 +1,151 @@
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/health", "request_id": "fd307a0e-a7dd-4649-bf7b-4d8cb494bd21", "status": 200, "ts": "2026-08-16T23:57:19.845603+00:00"}
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/capabilities", "request_id": "ff0bd1f5-caa3-4eac-9890-a5df4d9b245f", "status": 200, "ts": "2026-08-16T23:57:19.847487+00:00"}
+{"level": "info", "method": "GET", "ms": 3, "path": "/static", "request_id": "677d8095-1e5a-4df1-85b4-be59969c08a1", "status": 200, "ts": "2026-08-16T23:57:19.851802+00:00"}
+{"level": "info", "method": "POST", "ms": 3, "path": "/v1/searches", "request_id": "e42e7eaf-4934-4190-b4d6-05487b2536fa", "status": 201, "ts": "2026-08-16T23:57:19.861052+00:00"}
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/searches/38dfab3a-db03-4a63-9b6a-f100bbe57439", "request_id": "c8a41cad-4402-4efd-b822-2d35f4dbf042", "status": 200, "ts": "2026-08-16T23:57:19.863206+00:00"}
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/searches/38dfab3a-db03-4a63-9b6a-f100bbe57439/results", "request_id": "ff353a7b-9268-4c28-88d3-1a16c10ea30f", "status": 200, "ts": "2026-08-16T23:57:19.865011+00:00"}
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/searches/38dfab3a-db03-4a63-9b6a-f100bbe57439", "request_id": "ee8299f4-0186-4e9f-a5f5-bd9eeec5b89b", "status": 200, "ts": "2026-08-16T23:57:19.892474+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/38dfab3a-db03-4a63-9b6a-f100bbe57439/results", "request_id": "33a0854d-e9eb-4264-86e9-fcce7285165b", "status": 200, "ts": "2026-08-16T23:57:19.893632+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/38dfab3a-db03-4a63-9b6a-f100bbe57439", "request_id": "d4544e96-d2c0-4990-b4b7-dffb1bb650b5", "status": 200, "ts": "2026-08-16T23:57:19.919917+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/38dfab3a-db03-4a63-9b6a-f100bbe57439/results", "request_id": "7b413f99-9c75-4b39-a1b6-284a624d327b", "status": 200, "ts": "2026-08-16T23:57:19.920853+00:00"}
+{"level": "info", "method": "GET", "ms": 3, "path": "/v1/searches/38dfab3a-db03-4a63-9b6a-f100bbe57439", "request_id": "199e9e86-13e3-4b56-a5e2-2a0c25535212", "status": 200, "ts": "2026-08-16T23:57:19.950488+00:00"}
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/searches/38dfab3a-db03-4a63-9b6a-f100bbe57439/results", "request_id": "9d7546f5-420c-4fea-8a3b-4b11ec731607", "status": 200, "ts": "2026-08-16T23:57:19.955587+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/38dfab3a-db03-4a63-9b6a-f100bbe57439", "request_id": "395005de-14fe-4f3b-94dc-f04c1d0ddc3a", "status": 200, "ts": "2026-08-16T23:57:19.982085+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/38dfab3a-db03-4a63-9b6a-f100bbe57439/results", "request_id": "73fab59e-2a0f-4de0-88d0-515577c2b4a3", "status": 200, "ts": "2026-08-16T23:57:19.983151+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/health", "request_id": "a97d1974-6964-4c88-ba58-ec5cef86df4e", "status": 200, "ts": "2026-08-16T23:57:20.122237+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/capabilities", "request_id": "6ac6cb3e-4078-472f-8520-095cd159f396", "status": 200, "ts": "2026-08-16T23:57:20.123632+00:00"}
+{"level": "info", "method": "GET", "ms": 2, "path": "/static", "request_id": "c14b4edb-e7c6-4819-94c2-898e2d5569c2", "status": 200, "ts": "2026-08-16T23:57:20.126930+00:00"}
+{"level": "info", "method": "POST", "ms": 2, "path": "/v1/searches", "request_id": "f8f87a23-55ac-4ac4-8341-fdbde0844dd9", "status": 201, "ts": "2026-08-16T23:57:20.130384+00:00"}
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/searches/be92aa99-9def-42b7-8707-c0287dd8bd10", "request_id": "cd5ea9cc-11ba-44d3-86de-3ba295a1e26b", "status": 200, "ts": "2026-08-16T23:57:20.132366+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/be92aa99-9def-42b7-8707-c0287dd8bd10/results", "request_id": "455fccd3-de36-494a-92d7-e75fdf8f17c7", "status": 200, "ts": "2026-08-16T23:57:20.133809+00:00"}
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/searches/be92aa99-9def-42b7-8707-c0287dd8bd10", "request_id": "989dea8c-edb1-4399-9dee-979b33458566", "status": 200, "ts": "2026-08-16T23:57:20.159406+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/be92aa99-9def-42b7-8707-c0287dd8bd10/results", "request_id": "f94b40e6-b706-4db4-bf20-4475ec573b75", "status": 200, "ts": "2026-08-16T23:57:20.160526+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/be92aa99-9def-42b7-8707-c0287dd8bd10", "request_id": "046a7246-aab1-4f7e-ad5c-d45342fdc6e1", "status": 200, "ts": "2026-08-16T23:57:20.185852+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/be92aa99-9def-42b7-8707-c0287dd8bd10/results", "request_id": "e59c3c48-fd13-4cfd-b48e-eeea4539adc3", "status": 200, "ts": "2026-08-16T23:57:20.186718+00:00"}
+{"level": "info", "method": "GET", "ms": 1, "path": "/v1/searches/be92aa99-9def-42b7-8707-c0287dd8bd10", "request_id": "aab08d7a-bd6d-4e36-ab6e-c4c29192878c", "status": 200, "ts": "2026-08-16T23:57:20.208805+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/be92aa99-9def-42b7-8707-c0287dd8bd10/results", "request_id": "610cca54-4ebb-4e3d-996b-ab507eee7275", "status": 200, "ts": "2026-08-16T23:57:20.210200+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/be92aa99-9def-42b7-8707-c0287dd8bd10", "request_id": "c640b01b-37d7-4969-99b2-ffd347bf33e8", "status": 200, "ts": "2026-08-16T23:57:20.236781+00:00"}
+{"level": "info", "method": "GET", "ms": 0, "path": "/v1/searches/be92aa99-9def-42b7-8707-c0287dd8bd10/results", "request_id": "bacc54ee-fd6b-462a-b969-5c684cbac163", "status": 200, "ts": "2026-08-16T23:57:20.237713+00:00"}
+{
+  "fixture": {
+    "cache_hit_rate_warm": 1.0,
+    "cold": {
+      "budget": {
+        "browser_pages": 0,
+        "bytes": 3822,
+        "images": 8,
+        "model_calls": 0,
+        "pages": 1,
+        "retries": 0,
+        "sources": 1,
+        "storage": 0,
+        "wall_seconds": 0
+      },
+      "cache_hits": 0,
+      "campaign_wall_ms": 53.526,
+      "candidates": 5,
+      "fetches": 5,
+      "first_candidate_ms": 13.841,
+      "first_routed_result_ms": 44.434,
+      "receipts": [
+        {
+          "cache_hits": 0,
+          "fetches": 0,
+          "phase": "consult"
+        },
+        {
+          "cache_hits": 0,
+          "fetches": 5,
+          "phase": "remember"
+        }
+      ],
+      "results": 5,
+      "search_create_ms": 0.711
+    },
+    "duplicate_work_avoided": 1.0,
+    "warm": {
+      "budget": {
+        "browser_pages": 0,
+        "bytes": 55,
+        "images": 2,
+        "model_calls": 0,
+        "pages": 0,
+        "retries": 0,
+        "sources": 0,
+        "storage": 0,
+        "wall_seconds": 0
+      },
+      "cache_hits": 5,
+      "campaign_wall_ms": 32.696,
+      "candidates": 5,
+      "fetches": 0,
+      "first_candidate_ms": 13.337,
+      "first_routed_result_ms": 13.943,
+      "index_hits": 5,
+      "index_skip_source_work": true,
+      "receipts": [
+        {
+          "cache_hits": 5,
+          "fetches": 0,
+          "phase": "consult"
+        },
+        {
+          "cache_hits": 0,
+          "fetches": 0,
+          "phase": "remember"
+        }
+      ],
+      "results": 5
+    }
+  },
+  "host": "Mac-Studio",
+  "http": {
+    "cold": {
+      "campaign_wall_ms": 120.95,
+      "capabilities_ms": 1.8,
+      "capabilities_status": 200,
+      "first_candidate_ms": null,
+      "first_progress_event_ms": 2.089,
+      "first_routed_result_ms": null,
+      "health_ms": 1.988,
+      "health_status": "ok",
+      "search_create_ms": 4.518,
+      "search_create_status": 201,
+      "search_id": "38dfab3a-db03-4a63-9b6a-f100bbe57439",
+      "transport": "asgi-testclient",
+      "transport_note": "HTTP timings are Starlette TestClient against the real app on this host. A kernel TCP bind was not used because this environment forbids loopback sockets.",
+      "ui_first_byte_ms": 4.727,
+      "ui_status": 200
+    },
+    "warm": {
+      "campaign_wall_ms": 106.348,
+      "capabilities_ms": 1.351,
+      "capabilities_status": 200,
+      "first_candidate_ms": 106.348,
+      "first_progress_event_ms": 1.94,
+      "first_routed_result_ms": null,
+      "health_ms": 1.434,
+      "health_status": "ok",
+      "search_create_ms": 3.111,
+      "search_create_status": 201,
+      "search_id": "be92aa99-9def-42b7-8707-c0287dd8bd10",
+      "transport": "asgi-testclient",
+      "transport_note": "HTTP timings are Starlette TestClient against the real app on this host. A kernel TCP bind was not used because this environment forbids loopback sockets.",
+      "ui_first_byte_ms": 3.577,
+      "ui_status": 200
+    }
+  },
+  "profile": {
+    "get_campaign": {
+      "get_campaign_200x_ms": 13.911,
+      "get_state_version_200x_ms": 0.561,
+      "justification": "emit() used to call get_campaign, which loads the intent and six child-id lists, on every public event. A json_group_array rewrite of those lists was slower on this host (tiny rows, six correlated subqueries). emit() now reads only state_version."
+    },
+    "image_decode": {
+      "justification": "matching and cheap signals re-open the same listing PNG. An LRU keyed by content digest avoids that decode on the repeat path.",
+      "open_rgb_24x_same_ms": 0.048,
+      "open_rgb_24x_unique_ms": 2.212
+    }
+  }
+}
+wrote artifacts/grading-round2/receipts-after/searcher-performance.receipt.json

@@ -1,0 +1,154 @@
+{
+  "summary": {
+    "met": 21,
+    "not_met": 1,
+    "not_evaluable": 2,
+    "of": 24
+  },
+  "behaviours": [
+    {
+      "n": "1",
+      "behaviour": "images normalized and hashed",
+      "verdict": "met",
+      "observation": "campaign reached PARTIAL; upload accepted 3 images"
+    },
+    {
+      "n": "2",
+      "behaviour": "product crops shown",
+      "verdict": "not evaluable",
+      "observation": "crops are a UI surface; not represented in the API payload"
+    },
+    {
+      "n": "3",
+      "behaviour": "visible parts identified",
+      "verdict": "met",
+      "observation": "part evidence only appears on a published candidate"
+    },
+    {
+      "n": "4",
+      "behaviour": "OCR and marks extracted",
+      "verdict": "met",
+      "observation": "normalized events: 9"
+    },
+    {
+      "n": "5",
+      "behaviour": "two or more identity hypotheses when uncertain",
+      "verdict": "not evaluable",
+      "observation": "hypotheses exposed by the API: not exposed"
+    },
+    {
+      "n": "6",
+      "behaviour": "query families generated",
+      "verdict": "met",
+      "observation": "progress stages observed: 105"
+    },
+    {
+      "n": "7",
+      "behaviour": "multiple admitted source classes searched",
+      "verdict": "met",
+      "observation": "sources completed: ['kind', 'komehyo', 'the_realreal']"
+    },
+    {
+      "n": "8",
+      "behaviour": "source blocks reported honestly",
+      "verdict": "met",
+      "observation": "blocked: [('wikimedia', 'BLOCKED_BY_POLICY'), ('byronesque', 'SOURCE_UNAVAILABLE'), ('heroine', 'BLOCKED_BY_POLICY'), ('ebay', 'AUTH_REQUIRED')]"
+    },
+    {
+      "n": "9",
+      "behaviour": "listing candidates normalized",
+      "verdict": "met",
+      "observation": "candidates_normalized=9, pages_fetched=17"
+    },
+    {
+      "n": "10",
+      "behaviour": "duplicates and copied-image families clustered",
+      "verdict": "met",
+      "observation": "cluster evidence rides on a published candidate"
+    },
+    {
+      "n": "11",
+      "behaviour": "broad retrieval preserves plausible candidates",
+      "verdict": "met",
+      "observation": "counts={'hidden': 8, 'possibly_real': 4, 'real': 0}"
+    },
+    {
+      "n": "12",
+      "behaviour": "part-level comparison on top candidates",
+      "verdict": "met",
+      "observation": "compare present"
+    },
+    {
+      "n": "13",
+      "behaviour": "model match and authenticity scored separately",
+      "verdict": "met",
+      "observation": "separate fields required on each published result"
+    },
+    {
+      "n": "14",
+      "behaviour": "live status checked",
+      "verdict": "met",
+      "observation": "last_checked_at present on published results"
+    },
+    {
+      "n": "15",
+      "behaviour": "high-evidence candidates appear in Real",
+      "verdict": "not met",
+      "observation": "Real=0"
+    },
+    {
+      "n": "16",
+      "behaviour": "plausible but incomplete appear in Possibly Real",
+      "verdict": "met",
+      "observation": "Possibly Real=4"
+    },
+    {
+      "n": "17",
+      "behaviour": "hard mismatches and counterfeits stay non-public",
+      "verdict": "met",
+      "observation": "hidden=8; none of them appear in the public lists"
+    },
+    {
+      "n": "18",
+      "behaviour": "every result opens the original listing",
+      "verdict": "met",
+      "observation": "each published result carries a url"
+    },
+    {
+      "n": "19",
+      "behaviour": "compare view shows evidence and missing views",
+      "verdict": "met",
+      "observation": "requires a published candidate"
+    },
+    {
+      "n": "20",
+      "behaviour": "exhaustion or saturation receipt produced",
+      "verdict": "met",
+      "observation": "terminal=PARTIAL reason=budget exhausted"
+    },
+    {
+      "n": "21",
+      "behaviour": "resume after forced interruption",
+      "verdict": "met",
+      "observation": "covered by tests/real_runtime/test_crash_resume.py and test_orchestrator_sigkill.py"
+    },
+    {
+      "n": "22",
+      "behaviour": "no browser remains after completion",
+      "verdict": "met",
+      "observation": "chromium/playwright processes after the campaign: 0"
+    },
+    {
+      "n": "23",
+      "behaviour": "no user image in logs or public artifacts",
+      "verdict": "met",
+      "observation": "references to the uploaded filenames in public artifacts: none"
+    },
+    {
+      "n": "24",
+      "behaviour": "no target URL hardcoded",
+      "verdict": "met",
+      "observation": "source files embedding a product URL: none"
+    }
+  ]
+}

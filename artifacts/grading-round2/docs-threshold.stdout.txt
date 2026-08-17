@@ -1,0 +1,64 @@
+{
+  "nine_documents": {
+    "listed": [
+      "ARCHITECTURE.md",
+      "CLAIMS.md",
+      "LIMITATIONS.md",
+      "README.md",
+      "docs/OPERATING.md",
+      "docs/architecture/API.md",
+      "docs/architecture/EMBEDDINGS.md",
+      "docs/architecture/MATCHING_AND_AUTHENTICITY.md",
+      "web/index.html"
+    ],
+    "missing_from_tree": [],
+    "forbidden_still_present": [],
+    "required_missing": [],
+    "guarded_by_test": [
+      "ARCHITECTURE.md",
+      "CLAIMS.md",
+      "LIMITATIONS.md",
+      "docs/architecture/API.md",
+      "docs/architecture/EMBEDDINGS.md",
+      "web/index.html"
+    ],
+    "ungarded_by_test": [
+      "README.md",
+      "docs/OPERATING.md",
+      "docs/architecture/MATCHING_AND_AUTHENTICITY.md"
+    ],
+    "simulated_revert_would_fail_test": true
+  },
+  "threshold": {
+    "receipt_shipped": {
+      "value": 0.86,
+      "held_out_tpr": 0.5,
+      "held_out_fpr": 0.7
+    },
+    "receipt_verdict": "chosen threshold does not hold on held-out data",
+    "held_out_fpr_is_0_7": true,
+    "value_is_0_86": true,
+    "doc_hits": {
+      "src/searcher/core/embedding_gateway.py": [
+        "shortlist cut",
+        "not a validated identity gate",
+        "70%",
+        "0.86"
+      ],
+      "docs/architecture/EMBEDDINGS.md": [],
+      "docs/SEARCHER_BENCHMARK_METHOD.md": [
+        "0.86"
+      ],
+      "CLAIMS.md": [
+        "0.86"
+      ],
+      "LIMITATIONS.md": [
+        "0.86"
+      ],
+      "SEARCHER_BUCKET_POLICY.md": [],
+      "README.md": [
+        "0.86"
+      ]
+    }
+  }
+}

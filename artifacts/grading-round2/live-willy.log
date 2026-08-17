@@ -1,0 +1,104 @@
+{
+  "search_id": "584c87fd-1014-4d4f-b71b-53bc0aca4579",
+  "elapsed_s": 205.01,
+  "terminal_status": "PARTIAL",
+  "terminal_reason": "budget exhausted",
+  "candidates": 9,
+  "product_urls": 9,
+  "with_images": 9,
+  "image_count": 53,
+  "index_urls": [],
+  "counts": {
+    "real": 0,
+    "possibly_real": 4,
+    "replica": 0,
+    "hidden": 4
+  },
+  "target_url": "https://shop.kind.co.jp/products/8001001141404",
+  "target_in_possibly_real_rank": 1,
+  "target_has_working_link": true,
+  "possibly_real": [
+    {
+      "bucket": "possibly_real",
+      "url": "https://shop.kind.co.jp/products/8001001141404",
+      "title": "無地 ロングスリーブカットソー",
+      "images": 5
+    },
+    {
+      "bucket": "possibly_real",
+      "url": "https://shop.kind.co.jp/products/8001001141442",
+      "title": "ロゴ長袖カットソー",
+      "images": 5
+    },
+    {
+      "bucket": "possibly_real",
+      "url": "https://shop.kind.co.jp/products/8001001141527",
+      "title": "ロゴ長袖カットソーW21-0004",
+      "images": 5
+    },
+    {
+      "bucket": "possibly_real",
+      "url": "https://shop.kind.co.jp/products/8001001141565",
+      "title": "NYLON PANTS",
+      "images": 6
+    }
+  ],
+  "real": [],
+  "coverage": {
+    "candidates_hidden": 8,
+    "candidates_normalized": 9,
+    "pages_fetched": 17,
+    "sources_blocked": [
+      {
+        "detail": "",
+        "id": "wikimedia",
+        "name": "wikimedia",
+        "status": "BLOCKED_BY_POLICY"
+      },
+      {
+        "detail": "",
+        "id": "byronesque",
+        "name": "byronesque",
+        "status": "SOURCE_UNAVAILABLE"
+      },
+      {
+        "detail": "",
+        "id": "heroine",
+        "name": "heroine",
+        "status": "BLOCKED_BY_POLICY"
+      },
+      {
+        "detail": "",
+        "id": "ebay",
+        "name": "ebay",
+        "status": "AUTH_REQUIRED"
+      }
+    ],
+    "sources_completed": [
+      {
+        "detail": "",
+        "id": "kind",
+        "name": "kind",
+        "status": "SEARCHED_MATCHES_FOUND"
+      },
+      {
+        "detail": "",
+        "id": "komehyo",
+        "name": "komehyo",
+        "status": "SEARCHED_NO_MATCH"
+      },
+      {
+        "detail": "",
+        "id": "the_realreal",
+        "name": "the_realreal",
+        "status": "SEARCHED_NO_MATCH"
+      }
+    ],
+    "sources_in_progress": []
+  },
+  "runtime_counts": {
+    "hidden": 8,
+    "possibly_real": 4,
+    "real": 0
+  }
+}

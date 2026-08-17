@@ -1,0 +1,6 @@
+uv run python -m benchmark.run --all
+receipt: /Users/scammermike/.claude-grok/worktrees/searcher-regrade2-20260816-194923/artifacts/searcher-public-benchmark.receipt.json
+evidence: /Users/scammermike/.claude-grok/worktrees/searcher-regrade2-20260816-194923/artifacts/benchmark/evidence-board.html
+splits: /Users/scammermike/.claude-grok/worktrees/searcher-regrade2-20260816-194923/fixtures/benchmark/splits.json
+retrieval overall: {'n': 35, 'recall_at_1': 0.914286, 'recall_at_5': 1.0, 'recall_at_10': 1.0, 'mrr': 0.940476, 'missing': 0}
+false Real: 0
