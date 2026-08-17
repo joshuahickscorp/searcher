@@ -1,8 +1,8 @@
 === START 2026-08-17T01:16:58Z ===
 uv run python -m benchmark.run --all
-receipt: /Users/scammermike/.claude-grok/worktrees/searcher-regrade3-20260816-210839/artifacts/searcher-public-benchmark.receipt.json
-evidence: /Users/scammermike/.claude-grok/worktrees/searcher-regrade3-20260816-210839/artifacts/benchmark/evidence-board.html
-splits: /Users/scammermike/.claude-grok/worktrees/searcher-regrade3-20260816-210839/fixtures/benchmark/splits.json
+receipt: <home>/.claude-grok/worktrees/searcher-regrade3-20260816-210839/artifacts/searcher-public-benchmark.receipt.json
+evidence: <home>/.claude-grok/worktrees/searcher-regrade3-20260816-210839/artifacts/benchmark/evidence-board.html
+splits: <home>/.claude-grok/worktrees/searcher-regrade3-20260816-210839/fixtures/benchmark/splits.json
 retrieval overall: {'n': 35, 'recall_at_1': 0.914286, 'recall_at_5': 1.0, 'recall_at_10': 1.0, 'mrr': 0.940476, 'missing': 0}
 false Real: 0
 === EXIT 0 ===

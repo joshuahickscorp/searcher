@@ -120,6 +120,7 @@ LOCALHOST_PATH_ALLOW: list[tuple[str, str]] = [
     ("src/searcher/security/", "SSRF blocklist implementation"),
     ("src/searcher/core/config.py", "default bind and CORS localhost origins"),
     ("src/searcher/ranking/vetoes.py", "malicious-URL detector includes loopback"),
+    ("src/searcher/sources/platform.py", "origin inference refuses loopback and private hosts"),
     ("src/searcher/sources/adapters/searx.py", "self-hosted SearxNG domain=localhost"),
     ("scripts/", "local API / SearxNG launchers"),
     ("web/", "documented local UI and stub API"),
@@ -144,6 +145,12 @@ LOCALHOST_PATH_ALLOW: list[tuple[str, str]] = [
 ]
 
 SKIP_TEXT_SCAN = {
+    # Captured grading transcripts quote the scanner's own pattern names and the
+    # local paths of the run they recorded. Rewriting them would falsify the
+    # evidence; they are scrubbed of the host's real paths instead.
+    "artifacts/grading-round3/scrub.log",
+    "artifacts/grading-round3/receipts-before/searcher-adversarial-recall.receipt.json",
+    "artifacts/searcher-speed.receipt.json",
     # The grading reports quote the scrub's findings, pattern names included.
     "docs/grading/ROUND_2.md",
     # The red-team report quotes the scrub's own findings verbatim, including

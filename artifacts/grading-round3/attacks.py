@@ -500,7 +500,7 @@ def attack_capability_lie() -> dict[str, Any]:
             }
         )
 
-        real = Path("/Users/scammermike/Downloads/searcher/data/models/embedding.pt")
+        real = Path("<home>/Downloads/searcher/data/models/embedding.pt")
         if real.is_file():
             os.environ["SEARCHER_EMBEDDING_WEIGHTS"] = str(real)
             clear_embedding_probe_cache()
