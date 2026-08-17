@@ -20,5 +20,20 @@
   "finding": "Real did not open, and the reason is not the gate. Coverage records one source completed, rebag, with zero blocked and zero in progress - while the API intends to search nine. The eight that were never attempted include kind, the source the target listing is actually on. The campaign spent its work budget on the first source and stopped.",
   "why_it_matters": "The note shown to a reader asserts a conclusion - that the eight candidates are a different product - which is true only of the one source that ran. Nothing tells the reader that eight of nine sources were never attempted, so 'not found' is indistinguishable from 'not looked for'. This is a stronger form of the same defect as the walked-not-searched note, because here the interface makes a positive claim rather than merely omitting a caveat.",
   "distinct_from": "Not the same as sources filtered out before planning, which the in-flight accounting work covers. These sources were planned and then never reached.",
-  "reproduce": "POST five footwear photographs to /v1/searches and read coverage.sources_completed"
+  "reproduce": "POST five footwear photographs to /v1/searches and read coverage.sources_completed",
+  "why_one_source_ran": {
+    "status": "UNRESOLVED \u2014 narrowed, not solved",
+    "established": "The broker plans all nine sources for this campaign's own 19 queries, kind included, with zero skips recorded. Planning is correct, so the eight are lost during execution.",
+    "eliminated_by_command": {
+      "source_limit budget": "8 of 9 would still allow 8 to run; only 1 did",
+      "family scope filter": "all nine sources are family=legitimate",
+      "language filter": "queries span en fr it ja ko ru zh; the broker still planned all nine",
+      "max_work": "resets per source in engine.py, so it is not a global cap",
+      "wall_seconds": "180 configured, campaign finished at 130s",
+      "page_limit": "40 configured, 17 pages fetched",
+      "saturation": "fires at saturation_real=3 and the campaign published 0 Real"
+    },
+    "remaining": "The loss is inside engine.run's per-plan loop or in how the orchestrator invokes it. Note that a BudgetExceeded break there records UNMEASURABLE for the current plan, and coverage showed zero blocked, so that path did not fire either.",
+    "not_claimed": "The source_limit=8 off-by-one is a real and separate defect. It is not the cause of this, and attributing it here would have been the convenient answer rather than the true one."
+  }
 }
