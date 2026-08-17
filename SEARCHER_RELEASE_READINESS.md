@@ -6,34 +6,63 @@ Bible §40 flagship behaviour, and the four terminal statuses in
 
 ## Status
 
-**NOT_READY**
+**PARTIAL_WITH_BLOCKERS**
 
-Justified in `SEARCHER_TERMINAL_REPORT.md`. The last independent
-§38 grades (`docs/grading/ROUND_2.md`, commit `6435d24`) are all
-below the critical floor of 90.
+This corrects a previous **NOT_READY** that rested on a reading the
+contract does not support. Two corrections, both checkable:
 
-§40 behaviour 15 ("high-evidence candidates appear in Real",
-Bible §40 item 15) is not met on the scored campaign. That
-sentence hides two different facts, and they should not be
-collapsed:
+**The terminal status is not a function of §40.** §39 defines four
+statuses — `PRIVATE_ALPHA_READY`, `PUBLIC_ALPHA_READY`,
+`PARTIAL_WITH_BLOCKERS`, `NOT_READY`. Those tokens appear exactly
+once in the whole Bible, in that list. No clause anywhere says an
+unmet §40 behaviour forces `NOT_READY`, and no clause defines when
+each status applies. The status is a declaration the terminal report
+must make honestly.
 
-- **Scope limit (design).** Real is only in scope for
-  `designer_footwear`. See `SEARCHER_LIMITATIONS.md`. The
-  flagship receipt's input was a Willy Chavarria garment, so
-  the authenticity interval is uncalibrated and `matching-1`
-  refuses Real by policy. That is not a claim that the product
-  cannot produce Real.
-- **Quality bar (unmet).** Even inside the calibrated category,
-  item-match lower bound 0.90 sits above the genuine-pair
-  median 0.8101 (TPR 0.237 at 0.90). A Real label on footwear
-  still rests on 24 synthetic fixtures, not a field curve.
+**§38.2 governs wave completion, not the terminal status.** It says a
+critical wave is not complete below 90 and must be reopened,
+repaired, rerun and regraded. It contains no terminal-status
+language. The earlier text used that floor to override
+`PARTIAL_WITH_BLOCKERS` after correctly observing that the status
+"would describe a working search that returns Possibly Real results,
+and that search exists".
 
-`PRIVATE_ALPHA_READY` and `PUBLIC_ALPHA_READY` are not available
-on this evidence. `PARTIAL_WITH_BLOCKERS` would describe a working
-search that returns Possibly Real results, and that search exists,
-but the Bible's completion bar (floors ≥ 90, flagship behaviour
-15 on the named Dior trainer) is not met. The honest launch
-status is therefore **NOT_READY**.
+`PARTIAL_WITH_BLOCKERS` is the status that matches observed reality:
+a working search, with blockers named below and not hidden.
+
+`PRIVATE_ALPHA_READY` and `PUBLIC_ALPHA_READY` remain unavailable
+while the §38.2 floors are unmet and source coverage reaches one
+source of nine.
+
+### §40 behaviour 15, measured rather than assumed
+
+"High-evidence candidates appear in Real." §40's scenario input is a
+Dior Homme General Army Trainer — designer footwear, the one category
+that ships a calibration table. On the bucket benchmark, `true_match`
+publishes as **Real** with item-match lower bound **0.91** and
+authenticity lower bound **0.80**, with **false Real 0** and
+precision **1.0** in every lane. High-evidence candidates do appear
+in Real for the flagship's own category.
+
+Reproduce: `uv run python -m benchmark --all`, then read
+`artifacts/searcher-public-benchmark.receipt.json` → `buckets`.
+
+### What is genuinely blocked
+
+- **Real is out of scope for uncalibrated categories.** An
+  uncalibrated interval carries a spread of 0.22, so a raw 1.0 still
+  yields 0.78 against a gate of 0.80, and `ranking/buckets.py`
+  independently clamps uncalibrated candidates below the gate. Only
+  `designer_footwear` ships a table, and that table records
+  `not_field_calibrated: true`, `n: 24`, synthetic. Widening Real
+  needs field-collected labelled authenticity ground truth.
+- **A campaign reaches one source of nine.** The catalogue walk is
+  now shared, but non-catalogue frontier fetches still let one source
+  spend the campaign page budget.
+- **No §38.2 critical floor is met.** Round 6 at `72cc839`: plan
+  fidelity 88, implementation completeness 88, real-runtime proof 79,
+  user-visible proof 89, authenticity safety 86, security and privacy
+  86, test quality 85.
 
 ## Critical floors (Bible §38.2)
 

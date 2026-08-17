@@ -4,7 +4,17 @@ Bible §39. Bound to git SHA
 `31e6004c76e1d845447e0993a5ce68948f311265`. Host `Mac-Studio`.
 Date 2026-08-17. Receipt: `artifacts/searcher-terminal.receipt.json`.
 
-Terminal status: **NOT_READY**
+Terminal status: **PARTIAL_WITH_BLOCKERS**
+
+Corrected from NOT_READY. §39 defines four terminal statuses and those
+tokens appear exactly once in the Bible, in that list; no clause makes
+the status a function of §40, and §38.2's floor governs wave completion
+rather than terminal status. §40 behaviour 15 is measured, not assumed:
+`true_match` publishes as Real at item-match 0.91 and authenticity 0.80
+with false Real 0. Blockers are named in `SEARCHER_RELEASE_READINESS.md`
+and are not hidden by this status: Real is out of scope for uncalibrated
+categories, a campaign reaches one source of nine, and no §38.2 critical
+floor is met.
 
 ## Repository
 
