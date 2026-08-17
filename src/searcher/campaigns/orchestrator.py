@@ -580,6 +580,15 @@ class CampaignOrchestrator:
             "sources_blocked": blocked,
             "sources_in_progress": [],
             "pages_fetched": pages,
+            # `pages_fetched` counts every discovery page. The campaign
+            # `page_limit` caps only HTTP fetches: a browser fetch charges
+            # `browser_pages`, a separate dimension with its own ceiling.
+            # Reporting the total beside a stated page_limit of 40 is how a live
+            # run came to read as "60 pages against a limit of 40" - two
+            # different quantities compared as though they were one. The number
+            # the limit actually governs is published beside it so the limit can
+            # be checked rather than inferred.
+            "pages_charged_to_page_limit": self._pages_charged(search_id),
             "candidates_normalized": normalized,
             "candidates_hidden": hidden,
         }
@@ -1298,6 +1307,19 @@ class CampaignOrchestrator:
         self._finish_stage(search_id, CampaignState.REPLANNING)
         self._enter(search_id, CampaignState.DISCOVERING)
         return True
+
+    def _pages_charged(self, search_id: str) -> int | None:
+        """HTTP pages charged against the campaign page limit, or None."""
+        usage = self.controller.repos.get_budget_usage(search_id)
+        if not isinstance(usage, dict):
+            return None
+        used = usage.get("used")
+        if isinstance(used, dict) and "pages" in used:
+            try:
+                return int(used["pages"])
+            except (TypeError, ValueError):
+                return None
+        return None
 
     def _coverage_map(self, search_id: str) -> dict[str, Any]:
         raw = self.controller.repos.get_runtime(search_id).get("coverage")
