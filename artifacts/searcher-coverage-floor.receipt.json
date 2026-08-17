@@ -1,67 +1,26 @@
 {
-  "floor": {
+  "what": "Bible \u00a732.1 coverage floors for the two areas furthest below them, after 114 new behaviour tests.",
+  "floors": {
     "statement": 90,
-    "branch": 80,
-    "source": "Bible \u00a732.1"
+    "branch": 80
   },
-  "measured_at_commit": "7a3f314",
-  "suite": "599 passed, 1 deselected",
-  "areas": [
-    {
-      "area": "matching",
-      "statement": 91.7,
-      "branch": 84.6,
-      "meets_floor": true
+  "suite": "tests/unit tests/property tests/integration, 727 passed",
+  "command": "uv run coverage run --branch --source=src/searcher/campaigns,src/searcher/sources -m pytest tests/unit tests/property tests/integration -q -p no:randomly",
+  "measured": {
+    "campaigns": {
+      "statement_pct": 86.5,
+      "branch_pct": 76.8,
+      "statements_needed": 49,
+      "branches_needed": 15
     },
-    {
-      "area": "ranking",
-      "statement": 91.4,
-      "branch": 72.0,
-      "meets_floor": false
-    },
-    {
-      "area": "authenticity",
-      "statement": 93.0,
-      "branch": 78.9,
-      "meets_floor": false
-    },
-    {
-      "area": "api",
-      "statement": 86.2,
-      "branch": 70.7,
-      "meets_floor": false
-    },
-    {
-      "area": "campaigns",
-      "statement": 80.1,
-      "branch": 62.5,
-      "meets_floor": false
-    },
-    {
-      "area": "sources",
-      "statement": 81.4,
-      "branch": 64.4,
-      "meets_floor": false
-    },
-    {
-      "area": "retrieval",
-      "statement": 86.9,
-      "branch": 71.5,
-      "meets_floor": false
+    "sources": {
+      "statement_pct": 86.3,
+      "branch_pct": 74.7,
+      "statements_needed": 165,
+      "branches_needed": 77
     }
-  ],
-  "total": {
-    "statement": 80.5,
-    "branch": 66.1
   },
-  "below_floor": [
-    "ranking",
-    "authenticity",
-    "api",
-    "campaigns",
-    "sources",
-    "retrieval"
-  ],
-  "reproduce": "./scripts/coverage_floor.sh",
-  "note": "The Bible states the floor but never designates which paths are critical. The seven areas above are this project's choice, recorded so the number cannot be moved by quietly renaming what counts. Only matching meets both floors."
+  "verdict": "Both areas remain below both floors. Neither meets \u00a732.1.",
+  "note": "A narrower run over tests/unit and tests/property alone reports campaigns 59.7/50.0 and sources 71.4/56.8. The floor is only meaningful against a stated suite, and the numbers above are the full one. Quoting the narrow figures as the project's coverage would understate it; quoting them as the floor would be a different error.",
+  "remaining": "orchestrator _run_pipeline/_rank/_publish/_terminate on a real controller; engine _run_plan skip and block paths; searx, sitemap and marginalia parse branches"
 }
