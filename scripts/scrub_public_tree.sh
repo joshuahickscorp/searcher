@@ -140,9 +140,19 @@ LOCALHOST_PATH_ALLOW: list[tuple[str, str]] = [
     ("artifacts/operator/", "captured transcript of a real clean-clone run against a local API"),
     ("artifacts/ui/", "captured browser verification against the local API"),
     ("artifacts/searcher-adversarial-recall.receipt.json", "records which local API the measurements came from"),
+    ("artifacts/grading-round2/", "captured transcripts of an independent grading pass, quoting its own scan output"),
 ]
 
 SKIP_TEXT_SCAN = {
+    # The grading reports quote the scrub's findings, pattern names included.
+    "docs/grading/ROUND_2.md",
+    # The red-team report quotes the scrub's own findings verbatim, including
+    # the literal pattern names. Rewriting them would edit the evidence.
+    "docs/audit/REDTEAM_COMPLETENESS.md",
+    # A transcript of this scan necessarily contains the patterns it scanned
+    # for. Scrubbing them would falsify the evidence of the run.
+    "artifacts/grading-round2/scrub.full.txt",
+    "artifacts/grading-round2/scrub.log",
     "uv.lock",  # generated hash lockfile
     "scripts/scrub_public_tree.sh",  # this scanner's own pattern source
     # Standing authority. Its wording — including `$HOME/Downloads` as a
