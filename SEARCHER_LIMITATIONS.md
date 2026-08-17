@@ -31,17 +31,95 @@ impersonate the user, or publish accusations against sellers.
 
 ## Limitations that are true of this tree
 
-**Nothing this project publishes reaches Real.** Policy
-`matching-1` requires item-match lower bound ≥ 0.90, authenticity
-lower bound ≥ 0.80, evidence completeness ≥ 0.65, a calibrated
-authenticity interval, and a live destination-verified listing
-(`SEARCHER_BUCKET_POLICY.md`,
-`src/searcher/ranking/policy_versions.py`). On
+**Real is scoped to designer footwear.** That is a design
+decision, not a matcher failure. The product refuses to put a
+listing in Real when it has no calibration table for that
+listing's authenticity profile. It can produce Real inside the
+one profile it does calibrate.
+
+Exactly one table ships. Confirm the tree, then the profile the
+locator loads and the profile it rejects:
+
+```bash
+git ls-tree -r --name-only HEAD fixtures/calibration
+uv run python -c "from searcher.authenticity.calibration import locate_default_table, load_table, table_applies; t=load_table(locate_default_table()); print(t.profile, table_applies(t,'handbag'), t.method, t.provenance)"
+```
+
+Output: `fixtures/calibration/footwear_v1.json`, then
+`designer_footwear False`, method
+`piecewise-bin reliability on synthetic holdout`, provenance
+`n=24`, `fitted_on=fixtures/hard_negatives`,
+`not_field_calibrated=True`. `locate_default_table` is hardcoded
+to that filename (`src/searcher/authenticity/calibration.py:52`).
+`table_applies` (`src/searcher/authenticity/calibration.py:59-63`)
+is `table.profile == profile_id`. The engine drops the table when
+that is false (`src/searcher/authenticity/engine.py:133-135`).
+`profile_for("footwear")` resolves to `designer_footwear`
+(`src/searcher/authenticity/profiles/footwear.py:8`,
+`src/searcher/authenticity/profiles/__init__.py:9-14`). A
+handbag is `generic:handbag`
+(`src/searcher/authenticity/profiles/base.py:30-32`).
+
+Everything else takes the uncalibrated interval from
+`apply_calibration` (`src/searcher/authenticity/calibration.py:69-71`),
+whose spread is 0.22. A raw mean of 1.0 still yields lower bound
+0.78 against a Real authenticity gate of 0.80. `matching-1` then
+refuses any uncalibrated interval, independently of that number:
+
+```bash
+uv run python -c "from searcher.authenticity.calibration import apply_calibration; iv,cal,tag=apply_calibration(1.0, None); print(iv.lower_bound, cal, tag)"
+uv run python -c "from searcher.ranking.policy_versions import load_policy; p=load_policy('matching-1'); print(p.require_calibrated_for_real, p.real.authenticity_lower_bound, p.real.authenticity_lower_bound-0.01)"
+```
+
+Output: `0.78 False uncalibrated` and `True 0.8 0.79`.
+`make_interval` subtracts the spread
+(`src/searcher/matching/scores.py:13-16`). `matching-1` sets
+`require_calibrated_for_real=True`
+(`src/searcher/ranking/policy_versions.py:37`) and
+`authenticity_lower_bound=0.80`
+(`src/searcher/ranking/policy_versions.py:29`). `combine_authenticity` writes that tag onto
+`authority_ceiling` (`src/searcher/authenticity/decision.py:62,90`).
+`route_candidate` then clamps an uncalibrated
+candidate to the gate minus 0.01
+(`src/searcher/ranking/buckets.py:42-46`). Combined, an
+uncalibrated listing cannot satisfy Real.
+
+The table is not a market reliability curve and footwear Real is
+not field-validated. Its own provenance records
+`not_field_calibrated: true`, `n: 24`,
+`fitted_on: "fixtures/hard_negatives"`, method
+`piecewise-bin reliability on synthetic holdout`, notes
+`Identity-preserving bins from the synthetic corpus. Not a
+market reliability curve.`
+(`fixtures/calibration/footwear_v1.json:4-10`). A Real label on
+designer footwear rests on that synthetic fixture. The unit test
+that publishes Real is
+`tests/unit/test_real_gate_inputs.py:340-368`
+(`test_footwear_true_match_can_still_be_real`):
+
+```bash
+uv run pytest tests/unit/test_real_gate_inputs.py::test_footwear_true_match_can_still_be_real -q
+```
+
+**The item-match quality bar is a separate limit.** Policy
+`matching-1` also requires item-match lower bound ≥ 0.90 and
+evidence completeness ≥ 0.65
+(`src/searcher/ranking/policy_versions.py:28-30`,
+`SEARCHER_BUCKET_POLICY.md`). On
 `artifacts/searcher-match-calibration.receipt.json` the scorer's
-median on genuine same-listing pairs is 0.8101 and TPR at 0.90 is
-0.237. Live campaigns in this tree publish to Possibly Real. KIND
-destination verification has been observed to answer with a
-challenge (`tests/unit/test_verification.py`).
+median on genuine same-listing pairs is 0.8101 and TPR at 0.90
+is 0.237:
+
+```bash
+git show HEAD:artifacts/searcher-match-calibration.receipt.json | python3 -c 'import json,sys; p=json.load(sys.stdin)["pair_calibration"]; print(p["positive_median"], p["sweep_tpr_fpr"]["0.9"])'
+```
+
+Output: `0.8101 [0.237, 0.002]`. That bar can keep a calibrated
+footwear candidate out of Real. It is not the mechanism that
+refuses a garment or a bag. Live campaigns in this tree publish
+to Possibly Real. KIND destination verification has been
+observed to answer with a challenge
+(`tests/unit/test_verification.py`).
 
 **The pair threshold does not separate.** Shipped 0.86 admits 70%
 of different-listing pairs on held-out data
@@ -79,11 +157,6 @@ process down.
 **A finished search can honestly return nothing.** Empty Real and
 Possibly Real lists are allowed.
 
-**Calibration is not field-calibrated.**
-`fixtures/calibration/footwear_v1.json` records
-`not_field_calibrated: true`. Uncalibrated authenticity cannot
-pass the Real gate under `matching-1`.
-
 **Four code paths assumed footwear.** A garment was asked for its
 sole (gap advisor, authenticity profile, compare ontology,
 reference view classifier). Commits `e835379`, `3fe276b`,
@@ -106,6 +179,9 @@ not include those.
 
 ## What is not established
 
-- A field reliability curve for authenticity.
+- A field reliability curve for authenticity. The shipped table
+  says it is not one (`fixtures/calibration/footwear_v1.json:9-10`).
+- That a Real label on designer footwear would survive a market
+  holdout. The only Real path rests on 24 synthetic fixtures.
 - That every residual replica phrasing is now caught. No
   independent regrade has been run at SHA `31e6004`.

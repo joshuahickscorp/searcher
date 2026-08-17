@@ -63,7 +63,25 @@ new grade.
 
 ## What is still true and unflattering
 
-- **Nothing reaches Real.** Behaviour 15 of §40 fails.
+- **Real is scoped to designer footwear, not absent.**
+  `matching-1` refuses uncalibrated authenticity
+  (`require_calibrated_for_real=True`,
+  `src/searcher/ranking/policy_versions.py:37`; clamp at
+  `src/searcher/ranking/buckets.py:42-46`). One table ships,
+  `fixtures/calibration/footwear_v1.json`, profile
+  `designer_footwear`. `table_applies` is true only for that
+  profile_id. Command:
+  `uv run python -c "from searcher.authenticity.calibration import locate_default_table, load_table, table_applies; t=load_table(locate_default_table()); print(t.profile, table_applies(t,'handbag'))"`
+  → `designer_footwear False`. The unit test
+  `test_footwear_true_match_can_still_be_real`
+  (`tests/unit/test_real_gate_inputs.py:340-368`) publishes
+  Real on a synthetic shoe. That label rests on 24 synthetic
+  fixtures (`not_field_calibrated: true`,
+  `fixtures/calibration/footwear_v1.json:6-9`), not a field
+  curve. §40 behaviour 15 is not met on the scored campaign
+  because that campaign was a garment. Command:
+  `git show HEAD:artifacts/searcher-flagship-matched.receipt.json | python3 -c 'import json,sys; d=json.load(sys.stdin); print(d["counts"]["real"], [b for b in d["behaviours"] if str(b.get("n"))=="15"][0]["verdict"])'`
+  → `0 not met`.
 - **The pair threshold does not separate.** 0.86 admits 70% of
   different-listing pairs
   (`artifacts/searcher-threshold.receipt.json`).

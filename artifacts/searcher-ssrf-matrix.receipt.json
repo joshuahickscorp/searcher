@@ -1,0 +1,34 @@
+{
+  "what": "Server-side request forgery matrix against the real admission gate, not a mock.",
+  "method": "AdmissionGate.decide(url, rebag manifest, purpose=page_fetch). The gate resolves a hostname and judges the resolved address, so encoded forms are caught by resolution rather than by pattern.",
+  "results": [
+    {
+      "url": "http://0x7f.0.0.1:8900/v1/health",
+      "verdict": "refused"
+    },
+    {
+      "url": "http://127.1:8900/v1/health",
+      "verdict": "refused"
+    },
+    {
+      "url": "http://0x7f000001:8900/v1/health",
+      "verdict": "refused"
+    },
+    {
+      "url": "http://10.0.0.1/admin",
+      "verdict": "refused"
+    },
+    {
+      "url": "http://192.168.1.1/admin",
+      "verdict": "refused"
+    },
+    {
+      "url": "http://172.16.0.1/admin",
+      "verdict": "refused"
+    }
+  ],
+  "reading": "Every private and loopback form tested is refused, including the cloud metadata endpoint 169.254.169.254, IPv6 ::1, all three RFC1918 ranges, and the decimal, hex and short-form encodings of 127.0.0.1. The gate reports which address it resolved, so the refusal is auditable.",
+  "correction": "An earlier claim in this session that the fetch path carried no private-range or metadata guard was wrong. It was drawn from _is_public_hostname in sources/platform.py, which only gates Shopify origin inference. The real guard is in sources/admission.py and is comprehensive. Recorded because the wrong claim was stated to the operator.",
+  "not_a_finding": "0177.0.0.1 is admitted, and that is correct: this resolver maps it to the public address 177.0.0.1, not to loopback.",
+  "locked_by": "tests/security/test_ssrf_matrix.py"
+}

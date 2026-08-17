@@ -9,6 +9,7 @@ from typing import Any
 
 from searcher.core.ids import canonical_dumps, sha256_hex
 
+from .corpus import NEGATIVE_PARENTS, multiview_case_id
 from .paths import KIND_PACK, SPLIT_MANIFEST
 
 CALIBRATION = "calibration"
@@ -20,7 +21,7 @@ KNOWN_ITEM_TARGET = "8001001141404"
 
 # Constructed labels from the synthetic hard-negative recipe. These are not
 # marketplace authenticity labels and are not a professional judgment.
-BUCKET_TRUTH: dict[str, str] = {
+_BASE_BUCKET_TRUTH: dict[str, str] = {
     "true_match": "real",
     "adjacent_model": "hidden",
     "different_season": "possibly_real",
@@ -38,9 +39,19 @@ BUCKET_TRUTH: dict[str, str] = {
     "prompt_injection": "real",
 }
 
+BUCKET_TRUTH: dict[str, str] = {
+    **_BASE_BUCKET_TRUTH,
+    **{
+        multiview_case_id(case_id): truth
+        for case_id, truth in _BASE_BUCKET_TRUTH.items()
+        if case_id in NEGATIVE_PARENTS
+    },
+}
+
 # Held-out bucket cases: mix of Real / Possibly Real / Replica / hidden.
-# Replica has a single constructed case; it is reserved for the reporting split.
-HELD_OUT_BUCKET_IDS: frozenset[str] = frozenset(
+# Replica has a single constructed parent; its multi-view variant stays with it
+# so the reporting split sees the pairing rule on a wrong item with many views.
+_BASE_HELD_OUT_BUCKET_IDS: frozenset[str] = frozenset(
     {
         "true_match",
         "adjacent_model",
@@ -50,6 +61,11 @@ HELD_OUT_BUCKET_IDS: frozenset[str] = frozenset(
         "stolen_photos",
         "two_items",
     }
+)
+HELD_OUT_BUCKET_IDS: frozenset[str] = _BASE_HELD_OUT_BUCKET_IDS | frozenset(
+    multiview_case_id(case_id)
+    for case_id in _BASE_HELD_OUT_BUCKET_IDS
+    if case_id in NEGATIVE_PARENTS
 )
 
 KIND_PERMISSION = (
@@ -73,8 +89,10 @@ SPLIT_RULE = (
     "There is no authorized hidden-evaluation set; that split is absent. "
     "KIND: the known-item target handle is reserved for held_out; remaining "
     "handles sorted lexicographically, first five calibration, rest held_out. "
-    "Hard-negative cases: the seven ids in HELD_OUT_BUCKET_IDS are held_out "
-    "so the reporting split contains Real, Possibly Real, Replica, and hidden; "
+    "Hard-negative cases: the ids in HELD_OUT_BUCKET_IDS (the original seven "
+    "plus multi-view variants of the held-out negatives) are held_out so the "
+    "reporting split contains Real, Possibly Real, Replica, and hidden, and "
+    "so best-of-N pairing is scored on wrong items that carry many views; "
     "the remaining constructed cases are calibration. "
     "Calibration is used only to inspect the score-versus-outcome curve and "
     "to show where the already-shipped 0.86 threshold sits. Thresholds are "

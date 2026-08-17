@@ -145,6 +145,10 @@ LOCALHOST_PATH_ALLOW: list[tuple[str, str]] = [
 ]
 
 SKIP_TEXT_SCAN = {
+    # The SSRF matrix is a list of addresses the fetch gate must refuse. The
+    # private ranges in it are the test inputs, not a leak of this host's
+    # network - removing them would delete the evidence that they are blocked.
+    "artifacts/searcher-ssrf-matrix.receipt.json",
     # Round-4 grading transcripts: captured output of the scanner and of live
     # runs against loopback and a tunnel. They quote the pattern names they were
     # checked for, so scanning them finds itself. Host paths were replaced.

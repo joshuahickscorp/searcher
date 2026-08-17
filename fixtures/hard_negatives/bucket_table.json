@@ -220,16 +220,12 @@
     "internal": "rejected",
     "public": "hidden",
     "reasons": [
-      "WRONG_PRODUCT",
+      "STRONG_COUNTERFEIT_EVIDENCE",
       "hidden",
       "adjudicator=local_deterministic",
       "output=advisory"
     ],
-    "item_hard": [
-      "eyelet-count-mismatch",
-      "panel-count-mismatch",
-      "heel-construction-mismatch"
-    ],
+    "item_hard": [],
     "auth_hard": [
       "construction-eyelet-count",
       "construction-panel-count",
