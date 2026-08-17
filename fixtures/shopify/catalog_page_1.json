@@ -1,0 +1,25 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "#001 T-BACK DENIM JACKET",
+      "handle": "8039001512016",
+      "vendor": "New Manual",
+      "product_type": "ジャケット",
+      "tags": "Men, デニム",
+      "body_html": "<p>denim jacket</p>",
+      "images": [{"src": "https://cdn.example.test/jacket.jpg"}],
+      "variants": [{"price": "22000", "available": true}]
+    },
+    {
+      "id": 2,
+      "title": "#03 SELVEDGE STRAIGHT DENIM PANTS",
+      "handle": "8080000793043",
+      "vendor": "ANCELLM",
+      "product_type": "パンツ",
+      "tags": "Men",
+      "images": [{"src": "https://cdn.example.test/pants.jpg"}],
+      "variants": [{"price": "18000", "available": true}]
+    }
+  ]
+}

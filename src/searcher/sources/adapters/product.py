@@ -49,6 +49,9 @@ class SourceSpec:
     known_limitations: tuple[str, ...] = ()
     collection_paths: tuple[str, ...] = ()
     query_paths: tuple[str, ...] = ()
+    catalog_feed_path: str | None = None
+    catalog_page_param: str = "page"
+    catalog_page_size: int = 250
 
 
 def manifest_from_spec(spec: SourceSpec) -> SourceManifest:
@@ -307,6 +310,9 @@ KIND = SourceSpec(
     listing_prefixes=("/products/",),
     collection_paths=("/collections/all",),
     query_paths=("/collections/{slug}/products.json?limit=250",),
+    catalog_feed_path="/products.json",
+    catalog_page_param="page",
+    catalog_page_size=250,
 )
 
 BYRONESQUE = SourceSpec(
@@ -339,6 +345,9 @@ HEROINE = SourceSpec(
     listing_prefixes=("/products/", "/product/"),
     collection_paths=("/collections/all",),
     query_paths=("/collections/{slug}/products.json?limit=250", "/search?q={query}"),
+    catalog_feed_path="/collections/all/products.json",
+    catalog_page_param="page",
+    catalog_page_size=250,
     open_question="Is shopheroine.com the intended Heroine storefront?",
 )
 

@@ -32,6 +32,16 @@ from searcher.sources.broker import Coverage, SourceBroker
 from searcher.sources.browser import BrowserPool
 from searcher.sources.cache import ResponseCache
 from searcher.sources.cancel import RunCancel
+from searcher.sources.catalog import (
+    CATALOG_FALLBACK_RECEIPT,
+    CatalogResult,
+    catalog_feed_path_of,
+    catalog_page_param_of,
+    catalog_page_size_of,
+    catalog_url_allowed,
+    origin_for_spec,
+    page_catalog,
+)
 from searcher.sources.circuit import CircuitBreaker, CircuitOpen
 from searcher.sources.classify import (
     classify_acquired_document,
@@ -69,6 +79,7 @@ class SourceRunSummary:
     listings: list[ListingCandidate] = field(default_factory=list)
     blocked: list[dict[str, str]] = field(default_factory=list)
     expansions: list[dict[str, object]] = field(default_factory=list)
+    catalog_fallbacks: list[dict[str, object]] = field(default_factory=list)
 
 
 class _HasManifest(Protocol):
@@ -118,7 +129,11 @@ class DiscoveryEngine:
         self.per_index_cap = caps.per_index if per_index_cap is None else per_index_cap
         self.per_campaign_cap = caps.per_campaign if per_campaign_cap is None else per_campaign_cap
         self._campaign_expanded = 0
+        self._campaign_query_texts: list[str] = []
         self._expansions: list[dict[str, object]] = []
+        self._campaign_catalog_pages = 0
+        self._campaign_catalog_promoted = 0
+        self._catalogs: list[dict[str, object]] = []
         self.repos = controller.repos
         self.health = HealthStore(self.repos)
         self.broker = SourceBroker(health=self.health)
@@ -160,6 +175,23 @@ class DiscoveryEngine:
             cancel=cancel,
         )
 
+    def _intent_terms(self, search_id: str) -> list[str]:
+        """The user's own text and tags, if the campaign still holds them."""
+        try:
+            intent = self.controller.repos.get_intent(search_id)
+        except Exception:
+            return []
+        if intent is None:
+            return []
+        terms: list[str] = []
+        text = getattr(intent, "text", None)
+        if text:
+            terms.append(str(text))
+        for tag in getattr(intent, "tags", None) or []:
+            if str(tag).strip():
+                terms.append(str(tag))
+        return terms
+
     def run(
         self,
         search_id: str,
@@ -174,7 +206,20 @@ class DiscoveryEngine:
         events = SourceEvents(self.controller, search_id)
         coverage = Coverage()
         self._campaign_expanded = 0
+        # Feed-order sampling of a large collection misses the item being
+        # searched for; expansion ranks members against these before capping.
+        # Compiled queries are hypotheses about the item; the words the user
+        # actually typed are evidence about it. Ranking a collection by the
+        # hypotheses alone missed a listing titled ハイヒールパンプス because no
+        # compiled query contained that word, while the user's own text did.
+        self._campaign_query_texts = [
+            item.query_text for item in queries if str(item.query_text or "").strip()
+        ]
+        self._campaign_query_texts.extend(self._intent_terms(search_id))
         self._expansions = []
+        self._campaign_catalog_pages = 0
+        self._campaign_catalog_promoted = 0
+        self._catalogs = []
         if source_names is not None:
             self.broker.names = tuple(source_names)
         plans = self.broker.plan(
@@ -222,6 +267,7 @@ class DiscoveryEngine:
             listings=deduped.representatives,
             blocked=blocked,
             expansions=list(self._expansions),
+            catalog_fallbacks=list(self._catalogs),
         )
 
     def _run_plan(
@@ -379,6 +425,23 @@ class DiscoveryEngine:
                         state=FrontierState.CANCELLED,
                     )
                     raise
+        if self._should_catalog_fallback(adapter, source_id, found):
+            extra_pages, catalog_outcome = self._run_catalog_fallback(
+                adapter=adapter,
+                escalator=escalator,
+                manifest=manifest,
+                queries=queries,
+                search_id=search_id,
+                source_id=source_id,
+                events=events,
+                found=found,
+                frontier=frontier,
+            )
+            pages += extra_pages
+            if found:
+                last_outcome = SourceOutcome.SEARCHED_MATCHES_FOUND
+            elif catalog_outcome is not SourceOutcome.NOT_ATTEMPTED:
+                last_outcome = catalog_outcome
         if found:
             last_outcome = SourceOutcome.SEARCHED_MATCHES_FOUND
         elif last_outcome is SourceOutcome.NOT_ATTEMPTED:
@@ -545,6 +608,7 @@ class DiscoveryEngine:
             campaign_taken=self._campaign_expanded,
             child_depth=item.depth + 1,
             max_depth=MAX_DEPTH,
+            query_texts=self._campaign_query_texts,
         )
         self._campaign_expanded = result.campaign_taken_after
         self._record_expansion(search_id, source_id, result)
@@ -622,6 +686,138 @@ class DiscoveryEngine:
         runtime["index_expansions"] = recorded
         self.repos.update_runtime(search_id, runtime)
 
+    def _should_catalog_fallback(
+        self, adapter: Any, source_id: str, found: list[ListingCandidate]
+    ) -> bool:
+        if found:
+            return False
+        spec = getattr(adapter, "spec", None)
+        if spec is None or catalog_feed_path_of(spec) is None:
+            return False
+        for payload in self._expansions:
+            if payload.get("source_id") != source_id:
+                continue
+            if payload.get("catalog_fallback"):
+                continue
+            members_found = payload.get("members_found")
+            taken = payload.get("taken")
+            found_n = members_found if isinstance(members_found, int) else 0
+            taken_n = taken if isinstance(taken, int) else 0
+            if found_n > 0 or taken_n > 0:
+                return False
+        return True
+
+    def _run_catalog_fallback(
+        self,
+        *,
+        adapter: Any,
+        escalator: Escalator,
+        manifest: SourceManifest,
+        queries: list[QueryVariant],
+        search_id: str,
+        source_id: str,
+        events: SourceEvents,
+        found: list[ListingCandidate],
+        frontier: Frontier,
+    ) -> tuple[int, SourceOutcome]:
+        spec = getattr(adapter, "spec", None)
+        feed_path = catalog_feed_path_of(spec) if spec is not None else None
+        if spec is None or not feed_path:
+            return 0, SourceOutcome.NOT_ATTEMPTED
+        disallowed = list(getattr(spec, "disallowed", ()) or ())
+        origin = origin_for_spec(spec, fallback=f"https://{manifest.domain}")
+        allowed_hosts = set()
+        for raw in (manifest.domain, host_of(origin)):
+            if raw:
+                allowed_hosts.add(raw.lower())
+        seen = self._seen_target_urls(search_id, frontier)
+        query_texts = [item.query_text for item in queries if str(item.query_text or "").strip()]
+
+        def fetch_page(url: str) -> bytes:
+            if not catalog_url_allowed(url, disallowed):
+                return b""
+            doc = self._fetch_item(adapter, escalator, url, manifest)
+            events.page_fetched(source_id, url, doc.result.outcome.value)
+            self.repos.insert_discovery_page(
+                DiscoveryPage(
+                    page_id=new_id(),
+                    search_id=search_id,
+                    source_id=source_id,
+                    url=url,
+                    content_digest=doc.result.content_digest,
+                    cursor=None,
+                    outcome=doc.result.outcome,
+                    fetched_at=utc_now(),
+                )
+            )
+            if doc.result.outcome is SourceOutcome.SEARCHED_MATCHES_FOUND:
+                return doc.body
+            return b""
+
+        result = page_catalog(
+            origin=origin,
+            feed_path=feed_path,
+            query_texts=query_texts,
+            fetch_page=fetch_page,
+            disallowed=disallowed,
+            page_param=catalog_page_param_of(spec),
+            page_size=catalog_page_size_of(spec),
+            campaign_pages_already=self._campaign_catalog_pages,
+            campaign_promoted_already=self._campaign_catalog_promoted,
+            seen_urls=seen,
+            allowed_hosts=sorted(allowed_hosts),
+            source_id=source_id,
+        )
+        self._campaign_catalog_pages = result.campaign_pages_after
+        self._campaign_catalog_promoted = result.campaign_promoted_after
+        self._record_catalog(search_id, source_id, result)
+        language = None
+        try:
+            languages = adapter.manifest().languages
+            if languages:
+                language = languages[0]
+        except Exception:
+            language = None
+        for member in result.promoted:
+            if looks_like_index_url(member.url):
+                continue
+            if hasattr(adapter, "normalize"):
+                listing = raw_listing_from_member(
+                    member, source_adapter=source_id, language=language
+                )
+                candidate = attach_image_absence(adapter.normalize(listing), listing)
+            else:
+                candidate = candidate_from_member(
+                    member, source_adapter=source_id, language=language
+                )
+            if looks_like_index_url(candidate.canonical_url):
+                continue
+            found.append(candidate)
+            self.repos.upsert_candidate(search_id, candidate)
+            events.candidates_found(source_id, 1)
+        if result.products_promoted > 0:
+            return result.pages_read, SourceOutcome.SEARCHED_MATCHES_FOUND
+        if result.stopped_reason == "robots_disallowed":
+            return result.pages_read, SourceOutcome.BLOCKED_BY_POLICY
+        return result.pages_read, SourceOutcome.SEARCHED_NO_MATCH
+
+    def _record_catalog(self, search_id: str, source_id: str, result: CatalogResult) -> None:
+        payload = result.as_payload()
+        payload["source_id"] = source_id
+        payload["catalog_fallback"] = True
+        self._catalogs.append(payload)
+        receipt = ReceiptBase(
+            receipt_type=CATALOG_FALLBACK_RECEIPT,
+            search_id=search_id,
+            payload=payload,
+        ).seal()
+        self.controller.store_receipt(receipt)
+        runtime = self.repos.get_runtime(search_id)
+        recorded = list(runtime.get("catalog_fallbacks") or [])
+        recorded.append(payload)
+        runtime["catalog_fallbacks"] = recorded
+        self.repos.update_runtime(search_id, runtime)
+
     def _fetch_item(
         self,
         adapter: Any,
@@ -663,6 +859,7 @@ class DiscoveryEngine:
                 "matches": matches,
                 "work_skipped": work_skipped,
                 "expansions": list(self._expansions),
+                "catalog_fallbacks": list(self._catalogs),
             },
         )
         receipt = SourceRunReceipt(
@@ -673,7 +870,10 @@ class DiscoveryEngine:
             matches=matches,
             blocked_reason=outcome.value if is_block(outcome) else None,
             work_skipped=work_skipped,
-            payload={"expansions": list(self._expansions)},
+            payload={
+                "expansions": list(self._expansions),
+                "catalog_fallbacks": list(self._catalogs),
+            },
         ).seal()
         self.controller.store_receipt(receipt)
         events.coverage(source_id, outcome.value, pages)

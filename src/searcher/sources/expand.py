@@ -399,6 +399,7 @@ def expand_index(
     campaign_taken: int = 0,
     child_depth: int = 1,
     max_depth: int = 3,
+    query_texts: Sequence[str] = (),
 ) -> ExpansionResult:
     caps = expansion_caps_from_env()
     index_cap = caps.per_index if per_index_cap is None else max(0, per_index_cap)
@@ -409,6 +410,18 @@ def expand_index(
         listing_prefixes=listing_prefixes,
         allowed_hosts=allowed_hosts,
     )
+    if query_texts:
+        # Order by how well the feed's own text matches the campaign query before
+        # the cap applies. Taking the first N in feed order meant a 250-product
+        # collection was sampled by position: the item being searched for sat at
+        # position 104 and the cap was 24, so it was never reached. Sorting is
+        # stable, so an unscored feed keeps its original order.
+        from searcher.sources.catalog import haystack_from_product, match_score
+
+        members = sorted(
+            members,
+            key=lambda m: -match_score(query_texts, haystack_from_product({}, m)),
+        )
     seen = set(seen_urls or ())
     index_canon = _canon(url)
     seen.add(index_canon)

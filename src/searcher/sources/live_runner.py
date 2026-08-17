@@ -47,6 +47,7 @@ class LiveDiscoveryRunner:
         page_limit: int = 40,
         source_limit: int = 8,
         byte_limit: int = 8_000_000,
+        storage_limit: int = 50_000_000,
     ) -> SearchIntent:
         search_id = new_id()
         intent = SearchIntent(
@@ -74,7 +75,7 @@ class LiveDiscoveryRunner:
             model_call_limit=0,
             byte_limit=byte_limit,
             retry_limit=4,
-            storage_limit=50_000_000,
+            storage_limit=storage_limit,
         )
         self.controller.create(intent, budget=budget)
         variants = [(language, query_text)] + list(extra_queries or [])

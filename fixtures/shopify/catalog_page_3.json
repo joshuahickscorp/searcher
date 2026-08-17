@@ -1,0 +1,24 @@
+{
+  "products": [
+    {
+      "id": 8004001907551,
+      "title": "26SSSupreme x Hanes Spider-Man Tagless Tee",
+      "handle": "8004001907551",
+      "vendor": "Supreme×Hanes",
+      "product_type": "トップス",
+      "tags": "brand_Supreme:シュプリーム, brand_Hanes:ヘインズ",
+      "images": [{"src": "https://cdn.example.test/supreme.jpg"}],
+      "variants": [{"price": "7810", "available": true}]
+    },
+    {
+      "id": 4,
+      "title": "Loop Collar Shirt",
+      "handle": "8018001762539",
+      "vendor": "COMME des GARCONS SHIRT×Supreme",
+      "product_type": "トップス",
+      "tags": "brand_COMME des GARCONS SHIRT",
+      "images": [{"src": "https://cdn.example.test/cdg.jpg"}],
+      "variants": [{"price": "11660", "available": true}]
+    }
+  ]
+}

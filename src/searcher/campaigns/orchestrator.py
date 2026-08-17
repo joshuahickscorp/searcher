@@ -481,6 +481,7 @@ class CampaignOrchestrator:
                 "before": summary.candidates_before,
                 "after": summary.candidates_after,
                 "index_expansions": list(summary.expansions),
+                "catalog_fallbacks": list(getattr(summary, "catalog_fallbacks", []) or []),
             },
         )
         self.controller.emit(

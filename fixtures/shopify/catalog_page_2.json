@@ -1,0 +1,25 @@
+{
+  "products": [
+    {
+      "id": 8003001995070,
+      "title": "ハイヒールパンプス",
+      "handle": "8003001995070",
+      "vendor": "PRADA",
+      "product_type": "シューズ",
+      "tags": "brand_PRADA:プラダ, Women, シューズ, ブラック",
+      "body_html": "<p>PRADA pumps</p>",
+      "images": [{"src": "https://cdn.example.test/8003001995070_1.jpg"}],
+      "variants": [{"price": "5060", "available": true}]
+    },
+    {
+      "id": 3,
+      "title": "無地 ロングスリーブカットソー",
+      "handle": "8001001141404",
+      "vendor": "WILLY CHAVARRIA",
+      "product_type": "トップス",
+      "tags": "Men",
+      "images": [{"src": "https://cdn.example.test/willy.jpg"}],
+      "variants": [{"price": "18700", "available": true}]
+    }
+  ]
+}
