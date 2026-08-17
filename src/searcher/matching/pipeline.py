@@ -1,5 +1,6 @@
 """Stages B–G: isolate, parts, correspondence, geometry, explain."""
 
+
 from __future__ import annotations
 
 from searcher.contracts.enums import Availability, EvidencePolarity, FactClass, FactOrigin
@@ -31,6 +32,12 @@ from searcher.retrieval.cost import CostLedger, CostStage
 from searcher.retrieval.embeddings import OPERATING_THRESHOLD, pair_similarity
 from searcher.retrieval.signals import compute_cheap_signals
 from searcher.retrieval.text import text_identity, tokenize
+
+# Calibrated on fixtures/user_snapshots with the opencv detector: every true
+# pair scored at or above 14 inliers and no different-listing pair exceeded 7.
+# Ten sits in that gap. Absent opencv the detector is noise and never reaches
+# this, which is why the fallback labels itself degraded.
+CORRESPONDENCE_STRONG_INLIERS = 10
 
 
 def enrich_candidate(
@@ -215,8 +222,24 @@ def match_candidate(
                 make_part_match(name, mean, explanation=f"ref={ref_v} cand={cand_v}")
             )
         parts_mean = part_matches_mean(part_records)
-        # Correspondence is supporting geometry, not a substitute score.
-        if corr.inlier_ratio > 0.4:
+        # Correspondence measures geometry rather than hinting at it. Keypoints
+        # that survive a RANSAC homography are the same physical surface seen
+        # twice, so a strong inlier count IS the geometric evidence and sets the
+        # score instead of nudging it.
+        #
+        # The count, not the ratio, is what separates. Measured on
+        # fixtures/user_snapshots: a photograph of an object against its own
+        # listing gives a median of 35 inliers with a worst case of 14, while a
+        # different listing gives a median of 0 and a best of 7. The old
+        # ratio > 0.4 gate passed 2 inliers out of 4 matches and would have
+        # failed 35 out of 100.
+        if corr.inlier_count >= CORRESPONDENCE_STRONG_INLIERS:
+            geometry = tight(
+                max(geometry.interval.mean, 0.92),
+                support=list(geometry.support)
+                + [cite("correspondence", f"{corr.method}:{corr.inlier_count}-inliers")],
+            )
+        elif corr.inlier_ratio > 0.4:
             geometry = tight(
                 min(1.0, geometry.interval.mean + 0.04),
                 support=list(geometry.support) + [cite("correspondence", corr.method)],
