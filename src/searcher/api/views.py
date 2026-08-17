@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from collections import Counter
 from decimal import Decimal
 from typing import Any
 from urllib.parse import urlparse
@@ -103,6 +104,44 @@ def _progress_for(controller: CampaignController, campaign: SearchCampaign) -> d
     return {"stage": stage, "detail": None}
 
 
+
+_HIDDEN_REASON_WORDS = {
+    "INSUFFICIENT_MATCH": "the evidence did not establish the same item",
+    "INACCESSIBLE_DESTINATION": "the listing could not be reached",
+    "DEAD_LISTING": "the listing is no longer offered",
+    "SELF_DECLARED_REPLICA": "the seller describes a replica",
+    "STRONG_COUNTERFEIT_EVIDENCE": "marks contradict the reference",
+    "IMAGE_THEFT_OR_SCAM": "the photographs appear taken from elsewhere",
+    "MALICIOUS_URL": "the destination looked unsafe",
+    "DUPLICATE_NO_UTILITY": "it duplicates another result",
+    "WRONG_PRODUCT": "it is a different product",
+    "POLICY_REFUSAL": "policy refused it",
+}
+
+
+def _hidden_reason_note(
+    controller: CampaignController, search_id: str, hidden: int
+) -> str:
+    """Summarise why hidden candidates were hidden, in the reader's terms."""
+    counted: Counter[str] = Counter()
+    for row in controller.repos.list_results(search_id):
+        if not isinstance(row, dict) or row.get("public_bucket") != "hidden":
+            continue
+        payload = row.get("payload")
+        if not isinstance(payload, dict):
+            raw = row.get("payload_json")
+            payload = json.loads(raw) if isinstance(raw, str) and raw else {}
+        for code in payload.get("reason_codes") or []:
+            if code and code != "hidden":
+                counted[str(code)] += 1
+    if not counted:
+        return f"{hidden} candidate(s) were hidden."
+    parts = [
+        f"{count} because {_HIDDEN_REASON_WORDS.get(code, code.lower().replace('_', ' '))}"
+        for code, count in counted.most_common(3)
+    ]
+    return "Hidden: " + "; ".join(parts) + "."
+
 def project_search(controller: CampaignController, campaign: SearchCampaign) -> dict[str, Any]:
     search_id = campaign.search_id
     runtime = controller.repos.get_runtime(search_id)
@@ -112,7 +151,11 @@ def project_search(controller: CampaignController, campaign: SearchCampaign) -> 
     coverage = _as_coverage(runtime.get("coverage") or campaign.coverage)
     hidden_note = runtime.get("hidden_policy_note")
     if not hidden_note and counts["hidden"]:
-        hidden_note = "Some candidates did not meet policy."
+        # Name the gates that actually closed. "Some candidates did not meet
+        # policy" tells a reader nothing they can act on, and the reasons are
+        # already recorded per result - a campaign that hides everything should
+        # say why rather than leave a bare count.
+        hidden_note = _hidden_reason_note(controller, search_id, counts["hidden"])
     missing = runtime.get("missing_reference_views") or []
     terminal = campaign.terminal_status.value if campaign.terminal_status else None
     return {
