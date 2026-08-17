@@ -1492,11 +1492,19 @@ class CampaignOrchestrator:
         # A source that timed out, hung, looped or returned unparseable content
         # did not answer, and a campaign carrying one has not exhausted its
         # coverage. Fault injection found COMPLETE returned after all four.
-        outcomes = {
-            str(row.get("id") or ""): str(row.get("status") or "")
-            for row in (list(coverage.get("sources_completed") or []) + blocked)
-            if row.get("id")
-        }
+        # Coverage rows are dicts on the live path and bare source names on
+        # others. Assuming the dict shape crashed the terminal decision with
+        # AttributeError on a str, which turns an honest status into a 500.
+        outcomes: dict[str, str] = {}
+        for row in list(coverage.get("sources_completed") or []) + blocked:
+            if isinstance(row, dict):
+                name = str(row.get("id") or "")
+                if name:
+                    outcomes[name] = str(row.get("status") or "")
+            elif isinstance(row, str) and row:
+                # A bare name carries no outcome, so it cannot be judged
+                # unresolved and must not silently force PARTIAL.
+                outcomes.setdefault(row, "")
         verdict = published_terminal_status(
             proposed=CampaignState.COMPLETE.value,
             pages_fetched=pages_fetched,
