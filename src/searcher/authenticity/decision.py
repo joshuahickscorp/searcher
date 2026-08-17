@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from searcher.authenticity.calibration import CalibrationTable, apply_calibration, public_label
 from searcher.authenticity.contracts import CategorySignals
+from searcher.authenticity.established import UNESTABLISHED_PREFIX
+from searcher.contracts.enums import FactClass
 from searcher.contracts.primitives import ScoreWithEvidence
 from searcher.core.policy import apply_price_to_authenticity
 from searcher.matching.scores import weighted_mean
@@ -37,16 +39,16 @@ def combine_authenticity(
     completeness_value: float,
     table: CalibrationTable | None,
 ) -> CategorySignals:
-    raw = weighted_mean(
+    raw = _established_mean(
         [
-            (AUTH_WEIGHTS["construction"], construction.interval.mean),
-            (AUTH_WEIGHTS["label"], labels.interval.mean),
-            (AUTH_WEIGHTS["logo"], logos.interval.mean),
-            (AUTH_WEIGHTS["material"], materials.interval.mean),
-            (AUTH_WEIGHTS["photo"], photo_set.interval.mean),
-            (AUTH_WEIGHTS["originality"], originality.interval.mean),
-            (AUTH_WEIGHTS["source"], source.interval.mean),
-            (AUTH_WEIGHTS["provenance"], provenance.interval.mean),
+            ("construction", construction),
+            ("label", labels),
+            ("logo", logos),
+            ("material", materials),
+            ("photo", photo_set),
+            ("originality", originality),
+            ("source", source),
+            ("provenance", provenance),
         ]
     )
     # Completeness is a separate gate; when critical views are present and
@@ -87,3 +89,20 @@ def combine_authenticity(
         public_label=label,
         authority_ceiling=ceiling if calibrated else "uncalibrated",
     )
+
+
+def _score_is_established(score: ScoreWithEvidence) -> bool:
+    if score.fact_class is FactClass.UNRESOLVED:
+        return False
+    return not any(item.startswith(UNESTABLISHED_PREFIX) for item in score.missing)
+
+
+def _established_mean(parts: list[tuple[str, ScoreWithEvidence]]) -> float:
+    pairs = [
+        (AUTH_WEIGHTS[name], score.interval.mean)
+        for name, score in parts
+        if _score_is_established(score)
+    ]
+    if not pairs:
+        return 0.5
+    return weighted_mean(pairs)

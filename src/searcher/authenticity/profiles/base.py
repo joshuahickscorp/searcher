@@ -15,6 +15,7 @@ class CategoryProfile:
     construction_checks: tuple[str, ...]
     material_checks: tuple[str, ...]
     provenance_signals: tuple[str, ...]
+    established_parts: tuple[str, ...] = ()
 
 
 # Views any photographed object can plausibly show, drawn from ViewHypothesis.

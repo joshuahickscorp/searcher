@@ -4,10 +4,15 @@ from __future__ import annotations
 
 from decimal import Decimal
 
-from searcher.authenticity.calibration import load_table, locate_default_table
+from searcher.authenticity.calibration import load_table, locate_default_table, table_applies
 from searcher.authenticity.completeness import completeness
 from searcher.authenticity.construction import assess_construction
 from searcher.authenticity.decision import combine_authenticity
+from searcher.authenticity.established import (
+    established_claims,
+    footwear_rules_apply,
+    unestablished_tokens,
+)
 from searcher.authenticity.labels import assess_labels
 from searcher.authenticity.logos import assess_logos
 from searcher.authenticity.materials import assess_materials
@@ -63,8 +68,9 @@ def assess_authenticity(
     profile = profile_for(hypothesis.category)
     present = {view.view.value for view in candidate.views}
     complete, missing_views = completeness(profile=profile, present_views=present)
-    ref = _pick(reference_descriptors)
-    cand = _pick(candidate.descriptors)
+    footwear = footwear_rules_apply(profile.category) or footwear_rules_apply(profile.profile_id)
+    ref = _pick(reference_descriptors, footwear=footwear)
+    cand = _pick(candidate.descriptors, footwear=footwear)
     if ref is not None and cand is not None:
         from searcher.matching.geometry import compare_geometry
         from searcher.matching.pipeline import _flipped_descriptor
@@ -99,14 +105,7 @@ def assess_authenticity(
     photo, ph, pm = assess_photo_set(
         list(candidate.descriptors.values()),
         stock_mixed=stock_mixed,
-        apply_footwear_rules=(hypothesis.category or "").lower()
-        in {
-            "footwear",
-            "designer_footwear",
-            "sneaker",
-            "trainer",
-            "shoe",
-        },
+        apply_footwear_rules=footwear,
     )
     original, oh, _om = assess_originality(
         image_records=image_records or [],
@@ -119,10 +118,15 @@ def assess_authenticity(
     )
     provenance, pmiss = assess_provenance(candidate.candidate)
     price = _price_score(candidate, constraints)
-    hard = ch + lh + gh + mh + ph + oh + sh
+    hard = established_claims(ch + lh + gh + mh + ph + oh + sh, profile)
     soft: list[str] = []
-    missing = list(dict.fromkeys(missing_views + lm + gm + pm + pmiss))
+    missing = established_claims(missing_views + lm + gm + pm + pmiss, profile)
+    for token in unestablished_tokens(profile):
+        if token not in missing:
+            missing.append(token)
     table = load_table(locate_default_table())
+    if not table_applies(table, profile.profile_id):
+        table = None
     signals = combine_authenticity(
         construction=construction,
         labels=labels,
@@ -172,10 +176,16 @@ def assess_authenticity(
     )
 
 
-def _pick(items: dict[str, StructuredDescriptor]) -> StructuredDescriptor | None:
+def _pick(
+    items: dict[str, StructuredDescriptor],
+    *,
+    footwear: bool,
+) -> StructuredDescriptor | None:
     if not items:
         return None
-    return max(items.values(), key=lambda item: (item.eyelet_count, item.panel_count))
+    if footwear:
+        return max(items.values(), key=lambda item: (item.eyelet_count, item.panel_count))
+    return max(items.values(), key=lambda item: (item.keypoints, item.subject_area, item.aspect))
 
 
 def _pick_label(items: dict[str, StructuredDescriptor]) -> StructuredDescriptor | None:

@@ -56,6 +56,13 @@ def locate_default_table() -> Path | None:
     return cwd if cwd.is_file() else None
 
 
+def table_applies(table: CalibrationTable | None, profile_id: str) -> bool:
+    """A calibration table is a measurement of one profile, not a universal bin."""
+    if table is None or not table.calibrated:
+        return False
+    return table.profile == profile_id
+
+
 def apply_calibration(
     raw_mean: float, table: CalibrationTable | None
 ) -> tuple[ScoreInterval, bool, str]:

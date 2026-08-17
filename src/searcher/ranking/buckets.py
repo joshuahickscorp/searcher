@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from searcher.authenticity.established import established_claims, footwear_rules_apply
+from searcher.authenticity.profiles import profile_for
 from searcher.contracts.enums import Availability, BucketPublic, HumanReview
 from searcher.contracts.models import (
     AuthenticityEvidence,
@@ -56,6 +58,7 @@ def route_candidate(
         dead_listing_is_hard_veto=bundle.dead_listing_is_hard_veto,
         plausible_floor=bundle.possibly.plausible_item_match_lower_bound,
         exact_colour_required=bool(constraints and constraints.colour),
+        apply_footwear_item_rules=footwear_rules_apply(authenticity.reference_class),
     )
     view = GateView(
         item_match_lower_bound=item_lb,
@@ -94,10 +97,14 @@ def route_candidate(
         reasons.append("possibly-real-gate")
     else:
         reasons.append("hidden")
+    profile = profile_for(authenticity.reference_class)
     explanation = PublicExplanation(
         support=list(match.explanation.support)[:6],
-        contradictions=list(match.hard_contradictions) + list(authenticity.hard_contradictions),
-        missing_evidence=list(authenticity.missing_evidence),
+        contradictions=established_claims(
+            list(match.hard_contradictions) + list(authenticity.hard_contradictions),
+            profile,
+        ),
+        missing_evidence=established_claims(list(authenticity.missing_evidence), profile),
         live_status=candidate.availability,
         last_checked_at=candidate.last_checked_at,
         compared_images=list(match.explanation.compared_images),

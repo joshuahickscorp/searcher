@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from urllib.parse import urlparse
 
-from searcher.contracts.enums import BucketPublic, PublicEventName, SourceFamily
+from searcher.contracts.enums import BucketPublic, CampaignState, PublicEventName, SourceFamily
 from searcher.contracts.models import BucketDecision, ListingCandidate
 from searcher.ranking.vetoes import SELF_DECLARED_REPLICA
 from searcher.retrieval.text import self_declared_replica
@@ -69,6 +69,31 @@ def published_public_bucket(
         # which is the honest outcome rather than a card that goes nowhere.
         return BucketPublic.HIDDEN.value
     return public
+
+
+def published_terminal_status(
+    *,
+    proposed: str,
+    pages_fetched: int,
+    candidate_count: int,
+    queries_compiled: int | None = None,
+    saturation: bool = False,
+) -> str:
+    """COMPLETE is a coverage claim. Fetching nothing is not coverage.
+
+    A campaign that never retrieved a page and never stored a candidate cannot
+    have exhausted search. Saturation (enough Real results) is a different,
+    evidence-backed reason to stop. Fallbacks must not produce COMPLETE.
+    """
+    if proposed != CampaignState.COMPLETE.value:
+        return proposed
+    if saturation:
+        return proposed
+    if queries_compiled is not None and queries_compiled <= 0:
+        return CampaignState.BLOCKED.value
+    if pages_fetched <= 0 and candidate_count <= 0:
+        return CampaignState.BLOCKED.value
+    return proposed
 
 
 def event_name_for_public_bucket(bucket: str) -> str:
