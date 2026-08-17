@@ -608,3 +608,58 @@ def test_mutation_leak_upload_path(
     )
     assert status in {"KILLED", "SURVIVED"}
     print(f"leak upload path: {status} ({detail})")
+
+
+def test_mutation_expose_hidden_benchmark_answer(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Bible §32.9: expose hidden benchmark answer.
+
+    The twelfth sabotage, and the one this suite shipped without. §32.9 lists
+    twelve; eleven were implemented and the suite was reported complete. Round 6
+    counted them.
+
+    The sabotage leaks a held-out identifier into the calibration split, which
+    is how a benchmark quietly starts reporting on data it was tuned against.
+    `assert_no_leakage` exists to refuse exactly that.
+
+    Expected killer:
+    tests.unit.test_benchmark_splits.test_canonical_splits_have_no_shared_identifier
+    """
+    import benchmark.splits as splits_mod
+    from tests.unit.test_benchmark_splits import (
+        test_canonical_splits_have_no_shared_identifier,
+    )
+
+    original = splits_mod.assign_splits
+    splits = original()
+    held = splits.held_out_ids
+    assert held, "no held-out identifiers; this mutation would prove nothing"
+
+    # The sabotage: a held-out identifier appears in the calibration split, so
+    # the benchmark is tuned against data it later reports on. The guard that
+    # exists to refuse this is assert_no_leakage.
+    leaked = (*splits.calibration_ids, held[0])
+
+    def guard_killer() -> None:
+        from benchmark.splits import SplitLeakageError, assert_no_leakage
+
+        # The guard signals a leak by raising SplitLeakageError. _evaluate reads
+        # a killer as having caught the sabotage when it fails an assertion, so
+        # the refusal is translated into one rather than escaping the harness.
+        try:
+            assert_no_leakage(leaked, splits.held_out_ids)
+        except SplitLeakageError as exc:
+            raise AssertionError(f"leakage guard refused the sabotage: {exc}") from exc
+
+    status, detail = _evaluate(
+        "expose hidden benchmark answer",
+        (
+            "benchmark.splits.assert_no_leakage",
+            guard_killer,
+        ),
+        (
+            "tests.unit.test_benchmark_splits.test_canonical_splits_have_no_shared_identifier",
+            test_canonical_splits_have_no_shared_identifier,
+        ),
+    )
+    assert status in {"KILLED", "SURVIVED"}
+    print(f"expose hidden benchmark answer: {status} ({detail})")
