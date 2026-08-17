@@ -473,7 +473,7 @@ class CampaignOrchestrator:
             self.blocked_lanes["discovery"] = f"Discovery failed: {exc}"
             self._emit_discovery_fallback(search_id)
             return
-        coverage = self._ui_coverage(search_id, summary.coverage, summary.candidates_after)
+        coverage = self._ui_coverage(search_id, summary.coverage, summary.candidates_after, summary)
         self.controller.set_runtime(
             search_id,
             coverage=coverage,
@@ -482,6 +482,7 @@ class CampaignOrchestrator:
                 "after": summary.candidates_after,
                 "index_expansions": list(summary.expansions),
                 "catalog_fallbacks": list(getattr(summary, "catalog_fallbacks", []) or []),
+                "strategies": dict(getattr(summary, "strategy_coverage", {}) or {}),
             },
         )
         self.controller.emit(
@@ -524,14 +525,33 @@ class CampaignOrchestrator:
         )
 
     def _ui_coverage(
-        self, search_id: str, per_source: dict[str, str], normalized: int
+        self,
+        search_id: str,
+        per_source: dict[str, str],
+        normalized: int,
+        summary: Any | None = None,
     ) -> dict[str, object]:
-        completed: list[dict[str, str]] = []
-        blocked: list[dict[str, str]] = []
+        completed: list[dict[str, object]] = []
+        blocked: list[dict[str, object]] = []
         from searcher.contracts.enums import SourceOutcome
 
+        details = dict(getattr(summary, "coverage_details", {}) or {}) if summary else {}
+        strategies = dict(getattr(summary, "strategy_coverage", {}) or {}) if summary else {}
         for source_id, outcome in per_source.items():
-            entry = {"id": source_id, "name": source_id, "status": outcome, "detail": ""}
+            source_strategies = list(strategies.get(source_id) or [])
+            detail = str(details.get(source_id) or "")
+            if not detail and source_strategies:
+                from searcher.sources.strategies import format_strategy_detail
+
+                detail = format_strategy_detail(source_strategies)
+            entry: dict[str, object] = {
+                "id": source_id,
+                "name": source_id,
+                "status": outcome,
+                "detail": detail,
+            }
+            if source_strategies:
+                entry["strategies"] = source_strategies
             known = SourceOutcome._value2member_map_
             parsed = SourceOutcome(outcome) if outcome in known else None
             if parsed is not None and (

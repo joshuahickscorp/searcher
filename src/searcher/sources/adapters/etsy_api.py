@@ -20,6 +20,19 @@ from searcher.normalization.listing import normalize_raw
 from searcher.sources.adapters.protocol import DiscoveryPageResult
 from searcher.sources.fetch_modes import FetchedDocument
 from searcher.sources.manifest import build_manifest
+from searcher.sources.strategies import missing_key_note
+
+ETSY_KEY_NAMES = ("ETSY_API_KEY",)
+ETSY_SIGNUP_URL = "https://developers.etsy.com/documentation/essentials/authentication/"
+
+
+def etsy_auth_note(*, api_key: str) -> str:
+    return missing_key_note(
+        key_names=ETSY_KEY_NAMES,
+        present={"ETSY_API_KEY": api_key},
+        signup_url=ETSY_SIGNUP_URL,
+        product="Etsy Open API v3",
+    )
 
 
 class EtsyApiAdapter:
@@ -37,7 +50,11 @@ class EtsyApiAdapter:
             authentication="api_key",
             robots_policy="Disallow: /search?*q= ; Applications must not sidestep the API",
             disallowed_path_prefixes=["/search?", "/search?"],
-            known_limitations=["dormant without ETSY_API_KEY", "listing cache <= 6 hours"],
+            known_limitations=[
+                "dormant without ETSY_API_KEY",
+                f"register an app at {ETSY_SIGNUP_URL}",
+                "listing cache <= 6 hours",
+            ],
         )
 
     def manifest(self) -> SourceManifest:
@@ -54,7 +71,7 @@ class EtsyApiAdapter:
             [],
             None,
             SourceOutcome.AUTH_REQUIRED.value,
-            "ETSY_API_KEY not configured" if not self.api_key else "oauth not implemented",
+            etsy_auth_note(api_key=self.api_key),
         )
 
     def fetch(self, url: str, mode: FetchMode) -> FetchedDocument:
@@ -64,7 +81,7 @@ class EtsyApiAdapter:
                 attempt_id=new_id(),
                 url=url,
                 outcome=SourceOutcome.AUTH_REQUIRED,
-                classification_note="Etsy adapter is API-only and has no credential",
+                classification_note=etsy_auth_note(api_key=self.api_key),
             ),
             body=b"",
             headers={},
@@ -84,5 +101,5 @@ class EtsyApiAdapter:
             availability=Availability.UNKNOWN,
             checked_at=utc_now(),
             outcome=SourceOutcome.AUTH_REQUIRED,
-            note="API credential required",
+            note=etsy_auth_note(api_key=self.api_key),
         )

@@ -52,6 +52,7 @@ class SourceSpec:
     catalog_feed_path: str | None = None
     catalog_page_param: str = "page"
     catalog_page_size: int = 250
+    origin: str | None = None
 
 
 def manifest_from_spec(spec: SourceSpec) -> SourceManifest:
@@ -201,16 +202,19 @@ class ProductPageAdapter(GenericPageAdapter):
                 SourceOutcome.BLOCKED_BY_POLICY.value,
                 self.spec.open_question or "disabled",
             )
+        from searcher.sources.strategies import discover_seed_urls, plan_strategies
+
         terms = usable_query_text(query.query_text)
-        seeds = self._query_seeds(terms) if terms else []
-        note = "query"
-        # Collection crawls are only a fallback when the caller had no query.
-        if not seeds and not str(query.query_text or "").strip():
+        if terms:
+            planned = plan_strategies(self.spec, terms)
+            seeds = discover_seed_urls(planned)
+            note = "query"
+        else:
             seeds = self._fallback_seeds()
             note = "fallback"
         if not seeds:
             return DiscoveryPageResult(
-                [], [], None, SourceOutcome.NOT_ATTEMPTED.value, "no seed paths"
+                [], [], None, SourceOutcome.NOT_ATTEMPTED.value, note or "no seed paths"
             )
         return DiscoveryPageResult(seeds, [], None, SourceOutcome.NOT_ATTEMPTED.value, note)
 
@@ -308,6 +312,7 @@ KIND = SourceSpec(
     languages=("ja", "en"),
     disallowed=("/search",),
     listing_prefixes=("/products/",),
+    sitemap_urls=("https://shop.kind.co.jp/sitemap.xml",),
     collection_paths=("/collections/all",),
     query_paths=("/collections/{slug}/products.json?limit=250",),
     catalog_feed_path="/products.json",

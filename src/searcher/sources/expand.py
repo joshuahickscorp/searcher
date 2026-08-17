@@ -310,6 +310,25 @@ def _ld_item_url(element: object, base: str) -> str | None:
     return None
 
 
+def _sitemap_query_tokens(query_texts: Sequence[str]) -> list[str]:
+    tokens: list[str] = []
+    seen: set[str] = set()
+    for text in query_texts:
+        for part in str(text).split():
+            token = part.lower()
+            if len(token) > 2 and token not in seen:
+                seen.add(token)
+                tokens.append(token)
+    return tokens
+
+
+def _sitemap_loc_matches_query(url: str, tokens: Sequence[str]) -> bool:
+    if not tokens:
+        return True
+    lowered = url.lower()
+    return any(token.replace(" ", "-") in lowered or token in lowered for token in tokens)
+
+
 def _sitemap_members(body: bytes, listing_prefixes: Sequence[str]) -> list[IndexMember]:
     text = body.decode("utf-8-sig", errors="replace")
     locs = [match.group(1).strip() for match in _SITEMAP_LOC.finditer(text)]
@@ -427,6 +446,9 @@ def expand_index(
     seen.add(index_canon)
     reasons: Counter[str] = Counter()
     taken: list[IndexMember] = []
+    sitemap_tokens: list[str] = []
+    if query_texts and "sitemap" in url.lower():
+        sitemap_tokens = _sitemap_query_tokens(query_texts)
     if child_depth > max_depth:
         reasons["max_depth"] += len(members)
         return ExpansionResult(
@@ -444,6 +466,9 @@ def expand_index(
     for member in members:
         if not member.url:
             reasons["missing_url"] += 1
+            continue
+        if sitemap_tokens and not _sitemap_loc_matches_query(member.url, sitemap_tokens):
+            reasons["query_not_in_loc"] += 1
             continue
         if not _host_allowed(member.url, allowed_hosts):
             reasons["host_not_admitted"] += 1

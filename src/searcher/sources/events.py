@@ -45,11 +45,21 @@ class SourceEvents:
             {"phase": "page_fetched", "source": source_id, "url": url, "outcome": outcome},
         )
 
-    def coverage(self, source_id: str, outcome: str, pages: int) -> None:
-        self.emit(
-            PublicEventName.SEARCH_COVERAGE.value,
-            {"source": source_id, "outcome": outcome, "pages": pages},
-        )
+    def coverage(
+        self,
+        source_id: str,
+        outcome: str,
+        pages: int,
+        *,
+        strategies: list[dict[str, object]] | None = None,
+        detail: str = "",
+    ) -> None:
+        payload: dict[str, Any] = {"source": source_id, "outcome": outcome, "pages": pages}
+        if detail:
+            payload["detail"] = detail
+        if strategies:
+            payload["strategies"] = list(strategies)
+        self.emit(PublicEventName.SEARCH_COVERAGE.value, payload)
 
     def blocked(self, source_id: str, outcome: str, basis: str) -> None:
         self.emit(
