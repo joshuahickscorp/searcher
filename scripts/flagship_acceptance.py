@@ -198,10 +198,15 @@ def evaluate(
                     "met" if state.get("terminal_reason") else "not met",
                     f"terminal={state.get('terminal_status')}"
                     f" reason={state.get('terminal_reason')}"))
+    # Not observed here. This harness scores one uninterrupted campaign, so it
+    # has no evidence either way; asserting "met" from a test that ran elsewhere
+    # is exactly the sort of claim-without-observation this report exists to
+    # catch. tests/real_runtime/test_crash_resume.py and
+    # test_orchestrator_sigkill.py do cover it, and they are not this campaign.
     rows.append(row(21, "resume after forced interruption",
-                    "met",
-                    "covered by tests/real_runtime/test_crash_resume.py"
-                    " and test_orchestrator_sigkill.py"))
+                    "not evaluable",
+                    "this harness does not interrupt the campaign it scores;"
+                    " resume is covered by tests/real_runtime, not observed here"))
     leaked = browser_processes()
     rows.append(row(22, "no browser remains after completion",
                     "met" if leaked == 0 else "not met",

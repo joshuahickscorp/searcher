@@ -4,8 +4,7 @@
     "text": "WILLY CHAVARRIA \u7121\u5730 \u30ed\u30f3\u30b0\u30b9\u30ea\u30fc\u30d6\u30ab\u30c3\u30c8\u30bd\u30fc \u30d6\u30e9\u30c3\u30af",
     "tags": [
       "WILLY CHAVARRIA",
-      "\u30ed\u30f3\u30b0\u30b9\u30ea\u30fc\u30d6",
-      "black"
+      "\u30ed\u30f3\u30b0\u30b9\u30ea\u30fc\u30d6"
     ],
     "images": [
       "known_1.jpg",
@@ -13,7 +12,7 @@
       "known_3.jpg"
     ]
   },
-  "search_id": "803c8d3c-677e-4dbb-8c23-82558f997494",
+  "search_id": "de68d661-9c21-414e-a3b3-8c96bd5d3ce0",
   "terminal_status": "PARTIAL",
   "terminal_reason": "budget exhausted",
   "counts": {
@@ -22,9 +21,9 @@
     "hidden": 3
   },
   "summary": {
-    "met": 21,
+    "met": 20,
     "not_met": 1,
-    "not_evaluable": 2,
+    "not_evaluable": 3,
     "of": 24
   },
   "behaviours": [
@@ -62,7 +61,7 @@
       "n": "6",
       "behaviour": "query families generated",
       "verdict": "met",
-      "observation": "progress stages observed: 105"
+      "observation": "progress stages observed: 101"
     },
     {
       "n": "7",
@@ -74,13 +73,13 @@
       "n": "8",
       "behaviour": "source blocks reported honestly",
       "verdict": "met",
-      "observation": "blocked: [('wikimedia', 'BLOCKED_BY_POLICY'), ('byronesque', 'SOURCE_UNAVAILABLE'), ('heroine', 'BLOCKED_BY_POLICY'), ('ebay', 'AUTH_REQUIRED')]"
+      "observation": "blocked: [('wikimedia', 'BLOCKED_BY_ACCESS'), ('byronesque', 'SOURCE_UNAVAILABLE'), ('heroine', 'BLOCKED_BY_POLICY'), ('ebay', 'AUTH_REQUIRED')]"
     },
     {
       "n": "9",
       "behaviour": "listing candidates normalized",
       "verdict": "met",
-      "observation": "candidates_normalized=9, pages_fetched=17"
+      "observation": "candidates_normalized=9, pages_fetched=19"
     },
     {
       "n": "10",
@@ -151,8 +150,8 @@
     {
       "n": "21",
       "behaviour": "resume after forced interruption",
-      "verdict": "met",
-      "observation": "covered by tests/real_runtime/test_crash_resume.py and test_orchestrator_sigkill.py"
+      "verdict": "not evaluable",
+      "observation": "this harness does not interrupt the campaign it scores; resume is covered by tests/real_runtime, not observed here"
     },
     {
       "n": "22",
