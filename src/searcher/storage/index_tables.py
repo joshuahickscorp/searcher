@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Sequence
 from typing import Any
 
 from searcher.core.time import format_utc, utc_now
@@ -161,6 +162,69 @@ class IndexTables:
             key = str(row["listing_key"])
             out.setdefault(key, []).append(dict(row))
         return out
+
+    def search_listings_by_descriptor(
+        self,
+        query: Sequence[float],
+        *,
+        kind: str,
+        limit: int = 50,
+        min_similarity: float = 0.0,
+    ) -> list[tuple[str, float]]:
+        """Nearest listings by image descriptor, best first.
+
+        `search_listings` matches text terms. Descriptors were already being
+        stored here and nothing ever searched them, so retrieval was text-only:
+        a listing whose title carries no brand, model or year could not be found
+        by any query, and image matching never saw it because matching only runs
+        on candidates text retrieval already returned. A plain garment with a
+        generic title is invisible under that arrangement no matter how good the
+        matcher is.
+
+        Brute force over the stored blobs. The catalogue this indexes is a few
+        thousand rows, one query is a dot product per row, and an approximate
+        index is a later problem than having any visual retrieval at all.
+        """
+        import array
+        import math
+
+        wanted = list(query)
+        if not wanted:
+            return []
+        norm_q = math.sqrt(sum(value * value for value in wanted))
+        if norm_q <= 0.0:
+            return []
+
+        rows = self.db.execute(
+            "SELECT listing_key, dim, descriptor FROM index_descriptors WHERE kind = ?",
+            (kind,),
+        ).fetchall()
+
+        best: dict[str, float] = {}
+        for row in rows:
+            if int(row["dim"]) != len(wanted):
+                # A descriptor from another model or another version. Skipping is
+                # correct: comparing across dimensions would be meaningless, and
+                # silently truncating would be worse than not answering.
+                continue
+            values = array.array("f")
+            values.frombytes(bytes(row["descriptor"]))
+            if len(values) != len(wanted):
+                continue
+            dot = sum(a * b for a, b in zip(wanted, values, strict=True))
+            norm_c = math.sqrt(sum(value * value for value in values))
+            if norm_c <= 0.0:
+                continue
+            similarity = dot / (norm_q * norm_c)
+            key = str(row["listing_key"])
+            if similarity > best.get(key, -1.0):
+                best[key] = similarity
+
+        ranked = [
+            (key, score) for key, score in best.items() if score >= min_similarity
+        ]
+        ranked.sort(key=lambda item: (-item[1], item[0]))
+        return ranked[:limit]
 
     def search_listings(
         self,
