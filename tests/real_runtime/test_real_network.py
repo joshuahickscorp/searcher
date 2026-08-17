@@ -25,7 +25,18 @@ JA_QUERY = "ディオールオム トレーナー"
 
 
 @pytest.mark.timeout(240)
-def test_real_network_admitted_sources(controller: CampaignController) -> None:
+def test_real_network_admitted_sources(
+    controller: CampaignController, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    # This test walks real catalogs at the real politeness rate. Most admitted
+    # sources declare 12 requests per minute, which is 5.0s per fetch with
+    # jitter, and the shipped campaign cap is 80 pages - 400s of deliberate
+    # waiting against a 240s budget. The test cannot pass once catalog fallback
+    # engages, and the answer is not to crawl faster or to widen the timeout
+    # until the suite crawls too. It proves that admitted sources answer, which
+    # a handful of pages shows as well as eighty.
+    monkeypatch.setenv("SEARCHER_CATALOG_PAGES_PER_SOURCE", "2")
+    monkeypatch.setenv("SEARCHER_CATALOG_PAGES_PER_CAMPAIGN", "4")
     intent = make_intent()
     controller.create(intent, budget=make_budget())
     queries = [
