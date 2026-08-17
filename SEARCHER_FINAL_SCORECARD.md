@@ -1,39 +1,51 @@
 # Searcher scorecard
 
-Bible §38 dimensions. Round 1 was graded on 2026-08-16 at commit
-`6c4c5e3`. Round 2 is the independent pass in
-`docs/grading/ROUND_2.md`, graded 2026-08-17 at commit `6435d24`.
-Nothing here is self-assessed by the code that was graded.
+Bible §38 dimensions. Four independent passes, none of them
+self-assessed by the code being graded. Columns are labelled by the
+commit that was graded, because the round numbering in this project
+drifted: the third pass wrote its own scores under a `round_2` key
+in `artifacts/grading-round3/scores.json`, and an earlier version of
+this table then labelled that column round 2. The commits below are
+the unambiguous identifiers.
 
-This file is a Bible §39 document. It replaces the earlier text
-that said Round 2 had not been run.
+| Pass | Commit | Where it lives |
+|---|---|---|
+| 1 | `6c4c5e3` | `artifacts/grading-round3/scores.json`, `round_1` |
+| 2 | `a7a5a98` | `docs/grading/ROUND_2.md` |
+| 3 | `6435d24` | `artifacts/grading-round3/scores.json`, `round_2` |
+| 4 | `4610edd` | `docs/grading/ROUND_4.md`, `artifacts/grading-round4/` |
+
+This file is a Bible §39 document.
 
 Terminal status under §39: **NOT_READY**.
 
-SHA `31e6004c76e1d845447e0993a5ce68948f311265` has not been
-independently regraded. The numbers below stand as the last
-adversarial scores.
-
 ## Grades
 
-| Dimension | Round 1 | a7a5a98 | Round 2 (`6435d24`) | Floor |
-|---|---:|---:|---:|---:|
-| Plan fidelity | 58 | 70 | 78 | 90 |
-| Implementation completeness | 62 | 73 | 80 | 90 |
-| Real-runtime proof | 45 | 71 | 77 | 90 |
-| User-visible proof | 64 | 73 | 84 | 90 |
-| Retrieval quality | 38 | 64 | 73 | — |
-| Authenticity safety | 42 | 83 | 88 | 90 |
-| Security and privacy | 82 | 83 | 83 | 90 |
-| Cost efficiency | 78 | 80 | 81 | — |
-| Test quality | 60 | 76 | 85 | 90 |
-| Documentation | 55 | 77 | 80 | — |
+| Dimension | `6c4c5e3` | `a7a5a98` | `6435d24` | `4610edd` | Floor |
+|---|---:|---:|---:|---:|---:|
+| Plan fidelity | 58 | 70 | 78 | 82 | 90 |
+| Implementation completeness | 62 | 73 | 80 | 84 | 90 |
+| Real-runtime proof | 45 | 71 | 77 | 76 | 90 |
+| User-visible proof | 64 | 73 | 84 | 87 | 90 |
+| Retrieval quality | 38 | 64 | 73 | 72 | — |
+| Authenticity safety | 42 | 83 | 88 | 89 | 90 |
+| Security and privacy | 82 | 83 | 83 | 82 | 90 |
+| Cost efficiency | 78 | 80 | 81 | 83 | — |
+| Test quality | 60 | 76 | 85 | 83 | 90 |
+| Documentation | 55 | 77 | 80 | 80 | — |
 
-The floor for a critical category is 90. In Round 2 nothing
-reached it.
+Two dimensions fell in round 4. Real-runtime proof lost a point
+because the speed receipt did not reproduce, and test quality lost
+two because the round found a behaviour the suite did not cover.
+Neither is a regression in the product; both are the grade catching
+up with what was actually true.
 
-Round 2 one-line justifications are in `docs/grading/ROUND_2.md`.
-Scores are also stored at `artifacts/grading-round3/scores.json`.
+The floor for a critical category is 90. Across four rounds
+nothing has reached it. The closest is authenticity safety at 89.
+
+Per-dimension justifications are in `docs/grading/ROUND_2.md` and
+`docs/grading/ROUND_4.md`. Machine-readable scores for the first
+three passes are in `artifacts/grading-round3/scores.json`.
 
 ## What later commits changed, as measurements
 
@@ -61,7 +73,9 @@ new grade.
   reproducible** from this repository.
 - **Residual replica slang** still reached Possibly Real at
   `6435d24`.
-- **Round 3 of SHA `31e6004` has not been graded.**
+- **`31e6004` was never graded on its own.** The next pass ran
+  against `4610edd`, so that commit's changes were graded only in
+  aggregate with everything after them.
 
 ## Regenerating the evidence
 

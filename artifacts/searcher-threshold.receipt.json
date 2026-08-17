@@ -452,8 +452,8 @@
     "code_version": "0.1.0",
     "schema_version": "1.1.0",
     "policy_version": "provisional-1",
-    "git_sha": "28c2eb6bc5fba57fd4d5a9946c45243a265adcd3",
+    "git_sha": "36b99efed000443438ea0557673cd5f67129a5cf",
     "host": "Mac-Studio",
-    "measured_at": "2026-08-16T22:39:44.434881+00:00"
+    "measured_at": "2026-08-17T14:46:38.211502+00:00"
   }
 }

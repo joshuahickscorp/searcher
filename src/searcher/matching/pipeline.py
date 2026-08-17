@@ -169,6 +169,99 @@ def _blend_embedding(glob: ScoreWithEvidence, similarity: float | None) -> Score
     )
 
 
+def _png_for(image_id: str, pngs: dict[str, bytes]) -> bytes | None:
+    return pngs.get(image_id)
+
+
+def _pair_rank(
+    ref_desc: StructuredDescriptor,
+    cand_desc: StructuredDescriptor,
+    visual: float,
+    *,
+    footwear: bool,
+) -> tuple[float, float, float]:
+    """Rank a pair the way correspondence ranks inliers: best evidence first.
+
+    On footwear the identity-bearing view is the one where both photographs
+    still have eyelets and panels. A heel-to-heel ahash can look strong while
+    those counts are never compared. Bags have no such counts, so the rank
+    is just the visual score — the same max-over-pairs rule as embeddings.
+    """
+    if footwear:
+        return (
+            float(min(ref_desc.eyelet_count, cand_desc.eyelet_count)),
+            float(min(ref_desc.panel_count, cand_desc.panel_count)),
+            visual,
+        )
+    return (visual, 0.0, 0.0)
+
+
+def _best_view_pair(
+    reference_pngs: dict[str, bytes],
+    candidate_pngs: dict[str, bytes],
+    reference_descriptors: dict[str, StructuredDescriptor],
+    candidate_descriptors: dict[str, StructuredDescriptor],
+    *,
+    footwear: bool = False,
+    max_pairs: int = 9,
+) -> tuple[
+    StructuredDescriptor | None,
+    StructuredDescriptor | None,
+    bytes | None,
+    bytes | None,
+]:
+    """The strongest visual pair for this candidate, not the first of each.
+
+    Descriptor and pixels are always taken from the same photograph. A single
+    globally chosen reference view is the wrong object to compare when the
+    seller's matching photograph is the third frame. Bounded because this is
+    the same budget as correspondence.
+    """
+    best: (
+        tuple[tuple[float, float, float], StructuredDescriptor, StructuredDescriptor, bytes, bytes]
+        | None
+    ) = None
+    pairs = 0
+    references = list(reference_descriptors.items())
+    candidates = list(candidate_descriptors.items())
+    if footwear:
+        # Spend the 9-pair budget on laterals first, same ranking
+        # `_primary_descriptor` used, so a 5×5 gallery still compares
+        # the constructed views instead of burning the cap on soles.
+        references.sort(
+            key=lambda item: (item[1].eyelet_count, item[1].panel_count, item[1].aspect),
+            reverse=True,
+        )
+        candidates.sort(
+            key=lambda item: (item[1].eyelet_count, item[1].panel_count, item[1].aspect),
+            reverse=True,
+        )
+    for ref_id, ref_desc in references:
+        ref_png = _png_for(ref_id, reference_pngs) or _png_for(ref_desc.image_id, reference_pngs)
+        if ref_png is None:
+            continue
+        for cand_id, cand_desc in candidates:
+            cand_png = _png_for(cand_id, candidate_pngs) or _png_for(
+                cand_desc.image_id, candidate_pngs
+            )
+            if cand_png is None:
+                continue
+            if pairs >= max_pairs:
+                break
+            pairs += 1
+            visual = global_visual(
+                ref_desc, cand_desc, reference_png=ref_png, candidate_png=cand_png
+            ).interval.mean
+            rank = _pair_rank(ref_desc, cand_desc, visual, footwear=footwear)
+            if best is None or rank > best[0]:
+                best = (rank, ref_desc, cand_desc, ref_png, cand_png)
+        if pairs >= max_pairs:
+            break
+    if best is None:
+        return None, None, None, None
+    return best[1], best[2], best[3], best[4]
+
+
 def _best_correspondence(
     reference_pngs: dict[str, bytes],
     candidate_pngs: dict[str, bytes],
@@ -226,10 +319,13 @@ def match_candidate(
     footwear = ontology.category == "footwear"
     exact_colour = bool(constraints and constraints.colour)
     embedding_sim = pair_similarity(reference_pngs, candidate.pngs)
-    ref_desc = _primary_descriptor(reference_descriptors, footwear=footwear)
-    cand_desc = _primary_descriptor(candidate.descriptors, footwear=footwear)
-    ref_png = next(iter(reference_pngs.values())) if reference_pngs else None
-    cand_png = next(iter(candidate.pngs.values())) if candidate.pngs else None
+    ref_desc, cand_desc, ref_png, cand_png = _best_view_pair(
+        reference_pngs,
+        candidate.pngs,
+        reference_descriptors,
+        candidate.descriptors,
+        footwear=footwear,
+    )
     corr = (
         _best_correspondence(reference_pngs, candidate.pngs, ledger=ledger)
         if reference_pngs and candidate.pngs

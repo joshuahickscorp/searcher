@@ -86,7 +86,7 @@
         "correct": true,
         "hard_vetoes": [],
         "id": "hardneg:authentic_poor_photos",
-        "item_match_lower": 0.807616,
+        "item_match_lower": 0.810816,
         "predicted": "possibly_real",
         "reasons": [
           "possibly-real-gate",
@@ -193,7 +193,7 @@
       }
     ],
     "split": "held_out",
-    "wall_seconds": 1.028047
+    "wall_seconds": 2.949588
   },
   "calibration": {
     "curve": {
@@ -380,9 +380,9 @@
     "A claim that Searcher is better than Google Images or any other engine."
   ],
   "evidence_board": "artifacts/benchmark/evidence-board.html",
-  "git_sha": "28c2eb6bc5fba57fd4d5a9946c45243a265adcd3",
+  "git_sha": "36b99efed000443438ea0557673cd5f67129a5cf",
   "host": "Mac-Studio",
-  "measured_at": "2026-08-16T22:40:16.573314+00:00",
+  "measured_at": "2026-08-17T14:54:51.816952+00:00",
   "no_authenticity_claim": true,
   "not_computed": [
     {
@@ -403,24 +403,24 @@
       "cache_hits": 0,
       "fetches": 0,
       "images_processed": 34,
-      "wall_seconds": 1.028047
+      "wall_seconds": 2.949588
     },
     "cache_hit_rate": 1.0,
     "campaigns": 6,
     "fetches_per_campaign": 0,
     "fetches_total": 0,
-    "images_per_second": 82.245382,
+    "images_per_second": 45.924168,
     "images_processed": 209,
     "note": "fetches_per_campaign is 0 because every byte came from fixtures/ already permitted to be held. A live campaign's fetch cost is a different protocol; see artifacts/searcher-performance.receipt.json and artifacts/searcher-adversarial-recall.receipt.json.",
     "protocol": "Offline fixture campaigns. Retrieval is one closed-set ranking pass. Bucket evaluation is one judge_candidates campaign on the held-out constructed cases. No live source is contacted.",
     "retrieval": {
       "fetches": 0,
-      "images_per_second": 115.654373,
+      "images_per_second": 109.279855,
       "images_scored": 175,
-      "wall_seconds": 1.513129
+      "wall_seconds": 1.601393
     },
-    "wall_seconds_per_campaign": 0.423529,
-    "wall_seconds_total": 2.541176
+    "wall_seconds_per_campaign": 0.758497,
+    "wall_seconds_total": 4.550981
   },
   "policy_version": "provisional-1",
   "prior_receipts": {
@@ -1970,7 +1970,7 @@
       "units": "cosine"
     },
     "split": "held_out",
-    "wall_seconds": 1.513129
+    "wall_seconds": 1.601393
   },
   "schema_version": "1.1.0",
   "shipped_threshold": 0.86,
