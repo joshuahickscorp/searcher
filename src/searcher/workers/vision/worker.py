@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from searcher.authenticity.photo_reuse import screen_photo_reuse
 from searcher.contracts.models import ItemHypothesis, ListingCandidate, SearchConstraints
 from searcher.core.ids import idempotency_key
 from searcher.ranking.pipeline import JudgmentReport, judge_candidates
@@ -55,6 +56,12 @@ def run_vision_worker(
         parameters={"n": len(candidates)},
     )
     del key
+    # Screen the photographs rather than waiting to be told about them. Until
+    # this ran, `stolen` was only ever supplied by tests, so the theft veto was
+    # unreachable in production and the Real gate stayed fail-closed for every
+    # candidate. A caller may still pass its own findings; this fills the gap
+    # when it does not, so screening has genuinely happened either way.
+    screened_reuse, screened_stock = screen_photo_reuse(candidates)
     return judge_candidates(
         search_id=search_id,
         hypothesis=hypothesis,
@@ -64,8 +71,8 @@ def run_vision_worker(
         constraints=constraints,
         already_deduplicated=already_deduplicated,
         destination_verified=destination_verified,
-        stolen=stolen,
-        stock_mixed=stock_mixed,
+        stolen=stolen if stolen is not None else screened_reuse,
+        stock_mixed=stock_mixed if stock_mixed is not None else screened_stock,
         policy=load_policy(policy_version),
         bounds=bounds,
     )
