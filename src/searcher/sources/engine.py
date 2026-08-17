@@ -255,14 +255,42 @@ class DiscoveryEngine:
         )
         all_candidates: list[ListingCandidate] = []
         blocked: list[dict[str, str]] = []
-        for plan in plans:
+        def _record_unattempted(remaining: list[Any], why: str) -> None:
+            for skipped in remaining:
+                coverage.record(
+                    skipped.source_adapter,
+                    SourceOutcome.NOT_ATTEMPTED,
+                    detail=why,
+                )
+
+        for index, plan in enumerate(plans):
             cancel.raise_if_cancelled()
             try:
                 usage.consume(sources=1)
             except BudgetExceeded:
                 coverage.record(plan.source_adapter, SourceOutcome.UNMEASURABLE)
+                _record_unattempted(plans[index + 1 :], "source budget exhausted")
                 break
-            summary, found = self._run_plan(search_id, plan, queries, events, cancel)
+            try:
+                summary, found = self._run_plan(search_id, plan, queries, events, cancel)
+            except BudgetExceeded:
+                # A page-budget exhaustion inside one source used to unwind out
+                # of run() entirely, so every source after it vanished: a live
+                # campaign planned nine, completed one, and reported zero
+                # blocked. The reader was told "it is a different product" about
+                # eight candidates while the source holding their item had never
+                # been opened. A budget that runs out is a fact to report, not a
+                # reason to stop reporting.
+                coverage.record(
+                    plan.source_adapter,
+                    SourceOutcome.UNMEASURABLE,
+                    detail="budget exhausted while this source was being searched",
+                )
+                _record_unattempted(
+                    plans[index + 1 :],
+                    "not attempted: the campaign budget was exhausted by an earlier source",
+                )
+                break
             book = self._strategy_books.get(plan.source_adapter)
             coverage.record(
                 plan.source_adapter,

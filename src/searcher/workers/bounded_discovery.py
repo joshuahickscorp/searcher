@@ -336,12 +336,19 @@ class BoundedDiscoveryEngine(DiscoveryEngine):
             queries, usage, include_disabled=include_disabled, families=families
         )
         eligible: list[SourcePlan] = []
-        for plan in plans:
+        def _record_unattempted(remaining: list[SourcePlan], why: str) -> None:
+            for skipped in remaining:
+                coverage.record(
+                    skipped.source_adapter, SourceOutcome.NOT_ATTEMPTED, detail=why
+                )
+
+        for index, plan in enumerate(plans):
             cancel.raise_if_cancelled()
             try:
                 usage.consume(sources=1)
             except BudgetExceeded:
                 coverage.record(plan.source_adapter, SourceOutcome.UNMEASURABLE)
+                _record_unattempted(plans[index + 1 :], "source budget exhausted")
                 break
             eligible.append(plan)
         all_candidates: list[ListingCandidate] = []
@@ -349,7 +356,14 @@ class BoundedDiscoveryEngine(DiscoveryEngine):
         fatal: BaseException | None = None
 
         def one_plan(plan: SourcePlan) -> tuple[SourcePlan, str, list[ListingCandidate]]:
-            summary, found = self._run_plan(search_id, plan, queries, events, cancel)
+            # A page-budget exhaustion inside one source must not unwind past
+            # the sources after it. This is the engine the API actually runs -
+            # the base class was guarded first and this one was not, so the
+            # live path still lost every remaining source in silence.
+            try:
+                summary, found = self._run_plan(search_id, plan, queries, events, cancel)
+            except BudgetExceeded:
+                return plan, SourceOutcome.UNMEASURABLE.value, []
             return plan, summary, found
 
         results: list[tuple[SourcePlan, str, list[ListingCandidate]]] = []

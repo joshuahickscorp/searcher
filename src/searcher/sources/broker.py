@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+from collections.abc import Iterator
+from contextlib import contextmanager
+from contextvars import ContextVar
 from dataclasses import dataclass, field
 from typing import Any, cast
 
@@ -14,6 +17,11 @@ from searcher.sources.families import family_for
 from searcher.sources.health import HealthStore, may_plan
 from searcher.sources.platform import requires_operator_credential
 from searcher.sources.policy import policy_for
+
+# API campaigns set this so plan() declines a source whose own health_check
+# reports SOURCE_UNAVAILABLE (searx without SEARCHER_SEARX_URL). Default
+# SourceBroker().plan() stays unchanged: that path still plans searx.
+_SKIP_UNANSWERABLE: ContextVar[bool] = ContextVar("searcher_skip_unanswerable", default=False)
 
 DEFAULT_ORDER = (
     "searx",
@@ -64,6 +72,36 @@ class Coverage:
             self.strategies[source_id] = list(strategies)
 
 
+@contextmanager
+def skip_unanswerable_sources() -> Iterator[None]:
+    """Decline adapter-reported SOURCE_UNAVAILABLE for the current task."""
+    token = _SKIP_UNANSWERABLE.set(True)
+    try:
+        yield
+    finally:
+        _SKIP_UNANSWERABLE.reset(token)
+
+
+def _adapter_unavailable_outcome(name: str) -> SourceOutcome | None:
+    """SOURCE_UNAVAILABLE when the adapter's own health_check says so.
+
+    Matches uncredentialed_source_names(): a raised health_check is not a
+    decline — the source is still offered to the planner.
+    """
+    try:
+        adapter = resolve_adapter(name)
+        check = getattr(adapter, "health_check", None)
+        if not callable(check):
+            return None
+        health = check()
+    except Exception:
+        return None
+    outcome = getattr(health, "last_outcome", None) or getattr(health, "outcome", None)
+    if outcome is SourceOutcome.SOURCE_UNAVAILABLE:
+        return SourceOutcome.SOURCE_UNAVAILABLE
+    return None
+
+
 def _health_skip_outcome(record: object) -> SourceOutcome:
     last = getattr(record, "last_outcome", None)
     if isinstance(last, SourceOutcome) and last not in {
@@ -106,10 +144,14 @@ class SourceBroker:
         include_disabled: bool = False,
         families: frozenset[str] | None = None,
         coverage: Coverage | None = None,
+        skip_unanswerable: bool | None = None,
     ) -> list[SourcePlan]:
         if coverage is None:
             coverage = Coverage()
         self.coverage = coverage
+        decline_unanswerable = (
+            _SKIP_UNANSWERABLE.get() if skip_unanswerable is None else skip_unanswerable
+        )
         languages = {query.language for query in queries}
         query_ids = [query.query_id for query in queries]
         plans: list[SourcePlan] = []
@@ -163,10 +205,26 @@ class SourceBroker:
                         detail=f"health forbids planning ({record.state})",
                     )
                     continue
+            if decline_unanswerable:
+                unavailable = _adapter_unavailable_outcome(name)
+                if unavailable is not None:
+                    coverage.record(
+                        source_id,
+                        unavailable,
+                        detail="adapter reported SOURCE_UNAVAILABLE",
+                    )
+                    continue
             recorded = policy_for(manifest.source_id)
             basis = recorded.notes if recorded else manifest.robots_policy
             if usage is not None and usage.would_exceed(sources=1) is not None:
-                break
+                # Keep walking the remaining names so a tight source budget
+                # cannot hide AUTH_REQUIRED / BLOCKED_BY_POLICY skips.
+                coverage.record(
+                    source_id,
+                    SourceOutcome.UNMEASURABLE,
+                    detail="source budget exhausted",
+                )
+                continue
             plans.append(
                 SourcePlan(
                     source_plan_id=new_id(),

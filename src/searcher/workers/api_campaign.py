@@ -379,6 +379,102 @@ def _should_run_live(settings: Settings) -> bool:
     return present["discovery"] and present["routing"]
 
 
+def api_source_names() -> list[str]:
+    """Every known source. The broker records a reason for each one it declines.
+
+    A pre-filtered list hid skipped sources from coverage: first eBay, then
+    the other fifteen. The searched set is still the answerable subset.
+    """
+    from searcher.sources.broker import DEFAULT_ORDER
+
+    return list(DEFAULT_ORDER)
+
+
+def _coverage_source_ids(coverage: dict[str, object]) -> set[str]:
+    ids: set[str] = set()
+    for key in ("sources_completed", "sources_blocked", "sources_in_progress"):
+        rows = coverage.get(key)
+        if not isinstance(rows, list):
+            continue
+        for row in rows:
+            if isinstance(row, dict) and row.get("id"):
+                ids.add(str(row["id"]))
+    return ids
+
+
+def _copy_ui_coverage(raw: object) -> dict[str, object]:
+    coverage = empty_coverage()
+    if not isinstance(raw, dict):
+        return coverage
+    if "sources_completed" not in raw and "sources_blocked" not in raw:
+        return coverage
+    coverage.update(raw)
+    for key in ("sources_completed", "sources_blocked", "sources_in_progress"):
+        rows = coverage.get(key)
+        coverage[key] = list(rows) if isinstance(rows, list) else []
+    return coverage
+
+
+def account_for_every_known_source(controller: CampaignController, search_id: str) -> None:
+    """Name every known source the live run did not put on the coverage map.
+
+    BoundedDiscoveryEngine keeps its own Coverage and never reads the
+    broker's skip records, so a source the broker declined is invisible
+    unless this step copies those reasons onto the campaign.
+    """
+    from searcher.sources.broker import DEFAULT_ORDER, SourceBroker
+
+    coverage = _copy_ui_coverage(controller.repos.get_runtime(search_id).get("coverage"))
+    seen = _coverage_source_ids(coverage)
+    queries = controller.repos.list_queries(search_id)
+    if not queries:
+        return
+    broker = SourceBroker(names=DEFAULT_ORDER)
+    plans = broker.plan(queries, skip_unanswerable=True)
+    planned = {plan.source_adapter for plan in plans}
+    blocked_rows: list[dict[str, object]] = []
+    raw_blocked = coverage["sources_blocked"]
+    if isinstance(raw_blocked, list):
+        for row in raw_blocked:
+            if isinstance(row, dict):
+                blocked_rows.append(dict(row))
+    changed = False
+    for name in DEFAULT_ORDER:
+        if name in seen:
+            continue
+        if name in broker.coverage.per_source:
+            blocked_rows.append(
+                {
+                    "id": name,
+                    "name": name,
+                    "status": broker.coverage.per_source[name],
+                    "detail": broker.coverage.details.get(name, ""),
+                }
+            )
+        elif name in planned:
+            blocked_rows.append(
+                {
+                    "id": name,
+                    "name": name,
+                    "status": SourceOutcome.UNMEASURABLE.value,
+                    "detail": "source budget exhausted",
+                }
+            )
+        else:
+            continue
+        seen.add(name)
+        changed = True
+    if not changed:
+        return
+    coverage["sources_blocked"] = blocked_rows
+    controller.set_runtime(search_id, coverage=coverage)
+    controller.emit(
+        search_id,
+        PublicEventName.SEARCH_COVERAGE.value,
+        payload=coverage,
+        actor="api",
+    )
+
 
 def uncredentialed_source_names() -> list[str]:
     """Admitted, enabled sources that need no operator credential.
@@ -423,6 +519,7 @@ def uncredentialed_source_names() -> list[str]:
         names.append(name)
     return names
 
+
 def run_api_campaign(controller: CampaignController, search_id: str) -> None:
     """Run the orchestrator when layers are live; otherwise stop with BLOCKED."""
     try:
@@ -431,22 +528,26 @@ def run_api_campaign(controller: CampaignController, search_id: str) -> None:
         if is_terminal(campaign.state) or controller.repos.is_deleted(search_id):
             return
         if _should_run_live(controller.settings):
+            from searcher.sources.broker import skip_unanswerable_sources
             from searcher.workers.bounded_discovery import install_bounded_discovery
 
             install_bounded_discovery()
-            FastOrchestrator(
-                controller,
-                # Ask every admitted, enabled, credential-free source rather
-                # than a list written by hand. The hard-coded seven omitted
-                # rebag, whose feed answers and whose robots permits it, so that
-                # shop never appeared in any campaign's coverage - not as
-                # searched and not as blocked. It also named ebay, which cannot
-                # answer without an operator key.
-                source_names=uncredentialed_source_names(),
-                max_rounds=2,
-                max_work=8,
-                batch_size=3,
-            ).run(search_id)
+            # Ask every known source rather than the pre-filtered nine. The
+            # broker already records AUTH_REQUIRED / BLOCKED_BY_POLICY; the
+            # skip_unanswerable context adds SOURCE_UNAVAILABLE so searx is
+            # named and not fetched. BoundedDiscoveryEngine then throws those
+            # skip records away — account_for_every_known_source copies them
+            # back onto the campaign. The hard-coded seven omitted rebag
+            # entirely; the nine-name filter hid the other fifteen the same way.
+            with skip_unanswerable_sources():
+                FastOrchestrator(
+                    controller,
+                    source_names=api_source_names(),
+                    max_rounds=2,
+                    max_work=8,
+                    batch_size=3,
+                ).run(search_id)
+                account_for_every_known_source(controller, search_id)
             return
         with _STORE_LOCK:
             run_reference_query_wave(controller, search_id, [], settings=controller.settings)
