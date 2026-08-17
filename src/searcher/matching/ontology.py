@@ -108,10 +108,17 @@ _REGISTRY: dict[str, CategoryOntology] = {
     "trainer": FOOTWEAR_ONTOLOGY,
     "shoe": FOOTWEAR_ONTOLOGY,
     "garment": GARMENT_ONTOLOGY,
+    "designer_garment": GARMENT_ONTOLOGY,
     "clothing": GARMENT_ONTOLOGY,
     "outerwear": GARMENT_ONTOLOGY,
     "top": GARMENT_ONTOLOGY,
     "bottom": GARMENT_ONTOLOGY,
+    "shirt": GARMENT_ONTOLOGY,
+    "shirts": GARMENT_ONTOLOGY,
+    "long-sleeve": GARMENT_ONTOLOGY,
+    "longsleeve": GARMENT_ONTOLOGY,
+    "long_sleeve": GARMENT_ONTOLOGY,
+    "cutsew": GARMENT_ONTOLOGY,
 }
 
 

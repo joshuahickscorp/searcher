@@ -12,7 +12,17 @@ from searcher.reference.views import classify_view
 # the shape-based reading below: a shirt photographed straight on is a front
 # view, not a heel.
 _FOOTWEAR_CATEGORIES = frozenset(
-    {"footwear", "shoe", "shoes", "sneaker", "sneakers", "boot", "boots"}
+    {
+        "footwear",
+        "designer_footwear",
+        "shoe",
+        "shoes",
+        "sneaker",
+        "sneakers",
+        "trainer",
+        "boot",
+        "boots",
+    }
 )
 
 
@@ -71,8 +81,21 @@ def classify_subjects(
 def refine_views(
     guesses: list[ViewGuess],
     descriptors: Mapping[str, StructuredDescriptor],
+    *,
+    category: str | None = None,
 ) -> list[ViewGuess]:
-    """Upgrade guesses using extracted structure. Still probabilistic."""
+    """Upgrade guesses using extracted structure. Still probabilistic.
+
+    Footwear structure (eyelets → lateral, no eyelets → heel/sole) is only a
+    reading of shoes. A shirt's highlights routinely trip the eyelet counter;
+    applying that reading without a footwear category turned every garment
+    front into a lateral or a heel, so the views the garment profile expects
+    never appeared.
+    """
+    # No category means the caller has not named the object yet. Keep the
+    # historical shoe reading so a footwear enrich without ontology still
+    # finds a lateral. Named non-footwear categories must not inherit it.
+    footwear = category is None or _is_footwear(category)
     out: list[ViewGuess] = []
     for guess in guesses:
         desc = descriptors.get(guess.image_id)
@@ -83,9 +106,9 @@ def refine_views(
         confidence = guess.confidence
         if desc.label_hash:
             view, confidence = ViewHypothesis.LABEL, max(confidence, 0.72)
-        elif desc.eyelet_count >= 3 and desc.panel_count >= 2:
+        elif footwear and desc.eyelet_count >= 3 and desc.panel_count >= 2:
             view, confidence = ViewHypothesis.LATERAL, max(confidence, 0.7)
-        elif desc.eyelet_count == 0:
+        elif footwear and desc.eyelet_count == 0:
             if desc.aspect >= 1.8:
                 view, confidence = ViewHypothesis.SOLE, max(confidence, 0.66)
             else:

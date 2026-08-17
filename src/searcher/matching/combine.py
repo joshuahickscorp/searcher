@@ -54,15 +54,19 @@ def combine_item_match(
         lower_bound=round(min(lower, mean), 6),
         upper_bound=round(max(upper, mean), 6),
     )
+    correspondence_backed = any("correspondence" in item for item in geometry.support)
     if hard_count:
         interval = apply_hard_penalty(interval, hard_count=hard_count)
     elif (
         parts_mean >= 0.9
         and geometry.interval.mean >= 0.9
-        and global_visual.interval.mean >= 0.88
+        and (global_visual.interval.mean >= 0.88 or correspondence_backed)
         and missing_count <= 2
     ):
         # Strong visual identity: tighten the published lower bound.
+        # Correspondence, not the embedding, is the identity evidence. The
+        # embedding's median on genuine pairs is ~0.81, so requiring global
+        # >= 0.88 treated a shortlist cut as a gate the term cannot pass.
         lifted = min(interval.mean, max(interval.lower_bound, 0.91))
         interval = ScoreInterval(
             mean=interval.mean,
@@ -90,9 +94,16 @@ def tight(mean: float, *, support: list[str] | None = None) -> ScoreWithEvidence
     return scored(mean, spread=0.05, support=support or [])
 
 
-def make_part_match(name: str, mean: float, *, explanation: str | None = None) -> PartMatch:
+def make_part_match(
+    name: str,
+    mean: float,
+    *,
+    explanation: str | None = None,
+    correspondence_ref: str | None = None,
+) -> PartMatch:
     return PartMatch(
         part_name=name,
         interval=make_interval(mean, spread=0.07),
         explanation=explanation,
+        correspondence_ref=correspondence_ref,
     )

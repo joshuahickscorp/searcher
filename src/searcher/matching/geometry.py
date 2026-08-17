@@ -9,7 +9,27 @@ from searcher.matching.types import GeometryResult, StructuredDescriptor
 def compare_geometry(
     reference: StructuredDescriptor,
     candidate: StructuredDescriptor,
+    *,
+    apply_footwear_rules: bool = True,
 ) -> GeometryResult:
+    if not apply_footwear_rules:
+        aspect_delta = abs(reference.aspect - candidate.aspect)
+        score = max(0.0, 1.0 - min(1.0, aspect_delta))
+        silhouette_notes = []
+        if aspect_delta > 0.25:
+            score -= 0.08
+            silhouette_notes.append(f"aspect_delta={aspect_delta:.3f}")
+        if not silhouette_notes:
+            silhouette_notes.append("silhouette")
+        return GeometryResult(
+            score=max(0.0, min(1.0, score)),
+            sole_to_upper_delta=0.0,
+            heel_angle_delta=0.0,
+            aspect_delta=round(aspect_delta, 4),
+            panel_delta=0,
+            eyelet_delta=0,
+            notes=silhouette_notes,
+        )
     eyelet_delta = abs(reference.eyelet_count - candidate.eyelet_count)
     panel_delta = abs(reference.panel_count - candidate.panel_count)
     outsole_delta = abs(reference.outsole_ratio - candidate.outsole_ratio)

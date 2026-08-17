@@ -28,6 +28,7 @@ from searcher.core.ids import new_id
 from searcher.core.policy import apply_price_to_authenticity
 from searcher.evidence.records import EvidenceRecord
 from searcher.matching.explanations import cite
+from searcher.matching.pipeline import apply_category
 from searcher.matching.scores import scored
 from searcher.matching.types import EnrichedCandidate, StructuredDescriptor
 from searcher.ranking.vetoes import url_is_malicious
@@ -65,6 +66,7 @@ def assess_authenticity(
 ) -> AuthenticityEvidence:
     if ledger is not None and deep:
         ledger.record(CostStage.DEEP_AUTHENTICITY, detail="deep")
+    apply_category(candidate, hypothesis.category)
     profile = profile_for(hypothesis.category)
     present = {view.view.value for view in candidate.views}
     complete, missing_views = completeness(profile=profile, present_views=present)
@@ -78,11 +80,15 @@ def assess_authenticity(
         primary_png = candidate.pngs.get(cand.image_id)
         if primary_png:
             flipped = _flipped_descriptor(primary_png, cand.image_id)
-            if (
-                flipped is not None
-                and compare_geometry(ref, flipped).score > compare_geometry(ref, cand).score
-            ):
-                cand = flipped
+            if flipped is not None:
+                flipped_score = compare_geometry(
+                    ref, flipped, apply_footwear_rules=footwear
+                ).score
+                cand_score = compare_geometry(
+                    ref, cand, apply_footwear_rules=footwear
+                ).score
+                if flipped_score > cand_score:
+                    cand = flipped
     ref_label = _pick_label(reference_descriptors)
     cand_label = _pick_label(candidate.descriptors)
     construction, ch, _cs = assess_construction(profile=profile, reference=ref, candidate=cand)

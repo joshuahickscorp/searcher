@@ -1,6 +1,5 @@
 """Stages B–G: isolate, parts, correspondence, geometry, explain."""
 
-
 from __future__ import annotations
 
 from searcher.contracts.enums import Availability, EvidencePolarity, FactClass, FactOrigin
@@ -22,7 +21,7 @@ from searcher.matching.explanations import build_match_explanation, cite
 from searcher.matching.geometry import compare_geometry
 from searcher.matching.materials import colour_consistency
 from searcher.matching.ontology import CategoryOntology, ontology_for
-from searcher.matching.parts import build_descriptors, extract_parts
+from searcher.matching.parts import build_descriptors, compare_extracted_parts, extract_parts
 from searcher.matching.scores import scored
 from searcher.matching.segmentation import gallery_images, isolate_subjects
 from searcher.matching.structure import extract_structure
@@ -62,7 +61,7 @@ def enrich_candidate(
     chosen_category = category or (ontology.category if ontology else None)
     views = classify_subjects(gallery, category=chosen_category)
     descriptors = build_descriptors(gallery)
-    views = refine_views(views, descriptors)
+    views = refine_views(views, descriptors, category=chosen_category)
     parts = extract_parts(
         ontology=ontology or ontology_for("footwear"),
         subjects=gallery,
@@ -86,15 +85,43 @@ def enrich_candidate(
     )
 
 
+def apply_category(candidate: EnrichedCandidate, category: str | None) -> EnrichedCandidate:
+    """Re-read views and parts once the hypothesis category is known.
+
+    The orchestrator enriches without a category, so the first pass either
+    keeps a garment as front or, historically, refined it into a heel. Fine
+    matching and authenticity both know the hypothesis; they re-apply it here
+    rather than depending on the caller to pass ontology through.
+    """
+    if not category:
+        return candidate
+    views = classify_subjects(candidate.isolated, category=category)
+    views = refine_views(views, candidate.descriptors, category=category)
+    candidate.views = views
+    candidate.parts = extract_parts(
+        ontology=ontology_for(category),
+        subjects=candidate.isolated,
+        views=views,
+        descriptors=candidate.descriptors,
+    )
+    return candidate
+
+
 def _primary_descriptor(
     descriptors: dict[str, StructuredDescriptor],
+    *,
+    footwear: bool = True,
 ) -> StructuredDescriptor | None:
     if not descriptors:
         return None
-    # Prefer the most "lateral-like" (highest aspect among product shots).
+    if footwear:
+        return max(
+            descriptors.values(),
+            key=lambda item: (item.eyelet_count, item.panel_count, item.aspect),
+        )
     return max(
         descriptors.values(),
-        key=lambda item: (item.eyelet_count, item.panel_count, item.aspect),
+        key=lambda item: (item.subject_area, item.keypoints, item.aspect),
     )
 
 
@@ -107,7 +134,12 @@ def _text_score(
             query.extend(tokenize(belief.value))
     query.extend(tokenize(" ".join(hypothesis.visual_signature.ocr_terms)))
     blobs: list[str] = []
-    for fact in (candidate.title, candidate.description, candidate.seller_reported_model):
+    for fact in (
+        candidate.title,
+        candidate.description,
+        candidate.seller_reported_brand,
+        candidate.seller_reported_model,
+    ):
         if fact and fact.value:
             blobs.append(str(fact.value))
     blobs.extend(extra)
@@ -135,7 +167,6 @@ def _blend_embedding(glob: ScoreWithEvidence, similarity: float | None) -> Score
         missing=list(glob.missing),
         polarity=glob.polarity,
     )
-
 
 
 def _best_correspondence(
@@ -180,6 +211,7 @@ def _best_correspondence(
         )
     return best
 
+
 def match_candidate(
     *,
     hypothesis: ItemHypothesis,
@@ -189,14 +221,29 @@ def match_candidate(
     constraints: SearchConstraints | None = None,
     ledger: CostLedger | None = None,
 ) -> MatchEvidence:
+    apply_category(candidate, hypothesis.category)
     ontology = ontology_for(hypothesis.category)
     footwear = ontology.category == "footwear"
     exact_colour = bool(constraints and constraints.colour)
     embedding_sim = pair_similarity(reference_pngs, candidate.pngs)
-    ref_desc = _primary_descriptor(reference_descriptors)
-    cand_desc = _primary_descriptor(candidate.descriptors)
+    ref_desc = _primary_descriptor(reference_descriptors, footwear=footwear)
+    cand_desc = _primary_descriptor(candidate.descriptors, footwear=footwear)
     ref_png = next(iter(reference_pngs.values())) if reference_pngs else None
     cand_png = next(iter(candidate.pngs.values())) if candidate.pngs else None
+    corr = (
+        _best_correspondence(reference_pngs, candidate.pngs, ledger=ledger)
+        if reference_pngs and candidate.pngs
+        else CorrespondenceResult(
+            inlier_ratio=0.0,
+            match_count=0,
+            inlier_count=0,
+            method="none",
+            mirrored=False,
+            residual=0.0,
+            notes=["no_image_pair"],
+        )
+    )
+    corr_cite = cite("correspondence", f"{corr.method}:{corr.inlier_count}-inliers")
 
     text = _text_score(hypothesis, candidate.candidate, candidate.ocr_terms)
     if ref_desc and cand_desc and ref_png and cand_png:
@@ -204,11 +251,11 @@ def match_candidate(
             global_visual(ref_desc, cand_desc, reference_png=ref_png, candidate_png=cand_png),
             embedding_sim,
         )
-        geom_raw = compare_geometry(ref_desc, cand_desc)
+        geom_raw = compare_geometry(ref_desc, cand_desc, apply_footwear_rules=footwear)
         used_mirror = False
         flipped_desc = _flipped_descriptor(cand_png, cand_desc.image_id)
         if flipped_desc is not None:
-            geom_flip = compare_geometry(ref_desc, flipped_desc)
+            geom_flip = compare_geometry(ref_desc, flipped_desc, apply_footwear_rules=footwear)
             if geom_flip.score > geom_raw.score:
                 geom_raw = geom_flip
                 cand_desc = flipped_desc
@@ -229,7 +276,6 @@ def match_candidate(
                 EvidencePolarity.CONTRADICTORY if colour_contra else EvidencePolarity.SUPPORTING
             ),
         )
-        corr = _best_correspondence(reference_pngs, candidate.pngs, ledger=ledger)
         ref_label = next(
             (d.label_hash for d in reference_descriptors.values() if d.label_hash), None
         )
@@ -248,21 +294,39 @@ def match_candidate(
             label_hash_mismatch=label_mismatch,
             apply_footwear_rules=footwear,
         )
-        part_records = []
-        outsole_delta = 1 if "outsole" in " ".join(hard) else 0
-        heel_delta = 1 if any("heel" in item for item in hard) else 0
-        logo_delta = 1 if any("logo" in item for item in hard + soft) else 0
-        for name, delta, ref_v, cand_v in (
-            ("eyelets", geom_raw.eyelet_delta, ref_desc.eyelet_count, cand_desc.eyelet_count),
-            ("lateral_panels", geom_raw.panel_delta, ref_desc.panel_count, cand_desc.panel_count),
-            ("outsole", outsole_delta, ref_desc.outsole_ratio, cand_desc.outsole_ratio),
-            ("heel", heel_delta, ref_desc.heel_cut, cand_desc.heel_cut),
-            ("logo", logo_delta, ref_desc.logo_kind, cand_desc.logo_kind),
-        ):
-            step = float(delta if isinstance(delta, int) else 1)
-            mean = 0.95 if delta == 0 else max(0.1, 0.55 - 0.2 * step)
-            part_records.append(
-                make_part_match(name, mean, explanation=f"ref={ref_v} cand={cand_v}")
+        if footwear:
+            part_records = []
+            outsole_delta = 1 if "outsole" in " ".join(hard) else 0
+            heel_delta = 1 if any("heel" in item for item in hard) else 0
+            logo_delta = 1 if any("logo" in item for item in hard + soft) else 0
+            for name, delta, ref_v, cand_v in (
+                (
+                    "eyelets",
+                    geom_raw.eyelet_delta,
+                    ref_desc.eyelet_count,
+                    cand_desc.eyelet_count,
+                ),
+                (
+                    "lateral_panels",
+                    geom_raw.panel_delta,
+                    ref_desc.panel_count,
+                    cand_desc.panel_count,
+                ),
+                ("outsole", outsole_delta, ref_desc.outsole_ratio, cand_desc.outsole_ratio),
+                ("heel", heel_delta, ref_desc.heel_cut, cand_desc.heel_cut),
+                ("logo", logo_delta, ref_desc.logo_kind, cand_desc.logo_kind),
+            ):
+                step = float(delta if isinstance(delta, int) else 1)
+                mean = 0.95 if delta == 0 else max(0.1, 0.55 - 0.2 * step)
+                part_records.append(
+                    make_part_match(name, mean, explanation=f"ref={ref_v} cand={cand_v}")
+                )
+        else:
+            part_records = compare_extracted_parts(
+                ontology=ontology,
+                candidate_parts=candidate.parts,
+                correspondence=corr,
+                strong_inliers=CORRESPONDENCE_STRONG_INLIERS,
             )
         parts_mean = part_matches_mean(part_records)
         # Correspondence measures geometry rather than hinting at it. Keypoints
@@ -279,13 +343,20 @@ def match_candidate(
         if corr.inlier_count >= CORRESPONDENCE_STRONG_INLIERS:
             geometry = tight(
                 max(geometry.interval.mean, 0.92),
-                support=list(geometry.support)
-                + [cite("correspondence", f"{corr.method}:{corr.inlier_count}-inliers")],
+                support=list(geometry.support) + [corr_cite],
             )
         elif corr.inlier_ratio > 0.4:
             geometry = tight(
                 min(1.0, geometry.interval.mean + 0.04),
                 support=list(geometry.support) + [cite("correspondence", corr.method)],
+            )
+        elif corr.method != "none":
+            # Cite the measurement even when it is below the identity bar, so a
+            # live result can show the inlier count instead of looking as if
+            # correspondence never ran.
+            geometry = tight(
+                geometry.interval.mean,
+                support=list(geometry.support) + [corr_cite],
             )
     else:
         cheap = compute_cheap_signals(
@@ -302,9 +373,22 @@ def match_candidate(
             embedding_sim,
         )
         geometry = scored(0.45, spread=0.2, missing=["geometry"])
+        if corr.inlier_count >= CORRESPONDENCE_STRONG_INLIERS:
+            geometry = tight(0.92, support=[corr_cite])
+        elif corr.method != "none":
+            geometry = scored(0.45, spread=0.2, missing=["geometry"], support=[corr_cite])
         material = scored(cheap.colour, spread=0.14)
-        part_records = []
-        parts_mean = 0.4
+        if footwear:
+            part_records = []
+            parts_mean = 0.4
+        else:
+            part_records = compare_extracted_parts(
+                ontology=ontology,
+                candidate_parts=candidate.parts,
+                correspondence=corr,
+                strong_inliers=CORRESPONDENCE_STRONG_INLIERS,
+            )
+            parts_mean = part_matches_mean(part_records)
         hard, soft = [], []
         colour_contra = []
         label_mismatch = False
@@ -350,6 +434,8 @@ def match_candidate(
         cite("parts", "ontology"),
         cite("geometry", "relations"),
     ]
+    if corr.method != "none":
+        support.append(corr_cite)
     if embedding_sim is not None and embedding_sim >= OPERATING_THRESHOLD:
         support.append(cite("embedding", "cosine"))
         support.append(cite("embedding", "OBSERVED-pixels"))

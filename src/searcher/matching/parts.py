@@ -2,9 +2,16 @@
 
 from __future__ import annotations
 
+from searcher.contracts.primitives import PartMatch
 from searcher.matching.ontology import CategoryOntology, PartSpec
 from searcher.matching.structure import extract_structure
-from searcher.matching.types import ExtractedPart, IsolatedSubject, StructuredDescriptor, ViewGuess
+from searcher.matching.types import (
+    CorrespondenceResult,
+    ExtractedPart,
+    IsolatedSubject,
+    StructuredDescriptor,
+    ViewGuess,
+)
 
 
 def extract_parts(
@@ -90,3 +97,66 @@ def build_descriptors(subjects: list[IsolatedSubject]) -> dict[str, StructuredDe
             continue
         out[subject.image_id] = extract_structure(subject.png, image_id=subject.image_id)
     return out
+
+
+def compare_extracted_parts(
+    *,
+    ontology: CategoryOntology,
+    candidate_parts: list[ExtractedPart],
+    correspondence: CorrespondenceResult | None,
+    strong_inliers: int,
+) -> list[PartMatch]:
+    """Score ontology parts. Correspondence is identity; extraction is presence.
+
+    Footwear construction counts (eyelets, outsole) are a different function.
+    A shirt must not inherit a 0.95 because both sides had zero eyelets.
+    """
+    from searcher.matching.combine import make_part_match
+
+    allowed = set(ontology.part_names())
+    names: list[str] = []
+    confidence_by_name: dict[str, float] = {}
+    for part in candidate_parts:
+        if part.name not in allowed:
+            continue
+        if part.name not in names:
+            names.append(part.name)
+        confidence_by_name[part.name] = max(confidence_by_name.get(part.name, 0.0), part.confidence)
+    strong = correspondence is not None and correspondence.inlier_count >= strong_inliers
+    corr_ref = (
+        f"{correspondence.method}:{correspondence.inlier_count}"
+        if correspondence is not None and strong
+        else None
+    )
+    if not names:
+        if strong and corr_ref is not None:
+            return [
+                make_part_match(
+                    "subject",
+                    0.95,
+                    explanation=f"correspondence {corr_ref}-inliers",
+                    correspondence_ref=corr_ref,
+                )
+            ]
+        return []
+    records: list[PartMatch] = []
+    for name in names:
+        if strong and corr_ref is not None:
+            records.append(
+                make_part_match(
+                    name,
+                    0.95,
+                    explanation=f"correspondence {corr_ref}-inliers",
+                    correspondence_ref=corr_ref,
+                )
+            )
+        else:
+            conf = confidence_by_name[name]
+            records.append(
+                make_part_match(
+                    name,
+                    max(0.35, min(0.55, conf)),
+                    explanation="extracted-unconfirmed",
+                )
+            )
+    return records
