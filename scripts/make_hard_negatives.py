@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Generate the synthetic hard-negative corpus. No marketplace scraping."""
 
 from __future__ import annotations

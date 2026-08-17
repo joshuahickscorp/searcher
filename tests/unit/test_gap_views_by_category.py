@@ -32,3 +32,33 @@ def test_an_unknown_category_is_not_treated_as_footwear() -> None:
     # Defaulting to shoes is what produced the shirt-with-a-sole request.
     assert "sole" not in _views(None)
     assert "sole" not in _views("bag")
+
+
+def test_missing_category_does_not_get_footwear_rules() -> None:
+    """An item whose category was never established is not a shoe.
+
+    `ontology_for` carried a comment saying unknown categories must not
+    silently get footwear rules, and then returned the footwear ontology for
+    `None` and `""`. Only an unrecognised *string* reached the generic branch.
+    So an uncategorised garment was asked for its eyelets and its sole - the
+    defect the comment exists to prevent. Round 5 found it still present.
+    """
+    from searcher.matching.ontology import ontology_for
+
+    for absent in (None, "", "   "):
+        ontology = ontology_for(absent)
+        assert ontology.category != "footwear", (
+            f"category {absent!r} resolved to the footwear ontology"
+        )
+        part_names = {part.name for part in ontology.parts}
+        assert "eyelets" not in part_names
+        assert "outsole" not in part_names
+        assert ontology.authenticity_critical_views == ()
+
+
+def test_named_categories_still_resolve() -> None:
+    from searcher.matching.ontology import ontology_for
+
+    assert ontology_for("footwear").category == "footwear"
+    assert ontology_for("garment").category == "garment"
+    assert ontology_for("handbag").category == "handbag"

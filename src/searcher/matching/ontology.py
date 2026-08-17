@@ -123,12 +123,16 @@ _REGISTRY: dict[str, CategoryOntology] = {
 
 
 def ontology_for(category: str | None) -> CategoryOntology:
-    if not category:
-        return FOOTWEAR_ONTOLOGY
-    key = category.strip().lower()
+    key = (category or "").strip().lower()
     if key in _REGISTRY:
         return _REGISTRY[key]
-    # Unknown category: do not silently apply footwear rules.
+    # Unknown category: do not silently apply footwear rules. This branch used
+    # to be reached only by an unrecognised string, while no category at all
+    # returned the footwear ontology - so an item whose category was never
+    # established was asked for its eyelets and its sole, which is the defect
+    # the comment above was written to prevent.
+    if not key:
+        key = "uncategorised"
     return CategoryOntology(
         category=key,
         profile_id=f"generic:{key}",

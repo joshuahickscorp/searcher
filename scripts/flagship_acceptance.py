@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Bible §40 flagship acceptance, checked behaviour by behaviour against a real campaign.
 
 Runs one campaign through the real API with the §40 input, then evaluates each of

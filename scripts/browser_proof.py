@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Drive the real UI against a live API and write acceptance screenshots."""
 
 from __future__ import annotations
