@@ -17,6 +17,7 @@ from searcher.campaigns.controller import CampaignController
 from searcher.campaigns.events import list_events
 from searcher.campaigns.orchestrator import CampaignOrchestrator
 from searcher.contracts.enums import CampaignState, PublicEventName
+from searcher.core.errors import BudgetExceeded, ErrorClass, SearcherError
 from searcher.receipts.types import typed_from_payload
 from searcher.workers.api_campaign import create_api_campaign
 
@@ -148,3 +149,75 @@ def test_orchestrator_degrades_without_sources(controller: CampaignController) -
     assert campaign.terminal_reason
     if campaign.state is CampaignState.COMPLETE:
         assert campaign.search_exhaustion_receipt
+
+
+# The orchestrator's failure handlers, against the real controller above.
+#
+# These are the honest-failure paths and they were uncovered. When the budget
+# runs out mid-campaign, the results already gathered must be salvaged and the
+# campaign must end PARTIAL - not lose them, and not claim COMPLETE. When an
+# unexpected error escapes, the campaign must be persisted FAILED rather than
+# left mid-flight, where a later reader would take it for still working.
+# Cancellation must return quietly, because a cancelled campaign is not a
+# failure. A fake controller cannot show any of this: what is under test is what
+# gets written, so the assertions read the store afterwards.
+
+
+@pytest.mark.timeout(120)
+def test_budget_exhaustion_salvages_and_ends_partial(
+    controller: CampaignController, shop: str
+) -> None:
+    del shop
+    search_id = _create(controller)
+    orch = CampaignOrchestrator(controller, source_names=["offline_shop"], max_rounds=2)
+    real_pipeline = orch._run_pipeline
+
+    def exhaust(sid: str) -> None:
+        real_pipeline(sid)
+        raise BudgetExceeded("page budget exhausted", dimension="pages")
+
+    orch._run_pipeline = exhaust  # type: ignore[assignment]
+    orch.run(search_id)
+
+    campaign = controller.get(search_id)
+    assert campaign.state is CampaignState.PARTIAL, (
+        "budget exhaustion must end PARTIAL, never COMPLETE and never mid-flight"
+    )
+
+
+@pytest.mark.timeout(120)
+def test_cancellation_is_not_recorded_as_failure(
+    controller: CampaignController, shop: str
+) -> None:
+    del shop
+    search_id = _create(controller)
+    orch = CampaignOrchestrator(controller, source_names=["offline_shop"], max_rounds=2)
+
+    def cancelled(sid: str) -> None:
+        raise SearcherError("cancelled by the user", error_class=ErrorClass.CANCELLED)
+
+    orch._run_pipeline = cancelled  # type: ignore[assignment]
+    orch.run(search_id)
+
+    assert controller.get(search_id).state is not CampaignState.FAILED, (
+        "a cancelled campaign is not a failure and must not be recorded as one"
+    )
+
+
+@pytest.mark.timeout(120)
+def test_an_unexpected_error_is_persisted_as_failed(
+    controller: CampaignController, shop: str
+) -> None:
+    del shop
+    search_id = _create(controller)
+    orch = CampaignOrchestrator(controller, source_names=["offline_shop"], max_rounds=2)
+
+    def boom(sid: str) -> None:
+        raise RuntimeError("unexpected")
+
+    orch._run_pipeline = boom  # type: ignore[assignment]
+    orch.run(search_id)
+
+    assert controller.get(search_id).state is CampaignState.FAILED, (
+        "an escaping error must be persisted as FAILED, not left mid-flight"
+    )
