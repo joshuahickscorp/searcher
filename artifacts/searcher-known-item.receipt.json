@@ -13,5 +13,20 @@
     "why_it_is_never_retrieved": "Two independent reasons, either of which alone is sufficient. No query family can name it: the compiled queries are built from brand, model, line and year, and this listing has none of those - its title is a generic garment noun. And the catalogue walk cannot reach it: it is beyond 2000 products in feed order, far past any bounded page budget.",
     "what_this_means": "Discovery is text-driven, and image matching only runs on candidates discovery already returned. An item whose listing carries no distinguishing text is therefore unreachable no matter how good the matcher is. This is one architectural gap rather than two defects, and it explains the known-item miss and the retrieval-quality score together.",
     "not_a_reason_to_retire_the_check": "The scenario is the product's core promise - photograph something you own, find its listing. The check failing is correct. What it shows is that the promise needs visual retrieval over a source's catalogue, not better ranking of text-retrieved candidates."
+  },
+  "progress_2026_08_17": {
+    "closed": [
+      "search_listings_by_descriptor: cosine over stored image descriptors, dimension-guarded, best-photograph-per-listing",
+      "WarmIndex.search merges descriptor hits into the rows instead of only rescoring text hits",
+      "consult_and_surface builds its query descriptor from the campaign's reference photographs rather than a hashed text vector"
+    ],
+    "remaining": "catalogue ingest"
+  },
+  "remaining_spec": {
+    "problem": "The warm index is populated by remember_campaign from candidates a campaign already retrieved. A listing text never named was never indexed, so descriptor search cannot find it: the visual route now works but has nothing to search.",
+    "what_to_build": "A pass that walks an admitted source's catalogue feed and indexes each product with its image descriptors, independently of any campaign query. The machinery exists - catalog_feed_path_of, build_catalog_page_url and catalog_caps_from_env in searcher/sources/catalog.py already page a Shopify feed, and WarmIndex.put_listing already accepts descriptors.",
+    "acceptance": "./scripts/known_item_check.sh returns KIND listing 8001001141404 in Real or Possibly Real. That listing is the test because it is unreachable by text: a plain long-sleeve cut-and-sew with no brand, model, line or year, sitting past 2000 items in feed order.",
+    "constraints": "Robots must still be honoured, the ingest must be bounded by the same budget discipline as discovery, and indexing must not be triggered per-campaign or every search pays for a catalogue walk.",
+    "verify_the_caller_not_the_component": "Five findings today were reported working after verifying a component and not the path that calls it. Before claiming this closed, run the live check rather than a unit test of the ingest function."
   }
 }
