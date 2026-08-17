@@ -1,0 +1,81 @@
+{
+  "schema": "searcher.terminal.receipt/v1",
+  "artifact": "SEARCHER_TERMINAL_REPORT.md",
+  "document_sha256": "bd9ebb56ae1963f8b3dbf2473951dcfe7dd4e5ac7266885a409a9ecd1f28dd1c",
+  "document_bytes": 18798,
+  "commands": [
+    "git rev-parse HEAD",
+    "./scripts/test_all.sh",
+    "uv run ruff check .",
+    "uv run mypy src",
+    "uv run python -m benchmark --all",
+    "./scripts/scrub_public_tree.sh",
+    "uv run python -c \"from searcher.workers.api_campaign import uncredentialed_source_names; print(uncredentialed_source_names())\""
+  ],
+  "git_sha": "31e6004c76e1d845447e0993a5ce68948f311265",
+  "branch": "grok/searcher-terminal2-20260817-002547",
+  "host": "Mac-Studio",
+  "measured_at": "2026-08-17T04:42:55Z",
+  "regenerable": false,
+  "regenerable_note": "This receipt binds SEARCHER_TERMINAL_REPORT.md. The report aggregates committed receipts and commands run in this session. It is not produced by a single generator script.",
+  "terminal_status": "NOT_READY",
+  "section_39_paths_exist": {
+    "SEARCHER_SOURCE_AUTHORITY.md": true,
+    "SEARCHER_REUSE_LEDGER.json": true,
+    "SEARCHER_ARCHITECTURE.md": true,
+    "SEARCHER_DATA_MODEL.md": true,
+    "SEARCHER_SOURCE_POLICY.md": true,
+    "SEARCHER_AUTHENTICITY_POLICY.md": true,
+    "SEARCHER_BUCKET_POLICY.md": true,
+    "SEARCHER_UX_SPEC.md": true,
+    "SEARCHER_SECURITY.md": true,
+    "SEARCHER_PRIVACY.md": true,
+    "SEARCHER_PERFORMANCE_BASELINE.md": true,
+    "SEARCHER_BENCHMARK_METHOD.md": true,
+    "SEARCHER_PUBLIC_BENCHMARK_REPORT.md": true,
+    "SEARCHER_LIMITATIONS.md": true,
+    "SEARCHER_RELEASE_READINESS.md": true,
+    "SEARCHER_FINAL_SCORECARD.md": true,
+    "SEARCHER_TERMINAL_REPORT.md": true,
+    "artifacts/searcher-source-authority.receipt.json": true,
+    "artifacts/searcher-reuse-ledger.receipt.json": true,
+    "artifacts/searcher-clean-clone.receipt.json": true,
+    "artifacts/searcher-security.receipt.json": true,
+    "artifacts/searcher-performance.receipt.json": true,
+    "artifacts/searcher-public-benchmark.receipt.json": true,
+    "artifacts/searcher-terminal.receipt.json": true
+  },
+  "this_session": {
+    "test_all": "14 failed, 492 passed, 7 skipped, 1 deselected, 26 errors in 742.13s; exit 1",
+    "ruff": "All checks passed!",
+    "mypy": "exit 1; unused type ignore features.py:44; 269 files",
+    "benchmark_all_noweights": {
+      "n": 35,
+      "recall_at_1": 0.914286,
+      "recall_at_5": 1.0,
+      "mrr": 0.940476,
+      "false_real": 0,
+      "scorer": "searcher.cheap_visual.ahash_colour",
+      "saved_as": "artifacts/searcher-public-benchmark.noweights.receipt.json"
+    },
+    "uncredentialed_sources": [
+      "searx",
+      "wikimedia",
+      "marginalia",
+      "the_realreal",
+      "rebag",
+      "komehyo",
+      "kind",
+      "byronesque",
+      "heroine",
+      "archive_org"
+    ],
+    "opencv_available": false,
+    "scrub": {
+      "command": "./scripts/scrub_public_tree.sh",
+      "exit_code": 1,
+      "working_tree_findings": 360,
+      "new_section_39_findings": 0
+    }
+  }
+}

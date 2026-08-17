@@ -1,0 +1,29 @@
+{
+  "schema": "searcher.terminal.receipt/v1",
+  "artifact": "SEARCHER_REUSE_LEDGER.json",
+  "source_payload": "artifacts/audit/reuse-ledger.json",
+  "source_payload_sha256": "4d278e4e650fe51ef6214d4f23d622a5ce0cb7b9f147fbc8e292481d1426ab16",
+  "source_payload_bytes": 47478,
+  "artifact_sha256": "b60a2284689d9521f4a47e9b738c3bf806a02838e1f2fa0bc65931e548d72199",
+  "artifact_bytes": 47908,
+  "commands": [
+    "git rev-parse HEAD",
+    "python3 -c 'import json,pathlib; print(json.loads(pathlib.Path(\"SEARCHER_REUSE_LEDGER.json\").read_text())[\"counts\"])'"
+  ],
+  "git_sha": "31e6004c76e1d845447e0993a5ce68948f311265",
+  "host": "Mac-Studio",
+  "measured_at": "2026-08-17T04:35:54Z",
+  "regenerable": false,
+  "regenerable_note": "The 56-entry ledger was produced by the phase-zero audit. This receipt binds SEARCHER_REUSE_LEDGER.json, which copies that payload and adds bound_git_sha. Regenerating the entries requires the commands in artifacts/audit/reuse-ledger.receipt.json.",
+  "counts": {
+    "DEFER": 11,
+    "PORT_MINIMAL_COMPONENT": 1,
+    "REIMPLEMENT_FROM_CONTRACT": 3,
+    "REJECT": 15,
+    "REUSE_AS_PACKAGE": 1,
+    "WRAP_WITH_ADAPTER": 25
+  },
+  "visionmcp_sha": "18ee3c06d27f04937d1681dea5fa2650131e4b2a",
+  "job_scraper_sha": null,
+  "mtp_sha": null
+}

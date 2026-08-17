@@ -1,0 +1,47 @@
+{
+  "schema": "searcher.terminal.receipt/v1",
+  "artifact": "artifacts/searcher-clean-clone.receipt.json",
+  "commands": [
+    "git clone https://github.com/joshuahickscorp/searcher.git",
+    "uv sync",
+    "./scripts/first_run.sh --check-only",
+    "./scripts/test_all.sh"
+  ],
+  "git_sha": "31e6004c76e1d845447e0993a5ce68948f311265",
+  "host": "Mac-Studio",
+  "measured_at": "2026-08-17T04:35:54Z",
+  "regenerable": false,
+  "regenerable_note": "A network clone and a kernel TCP bind were not run in this session (local-only contract; this environment has previously refused loopback sockets). Bible \u00a732.8 is therefore not re-executed at this SHA.",
+  "prior_operator_clone": {
+    "path": "artifacts/operator/RECEIPT.md",
+    "public_sha": "a66414e",
+    "not_this_sha": true,
+    "timings_s": {
+      "clone": 1.42,
+      "uv_sync": 0.59,
+      "capabilities": 1.06,
+      "api_up": 0.92,
+      "search": 124.6,
+      "clone_to_search": 310.44
+    },
+    "first_search": {
+      "terminal": "PARTIAL",
+      "real": 0,
+      "possibly_real": 0,
+      "hidden": 8,
+      "test_all": "250 passed, 3 skipped, 1 deselected in 224.48s; live 1 passed, 253 deselected in 93.48s"
+    },
+    "pages": {
+      "url": "https://joshuahickscorp.github.io/searcher/",
+      "http_status": 200,
+      "bytes": 10826,
+      "health_on_pages_origin": 404
+    }
+  },
+  "this_session": {
+    "cloned": false,
+    "api_started": false,
+    "loopback_bind": "not attempted",
+    "uv_sync": "performed as a side effect of ./scripts/test_all.sh in this worktree, not in a fresh clone"
+  }
+}

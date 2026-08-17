@@ -1,0 +1,53 @@
+{
+  "schema": "searcher.terminal.receipt/v1",
+  "artifact": "artifacts/searcher-security.receipt.json",
+  "commands": [
+    "uv run pytest -q tests/security tests/unit/test_donor_rejection.py tests/property/test_p07_campaign_isolation.py tests/adversarial/test_prompt_injection_listing.py tests/adversarial/test_prompt_injection_image.py tests/unit/test_upload_validation.py",
+    "uv run ruff check .",
+    "./scripts/scrub_public_tree.sh"
+  ],
+  "git_sha": "31e6004c76e1d845447e0993a5ce68948f311265",
+  "host": "Mac-Studio",
+  "measured_at": "2026-08-17T04:41:30Z",
+  "regenerable": true,
+  "security_suite": {
+    "command": "uv run pytest -q tests/security tests/unit/test_donor_rejection.py tests/property/test_p07_campaign_isolation.py tests/adversarial/test_prompt_injection_listing.py tests/adversarial/test_prompt_injection_image.py tests/unit/test_upload_validation.py",
+    "passed": 49,
+    "failed": 0,
+    "wall_seconds": 2.18,
+    "exit_code": 0
+  },
+  "scrub": {
+    "command": "./scripts/scrub_public_tree.sh",
+    "exit_code": 1,
+    "working_tree_findings": 360,
+    "new_section_39_findings": 0,
+    "note": "Findings are in files already committed at this SHA. New section 39 files added none."
+  },
+  "ruff": {
+    "command": "uv run ruff check .",
+    "result": "All checks passed!",
+    "exit_code": 0
+  },
+  "mypy": {
+    "command": "uv run mypy src",
+    "exit_code": 1,
+    "result": "unused type ignore at src/searcher/matching/features.py:44; 269 source files checked",
+    "note": "Pre-existing at this SHA. This session did not edit src/."
+  },
+  "test_all_this_session": {
+    "command": "./scripts/test_all.sh",
+    "exit_code": 1,
+    "fast_suite": "14 failed, 492 passed, 7 skipped, 1 deselected, 26 errors in 742.13s",
+    "live_campaign_invocation": "not run; wrapper is set -e and the first pytest exited 1",
+    "failure_mode": "subprocess spawn returned SIGSEGV (-11) after tesseract/OCR and on later child python and bash script invocations",
+    "collected": "540 tests (539 plus 1 live_campaign)"
+  },
+  "last_committed_green_suite": {
+    "source": "artifacts/grading-round3/test_all.log",
+    "commit": "6435d248a716429f197e807627c126b73f30efc5",
+    "fast_suite": "458 passed, 6 skipped, 1 deselected in 51.28s",
+    "live_campaign": "1 passed, 464 deselected in 132.17s",
+    "exit_code": 0
+  }
+}

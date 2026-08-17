@@ -1,0 +1,21 @@
+{
+  "schema": "searcher.terminal.receipt/v1",
+  "artifact": "SEARCHER_SOURCE_AUTHORITY.md",
+  "payload": "artifacts/audit/source-authority.json",
+  "payload_sha256": "5cdbbcce14fd610db79e339aba8ae05860b6fcb6696e81b39fb1087dc1565cfc",
+  "payload_bytes": 8294,
+  "document_sha256": "c2c13bc735482f125161130b096c9fd12be638993b314a18edf81ac296f014cb",
+  "document_bytes": 2385,
+  "commands": [
+    "git rev-parse HEAD",
+    "python3 -c 'import hashlib,pathlib; p=pathlib.Path(\"artifacts/audit/source-authority.json\"); print(hashlib.sha256(p.read_bytes()).hexdigest(), len(p.read_bytes()))'"
+  ],
+  "git_sha": "31e6004c76e1d845447e0993a5ce68948f311265",
+  "host": "Mac-Studio",
+  "measured_at": "2026-08-17T04:35:54Z",
+  "regenerable": false,
+  "regenerable_note": "The phase-zero donor locate is not re-run in this session. This receipt binds the committed payload artifacts/audit/source-authority.json (inspected_at 2026-08-16T04:48:46Z, VisionMCP SHA 18ee3c06d27f04937d1681dea5fa2650131e4b2a) to SEARCHER_SOURCE_AUTHORITY.md at the named git SHA. Regenerating the payload requires the commands in artifacts/audit/source-authority.receipt.json and the donor checkouts those commands name.",
+  "visionmcp_sha": "18ee3c06d27f04937d1681dea5fa2650131e4b2a",
+  "job_scraper_sha": null,
+  "mtp_sha": null
+}
