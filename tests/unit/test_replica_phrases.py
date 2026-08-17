@@ -262,3 +262,60 @@ def test_ordinary_contractions_are_not_replica_claims() -> None:
     clean = ("isn't damaged", "ain't cheap", "isn't available", "not a scratch on it")
     wrong = [text for text in clean if self_declared_replica(text)]
     assert wrong == [], f"ordinary listing text called a replica: {wrong}"
+
+
+# Round 7 found four members of a class four earlier rounds had each patched by
+# name. The characters were different every time; the trick never was.
+ROUND_7_ESCAPES = ["re–plica", "re/plica", "r3pl!ca", "inauthentic"]
+
+SEPARATOR_FAMILY = [
+    "re–plica", "re—plica", "re/plica", "re\\plica", "re_plica",
+    "r.e.p.l.i.c.a", "re*plica", "re+plica", "re~plica", "re=plica",
+]
+
+LETTER_SUBSTITUTE_FAMILY = ["r3pl!ca", "rep|ica", "re!plica", "r3pl1ca", "rep1ica", "r3plica"]
+
+NEGATING_PREFIX_FAMILY = [
+    "inauthentic", "ingenuine", "unauthentic", "un-authentic",
+    "non authentic", "non-genuine", "unoriginal",
+]
+
+# Ordinary listing text that must never be read as a replica claim. Several of
+# these are one character away from a pattern above.
+INNOCENT = [
+    "Air Max 1", "Levi 501", "Model 111", "Room 101", "size 8!", "great deal!",
+    "in original box", "comes in original packaging", "in genuine leather",
+    "in excellent condition", "authentic",
+]
+
+# Deliberately not in INNOCENT: "1-1 stitching detail". "1:1" is standard
+# replica vocabulary and the hyphen form normalises onto it. Flagging it is the
+# right call rather than a defect to fix, because the two errors do not cost the
+# same: a missed replica claim can send a buyer to a counterfeit, while a
+# false positive hides one listing. The detector should lean toward hiding.
+
+
+@pytest.mark.parametrize("text", ROUND_7_ESCAPES)
+def test_round_7_escapes_are_closed(text: str) -> None:
+    assert self_declared_replica(text), f"{text!r} still publishes as Real"
+
+
+@pytest.mark.parametrize("text", SEPARATOR_FAMILY)
+def test_any_separator_inside_the_word_is_seen(text: str) -> None:
+    """Naming separators one at a time is how this class escaped five rounds."""
+    assert self_declared_replica(text), text
+
+
+@pytest.mark.parametrize("text", LETTER_SUBSTITUTE_FAMILY)
+def test_punctuation_standing_in_for_a_letter_is_read_as_one(text: str) -> None:
+    assert self_declared_replica(text), text
+
+
+@pytest.mark.parametrize("text", NEGATING_PREFIX_FAMILY)
+def test_a_negating_prefix_is_a_negation(text: str) -> None:
+    assert self_declared_replica(text), text
+
+
+@pytest.mark.parametrize("text", INNOCENT)
+def test_ordinary_listing_text_is_not_a_replica_claim(text: str) -> None:
+    assert not self_declared_replica(text), f"{text!r} was wrongly called a replica claim"

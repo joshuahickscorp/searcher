@@ -75,6 +75,14 @@ REPLICA_PATTERNS = (
     re.compile(rf"\b(?:un|non){_SEP}?authentic\b"),
     re.compile(rf"\b(?:un|non){_SEP}?genuine\b"),
     re.compile(rf"\b(?:un|non){_SEP}?original\b"),
+    re.compile(rf"\b(?:un|non){_SEP}?authentic\b"),
+    # The "in-" prefix takes no separator, deliberately. "inauthentic" is one
+    # word and is the claim; "in original box" is three words and is the
+    # opposite claim, extremely common, and would be caught by the same pattern
+    # if a separator were allowed. The prefix is also not applied to "original"
+    # for that reason - "inoriginal" is not a word, so there is nothing to gain
+    # and a very common phrase to lose.
+    re.compile(r"\bin(?:authentic|genuine)\b"),
     re.compile(r"\bcounterfeit\b"),
     # "not 100% authentic" and "not fully genuine" are the same claim as "not
     # authentic". Requiring the words to be adjacent missed every hedged form.
@@ -261,6 +269,13 @@ _LEET_I = str.maketrans({**_LEET_BASE, "1": "i"})
 # Kept for the despaced pass, which only needs one reading.
 _LEET = _LEET_L
 
+# Characters that stand in for a letter rather than separating two of them.
+# "1" reads as l or i; so do "!" and "|", and "r3pl!ca" escaped five rounds
+# because the separator pass stripped the "!" and destroyed the word instead of
+# reading it. A character can substitute for a letter or divide two letters, and
+# which one it is cannot be decided by the character alone - so both readings
+# are tried.
+_AMBIGUOUS_CHARS = "1!|"
 _AMBIGUOUS = "1"
 _MAX_AMBIGUOUS = 3
 
@@ -269,16 +284,18 @@ def _word_variants(word: str) -> list[str]:
     """Readings of one word where digits may stand in for letters."""
     from itertools import product
 
-    if _AMBIGUOUS not in word:
+    slots = sum(word.count(ch) for ch in _AMBIGUOUS_CHARS)
+    if not slots:
         return [word]
-    if word.count(_AMBIGUOUS) > _MAX_AMBIGUOUS:
-        return [word.replace(_AMBIGUOUS, "l"), word.replace(_AMBIGUOUS, "i")]
+    if slots > _MAX_AMBIGUOUS:
+        table_l = str.maketrans(dict.fromkeys(_AMBIGUOUS_CHARS, "l"))
+        table_i = str.maketrans(dict.fromkeys(_AMBIGUOUS_CHARS, "i"))
+        return [word.translate(table_l), word.translate(table_i)]
     out: list[str] = []
-    slots = word.count(_AMBIGUOUS)
     for choice in product("li", repeat=slots):
         chars, index = [], 0
         for ch in word:
-            if ch == _AMBIGUOUS:
+            if ch in _AMBIGUOUS_CHARS:
                 chars.append(choice[index])
                 index += 1
             else:
@@ -301,7 +318,7 @@ def _leet_variants(folded: str) -> list[str]:
     substitution is applied to, so a word is what gets enumerated.
     """
     base = folded.translate(str.maketrans(_LEET_BASE))
-    if _AMBIGUOUS not in base:
+    if not any(ch in base for ch in _AMBIGUOUS_CHARS):
         return [base] if base != folded else []
     per_word = [_word_variants(word) for word in base.split(" ")]
     out: list[str] = []
@@ -349,8 +366,15 @@ def _despaced(text: str) -> str:
 
     Sellers write "r e p l i c a" and "counter feit" precisely because a word
     list does not see them. Only unambiguous words are matched this way.
+
+    Every non-alphanumeric run is a separator here, not just space, dot,
+    underscore and hyphen. Restricting it to those four let the same trick
+    through under a different character: "re-plica" was caught while "re–plica"
+    with an en dash, "re/plica" with a slash and "r3pl!ca" with an exclamation
+    all published as Real. Naming the characters one at a time is how this class
+    has escaped five review rounds; naming the complement closes it.
     """
-    return re.sub(r"[\s._-]+", "", text).translate(_LEET)
+    return re.sub(r"[^0-9a-z]+", "", text).translate(_LEET)
 
 
 _DESPACED_PATTERNS = (
