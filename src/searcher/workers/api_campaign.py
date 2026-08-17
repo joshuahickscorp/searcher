@@ -408,8 +408,8 @@ def uncredentialed_source_names() -> list[str]:
             continue
         # Same reason as the credential check above, one step further: ask the
         # adapter whether it can answer at all. searx is admitted and enabled
-        # but points at localhost until SEARCHER_SEARX_URL is set, and this
-        # project's own SSRF gate refuses localhost - so it was counted as
+        # but points at the loopback host until SEARCHER_SEARX_URL is set, and
+        # this project's own SSRF gate refuses loopback - so it was counted as
         # reach, planned on every campaign, and reported SOURCE_UNAVAILABLE.
         # The health check is pure and costs microseconds for every adapter.
         try:
