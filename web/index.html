@@ -139,6 +139,28 @@
         <li>that a result is fake solely because the model is uncertain.</li>
       </ul>
       <p>Searcher does not place orders, enter payment information, negotiate with sellers, or publish accusations against sellers. Listing pages open in a new tab. Checkout is never embedded.</p>
+
+      <h3>Why replica sources are not searched</h3>
+      <p>
+        Searcher can rank a listing as Replica, and a listing from a replica
+        source can never be ranked Real. It does not, however, search replica
+        marketplaces, and that is a limit of what may be fetched rather than a
+        limit of the software.
+      </p>
+      <p>
+        The three replica sources this project reviewed are all refused for
+        stated reasons: Taobao&rsquo;s robots file disallows the query-string
+        URLs its item pages use; Weidian serves no robots file, redirecting
+        <code>/robots.txt</code> elsewhere; and Yupoo returns a 404 page for
+        both <code>/robots.txt</code> and its album paths. Searching any of them
+        would mean ignoring a robots rule or working around an anti-automation
+        gate. Searcher does neither, so the result is no replica coverage at
+        all &mdash; not partial coverage, and not silence.
+      </p>
+      <p>
+        This means an absence of replica results is never evidence that no
+        replica exists. It only means Searcher was not permitted to look.
+      </p>
       <p>A missing candidate is simply absent. If some candidates did not meet policy, that is all the interface will say.</p>
       <p><a href="#/">Back to search</a></p>
     </article>
