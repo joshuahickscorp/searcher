@@ -164,6 +164,11 @@ def test_hard_negative_corpus_bucket_table() -> None:
     pngs: dict[str, dict[str, bytes]] = {}
     dest = {}
     stolen: set[str] = set()
+    # Declares that stock-photo screening ran and found nothing. The Real gate is
+    # fail-closed without both screenings, so omitting this holds every candidate
+    # at Possibly Real and the table below would be measuring the gate rather
+    # than the hard negatives it exists to test.
+    stock_mixed: set[str] = set()
     colour_required = None
     for spec in _corpus():
         cid = str(spec["id"])
@@ -193,6 +198,7 @@ def test_hard_negative_corpus_bucket_table() -> None:
         already_deduplicated=True,
         destination_verified=dest,
         stolen=stolen,
+        stock_mixed=stock_mixed,
     )
     by_id = {bundle.candidate.candidate_id: bundle for bundle in report.bundles}
     for spec in _corpus():
