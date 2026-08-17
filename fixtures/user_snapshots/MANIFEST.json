@@ -1,0 +1,68 @@
+{
+  "what": "Simulated user snapshots, for calibrating local correspondence.",
+  "why": "The committed KIND fixtures pair different views of one garment - a flat-lay against a detail crop - which share almost no surface. That is the hardest case for correspondence and the rarest in practice. The product's actual case is someone photographing the item they own, whose photograph overlaps the seller's photograph of the same physical object.",
+  "how": "Each file is derived from the listing photograph named in derived_from: resized to 512x512, warped by a random perspective of up to 10 percent of each edge, scaled in brightness by 0.8-1.2 with an offset of -25 to +25, and saved as JPEG quality 55. The random seed is the file's index in sorted order, so regeneration is deterministic.",
+  "honest_limits": "These are NOT independent photographs. They are warps of the same source pixels, so they share sensor, focus, lighting geometry and the exact drape of the garment. A true-positive rate measured on them is an upper bound on what real photographs would give, and must be reported as such. They are adequate for asking whether correspondence fires on overlapping surfaces, and inadequate for claiming a recall figure.",
+  "items": [
+    {
+      "snapshot": "8001001137032_snapshot.jpg",
+      "derived_from": "8001001137032_1.jpg",
+      "listing_handle": "8001001137032",
+      "sha256": "3aaeca96827479779c9d7de6dccdf207e63ba16a6e2a79d774ead4d73a2ddb43"
+    },
+    {
+      "snapshot": "8001001141343_snapshot.jpg",
+      "derived_from": "8001001141343_1.jpg",
+      "listing_handle": "8001001141343",
+      "sha256": "e5a466854edce9698a45363d5879286ffffe249cae68b8948305db851d8f973b"
+    },
+    {
+      "snapshot": "8001001141350_snapshot.jpg",
+      "derived_from": "8001001141350_1.jpg",
+      "listing_handle": "8001001141350",
+      "sha256": "eb31b0a6f09bc4e203e78ab3afeae20510c56cc985631c74055543179fb0e399"
+    },
+    {
+      "snapshot": "8001001141367_snapshot.jpg",
+      "derived_from": "8001001141367_1.jpg",
+      "listing_handle": "8001001141367",
+      "sha256": "eb28cde878c3b2d1d071f46b9b47dda6c80b18c2ae70f8dc207abb84fbd889fe"
+    },
+    {
+      "snapshot": "8001001141404_snapshot.jpg",
+      "derived_from": "8001001141404_1.jpg",
+      "listing_handle": "8001001141404",
+      "sha256": "96756c88130954de270c6f69ad8ee522cedc2aef324dabc318af8e45ce48f1d0"
+    },
+    {
+      "snapshot": "8001001141442_snapshot.jpg",
+      "derived_from": "8001001141442_1.jpg",
+      "listing_handle": "8001001141442",
+      "sha256": "c78365a1176958163f1ebec429571a61bb206b670ff01b7b9c7826162143fd9f"
+    },
+    {
+      "snapshot": "8001001141473_snapshot.jpg",
+      "derived_from": "8001001141473_1.jpg",
+      "listing_handle": "8001001141473",
+      "sha256": "0006d273a9e88e2819139d1cb44e9bc37790afdee6e326e0a23d4335c1aebc4e"
+    },
+    {
+      "snapshot": "8001001141480_snapshot.jpg",
+      "derived_from": "8001001141480_1.jpg",
+      "listing_handle": "8001001141480",
+      "sha256": "dc31cac87a466fab25caa1be2f11e84fdbf6ddc8fb65a03af428101ac9f16915"
+    },
+    {
+      "snapshot": "8001001141503_snapshot.jpg",
+      "derived_from": "8001001141503_1.jpg",
+      "listing_handle": "8001001141503",
+      "sha256": "5e38d275cb761e02180b6718a9b017b102b7ad6541f5feba9f8b780a7a5f3f61"
+    },
+    {
+      "snapshot": "8001001141527_snapshot.jpg",
+      "derived_from": "8001001141527_1.jpg",
+      "listing_handle": "8001001141527",
+      "sha256": "a5c132447a7c74404a62d45846643b8e7d01fedca1a648b6a9ce919e75139617"
+    }
+  ]
+}
