@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: http: https:; connect-src 'self' http: https:; font-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'">
   <title>SEARCHER</title>
   <meta name="description" content="Find the exact item, not merely something similar.">
@@ -37,6 +39,7 @@
     <section id="view-home" class="view view-home">
       <form id="search-form" novalidate>
         <div class="first-screen">
+          <p class="lead">Find the exact item, not merely something similar.</p>
           <div class="field">
             <span class="field-label" id="images-label">Images</span>
             <div
@@ -55,6 +58,7 @@
               <label id="dropzone-hint" class="dropzone-hint" for="file-input">
                 Drop, click, or paste
               </label>
+              <p class="dropzone-sub">1 to 10 JPEG, PNG, WebP, or GIF photographs. The server is the final validator.</p>
               <p id="dropzone-desc" class="visually-hidden">1 to 10 raster images. The server is the final validator.</p>
               <ul id="thumbs" class="thumbs" aria-label="Selected images"></ul>
             </div>
@@ -157,7 +161,8 @@
 
   <aside id="results" class="drawer" hidden aria-labelledby="results-heading">
     <div class="drawer-head">
-      <h2 id="results-heading">Results</h2>
+      <h2 id="results-heading" tabindex="-1">Results</h2>
+      <p id="campaign-intent" class="campaign-intent" hidden></p>
       <p id="campaign-status" class="campaign-status"></p>
       <div class="drawer-actions">
         <button type="button" id="cancel-search" hidden>Cancel search</button>
@@ -167,7 +172,11 @@
     </div>
 
     <div id="progress" class="progress" hidden>
-      <p id="progress-now" class="progress-now"></p>
+      <p id="progress-now" class="progress-now" aria-describedby="progress-meta progress-detail progress-stats"></p>
+      <p id="progress-meta" class="progress-meta" hidden></p>
+      <p id="progress-detail" class="progress-detail" hidden></p>
+      <p id="progress-stats" class="progress-stats" hidden></p>
+      <ul id="progress-sources" class="progress-sources" hidden></ul>
       <details id="stage-details">
         <summary>All stages</summary>
         <ol id="stage-list" class="stage-list"></ol>

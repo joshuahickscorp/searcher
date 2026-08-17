@@ -20,6 +20,7 @@ const SAMPLE = path.resolve("web/images/sample-upload.png");
 const consoleLines = [];
 const dialogs = [];
 const failures = [];
+const feedbackPosts = [];
 
 function httpJson(urlPath) {
   return new Promise((resolve, reject) => {
@@ -61,6 +62,11 @@ class Cdp {
         consoleLines.push({ type: msg.params.entry?.level, text: msg.params.entry?.text });
       } else if (msg.method === "Page.javascriptDialogOpening") {
         dialogs.push(msg.params);
+      } else if (msg.method === "Network.requestWillBeSent") {
+        const req = msg.params.request || {};
+        if (req.method === "POST" && String(req.url || "").includes("/feedback")) {
+          feedbackPosts.push({ url: req.url, postData: req.postData || null });
+        }
       }
     });
   }
@@ -196,7 +202,7 @@ async function main() {
     "--no-first-run",
     "--no-default-browser-check",
     "--disable-dev-shm-usage",
-    "--window-size=1280,900",
+    "--window-size=1280,800",
     "about:blank",
   ], { stdio: ["ignore", "pipe", "pipe"] });
   const chromeLog = createWriteStream(path.join(OUT, "chrome.log"));
@@ -253,7 +259,7 @@ async function main() {
   };
 
   // 1. Initial screen
-  await setViewport(cdp, 1280, 900, false);
+  await setViewport(cdp, 1280, 800, false);
   await cdp.navigate(ui());
   await waitFor(cdp, `document.getElementById("search-button") && document.getElementById("search-button").textContent.includes("Search")`);
   await screenshot(cdp, "01-initial");
@@ -309,7 +315,7 @@ async function main() {
   await sleep(200);
   await screenshot(cdp, "05-why-expanded");
 
-  await clickSel(cdp, "#list-real .card-actions button");
+  await clickSel(cdp, "#list-real .compare-btn, #list-real .card-actions button");
   await waitFor(cdp, `document.getElementById("compare").open === true`);
   await screenshot(cdp, "06-compare");
 
@@ -320,6 +326,10 @@ async function main() {
     await clickSel(cdp, "#compare-close");
   }
   await waitFor(cdp, `document.getElementById("compare").open === false`);
+
+  await clickSel(cdp, "#list-real .feedback-yes");
+  await waitFor(cdp, `document.querySelector("#list-real .feedback-status")?.textContent.includes("recorded")`, 8000);
+  const feedbackStatus = await evalValue(cdp, `document.querySelector("#list-real .feedback-status")?.textContent || ""`);
 
   const linkAttrs = await evalValue(cdp, `
     const a = document.querySelector("#list-real .card-actions a");
@@ -385,14 +395,14 @@ async function main() {
   await screenshot(cdp, "07-keyboard-complete");
 
   // 4. Mobile sheet
-  await setViewport(cdp, 375, 812, true);
+  await setViewport(cdp, 390, 844, true);
   await cdp.navigate(ui("#/search/fixture-normal"));
   await waitFor(cdp, `!document.getElementById("results").hidden && document.querySelectorAll("#list-real .card").length >= 1`);
   await screenshot(cdp, "08-mobile-sheet");
   const drawerWidth = await evalValue(cdp, `document.getElementById("results").getBoundingClientRect().width`);
 
   // 5. Reduced motion
-  await setViewport(cdp, 1280, 900, false);
+  await setViewport(cdp, 1280, 800, false);
   await cdp.send("Emulation.setEmulatedMedia", {
     features: [{ name: "prefers-reduced-motion", value: "reduce" }],
   });
@@ -435,6 +445,7 @@ async function main() {
   // 8. No candidates + blocked sources
   await cdp.navigate(ui("#/search/fixture-empty"));
   await waitFor(cdp, `document.body.innerText.includes("did not find a displayable candidate")`);
+  await waitFor(cdp, `document.body.innerText.includes("Add a photograph of the sole")`);
   await screenshot(cdp, "12-no-candidates");
 
   await cdp.navigate(ui("#/search/fixture-blocked"));
@@ -489,6 +500,7 @@ async function main() {
     compareHasParts: /Part/i.test(compareText),
     linkAttrs,
     liveSearchId,
+    feedbackStatus,
     drawerWidth,
     animation,
     xssDom,
@@ -497,6 +509,7 @@ async function main() {
     hashAfter,
     unavailableText,
     colors,
+    feedbackPosts,
     consoleLines,
     failures,
   };
@@ -515,6 +528,8 @@ async function main() {
     animation,
     hashBefore,
     hashAfter,
+    feedbackStatus,
+    feedbackPosts,
     consoleErrors: consoleLines.filter((l) => l.type === "error"),
     failures,
   }, null, 2));

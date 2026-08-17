@@ -70,6 +70,12 @@ export function createForm({ onSubmit }) {
       thumbs.appendChild(el("li", { className: "thumb" }, [img, remove]));
     });
     searchButton.disabled = files.length === 0;
+    const hint = $("dropzone-hint");
+    if (hint) {
+      hint.textContent = files.length
+        ? `${files.length} of 10 photographs`
+        : "Drop, click, or paste";
+    }
   }
 
   function removeAt(index) {

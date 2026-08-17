@@ -82,6 +82,15 @@ export function createApi(getBase) {
     deleteSearch(id) {
       return request(`/v1/searches/${encodeURIComponent(id)}`, { method: "DELETE" });
     },
+    sendFeedback(resultId, { verdict, note } = {}) {
+      const body = { verdict };
+      if (note) body.note = note;
+      return request(`/v1/results/${encodeURIComponent(resultId)}/feedback`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+    },
     openEvents(id, handlers) {
       const url = `${root()}/v1/searches/${encodeURIComponent(id)}/events`;
       const source = new EventSource(url);

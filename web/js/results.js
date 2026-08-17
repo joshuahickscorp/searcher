@@ -1,4 +1,5 @@
 import { $, announce, clear, el, outboundLink, remoteImg, show, text } from "./dom.js";
+import { feedbackControls, paintFeedback } from "./feedback.js";
 import {
   NO_CANDIDATES,
   NO_REAL,
@@ -7,11 +8,19 @@ import {
   REPLICA_SUBTITLE,
   STAGES,
   availabilityLine,
+  coverageStatsLine,
   interval,
   missingOr,
+  nextInputFromMissing,
   priceLine,
   sizeLine,
+  sourcesInProgress,
   stageFromState,
+  stageStepLabel,
+  terminalStatusLabel,
+  whyHeadingText,
+  whyLeadText,
+  formatElapsed,
 } from "./format.js";
 
 function scoreLine(label, block) {
@@ -84,12 +93,40 @@ function whySection(result) {
   }
 
   return el("details", { className: "why" }, [
-    el("summary", { text: "Why this result" }),
+    el("summary", { text: "Full evidence" }),
     body,
   ]);
 }
 
-function card(result, { apiBase, onCompare }) {
+function whyLeadBlock(result) {
+  const heading = whyHeadingText(result);
+  const lead = whyLeadText(result);
+  if (!heading && !lead) return null;
+  const block = el("div", { className: "why-lead" });
+  if (heading) block.appendChild(el("p", { className: "why-kicker", text: heading }));
+  if (lead) block.appendChild(el("p", { className: "why-sentence", text: lead }));
+  return block;
+}
+
+function nextInputBlock(search) {
+  const next = nextInputFromMissing(search);
+  if (!next) return null;
+  const box = el("div", { className: "next-input" }, [
+    el("p", { className: "next-input-k", text: "What to add next" }),
+    el("p", { className: "next-input-action", text: next.action }),
+  ]);
+  if (next.why) {
+    box.appendChild(el("p", { className: "next-input-why", text: next.why }));
+  }
+  if (next.rest.length) {
+    box.appendChild(el("ul", { className: "next-input-rest" }, next.rest.map((row) => (
+      el("li", { text: row })
+    ))));
+  }
+  return box;
+}
+
+function card(result, { apiBase, onCompare, onFeedback, feedbackState }) {
   const li = el("li", {
     className: "card",
     dataset: { resultId: result.result_id },
@@ -108,6 +145,9 @@ function card(result, { apiBase, onCompare }) {
   li.appendChild(el("p", { className: "card-meta", text: priceLine(result.price) }));
   li.appendChild(el("p", { className: "card-meta", text: sizeLine(result.size) }));
   li.appendChild(el("p", { className: "card-meta", text: availabilityLine(result) }));
+
+  const lead = whyLeadBlock(result);
+  if (lead) li.appendChild(lead);
 
   const scores = el("div", { className: "score-block" }, [
     scoreLine("Item match", result.item_match),
@@ -149,11 +189,17 @@ function card(result, { apiBase, onCompare }) {
       text: "Availability could not be confirmed, so the link may be stale.",
     }));
   }
-  const compareBtn = el("button", { type: "button", text: "Compare" });
+  const compareBtn = el("button", { type: "button", className: "compare-btn", text: "Compare" });
   compareBtn.addEventListener("click", () => onCompare(result, compareBtn));
   actions.appendChild(compareBtn);
   li.appendChild(actions);
   li.appendChild(whySection(result));
+  if (typeof onFeedback === "function") {
+    li.appendChild(feedbackControls(result, {
+      onFeedback,
+      state: feedbackState ? feedbackState.get(result.result_id) : null,
+    }));
+  }
   return li;
 }
 
@@ -197,14 +243,21 @@ function coverageBlock(search) {
   return wrap;
 }
 
-export function createResults({ apiBase, onCompare, onCancel, onDelete, onClose, onTab, replicaScope }) {
+export function createResults({ apiBase, onCompare, onFeedback, onCancel, onDelete, onClose, onTab, replicaScope }) {
   const drawer = $("results");
+  const heading = $("results-heading");
+  const intentLine = $("campaign-intent");
   const status = $("campaign-status");
   const cancelBtn = $("cancel-search");
   const deleteBtn = $("delete-search");
   const closeBtn = $("close-drawer");
   const progress = $("progress");
   const progressNow = $("progress-now");
+  const progressMeta = $("progress-meta");
+  const progressDetail = $("progress-detail");
+  const progressStats = $("progress-stats");
+  const progressSources = $("progress-sources");
+  const stageDetails = $("stage-details");
   const stageList = $("stage-list");
   const streamNote = $("stream-note");
   const warningNote = $("warning-note");
@@ -230,13 +283,44 @@ export function createResults({ apiBase, onCompare, onCancel, onDelete, onClose,
 
   const results = new Map();
   const cards = new Map();
+  const signatures = new Map();
+  const feedbackState = new Map();
+  const activity = { discovered: new Set(), normalized: new Set(), promoted: new Set() };
   let tab = "real";
   let search = null;
   let lastStage = null;
+  let startedAt = null;
+  let tick = null;
 
   function currentStage() {
     if (!search) return null;
     return (search.progress && search.progress.stage) || stageFromState(search.state);
+  }
+
+  function activityCounts() {
+    return {
+      discovered: activity.discovered.size,
+      normalized: activity.normalized.size,
+      promoted: activity.promoted.size,
+    };
+  }
+
+  function stopTick() {
+    if (tick) {
+      clearInterval(tick);
+      tick = null;
+    }
+  }
+
+  function ensureTick() {
+    if (tick || !search || search.terminal_status) return;
+    tick = setInterval(() => {
+      if (!search || search.terminal_status) {
+        stopTick();
+        return;
+      }
+      renderStages();
+    }, 1000);
   }
 
   function renderStages() {
@@ -257,8 +341,77 @@ export function createResults({ apiBase, onCompare, onCancel, onDelete, onClose,
     });
     const busy = Boolean(search && !search.terminal_status && stage);
     progress.classList.toggle("is-busy", busy);
-    text(progressNow, (search && search.terminal_status) ? "Search finished" : (stage || "Starting"));
-    show(progress, Boolean(stage || (search && !search.terminal_status)));
+    const nowLabel = terminal ? "Search finished" : (stage || "Starting");
+    text(progressNow, nowLabel);
+
+    const metaBits = [];
+    if (!terminal && stage) {
+      const step = stageStepLabel(stage);
+      if (step) metaBits.push(step);
+    }
+    if (!terminal && startedAt) {
+      const elapsed = formatElapsed(Date.now() - startedAt);
+      if (elapsed) metaBits.push(elapsed);
+    }
+    if (progressMeta) {
+      text(progressMeta, metaBits.join(" · "));
+      show(progressMeta, metaBits.length > 0);
+    }
+
+    const apiDetail = search && search.progress && search.progress.detail;
+    const detailText = apiDetail && String(apiDetail).trim() ? String(apiDetail).trim() : "";
+    if (progressDetail) {
+      text(progressDetail, detailText);
+      show(progressDetail, Boolean(detailText));
+    }
+    const runningNames = sourcesInProgress(search && search.coverage);
+
+    const stats = coverageStatsLine(search && search.coverage, activityCounts());
+    if (progressStats) {
+      text(progressStats, stats);
+      show(progressStats, Boolean(stats));
+    }
+    if (progressSources) {
+      clear(progressSources);
+      if (runningNames.length && !terminal) {
+        for (const name of runningNames) {
+          progressSources.appendChild(el("li", { text: name }));
+        }
+        show(progressSources, true);
+      } else {
+        show(progressSources, false);
+      }
+    }
+    if (stageDetails) {
+      const summary = stageDetails.querySelector("summary");
+      if (summary) {
+        text(summary, terminal ? "All stages" : (stage ? `Now: ${stage}` : "All stages"));
+      }
+    }
+    show(progress, Boolean(stage || (search && !search.terminal_status) || stats));
+    if (busy) ensureTick();
+    else stopTick();
+  }
+
+  function fillEmpty(node, lines) {
+    clear(node);
+    for (const line of lines) {
+      node.appendChild(el("p", { text: line }));
+    }
+    const next = nextInputBlock(search);
+    if (next) node.appendChild(next);
+    else if (search && search.terminal_status && search.terminal_status !== "BLOCKED" && search.terminal_status !== "FAILED") {
+      node.appendChild(el("p", {
+        className: "next-input-fallback",
+        text: "Close results, add another photograph or a more specific name, and search again.",
+      }));
+    }
+    if (search && search.deeper_refresh_available) {
+      node.appendChild(el("p", {
+        className: "next-input-note",
+        text: "Deeper refresh is available.",
+      }));
+    }
   }
 
   function emptyCopy() {
@@ -268,17 +421,14 @@ export function createResults({ apiBase, onCompare, onCancel, onDelete, onClose,
     const terminal = search.terminal_status;
     const blockedLike = terminal === "BLOCKED" || terminal === "FAILED";
 
-    clear(emptyReal);
-    clear(emptyPossible);
-
     if (realN === 0 && posN === 0) {
       if (blockedLike) {
         show(emptyReal, false);
         show(emptyPossible, false);
       } else if (terminal) {
-        emptyReal.appendChild(el("p", { text: NO_CANDIDATES }));
+        fillEmpty(emptyReal, [NO_CANDIDATES]);
+        fillEmpty(emptyPossible, [NO_CANDIDATES]);
         show(emptyReal, tab === "real");
-        emptyPossible.appendChild(el("p", { text: NO_CANDIDATES }));
         show(emptyPossible, tab === "possibly_real");
       } else {
         show(emptyReal, false);
@@ -287,17 +437,18 @@ export function createResults({ apiBase, onCompare, onCancel, onDelete, onClose,
       return;
     }
     if (realN === 0) {
-      emptyReal.appendChild(el("p", { text: NO_REAL }));
-      if (posN > 0) {
-        emptyReal.appendChild(el("p", { text: "See Possibly Real." }));
-      }
+      const lines = [NO_REAL];
+      if (posN > 0) lines.push("See Possibly Real.");
+      fillEmpty(emptyReal, lines);
       show(emptyReal, tab === "real");
     } else {
       show(emptyReal, false);
     }
-    show(emptyPossible, tab === "possibly_real" && posN === 0);
     if (posN === 0 && tab === "possibly_real") {
-      emptyPossible.appendChild(el("p", { text: "No Possibly Real candidates yet." }));
+      fillEmpty(emptyPossible, ["No Possibly Real candidates yet."]);
+      show(emptyPossible, true);
+    } else {
+      show(emptyPossible, false);
     }
   }
 
@@ -381,12 +532,33 @@ export function createResults({ apiBase, onCompare, onCancel, onDelete, onClose,
     possible.sort((a, b) => (a.rank || 0) - (b.rank || 0));
     replica.sort((a, b) => (a.rank || 0) - (b.rank || 0));
 
+    function signatureOf(result) {
+      return JSON.stringify({
+        bucket: result.bucket,
+        rank: result.rank,
+        title: result.title,
+        avail: result.availability,
+        checked: result.last_checked_at,
+        heading: whyHeadingText(result),
+        lead: whyLeadText(result),
+        chips: result.evidence_chips,
+        gap: result.primary_gap,
+        price: result.price && result.price.display,
+        size: result.size && result.size.display,
+      });
+    }
+
     function order(list, parent) {
       for (const result of list) {
+        const nextSig = signatureOf(result);
         let node = cards.get(result.result_id);
-        if (!node) {
-          node = card(result, { apiBase, onCompare });
+        const focused = node && node.contains(document.activeElement);
+        if (!node || (signatures.get(result.result_id) !== nextSig && !focused)) {
+          const next = card(result, { apiBase, onCompare, onFeedback, feedbackState });
+          if (node) node.replaceWith(next);
+          node = next;
           cards.set(result.result_id, node);
+          signatures.set(result.result_id, nextSig);
         }
         parent.appendChild(node);
       }
@@ -461,6 +633,7 @@ export function createResults({ apiBase, onCompare, onCancel, onDelete, onClose,
     open() {
       show(drawer, true);
       document.body.classList.add("drawer-open");
+      if (heading && typeof heading.focus === "function") heading.focus();
     },
     close() {
       show(drawer, false);
@@ -472,11 +645,18 @@ export function createResults({ apiBase, onCompare, onCancel, onDelete, onClose,
     reset() {
       results.clear();
       cards.clear();
+      signatures.clear();
+      feedbackState.clear();
+      activity.discovered.clear();
+      activity.normalized.clear();
+      activity.promoted.clear();
       clear(listReal);
       clear(listPossible);
       clear(listReplica);
       search = null;
       lastStage = null;
+      startedAt = null;
+      stopTick();
       show(streamNote, false);
       show(warningNote, false);
       show(terminalNote, false);
@@ -487,16 +667,42 @@ export function createResults({ apiBase, onCompare, onCancel, onDelete, onClose,
       show(tabReplica, false);
       show(panelReplica, false);
       text(status, "");
+      if (intentLine) {
+        text(intentLine, "");
+        show(intentLine, false);
+      }
       text(countReal, "0");
       text(countPossible, "0");
       text(countReplica, "0");
+      if (progressDetail) {
+        text(progressDetail, "");
+        show(progressDetail, false);
+      }
+      if (progressStats) {
+        text(progressStats, "");
+        show(progressStats, false);
+      }
+      if (progressMeta) {
+        text(progressMeta, "");
+        show(progressMeta, false);
+      }
     },
     setSearch(next) {
       search = next;
       const stage = currentStage();
-      text(status, search.terminal_status || stage || search.state || "");
+      const label = search.terminal_status
+        ? terminalStatusLabel(search.terminal_status)
+        : (stage || search.state || "");
+      text(status, label);
+      if (intentLine) {
+        const intent = search.intent && search.intent.text ? String(search.intent.text).trim() : "";
+        text(intentLine, intent);
+        show(intentLine, Boolean(intent));
+      }
       show(cancelBtn, !search.terminal_status);
       show(deleteBtn, Boolean(search.terminal_status));
+      if (!search.terminal_status && !startedAt) startedAt = Date.now();
+      if (search.terminal_status) stopTick();
       renderStages();
       renderTerminal();
       if (search.counts) {
@@ -562,6 +768,22 @@ export function createResults({ apiBase, onCompare, onCancel, onDelete, onClose,
     announceStage(stage) {
       if (stage && stage !== lastStage) announce(stage);
       lastStage = stage;
+    },
+    noteCandidate(kind, candidateId) {
+      const key = candidateId || `${kind}:${activity.discovered.size + activity.normalized.size + 1}`;
+      if (kind === "discovered") activity.discovered.add(key);
+      else if (kind === "normalized") activity.normalized.add(key);
+      else if (kind === "promoted") activity.promoted.add(key);
+      renderStages();
+    },
+    setFeedback(resultId, state) {
+      if (!resultId) return;
+      feedbackState.set(resultId, state);
+      const node = cards.get(resultId);
+      if (node) paintFeedback(node.querySelector(".feedback"), state);
+    },
+    getFeedback(resultId) {
+      return feedbackState.get(resultId) || null;
     },
   };
 }
