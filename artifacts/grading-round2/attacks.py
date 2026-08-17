@@ -1,3 +1,5 @@
+# ruff: noqa: E501 — captured evidence from the round-2 grading pass, kept exactly
+# as it was run so its output can be reproduced.
 """Round-2 attacks. Fail if a replica reaches Real, COMPLETE needs no work,
 a dummy capability is available, or a result publishes without a reason or link.
 

@@ -1,3 +1,5 @@
+# ruff: noqa: E501 — captured evidence from the round-2 grading pass, kept exactly
+# as it was run so its output can be reproduced.
 """Check the nine-document claim and the pair-threshold documentation.
 
 Does not edit src/. Writes artifacts/grading-round2/docs-threshold.json.
