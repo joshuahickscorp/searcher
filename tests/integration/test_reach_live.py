@@ -269,7 +269,15 @@ def _pick_kind_miss() -> tuple[str, str, str]:
     raise RuntimeError("kind.co.jp page 1 had no vendor without a collection handle")
 
 
-@pytest.mark.timeout(240)
+# kind declares 12 requests per minute, so each of the 24 pages below is 5.0s of
+# deliberate waiting: about 120s of politeness before anything else, and 230s
+# measured end to end. The old 240s timeout left a 4% margin, which is why this
+# passed alone and timed out inside the full suite where the shared host limiter
+# is contended. Cutting the page budget instead was tried and does not work: at
+# 8 pages the walk no longer reaches a vendor without a collection handle and
+# the assertion fails honestly. The work is real and polite, so the timeout is
+# what was wrong.
+@pytest.mark.timeout(420)
 def test_live_kind_finds_vendor_without_collection_handle(
     controller: CampaignController,
 ) -> None:

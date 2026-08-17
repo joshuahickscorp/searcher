@@ -66,31 +66,31 @@ data: {"stage":"source_start","detail":null}
 
 id: 17
 event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+data: {"stage":"source_start","detail":null}
 
 id: 18
 event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+data: {"stage":"source_start","detail":null}
 
 id: 19
 event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+data: {"stage":"source_start","detail":null}
 
 id: 20
 event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+data: {"stage":"source_start","detail":null}
 
 id: 21
 event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+data: {"stage":"source_start","detail":null}
 
 id: 22
 event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+data: {"stage":"source_start","detail":null}
 
 id: 23
 event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+data: {"stage":"source_start","detail":null}
 
 id: 24
 event: search.progress
@@ -118,53 +118,51 @@ data: {"stage":"query_dispatch","detail":null}
 
 id: 30
 event: search.progress
-data: {"stage":"page_fetched","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 31
 event: search.progress
-data: {"stage":"page_fetched","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 32
 event: search.progress
-data: {"stage":"page_fetched","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 33
 event: search.progress
-data: {"stage":"page_fetched","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 34
 event: search.progress
-data: {"stage":"page_fetched","detail":null}
-
-: heartbeat
+data: {"stage":"query_dispatch","detail":null}
 
 id: 35
 event: search.progress
-data: {"stage":"page_fetched","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 36
 event: search.progress
-data: {"stage":"page_fetched","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 37
 event: search.progress
-data: {"stage":"page_fetched","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 38
 event: search.progress
-data: {"stage":"page_fetched","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 39
-event: search.coverage
-data: {"sources_completed":[{"id":"wikimedia","name":"wikimedia","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":9,"candidates_normalized":0,"candidates_hidden":0}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 40
 event: search.progress
-data: {"stage":"source_complete","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 41
 event: search.progress
-data: {"stage":"source_start","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 42
 event: search.progress
@@ -220,199 +218,187 @@ data: {"stage":"query_dispatch","detail":null}
 
 id: 55
 event: search.progress
-data: {"stage":"page_fetched","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 56
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 57
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 58
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 59
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 60
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 61
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 62
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 63
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 64
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 65
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 66
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 67
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 68
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 69
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 70
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 71
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 72
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 73
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 74
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 75
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 76
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 77
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 78
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 79
-event: candidate.discovered
-data: {"candidate_id":""}
-
-: heartbeat
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 80
 event: search.progress
-data: {"stage":"page_fetched","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 81
-event: candidate.discovered
-data: {"candidate_id":""}
-
-: heartbeat
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 82
 event: search.progress
-data: {"stage":"page_fetched","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 83
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 84
 event: search.progress
-data: {"stage":"page_fetched","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 85
-event: candidate.discovered
-data: {"candidate_id":""}
-
-: heartbeat
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 86
 event: search.progress
-data: {"stage":"page_fetched","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 87
-event: candidate.discovered
-data: {"candidate_id":""}
-
-: heartbeat
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 88
 event: search.progress
-data: {"stage":"page_fetched","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 89
-event: candidate.discovered
-data: {"candidate_id":""}
-
-id: 90
 event: search.progress
 data: {"stage":"page_fetched","detail":null}
 
-id: 91
-event: candidate.discovered
-data: {"candidate_id":""}
+id: 90
+event: search.warning
+data: {"code":"warning","message":""}
 
-: heartbeat
+id: 91
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
 
 id: 92
 event: search.progress
-data: {"stage":"page_fetched","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 93
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 94
 event: search.progress
-data: {"stage":"page_fetched","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 95
-event: candidate.discovered
-data: {"candidate_id":""}
-
-: heartbeat
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 96
 event: search.progress
-data: {"stage":"page_fetched","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 97
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 98
-event: search.coverage
-data: {"sources_completed":[{"id":"kind","name":"kind","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":10,"candidates_normalized":0,"candidates_hidden":0}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 99
 event: search.progress
-data: {"stage":"source_complete","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 100
 event: search.progress
-data: {"stage":"source_start","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 101
 event: search.progress
@@ -467,16 +453,16 @@ event: search.progress
 data: {"stage":"query_dispatch","detail":null}
 
 id: 114
-event: search.coverage
-data: {"sources_completed":[{"id":"komehyo","name":"komehyo","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":0,"candidates_normalized":0,"candidates_hidden":0}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 115
 event: search.progress
-data: {"stage":"source_complete","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 116
 event: search.progress
-data: {"stage":"source_start","detail":null}
+data: {"stage":"query_dispatch","detail":null}
 
 id: 117
 event: search.progress
@@ -531,230 +517,226 @@ event: search.progress
 data: {"stage":"query_dispatch","detail":null}
 
 id: 130
-event: search.coverage
-data: {"sources_completed":[{"id":"the_realreal","name":"the_realreal","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":0,"candidates_normalized":0,"candidates_hidden":0}
+event: search.progress
+data: {"stage":"query_dispatch","detail":null}
 
 id: 131
 event: search.progress
-data: {"stage":"source_complete","detail":null}
+data: {"stage":"page_fetched","detail":null}
 
 id: 132
 event: search.progress
-data: {"stage":"source_start","detail":null}
+data: {"stage":"page_fetched","detail":null}
 
 id: 133
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 134
 event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+data: {"stage":"page_fetched","detail":null}
 
 id: 135
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 136
 event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+data: {"stage":"page_fetched","detail":null}
 
 id: 137
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 138
 event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+data: {"stage":"page_fetched","detail":null}
 
 id: 139
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 140
 event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+data: {"stage":"page_fetched","detail":null}
 
 id: 141
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 142
 event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+data: {"stage":"page_fetched","detail":null}
 
 id: 143
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 144
 event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+data: {"stage":"page_fetched","detail":null}
 
 id: 145
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 146
 event: search.progress
 data: {"stage":"page_fetched","detail":null}
 
 id: 147
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 148
+event: search.warning
+data: {"code":"warning","message":""}
 
 : heartbeat
 
-id: 148
+id: 149
 event: search.progress
 data: {"stage":"page_fetched","detail":null}
-
-id: 149
-event: candidate.discovered
-data: {"candidate_id":""}
 
 id: 150
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 151
-event: candidate.discovered
-data: {"candidate_id":""}
-
-id: 152
 event: search.progress
 data: {"stage":"page_fetched","detail":null}
 
+id: 152
+event: search.warning
+data: {"code":"warning","message":""}
+
 id: 153
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
 
 id: 154
 event: search.progress
 data: {"stage":"page_fetched","detail":null}
 
 id: 155
-event: candidate.discovered
-data: {"candidate_id":""}
-
-: heartbeat
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
 
 id: 156
 event: search.progress
 data: {"stage":"page_fetched","detail":null}
 
 id: 157
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 158
-event: search.progress
-data: {"stage":"page_fetched","detail":null}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 159
-event: candidate.discovered
-data: {"candidate_id":""}
-
-: heartbeat
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
 
 id: 160
 event: search.progress
 data: {"stage":"page_fetched","detail":null}
 
 id: 161
-event: candidate.discovered
-data: {"candidate_id":""}
-
-id: 162
 event: search.progress
 data: {"stage":"page_fetched","detail":null}
 
+id: 162
+event: search.warning
+data: {"code":"warning","message":""}
+
 id: 163
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 164
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 165
 event: candidate.discovered
 data: {"candidate_id":""}
 
-id: 164
-event: search.coverage
-data: {"sources_completed":[{"id":"byronesque","name":"byronesque","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":9,"candidates_normalized":0,"candidates_hidden":0}
-
-id: 165
-event: search.progress
-data: {"stage":"source_complete","detail":null}
-
 id: 166
 event: search.progress
-data: {"stage":"source_start","detail":null}
+data: {"stage":"page_fetched","detail":null}
 
 id: 167
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+event: candidate.discovered
+data: {"candidate_id":""}
 
 id: 168
 event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+data: {"stage":"page_fetched","detail":null}
 
 id: 169
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 170
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+event: candidate.discovered
+data: {"candidate_id":""}
 
 id: 171
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 172
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+event: candidate.discovered
+data: {"candidate_id":""}
 
 id: 173
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+event: candidate.discovered
+data: {"candidate_id":""}
 
 id: 174
 event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+data: {"stage":"page_fetched","detail":null}
 
 id: 175
 event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+data: {"stage":"page_fetched","detail":null}
 
 id: 176
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+event: candidate.discovered
+data: {"candidate_id":""}
 
 id: 177
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 178
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 179
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
+event: candidate.discovered
+data: {"candidate_id":""}
 
 id: 180
-event: search.warning
-data: {"code":"warning","message":""}
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
 
 id: 181
-event: search.warning
-data: {"code":"warning","message":""}
+event: candidate.discovered
+data: {"candidate_id":""}
 
 id: 182
-event: search.warning
-data: {"code":"warning","message":""}
+event: search.coverage
+data: {"sources_completed":[{"id":"byronesque","name":"byronesque","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":9,"candidates_normalized":0,"candidates_hidden":0}
 
 id: 183
-event: search.warning
-data: {"code":"warning","message":""}
+event: search.progress
+data: {"stage":"source_complete","detail":null}
 
 id: 184
-event: search.warning
-data: {"code":"warning","message":""}
+event: candidate.discovered
+data: {"candidate_id":""}
 
 id: 185
 event: search.warning
@@ -765,510 +747,760 @@ event: search.warning
 data: {"code":"warning","message":""}
 
 id: 187
-event: search.warning
-data: {"code":"warning","message":""}
+event: candidate.discovered
+data: {"candidate_id":""}
 
 id: 188
-event: search.warning
-data: {"code":"warning","message":""}
+event: candidate.discovered
+data: {"candidate_id":""}
 
 id: 189
-event: search.coverage
-data: {"sources_completed":[{"id":"heroine","name":"heroine","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":0,"candidates_normalized":0,"candidates_hidden":0}
+event: candidate.discovered
+data: {"candidate_id":""}
 
 id: 190
 event: search.progress
-data: {"stage":"source_complete","detail":null}
+data: {"stage":"page_fetched","detail":null}
 
 id: 191
-event: search.progress
-data: {"stage":"source_start","detail":null}
+event: candidate.discovered
+data: {"candidate_id":""}
 
 id: 192
-event: search.progress
-data: {"stage":"query_dispatch","detail":null}
-
-id: 193
 event: search.warning
 data: {"code":"warning","message":""}
 
+id: 193
+event: candidate.discovered
+data: {"candidate_id":""}
+
 id: 194
-event: search.coverage
-data: {"sources_completed":[{"id":"ebay","name":"ebay","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":0,"candidates_normalized":0,"candidates_hidden":0}
+event: candidate.discovered
+data: {"candidate_id":""}
 
 id: 195
-event: search.progress
-data: {"stage":"source_complete","detail":null}
+event: candidate.discovered
+data: {"candidate_id":""}
 
 id: 196
-event: search.coverage
-data: {"sources_completed":[{"detail":"","id":"wikimedia","name":"wikimedia","status":"SEARCHED_NO_MATCH"},{"detail":"","id":"kind","name":"kind","status":"SEARCHED_MATCHES_FOUND"},{"detail":"","id":"komehyo","name":"komehyo","status":"SEARCHED_NO_MATCH"},{"detail":"","id":"the_realreal","name":"the_realreal","status":"SEARCHED_NO_MATCH"},{"detail":"","id":"byronesque","name":"byronesque","status":"SEARCHED_MATCHES_FOUND"}],"sources_blocked":[{"detail":"","id":"heroine","name":"heroine","status":"BLOCKED_BY_POLICY"},{"detail":"","id":"ebay","name":"ebay","status":"AUTH_REQUIRED"}],"sources_in_progress":[],"pages_fetched":28,"candidates_normalized":34,"candidates_hidden":0}
+event: candidate.discovered
+data: {"candidate_id":""}
 
 id: 197
 event: candidate.discovered
-data: {"candidate_id":"9c219157-0067-45d4-b5f4-461b15fc33f8"}
+data: {"candidate_id":""}
 
 id: 198
-event: candidate.discovered
-data: {"candidate_id":"89ac8ded-ccb8-4789-9abd-b7c388f6f1a4"}
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
 
 id: 199
 event: candidate.discovered
-data: {"candidate_id":"01b2e73a-dda0-4c37-9b87-5cf83c31d5ad"}
+data: {"candidate_id":""}
 
 id: 200
-event: candidate.discovered
-data: {"candidate_id":"18f430e6-906e-4375-ab0b-42ed44f00f95"}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 201
 event: candidate.discovered
-data: {"candidate_id":"862409ea-a985-4d78-be6f-fe366b6fcf2c"}
+data: {"candidate_id":""}
 
 id: 202
-event: candidate.discovered
-data: {"candidate_id":"6a5d4db3-b30e-4df1-a9a5-ab928e5f5c7e"}
+event: search.coverage
+data: {"sources_completed":[{"id":"marginalia","name":"marginalia","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":9,"candidates_normalized":0,"candidates_hidden":0}
 
 id: 203
-event: candidate.discovered
-data: {"candidate_id":"f28697d6-a76e-4b08-b708-93726da920b6"}
+event: search.progress
+data: {"stage":"source_complete","detail":null}
 
 id: 204
 event: candidate.discovered
-data: {"candidate_id":"33825ea1-bc84-46ab-a807-31219706f017"}
+data: {"candidate_id":""}
 
 id: 205
-event: candidate.discovered
-data: {"candidate_id":"02983092-557a-4ff7-bd0c-9093278b103f"}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 206
 event: candidate.discovered
-data: {"candidate_id":"bed3a14a-89fd-4d30-be1e-2c4b4def197b"}
+data: {"candidate_id":""}
 
 id: 207
 event: candidate.discovered
-data: {"candidate_id":"a054fbcc-a263-42c3-92a9-5f46539dbd6e"}
+data: {"candidate_id":""}
 
 id: 208
 event: candidate.discovered
-data: {"candidate_id":"e0aa7980-156e-457d-8060-af49c979a9ca"}
+data: {"candidate_id":""}
 
 id: 209
-event: candidate.discovered
-data: {"candidate_id":"f7011b7f-102b-471d-aa7e-1d85386cd3e1"}
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
 
 id: 210
-event: candidate.discovered
-data: {"candidate_id":"36b05a0d-c0d2-4479-a7ef-fa420457cf07"}
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
 
 id: 211
-event: candidate.discovered
-data: {"candidate_id":"c163f46b-d7f9-44b2-b104-c63e262a66f3"}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 212
-event: candidate.discovered
-data: {"candidate_id":"dc2c9953-ee43-4946-8d06-f41d472e3454"}
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
 
 id: 213
-event: candidate.discovered
-data: {"candidate_id":"3230e4af-4aa2-4118-bd4f-856495e76f9e"}
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
 
 id: 214
-event: candidate.discovered
-data: {"candidate_id":"7089d245-bb53-4f37-ae52-6eb82dfbce8b"}
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
 
 id: 215
-event: candidate.discovered
-data: {"candidate_id":"8b84879f-0043-4403-b730-6e332537e66c"}
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
 
 id: 216
-event: candidate.discovered
-data: {"candidate_id":"d43f7913-7134-45b0-9e8f-b50297814911"}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 217
-event: candidate.discovered
-data: {"candidate_id":"10b0d559-e7d2-4894-9839-254dc272171e"}
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
 
 id: 218
-event: candidate.discovered
-data: {"candidate_id":"4fe43454-e7b8-485d-8d2c-6f1310ba907c"}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 219
-event: candidate.discovered
-data: {"candidate_id":"216c12e7-198b-452f-8b27-114be63c632b"}
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
 
 id: 220
-event: candidate.discovered
-data: {"candidate_id":"bd62e5a3-ed4a-4c33-ae27-73682afaf13f"}
+event: search.coverage
+data: {"sources_completed":[{"id":"kind","name":"kind","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":5,"candidates_normalized":0,"candidates_hidden":0}
 
 id: 221
-event: candidate.discovered
-data: {"candidate_id":"fcfd101f-39f0-47c4-b509-528b1edc4507"}
+event: search.progress
+data: {"stage":"source_complete","detail":null}
 
 id: 222
-event: candidate.discovered
-data: {"candidate_id":"fa2b2e46-f33c-4b09-acec-a662c49938cd"}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 223
-event: candidate.discovered
-data: {"candidate_id":"b1feed70-9342-4a13-8365-a232c336954d"}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 224
-event: candidate.discovered
-data: {"candidate_id":"047eb35d-8fd2-4709-9106-1bc15068e74d"}
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
 
 id: 225
-event: candidate.discovered
-data: {"candidate_id":"37673e24-f894-4cab-a7de-4886b1275a1e"}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 226
-event: candidate.discovered
-data: {"candidate_id":"944b6da2-bbcb-4fd3-b6f5-cc12ffb8f783"}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 227
-event: candidate.discovered
-data: {"candidate_id":"ee1fcf73-3b24-4f4c-9bc7-5fcb825d3f15"}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 228
-event: candidate.discovered
-data: {"candidate_id":"08798933-37a7-4363-8a52-dd2689dfb1ca"}
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
 
 id: 229
-event: candidate.discovered
-data: {"candidate_id":"f11ed64b-97a2-498f-93c8-bc2a6f710eef"}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 230
-event: candidate.discovered
-data: {"candidate_id":"9681767a-7347-4c1e-95c1-9c526bcdba9f"}
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
 
 id: 231
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 232
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 233
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 234
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 235
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 236
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 237
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 238
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 239
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 240
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 241
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 242
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 243
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 244
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 245
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 246
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 247
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 248
+event: search.coverage
+data: {"sources_completed":[{"id":"the_realreal","name":"the_realreal","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":5,"candidates_normalized":0,"candidates_hidden":0}
+
+id: 249
+event: search.progress
+data: {"stage":"source_complete","detail":null}
+
+id: 250
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 251
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 252
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 253
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 254
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 255
+event: search.coverage
+data: {"sources_completed":[{"id":"rebag","name":"rebag","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":6,"candidates_normalized":0,"candidates_hidden":0}
+
+id: 256
+event: search.progress
+data: {"stage":"source_complete","detail":null}
+
+id: 257
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 258
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 259
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 260
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 261
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 262
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 263
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 264
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 265
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 266
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 267
+event: search.coverage
+data: {"sources_completed":[{"id":"heroine","name":"heroine","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":2,"candidates_normalized":0,"candidates_hidden":0}
+
+id: 268
+event: search.progress
+data: {"stage":"source_complete","detail":null}
+
+id: 269
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 270
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+id: 271
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 272
+event: search.coverage
+data: {"sources_completed":[{"id":"komehyo","name":"komehyo","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":8,"candidates_normalized":0,"candidates_hidden":0}
+
+id: 273
+event: search.progress
+data: {"stage":"source_complete","detail":null}
+
+id: 274
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 275
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 276
+event: search.coverage
+data: {"sources_completed":[{"id":"wikimedia","name":"wikimedia","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":7,"candidates_normalized":0,"candidates_hidden":0}
+
+id: 277
+event: search.progress
+data: {"stage":"source_complete","detail":null}
+
+id: 278
+event: search.warning
+data: {"code":"warning","message":""}
+
+id: 279
+event: search.coverage
+data: {"sources_completed":[{"detail":"","id":"kind","name":"kind","status":"SEARCHED_MATCHES_FOUND"}],"sources_blocked":[{"detail":"","id":"archive_org","name":"archive_org","status":"UNMEASURABLE"},{"detail":"","id":"wikimedia","name":"wikimedia","status":"BLOCKED_BY_POLICY"},{"detail":"","id":"marginalia","name":"marginalia","status":"SOURCE_UNAVAILABLE"},{"detail":"","id":"the_realreal","name":"the_realreal","status":"SOURCE_UNAVAILABLE"},{"detail":"","id":"rebag","name":"rebag","status":"SOURCE_UNAVAILABLE"},{"detail":"","id":"komehyo","name":"komehyo","status":"SOURCE_UNAVAILABLE"},{"detail":"","id":"byronesque","name":"byronesque","status":"SOURCE_UNAVAILABLE"},{"detail":"","id":"heroine","name":"heroine","status":"BLOCKED_BY_POLICY"}],"sources_in_progress":[],"pages_fetched":51,"candidates_normalized":24,"candidates_hidden":0}
+
+id: 280
+event: candidate.discovered
+data: {"candidate_id":"9da3b84b-9716-4b07-8258-6f6bb52324f8"}
+
+id: 281
+event: candidate.discovered
+data: {"candidate_id":"8fd31cdc-ea42-4b45-8ba4-2144c86fa080"}
+
+id: 282
+event: candidate.discovered
+data: {"candidate_id":"9ceecce9-17cb-4bf2-ad8e-ac401727fe2f"}
+
+id: 283
+event: candidate.discovered
+data: {"candidate_id":"bb43a876-63ae-4f22-853c-5e684b47dd14"}
+
+id: 284
+event: candidate.discovered
+data: {"candidate_id":"a6ee1976-0b97-4238-ae89-a07dd7f535e8"}
+
+id: 285
+event: candidate.discovered
+data: {"candidate_id":"7f39624f-fdd8-4382-a2e6-94b4140e5786"}
+
+id: 286
+event: candidate.discovered
+data: {"candidate_id":"d778091b-e634-47cb-980e-b6607bc53b43"}
+
+id: 287
+event: candidate.discovered
+data: {"candidate_id":"61907e1a-8797-4e93-a692-9279d2b5747e"}
+
+id: 288
+event: candidate.discovered
+data: {"candidate_id":"a1b32f8f-6952-4a37-951a-87b3bffdb291"}
+
+id: 289
+event: candidate.discovered
+data: {"candidate_id":"cd5d6db7-5d10-44e2-b459-ea92c82b6a25"}
+
+id: 290
+event: candidate.discovered
+data: {"candidate_id":"869d0540-5a53-443f-8e88-d4f753e71a2e"}
+
+id: 291
+event: candidate.discovered
+data: {"candidate_id":"e443fe63-8066-4620-b865-6dc0dd9665ac"}
+
+id: 292
+event: candidate.discovered
+data: {"candidate_id":"e1fcfb01-625b-457d-b36c-85fea4044feb"}
+
+id: 293
+event: candidate.discovered
+data: {"candidate_id":"18e8efc2-be8e-4a30-9950-ac366b6cb212"}
+
+id: 294
+event: candidate.discovered
+data: {"candidate_id":"f8207506-4f14-4afd-9593-72f981ed3007"}
+
+id: 295
+event: candidate.discovered
+data: {"candidate_id":"f3976549-c1a8-4336-8b92-4a054194da52"}
+
+id: 296
+event: candidate.discovered
+data: {"candidate_id":"d14ffee6-9318-4a9b-9bd1-b33204c5738a"}
+
+id: 297
+event: candidate.discovered
+data: {"candidate_id":"903e3b2a-072c-4636-9a64-70da5c0c2741"}
+
+id: 298
+event: candidate.discovered
+data: {"candidate_id":"7f751a6f-e9d0-433c-9e46-3bdc81a82693"}
+
+id: 299
+event: candidate.discovered
+data: {"candidate_id":"b4b38850-08d8-41ca-b6bb-07c202d06b94"}
+
+id: 300
+event: candidate.discovered
+data: {"candidate_id":"6a589d15-3cb3-401f-99f7-d10d3166e5d8"}
+
+id: 301
+event: candidate.discovered
+data: {"candidate_id":"aa2a2c54-5d3b-4f25-b5ff-60929c2e7d62"}
+
+id: 302
+event: candidate.discovered
+data: {"candidate_id":"37115307-5e6d-4c41-940f-0efba756c2e1"}
+
+id: 303
+event: candidate.discovered
+data: {"candidate_id":"25640686-dee7-4a94-a02f-81f713082966"}
+
+id: 304
 event: search.state
 data: {"state":"ACQUIRING","version":9}
 
-id: 232
+id: 305
 event: search.progress
 data: {"stage":"Comparing candidate images","detail":null}
 
-id: 233
+id: 306
 event: search.state
 data: {"state":"NORMALIZING","version":10}
 
-id: 234
+id: 307
 event: search.progress
 data: {"stage":"Comparing candidate images","detail":null}
 
-id: 235
+id: 308
 event: candidate.normalized
-data: {"candidate_id":"9c219157-0067-45d4-b5f4-461b15fc33f8"}
+data: {"candidate_id":"9da3b84b-9716-4b07-8258-6f6bb52324f8"}
 
-id: 236
+id: 309
 event: candidate.normalized
-data: {"candidate_id":"89ac8ded-ccb8-4789-9abd-b7c388f6f1a4"}
+data: {"candidate_id":"8fd31cdc-ea42-4b45-8ba4-2144c86fa080"}
 
-id: 237
+id: 310
 event: candidate.normalized
-data: {"candidate_id":"01b2e73a-dda0-4c37-9b87-5cf83c31d5ad"}
+data: {"candidate_id":"9ceecce9-17cb-4bf2-ad8e-ac401727fe2f"}
 
-id: 238
+id: 311
 event: candidate.normalized
-data: {"candidate_id":"18f430e6-906e-4375-ab0b-42ed44f00f95"}
+data: {"candidate_id":"bb43a876-63ae-4f22-853c-5e684b47dd14"}
 
-id: 239
+id: 312
 event: candidate.normalized
-data: {"candidate_id":"862409ea-a985-4d78-be6f-fe366b6fcf2c"}
+data: {"candidate_id":"a6ee1976-0b97-4238-ae89-a07dd7f535e8"}
 
-id: 240
+id: 313
 event: candidate.normalized
-data: {"candidate_id":"6a5d4db3-b30e-4df1-a9a5-ab928e5f5c7e"}
+data: {"candidate_id":"7f39624f-fdd8-4382-a2e6-94b4140e5786"}
 
-id: 241
+id: 314
 event: candidate.normalized
-data: {"candidate_id":"f28697d6-a76e-4b08-b708-93726da920b6"}
+data: {"candidate_id":"d778091b-e634-47cb-980e-b6607bc53b43"}
 
-id: 242
+id: 315
 event: candidate.normalized
-data: {"candidate_id":"33825ea1-bc84-46ab-a807-31219706f017"}
+data: {"candidate_id":"61907e1a-8797-4e93-a692-9279d2b5747e"}
 
-id: 243
+id: 316
 event: candidate.normalized
-data: {"candidate_id":"02983092-557a-4ff7-bd0c-9093278b103f"}
+data: {"candidate_id":"a1b32f8f-6952-4a37-951a-87b3bffdb291"}
 
-id: 244
+id: 317
 event: candidate.normalized
-data: {"candidate_id":"bed3a14a-89fd-4d30-be1e-2c4b4def197b"}
+data: {"candidate_id":"cd5d6db7-5d10-44e2-b459-ea92c82b6a25"}
 
-id: 245
+id: 318
 event: candidate.normalized
-data: {"candidate_id":"a054fbcc-a263-42c3-92a9-5f46539dbd6e"}
+data: {"candidate_id":"869d0540-5a53-443f-8e88-d4f753e71a2e"}
 
-id: 246
+id: 319
 event: candidate.normalized
-data: {"candidate_id":"e0aa7980-156e-457d-8060-af49c979a9ca"}
+data: {"candidate_id":"e443fe63-8066-4620-b865-6dc0dd9665ac"}
 
-id: 247
+id: 320
 event: candidate.normalized
-data: {"candidate_id":"f7011b7f-102b-471d-aa7e-1d85386cd3e1"}
+data: {"candidate_id":"e1fcfb01-625b-457d-b36c-85fea4044feb"}
 
-id: 248
+id: 321
 event: candidate.normalized
-data: {"candidate_id":"36b05a0d-c0d2-4479-a7ef-fa420457cf07"}
+data: {"candidate_id":"18e8efc2-be8e-4a30-9950-ac366b6cb212"}
 
-id: 249
+id: 322
 event: candidate.normalized
-data: {"candidate_id":"c163f46b-d7f9-44b2-b104-c63e262a66f3"}
+data: {"candidate_id":"f8207506-4f14-4afd-9593-72f981ed3007"}
 
-id: 250
+id: 323
 event: candidate.normalized
-data: {"candidate_id":"dc2c9953-ee43-4946-8d06-f41d472e3454"}
+data: {"candidate_id":"f3976549-c1a8-4336-8b92-4a054194da52"}
 
-id: 251
+id: 324
 event: candidate.normalized
-data: {"candidate_id":"3230e4af-4aa2-4118-bd4f-856495e76f9e"}
+data: {"candidate_id":"d14ffee6-9318-4a9b-9bd1-b33204c5738a"}
 
-id: 252
+id: 325
 event: candidate.normalized
-data: {"candidate_id":"7089d245-bb53-4f37-ae52-6eb82dfbce8b"}
+data: {"candidate_id":"903e3b2a-072c-4636-9a64-70da5c0c2741"}
 
-id: 253
+id: 326
 event: candidate.normalized
-data: {"candidate_id":"8b84879f-0043-4403-b730-6e332537e66c"}
+data: {"candidate_id":"7f751a6f-e9d0-433c-9e46-3bdc81a82693"}
 
-id: 254
+id: 327
 event: candidate.normalized
-data: {"candidate_id":"d43f7913-7134-45b0-9e8f-b50297814911"}
+data: {"candidate_id":"b4b38850-08d8-41ca-b6bb-07c202d06b94"}
 
-id: 255
+id: 328
 event: candidate.normalized
-data: {"candidate_id":"10b0d559-e7d2-4894-9839-254dc272171e"}
+data: {"candidate_id":"6a589d15-3cb3-401f-99f7-d10d3166e5d8"}
 
-id: 256
+id: 329
 event: candidate.normalized
-data: {"candidate_id":"4fe43454-e7b8-485d-8d2c-6f1310ba907c"}
+data: {"candidate_id":"aa2a2c54-5d3b-4f25-b5ff-60929c2e7d62"}
 
-id: 257
+id: 330
 event: candidate.normalized
-data: {"candidate_id":"216c12e7-198b-452f-8b27-114be63c632b"}
+data: {"candidate_id":"37115307-5e6d-4c41-940f-0efba756c2e1"}
 
-id: 258
+id: 331
 event: candidate.normalized
-data: {"candidate_id":"bd62e5a3-ed4a-4c33-ae27-73682afaf13f"}
+data: {"candidate_id":"25640686-dee7-4a94-a02f-81f713082966"}
 
-id: 259
-event: candidate.normalized
-data: {"candidate_id":"fcfd101f-39f0-47c4-b509-528b1edc4507"}
-
-id: 260
-event: candidate.normalized
-data: {"candidate_id":"fa2b2e46-f33c-4b09-acec-a662c49938cd"}
-
-id: 261
-event: candidate.normalized
-data: {"candidate_id":"b1feed70-9342-4a13-8365-a232c336954d"}
-
-id: 262
-event: candidate.normalized
-data: {"candidate_id":"047eb35d-8fd2-4709-9106-1bc15068e74d"}
-
-id: 263
-event: candidate.normalized
-data: {"candidate_id":"37673e24-f894-4cab-a7de-4886b1275a1e"}
-
-id: 264
-event: candidate.normalized
-data: {"candidate_id":"944b6da2-bbcb-4fd3-b6f5-cc12ffb8f783"}
-
-id: 265
-event: candidate.normalized
-data: {"candidate_id":"ee1fcf73-3b24-4f4c-9bc7-5fcb825d3f15"}
-
-id: 266
-event: candidate.normalized
-data: {"candidate_id":"08798933-37a7-4363-8a52-dd2689dfb1ca"}
-
-id: 267
-event: candidate.normalized
-data: {"candidate_id":"f11ed64b-97a2-498f-93c8-bc2a6f710eef"}
-
-id: 268
-event: candidate.normalized
-data: {"candidate_id":"cc3ee89e-79c9-46d9-b4a3-98fdc0470644"}
-
-id: 269
-event: candidate.normalized
-data: {"candidate_id":"9c1e98b9-baf5-4033-980f-9d18263635d1"}
-
-id: 270
-event: candidate.normalized
-data: {"candidate_id":"334545c0-f370-43ba-a266-4df445ed0403"}
-
-id: 271
-event: candidate.normalized
-data: {"candidate_id":"5675228f-44e8-4e7e-894b-7b94974f8841"}
-
-id: 272
-event: candidate.normalized
-data: {"candidate_id":"ca1f1711-07ad-48d2-b3a0-fbff5306a3ae"}
-
-id: 273
-event: candidate.normalized
-data: {"candidate_id":"4e73f726-c7d7-4bf4-90e8-59fd15c61dd7"}
-
-id: 274
-event: candidate.normalized
-data: {"candidate_id":"9681767a-7347-4c1e-95c1-9c526bcdba9f"}
-
-id: 275
-event: candidate.normalized
-data: {"candidate_id":"671913bb-29ae-47a1-be48-f3f3093b84e6"}
-
-id: 276
-event: candidate.normalized
-data: {"candidate_id":"9d93acdb-8c4f-40fe-84d7-eaeb1ca4a6e4"}
-
-id: 277
+id: 332
 event: search.state
 data: {"state":"DEDUPLICATING","version":11}
 
-id: 278
+id: 333
 event: search.progress
 data: {"stage":"Comparing candidate images","detail":null}
 
-id: 279
+id: 334
 event: search.state
 data: {"state":"BROAD_RETRIEVAL","version":12}
 
-id: 280
+id: 335
 event: search.progress
 data: {"stage":"Comparing candidate images","detail":null}
 
-id: 281
+id: 336
 event: search.state
 data: {"state":"FINE_MATCHING","version":13}
 
-id: 282
+id: 337
 event: search.progress
 data: {"stage":"Checking detail consistency","detail":null}
 
-id: 283
+id: 338
 event: candidate.promoted
-data: {"candidate_id":"9c219157-0067-45d4-b5f4-461b15fc33f8"}
+data: {"candidate_id":"d778091b-e634-47cb-980e-b6607bc53b43"}
 
-id: 284
+id: 339
 event: candidate.promoted
-data: {"candidate_id":"89ac8ded-ccb8-4789-9abd-b7c388f6f1a4"}
+data: {"candidate_id":"9ceecce9-17cb-4bf2-ad8e-ac401727fe2f"}
 
-id: 285
+id: 340
 event: candidate.promoted
-data: {"candidate_id":"f7011b7f-102b-471d-aa7e-1d85386cd3e1"}
+data: {"candidate_id":"18e8efc2-be8e-4a30-9950-ac366b6cb212"}
 
-id: 286
+id: 341
 event: candidate.promoted
-data: {"candidate_id":"6a5d4db3-b30e-4df1-a9a5-ab928e5f5c7e"}
+data: {"candidate_id":"9da3b84b-9716-4b07-8258-6f6bb52324f8"}
 
-id: 287
+id: 342
 event: candidate.promoted
-data: {"candidate_id":"e0aa7980-156e-457d-8060-af49c979a9ca"}
+data: {"candidate_id":"a1b32f8f-6952-4a37-951a-87b3bffdb291"}
 
-id: 288
+id: 343
 event: candidate.promoted
-data: {"candidate_id":"36b05a0d-c0d2-4479-a7ef-fa420457cf07"}
+data: {"candidate_id":"f3976549-c1a8-4336-8b92-4a054194da52"}
 
-id: 289
+id: 344
 event: candidate.promoted
-data: {"candidate_id":"dc2c9953-ee43-4946-8d06-f41d472e3454"}
+data: {"candidate_id":"f8207506-4f14-4afd-9593-72f981ed3007"}
 
-id: 290
+id: 345
 event: candidate.promoted
-data: {"candidate_id":"f28697d6-a76e-4b08-b708-93726da920b6"}
+data: {"candidate_id":"d14ffee6-9318-4a9b-9bd1-b33204c5738a"}
 
-id: 291
+id: 346
 event: search.state
 data: {"state":"AUTHENTICITY_REVIEW","version":14}
 
-id: 292
+id: 347
 event: search.progress
 data: {"stage":"Checking listing authenticity evidence","detail":null}
 
 : heartbeat
 
-id: 293
+id: 348
 event: search.state
 data: {"state":"LIVE_CHECKING","version":15}
 
-id: 294
+id: 349
 event: search.progress
 data: {"stage":"Verifying live links","detail":null}
 
 : heartbeat
 
-id: 295
+: heartbeat
+
+: heartbeat
+
+: heartbeat
+
+: heartbeat
+
+: heartbeat
+
+id: 350
 event: candidate.updated
-data: {"candidate_id":"9c219157-0067-45d4-b5f4-461b15fc33f8"}
+data: {"candidate_id":"d778091b-e634-47cb-980e-b6607bc53b43"}
 
-id: 296
+id: 351
 event: candidate.updated
-data: {"candidate_id":"89ac8ded-ccb8-4789-9abd-b7c388f6f1a4"}
+data: {"candidate_id":"9ceecce9-17cb-4bf2-ad8e-ac401727fe2f"}
 
-id: 297
+id: 352
 event: candidate.updated
-data: {"candidate_id":"f7011b7f-102b-471d-aa7e-1d85386cd3e1"}
+data: {"candidate_id":"18e8efc2-be8e-4a30-9950-ac366b6cb212"}
 
-id: 298
+id: 353
 event: candidate.updated
-data: {"candidate_id":"6a5d4db3-b30e-4df1-a9a5-ab928e5f5c7e"}
+data: {"candidate_id":"9da3b84b-9716-4b07-8258-6f6bb52324f8"}
 
-id: 299
+id: 354
 event: candidate.updated
-data: {"candidate_id":"e0aa7980-156e-457d-8060-af49c979a9ca"}
+data: {"candidate_id":"a1b32f8f-6952-4a37-951a-87b3bffdb291"}
 
-id: 300
+id: 355
 event: candidate.updated
-data: {"candidate_id":"36b05a0d-c0d2-4479-a7ef-fa420457cf07"}
+data: {"candidate_id":"f3976549-c1a8-4336-8b92-4a054194da52"}
 
-id: 301
+id: 356
 event: candidate.updated
-data: {"candidate_id":"dc2c9953-ee43-4946-8d06-f41d472e3454"}
+data: {"candidate_id":"f8207506-4f14-4afd-9593-72f981ed3007"}
 
-id: 302
+id: 357
 event: candidate.updated
-data: {"candidate_id":"f28697d6-a76e-4b08-b708-93726da920b6"}
+data: {"candidate_id":"d14ffee6-9318-4a9b-9bd1-b33204c5738a"}
 
-id: 303
-event: result.possibly_real
-data: {"result_id":"1971032a-ecca-47f1-b0d9-d6da44192e67","search_id":"b9bd3ef1-36fa-483e-afec-ed716bfab777","candidate_id":"9c219157-0067-45d4-b5f4-461b15fc33f8","bucket":"possibly_real","rank":1,"title":"無地 ロングスリーブカットソー","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001141404","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141404_1.jpg?v=1786853462","alt":"無地 ロングスリーブカットソー"},"price":{"original":"8360","currency":"JPY","display":"¥8,360"},"size":null,"availability":"LIVE","last_checked_at":"2026-08-16T20:45:58.210456+00:00","item_match":{"label":"Incomplete evidence","mean":0.568548,"lower_bound":0.497648,"upper_bound":0.608548},"authenticity":{"label":"Incomplete evidence","mean":0.52,"lower_bound":0.4,"upper_bound":0.586},"listing_utility":{"live":true,"label":"Live","score":0.8350000000000001,"last_checked_at":"2026-08-16T20:45:58.210456+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"unknown"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:embedding:cosine","ev:embedding:OBSERVED-pixels"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:embedding:cosine","ev:embedding:OBSERVED-pixels"],"contradictions":[],"missing":["unknown","label-view","logo-not-resolved","cross-view-second-image","provenance"],"seller_reported":[{"field":"Title","value":"無地 ロングスリーブカットソー","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141404","origin":"REPORTED_BY_SELLER"}],"images_compared":[],"duplicate_image_family_count":4,"live":true,"checked_at":"2026-08-16T20:45:58.210456+00:00"}}
-
-id: 304
-event: result.possibly_real
-data: {"result_id":"4cde26fb-9e52-42dc-b506-af06e8e4e924","search_id":"b9bd3ef1-36fa-483e-afec-ed716bfab777","candidate_id":"89ac8ded-ccb8-4789-9abd-b7c388f6f1a4","bucket":"possibly_real","rank":1,"title":"ロゴ長袖カットソー","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001141442","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141442_1.jpg?v=1786853460","alt":"ロゴ長袖カットソー"},"price":{"original":"7260","currency":"JPY","display":"¥7,260"},"size":null,"availability":"LIVE","last_checked_at":"2026-08-16T20:45:58.213721+00:00","item_match":{"label":"Incomplete evidence","mean":0.601374,"lower_bound":0.530474,"upper_bound":0.641374},"authenticity":{"label":"Incomplete evidence","mean":0.52,"lower_bound":0.4,"upper_bound":0.586},"listing_utility":{"live":true,"label":"Live","score":0.8350000000000001,"last_checked_at":"2026-08-16T20:45:58.213721+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"unknown"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:embedding:cosine","ev:embedding:OBSERVED-pixels"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:embedding:cosine","ev:embedding:OBSERVED-pixels"],"contradictions":[],"missing":["unknown","label-view","logo-not-resolved","cross-view-second-image","provenance"],"seller_reported":[{"field":"Title","value":"ロゴ長袖カットソー","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141442","origin":"REPORTED_BY_SELLER"}],"images_compared":[],"duplicate_image_family_count":4,"live":true,"checked_at":"2026-08-16T20:45:58.213721+00:00"}}
-
-id: 305
-event: result.removed
-data: {"result_id":"bd232980-c682-45fa-8a3c-6f81529cb514","reason":"hidden"}
-
-id: 306
-event: result.removed
-data: {"result_id":"fb65f8d5-8b33-47db-9c4f-a61364916c11","reason":"hidden"}
-
-id: 307
-event: result.removed
-data: {"result_id":"0c6a8a78-ba1e-4b3b-b958-694f9664476f","reason":"hidden"}
-
-id: 308
-event: result.removed
-data: {"result_id":"4bccfd4c-a40a-484b-96ad-efb214d08303","reason":"hidden"}
-
-id: 309
-event: result.removed
-data: {"result_id":"b04f843b-30a8-4537-9c91-5d39fac94262","reason":"hidden"}
-
-id: 310
-event: result.possibly_real
-data: {"result_id":"5a689ecc-ac20-47d6-bad7-e1e8747d943b","search_id":"b9bd3ef1-36fa-483e-afec-ed716bfab777","candidate_id":"f28697d6-a76e-4b08-b708-93726da920b6","bucket":"possibly_real","rank":1,"title":"ロゴ長袖カットソーW21-0004","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001141527","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141527_1.jpg?v=1786777863","alt":"ロゴ長袖カットソーW21-0004"},"price":{"original":"7260","currency":"JPY","display":"¥7,260"},"size":null,"availability":"LIVE","last_checked_at":"2026-08-16T20:46:25.096253+00:00","item_match":{"label":"Incomplete evidence","mean":0.565527,"lower_bound":0.494627,"upper_bound":0.605527},"authenticity":{"label":"Incomplete evidence","mean":0.52,"lower_bound":0.4,"upper_bound":0.586},"listing_utility":{"live":true,"label":"Live","score":0.8350000000000001,"last_checked_at":"2026-08-16T20:46:25.096253+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"unknown"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:embedding:cosine","ev:embedding:OBSERVED-pixels"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:embedding:cosine","ev:embedding:OBSERVED-pixels"],"contradictions":[],"missing":["unknown","label-view","logo-not-resolved","cross-view-second-image","provenance"],"seller_reported":[{"field":"Title","value":"ロゴ長袖カットソーW21-0004","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141527","origin":"REPORTED_BY_SELLER"}],"images_compared":[],"duplicate_image_family_count":4,"live":true,"checked_at":"2026-08-16T20:46:25.096253+00:00"}}
-
-id: 311
+id: 358
 event: search.state
-data: {"state":"PARTIAL","version":16}
+data: {"state":"RANKING","version":16}
 
-id: 312
-event: search.complete
-data: {"terminal_status":"PARTIAL","reason":"budget exhausted"}
+id: 359
+event: search.progress
+data: {"stage":"Ranking results","detail":null}
+
+id: 360
+event: search.state
+data: {"state":"PUBLISHING","version":17}
+
+id: 361
+event: search.progress
+data: {"stage":"Ranking results","detail":null}
+
+id: 362
+event: result.possibly_real
+data: {"result_id":"c599fb8d-a1cc-4bc1-af8f-e5029c7aeff3","search_id":"fc22b9ab-4541-4d06-8f98-035388477331","candidate_id":"d778091b-e634-47cb-980e-b6607bc53b43","bucket":"possibly_real","rank":1,"title":"GAME SHIRT L S UMBRO SP長袖TシャツTC261-JK511","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8006002318626","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8006002318626_1.jpg?v=1786965670","alt":"GAME SHIRT L S UMBRO SP長袖TシャツTC261-JK511"},"price":{"original":"33660","currency":"","display":"33660"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-17T16:20:20.424590+00:00","item_match":{"label":"Incomplete evidence","mean":0.575826,"lower_bound":0.505826,"upper_bound":0.615826},"authenticity":{"label":"Incomplete evidence","mean":0.469648,"lower_bound":0.249648,"upper_bound":0.590648},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-17T16:20:20.424590+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"GAME SHIRT L S UMBRO SP長袖TシャツTC261-JK511","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"UMBRO×TOGA ARCHIVES","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8006002318626","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8006002318626_1.jpg?v=1786965670","alt":"GAME SHIRT L S UMBRO SP長袖TシャツTC261-JK511","image_id":"2b98d592-cc13-4d85-ac3b-ab3daf762444"}],"images_compared_reason":null,"duplicate_image_family_count":5,"live":false,"checked_at":"2026-08-17T16:20:20.424590+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8006002318626_1.jpg?v=1786965670","alt":"GAME SHIRT L S UMBRO SP長袖TシャツTC261-JK511","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"GAME SHIRT L S UMBRO SP長袖TシャツTC261-JK511","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"UMBRO×TOGA ARCHIVES","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8006002318626","origin":"REPORTED_BY_SELLER"}]}}
+
+id: 363
+event: result.possibly_real
+data: {"result_id":"66a9090c-15df-4e4a-88c8-649435a200a4","search_id":"fc22b9ab-4541-4d06-8f98-035388477331","candidate_id":"9ceecce9-17cb-4bf2-ad8e-ac401727fe2f","bucket":"possibly_real","rank":1,"title":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001076249","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001076249_1.jpg?v=1786972271","alt":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO"},"price":{"original":"50160","currency":"","display":"50160"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-17T16:20:29.182956+00:00","item_match":{"label":"Incomplete evidence","mean":0.523009,"lower_bound":0.453009,"upper_bound":0.59},"authenticity":{"label":"Incomplete evidence","mean":0.501219,"lower_bound":0.281219,"upper_bound":0.622219},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-17T16:20:29.182956+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"OUR LEGACY","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001076249","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001076249_1.jpg?v=1786972271","alt":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO","image_id":"042222bc-3f92-4c59-97c7-936bc8d412bb"}],"images_compared_reason":null,"duplicate_image_family_count":5,"live":false,"checked_at":"2026-08-17T16:20:29.182956+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001076249_1.jpg?v=1786972271","alt":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"OUR LEGACY","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001076249","origin":"REPORTED_BY_SELLER"}]}}
+
+id: 364
+event: result.possibly_real
+data: {"result_id":"1fd60c8d-148e-4eba-860f-e720f55131c6","search_id":"fc22b9ab-4541-4d06-8f98-035388477331","candidate_id":"18e8efc2-be8e-4a30-9950-ac366b6cb212","bucket":"possibly_real","rank":1,"title":"23SSウールコートUC2B9303","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001059341","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001059341_1.jpg?v=1786972271","alt":"23SSウールコートUC2B9303"},"price":{"original":"72160","currency":"","display":"72160"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-17T16:20:37.681714+00:00","item_match":{"label":"Incomplete evidence","mean":0.576389,"lower_bound":0.506389,"upper_bound":0.616389},"authenticity":{"label":"Incomplete evidence","mean":0.463853,"lower_bound":0.243853,"upper_bound":0.584853},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-17T16:20:37.681714+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"23SSウールコートUC2B9303","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"UNDERCOVER×jun takahashi","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001059341","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001059341_1.jpg?v=1786972271","alt":"23SSウールコートUC2B9303","image_id":"9205b4cc-d848-48b2-97ae-c0b63324aa64"}],"images_compared_reason":null,"duplicate_image_family_count":5,"live":false,"checked_at":"2026-08-17T16:20:37.681714+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001059341_1.jpg?v=1786972271","alt":"23SSウールコートUC2B9303","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"23SSウールコートUC2B9303","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"UNDERCOVER×jun takahashi","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001059341","origin":"REPORTED_BY_SELLER"}]}}
+
+id: 365
+event: result.possibly_real
+data: {"result_id":"2caff3b6-f561-4421-8aee-a3ef690923ad","search_id":"fc22b9ab-4541-4d06-8f98-035388477331","candidate_id":"9da3b84b-9716-4b07-8258-6f6bb52324f8","bucket":"possibly_real","rank":1,"title":"FINX CO CORDUROY L S SHIRTオーバーサイズコーデュロイシャツジャケットVS52-307","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001067568","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001067568_1.jpg?v=1786972271","alt":"FINX CO CORDUROY L S SHIRTオーバーサイズコーデュロイシャツジャケットVS52-307"},"price":{"original":"13860","currency":"","display":"13860"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-17T16:20:49.300523+00:00","item_match":{"label":"Incomplete evidence","mean":0.553222,"lower_bound":0.483222,"upper_bound":0.593222},"authenticity":{"label":"Incomplete evidence","mean":0.462035,"lower_bound":0.242035,"upper_bound":0.583035},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-17T16:20:49.300523+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"FINX CO CORDUROY L S SHIRTオーバーサイズコーデュロイシャツジャケットVS52-307","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"VEIN","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001067568","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001067568_1.jpg?v=1786972271","alt":"FINX CO CORDUROY L S SHIRTオーバーサイズコーデュロイシャツジャケットVS52-307","image_id":"a05f7d40-8b4f-4877-a333-b3a1afa4c2b8"}],"images_compared_reason":null,"duplicate_image_family_count":4,"live":false,"checked_at":"2026-08-17T16:20:49.300523+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001067568_1.jpg?v=1786972271","alt":"FINX CO CORDUROY L S SHIRTオーバーサイズコーデュロイシャツジャケットVS52-307","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"FINX CO CORDUROY L S SHIRTオーバーサイズコーデュロイシャツジャケットVS52-307","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"VEIN","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001067568","origin":"REPORTED_BY_SELLER"}]}}
+
+id: 366
+event: result.removed
+data: {"result_id":"87b7f7dc-2aca-4491-8ed6-46a0ed6857e8","reason":"hidden"}
+
+id: 367
+event: result.removed
+data: {"result_id":"8ce7e6e3-26f8-4a96-9dd1-f89b7dfd2e90","reason":"hidden"}
+
+id: 368
+event: result.removed
+data: {"result_id":"2e74f770-7015-4b78-b7ab-fff0afc45243","reason":"hidden"}
+
+id: 369
+event: result.possibly_real
+data: {"result_id":"4a93bd52-39fe-49c8-bae9-d82c601a7748","search_id":"fc22b9ab-4541-4d06-8f98-035388477331","candidate_id":"d14ffee6-9318-4a9b-9bd1-b33204c5738a","bucket":"possibly_real","rank":1,"title":"24AWbone flight jacket．MA-1ジャケットsbj.0002AW24","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001062938","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001062938_1.jpg?v=1786972270","alt":"24AWbone flight jacket．MA-1ジャケットsbj.0002AW24"},"price":{"original":"88660","currency":"","display":"88660"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-17T16:21:33.673368+00:00","item_match":{"label":"Incomplete evidence","mean":0.554219,"lower_bound":0.484219,"upper_bound":0.594219},"authenticity":{"label":"Incomplete evidence","mean":0.549551,"lower_bound":0.329551,"upper_bound":0.670551},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-17T16:21:33.673368+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"24AWbone flight jacket．MA-1ジャケットsbj.0002AW24","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"TAKAHIROMIYASHITA TheSoloIst．","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001062938","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001062938_1.jpg?v=1786972270","alt":"24AWbone flight jacket．MA-1ジャケットsbj.0002AW24","image_id":"3c59c573-c642-4a69-8e74-77f5e048770e"}],"images_compared_reason":null,"duplicate_image_family_count":5,"live":false,"checked_at":"2026-08-17T16:21:33.673368+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001062938_1.jpg?v=1786972270","alt":"24AWbone flight jacket．MA-1ジャケットsbj.0002AW24","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"24AWbone flight jacket．MA-1ジャケットsbj.0002AW24","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"TAKAHIROMIYASHITA TheSoloIst．","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001062938","origin":"REPORTED_BY_SELLER"}]}}
+
+id: 370
+event: search.state
+data: {"state":"GAP_ANALYSIS","version":18}
+
+id: 371
+event: search.progress
+data: {"stage":"Ranking results","detail":null}
+
+id: 372
+event: search.progress
+data: {"stage":"Searching alternate names","detail":null}
 

@@ -1,125 +1,81 @@
 {
-  "search_id": "b9bd3ef1-36fa-483e-afec-ed716bfab777",
+  "search_id": "fc22b9ab-4541-4d06-8f98-035388477331",
   "terminal_status": "PARTIAL",
-  "terminal_reason": "budget exhausted",
+  "terminal_reason": "useful coverage remains incomplete; some sources blocked",
   "counts": {
     "real": 0,
-    "possibly_real": 3,
-    "hidden": 5
+    "possibly_real": 5,
+    "hidden": 3
   },
   "coverage": {
     "sources_completed": [
       {
         "detail": "",
-        "id": "wikimedia",
-        "name": "wikimedia",
-        "status": "SEARCHED_NO_MATCH"
-      },
-      {
-        "detail": "",
         "id": "kind",
         "name": "kind",
-        "status": "SEARCHED_MATCHES_FOUND"
-      },
-      {
-        "detail": "",
-        "id": "komehyo",
-        "name": "komehyo",
-        "status": "SEARCHED_NO_MATCH"
-      },
-      {
-        "detail": "",
-        "id": "the_realreal",
-        "name": "the_realreal",
-        "status": "SEARCHED_NO_MATCH"
-      },
-      {
-        "detail": "",
-        "id": "byronesque",
-        "name": "byronesque",
         "status": "SEARCHED_MATCHES_FOUND"
       }
     ],
     "sources_blocked": [
       {
         "detail": "",
-        "id": "heroine",
-        "name": "heroine",
+        "id": "archive_org",
+        "name": "archive_org",
+        "status": "UNMEASURABLE"
+      },
+      {
+        "detail": "",
+        "id": "wikimedia",
+        "name": "wikimedia",
         "status": "BLOCKED_BY_POLICY"
       },
       {
         "detail": "",
-        "id": "ebay",
-        "name": "ebay",
-        "status": "AUTH_REQUIRED"
+        "id": "marginalia",
+        "name": "marginalia",
+        "status": "SOURCE_UNAVAILABLE"
+      },
+      {
+        "detail": "",
+        "id": "the_realreal",
+        "name": "the_realreal",
+        "status": "SOURCE_UNAVAILABLE"
+      },
+      {
+        "detail": "",
+        "id": "rebag",
+        "name": "rebag",
+        "status": "SOURCE_UNAVAILABLE"
+      },
+      {
+        "detail": "",
+        "id": "komehyo",
+        "name": "komehyo",
+        "status": "SOURCE_UNAVAILABLE"
+      },
+      {
+        "detail": "",
+        "id": "byronesque",
+        "name": "byronesque",
+        "status": "SOURCE_UNAVAILABLE"
+      },
+      {
+        "detail": "",
+        "id": "heroine",
+        "name": "heroine",
+        "status": "BLOCKED_BY_POLICY"
       }
     ],
     "sources_in_progress": [],
-    "pages_fetched": 28,
-    "candidates_normalized": 42,
-    "candidates_hidden": 10
+    "pages_fetched": 51,
+    "candidates_normalized": 24,
+    "candidates_hidden": 6
   },
   "target_in_real_rank": null,
-  "target_in_possibly_real_rank": 1,
+  "target_in_possibly_real_rank": null,
   "target_url_real": null,
-  "target_url_possible": "https://shop.kind.co.jp/products/8001001141404",
-  "why": {
-    "heading": "Why Possibly Real",
-    "points": [
-      "ev:text:identity",
-      "ev:global:visual",
-      "ev:parts:ontology",
-      "ev:geometry:relations",
-      "ev:embedding:cosine",
-      "ev:embedding:OBSERVED-pixels"
-    ],
-    "tab_reason": "The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.",
-    "still_unverified": [
-      "No physical inspection."
-    ],
-    "supporting": [
-      "ev:text:identity",
-      "ev:global:visual",
-      "ev:parts:ontology",
-      "ev:geometry:relations",
-      "ev:embedding:cosine",
-      "ev:embedding:OBSERVED-pixels"
-    ],
-    "contradictions": [],
-    "missing": [
-      "unknown",
-      "label-view",
-      "logo-not-resolved",
-      "cross-view-second-image",
-      "provenance"
-    ],
-    "seller_reported": [
-      {
-        "field": "Title",
-        "value": "無地 ロングスリーブカットソー",
-        "origin": "REPORTED_BY_SELLER"
-      },
-      {
-        "field": "Brand",
-        "value": "WILLY CHAVARRIA",
-        "origin": "REPORTED_BY_SELLER"
-      },
-      {
-        "field": "Model",
-        "value": "8001001141404",
-        "origin": "REPORTED_BY_SELLER"
-      }
-    ],
-    "images_compared": [],
-    "duplicate_image_family_count": 4,
-    "live": true,
-    "checked_at": "2026-08-16T20:45:58.210456+00:00"
-  },
-  "item_match": {
-    "label": "Incomplete evidence",
-    "mean": 0.568548,
-    "lower_bound": 0.497648,
-    "upper_bound": 0.608548
-  },
+  "target_url_possible": null,
+  "why": null,
+  "item_match": null,
   "reason": null
 }
