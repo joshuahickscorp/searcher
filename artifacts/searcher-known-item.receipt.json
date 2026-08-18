@@ -28,5 +28,20 @@
     "acceptance": "./scripts/known_item_check.sh returns KIND listing 8001001141404 in Real or Possibly Real. That listing is the test because it is unreachable by text: a plain long-sleeve cut-and-sew with no brand, model, line or year, sitting past 2000 items in feed order.",
     "constraints": "Robots must still be honoured, the ingest must be bounded by the same budget discipline as discovery, and indexing must not be triggered per-campaign or every search pays for a catalogue walk.",
     "verify_the_caller_not_the_component": "Five findings today were reported working after verifying a component and not the path that calls it. Before claiming this closed, run the live check rather than a unit test of the ingest function."
+  },
+  "end_to_end_visual_retrieval": {
+    "what": "The visual route exercised on real data, with no text query involved.",
+    "method": "Ingested all 250 products of shop.kind.co.jp products.json page 9 - the page carrying the target - describing one image each. Queried with fixtures/user_snapshots/8001001141404_snapshot.jpg, a simulated user photograph of the target item.",
+    "ingest": {
+      "products_seen": 250,
+      "listings_indexed": 250,
+      "images_described": 250,
+      "errors": 0
+    },
+    "result": "TARGET RANK 2 of 250",
+    "target_feed_position": 2095,
+    "why_this_matters": "The listing carries no brand, model, line or year, so no compiled query can name it, and it sits past 2000 items so no bounded catalogue walk reaches it. It was retrieved by its photographs against 250 real competing products. The route works end to end.",
+    "the_honest_limit": "descriptor_from_bytes returned a 24-dimension descriptor, not the 384-dimension DINOv2 embedding. That is a cheap fallback, and it shows: the top five scores sit between 0.969 and 0.995, so the ranking is barely separated. Rank 2 of 250 is the fallback's result, not the model's. Running this path on the real embedding is the next lever and is likely worth the rank-1 place.",
+    "what_is_still_not_done": "The live known-item check runs a full campaign and needs a walk reaching feed position 2095 with the real model. This proves the mechanism and quantifies the depth; it does not replace that run."
   }
 }
