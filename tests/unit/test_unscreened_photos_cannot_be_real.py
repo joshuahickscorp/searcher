@@ -67,3 +67,29 @@ def test_the_vision_worker_can_declare_both_screenings() -> None:
     assert "stock_mixed" in params, (
         "a caller that screened for inserted stock photography must be able to say so"
     )
+
+
+def test_the_orchestrator_screens_at_the_gate_it_actually_runs() -> None:
+    """The screener has to sit on the path production takes.
+
+    It was wired into `run_vision_worker`, which is referenced only from
+    tests/integration. The orchestrator's own `route_candidate` call passed
+    neither `stolen_photo` nor `photo_screening_ran`, so on every live campaign
+    screening never ran and the Real gate stayed fail-closed for all candidates.
+
+    That is the same shape as the defect the gate was written to fix: a safety
+    behaviour present in a function nothing calls. Round 8 found it by running a
+    campaign rather than reading the code.
+    """
+    from searcher.campaigns.orchestrator import CampaignOrchestrator
+
+    source = inspect.getsource(CampaignOrchestrator._rank)
+    assert "screen_photo_reuse(candidates)" in source, (
+        "the ranking path must screen its own candidates"
+    )
+    assert "photo_screening_ran=True" in source, (
+        "and must tell the gate that screening ran, or Real stays shut"
+    )
+    assert "stolen_photo=candidate.candidate_id in reused_ids" in source, (
+        "and must pass the finding, or the veto is unreachable again"
+    )

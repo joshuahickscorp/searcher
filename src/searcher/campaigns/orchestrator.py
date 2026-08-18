@@ -1051,6 +1051,15 @@ class CampaignOrchestrator:
         )
         if not candidates:
             return
+        # Screen the photographs here, at the gate that actually runs. The
+        # screener was wired into the vision worker, which nothing in production
+        # calls, so screening never ran on a live campaign and the Real gate
+        # stayed fail-closed for every candidate - the same shape as the veto it
+        # was written to make reachable. An empty finding means screening ran and
+        # found nothing; the gate distinguishes that from nobody looking.
+        from searcher.authenticity.photo_reuse import screen_photo_reuse
+
+        reused_ids, _stock_ids = screen_photo_reuse(candidates)
         try:
             from searcher.contracts.models import AuthenticityEvidence, MatchEvidence
             from searcher.ranking.buckets import route_candidate
@@ -1104,6 +1113,8 @@ class CampaignOrchestrator:
                 constraints=intent.constraints,
                 destination_verified=dest,
                 destination_attested=bool(attested_map.get(candidate.candidate_id, False)),
+                stolen_photo=candidate.candidate_id in reused_ids,
+                photo_screening_ran=True,
                 policy=policy,
                 live_checked=live_checked,
             )
