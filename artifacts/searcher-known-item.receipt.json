@@ -155,5 +155,14 @@
       "matches_the_measurement": "5 images on the candidate, 0 retrievable bytes.",
       "where_a_repair_belongs": "hydrate_from_index holds the controller and therefore the store. Fetching each image's remote_url there and writing it under its content_digest would make the candidate comparable. It needs the same robots and budget discipline as discovery, which is why it is not a two-line change and is not attempted here."
     }
+  },
+  "RESOLVED": {
+    "result": "PASS",
+    "target_in_possibly_real_rank": 1,
+    "target_url": "https://shop.kind.co.jp/products/8001001141404",
+    "item_match_lower_bound": 0.863179,
+    "command": "./scripts/ingest_catalog.py --source kind --pages 9 ... then ./scripts/known_item_check.sh",
+    "the_fix": "_download_listing_image skipped any image that already carried a content_digest. That is sound for a candidate this campaign discovered and downloaded, and wrong for one hydrated from the warm index, where the digest is copied from the stored payload while the bytes live in whichever campaign first indexed them. A digest was being read as proof of possession. It now also checks the bytes are retrievable from this campaign's store, and fails closed - an unreadable store means a redundant download rather than a pixel-less candidate.",
+    "why_it_was_hard_to_see": "Every layer reported success. Ingest indexed 2250 listings. The index returned the target at rank 1 of 2250. Consult carried it into the campaign among 40 hits. It became candidate 30 of 63. Nothing failed, and the item still never reached judgment, because one boolean treated metadata as data."
   }
 }

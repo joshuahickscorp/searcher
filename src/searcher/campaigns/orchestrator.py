@@ -593,6 +593,25 @@ class CampaignOrchestrator:
             "candidates_hidden": hidden,
         }
 
+    def _bytes_present(self, search_id: str, digest: str) -> bool:
+        """Whether this campaign can actually read the bytes behind a digest.
+
+        A digest was treated as proof the image was already downloaded, which
+        holds for a candidate discovered by this campaign and not for one
+        hydrated from the warm index: hydration copies the digest from the
+        stored payload while the bytes live in whichever campaign first indexed
+        them. The image was then skipped as already-present, the candidate
+        reached broad retrieval with no pixels, scored nothing visually, and was
+        cut by the fine-compare cap before any judgment ran.
+        """
+        try:
+            return bool(self.controller.store.get(digest, campaign_id=search_id))
+        except Exception:
+            try:
+                return bool(self.controller.store.get(digest))
+            except Exception:
+                return False
+
     def _download_listing_image(
         self,
         image: ListingImage,
@@ -601,7 +620,9 @@ class CampaignOrchestrator:
         http: Any,
         usage: Any,
     ) -> tuple[ListingImage, bool]:
-        if image.content_digest or not image.remote_url:
+        if not image.remote_url:
+            return image, False
+        if image.content_digest and self._bytes_present(search_id, image.content_digest):
             return image, False
         if usage.would_exceed(images=1) is not None:
             return image, False

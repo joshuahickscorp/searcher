@@ -1,11 +1,11 @@
 {
-  "search_id": "80df162d-1aa1-4d89-82d1-163f1dd21b45",
+  "search_id": "33b7a44e-85ec-4204-a3a3-535e4b3ce096",
   "terminal_status": "COMPLETE",
   "terminal_reason": "coverage exhausted",
   "counts": {
     "real": 0,
-    "possibly_real": 4,
-    "hidden": 4
+    "possibly_real": 7,
+    "hidden": 1
   },
   "coverage": {
     "sources_completed": [
@@ -157,16 +157,87 @@
       }
     ],
     "sources_in_progress": [],
-    "pages_fetched": 7,
+    "pages_fetched": 10,
     "candidates_normalized": 63,
-    "candidates_hidden": 8,
+    "candidates_hidden": 2,
     "pages_charged_to_page_limit": null
   },
   "target_in_real_rank": null,
-  "target_in_possibly_real_rank": null,
+  "target_in_possibly_real_rank": 1,
   "target_url_real": null,
-  "target_url_possible": null,
-  "why": null,
-  "item_match": null,
+  "target_url_possible": "https://shop.kind.co.jp/products/8001001141404",
+  "why": {
+    "heading": "Why Possibly Real",
+    "points": [
+      "ev:text:identity",
+      "ev:global:visual",
+      "ev:parts:ontology",
+      "ev:geometry:relations",
+      "ev:correspondence:orb:26-inliers"
+    ],
+    "tab_reason": "The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.",
+    "still_unverified": [
+      "No physical inspection."
+    ],
+    "supporting": [
+      "ev:text:identity",
+      "ev:global:visual",
+      "ev:parts:ontology",
+      "ev:geometry:relations",
+      "ev:correspondence:orb:26-inliers"
+    ],
+    "contradictions": [],
+    "missing": [
+      "rear",
+      "lateral",
+      "label",
+      "detail",
+      "label-view",
+      "logo-not-resolved",
+      "cross-view-second-image",
+      "provenance",
+      "unestablished:construction",
+      "price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+      "availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+      "title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+      "seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)",
+      "images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"
+    ],
+    "seller_reported": [
+      {
+        "field": "Title",
+        "value": "無地 ロングスリーブカットソー",
+        "origin": "REPORTED_BY_SELLER"
+      },
+      {
+        "field": "Brand",
+        "value": "WILLY CHAVARRIA",
+        "origin": "REPORTED_BY_SELLER"
+      },
+      {
+        "field": "Model",
+        "value": "8001001141404",
+        "origin": "REPORTED_BY_SELLER"
+      }
+    ],
+    "images_compared": [
+      {
+        "role": "product",
+        "url": "https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141404_1.jpg?v=1786853462",
+        "alt": "無地 ロングスリーブカットソー",
+        "image_id": "9d45bf3f-c5e3-45e1-9667-0548f14df1d9"
+      }
+    ],
+    "images_compared_reason": null,
+    "duplicate_image_family_count": 4,
+    "live": false,
+    "checked_at": "2026-08-18T01:03:22.248081+00:00"
+  },
+  "item_match": {
+    "label": "High",
+    "mean": 0.863179,
+    "lower_bound": 0.863179,
+    "upper_bound": 0.903179
+  },
   "reason": null
 }
