@@ -122,5 +122,18 @@
       "what_this_rules_out": "Not retrieval: the consult path returns it among 40 hits with a 384-dimension query built from the user's photographs. Not the Real gate, the screening gate, or any veto: no judgment ran on it. Not the index, the descriptors, the versions or the dimensions, all verified aligned.",
       "next": "Find the shortlist that admits 8 of 63 candidates to judgment and why the target is outside it. Likely a deep-matching or part-matching cap applied on a text-derived ordering, which would place a visually-retrieved candidate last by construction."
     }
+  },
+  "root_cause_final": {
+    "mechanism": "FINE_COMPARE_CAP = 8 in campaigns/orchestrator.py. select_kept_ids admits the ranked candidates first, then fills by discovery order, and never exceeds the cap.",
+    "measured": {
+      "candidates": 63,
+      "cap": 8,
+      "judged": 8,
+      "target_discovery_position": 30,
+      "blocked_lanes": null
+    },
+    "which_path_ran": "Routing was not blocked, so the ranked path ran rather than the degraded discovery-order fallback. Broad retrieval produced a ranking and the target did not reach its top 8.",
+    "conclusion": "The shortlist is doing its job on a ranking that fails. The same item the warm index returns at rank 1 of 2250 on its photographs is ranked outside the top 8 of 63 by broad retrieval, which decides what gets scored. Visual similarity retrieves it and then does not carry into the ordering that admits candidates to judgment.",
+    "the_fix_is_not_the_cap": "Raising the cap would let this listing through and would not fix the ordering; the next item with no matching text would sit at position 31. Broad retrieval has to weigh the visual evidence that already found the item."
   }
 }
