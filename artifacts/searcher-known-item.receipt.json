@@ -148,6 +148,12 @@
         "Carry the index's own descriptor similarity through as a prior, which costs nothing because the index already computed it - the same score that ranked the target 1 of 2250."
       ],
       "not_yet_attempted": "Neither repair is implemented. The mechanism is measured, not fixed."
+    },
+    "confirmed_in_code": {
+      "where": "searcher/index/consult.py, _hydrate",
+      "what": "It copies each image's metadata - content_digest and remote_url survive - and assigns fresh ids, but it never fetches bytes. Its first statement is `del search_id`, so it cannot address the campaign's content store even in principle. An index-hydrated candidate is pixel-less by construction, not by accident.",
+      "matches_the_measurement": "5 images on the candidate, 0 retrievable bytes.",
+      "where_a_repair_belongs": "hydrate_from_index holds the controller and therefore the store. Fetching each image's remote_url there and writing it under its content_digest would make the candidate comparable. It needs the same robots and budget discipline as discovery, which is why it is not a two-line change and is not attempted here."
     }
   }
 }
