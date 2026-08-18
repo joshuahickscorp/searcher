@@ -269,5 +269,13 @@
     "https://shop.kind.co.jp/products/8020001554199",
     "https://shop.kind.co.jp/products/8040001319109",
     "https://shop.kind.co.jp/products/8020001554212"
-  ]
+  ],
+  "parser_failed_is_never_assigned": {
+    "found_by": "round 8, independently",
+    "verified": "grep of src shows PARSER_FAILED is read in sources/health.py and campaigns/publication.py and assigned nowhere.",
+    "mechanism": "A source's outcome comes from the adapter's DiscoveryPageResult. Adapters were made defensive earlier today so a hostile or unreadable body returns [] instead of raising - which was the right fix for crashing on binary and truncated responses, and it means an unparseable 200 now yields no listings and reports SEARCHED_NO_MATCH.",
+    "why_it_matters": "SEARCHED_NO_MATCH tells a user the source was searched and had nothing. A parse failure means we could not read what it sent. Those are different facts and the second is the one that should reopen a source. It also makes the COMPLETE rule weaker than it reads: that rule lists PARSER_FAILED among the outcomes forbidding COMPLETE, and that branch is dead while nothing assigns it.",
+    "i_introduced_half_of_this": "The defensiveness that turned a crash into an empty list is mine, from today. It traded a loud failure for a quiet one and I did not notice the outcome it produced.",
+    "the_shape_of_a_fix": "The adapters already call classify_acquired_document. A 200 response that classifies as OTHER and yields no listings is unreadable rather than empty. Wiring that across adapters and confirming a genuinely empty search still reports SEARCHED_NO_MATCH needs verification I cannot complete now, so it is specified rather than attempted."
+  }
 }
