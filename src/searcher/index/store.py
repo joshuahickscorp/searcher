@@ -387,7 +387,32 @@ def hypothesis_digest(hypothesis: ItemHypothesis) -> str:
 
 
 def descriptor_from_bytes(data: bytes) -> list[float] | None:
-    """Colour histogram when the bytes are an image; otherwise a content fingerprint."""
+    """The strongest image descriptor available, falling back as it degrades.
+
+    This was a colour histogram, and a colour histogram barely separates
+    anything: on a real catalogue page the top five listings scored between
+    0.969 and 0.995, so the correct item placed second by a margin that is
+    indistinguishable from noise. The embedding is what this index is worth
+    searching with, and it was sitting behind `pair_similarity` unused by the
+    index path.
+
+    The fallback stays for an installation with no weights. Descriptors of
+    different dimensions never meet: `search_listings_by_descriptor` skips a
+    mismatch rather than comparing across spaces, so an index written by one
+    and queried by the other degrades to finding nothing instead of finding
+    nonsense.
+    """
+    try:
+        from searcher.retrieval.embeddings import embed_pngs, resolve_backend
+
+        backend = resolve_backend()
+        if backend is not None:
+            vectors = embed_pngs([data], backend)
+            first = vectors[0] if vectors else None
+            if first:
+                return [float(value) for value in first]
+    except Exception:
+        pass
     try:
         from searcher.reference.imaging import colour_histogram
 
