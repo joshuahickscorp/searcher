@@ -96,8 +96,6 @@ id: 24
 event: search.progress
 data: {"stage":"page_fetched","detail":null}
 
-: heartbeat
-
 id: 25
 event: search.progress
 data: {"stage":"page_fetched","detail":null}
@@ -107,16 +105,18 @@ event: search.progress
 data: {"stage":"page_fetched","detail":null}
 
 id: 27
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
+
+: heartbeat
 
 id: 28
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
 
 id: 29
-event: candidate.discovered
-data: {"candidate_id":""}
+event: search.progress
+data: {"stage":"page_fetched","detail":null}
 
 id: 30
 event: candidate.discovered
@@ -203,582 +203,594 @@ event: candidate.discovered
 data: {"candidate_id":""}
 
 id: 51
-event: search.coverage
-data: {"sources_completed":[{"id":"kind","name":"kind","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":10,"candidates_normalized":0,"candidates_hidden":0}
+event: candidate.discovered
+data: {"candidate_id":""}
 
 id: 52
-event: search.progress
-data: {"stage":"source_complete","detail":null}
+event: candidate.discovered
+data: {"candidate_id":""}
 
 id: 53
-event: search.warning
-data: {"code":"warning","message":""}
+event: candidate.discovered
+data: {"candidate_id":""}
 
 id: 54
 event: search.coverage
-data: {"sources_completed":[{"detail":"","id":"kind","name":"kind","status":"SEARCHED_MATCHES_FOUND"}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":10,"candidates_normalized":56,"candidates_hidden":0,"pages_charged_to_page_limit":null}
+data: {"sources_completed":[{"id":"kind","name":"kind","status":"SEARCHED_MATCHES_FOUND","detail":""}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":13,"candidates_normalized":0,"candidates_hidden":0}
 
 id: 55
-event: candidate.discovered
-data: {"candidate_id":"1b385c0c-895e-4cfa-903c-04c0256bbacb"}
+event: search.progress
+data: {"stage":"source_complete","detail":null}
 
 id: 56
-event: candidate.discovered
-data: {"candidate_id":"0a5eca85-dfd5-495e-a8af-e505d0ed27bd"}
+event: search.warning
+data: {"code":"warning","message":""}
 
 id: 57
-event: candidate.discovered
-data: {"candidate_id":"a5825566-b34c-4cd2-b6be-a7e7baa34770"}
+event: search.coverage
+data: {"sources_completed":[{"detail":"","id":"kind","name":"kind","status":"SEARCHED_MATCHES_FOUND"}],"sources_blocked":[],"sources_in_progress":[],"pages_fetched":13,"candidates_normalized":56,"candidates_hidden":0,"pages_charged_to_page_limit":null}
 
 id: 58
 event: candidate.discovered
-data: {"candidate_id":"4ea09453-3abf-4e98-8d65-d9ffa4ff3b2f"}
+data: {"candidate_id":"78735547-3a41-4e1c-8f51-db5305975f98"}
 
 id: 59
 event: candidate.discovered
-data: {"candidate_id":"b2348be2-a0b5-49b5-b305-e1da04d366c0"}
+data: {"candidate_id":"f5942a4d-6a7b-4998-9132-2c04de02c292"}
 
 id: 60
 event: candidate.discovered
-data: {"candidate_id":"576b602c-c7d1-4e16-87ed-c052a433ed90"}
+data: {"candidate_id":"9c03a98c-ba51-4bb8-b108-e41b8e3ac396"}
 
 id: 61
 event: candidate.discovered
-data: {"candidate_id":"35b33202-48a4-416b-b60f-e7a1d4e43eb7"}
+data: {"candidate_id":"ac26913b-af63-4a30-a46a-4d0c5d9442c1"}
 
 id: 62
 event: candidate.discovered
-data: {"candidate_id":"b2c6749b-d4f0-4d36-bc14-f93ef6848090"}
+data: {"candidate_id":"d6b25531-b9c0-4fc4-8f69-216a06ee2be9"}
 
 id: 63
 event: candidate.discovered
-data: {"candidate_id":"ff4265cc-3d6f-4146-a94a-7f85117bcf1d"}
+data: {"candidate_id":"635cc593-fc31-4f25-a70b-263d4c2926ec"}
 
 id: 64
 event: candidate.discovered
-data: {"candidate_id":"1adbb2c0-3df5-4aa9-8051-bf2d37fa7991"}
+data: {"candidate_id":"27a6f0a4-4ef0-4780-9b05-5ff2116d6f48"}
 
 id: 65
 event: candidate.discovered
-data: {"candidate_id":"8fd84bb0-d3b0-421d-8921-6a2fdc43839a"}
+data: {"candidate_id":"3ca42c6a-10cc-4f87-bf3d-e4a1061df172"}
 
 id: 66
 event: candidate.discovered
-data: {"candidate_id":"765ffc42-8741-448c-acae-70c66d324da1"}
+data: {"candidate_id":"8711e971-96e1-47a2-903c-16ad7fec4802"}
 
 id: 67
 event: candidate.discovered
-data: {"candidate_id":"26908def-197a-4e43-b87f-e4a4b6760645"}
+data: {"candidate_id":"40336193-e8ad-44a9-b0b0-a23f8969126c"}
 
 id: 68
 event: candidate.discovered
-data: {"candidate_id":"4547de5a-8843-4a54-8775-5fbb3fc3b01c"}
+data: {"candidate_id":"1511cb67-472e-4aa2-8ed9-dcaa6ea68787"}
 
 id: 69
 event: candidate.discovered
-data: {"candidate_id":"2e1130b6-8997-4744-ad57-7f32541d4eb7"}
+data: {"candidate_id":"988c5b3c-f9d6-4001-9701-01afa9b53435"}
 
 id: 70
 event: candidate.discovered
-data: {"candidate_id":"f87f067d-d021-41d5-9086-4baea0c70852"}
+data: {"candidate_id":"a29a2c25-15f5-4f04-9b0c-626e04105770"}
 
 id: 71
 event: candidate.discovered
-data: {"candidate_id":"ee3d1c26-6e43-4a84-b260-364a4823775a"}
+data: {"candidate_id":"b5915b96-83c4-4751-968d-fb5a8d5aaa43"}
 
 id: 72
 event: candidate.discovered
-data: {"candidate_id":"762f6f1a-1168-460a-83b9-b824124bed6f"}
+data: {"candidate_id":"2d90383f-17cb-4630-9220-2e1e3acf9929"}
 
 id: 73
 event: candidate.discovered
-data: {"candidate_id":"75bda016-44c0-4095-bf02-8ab856a569ed"}
+data: {"candidate_id":"bb1aaf92-a188-42e2-851e-da0401093efc"}
 
 id: 74
 event: candidate.discovered
-data: {"candidate_id":"c1668464-6689-446f-83ff-3c8d4a2475cd"}
+data: {"candidate_id":"9d18718d-6035-40ba-a62b-cc16c575a453"}
 
 id: 75
 event: candidate.discovered
-data: {"candidate_id":"c551204c-2371-4f17-9a91-ed9abc633ecd"}
+data: {"candidate_id":"81ef51bf-2f5d-47b0-a0ed-40b398bee6d3"}
 
 id: 76
 event: candidate.discovered
-data: {"candidate_id":"8fd3a091-d473-4afd-bda4-ff34d730dd1e"}
+data: {"candidate_id":"919e8023-be64-4754-9e5e-bf7687354177"}
 
 id: 77
 event: candidate.discovered
-data: {"candidate_id":"346daefe-588c-4da8-90a9-eea2321cb72c"}
+data: {"candidate_id":"53fa7116-cbdc-4ffa-8a32-d127ecd0f1d6"}
 
 id: 78
 event: candidate.discovered
-data: {"candidate_id":"0b0f17a6-3879-4a98-b45b-3b0fe68905a6"}
+data: {"candidate_id":"50f6a268-783c-4fe5-ab87-76bbc2236e05"}
 
 id: 79
 event: candidate.discovered
-data: {"candidate_id":"0710bdec-5d1c-4fa1-8148-58e86ffe46dc"}
+data: {"candidate_id":"8025cd82-0692-4b47-a35b-17defd5eff5c"}
 
 id: 80
 event: candidate.discovered
-data: {"candidate_id":"736fc610-3a2b-468c-b388-4f418e3da526"}
+data: {"candidate_id":"5494cbe4-f33a-40f9-ad17-1d40be97ddc7"}
 
 id: 81
 event: candidate.discovered
-data: {"candidate_id":"d568b4be-88e0-4a75-8188-272462d41801"}
+data: {"candidate_id":"5f748d62-0482-455e-9e07-10be37912ac6"}
 
 id: 82
 event: candidate.discovered
-data: {"candidate_id":"e1fd9190-9aef-4f5a-aefe-30ee829df980"}
+data: {"candidate_id":"611074dc-10be-4854-b59d-58cbaef90861"}
 
 id: 83
 event: candidate.discovered
-data: {"candidate_id":"2895cd5c-6ab7-46af-8d80-c602904d4c40"}
+data: {"candidate_id":"820706fc-258b-426b-ace8-cd2158b82827"}
 
 id: 84
 event: candidate.discovered
-data: {"candidate_id":"f108e847-090c-4666-9ccf-e62fac12f146"}
+data: {"candidate_id":"48f7009e-b93b-4f7d-aaf0-57af7cd95615"}
 
 id: 85
 event: candidate.discovered
-data: {"candidate_id":"8d13eb28-6f41-42cb-a346-81f31348e3bb"}
+data: {"candidate_id":"fec1471f-7f83-4f18-9f9f-c84121fc8711"}
 
 id: 86
 event: candidate.discovered
-data: {"candidate_id":"94d3b3d8-3120-4bc1-8469-6e59e98752e9"}
+data: {"candidate_id":"dff94894-5d94-4eec-8358-53b9f383137e"}
 
 id: 87
 event: candidate.discovered
-data: {"candidate_id":"549c62b4-7d77-431c-a83b-96d1a5b54d6a"}
+data: {"candidate_id":"71cf17d9-26db-40cf-942d-1018cfa5087e"}
 
 id: 88
 event: candidate.discovered
-data: {"candidate_id":"aeb28bf2-0a86-4983-8b0b-3a9c4e2fcd94"}
+data: {"candidate_id":"87ab52ce-fd3a-4aac-99a9-bce3324b1fc7"}
 
 id: 89
 event: candidate.discovered
-data: {"candidate_id":"e6eb5735-75ad-4fa1-9e7e-7287fb60f87d"}
+data: {"candidate_id":"c3a1006f-9962-4135-98d3-dedb2dccb068"}
 
 id: 90
 event: candidate.discovered
-data: {"candidate_id":"a74c64d9-b6c0-4826-81a8-993013345977"}
+data: {"candidate_id":"ac0296b6-91bb-47d8-b4fd-8d32622aa957"}
 
 id: 91
 event: candidate.discovered
-data: {"candidate_id":"e02cbbd8-fc9d-4a3c-a3aa-d8d34252be1f"}
+data: {"candidate_id":"a9e41220-1cae-490b-8a15-db5347a448df"}
 
 id: 92
 event: candidate.discovered
-data: {"candidate_id":"ff9d5397-3fee-4751-a164-139d031a651d"}
+data: {"candidate_id":"a0bd6cdf-6e93-4f56-9407-a081d94ee242"}
 
 id: 93
 event: candidate.discovered
-data: {"candidate_id":"c1f2bd34-e728-4e25-8ce4-8c199f5f344a"}
+data: {"candidate_id":"abdc92a1-ed05-43bf-9ef6-bf38e1fa4cbe"}
 
 id: 94
 event: candidate.discovered
-data: {"candidate_id":"8c041565-545e-4de1-94c9-155cdc38c828"}
+data: {"candidate_id":"32e11dda-18e9-44b8-95a4-a5482ca8aa53"}
 
 id: 95
 event: candidate.discovered
-data: {"candidate_id":"5c0926de-a49c-4d91-af15-23a2b16c05d3"}
+data: {"candidate_id":"b30e2f22-52ff-4ce0-8907-76efbac5b734"}
 
 id: 96
 event: candidate.discovered
-data: {"candidate_id":"a571ddf3-ad09-43e8-93bb-ecb17932a7a7"}
+data: {"candidate_id":"f2abd0b7-aadb-4d3c-a126-4e552a221ce2"}
 
 id: 97
 event: candidate.discovered
-data: {"candidate_id":"547c03fc-7fa1-4e37-b3ac-be30e1be58ce"}
+data: {"candidate_id":"26df0147-2ad1-4e93-a4d0-90fe081f36df"}
 
 id: 98
 event: candidate.discovered
-data: {"candidate_id":"94cb4623-b38f-48e4-938d-fce964c9718a"}
+data: {"candidate_id":"ee81f013-de79-4a0c-af5b-90eeded0c4f4"}
 
 id: 99
 event: candidate.discovered
-data: {"candidate_id":"34399ceb-33b1-435f-826f-28f929e3595a"}
+data: {"candidate_id":"7bae501b-7551-4152-afae-b9058b1266c5"}
 
 id: 100
 event: candidate.discovered
-data: {"candidate_id":"09e78b70-014f-4bcf-ad30-d7ba49bfe969"}
+data: {"candidate_id":"ff7bb6b7-61c2-4959-a59d-b68263884ffa"}
 
 id: 101
 event: candidate.discovered
-data: {"candidate_id":"fedca96b-1ff2-4ed1-b5e7-70a9985932b9"}
+data: {"candidate_id":"40e17111-3f3d-4f34-903b-80eaa60d584d"}
 
 id: 102
 event: candidate.discovered
-data: {"candidate_id":"550a7171-ebcf-4acc-9899-850cedb75b16"}
+data: {"candidate_id":"f7773294-8a92-45b3-8a88-4a6a807f0dda"}
 
 id: 103
 event: candidate.discovered
-data: {"candidate_id":"ae496a57-13f7-47ab-91c2-ba49e3b805f5"}
+data: {"candidate_id":"4ec4ca59-31f7-4914-8b79-e565eda926b4"}
 
 id: 104
 event: candidate.discovered
-data: {"candidate_id":"6b2d80a3-332e-40a8-8801-f30b64b10328"}
+data: {"candidate_id":"50af5461-46a6-4d3f-9c7d-c9bfc95a223b"}
 
 id: 105
 event: candidate.discovered
-data: {"candidate_id":"0d9a9ca1-d49c-4c61-ac59-32ab06cdc3a9"}
+data: {"candidate_id":"af8f4bcb-3976-4745-b83f-f03482308ebb"}
 
 id: 106
 event: candidate.discovered
-data: {"candidate_id":"afbc4384-98fa-4ea0-a490-9a34c4c12d9e"}
+data: {"candidate_id":"b0b375f0-6cb7-47c0-b5f5-873e45cdb564"}
 
 id: 107
 event: candidate.discovered
-data: {"candidate_id":"97b6cc47-3fb2-403e-996b-8b6ecb0d1e6a"}
+data: {"candidate_id":"ecb8b939-4fa4-45f8-9170-8c2cc49ca1e4"}
 
 id: 108
 event: candidate.discovered
-data: {"candidate_id":"93ce9073-9bdc-41d9-bfcf-e1f04b664df7"}
+data: {"candidate_id":"d53dd321-690a-47fb-a9df-9d777c951c7a"}
 
 id: 109
 event: candidate.discovered
-data: {"candidate_id":"ef304639-cc2e-4728-956c-aac6ed099cfc"}
+data: {"candidate_id":"8835830e-06ff-4405-b7ff-e9af77171f14"}
 
 id: 110
 event: candidate.discovered
-data: {"candidate_id":"3f6b995b-0196-47bf-ad5f-8b7dc51158f8"}
+data: {"candidate_id":"52bac655-8cdf-4f6e-a673-b3e34810c2b1"}
 
 id: 111
+event: candidate.discovered
+data: {"candidate_id":"040e4f94-4459-410a-84ae-33c341d41f72"}
+
+id: 112
+event: candidate.discovered
+data: {"candidate_id":"8c8a0918-3682-47d0-89f0-d77f3f474952"}
+
+id: 113
+event: candidate.discovered
+data: {"candidate_id":"1125b92b-dd7a-4e47-b312-d006c72c2890"}
+
+id: 114
 event: search.state
 data: {"state":"ACQUIRING","version":9}
 
-id: 112
+id: 115
 event: search.progress
 data: {"stage":"Comparing candidate images","detail":null}
 
-id: 113
+id: 116
 event: search.state
 data: {"state":"NORMALIZING","version":10}
 
-id: 114
+id: 117
 event: search.progress
 data: {"stage":"Comparing candidate images","detail":null}
-
-id: 115
-event: candidate.normalized
-data: {"candidate_id":"718516f1-2863-4179-8994-d301a7db4bc7"}
-
-id: 116
-event: candidate.normalized
-data: {"candidate_id":"be9a7609-a8fe-460d-8136-e37fed0b97d9"}
-
-id: 117
-event: candidate.normalized
-data: {"candidate_id":"062d0a48-2f4c-46d0-94b0-720f9803e797"}
 
 id: 118
 event: candidate.normalized
-data: {"candidate_id":"8c041565-545e-4de1-94c9-155cdc38c828"}
+data: {"candidate_id":"ddff0b6b-4778-4ae5-8885-54c291a64c9e"}
 
 id: 119
 event: candidate.normalized
-data: {"candidate_id":"5c0926de-a49c-4d91-af15-23a2b16c05d3"}
+data: {"candidate_id":"7b9336bc-b4fc-462f-9ba1-568584267f76"}
 
 id: 120
 event: candidate.normalized
-data: {"candidate_id":"a571ddf3-ad09-43e8-93bb-ecb17932a7a7"}
+data: {"candidate_id":"e1510f33-91f6-4d76-916f-fa59914b41c2"}
 
 id: 121
 event: candidate.normalized
-data: {"candidate_id":"547c03fc-7fa1-4e37-b3ac-be30e1be58ce"}
+data: {"candidate_id":"26df0147-2ad1-4e93-a4d0-90fe081f36df"}
 
 id: 122
 event: candidate.normalized
-data: {"candidate_id":"8ab08e9b-516f-45c7-b2b7-2d1216a2065a"}
+data: {"candidate_id":"ee81f013-de79-4a0c-af5b-90eeded0c4f4"}
 
 id: 123
 event: candidate.normalized
-data: {"candidate_id":"8e649aa4-1c25-4f1c-84d9-9477d0efbcb5"}
+data: {"candidate_id":"7bae501b-7551-4152-afae-b9058b1266c5"}
 
 id: 124
 event: candidate.normalized
-data: {"candidate_id":"1628836b-abaa-49b6-8cf5-d44597d802b2"}
+data: {"candidate_id":"ff7bb6b7-61c2-4959-a59d-b68263884ffa"}
 
 id: 125
 event: candidate.normalized
-data: {"candidate_id":"f08cfbb8-0bb7-45bd-8efc-304f3e9400a0"}
+data: {"candidate_id":"e25acc06-3a7a-41bb-9ac5-77d5b849bd8f"}
 
 id: 126
 event: candidate.normalized
-data: {"candidate_id":"94cb4623-b38f-48e4-938d-fce964c9718a"}
+data: {"candidate_id":"7cea2428-9ece-4e75-bca7-707004b3c915"}
 
 id: 127
 event: candidate.normalized
-data: {"candidate_id":"34399ceb-33b1-435f-826f-28f929e3595a"}
+data: {"candidate_id":"42039871-768c-4983-9b25-fb61c9750be3"}
 
 id: 128
 event: candidate.normalized
-data: {"candidate_id":"09e78b70-014f-4bcf-ad30-d7ba49bfe969"}
+data: {"candidate_id":"4ea75331-4fca-45b1-bc83-11512c1596b2"}
 
 id: 129
 event: candidate.normalized
-data: {"candidate_id":"fedca96b-1ff2-4ed1-b5e7-70a9985932b9"}
+data: {"candidate_id":"40e17111-3f3d-4f34-903b-80eaa60d584d"}
 
 id: 130
 event: candidate.normalized
-data: {"candidate_id":"550a7171-ebcf-4acc-9899-850cedb75b16"}
+data: {"candidate_id":"f7773294-8a92-45b3-8a88-4a6a807f0dda"}
 
 id: 131
 event: candidate.normalized
-data: {"candidate_id":"ae496a57-13f7-47ab-91c2-ba49e3b805f5"}
+data: {"candidate_id":"4ec4ca59-31f7-4914-8b79-e565eda926b4"}
 
 id: 132
 event: candidate.normalized
-data: {"candidate_id":"6b2d80a3-332e-40a8-8801-f30b64b10328"}
+data: {"candidate_id":"50af5461-46a6-4d3f-9c7d-c9bfc95a223b"}
 
 id: 133
 event: candidate.normalized
-data: {"candidate_id":"0d9a9ca1-d49c-4c61-ac59-32ab06cdc3a9"}
+data: {"candidate_id":"af8f4bcb-3976-4745-b83f-f03482308ebb"}
 
 id: 134
 event: candidate.normalized
-data: {"candidate_id":"afbc4384-98fa-4ea0-a490-9a34c4c12d9e"}
+data: {"candidate_id":"b0b375f0-6cb7-47c0-b5f5-873e45cdb564"}
 
 id: 135
 event: candidate.normalized
-data: {"candidate_id":"97b6cc47-3fb2-403e-996b-8b6ecb0d1e6a"}
+data: {"candidate_id":"ecb8b939-4fa4-45f8-9170-8c2cc49ca1e4"}
 
 id: 136
 event: candidate.normalized
-data: {"candidate_id":"93ce9073-9bdc-41d9-bfcf-e1f04b664df7"}
+data: {"candidate_id":"d53dd321-690a-47fb-a9df-9d777c951c7a"}
 
 id: 137
 event: candidate.normalized
-data: {"candidate_id":"ef304639-cc2e-4728-956c-aac6ed099cfc"}
+data: {"candidate_id":"8835830e-06ff-4405-b7ff-e9af77171f14"}
 
 id: 138
 event: candidate.normalized
-data: {"candidate_id":"3f6b995b-0196-47bf-ad5f-8b7dc51158f8"}
+data: {"candidate_id":"52bac655-8cdf-4f6e-a673-b3e34810c2b1"}
 
 id: 139
 event: candidate.normalized
-data: {"candidate_id":"1b385c0c-895e-4cfa-903c-04c0256bbacb"}
+data: {"candidate_id":"040e4f94-4459-410a-84ae-33c341d41f72"}
 
 id: 140
 event: candidate.normalized
-data: {"candidate_id":"0a5eca85-dfd5-495e-a8af-e505d0ed27bd"}
+data: {"candidate_id":"8c8a0918-3682-47d0-89f0-d77f3f474952"}
 
 id: 141
 event: candidate.normalized
-data: {"candidate_id":"a5825566-b34c-4cd2-b6be-a7e7baa34770"}
+data: {"candidate_id":"1125b92b-dd7a-4e47-b312-d006c72c2890"}
 
 id: 142
 event: candidate.normalized
-data: {"candidate_id":"4ea09453-3abf-4e98-8d65-d9ffa4ff3b2f"}
+data: {"candidate_id":"78735547-3a41-4e1c-8f51-db5305975f98"}
 
 id: 143
 event: candidate.normalized
-data: {"candidate_id":"b2348be2-a0b5-49b5-b305-e1da04d366c0"}
+data: {"candidate_id":"f5942a4d-6a7b-4998-9132-2c04de02c292"}
 
 id: 144
 event: candidate.normalized
-data: {"candidate_id":"576b602c-c7d1-4e16-87ed-c052a433ed90"}
+data: {"candidate_id":"9c03a98c-ba51-4bb8-b108-e41b8e3ac396"}
 
 id: 145
 event: candidate.normalized
-data: {"candidate_id":"35b33202-48a4-416b-b60f-e7a1d4e43eb7"}
+data: {"candidate_id":"ac26913b-af63-4a30-a46a-4d0c5d9442c1"}
 
 id: 146
 event: candidate.normalized
-data: {"candidate_id":"b2c6749b-d4f0-4d36-bc14-f93ef6848090"}
+data: {"candidate_id":"d6b25531-b9c0-4fc4-8f69-216a06ee2be9"}
 
 id: 147
 event: candidate.normalized
-data: {"candidate_id":"ff4265cc-3d6f-4146-a94a-7f85117bcf1d"}
+data: {"candidate_id":"635cc593-fc31-4f25-a70b-263d4c2926ec"}
 
 id: 148
 event: candidate.normalized
-data: {"candidate_id":"1adbb2c0-3df5-4aa9-8051-bf2d37fa7991"}
+data: {"candidate_id":"27a6f0a4-4ef0-4780-9b05-5ff2116d6f48"}
 
 id: 149
 event: candidate.normalized
-data: {"candidate_id":"8fd84bb0-d3b0-421d-8921-6a2fdc43839a"}
+data: {"candidate_id":"3ca42c6a-10cc-4f87-bf3d-e4a1061df172"}
 
 id: 150
 event: candidate.normalized
-data: {"candidate_id":"765ffc42-8741-448c-acae-70c66d324da1"}
+data: {"candidate_id":"8711e971-96e1-47a2-903c-16ad7fec4802"}
 
 id: 151
 event: candidate.normalized
-data: {"candidate_id":"26908def-197a-4e43-b87f-e4a4b6760645"}
+data: {"candidate_id":"40336193-e8ad-44a9-b0b0-a23f8969126c"}
 
 id: 152
 event: candidate.normalized
-data: {"candidate_id":"4547de5a-8843-4a54-8775-5fbb3fc3b01c"}
+data: {"candidate_id":"1511cb67-472e-4aa2-8ed9-dcaa6ea68787"}
 
 id: 153
 event: candidate.normalized
-data: {"candidate_id":"2e1130b6-8997-4744-ad57-7f32541d4eb7"}
+data: {"candidate_id":"988c5b3c-f9d6-4001-9701-01afa9b53435"}
 
 id: 154
 event: candidate.normalized
-data: {"candidate_id":"f87f067d-d021-41d5-9086-4baea0c70852"}
+data: {"candidate_id":"a29a2c25-15f5-4f04-9b0c-626e04105770"}
 
 id: 155
 event: candidate.normalized
-data: {"candidate_id":"ee3d1c26-6e43-4a84-b260-364a4823775a"}
+data: {"candidate_id":"b5915b96-83c4-4751-968d-fb5a8d5aaa43"}
 
 id: 156
 event: candidate.normalized
-data: {"candidate_id":"762f6f1a-1168-460a-83b9-b824124bed6f"}
+data: {"candidate_id":"2d90383f-17cb-4630-9220-2e1e3acf9929"}
 
 id: 157
 event: candidate.normalized
-data: {"candidate_id":"75bda016-44c0-4095-bf02-8ab856a569ed"}
+data: {"candidate_id":"bb1aaf92-a188-42e2-851e-da0401093efc"}
 
 id: 158
 event: candidate.normalized
-data: {"candidate_id":"c1668464-6689-446f-83ff-3c8d4a2475cd"}
+data: {"candidate_id":"9d18718d-6035-40ba-a62b-cc16c575a453"}
 
 id: 159
 event: candidate.normalized
-data: {"candidate_id":"c551204c-2371-4f17-9a91-ed9abc633ecd"}
+data: {"candidate_id":"81ef51bf-2f5d-47b0-a0ed-40b398bee6d3"}
 
 id: 160
 event: candidate.normalized
-data: {"candidate_id":"8fd3a091-d473-4afd-bda4-ff34d730dd1e"}
+data: {"candidate_id":"919e8023-be64-4754-9e5e-bf7687354177"}
 
 id: 161
 event: candidate.normalized
-data: {"candidate_id":"346daefe-588c-4da8-90a9-eea2321cb72c"}
+data: {"candidate_id":"53fa7116-cbdc-4ffa-8a32-d127ecd0f1d6"}
 
 id: 162
 event: candidate.normalized
-data: {"candidate_id":"0b0f17a6-3879-4a98-b45b-3b0fe68905a6"}
+data: {"candidate_id":"50f6a268-783c-4fe5-ab87-76bbc2236e05"}
 
 id: 163
 event: candidate.normalized
-data: {"candidate_id":"0710bdec-5d1c-4fa1-8148-58e86ffe46dc"}
+data: {"candidate_id":"8025cd82-0692-4b47-a35b-17defd5eff5c"}
 
 id: 164
 event: candidate.normalized
-data: {"candidate_id":"736fc610-3a2b-468c-b388-4f418e3da526"}
+data: {"candidate_id":"5494cbe4-f33a-40f9-ad17-1d40be97ddc7"}
 
 id: 165
 event: candidate.normalized
-data: {"candidate_id":"d568b4be-88e0-4a75-8188-272462d41801"}
+data: {"candidate_id":"5f748d62-0482-455e-9e07-10be37912ac6"}
 
 id: 166
 event: candidate.normalized
-data: {"candidate_id":"e1fd9190-9aef-4f5a-aefe-30ee829df980"}
+data: {"candidate_id":"611074dc-10be-4854-b59d-58cbaef90861"}
 
 id: 167
 event: candidate.normalized
-data: {"candidate_id":"2895cd5c-6ab7-46af-8d80-c602904d4c40"}
+data: {"candidate_id":"820706fc-258b-426b-ace8-cd2158b82827"}
 
 id: 168
 event: candidate.normalized
-data: {"candidate_id":"f108e847-090c-4666-9ccf-e62fac12f146"}
+data: {"candidate_id":"48f7009e-b93b-4f7d-aaf0-57af7cd95615"}
 
 id: 169
 event: candidate.normalized
-data: {"candidate_id":"8d13eb28-6f41-42cb-a346-81f31348e3bb"}
+data: {"candidate_id":"fec1471f-7f83-4f18-9f9f-c84121fc8711"}
 
 id: 170
 event: candidate.normalized
-data: {"candidate_id":"94d3b3d8-3120-4bc1-8469-6e59e98752e9"}
+data: {"candidate_id":"dff94894-5d94-4eec-8358-53b9f383137e"}
 
 id: 171
 event: candidate.normalized
-data: {"candidate_id":"549c62b4-7d77-431c-a83b-96d1a5b54d6a"}
+data: {"candidate_id":"71cf17d9-26db-40cf-942d-1018cfa5087e"}
 
 id: 172
 event: candidate.normalized
-data: {"candidate_id":"aeb28bf2-0a86-4983-8b0b-3a9c4e2fcd94"}
+data: {"candidate_id":"87ab52ce-fd3a-4aac-99a9-bce3324b1fc7"}
 
 id: 173
 event: candidate.normalized
-data: {"candidate_id":"e6eb5735-75ad-4fa1-9e7e-7287fb60f87d"}
+data: {"candidate_id":"c3a1006f-9962-4135-98d3-dedb2dccb068"}
 
 id: 174
 event: candidate.normalized
-data: {"candidate_id":"a74c64d9-b6c0-4826-81a8-993013345977"}
+data: {"candidate_id":"ac0296b6-91bb-47d8-b4fd-8d32622aa957"}
 
 id: 175
 event: candidate.normalized
-data: {"candidate_id":"e02cbbd8-fc9d-4a3c-a3aa-d8d34252be1f"}
+data: {"candidate_id":"a9e41220-1cae-490b-8a15-db5347a448df"}
 
 id: 176
 event: candidate.normalized
-data: {"candidate_id":"ff9d5397-3fee-4751-a164-139d031a651d"}
+data: {"candidate_id":"a0bd6cdf-6e93-4f56-9407-a081d94ee242"}
 
 id: 177
 event: candidate.normalized
-data: {"candidate_id":"c1f2bd34-e728-4e25-8ce4-8c199f5f344a"}
+data: {"candidate_id":"abdc92a1-ed05-43bf-9ef6-bf38e1fa4cbe"}
 
 id: 178
+event: candidate.normalized
+data: {"candidate_id":"32e11dda-18e9-44b8-95a4-a5482ca8aa53"}
+
+id: 179
+event: candidate.normalized
+data: {"candidate_id":"b30e2f22-52ff-4ce0-8907-76efbac5b734"}
+
+id: 180
+event: candidate.normalized
+data: {"candidate_id":"f2abd0b7-aadb-4d3c-a126-4e552a221ce2"}
+
+id: 181
 event: search.state
 data: {"state":"DEDUPLICATING","version":11}
 
-id: 179
+id: 182
 event: search.progress
 data: {"stage":"Comparing candidate images","detail":null}
 
-id: 180
+id: 183
 event: search.state
 data: {"state":"BROAD_RETRIEVAL","version":12}
 
-id: 181
+id: 184
 event: search.progress
 data: {"stage":"Comparing candidate images","detail":null}
 
-id: 182
+id: 185
 event: search.state
 data: {"state":"FINE_MATCHING","version":13}
 
-id: 183
+id: 186
 event: search.progress
 data: {"stage":"Checking detail consistency","detail":null}
 
-id: 184
-event: candidate.promoted
-data: {"candidate_id":"be9a7609-a8fe-460d-8136-e37fed0b97d9"}
-
-id: 185
-event: candidate.promoted
-data: {"candidate_id":"8e649aa4-1c25-4f1c-84d9-9477d0efbcb5"}
-
-id: 186
-event: candidate.promoted
-data: {"candidate_id":"f08cfbb8-0bb7-45bd-8efc-304f3e9400a0"}
-
 id: 187
 event: candidate.promoted
-data: {"candidate_id":"718516f1-2863-4179-8994-d301a7db4bc7"}
+data: {"candidate_id":"7b9336bc-b4fc-462f-9ba1-568584267f76"}
 
 id: 188
 event: candidate.promoted
-data: {"candidate_id":"062d0a48-2f4c-46d0-94b0-720f9803e797"}
+data: {"candidate_id":"7cea2428-9ece-4e75-bca7-707004b3c915"}
 
 id: 189
 event: candidate.promoted
-data: {"candidate_id":"1628836b-abaa-49b6-8cf5-d44597d802b2"}
+data: {"candidate_id":"4ea75331-4fca-45b1-bc83-11512c1596b2"}
 
 id: 190
 event: candidate.promoted
-data: {"candidate_id":"8ab08e9b-516f-45c7-b2b7-2d1216a2065a"}
+data: {"candidate_id":"ddff0b6b-4778-4ae5-8885-54c291a64c9e"}
 
 id: 191
 event: candidate.promoted
-data: {"candidate_id":"a571ddf3-ad09-43e8-93bb-ecb17932a7a7"}
+data: {"candidate_id":"e1510f33-91f6-4d76-916f-fa59914b41c2"}
 
 id: 192
+event: candidate.promoted
+data: {"candidate_id":"42039871-768c-4983-9b25-fb61c9750be3"}
+
+id: 193
+event: candidate.promoted
+data: {"candidate_id":"f7773294-8a92-45b3-8a88-4a6a807f0dda"}
+
+id: 194
+event: candidate.promoted
+data: {"candidate_id":"e25acc06-3a7a-41bb-9ac5-77d5b849bd8f"}
+
+id: 195
 event: search.state
 data: {"state":"AUTHENTICITY_REVIEW","version":14}
 
-id: 193
+id: 196
 event: search.progress
 data: {"stage":"Checking listing authenticity evidence","detail":null}
 
-id: 194
+id: 197
 event: search.state
 data: {"state":"LIVE_CHECKING","version":15}
 
-id: 195
+id: 198
 event: search.progress
 data: {"stage":"Verifying live links","detail":null}
 
@@ -794,107 +806,107 @@ data: {"stage":"Verifying live links","detail":null}
 
 : heartbeat
 
-id: 196
-event: candidate.updated
-data: {"candidate_id":"be9a7609-a8fe-460d-8136-e37fed0b97d9"}
-
-id: 197
-event: candidate.updated
-data: {"candidate_id":"8e649aa4-1c25-4f1c-84d9-9477d0efbcb5"}
-
-id: 198
-event: candidate.updated
-data: {"candidate_id":"f08cfbb8-0bb7-45bd-8efc-304f3e9400a0"}
-
 id: 199
 event: candidate.updated
-data: {"candidate_id":"718516f1-2863-4179-8994-d301a7db4bc7"}
+data: {"candidate_id":"7b9336bc-b4fc-462f-9ba1-568584267f76"}
 
 id: 200
 event: candidate.updated
-data: {"candidate_id":"062d0a48-2f4c-46d0-94b0-720f9803e797"}
+data: {"candidate_id":"7cea2428-9ece-4e75-bca7-707004b3c915"}
 
 id: 201
 event: candidate.updated
-data: {"candidate_id":"1628836b-abaa-49b6-8cf5-d44597d802b2"}
+data: {"candidate_id":"4ea75331-4fca-45b1-bc83-11512c1596b2"}
 
 id: 202
 event: candidate.updated
-data: {"candidate_id":"8ab08e9b-516f-45c7-b2b7-2d1216a2065a"}
+data: {"candidate_id":"ddff0b6b-4778-4ae5-8885-54c291a64c9e"}
 
 id: 203
 event: candidate.updated
-data: {"candidate_id":"a571ddf3-ad09-43e8-93bb-ecb17932a7a7"}
+data: {"candidate_id":"e1510f33-91f6-4d76-916f-fa59914b41c2"}
 
 id: 204
+event: candidate.updated
+data: {"candidate_id":"42039871-768c-4983-9b25-fb61c9750be3"}
+
+id: 205
+event: candidate.updated
+data: {"candidate_id":"f7773294-8a92-45b3-8a88-4a6a807f0dda"}
+
+id: 206
+event: candidate.updated
+data: {"candidate_id":"e25acc06-3a7a-41bb-9ac5-77d5b849bd8f"}
+
+id: 207
 event: search.state
 data: {"state":"RANKING","version":16}
 
-id: 205
+id: 208
 event: search.progress
 data: {"stage":"Ranking results","detail":null}
 
-id: 206
+id: 209
 event: search.state
 data: {"state":"PUBLISHING","version":17}
 
-id: 207
+id: 210
 event: search.progress
 data: {"stage":"Ranking results","detail":null}
-
-id: 208
-event: result.possibly_real
-data: {"result_id":"80a7977f-b12c-4a3c-8e2a-0c26fef9b52f","search_id":"33b7a44e-85ec-4204-a3a3-535e4b3ce096","candidate_id":"be9a7609-a8fe-460d-8136-e37fed0b97d9","bucket":"possibly_real","rank":1,"title":"無地 ロングスリーブカットソー","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001141404","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141404_1.jpg?v=1786853462","alt":"無地 ロングスリーブカットソー"},"price":{"original":"8360","currency":"","display":"8360"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-18T01:03:22.248081+00:00","item_match":{"label":"High","mean":0.863179,"lower_bound":0.863179,"upper_bound":0.903179},"authenticity":{"label":"Incomplete evidence","mean":0.451303,"lower_bound":0.231303,"upper_bound":0.572303},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-18T01:03:22.248081+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:26-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:26-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"無地 ロングスリーブカットソー","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141404","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141404_1.jpg?v=1786853462","alt":"無地 ロングスリーブカットソー","image_id":"9d45bf3f-c5e3-45e1-9667-0548f14df1d9"}],"images_compared_reason":null,"duplicate_image_family_count":4,"live":false,"checked_at":"2026-08-18T01:03:22.248081+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141404_1.jpg?v=1786853462","alt":"無地 ロングスリーブカットソー","part":""},"parts":[{"part":"collar","note":"correspondence orb:26-inliers","status":"compared","origin":"INFERRED"},{"part":"placket","note":"correspondence orb:26-inliers","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"correspondence orb:26-inliers","status":"compared","origin":"INFERRED"},{"part":"hem","note":"correspondence orb:26-inliers","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"correspondence orb:26-inliers","status":"compared","origin":"INFERRED"},{"part":"closure","note":"correspondence orb:26-inliers","status":"compared","origin":"INFERRED"},{"part":"logo","note":"correspondence orb:26-inliers","status":"compared","origin":"INFERRED"},{"part":"seams","note":"correspondence orb:26-inliers","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"correspondence orb:26-inliers","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:26-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"無地 ロングスリーブカットソー","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141404","origin":"REPORTED_BY_SELLER"}]}}
-
-id: 209
-event: result.possibly_real
-data: {"result_id":"c3ef9ba3-5699-4779-80ca-fb921204dab9","search_id":"33b7a44e-85ec-4204-a3a3-535e4b3ce096","candidate_id":"8e649aa4-1c25-4f1c-84d9-9477d0efbcb5","bucket":"possibly_real","rank":1,"title":"ロゴ長袖カットソー","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001141442","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141442_1.jpg?v=1786853460","alt":"ロゴ長袖カットソー"},"price":{"original":"7260","currency":"","display":"7260"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-18T01:03:30.525772+00:00","item_match":{"label":"Incomplete evidence","mean":0.667254,"lower_bound":0.586454,"upper_bound":0.707254},"authenticity":{"label":"Incomplete evidence","mean":0.473277,"lower_bound":0.253277,"upper_bound":0.594277},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-18T01:03:30.525772+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"ロゴ長袖カットソー","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141442","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141442_1.jpg?v=1786853460","alt":"ロゴ長袖カットソー","image_id":"024fc5eb-4e50-4ef8-bf4e-fedb9e067f66"}],"images_compared_reason":null,"duplicate_image_family_count":4,"live":false,"checked_at":"2026-08-18T01:03:30.525772+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141442_1.jpg?v=1786853460","alt":"ロゴ長袖カットソー","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"ロゴ長袖カットソー","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141442","origin":"REPORTED_BY_SELLER"}]}}
-
-id: 210
-event: result.possibly_real
-data: {"result_id":"58adebc7-5407-48d5-b748-c70930fc3e1d","search_id":"33b7a44e-85ec-4204-a3a3-535e4b3ce096","candidate_id":"f08cfbb8-0bb7-45bd-8efc-304f3e9400a0","bucket":"possibly_real","rank":1,"title":"加工スウェットリブパンツ","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001141541","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141541_1.jpg?v=1786853462","alt":"加工スウェットリブパンツ"},"price":{"original":"10560","currency":"","display":"10560"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-18T01:03:41.667959+00:00","item_match":{"label":"Incomplete evidence","mean":0.65394,"lower_bound":0.57314,"upper_bound":0.69394},"authenticity":{"label":"Incomplete evidence","mean":0.448421,"lower_bound":0.228421,"upper_bound":0.569421},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-18T01:03:41.667959+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:2-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:2-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"加工スウェットリブパンツ","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141541","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141541_1.jpg?v=1786853462","alt":"加工スウェットリブパンツ","image_id":"2dee151d-12bd-4506-9fbb-9ed24f4b7265"}],"images_compared_reason":null,"duplicate_image_family_count":6,"live":false,"checked_at":"2026-08-18T01:03:41.667959+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141541_1.jpg?v=1786853462","alt":"加工スウェットリブパンツ","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:2-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"加工スウェットリブパンツ","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141541","origin":"REPORTED_BY_SELLER"}]}}
 
 id: 211
 event: result.possibly_real
-data: {"result_id":"28f4482b-0b08-4368-aba6-d53b634bcd51","search_id":"33b7a44e-85ec-4204-a3a3-535e4b3ce096","candidate_id":"718516f1-2863-4179-8994-d301a7db4bc7","bucket":"possibly_real","rank":1,"title":"ロゴロンTEE","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001141350","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141350_1.jpg?v=1786853462","alt":"ロゴロンTEE"},"price":{"original":"6160","currency":"","display":"6160"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-18T01:03:51.885643+00:00","item_match":{"label":"High","mean":0.826522,"lower_bound":0.826522,"upper_bound":0.866522},"authenticity":{"label":"Incomplete evidence","mean":0.448421,"lower_bound":0.228421,"upper_bound":0.569421},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-18T01:03:51.885643+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:11-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:11-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"ロゴロンTEE","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141350","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141350_1.jpg?v=1786853462","alt":"ロゴロンTEE","image_id":"7c0a64c6-78cd-480b-9649-3355c8e9cdba"}],"images_compared_reason":null,"duplicate_image_family_count":4,"live":false,"checked_at":"2026-08-18T01:03:51.885643+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141350_1.jpg?v=1786853462","alt":"ロゴロンTEE","part":""},"parts":[{"part":"collar","note":"correspondence orb:11-inliers","status":"compared","origin":"INFERRED"},{"part":"placket","note":"correspondence orb:11-inliers","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"correspondence orb:11-inliers","status":"compared","origin":"INFERRED"},{"part":"hem","note":"correspondence orb:11-inliers","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"correspondence orb:11-inliers","status":"compared","origin":"INFERRED"},{"part":"closure","note":"correspondence orb:11-inliers","status":"compared","origin":"INFERRED"},{"part":"logo","note":"correspondence orb:11-inliers","status":"compared","origin":"INFERRED"},{"part":"seams","note":"correspondence orb:11-inliers","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"correspondence orb:11-inliers","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:11-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"ロゴロンTEE","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141350","origin":"REPORTED_BY_SELLER"}]}}
+data: {"result_id":"b62c10b3-9f3e-47e9-a426-40a38e4d7158","search_id":"11936741-1276-4fd4-ad50-9f3cf8118581","candidate_id":"7b9336bc-b4fc-462f-9ba1-568584267f76","bucket":"possibly_real","rank":1,"title":"無地 ロングスリーブカットソー","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001141404","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141404_1.jpg?v=1786853462","alt":"無地 ロングスリーブカットソー"},"price":{"original":"8360","currency":"","display":"8360"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-18T01:36:29.247342+00:00","item_match":{"label":"High","mean":0.863179,"lower_bound":0.863179,"upper_bound":0.903179},"authenticity":{"label":"Incomplete evidence","mean":0.451303,"lower_bound":0.231303,"upper_bound":0.572303},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-18T01:36:29.247342+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:26-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:26-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"無地 ロングスリーブカットソー","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141404","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141404_1.jpg?v=1786853462","alt":"無地 ロングスリーブカットソー","image_id":"e80769dc-c6b8-4e49-91eb-d0ea22591672"}],"images_compared_reason":null,"duplicate_image_family_count":4,"live":false,"checked_at":"2026-08-18T01:36:29.247342+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141404_1.jpg?v=1786853462","alt":"無地 ロングスリーブカットソー","part":""},"parts":[{"part":"collar","note":"correspondence orb:26-inliers","status":"compared","origin":"INFERRED"},{"part":"placket","note":"correspondence orb:26-inliers","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"correspondence orb:26-inliers","status":"compared","origin":"INFERRED"},{"part":"hem","note":"correspondence orb:26-inliers","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"correspondence orb:26-inliers","status":"compared","origin":"INFERRED"},{"part":"closure","note":"correspondence orb:26-inliers","status":"compared","origin":"INFERRED"},{"part":"logo","note":"correspondence orb:26-inliers","status":"compared","origin":"INFERRED"},{"part":"seams","note":"correspondence orb:26-inliers","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"correspondence orb:26-inliers","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:26-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"無地 ロングスリーブカットソー","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141404","origin":"REPORTED_BY_SELLER"}]}}
 
 id: 212
 event: result.possibly_real
-data: {"result_id":"cd24bba9-c3d3-4d71-9173-ff3350abace9","search_id":"33b7a44e-85ec-4204-a3a3-535e4b3ce096","candidate_id":"062d0a48-2f4c-46d0-94b0-720f9803e797","bucket":"possibly_real","rank":1,"title":"NYLON PANTS","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001141565","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141565_1.jpg?v=1786853462","alt":"NYLON PANTS"},"price":{"original":"10560","currency":"","display":"10560"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-18T01:04:02.459104+00:00","item_match":{"label":"Incomplete evidence","mean":0.635027,"lower_bound":0.554227,"upper_bound":0.675027},"authenticity":{"label":"Incomplete evidence","mean":0.476686,"lower_bound":0.256686,"upper_bound":0.597686},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-18T01:04:02.459104+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"NYLON PANTS","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141565","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141565_1.jpg?v=1786853462","alt":"NYLON PANTS","image_id":"85def148-a466-4b7c-9652-2ef8bec21480"}],"images_compared_reason":null,"duplicate_image_family_count":5,"live":false,"checked_at":"2026-08-18T01:04:02.459104+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141565_1.jpg?v=1786853462","alt":"NYLON PANTS","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"NYLON PANTS","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141565","origin":"REPORTED_BY_SELLER"}]}}
+data: {"result_id":"2c322ef1-822f-4d50-85f6-d0d7dfe10203","search_id":"11936741-1276-4fd4-ad50-9f3cf8118581","candidate_id":"7cea2428-9ece-4e75-bca7-707004b3c915","bucket":"possibly_real","rank":1,"title":"ロゴ長袖カットソー","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001141442","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141442_1.jpg?v=1786853460","alt":"ロゴ長袖カットソー"},"price":{"original":"7260","currency":"","display":"7260"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-18T01:36:42.284079+00:00","item_match":{"label":"Incomplete evidence","mean":0.667254,"lower_bound":0.586454,"upper_bound":0.707254},"authenticity":{"label":"Incomplete evidence","mean":0.473277,"lower_bound":0.253277,"upper_bound":0.594277},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-18T01:36:42.284079+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"ロゴ長袖カットソー","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141442","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141442_1.jpg?v=1786853460","alt":"ロゴ長袖カットソー","image_id":"763c249b-eaa0-4c2f-a7f9-0bcdbf6a2122"}],"images_compared_reason":null,"duplicate_image_family_count":4,"live":false,"checked_at":"2026-08-18T01:36:42.284079+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141442_1.jpg?v=1786853460","alt":"ロゴ長袖カットソー","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"ロゴ長袖カットソー","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141442","origin":"REPORTED_BY_SELLER"}]}}
 
 id: 213
 event: result.possibly_real
-data: {"result_id":"9ce05368-6d81-4f08-ace9-71529eba1b58","search_id":"33b7a44e-85ec-4204-a3a3-535e4b3ce096","candidate_id":"1628836b-abaa-49b6-8cf5-d44597d802b2","bucket":"possibly_real","rank":1,"title":"スウェットリブパンツ","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001141534","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141534_1.jpg?v=1786853462","alt":"スウェットリブパンツ"},"price":{"original":"9460","currency":"","display":"9460"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-18T01:04:10.201312+00:00","item_match":{"label":"Incomplete evidence","mean":0.535937,"lower_bound":0.461537,"upper_bound":0.59},"authenticity":{"label":"Incomplete evidence","mean":0.461053,"lower_bound":0.241053,"upper_bound":0.582053},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-18T01:04:10.201312+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"front"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing":["front","rear","lateral","detail","reference-label","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"スウェットリブパンツ","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141534","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141534_1.jpg?v=1786853462","alt":"スウェットリブパンツ","image_id":"553d613b-06db-43e1-8f7f-157ca8b9aa81"}],"images_compared_reason":null,"duplicate_image_family_count":7,"live":false,"checked_at":"2026-08-18T01:04:10.201312+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141534_1.jpg?v=1786853462","alt":"スウェットリブパンツ","part":""},"parts":[{"part":"lining","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"label","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing_views":["front","rear","lateral","detail","reference-label","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"スウェットリブパンツ","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141534","origin":"REPORTED_BY_SELLER"}]}}
+data: {"result_id":"4a3ff180-92e3-440b-9c09-4afba52e583e","search_id":"11936741-1276-4fd4-ad50-9f3cf8118581","candidate_id":"4ea75331-4fca-45b1-bc83-11512c1596b2","bucket":"possibly_real","rank":1,"title":"加工スウェットリブパンツ","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001141541","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141541_1.jpg?v=1786853462","alt":"加工スウェットリブパンツ"},"price":{"original":"10560","currency":"","display":"10560"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-18T01:36:52.862273+00:00","item_match":{"label":"Incomplete evidence","mean":0.65394,"lower_bound":0.57314,"upper_bound":0.69394},"authenticity":{"label":"Incomplete evidence","mean":0.448421,"lower_bound":0.228421,"upper_bound":0.569421},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-18T01:36:52.862273+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:2-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:2-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"加工スウェットリブパンツ","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141541","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141541_1.jpg?v=1786853462","alt":"加工スウェットリブパンツ","image_id":"3ed669dd-b9f0-4b4a-a0d6-000165bf81ca"}],"images_compared_reason":null,"duplicate_image_family_count":6,"live":false,"checked_at":"2026-08-18T01:36:52.862273+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141541_1.jpg?v=1786853462","alt":"加工スウェットリブパンツ","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:2-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"加工スウェットリブパンツ","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141541","origin":"REPORTED_BY_SELLER"}]}}
 
 id: 214
-event: result.removed
-data: {"result_id":"c6cce97f-e1af-4809-91e0-7f53ec844de6","reason":"hidden"}
+event: result.possibly_real
+data: {"result_id":"aea10c38-8e90-4d7e-a4c6-b4633f2bfe78","search_id":"11936741-1276-4fd4-ad50-9f3cf8118581","candidate_id":"ddff0b6b-4778-4ae5-8885-54c291a64c9e","bucket":"possibly_real","rank":1,"title":"ロゴロンTEE","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001141350","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141350_1.jpg?v=1786853462","alt":"ロゴロンTEE"},"price":{"original":"6160","currency":"","display":"6160"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-18T01:37:05.116473+00:00","item_match":{"label":"High","mean":0.826522,"lower_bound":0.826522,"upper_bound":0.866522},"authenticity":{"label":"Incomplete evidence","mean":0.448421,"lower_bound":0.228421,"upper_bound":0.569421},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-18T01:37:05.116473+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:11-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:11-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"ロゴロンTEE","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141350","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141350_1.jpg?v=1786853462","alt":"ロゴロンTEE","image_id":"8ba75728-e56c-451f-8407-c4fcbe8ad7f6"}],"images_compared_reason":null,"duplicate_image_family_count":4,"live":false,"checked_at":"2026-08-18T01:37:05.116473+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141350_1.jpg?v=1786853462","alt":"ロゴロンTEE","part":""},"parts":[{"part":"collar","note":"correspondence orb:11-inliers","status":"compared","origin":"INFERRED"},{"part":"placket","note":"correspondence orb:11-inliers","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"correspondence orb:11-inliers","status":"compared","origin":"INFERRED"},{"part":"hem","note":"correspondence orb:11-inliers","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"correspondence orb:11-inliers","status":"compared","origin":"INFERRED"},{"part":"closure","note":"correspondence orb:11-inliers","status":"compared","origin":"INFERRED"},{"part":"logo","note":"correspondence orb:11-inliers","status":"compared","origin":"INFERRED"},{"part":"seams","note":"correspondence orb:11-inliers","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"correspondence orb:11-inliers","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:11-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"ロゴロンTEE","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141350","origin":"REPORTED_BY_SELLER"}]}}
 
 id: 215
 event: result.possibly_real
-data: {"result_id":"dae237d0-a6b2-40c1-beb8-d507619da31c","search_id":"33b7a44e-85ec-4204-a3a3-535e4b3ce096","candidate_id":"a571ddf3-ad09-43e8-93bb-ecb17932a7a7","bucket":"possibly_real","rank":1,"title":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001076249","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001076249_1.jpg?v=1786972271","alt":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO"},"price":{"original":"50160","currency":"","display":"50160"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-18T01:04:33.620453+00:00","item_match":{"label":"Incomplete evidence","mean":0.523009,"lower_bound":0.453009,"upper_bound":0.59},"authenticity":{"label":"Incomplete evidence","mean":0.501219,"lower_bound":0.281219,"upper_bound":0.622219},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-18T01:04:33.620453+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"OUR LEGACY","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001076249","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001076249_1.jpg?v=1786972271","alt":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO","image_id":"c56a4edf-aac7-466b-8949-3e4bd4710b4f"}],"images_compared_reason":null,"duplicate_image_family_count":5,"live":false,"checked_at":"2026-08-18T01:04:33.620453+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001076249_1.jpg?v=1786972271","alt":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"ABOVE SHIRTアボーヴ チェック柄シャツM4252AO","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"OUR LEGACY","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001076249","origin":"REPORTED_BY_SELLER"}]}}
+data: {"result_id":"9d13bbe7-5d50-4d7f-ad93-f8154608843f","search_id":"11936741-1276-4fd4-ad50-9f3cf8118581","candidate_id":"e1510f33-91f6-4d76-916f-fa59914b41c2","bucket":"possibly_real","rank":1,"title":"NYLON PANTS","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001141565","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141565_1.jpg?v=1786853462","alt":"NYLON PANTS"},"price":{"original":"10560","currency":"","display":"10560"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-18T01:37:13.109518+00:00","item_match":{"label":"Incomplete evidence","mean":0.635027,"lower_bound":0.554227,"upper_bound":0.675027},"authenticity":{"label":"Incomplete evidence","mean":0.476686,"lower_bound":0.256686,"upper_bound":0.597686},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-18T01:37:13.109518+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"NYLON PANTS","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141565","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141565_1.jpg?v=1786853462","alt":"NYLON PANTS","image_id":"c9ef8d16-c9e7-41e4-a067-5690d4aa2ed5"}],"images_compared_reason":null,"duplicate_image_family_count":5,"live":false,"checked_at":"2026-08-18T01:37:13.109518+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141565_1.jpg?v=1786853462","alt":"NYLON PANTS","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"NYLON PANTS","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141565","origin":"REPORTED_BY_SELLER"}]}}
 
 id: 216
-event: search.state
-data: {"state":"GAP_ANALYSIS","version":18}
+event: result.possibly_real
+data: {"result_id":"4c60f630-c83e-4356-9c30-aa047523ae05","search_id":"11936741-1276-4fd4-ad50-9f3cf8118581","candidate_id":"42039871-768c-4983-9b25-fb61c9750be3","bucket":"possibly_real","rank":1,"title":"スウェットリブパンツ","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8001001141534","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141534_1.jpg?v=1786853462","alt":"スウェットリブパンツ"},"price":{"original":"9460","currency":"","display":"9460"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-18T01:37:21.693255+00:00","item_match":{"label":"Incomplete evidence","mean":0.535937,"lower_bound":0.461537,"upper_bound":0.59},"authenticity":{"label":"Incomplete evidence","mean":0.461053,"lower_bound":0.241053,"upper_bound":0.582053},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-18T01:37:21.693255+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"front"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing":["front","rear","lateral","detail","reference-label","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"スウェットリブパンツ","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141534","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141534_1.jpg?v=1786853462","alt":"スウェットリブパンツ","image_id":"52ef8817-d04f-41fe-b5e4-46929a72eae9"}],"images_compared_reason":null,"duplicate_image_family_count":7,"live":false,"checked_at":"2026-08-18T01:37:21.693255+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141534_1.jpg?v=1786853462","alt":"スウェットリブパンツ","part":""},"parts":[{"part":"lining","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"label","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing_views":["front","rear","lateral","detail","reference-label","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"スウェットリブパンツ","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"WILLY CHAVARRIA","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8001001141534","origin":"REPORTED_BY_SELLER"}]}}
 
 id: 217
-event: search.progress
-data: {"stage":"Ranking results","detail":null}
+event: result.possibly_real
+data: {"result_id":"c66d9dfb-957f-49cd-b0ad-a46102a06feb","search_id":"11936741-1276-4fd4-ad50-9f3cf8118581","candidate_id":"f7773294-8a92-45b3-8a88-4a6a807f0dda","bucket":"possibly_real","rank":1,"title":"R9 BUFFALO CHECK SHIRTチェックシャツRW25A0206","source":{"name":"kind","adapter":"kind"},"listing_url":"https://shop.kind.co.jp/products/8003001998576","primary_image":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8003001998576_1.jpg?v=1786796464","alt":"R9 BUFFALO CHECK SHIRTチェックシャツRW25A0206"},"price":{"original":"9460","currency":"","display":"9460"},"size":null,"availability":"UNKNOWN","last_checked_at":"2026-08-18T01:37:29.645655+00:00","item_match":{"label":"Incomplete evidence","mean":0.552792,"lower_bound":0.482792,"upper_bound":0.592792},"authenticity":{"label":"Incomplete evidence","mean":0.480335,"lower_bound":0.260335,"upper_bound":0.601335},"listing_utility":{"live":false,"label":"Unknown","score":0.28500000000000003,"last_checked_at":"2026-08-18T01:37:29.645655+00:00"},"evidence_chips":[{"kind":"support","text":"ev:text:identity"},{"kind":"support","text":"ev:global:visual"},{"kind":"support","text":"ev:parts:ontology"}],"primary_gap":{"kind":"missing","text":"rear"},"why":{"heading":"Why Possibly Real","points":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"tab_reason":"The item may match, but important evidence is missing or conflicting. Reason codes: possibly-real-gate.","still_unverified":["No physical inspection."],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported":[{"field":"Title","value":"R9 BUFFALO CHECK SHIRTチェックシャツRW25A0206","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"ROTT WEILER","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8003001998576","origin":"REPORTED_BY_SELLER"}],"images_compared":[{"role":"product","url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8003001998576_1.jpg?v=1786796464","alt":"R9 BUFFALO CHECK SHIRTチェックシャツRW25A0206","image_id":"6e0c0734-7e29-4a23-b556-9da703f6a968"}],"images_compared_reason":null,"duplicate_image_family_count":4,"live":false,"checked_at":"2026-08-18T01:37:29.645655+00:00"},"compare":{"reference_crop":{"url":"","alt":"User reference","part":""},"candidate_crop":{"url":"https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8003001998576_1.jpg?v=1786796464","alt":"R9 BUFFALO CHECK SHIRTチェックシャツRW25A0206","part":""},"parts":[{"part":"collar","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"placket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"sleeve","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"hem","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"pocket","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"closure","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"logo","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"seams","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"},{"part":"yoke","note":"extracted-unconfirmed","status":"compared","origin":"INFERRED"}],"supporting":["ev:text:identity","ev:global:visual","ev:parts:ontology","ev:geometry:relations","ev:correspondence:orb:0-inliers"],"contradictions":[],"missing_views":["rear","lateral","label","detail","label-view","logo-not-resolved","cross-view-second-image","provenance","unestablished:construction","price: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","availability: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","title: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","seller: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)","images: blocked by challenge (BLOCKED_BY_CHALLENGE: access_denied)"],"seller_reported_fields":[{"field":"Title","value":"R9 BUFFALO CHECK SHIRTチェックシャツRW25A0206","origin":"REPORTED_BY_SELLER"},{"field":"Brand","value":"ROTT WEILER","origin":"REPORTED_BY_SELLER"},{"field":"Model","value":"8003001998576","origin":"REPORTED_BY_SELLER"}]}}
 
 id: 218
-event: search.progress
-data: {"stage":"Searching alternate names","detail":null}
+event: result.removed
+data: {"result_id":"0aca6aba-3c46-4fec-b097-f58665e322ae","reason":"hidden"}
 
 id: 219
 event: search.state
-data: {"state":"COMPLETE","version":19}
+data: {"state":"GAP_ANALYSIS","version":18}
 
 id: 220
+event: search.progress
+data: {"stage":"Ranking results","detail":null}
+
+id: 221
+event: search.progress
+data: {"stage":"Searching alternate names","detail":null}
+
+id: 222
+event: search.state
+data: {"state":"COMPLETE","version":19}
+
+id: 223
 event: search.complete
 data: {"terminal_status":"COMPLETE","reason":"coverage exhausted"}
 
-id: 221
+id: 224
 event: search.coverage
-data: {"sources_completed":[{"detail":"","id":"kind","name":"kind","status":"SEARCHED_MATCHES_FOUND"}],"sources_blocked":[{"detail":"adapter reported SOURCE_UNAVAILABLE","id":"searx","name":"searx","status":"SOURCE_UNAVAILABLE"},{"detail":"source budget exhausted","id":"wikimedia","name":"wikimedia","status":"UNMEASURABLE"},{"detail":"source budget exhausted","id":"marginalia","name":"marginalia","status":"UNMEASURABLE"},{"detail":"source budget exhausted","id":"the_realreal","name":"the_realreal","status":"UNMEASURABLE"},{"detail":"source budget exhausted","id":"rebag","name":"rebag","status":"UNMEASURABLE"},{"detail":"source budget exhausted","id":"komehyo","name":"komehyo","status":"UNMEASURABLE"},{"detail":"source budget exhausted","id":"byronesque","name":"byronesque","status":"UNMEASURABLE"},{"detail":"source budget exhausted","id":"heroine","name":"heroine","status":"UNMEASURABLE"},{"detail":"source budget exhausted","id":"archive_org","name":"archive_org","status":"UNMEASURABLE"},{"detail":"operator credential required","id":"ebay","name":"ebay","status":"AUTH_REQUIRED"},{"detail":"operator credential required","id":"etsy","name":"etsy","status":"AUTH_REQUIRED"},{"detail":"source disabled","id":"mercari_jp","name":"mercari_jp","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"yahoo_auctions","name":"yahoo_auctions","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"buyee","name":"buyee","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"vinted","name":"vinted","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"bunjang","name":"bunjang","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"ssense","name":"ssense","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"depop","name":"depop","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"grailed","name":"grailed","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"vestiaire","name":"vestiaire","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"taobao","name":"taobao","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"weidian","name":"weidian","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"yupoo","name":"yupoo","status":"BLOCKED_BY_POLICY"}],"sources_in_progress":[],"pages_fetched":10,"candidates_normalized":63,"candidates_hidden":2,"pages_charged_to_page_limit":null}
+data: {"sources_completed":[{"detail":"","id":"kind","name":"kind","status":"SEARCHED_MATCHES_FOUND"}],"sources_blocked":[{"detail":"adapter reported SOURCE_UNAVAILABLE","id":"searx","name":"searx","status":"SOURCE_UNAVAILABLE"},{"detail":"source budget exhausted","id":"wikimedia","name":"wikimedia","status":"UNMEASURABLE"},{"detail":"source budget exhausted","id":"marginalia","name":"marginalia","status":"UNMEASURABLE"},{"detail":"source budget exhausted","id":"the_realreal","name":"the_realreal","status":"UNMEASURABLE"},{"detail":"source budget exhausted","id":"rebag","name":"rebag","status":"UNMEASURABLE"},{"detail":"source budget exhausted","id":"komehyo","name":"komehyo","status":"UNMEASURABLE"},{"detail":"source budget exhausted","id":"byronesque","name":"byronesque","status":"UNMEASURABLE"},{"detail":"source budget exhausted","id":"heroine","name":"heroine","status":"UNMEASURABLE"},{"detail":"source budget exhausted","id":"archive_org","name":"archive_org","status":"UNMEASURABLE"},{"detail":"operator credential required","id":"ebay","name":"ebay","status":"AUTH_REQUIRED"},{"detail":"operator credential required","id":"etsy","name":"etsy","status":"AUTH_REQUIRED"},{"detail":"source disabled","id":"mercari_jp","name":"mercari_jp","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"yahoo_auctions","name":"yahoo_auctions","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"buyee","name":"buyee","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"vinted","name":"vinted","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"bunjang","name":"bunjang","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"ssense","name":"ssense","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"depop","name":"depop","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"grailed","name":"grailed","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"vestiaire","name":"vestiaire","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"taobao","name":"taobao","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"weidian","name":"weidian","status":"BLOCKED_BY_POLICY"},{"detail":"source disabled","id":"yupoo","name":"yupoo","status":"BLOCKED_BY_POLICY"}],"sources_in_progress":[],"pages_fetched":13,"candidates_normalized":63,"candidates_hidden":2,"pages_charged_to_page_limit":null}
 

@@ -164,5 +164,18 @@
     "command": "./scripts/ingest_catalog.py --source kind --pages 9 ... then ./scripts/known_item_check.sh",
     "the_fix": "_download_listing_image skipped any image that already carried a content_digest. That is sound for a candidate this campaign discovered and downloaded, and wrong for one hydrated from the warm index, where the digest is copied from the stored payload while the bytes live in whichever campaign first indexed them. A digest was being read as proof of possession. It now also checks the bytes are retrievable from this campaign's store, and fails closed - an unreadable store means a redundant download rather than a pixel-less candidate.",
     "why_it_was_hard_to_see": "Every layer reported success. Ingest indexed 2250 listings. The index returned the target at rank 1 of 2250. Consult carried it into the campaign among 40 hits. It became candidate 30 of 63. Nothing failed, and the item still never reached judgment, because one boolean treated metadata as data."
+  },
+  "after_orchestrator_screening": {
+    "check": "PASS - target ranked 1 in Possibly Real",
+    "real_still_empty": true,
+    "published_candidate_gate_inputs": {
+      "item_match_lower_bound": 0.8632,
+      "gate": 0.65,
+      "authenticity_lower_bound": 0.2313,
+      "evidence_completeness": 0.8
+    },
+    "reading": "Screening now runs on the live path, so Real is no longer shut by an unscreened candidate. It is shut by the evidence: item match is 0.863 against 0.90 and authenticity is 0.231 against 0.80. Both are genuine measurements of a real listing rather than an artefact of a gate nothing satisfied.",
+    "and_by_the_documented_scope_limit": "This listing is a garment, so its authenticity interval is uncalibrated - only designer_footwear ships a table - and ranking/buckets.py caps an uncalibrated candidate below the Real gate regardless of its evidence. Real is therefore unreachable for this item by policy as well as by evidence.",
+    "what_changed_and_what_did_not": "Changed: screening runs, so the theft veto is reachable and Real is not blocked by an unanswerable precondition. Unchanged: this item cannot be Real, and saying so is the product working rather than failing."
   }
 }

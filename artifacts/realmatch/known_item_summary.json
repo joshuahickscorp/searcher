@@ -1,5 +1,5 @@
 {
-  "search_id": "33b7a44e-85ec-4204-a3a3-535e4b3ce096",
+  "search_id": "11936741-1276-4fd4-ad50-9f3cf8118581",
   "terminal_status": "COMPLETE",
   "terminal_reason": "coverage exhausted",
   "counts": {
@@ -157,7 +157,7 @@
       }
     ],
     "sources_in_progress": [],
-    "pages_fetched": 10,
+    "pages_fetched": 13,
     "candidates_normalized": 63,
     "candidates_hidden": 2,
     "pages_charged_to_page_limit": null
@@ -225,13 +225,13 @@
         "role": "product",
         "url": "https://cdn.shopify.com/s/files/1/0585/3010/3347/files/8001001141404_1.jpg?v=1786853462",
         "alt": "無地 ロングスリーブカットソー",
-        "image_id": "9d45bf3f-c5e3-45e1-9667-0548f14df1d9"
+        "image_id": "e80769dc-c6b8-4e49-91eb-d0ea22591672"
       }
     ],
     "images_compared_reason": null,
     "duplicate_image_family_count": 4,
     "live": false,
-    "checked_at": "2026-08-18T01:03:22.248081+00:00"
+    "checked_at": "2026-08-18T01:36:29.247342+00:00"
   },
   "item_match": {
     "label": "High",
