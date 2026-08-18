@@ -37,6 +37,10 @@ from searcher.index.vectors import (
 )
 from searcher.storage.repositories import Repositories
 
+# What kind an image descriptor row carries. These rows held colour
+# histograms once; the label outlived the fact and a search asking for image
+# descriptors found nothing while embeddings sat under "histogram".
+IMAGE_DESCRIPTOR_KIND = "image"
 
 @dataclass(frozen=True, slots=True)
 class IndexHit:
@@ -133,7 +137,11 @@ class WarmIndex:
         text_vec = hashed_text_vector(title_terms + desc_terms + ocr_terms)
         packed.append(("text", len(text_vec), pack_descriptor(text_vec), "hashed_text"))
         for digest_id, values in (descriptors or {}).items():
-            packed.append((digest_id, len(values), pack_descriptor(values), "histogram"))
+            # Labelled by what it is, not by what it used to be. These rows
+            # held colour histograms once and the name stuck after they became
+            # embeddings, so a descriptor search asking for image descriptors
+            # found nothing while the embeddings sat here under "histogram".
+            packed.append((digest_id, len(values), pack_descriptor(values), IMAGE_DESCRIPTOR_KIND))
         self.tables.replace_descriptors(key, packed)
         return key
 
@@ -183,7 +191,7 @@ class WarmIndex:
             known = {str(row["listing_key"]) for row in rows}
             extra = self.tables.search_listings_by_descriptor(
                 query_descriptor,
-                kind="global",
+                kind=IMAGE_DESCRIPTOR_KIND,
                 limit=limit,
             )
             for listing_key, _score in extra:

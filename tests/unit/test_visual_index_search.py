@@ -61,7 +61,7 @@ def _listing(index: IndexTables, key: str) -> None:
     )
 
 
-def _add(index: IndexTables, key: str, values: list[float], kind: str = "global") -> None:
+def _add(index: IndexTables, key: str, values: list[float], kind: str = "image") -> None:
     _listing(index, key)
     index.replace_descriptors(key, [(f"{key}-digest", len(values), _blob(values), kind)])
 
@@ -69,7 +69,7 @@ def _add(index: IndexTables, key: str, values: list[float], kind: str = "global"
 def test_the_nearest_descriptor_ranks_first(index: IndexTables) -> None:
     _add(index, "target", [1.0, 0.0, 0.0])
     _add(index, "other", [0.0, 1.0, 0.0])
-    ranked = index.search_listings_by_descriptor([1.0, 0.0, 0.0], kind="global")
+    ranked = index.search_listings_by_descriptor([1.0, 0.0, 0.0], kind="image")
     assert ranked and ranked[0][0] == "target"
     assert ranked[0][1] == pytest.approx(1.0)
 
@@ -79,7 +79,7 @@ def test_a_listing_with_no_matching_text_is_still_findable(index: IndexTables) -
     _add(index, "plain-garment", [0.9, 0.1, 0.0])
     for i in range(20):
         _add(index, f"noise{i}", [0.0, 0.0, 1.0])
-    ranked = index.search_listings_by_descriptor([1.0, 0.0, 0.0], kind="global")
+    ranked = index.search_listings_by_descriptor([1.0, 0.0, 0.0], kind="image")
     assert ranked[0][0] == "plain-garment", "the item text cannot name was not retrieved"
 
 
@@ -89,12 +89,12 @@ def test_descriptors_of_another_dimension_are_skipped_not_truncated(
     """Comparing across model versions is meaningless; answering anyway is worse."""
     _add(index, "wrong-dim", [1.0, 0.0])
     _add(index, "right-dim", [0.5, 0.5, 0.5])
-    ranked = index.search_listings_by_descriptor([1.0, 0.0, 0.0], kind="global")
+    ranked = index.search_listings_by_descriptor([1.0, 0.0, 0.0], kind="image")
     assert [key for key, _ in ranked] == ["right-dim"]
 
 
 def test_kind_separates_descriptor_families(index: IndexTables) -> None:
-    _add(index, "global-one", [1.0, 0.0, 0.0], kind="global")
+    _add(index, "global-one", [1.0, 0.0, 0.0], kind="image")
     _add(index, "parts-one", [1.0, 0.0, 0.0], kind="parts")
     ranked = index.search_listings_by_descriptor([1.0, 0.0, 0.0], kind="parts")
     assert [key for key, _ in ranked] == ["parts-one"]
@@ -104,15 +104,15 @@ def test_a_zero_or_empty_query_returns_nothing_rather_than_everything(
     index: IndexTables,
 ) -> None:
     _add(index, "target", [1.0, 0.0, 0.0])
-    assert index.search_listings_by_descriptor([], kind="global") == []
-    assert index.search_listings_by_descriptor([0.0, 0.0, 0.0], kind="global") == []
+    assert index.search_listings_by_descriptor([], kind="image") == []
+    assert index.search_listings_by_descriptor([0.0, 0.0, 0.0], kind="image") == []
 
 
 def test_min_similarity_excludes_distant_listings(index: IndexTables) -> None:
     _add(index, "near", [1.0, 0.05, 0.0])
     _add(index, "far", [0.0, 0.0, 1.0])
     ranked = index.search_listings_by_descriptor(
-        [1.0, 0.0, 0.0], kind="global", min_similarity=0.5
+        [1.0, 0.0, 0.0], kind="image", min_similarity=0.5
     )
     assert [key for key, _ in ranked] == ["near"]
 
@@ -123,11 +123,11 @@ def test_the_best_image_represents_a_multi_image_listing(index: IndexTables) -> 
     index.replace_descriptors(
         "multi",
         [
-            ("a", 3, _blob([0.0, 0.0, 1.0]), "global"),
-            ("b", 3, _blob([1.0, 0.0, 0.0]), "global"),
+            ("a", 3, _blob([0.0, 0.0, 1.0]), "image"),
+            ("b", 3, _blob([1.0, 0.0, 0.0]), "image"),
         ],
     )
-    ranked = index.search_listings_by_descriptor([1.0, 0.0, 0.0], kind="global")
+    ranked = index.search_listings_by_descriptor([1.0, 0.0, 0.0], kind="image")
     assert ranked[0][0] == "multi"
     assert ranked[0][1] == pytest.approx(1.0), "the matching photograph should decide"
     assert math.isfinite(ranked[0][1])

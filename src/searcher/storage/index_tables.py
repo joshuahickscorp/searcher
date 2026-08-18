@@ -167,7 +167,7 @@ class IndexTables:
         self,
         query: Sequence[float],
         *,
-        kind: str,
+        kind: str = "image",
         limit: int = 50,
         min_similarity: float = 0.0,
     ) -> list[tuple[str, float]]:
