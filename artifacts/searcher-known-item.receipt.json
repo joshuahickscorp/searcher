@@ -92,5 +92,24 @@
     "target_feed_position": 2095,
     "reading": "A listing carrying no brand, model, line or year - unnameable by any compiled query - retrieved first from a photograph against 2250 real competing products from the same shop. This is the full catalogue depth the target sits at, not a slice chosen to contain it.",
     "still_not_run": "scripts/known_item_check.sh drives a full campaign against a live API and has not been run. This measures the retrieval route directly. The two are different tests and the campaign one remains the acceptance."
+  },
+  "live_check_run": {
+    "command": "./scripts/ingest_catalog.py --source kind --pages 9 ... then ./scripts/known_item_check.sh",
+    "result": "SOURCE LISTING NOT IN PUBLIC TABS - the check still fails",
+    "campaign": {
+      "pages_fetched": 7,
+      "candidates_normalized": 63,
+      "candidates_hidden": 8
+    },
+    "preconditions_verified": {
+      "listings_indexed_into_the_check_data_root": 2250,
+      "index_enabled": true,
+      "versions_match": "stored model_version histogram-1 / adapter_version listing-index-1 equals versions_from_settings",
+      "reference_digests_present_on_the_campaign": 3,
+      "descriptor_dimensions_align": "ingest and query both use descriptor_from_bytes, 384"
+    },
+    "direct_route_works": "The same query against the same index returns the target at rank 1 of 2250.",
+    "conclusion": "Every precondition that can be checked from outside is satisfied and the campaign still does not surface the listing, so the remaining gap is inside consult_and_surface or hydrate_from_index rather than in the index, the descriptors or the query. That has not been isolated and is not claimed as understood.",
+    "next": "Instrument consult_and_surface on this campaign: whether index.search returns the target among its hits, and if it does, what hydrate_from_index does with it. The direct search proves the data and the query are right, so the loss is downstream of both."
   }
 }

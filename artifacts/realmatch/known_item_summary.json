@@ -1,11 +1,11 @@
 {
-  "search_id": "4af2aeb5-8045-4da0-a07e-d95ebeea561b",
-  "terminal_status": "PARTIAL",
-  "terminal_reason": "useful coverage remains incomplete; some sources blocked",
+  "search_id": "80df162d-1aa1-4d89-82d1-163f1dd21b45",
+  "terminal_status": "COMPLETE",
+  "terminal_reason": "coverage exhausted",
   "counts": {
     "real": 0,
-    "possibly_real": 6,
-    "hidden": 2
+    "possibly_real": 4,
+    "hidden": 4
   },
   "coverage": {
     "sources_completed": [
@@ -17,12 +17,6 @@
       }
     ],
     "sources_blocked": [
-      {
-        "detail": "",
-        "id": "archive_org",
-        "name": "archive_org",
-        "status": "SOURCE_UNAVAILABLE"
-      },
       {
         "detail": "adapter reported SOURCE_UNAVAILABLE",
         "id": "searx",
@@ -69,6 +63,12 @@
         "detail": "source budget exhausted",
         "id": "heroine",
         "name": "heroine",
+        "status": "UNMEASURABLE"
+      },
+      {
+        "detail": "source budget exhausted",
+        "id": "archive_org",
+        "name": "archive_org",
         "status": "UNMEASURABLE"
       },
       {
@@ -157,9 +157,9 @@
       }
     ],
     "sources_in_progress": [],
-    "pages_fetched": 14,
-    "candidates_normalized": 24,
-    "candidates_hidden": 4,
+    "pages_fetched": 7,
+    "candidates_normalized": 63,
+    "candidates_hidden": 8,
     "pages_charged_to_page_limit": null
   },
   "target_in_real_rank": null,
