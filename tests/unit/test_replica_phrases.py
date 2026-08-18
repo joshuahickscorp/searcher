@@ -83,7 +83,12 @@ LEAKED_ROUND_TWO = [
     'best batch',
     'repfam',
     'high quality copy',
-    'mirror',
+    # 'mirror' was here and is deliberately removed. Round 9 measured it
+    # hiding honest listings - a mirror finish, mirror polished steel, an
+    # actual mirror - and the replica sense always carries a grade word:
+    # mirror quality, mirror grade, mirror batch. Those still veto and are
+    # asserted below. Keeping the bare word would hide every seller who
+    # describes a finish, to catch a euphemism that rarely appears alone.
     'from the factory',
     'not orig',
     "this isn't the authentic pair",
@@ -351,3 +356,33 @@ def test_naming_a_replica_market_is_declaring_a_replica(text: str) -> None:
 @pytest.mark.parametrize("text", INNOCENT_NEIGHBOURS)
 def test_ordinary_words_near_those_patterns_are_left_alone(text: str) -> None:
     assert not self_declared_replica(text), f"{text!r} was wrongly called a replica claim"
+
+
+# Round 9 found these hiding honest listings. Each word has a replica sense and
+# an ordinary one, and the patterns were matching the word rather than the sense.
+OVERFLAGGED_BEFORE = [
+    "mirror", "mirror finish", "mirror polished steel", "an antique mirror",
+    "AAA+", "AAA batteries", "AAA rated",
+]
+
+# The replica sense of the same words, which must still veto.
+REPLICA_SENSE = [
+    "mirror quality", "mirror grade", "mirror batch", "quality mirror",
+    "AAA+ quality", "aaa batch", "AAA grade",
+]
+
+
+@pytest.mark.parametrize("text", OVERFLAGGED_BEFORE)
+def test_the_ordinary_sense_of_an_ambiguous_word_is_not_a_replica_claim(text: str) -> None:
+    """A finish, a battery size and a credit rating are not confessions.
+
+    Hiding these costs every honest seller their listing. Missing a euphemism
+    costs one buyer one bad result. The errors are not symmetric and the
+    detector should not treat them as if they were.
+    """
+    assert not self_declared_replica(text), f"{text!r} was wrongly called a replica claim"
+
+
+@pytest.mark.parametrize("text", REPLICA_SENSE)
+def test_the_replica_sense_of_the_same_word_still_vetoes(text: str) -> None:
+    assert self_declared_replica(text), f"{text!r} should still veto"

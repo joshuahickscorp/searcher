@@ -64,7 +64,9 @@ REPLICA_PATTERNS = (
     re.compile(r"\brepsneakers?\b"),
     re.compile(r"\b1\s*[:：]\s*1\b"),
     re.compile(r"\bmirror\s+(?:quality|batch)\b"),
-    re.compile(r"\baaa\+?\s*(?:quality|batch)?\b"),
+    # "AAA" alone is a battery size and a credit rating. The replica sense
+    # carries a grade word with it.
+    re.compile(r"\baaa\+?\s*(?:quality|batch|grade|version|copy)\b"),
     # Sellers separate the negating prefix however they like, so the separator
     # is a class rather than a list of spellings: un-authorized, un authorized,
     # un_authorized.
@@ -167,7 +169,12 @@ REPLICA_PATTERNS = (
     # One-to-one, spelled every way sellers spell it.
     re.compile(r"\b1\s*[/\-]\s*1\b"),
     re.compile(r"\bone\s+to\s+one\b"),
-    re.compile(r"\bmirror\b"),
+    # "mirror" needs its replica sense. Bare, it is a finish and a material:
+    # "mirror finish", "mirror polished steel", an actual mirror. Round 9 found
+    # it overflagging, and a detector that hides honest listings costs every
+    # seller their listing while a miss costs one buyer one bad result.
+    re.compile(r"\bmirror\s+(?:quality|grade|batch|copy|version|pair|rep(?:lica)?)\b"),
+    re.compile(r"\b(?:quality|grade|batch)\s+mirror\b"),
 )
 
 
