@@ -69,5 +69,28 @@
       "reading": "The item nothing can name is now retrieved first from its photographs, against 250 real competing products, with the runners-up 0.035 behind rather than 0.019. The index was storing colour histograms while the embedding sat behind pair_similarity, unused by the index path.",
       "safety_of_the_change": "Descriptors of different dimensions never meet: search_listings_by_descriptor skips a mismatch rather than comparing across spaces, so an index written by the histogram and queried by the embedding finds nothing rather than nonsense."
     }
+  },
+  "full_depth_run": {
+    "what": "The known-item target retrieved from a catalogue indexed to the depth it actually sits at.",
+    "command": "./scripts/ingest_catalog.py --source kind --pages 9 --page-size 250 --images 1",
+    "indexed": {
+      "products_seen": 2250,
+      "listings_indexed": 2250,
+      "images_described": 2250,
+      "errors": 0
+    },
+    "query": "fixtures/user_snapshots/8001001141404_snapshot.jpg, no text",
+    "result": "TARGET RANK 1 of 2250",
+    "scores": [
+      0.9366,
+      0.9038,
+      0.9013,
+      0.9012,
+      0.899
+    ],
+    "margin_over_runner_up": 0.0328,
+    "target_feed_position": 2095,
+    "reading": "A listing carrying no brand, model, line or year - unnameable by any compiled query - retrieved first from a photograph against 2250 real competing products from the same shop. This is the full catalogue depth the target sits at, not a slice chosen to contain it.",
+    "still_not_run": "scripts/known_item_check.sh drives a full campaign against a live API and has not been run. This measures the retrieval route directly. The two are different tests and the campaign one remains the acceptance."
   }
 }
