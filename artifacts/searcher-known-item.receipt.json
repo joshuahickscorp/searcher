@@ -110,6 +110,17 @@
     },
     "direct_route_works": "The same query against the same index returns the target at rank 1 of 2250.",
     "conclusion": "Every precondition that can be checked from outside is satisfied and the campaign still does not surface the listing, so the remaining gap is inside consult_and_surface or hydrate_from_index rather than in the index, the descriptors or the query. That has not been isolated and is not claimed as understood.",
-    "next": "Instrument consult_and_surface on this campaign: whether index.search returns the target among its hits, and if it does, what hydrate_from_index does with it. The direct search proves the data and the query are right, so the loss is downstream of both."
+    "next": "Instrument consult_and_surface on this campaign: whether index.search returns the target among its hits, and if it does, what hydrate_from_index does with it. The direct search proves the data and the query are right, so the loss is downstream of both.",
+    "isolated": {
+      "index_search_returns_the_target": true,
+      "hits": 40,
+      "target_becomes_a_candidate": true,
+      "candidates_on_campaign": 63,
+      "candidates_with_a_result_row": 8,
+      "target_result_row": "none",
+      "conclusion": "The target survives retrieval and becomes one of 63 candidates, then is cut before judgment: only 8 candidates were scored at all, 4 hidden and 4 possibly real, and the target is not among them. It was never judged and never hidden - it was dropped by whatever selects which candidates get scored.",
+      "what_this_rules_out": "Not retrieval: the consult path returns it among 40 hits with a 384-dimension query built from the user's photographs. Not the Real gate, the screening gate, or any veto: no judgment ran on it. Not the index, the descriptors, the versions or the dimensions, all verified aligned.",
+      "next": "Find the shortlist that admits 8 of 63 candidates to judgment and why the target is outside it. Likely a deep-matching or part-matching cap applied on a text-derived ordering, which would place a visually-retrieved candidate last by construction."
+    }
   }
 }
