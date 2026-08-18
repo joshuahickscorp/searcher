@@ -45,6 +45,21 @@ def record_outcome(claimed: SourceOutcome, actual: SourceOutcome) -> SourceOutco
     return assert_outcome_honest(claimed, actual)
 
 
+def _is_unreadable(text: str) -> bool:
+    """A non-empty payload in no format this project can parse.
+
+    Deliberately narrow. Absence of content is an answer; unreadable content is
+    a failure to get one, and only the second should reopen a source.
+    """
+    body = text.strip()
+    if not body:
+        return False
+    if body[0] in "<{[":
+        return False
+    lowered = body[:512].lower()
+    return not ("<html" in lowered or "<?xml" in lowered or "<!doctype" in lowered)
+
+
 def classify_http(
     status: int | None,
     *,
@@ -73,6 +88,21 @@ def classify_http(
         text = _as_text(body)
         if _looks_like_challenge(text):
             return SourceOutcome.BLOCKED_BY_ACCESS
+        # 304 only: a Not Modified carries no body by definition, so whatever
+        # arrives with one is not a document the source meant us to parse.
+        # Judging it unreadable would report a parse failure for a working cache
+        # revalidation. An existing test caught this.
+        if status == 200 and _is_unreadable(text):
+            # A 200 carrying something we cannot read is not an empty search.
+            # PARSER_FAILED was read in two places and assigned nowhere, so an
+            # unparseable reply reported SEARCHED_NO_MATCH - "this source was
+            # searched and had nothing" - which is a different fact and the
+            # wrong one. It also left the COMPLETE rule weaker than it reads,
+            # since that rule forbids COMPLETE on PARSER_FAILED and the branch
+            # was dead. An empty body is not this: nothing to read is a real
+            # empty answer, and only a non-empty body in no recognisable format
+            # counts as unreadable.
+            return SourceOutcome.PARSER_FAILED
         return SourceOutcome.SEARCHED_MATCHES_FOUND
     if 300 <= status < 400:
         return SourceOutcome.NETWORK_FAILED
