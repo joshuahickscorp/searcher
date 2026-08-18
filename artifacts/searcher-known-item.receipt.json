@@ -134,6 +134,20 @@
     },
     "which_path_ran": "Routing was not blocked, so the ranked path ran rather than the degraded discovery-order fallback. Broad retrieval produced a ranking and the target did not reach its top 8.",
     "conclusion": "The shortlist is doing its job on a ranking that fails. The same item the warm index returns at rank 1 of 2250 on its photographs is ranked outside the top 8 of 63 by broad retrieval, which decides what gets scored. Visual similarity retrieves it and then does not carry into the ordering that admits candidates to judgment.",
-    "the_fix_is_not_the_cap": "Raising the cap would let this listing through and would not fix the ordering; the next item with no matching text would sit at position 31. Broad retrieval has to weigh the visual evidence that already found the item."
+    "the_fix_is_not_the_cap": "Raising the cap would let this listing through and would not fix the ordering; the next item with no matching text would sit at position 31. Broad retrieval has to weigh the visual evidence that already found the item.",
+    "actual_mechanism": {
+      "measured": {
+        "target_images_on_candidate": 5,
+        "target_image_bytes_retrievable_from_store": 0,
+        "a_judged_candidate": "6 images, 1 retrievable"
+      },
+      "explanation": "A candidate hydrated from the warm index carries image metadata but no image bytes: nothing fetched them into the campaign's content store. `_candidate_pngs` therefore returns an empty map for it, broad retrieval has no pixels to compare, its visual score is empty, and it ranks below candidates whose images were fetched during discovery. The cap of 8 then cuts it.",
+      "why_this_supersedes_the_earlier_reading": "The previous note said broad retrieval ranks it poorly and needs to weigh visual evidence. It cannot weigh what it does not have. The ordering is not mis-weighted; the input is missing.",
+      "two_possible_repairs": [
+        "Fetch the images for an index-hydrated candidate before broad retrieval, which costs a download per candidate and makes it comparable to a discovered one.",
+        "Carry the index's own descriptor similarity through as a prior, which costs nothing because the index already computed it - the same score that ranked the target 1 of 2250."
+      ],
+      "not_yet_attempted": "Neither repair is implemented. The mechanism is measured, not fixed."
+    }
   }
 }
