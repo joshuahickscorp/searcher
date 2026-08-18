@@ -90,6 +90,26 @@ REPLICA_PATTERNS = (
         rf"\b{_NEG}{_SEP}+(?:{_HEDGE}{_SEP}+)?"
         rf"(?:authentic|genuine|real|original|legit)\b"
     ),
+    # Replica marketplaces and the slang sellers use to name them. A listing
+    # that says where it came from is declaring what it is, and none of these
+    # words is a morphological variant of "replica" - the earlier work closed
+    # separators, letter substitutes and negating prefixes, which is a different
+    # class entirely. An independent grade found these still publishing as Real
+    # after that work was described as closing the class.
+    #
+    # Each is a proper noun or a fixed phrase in this trade, not an ordinary
+    # English word: "yupoo" and "weidian" are hosting and marketplace names,
+    # "LJR" and "godtier" name replica tiers, "batch" and "factory" are only
+    # quality grades when attached to goods. `_SEP` lets the spaced, hyphenated
+    # and dashed forms match without admitting the bare words.
+    re.compile(r"\b(?:dhgate|weidian|yupoo|pandabuy|taobao)\b"),
+    re.compile(r"\bljr\b"),
+    re.compile(r"\bgod{_SEP}?tier\b".replace("{_SEP}", _SEP)),
+    re.compile(r"\blook{_SEP}?alike\b".replace("{_SEP}", _SEP)),
+    re.compile(rf"\bfactory{_SEP}+(?:pair|batch|shoes?|version)\b"),
+    re.compile(rf"\b(?:og|ok|lc|uc|gp|ps){_SEP}+batch\b"),
+    re.compile(rf"\bbatch{_SEP}+(?:shoes?|pair|version|quality)\b"),
+    re.compile(rf"\b(?:taobao|weidian|1688){_SEP}+agent\b"),
     re.compile(r"\breproduction\b"),
     re.compile(r"\bstimulant\b"),
     re.compile(r"\bsuper\s?fakes?\b"),

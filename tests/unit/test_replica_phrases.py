@@ -319,3 +319,35 @@ def test_a_negating_prefix_is_a_negation(text: str) -> None:
 @pytest.mark.parametrize("text", INNOCENT)
 def test_ordinary_listing_text_is_not_a_replica_claim(text: str) -> None:
     assert not self_declared_replica(text), f"{text!r} was wrongly called a replica claim"
+
+
+# Round 8 found these still publishing Real after the morphological families
+# were closed and I described the class as closed. They are not variants of
+# "replica" at all - they are the marketplaces and slang the trade uses, and a
+# listing naming one is declaring what it is.
+MARKETPLACE_AND_SLANG = [
+    "dhgate", "weidian", "yupoo", "pandabuy", "taobao agent", "1688 agent",
+    "LJR", "godtier", "god tier", "god-tier",
+    "lookalike", "look-alike", "look alike",
+    "factory pair", "factory batch", "factory shoes", "factory version",
+    "OG batch", "LC batch", "batch shoes", "batch quality",
+]
+
+# One word apart from the patterns above, and entirely ordinary. A replica
+# detector that hides these is worse than one that misses a euphemism.
+INNOCENT_NEIGHBOURS = [
+    "factory sealed", "factory second", "made in a factory", "ex-factory price",
+    "batch number 12", "first batch of the season",
+    "God of War tee", "agent provocateur", "look at this stitching",
+    "sold by an agent", "outlet quality",
+]
+
+
+@pytest.mark.parametrize("text", MARKETPLACE_AND_SLANG)
+def test_naming_a_replica_market_is_declaring_a_replica(text: str) -> None:
+    assert self_declared_replica(text), f"{text!r} still publishes as Real"
+
+
+@pytest.mark.parametrize("text", INNOCENT_NEIGHBOURS)
+def test_ordinary_words_near_those_patterns_are_left_alone(text: str) -> None:
+    assert not self_declared_replica(text), f"{text!r} was wrongly called a replica claim"
